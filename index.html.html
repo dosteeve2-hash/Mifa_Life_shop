@@ -546,7 +546,11 @@ footer{background:var(--sl2);color:rgba(255,255,255,.6)}
       <div><div class="sh-eyebrow">⚡ Offres limitées</div><h2 class="sh-title">Promos <span class="sh-accent">Flash 🔥</span></h2></div>
       <button class="sh-link">Voir tout <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
     </div>
-    <div class="prod-grid" id="flashGrid"></div>
+    <div id="product-container" class="prod-grid">
+    <p style="text-align:center; grid-column: 1/-1; color: var(--t4); padding: 40px;">
+        Chargement des pépites Mifa Life...
+    </p>
+</div>
   </div>
 </section>
 
@@ -981,6 +985,69 @@ BANNERS.forEach((b,i)=>{
 
   // Lancer le chargement au démarrage
   chargerProduits();
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  // 1. Initialisation (Remplace par tes vraies clés de Supabase)
+  const SUPABASE_URL = 'https://TON_PROJET.supabase.co';
+  const SUPABASE_KEY = 'TA_CLE_ANON_PUBLIQUE';
+  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  async function fetchAndDisplayProducts() {
+    const container = document.getElementById('product-container');
+
+    // 2. Récupération des données
+    const { data: products, error } = await supabase
+      .from('products') // Le nom de la table que tu as créée
+      .select('*');
+
+    if (error) {
+      container.innerHTML = `<p style="color:red; grid-column:1/-1;">Erreur de connexion : ${error.message}</p>`;
+      return;
+    }
+
+    // 3. Génération du HTML
+    if (products && products.length > 0) {
+      container.innerHTML = ''; // On vide le message de chargement
+
+      products.forEach(product => {
+        const productHTML = `
+          <div class="card visible">
+            <div class="card-img">
+              <span class="card-emoji">${product.image_url || '📦'}</span>
+              <div class="card-like">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-cat">${product.category || 'Nouveauté'}</div>
+              <div class="card-name">${product.name}</div>
+              <div class="card-stars">
+                <span class="s">★★★★★</span>
+                <span class="r">(4.9)</span>
+              </div>
+              <div class="card-footer">
+                <div class="card-price-wrap">
+                  <div class="card-price">${new Intl.NumberFormat('fr-FR').format(product.price)} FCFA</div>
+                </div>
+                <button class="card-add" onclick="ajouterAuPanier('${product.name}', ${product.price})">+</button>
+              </div>
+            </div>
+            <div class="card-cta">
+              <div class="card-cta-btn">Voir les détails</div>
+            </div>
+          </div>
+        `;
+        container.innerHTML += productHTML;
+      });
+    } else {
+      container.innerHTML = `<p style="grid-column:1/-1;">Aucun produit trouvé dans la boutique.</p>`;
+    }
+  }
+
+  // Lancement
+  document.addEventListener('DOMContentLoaded', fetchAndDisplayProducts);
 </script>
 </body>
 </html>
