@@ -1191,7 +1191,19 @@ textarea.form-inp{resize:vertical;min-height:72px}
 /* Ensure dashboard and admin pages work */
 #spa-dashboard .page-view{display:none}
 #spa-dashboard .page-view.on{display:block}
+/* Force l'affichage du contenu même si le script plante */
+#loader.loaded {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transition: opacity 0.8s ease-out, visibility 0.8s !important;
+}
 
+/* On s'assure que le corps de la page est scrollable */
+body.ready {
+    overflow: auto !important;
+    cursor: default !important; /* Redonne la souris si le curseur custom bug */
+}
 </style>
 </head>
 <body>
@@ -3665,31 +3677,22 @@ textarea.form-inp{resize:vertical;min-height:72px}
 </button>
 
 <script>
-  // --- SÉCURITÉ LOADER MIFA LIFE ---
-window.addEventListener('load', function() {
-    const loader = document.getElementById('preloader') || document.querySelector('.loader-wrapper');
+ function unlockMifaLife() {
+    const loader = document.getElementById('loader');
     if (loader) {
-        // On attend un tout petit peu pour que l'animation soit fluide
-        setTimeout(() => {
-            loader.style.opacity = '0';
-            loader.style.transition = 'opacity 0.8s ease';
-            setTimeout(() => {
-                loader.style.display = 'none';
-                document.body.style.overflow = 'auto'; // On redonne le scroll
-                document.body.style.cursor = 'default'; // On récupère la souris si le script bug
-            }, 800);
-        }, 1500); 
+        loader.classList.add('loaded'); // Applique le CSS pour cacher le loader
+        document.body.classList.add('ready'); // Redonne le scroll et la souris
+        console.log("Mifa Life débloqué manuellement");
     }
+}
+
+// Tentative 1 : Dès que la page est totalement chargée
+window.addEventListener('load', () => {
+    setTimeout(unlockMifaLife, 2000); // Laisse 2s pour voir la belle animation
 });
 
-// Sécurité ultime : après 5 secondes, on force l'ouverture quoi qu'il arrive
-setTimeout(() => {
-    const loader = document.getElementById('preloader') || document.querySelector('.loader-wrapper');
-    if (loader && loader.style.display !== 'none') {
-        loader.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-}, 5000);
+// Tentative 2 : Sécurité absolue après 5 secondes
+setTimeout(unlockMifaLife, 5000);
 /* ═══════════════════════════════════════════════════
    MIFA LIFE SHOP v4 — UNIFIED SINGLE-FILE SPA
    Toutes les pages en un seul fichier
