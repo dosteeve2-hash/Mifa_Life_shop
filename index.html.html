@@ -10,7 +10,7 @@
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',system-ui,sans-serif;background:#F8FAFB;color:#111827;overflow-x:hidden;cursor:none}
+body{font-family:'DM Sans',system-ui,sans-serif;background:#F8FAFB;color:#111827;overflow-x:hidden;cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><circle cx="5" cy="5" r="5" fill="%2300A896"/></svg>'), auto;}
 a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer;border:none;outline:none}
 input,select,textarea{font-family:inherit;outline:none}
@@ -3665,6 +3665,31 @@ textarea.form-inp{resize:vertical;min-height:72px}
 </button>
 
 <script>
+  // --- SÉCURITÉ LOADER MIFA LIFE ---
+window.addEventListener('load', function() {
+    const loader = document.getElementById('preloader') || document.querySelector('.loader-wrapper');
+    if (loader) {
+        // On attend un tout petit peu pour que l'animation soit fluide
+        setTimeout(() => {
+            loader.style.opacity = '0';
+            loader.style.transition = 'opacity 0.8s ease';
+            setTimeout(() => {
+                loader.style.display = 'none';
+                document.body.style.overflow = 'auto'; // On redonne le scroll
+                document.body.style.cursor = 'default'; // On récupère la souris si le script bug
+            }, 800);
+        }, 1500); 
+    }
+});
+
+// Sécurité ultime : après 5 secondes, on force l'ouverture quoi qu'il arrive
+setTimeout(() => {
+    const loader = document.getElementById('preloader') || document.querySelector('.loader-wrapper');
+    if (loader && loader.style.display !== 'none') {
+        loader.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}, 5000);
 /* ═══════════════════════════════════════════════════
    MIFA LIFE SHOP v4 — UNIFIED SINGLE-FILE SPA
    Toutes les pages en un seul fichier
