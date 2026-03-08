@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Admin — Mifa Life Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --em:#00A896;--em-d:#007a6e;--em-l:rgba(0,168,150,.08);--em-g:rgba(0,168,150,.18);
+  --or:#FF6B35;--or-d:#cc5428;
+  --sl:#2F3E46;--sl2:#1a2332;--sl3:#0d1520;
+  --mu:#F5CB5C;
+  --bg:#F8FAFB;--bg2:#EEF2F5;--bg3:#E2E8F0;
+  --t1:#111827;--t2:#374151;--t3:#6B7280;--t4:#9CA3AF;
+  --r:10px;--rl:16px;--shm:0 2px 12px rgba(0,0,0,.07);--shl:0 8px 32px rgba(0,0,0,.11);
+  --red:#EF4444;--green:#10B981;--yellow:#F59E0B;--blue:#3B82F6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"DM Sans",system-ui,sans-serif;background:#F0F4F8;color:var(--t1);min-height:100vh}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+/* ── TOP NAV ── */
+#topNav{
+  position:sticky;top:0;z-index:200;
+  background:var(--sl3);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  padding:0 24px;height:58px;
+  display:flex;align-items:center;gap:16px;
+}
+.tn-logo{
+  display:flex;align-items:center;gap:10px;min-width:200px;
+  font-family:"Syne",sans-serif;font-weight:800;font-size:18px;color:#fff;
+  cursor:pointer;text-decoration:none;
+}
+.tn-logo-icon{
+  width:32px;height:32px;background:var(--em);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+}
+.tn-logo-icon svg{stroke:#fff;width:16px;height:16px}
+.tn-logo span{color:var(--em)}
+.tn-search{
+  flex:1;max-width:380px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);
+  border-radius:8px;display:flex;align-items:center;padding:0 12px;gap:8px;
+}
+.tn-search input{background:none;border:none;outline:none;color:#fff;font-size:13px;width:100%;padding:8px 0}
+.tn-search input::placeholder{color:rgba(255,255,255,.4)}
+.tn-search svg{color:rgba(255,255,255,.4);width:14px;height:14px}
+.tn-r{display:flex;align-items:center;gap:8px;margin-left:auto}
+.tn-icon-btn{
+  width:36px;height:36px;border-radius:8px;border:none;
+  background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:all .2s;position:relative;
+}
+.tn-icon-btn:hover{background:rgba(255,255,255,.15);color:#fff}
+.tn-badge{
+  position:absolute;top:4px;right:4px;width:8px;height:8px;
+  background:var(--or);border-radius:50%;border:2px solid var(--sl3);
+}
+.tn-avatar{
+  width:32px;height:32px;border-radius:50%;object-fit:cover;
+  border:2px solid rgba(255,255,255,.2);cursor:pointer;
+}
+.tn-site-btn{
+  display:flex;align-items:center;gap:6px;padding:7px 14px;
+  background:var(--em);color:#fff;border:none;border-radius:8px;
+  font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;
+  text-decoration:none;
+}
+.tn-site-btn:hover{background:var(--em-d)}
+.tn-site-btn svg{width:12px;height:12px;stroke:#fff}
+
+/* ── LAYOUT ── */
+#adminWrap{display:flex;min-height:calc(100vh - 58px)}
+
+/* ── SIDEBAR ── */
+#sidebar{
+  width:220px;flex-shrink:0;
+  background:var(--sl2);
+  border-right:1px solid rgba(255,255,255,.05);
+  display:flex;flex-direction:column;
+  position:sticky;top:58px;height:calc(100vh - 58px);overflow-y:auto;
+}
+.sb-section{
+  padding:20px 0 8px;
+}
+.sb-label{
+  padding:0 16px 8px;
+  font-size:10px;font-weight:700;letter-spacing:.08em;
+  color:rgba(255,255,255,.3);text-transform:uppercase;
+}
+.sb-item{
+  display:flex;align-items:center;gap:10px;padding:10px 16px;
+  color:rgba(255,255,255,.55);font-size:13px;font-weight:500;
+  cursor:pointer;transition:all .18s;position:relative;border:none;background:none;width:100%;text-align:left;
+}
+.sb-item:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)}
+.sb-item.on{
+  background:rgba(0,168,150,.15);color:#fff;
+}
+.sb-item.on::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--em);border-radius:0 3px 3px 0;
+}
+.sb-item svg{width:16px;height:16px;flex-shrink:0}
+.sb-badge{
+  margin-left:auto;background:var(--or);color:#fff;
+  font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px;
+}
+.sb-item.on .sb-badge{background:var(--em-d)}
+.sb-divider{height:1px;background:rgba(255,255,255,.07);margin:8px 16px}
+.sb-bottom{margin-top:auto;padding:16px}
+.sb-user{
+  display:flex;align-items:center;gap:10px;padding:10px;
+  background:rgba(255,255,255,.06);border-radius:10px;
+}
+.sb-user img{width:32px;height:32px;border-radius:50%;object-fit:cover}
+.sb-user-name{font-size:12px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-user-role{font-size:10px;color:rgba(255,255,255,.4)}
+.sb-logout{
+  display:flex;align-items:center;gap:8px;width:100%;padding:10px 16px;
+  color:rgba(255,255,255,.4);font-size:12px;font-weight:500;
+  border:none;background:none;cursor:pointer;transition:all .2s;border-radius:8px;margin-top:4px;
+}
+.sb-logout:hover{background:rgba(239,68,68,.1);color:var(--red)}
+.sb-logout svg{width:14px;height:14px}
+
+/* ── MAIN CONTENT ── */
+#adminMain{flex:1;min-width:0;overflow:hidden}
+
+/* ── PAGE VIEWS ── */
+.adm-pg{display:none;padding:28px;animation:fadeIn .2s ease}
+.adm-pg.on{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ── PAGE HEADER ── */
+.pg-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.pg-hd-l .pg-title{font-family:"Syne",sans-serif;font-weight:800;font-size:22px;color:var(--t1)}
+.pg-hd-l .pg-sub{font-size:13px;color:var(--t3);margin-top:2px}
+.pg-actions{display:flex;align-items:center;gap:8px}
+
+/* ── BUTTONS ── */
+.btn-primary{
+  display:inline-flex;align-items:center;gap:6px;padding:9px 18px;
+  background:var(--em);color:#fff;border:none;border-radius:8px;
+  font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;
+}
+.btn-primary:hover{background:var(--em-d)}
+.btn-primary svg{width:14px;height:14px;stroke:#fff}
+.btn-sec{
+  display:inline-flex;align-items:center;gap:6px;padding:9px 16px;
+  background:#fff;color:var(--t2);border:1px solid var(--bg3);
+  border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;
+}
+.btn-sec:hover{border-color:var(--em);color:var(--em)}
+.btn-sec svg{width:14px;height:14px}
+.btn-danger{background:var(--red);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer}
+
+/* ── STAT CARDS ── */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.stat-card{
+  background:#fff;border-radius:var(--rl);padding:20px;
+  border:1px solid var(--bg3);transition:all .2s;cursor:default;
+}
+.stat-card:hover{box-shadow:var(--shl);transform:translateY(-2px)}
+.stat-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.stat-icon{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+}
+.stat-icon svg{width:18px;height:18px}
+.stat-icon.em{background:var(--em-l)}  .stat-icon.em svg{stroke:var(--em)}
+.stat-icon.or{background:rgba(255,107,53,.1)} .stat-icon.or svg{stroke:var(--or)}
+.stat-icon.gr{background:rgba(16,185,129,.1)} .stat-icon.gr svg{stroke:var(--green)}
+.stat-icon.bl{background:rgba(59,130,246,.1)} .stat-icon.bl svg{stroke:var(--blue)}
+.stat-delta{font-size:11px;font-weight:600;padding:3px 8px;border-radius:20px}
+.stat-delta.up{background:rgba(16,185,129,.1);color:var(--green)}
+.stat-delta.dn{background:rgba(239,68,68,.1);color:var(--red)}
+.stat-val{font-family:"Syne",sans-serif;font-size:26px;font-weight:800;color:var(--t1);line-height:1}
+.stat-lbl{font-size:12px;color:var(--t3);margin-top:4px}
+
+/* ── TABLE ── */
+.tbl-wrap{background:#fff;border-radius:var(--rl);border:1px solid var(--bg3);overflow:hidden}
+.tbl-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--bg3);flex-wrap:wrap;gap:10px}
+.tbl-title{font-weight:700;font-size:15px;color:var(--t1)}
+.tbl-search{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--bg3);border-radius:8px;padding:7px 12px}
+.tbl-search input{background:none;border:none;outline:none;font-size:13px;color:var(--t1);width:180px}
+.tbl-search svg{width:13px;height:13px;color:var(--t4)}
+table{width:100%;border-collapse:collapse}
+thead{background:var(--bg2)}
+th{padding:10px 16px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);white-space:nowrap}
+td{padding:12px 16px;font-size:13px;color:var(--t2);border-top:1px solid var(--bg3)}
+tr:hover td{background:var(--bg)}.
+.tbl-pag{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-top:1px solid var(--bg3)}
+.tbl-pag span{font-size:13px;color:var(--t3)}
+.tbl-pag-btns{display:flex;gap:4px}
+.tbl-pag-btns button{width:32px;height:32px;border-radius:6px;border:1px solid var(--bg3);background:#fff;font-size:13px;cursor:pointer;transition:all .2s}
+.tbl-pag-btns button.on,.tbl-pag-btns button:hover{background:var(--em);color:#fff;border-color:var(--em)}
+
+/* ── STATUS BADGES ── */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap}
+.badge::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.badge-success{background:rgba(16,185,129,.1);color:var(--green)}.badge-success::before{background:var(--green)}
+.badge-warn{background:rgba(245,158,11,.1);color:var(--yellow)}.badge-warn::before{background:var(--yellow)}
+.badge-danger{background:rgba(239,68,68,.1);color:var(--red)}.badge-danger::before{background:var(--red)}
+.badge-info{background:rgba(59,130,246,.1);color:var(--blue)}.badge-info::before{background:var(--blue)}
+.badge-neutral{background:var(--bg2);color:var(--t3)}.badge-neutral::before{background:var(--t4)}
+
+/* ── CHART ── */
+.chart-box{background:#fff;border-radius:var(--rl);border:1px solid var(--bg3);padding:20px;margin-bottom:24px}
+.chart-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.chart-head h3{font-weight:700;font-size:15px}
+canvas{width:100%;display:block}
+
+/* ── 2-COL GRID ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+@media(max-width:900px){.two-col{grid-template-columns:1fr}}
+
+/* ── CARD ── */
+.card{background:#fff;border-radius:var(--rl);border:1px solid var(--bg3);padding:20px}
+.card-title{font-weight:700;font-size:14px;margin-bottom:14px;color:var(--t1)}
+
+/* ── VENDOR GRID ── */
+.vd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.vd-card{
+  background:#fff;border-radius:var(--rl);border:1px solid var(--bg3);
+  padding:20px;transition:all .2s;cursor:pointer;
+}
+.vd-card:hover{box-shadow:var(--shl);transform:translateY(-2px);border-color:var(--em)}
+.vd-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.vd-av{width:44px;height:44px;border-radius:12px;object-fit:cover;background:var(--bg2)}
+.vd-name{font-weight:700;font-size:14px;color:var(--t1)}
+.vd-cat{font-size:11px;color:var(--t3)}
+.vd-stats{display:flex;gap:16px}
+.vd-st{text-align:center}
+.vd-st-val{font-weight:700;font-size:15px;color:var(--t1)}
+.vd-st-lbl{font-size:10px;color:var(--t4)}
+.vd-actions{display:flex;gap:6px;margin-top:14px}
+.vd-btn{flex:1;padding:7px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;border:1px solid var(--bg3);background:#fff;color:var(--t2)}
+.vd-btn.primary{background:var(--em);color:#fff;border-color:var(--em)}
+.vd-btn:hover{opacity:.85}
+
+/* ── PRODUCT GRID ── */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.prod-adm-card{background:#fff;border-radius:var(--r);border:1px solid var(--bg3);overflow:hidden;transition:all .2s}
+.prod-adm-card:hover{box-shadow:var(--shl);border-color:var(--em)}
+.prod-adm-img{width:100%;height:140px;object-fit:cover;background:var(--bg2)}
+.prod-adm-body{padding:12px}
+.prod-adm-name{font-weight:600;font-size:13px;color:var(--t1);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prod-adm-price{font-weight:700;font-size:14px;color:var(--em)}
+.prod-adm-actions{display:flex;gap:6px;margin-top:10px}
+.prod-adm-btn{flex:1;padding:6px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+
+/* ── FORM ELEMENTS ── */
+.form-section{background:#fff;border-radius:var(--rl);border:1px solid var(--bg3);padding:24px;margin-bottom:16px}
+.form-section h3{font-weight:700;font-size:15px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--bg3)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px}
+.form-row.full{grid-template-columns:1fr}
+.form-group label{display:block;font-size:12px;font-weight:600;color:var(--t2);margin-bottom:6px}
+.form-inp{width:100%;padding:9px 12px;border:1px solid var(--bg3);border-radius:8px;font-size:13px;font-family:inherit;outline:none;transition:border .2s;background:#fff}
+.form-inp:focus{border-color:var(--em);box-shadow:0 0 0 3px var(--em-l)}
+select.form-inp{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px}
+
+/* ── FILTER BAR ── */
+.filter-bar{display:flex;align-items:center;gap:10px;padding:12px 20px;background:#fff;border-bottom:1px solid var(--bg3);flex-wrap:wrap}
+.filter-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--bg3);background:#fff;font-size:12px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .2s;white-space:nowrap}
+.filter-btn.on,.filter-btn:hover{background:var(--em);color:#fff;border-color:var(--em)}
+.filter-count{font-size:11px;color:var(--t3);margin-left:auto;white-space:nowrap}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:9999;pointer-events:none}
+.toast-b{background:var(--sl);color:#fff;padding:10px 22px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;transform:translateY(8px);transition:all .3s;white-space:nowrap}
+.toast-b.show{opacity:1;transform:translateY(0)}
+
+/* ── SCROLL TOP ── */
+#stb{position:fixed;bottom:28px;right:28px;z-index:999;width:42px;height:42px;border-radius:50%;background:var(--em);color:#fff;border:none;cursor:pointer;box-shadow:var(--shl);display:none;align-items:center;justify-content:center}
+#stb.vis{display:flex}
+#stb svg{width:16px;height:16px;stroke:#fff}
+
+/* ── LOADER ── */
+#loader{position:fixed;inset:0;background:var(--sl3);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;
+  animation:loaderAutoHide 3s ease forwards}
+@keyframes loaderAutoHide{0%,65%{opacity:1;visibility:visible}80%{opacity:0}100%{opacity:0;visibility:hidden;pointer-events:none}}
+.ld-icon{display:flex;flex-direction:column;gap:4px;margin-bottom:16px}
+.ld-icon span{height:3px;background:var(--em);border-radius:2px;display:block;animation:ldPulse 1.2s ease infinite}
+.ld-icon span:nth-child(1){width:40px;animation-delay:0s}
+.ld-icon span:nth-child(2){width:25px;animation-delay:.15s}
+.ld-icon span:nth-child(3){width:33px;animation-delay:.3s}
+@keyframes ldPulse{0%,100%{opacity:.3}50%{opacity:1}}
+.ld-brand{font-family:"Syne",sans-serif;font-size:24px;font-weight:800;color:#fff;letter-spacing:-.03em}
+.ld-brand span{color:var(--em)}
+.ld-sub{font-size:12px;color:rgba(255,255,255,.4);margin-top:6px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  #sidebar{display:none}
+  .two-col{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-icon"><span></span><span></span><span></span></div>
+  <div class="ld-brand"><span>MIFA</span> LIFE SHOP</div>
+  <div class="ld-sub">Administration · by Mifa Life Company</div>
+</div>
+
+<!-- TOP NAV -->
+<nav id="topNav">
+  <a class="tn-logo" href="index.html">
+    <div class="tn-logo-icon">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    <span>MIFA</span>&nbsp;LIFE&nbsp;<span style="color:rgba(255,255,255,.4);font-weight:600">ADMIN</span>
+  </a>
+  <div class="tn-search">
+    <svg viewBox="0 0 24 24" width="14" height="14" style="stroke:rgba(255,255,255,.4)"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="srchInp" placeholder="Rechercher commandes, vendeurs, produits…"/>
+  </div>
+  <div class="tn-r">
+    <button class="tn-icon-btn" title="Notifications" onclick="showToast('3 nouvelles notifications')">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="tn-badge"></span>
+    </button>
+    <button class="tn-icon-btn" title="Paramètres" onclick="showAdmPage('settings-adm','Paramètres')">
+      <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+    <img class="tn-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&q=70&fit=crop&crop=face" alt="Admin" onclick="showToast('Profil admin')"/>
+    <a class="tn-site-btn" href="index.html" target="_blank">
+      <svg viewBox="0 0 24 24" width="12" height="12"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Voir le site
+    </a>
+  </div>
+</nav>
+
+<div id="adminWrap">
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sb-section">
+    <div class="sb-label">Principal</div>
+    <button class="sb-item on" data-page="dashboard" onclick="showAdmPage('dashboard','Tableau de bord')">
+      <svg viewBox="0 0 24 24" width="16" height="16"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </button>
+    <button class="sb-item" data-page="orders" onclick="showAdmPage('orders','Commandes')">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/><path d="M9 12h6M9 16h4"/></svg>
+      Commandes
+      <span class="sb-badge">12</span>
+    </button>
+    <button class="sb-item" data-page="products" onclick="showAdmPage('products','Produits')">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      Produits
+    </button>
+    <button class="sb-item" data-page="users" onclick="showAdmPage('users','Utilisateurs')">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Utilisateurs
+    </button>
+  </div>
+  <div class="sb-divider"></div>
+  <div class="sb-section">
+    <div class="sb-label">Marketplace</div>
+    <button class="sb-item" data-page="vendors-adm" onclick="showAdmPage('vendors-adm','Vendeurs')">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Vendeurs
+      <span class="sb-badge">3</span>
+    </button>
+    <button class="sb-item" data-page="partners" onclick="showAdmPage('partners','Partenaires')">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Partenaires
+    </button>
+    <button class="sb-item" data-page="finances" onclick="showAdmPage('finances','Finances')">
+      <svg viewBox="0 0 24 24" width="16" height="16"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Finances
+    </button>
+  </div>
+  <div class="sb-divider"></div>
+  <div class="sb-section">
+    <div class="sb-label">Système</div>
+    <button class="sb-item" data-page="settings-adm" onclick="showAdmPage('settings-adm','Paramètres')">
+      <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Paramètres
+    </button>
+  </div>
+  <div class="sb-bottom">
+    <div class="sb-user">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&q=70&fit=crop&crop=face" alt="Admin"/>
+      <div><div class="sb-user-name">Administrateur</div><div class="sb-user-role">Super Admin</div></div>
+    </div>
+    <button class="sb-logout" onclick="location.href='auth.html'">
+      <svg viewBox="0 0 24 24" width="14" height="14"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Déconnexion
+    </button>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div id="adminMain">
+
+<!-- ═══ DASHBOARD ═══ -->
+<div class="adm-pg on" id="pg-dashboard">
+  <div class="pg-hd">
+    <div class="pg-hd-l">
+      <div class="pg-title">Tableau de bord</div>
+      <div class="pg-sub">Bienvenue · Dernière mise à jour : <span id="lastUpdate"></span></div>
+    </div>
+    <div class="pg-actions">
+      <button class="btn-sec" onclick="showToast('Rapport PDF généré ✓')">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Exporter
+      </button>
+    </div>
+  </div>
+  
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon em"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <span class="stat-delta up">↑ 23%</span>
+      </div>
+      <div class="stat-val">2.1M</div>
+      <div class="stat-lbl">Chiffre d'affaires (XOF)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon or"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg></div>
+        <span class="stat-delta up">↑ 18%</span>
+      </div>
+      <div class="stat-val">1 248</div>
+      <div class="stat-lbl">Commandes ce mois</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon gr"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <span class="stat-delta up">↑ 12%</span>
+      </div>
+      <div class="stat-val">24 750</div>
+      <div class="stat-lbl">Clients inscrits</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon bl"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+        <span class="stat-delta up">↑ 7%</span>
+      </div>
+      <div class="stat-val">87</div>
+      <div class="stat-lbl">Vendeurs actifs</div>
+    </div>
+  </div>
+  
+  <div class="chart-box">
+    <div class="chart-head">
+      <h3>Revenus mensuels (XOF)</h3>
+      <div style="display:flex;gap:8px">
+        <button class="filter-btn on" onclick="this.parentNode.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">2026</button>
+        <button class="filter-btn" onclick="this.parentNode.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">2025</button>
+      </div>
+    </div>
+    <canvas id="revenueChart" height="200"></canvas>
+  </div>
+  
+  <div class="two-col">
+    <div class="tbl-wrap">
+      <div class="tbl-head"><div class="tbl-title">Dernières commandes</div><button class="btn-sec" onclick="showAdmPage('orders','Commandes')">Voir tout</button></div>
+      <table>
+        <thead><tr><th>ID</th><th>Client</th><th>Montant</th><th>Statut</th></tr></thead>
+        <tbody id="recentOrdersTbl">
+          <tr><td style="color:var(--t3);text-align:center;padding:24px" colspan="4">Chargement…</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tbl-wrap">
+      <div class="tbl-head"><div class="tbl-title">Top vendeurs</div><button class="btn-sec" onclick="showAdmPage('vendors-adm','Vendeurs')">Voir tout</button></div>
+      <table>
+        <thead><tr><th>Vendeur</th><th>Ventes</th><th>Note</th></tr></thead>
+        <tbody id="topVendorsTbl">
+          <tr><td style="color:var(--t3);text-align:center;padding:24px" colspan="3">Chargement…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ COMMANDES ═══ -->
+<div class="adm-pg" id="pg-orders">
+  <div class="pg-hd">
+    <div class="pg-hd-l"><div class="pg-title">Gestion des commandes</div><div class="pg-sub" id="ordersCount">Chargement…</div></div>
+    <div class="pg-actions">
+      <button class="btn-sec" onclick="showToast('Export CSV des commandes')">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export CSV
+      </button>
+    </div>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-btn on" onclick="filterOrders('all',this)">Toutes</button>
+    <button class="filter-btn" onclick="filterOrders('pending',this)">En attente</button>
+    <button class="filter-btn" onclick="filterOrders('confirmed',this)">Confirmées</button>
+    <button class="filter-btn" onclick="filterOrders('shipped',this)">Expédiées</button>
+    <button class="filter-btn" onclick="filterOrders('delivered',this)">Livrées</button>
+    <button class="filter-btn" onclick="filterOrders('cancelled',this)">Annulées</button>
+    <span class="filter-count" id="orderFilterCount"></span>
+  </div>
+  <div class="tbl-wrap">
+    <div class="tbl-head">
+      <div class="tbl-title">Commandes</div>
+      <div class="tbl-search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" placeholder="Rechercher une commande…" oninput="searchOrders(this.value)"/>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>N° Commande</th><th>Client</th><th>Date</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead>
+      <tbody id="allOrdersTbl"></tbody>
+    </table>
+    <div class="tbl-pag"><span>Affichage 1-15 sur 1 248</span><div class="tbl-pag-btns" id="orderPag"></div></div>
+  </div>
+</div>
+
+<!-- ═══ PRODUITS ═══ -->
+<div class="adm-pg" id="pg-products">
+  <div class="pg-hd">
+    <div class="pg-hd-l"><div class="pg-title">Catalogue produits</div><div class="pg-sub">5 420 produits · <span style="color:var(--yellow)">312 en attente de validation</span></div></div>
+    <div class="pg-actions">
+      <button class="btn-sec" onclick="showToast('Export catalogue')">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/></svg>
+        Export
+      </button>
+      <button class="btn-primary" onclick="openAddProduct()">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Ajouter produit
+      </button>
+    </div>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-btn on" onclick="filterAdmProds('all',this)">Tous</button>
+    <button class="filter-btn" onclick="filterAdmProds('active',this)">Actifs</button>
+    <button class="filter-btn" onclick="filterAdmProds('pending',this)">En attente</button>
+    <button class="filter-btn" onclick="filterAdmProds('out',this)">Rupture de stock</button>
+    <span class="filter-count" id="prodFilterCount"></span>
+  </div>
+  <div id="admProdGrid" class="prod-grid" style="padding:20px"></div>
+</div>
+
+<!-- ═══ UTILISATEURS ═══ -->
+<div class="adm-pg" id="pg-users">
+  <div class="pg-hd">
+    <div class="pg-hd-l"><div class="pg-title">Utilisateurs</div><div class="pg-sub">24 750 clients inscrits</div></div>
+    <div class="pg-actions">
+      <button class="btn-sec" onclick="showToast('Export utilisateurs')">Export CSV</button>
+    </div>
+  </div>
+  <div class="tbl-wrap">
+    <div class="tbl-head">
+      <div class="tbl-title">Clients</div>
+      <div class="tbl-search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" placeholder="Rechercher un client…"/>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>Client</th><th>Email</th><th>Ville</th><th>Commandes</th><th>Total dépensé</th><th>Statut</th><th>Actions</th></tr></thead>
+      <tbody id="usersTbl"></tbody>
+    </table>
+    <div class="tbl-pag"><span>Affichage 1-15 sur 24 750</span><div class="tbl-pag-btns" id="userPag"></div></div>
+  </div>
+</div>
+
+<!-- ═══ VENDEURS ═══ -->
+<div class="adm-pg" id="pg-vendors-adm">
+  <div class="pg-hd">
+    <div class="pg-hd-l"><div class="pg-title">Gestion des vendeurs</div><div class="pg-sub">87 actifs · <span style="color:var(--yellow)">3 en attente de validation</span></div></div>
+    <div class="pg-actions">
+      <button class="btn-sec" onclick="showToast('Export vendeurs')">Export CSV</button>
+      <button class="btn-primary" onclick="showToast('Inviter un vendeur')">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Inviter un vendeur
+      </button>
+    </div>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-btn on" onclick="filterAdmVendors('all',this)">Tous</button>
+    <button class="filter-btn" onclick="filterAdmVendors('active',this)">Actifs</button>
+    <button class="filter-btn" onclick="filterAdmVendors('pending',this)">En attente</button>
+    <button class="filter-btn" onclick="filterAdmVendors('suspended',this)">Suspendus</button>
+  </div>
+  <div id="admVendorsGrid" class="vd-grid" style="padding:20px"></div>
+</div>
+
+<!-- ═══ PARTENAIRES ═══ -->
+<div class="adm-pg" id="pg-partners">
+  <div class="pg-hd">
+    <div class="pg-hd-l"><div class="pg-title">Partenaires & Affiliés</div><div class="pg-sub">12 partenaires actifs</div></div>
+    <div class="pg-actions">
+      <button class="btn-primary" onclick="showToast('Nouveau partenaire')">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Nouveau partenaire
+      </button>
+    </div>
+  </div>
+  <div class="stats-grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="stat-card"><div class="stat-top"><div class="stat-icon em"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><span class="stat-delta up">↑ 3</span></div><div class="stat-val">12</div><div class="stat-lbl">Partenaires actifs</div></div>
+    <div class="stat-card"><div class="stat-top"><div class="stat-icon or"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div></div><div class="stat-val">450K</div><div class="stat-lbl">Commissions versées (XOF)</div></div>
+    <div class="stat-card"><div class="stat-top"><div class="stat-icon gr"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div></div><div class="stat-val">3 200</div><div class="stat-lbl">Conversions ce mois</div></div>
+  </div>
+  <div class="tbl-wrap">
+    <div class="tbl-head"><div class="tbl-title">Liste des partenaires</div></div>
+    <table>
+      <thead><tr><th>Partenaire</th><th>Type</th><th>Commissions</th><th>Conversions</th><th>Statut</th><th>Actions</th></tr></thead>
+      <tbody id="partnersTbl"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ FINANCES ═══ -->
+<div class="adm-pg" id="pg-finances">
+  <div class="pg-hd">
+    <div class="pg-hd-l"><div class="pg-title">Finances</div><div class="pg-sub">Revenus, commissions et paiements</div></div>
+    <div class="pg-actions">
+      <button class="btn-sec" onclick="showToast('Rapport financier exporté')">Export</button>
+    </div>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-top"><div class="stat-icon em"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><span class="stat-delta up">↑ 23%</span></div><div class="stat-val">2.1M</div><div class="stat-lbl">Revenus bruts (XOF)</div></div>
+    <div class="stat-card"><div class="stat-top"><div class="stat-icon or"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div></div><div class="stat-val">315K</div><div class="stat-lbl">Commissions vendeurs</div></div>
+    <div class="stat-card"><div class="stat-top"><div class="stat-icon gr"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div><span class="stat-delta up">↑ 11%</span></div><div class="stat-val">1.785M</div><div class="stat-lbl">Revenus nets (XOF)</div></div>
+    <div class="stat-card"><div class="stat-top"><div class="stat-icon bl"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div></div><div class="stat-val">98.2%</div><div class="stat-lbl">Taux de paiement</div></div>
+  </div>
+  <div class="two-col">
+    <div class="card"><div class="card-title">Méthodes de paiement</div><canvas id="payChart" height="160"></canvas></div>
+    <div class="card"><div class="card-title">Transactions récentes</div><div id="recentTxTbl" style="max-height:200px;overflow-y:auto"></div></div>
+  </div>
+</div>
+
+<!-- ═══ PARAMÈTRES ═══ -->
+<div class="adm-pg" id="pg-settings-adm">
+  <div class="pg-hd">
+    <div class="pg-hd-l"><div class="pg-title">Paramètres du site</div><div class="pg-sub">Configuration générale de Mifa Life Shop</div></div>
+    <div class="pg-actions"><button class="btn-primary" onclick="showToast('Paramètres sauvegardés ✓')">Sauvegarder</button></div>
+  </div>
+  <div class="form-section">
+    <h3>Informations générales</h3>
+    <div class="form-row"><div class="form-group"><label>Nom du site</label><input class="form-inp" value="Mifa Life Shop"/></div><div class="form-group"><label>URL principale</label><input class="form-inp" value="https://www.mifalife.store"/></div></div>
+    <div class="form-row"><div class="form-group"><label>Email contact</label><input class="form-inp" type="email" value="contact@mifalife.store"/></div><div class="form-group"><label>Téléphone / WhatsApp</label><input class="form-inp" value="+223 XX XX XX XX"/></div></div>
+    <div class="form-row full"><div class="form-group"><label>Description</label><textarea class="form-inp" rows="3">La grande marketplace du Mali. Mode, beauté, maison — livraison rapide à Bamako et partout au Mali.</textarea></div></div>
+  </div>
+  <div class="form-section">
+    <h3>Paiements acceptés</h3>
+    <div class="form-row">
+      <div class="form-group"><label>Orange Money</label><select class="form-inp"><option>Activé</option><option>Désactivé</option></select></div>
+      <div class="form-group"><label>Wave</label><select class="form-inp"><option>Activé</option><option>Désactivé</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Moov Money</label><select class="form-inp"><option>Activé</option><option>Désactivé</option></select></div>
+      <div class="form-group"><label>Paiement à la livraison</label><select class="form-inp"><option>Activé</option><option>Désactivé</option></select></div>
+    </div>
+  </div>
+  <div class="form-section">
+    <h3>Supabase / Base de données</h3>
+    <div class="form-row"><div class="form-group"><label>URL Supabase</label><input class="form-inp" placeholder="https://rsvqndmymsflkodubxgb.supabase.co"/></div><div class="form-group"><label>Clé Anon</label><input class="form-inp" type="password" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJzdnFuZG15bXNmbGtvZHVieGdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMTMyOTQsImV4cCI6MjA4Nzc4OTI5NH0.YnWhKIM5l2AOvpi8pxuUarPdL_ueFlY2QmVODEE4-b4"/></div></div>
+    <button class="btn-primary" onclick="showToast('Connexion Supabase testée ✓')">Tester la connexion</button>
+  </div>
+</div>
+
+</div><!-- /adminMain -->
+</div><!-- /adminWrap -->
+
+<div id="toast"><div class="toast-b" id="toastMsg"></div></div>
+<button id="stb" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+<script>
+/* ════ SHARED DATA ════ */
+const VENDORS = [
+  {id:1,name:"Fatoumata Diallo",shop:"Fatou Fashion",cat:"Vêtements & Mode",city:"Bamako",sales:1240,revenue:4850000,rating:4.8,prods:86,img:"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=80&q=70&fit=crop&crop=face",status:"active"},
+  {id:2,name:"Kadiatou Traoré",shop:"Kadi Bijoux",cat:"Bijoux & Montres",city:"Bamako",sales:890,revenue:2140000,rating:4.7,prods:124,img:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=70&fit=crop&crop=face",status:"active"},
+  {id:3,name:"Aminata Coulibaly",shop:"Aminata Beauté",cat:"Beauté & Soin",city:"Sikasso",sales:560,revenue:1230000,rating:4.9,prods:45,img:"https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=80&q=70&fit=crop&crop=face",status:"active"},
+  {id:4,name:"Ibrahim Koné",shop:"IK Electronics",cat:"Électronique",city:"Bamako",sales:320,revenue:3200000,rating:4.5,prods:38,img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=70&fit=crop&crop=face",status:"pending"},
+  {id:5,name:"Mariam Sanogo",shop:"Casa Déco",cat:"Maison & Déco",city:"Ségou",sales:210,revenue:890000,rating:4.6,prods:67,img:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=70&fit=crop&crop=face",status:"active"},
+  {id:6,name:"Oumar Touré",shop:"Toure Sport",cat:"Sport & Fitness",city:"Kayes",sales:180,revenue:720000,rating:4.4,prods:29,img:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=80&q=70&fit=crop&crop=face",status:"pending"},
+];
+
+const ORDERS_DATA = [
+  {id:"#ORD-2847",client:"Awa Diallo",date:"2026-03-08",amount:45000,status:"delivered",items:3},
+  {id:"#ORD-2846",client:"Boubacar Koné",date:"2026-03-08",amount:128000,status:"shipped",items:5},
+  {id:"#ORD-2845",client:"Fatima Traoré",date:"2026-03-07",amount:67500,status:"confirmed",items:2},
+  {id:"#ORD-2844",client:"Moussa Coulibaly",date:"2026-03-07",amount:23000,status:"pending",items:1},
+  {id:"#ORD-2843",client:"Aissatou Bah",date:"2026-03-06",amount:89000,status:"delivered",items:4},
+  {id:"#ORD-2842",client:"Seydou Dembélé",date:"2026-03-06",amount:15500,status:"cancelled",items:1},
+  {id:"#ORD-2841",client:"Rokia Sissoko",date:"2026-03-05",amount:234000,status:"delivered",items:8},
+  {id:"#ORD-2840",client:"Tiéba Sanogo",date:"2026-03-05",amount:42000,status:"shipped",items:2},
+];
+
+const USERS_DATA = [
+  {name:"Awa Diallo",email:"awa@gmail.com",city:"Bamako",orders:12,spent:245000,status:"active",avatar:"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=40&q=70&fit=crop&crop=face"},
+  {name:"Boubacar Koné",email:"boubacar@gmail.com",city:"Bamako",orders:8,spent:128000,status:"active",avatar:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&q=70&fit=crop&crop=face"},
+  {name:"Fatima Traoré",email:"fatima@gmail.com",city:"Sikasso",orders:5,spent:67500,status:"active",avatar:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&q=70&fit=crop&crop=face"},
+  {name:"Moussa Coulibaly",email:"moussa@gmail.com",city:"Kayes",orders:3,spent:45000,status:"active",avatar:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=40&q=70&fit=crop&crop=face"},
+  {name:"Aissatou Bah",email:"aissatou@gmail.com",city:"Mopti",orders:7,spent:189000,status:"active",avatar:"https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=40&q=70&fit=crop&crop=face"},
+  {name:"Seydou Dembélé",email:"seydou@gmail.com",city:"Bamako",orders:1,spent:15500,status:"suspended",avatar:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=40&q=70&fit=crop&crop=face"},
+];
+
+const PRODS_ADM = [
+  {id:1,name:"Boubou Bogolan Mali",price:45000,stock:23,status:"active",img:"https://images.unsplash.com/photo-1590735213920-68192a487bc2?w=300&q=70&fit=crop"},
+  {id:2,name:"Bijoux Cauris Dorés",price:12500,stock:0,status:"out",img:"https://images.unsplash.com/photo-1573408301185-9519f94b08ef?w=300&q=70&fit=crop"},
+  {id:3,name:"Sac Tissé Malien",price:28000,stock:8,status:"active",img:"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=300&q=70&fit=crop"},
+  {id:4,name:"Shea Butter Naturel",price:8500,stock:45,status:"pending",img:"https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=300&q=70&fit=crop"},
+  {id:5,name:"Tissu Wax Africain",price:15000,stock:150,status:"active",img:"https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=300&q=70&fit=crop"},
+  {id:6,name:"Sandales Cuir Mali",price:22000,stock:12,status:"active",img:"https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=300&q=70&fit=crop"},
+];
+
+/* ════ FUNCTIONS ════ */
+function showToast(msg,type) {
+  const t = document.getElementById('toastMsg');
+  if(!t) return;
+  t.textContent = msg;
+  t.style.background = type==='red'?'#EF4444':type==='green'?'#10B981':'#2F3E46';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+function showAdmPage(pid, title) {
+  document.querySelectorAll('.adm-pg').forEach(p=>p.classList.remove('on'));
+  const p = document.getElementById('pg-'+pid);
+  if(p) p.classList.add('on');
+  document.querySelectorAll('.sb-item').forEach(b=>{
+    b.classList.toggle('on', b.dataset.page===pid);
+  });
+  // Update page subtitle
+  document.title = title + ' — Mifa Life Admin';
+  // Lazy render
+  if(pid==='orders') renderOrders();
+  if(pid==='users') renderUsers();
+  if(pid==='vendors-adm') renderVendors();
+  if(pid==='products') renderAdmProds();
+  if(pid==='partners') renderPartners();
+  if(pid==='finances') renderFinances();
+  if(pid==='dashboard') { renderDashboard(); renderChart(); }
+}
+
+function doSearch() {
+  const q = document.getElementById('srchInp')?.value?.trim();
+  if(q) showToast('Recherche : ' + q);
+}
+
+function formatXOF(n) { return n.toLocaleString('fr-FR') + ' XOF'; }
+function formatDate(d) { return new Date(d).toLocaleDateString('fr-FR'); }
+
+function statusBadge(s) {
+  const map = {
+    active:'success',pending:'warn',delivered:'success',shipped:'info',
+    confirmed:'info',pending_order:'warn',cancelled:'danger',suspended:'danger',out:'danger'
+  };
+  const labels = {active:'Actif',pending:'En attente',delivered:'Livré',shipped:'Expédié',
+    confirmed:'Confirmé',pending_order:'En attente',cancelled:'Annulé',suspended:'Suspendu',out:'Rupture'};
+  return `<span class="badge badge-${map[s]||'neutral'}">${labels[s]||s}</span>`;
+}
+
+function renderDashboard() {
+  // Recent orders table
+  const tbl = document.getElementById('recentOrdersTbl');
+  if(tbl) tbl.innerHTML = ORDERS_DATA.slice(0,5).map(o=>`
+    <tr>
+      <td style="font-weight:600;color:var(--em)">${o.id}</td>
+      <td>${o.client}</td>
+      <td style="font-weight:700">${formatXOF(o.amount)}</td>
+      <td>${statusBadge(o.status)}</td>
+    </tr>`).join('');
+  
+  // Top vendors table
+  const vtbl = document.getElementById('topVendorsTbl');
+  if(vtbl) vtbl.innerHTML = VENDORS.filter(v=>v.status==='active').slice(0,5).map(v=>`
+    <tr>
+      <td style="display:flex;align-items:center;gap:8px">
+        <img src="${v.img}" style="width:28px;height:28px;border-radius:50%;object-fit:cover"/>
+        <span style="font-weight:600">${v.shop}</span>
+      </td>
+      <td style="font-weight:700">${v.sales.toLocaleString()}</td>
+      <td><span style="color:var(--yellow)">★</span> ${v.rating}</td>
+    </tr>`).join('');
+  
+  // Update date
+  const lu = document.getElementById('lastUpdate');
+  if(lu) lu.textContent = new Date().toLocaleString('fr-FR');
+}
+
+function renderOrders(filter='all') {
+  const data = filter==='all' ? ORDERS_DATA : ORDERS_DATA.filter(o=>o.status===filter||(filter==='pending'&&o.status==='pending'));
+  const tbl = document.getElementById('allOrdersTbl');
+  const cnt = document.getElementById('ordersCount');
+  if(cnt) cnt.textContent = data.length + ' commandes · Ce mois';
+  if(!tbl) return;
+  tbl.innerHTML = data.map(o=>`
+    <tr>
+      <td><a style="font-weight:700;color:var(--em);cursor:pointer" onclick="showToast('Détails commande ${o.id}')">${o.id}</a></td>
+      <td>${o.client}</td>
+      <td>${formatDate(o.date)}</td>
+      <td style="font-weight:700">${formatXOF(o.amount)}</td>
+      <td>${statusBadge(o.status)}</td>
+      <td>
+        <button class="btn-sec" style="padding:4px 10px;font-size:11px" onclick="showToast('Commande ${o.id} mise à jour')">Modifier</button>
+      </td>
+    </tr>`).join('');
+  renderPag('orderPag', data.length);
+}
+
+function filterOrders(filter, btn) {
+  document.querySelectorAll('.filter-bar .filter-btn').forEach(b=>b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  renderOrders(filter);
+}
+
+function searchOrders(q) {
+  if(!q) { renderOrders(); return; }
+  const data = ORDERS_DATA.filter(o=>o.id.toLowerCase().includes(q.toLowerCase())||o.client.toLowerCase().includes(q.toLowerCase()));
+  const tbl = document.getElementById('allOrdersTbl');
+  if(tbl) tbl.innerHTML = data.map(o=>`
+    <tr><td style="font-weight:700;color:var(--em)">${o.id}</td><td>${o.client}</td>
+    <td>${formatDate(o.date)}</td><td style="font-weight:700">${formatXOF(o.amount)}</td>
+    <td>${statusBadge(o.status)}</td><td><button class="btn-sec" style="padding:4px 10px;font-size:11px">Modifier</button></td></tr>`).join('');
+}
+
+function renderUsers() {
+  const tbl = document.getElementById('usersTbl');
+  if(!tbl) return;
+  tbl.innerHTML = USERS_DATA.map(u=>`
+    <tr>
+      <td style="display:flex;align-items:center;gap:8px">
+        <img src="${u.avatar}" style="width:30px;height:30px;border-radius:50%;object-fit:cover"/>
+        <span style="font-weight:600">${u.name}</span>
+      </td>
+      <td style="color:var(--t3)">${u.email}</td>
+      <td>${u.city}</td>
+      <td>${u.orders}</td>
+      <td style="font-weight:700">${formatXOF(u.spent)}</td>
+      <td>${statusBadge(u.status)}</td>
+      <td>
+        <button class="btn-sec" style="padding:4px 10px;font-size:11px" onclick="showToast('Profil de ${u.name}')" >Voir</button>
+        ${u.status==='active'?`<button class="btn-danger" style="margin-left:4px" onclick="showToast('${u.name} suspendu')">Suspendre</button>`:''}
+      </td>
+    </tr>`).join('');
+  renderPag('userPag', USERS_DATA.length);
+}
+
+function renderVendors(filter='all') {
+  const data = filter==='all' ? VENDORS : VENDORS.filter(v=>v.status===filter);
+  const grid = document.getElementById('admVendorsGrid');
+  if(!grid) return;
+  grid.innerHTML = data.map(v=>`
+    <div class="vd-card">
+      <div class="vd-top">
+        <img class="vd-av" src="${v.img}" alt="${v.name}"/>
+        <div>
+          <div class="vd-name">${v.shop}</div>
+          <div class="vd-cat">${v.cat} · ${v.city}</div>
+          <div style="margin-top:4px">${statusBadge(v.status)}</div>
+        </div>
+      </div>
+      <div class="vd-stats">
+        <div class="vd-st"><div class="vd-st-val">${v.sales}</div><div class="vd-st-lbl">Ventes</div></div>
+        <div class="vd-st"><div class="vd-st-val">${v.prods}</div><div class="vd-st-lbl">Produits</div></div>
+        <div class="vd-st"><div class="vd-st-val">${v.rating}</div><div class="vd-st-lbl">Note</div></div>
+      </div>
+      <div class="vd-actions">
+        <button class="vd-btn" onclick="showToast('Boutique de ${v.shop}')">Voir boutique</button>
+        ${v.status==='pending'?`<button class="vd-btn primary" onclick="showToast('${v.shop} approuvé ✓')">Approuver</button>`:`<button class="vd-btn" onclick="showToast('Message à ${v.name}')">Contacter</button>`}
+      </div>
+    </div>`).join('');
+}
+
+function filterAdmVendors(filter, btn) {
+  document.querySelectorAll('#pg-vendors-adm .filter-bar .filter-btn').forEach(b=>b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  renderVendors(filter);
+}
+
+function renderAdmProds(filter='all') {
+  let data = PRODS_ADM;
+  if(filter==='active') data=data.filter(p=>p.status==='active');
+  if(filter==='pending') data=data.filter(p=>p.status==='pending');
+  if(filter==='out') data=data.filter(p=>p.status==='out');
+  const grid = document.getElementById('admProdGrid');
+  if(!grid) return;
+  grid.innerHTML = data.map(p=>`
+    <div class="prod-adm-card">
+      <img class="prod-adm-img" src="${p.img}" alt="${p.name}" loading="lazy"/>
+      <div class="prod-adm-body">
+        <div class="prod-adm-name">${p.name}</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px">
+          <div class="prod-adm-price">${p.price.toLocaleString()} XOF</div>
+          ${statusBadge(p.status)}
+        </div>
+        <div style="font-size:11px;color:var(--t3);margin-top:4px">${p.stock > 0 ? p.stock+' en stock' : '<span style="color:var(--red)">Rupture</span>'}</div>
+        <div class="prod-adm-actions">
+          <button class="prod-adm-btn" style="background:var(--em);color:#fff" onclick="showToast('Éditer ${p.name}')">Éditer</button>
+          <button class="prod-adm-btn" style="background:var(--bg2);color:var(--t2)" onclick="showToast('${p.name} supprimé')">Suppr.</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function filterAdmProds(filter, btn) {
+  document.querySelectorAll('#pg-products .filter-bar .filter-btn').forEach(b=>b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  renderAdmProds(filter);
+}
+
+function openAddProduct() {
+  showToast('Formulaire ajout produit (bientôt disponible)');
+}
+
+function renderPartners() {
+  const tbl = document.getElementById('partnersTbl');
+  if(!tbl) return;
+  const partners = [
+    {name:"Orange Mali",type:"Paiement mobile",commissions:120000,conversions:890,status:"active"},
+    {name:"Wave",type:"Paiement mobile",commissions:85000,conversions:650,status:"active"},
+    {name:"DHL Mali",type:"Livraison",commissions:45000,conversions:320,status:"active"},
+    {name:"Facebook Mali",type:"Marketing",commissions:0,conversions:1200,status:"active"},
+    {name:"Jumia",type:"Affiliation",commissions:25000,conversions:180,status:"pending"},
+  ];
+  tbl.innerHTML = partners.map(p=>`
+    <tr>
+      <td style="font-weight:600">${p.name}</td>
+      <td><span style="background:var(--bg2);padding:3px 8px;border-radius:20px;font-size:11px">${p.type}</span></td>
+      <td style="font-weight:600">${p.commissions.toLocaleString()} XOF</td>
+      <td>${p.conversions.toLocaleString()}</td>
+      <td>${statusBadge(p.status)}</td>
+      <td><button class="btn-sec" style="padding:4px 10px;font-size:11px" onclick="showToast('Détails ${p.name}')">Voir</button></td>
+    </tr>`).join('');
+}
+
+function renderFinances() {
+  const txDiv = document.getElementById('recentTxTbl');
+  if(!txDiv) return;
+  const txs = [
+    {date:'08/03',desc:'Ventes marketplace',amount:145000,type:'credit'},
+    {date:'07/03',desc:'Commission Orange Money',amount:8700,type:'debit'},
+    {date:'07/03',desc:'Ventes marketplace',amount:98000,type:'credit'},
+    {date:'06/03',desc:'Paiement DHL',amount:12500,type:'debit'},
+    {date:'06/03',desc:'Ventes marketplace',amount:234000,type:'credit'},
+  ];
+  txDiv.innerHTML = txs.map(function(t) {
+    var sign = t.type==='credit' ? '+' : '-';
+    var color = t.type==='credit' ? 'var(--green)' : 'var(--red)';
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bg3)">' +
+      '<div><div style="font-size:13px;font-weight:500">' + t.desc + '</div>' +
+      '<div style="font-size:11px;color:var(--t3)">' + t.date + '</div></div>' +
+      '<div style="font-weight:700;color:' + color + '">' + sign + t.amount.toLocaleString('fr-FR') + ' XOF</div>' +
+    '</div>';
+  }).join('');
+}
+function renderChart() {
+  const canvas = document.getElementById('revenueChart');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const months=['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+  const data=[820000,940000,780000,1100000,1350000,1180000,1420000,1600000,1380000,1750000,1920000,2100000];
+  const maxVal=Math.max(...data);
+  const W=canvas.offsetWidth||600; canvas.width=W; canvas.height=200;
+  const H=200,pad={t:20,r:20,b:40,l:60},gw=W-pad.l-pad.r,gh=H-pad.t-pad.b;
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle='rgba(0,0,0,.06)';ctx.lineWidth=1;
+  for(let i=0;i<=4;i++){const y=pad.t+gh*(1-i/4);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();ctx.fillStyle='#9CA3AF';ctx.font='11px DM Sans,sans-serif';ctx.textAlign='right';ctx.fillText(((maxVal*i/4)/1000000).toFixed(1)+'M',pad.l-6,y+4);}
+  const bw=gw/months.length*.6;
+  data.forEach((v,i)=>{
+    const x=pad.l+gw*i/months.length+(gw/months.length-bw)/2;
+    const h2=gh*(v/maxVal),y=pad.t+gh-h2;
+    const grad=ctx.createLinearGradient(0,y,0,y+h2);
+    grad.addColorStop(0,'#00A896');grad.addColorStop(1,'rgba(0,168,150,.25)');
+    ctx.fillStyle=grad;ctx.beginPath();
+    ctx.roundRect?ctx.roundRect(x,y,bw,h2,4):ctx.rect(x,y,bw,h2);
+    ctx.fill();
+    ctx.fillStyle='#9CA3AF';ctx.font='10px DM Sans,sans-serif';ctx.textAlign='center';
+    ctx.fillText(months[i],x+bw/2,H-6);
+  });
+}
+
+function renderPag(id, total) {
+  const el = document.getElementById(id);
+  if(!el) return;
+  const pages = Math.min(Math.ceil(total/15),5);
+  el.innerHTML = Array.from({length:pages},(_,i)=>`<button class="${i===0?'on':''}" onclick="this.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on'));this.classList.add('on')">${i+1}</button>`).join('');
+}
+
+/* ════ INIT ════ */
+window.addEventListener('DOMContentLoaded',()=>{
+  // Hide loader
+  setTimeout(()=>{ const ld=document.getElementById('loader'); if(ld) ld.style.cssText='display:none!important'; },1800);
+  
+  // Initial render
+  renderDashboard();
+  renderChart();
+  
+  // Hash routing
+  function handleHash(){
+    const h=location.hash.replace('#','')||'dashboard';
+    const map={dashboard:'Tableau de bord',orders:'Commandes',products:'Produits',users:'Utilisateurs','vendors-adm':'Vendeurs',partners:'Partenaires',finances:'Finances','settings-adm':'Paramètres'};
+    if(map[h]) showAdmPage(h, map[h]);
+  }
+  handleHash();
+  window.addEventListener('hashchange', handleHash);
+  
+  // Scroll to top button
+  window.addEventListener('scroll',()=>{
+    const s=document.getElementById('stb');
+    if(s) s.classList.toggle('vis',window.scrollY>300);
+  });
+  
+  // Update current date
+  const lu = document.getElementById('lastUpdate');
+  if(lu) lu.textContent = new Date().toLocaleString('fr-FR');
+});
+</script>
+</body>
+</html>
