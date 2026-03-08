@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Promos &amp; Fidelite &mdash; Mifa Life Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>
+<style>
+
+:root{
+  --em:#00A896;--em-d:#007a6e;--em-l:rgba(0,168,150,.08);--em-g:rgba(0,168,150,.18);
+  --or:#FF6B35;--or-d:#cc5428;
+  --sl:#2F3E46;--sl2:#1a2332;--sl3:#0d1520;
+  --mu:#F5CB5C;
+  --bg:#F8FAFB;--bg2:#EEF2F5;--bg3:#E2E8F0;
+  --t1:#111827;--t2:#374151;--t3:#6B7280;--t4:#9CA3AF;
+  --r:12px;--rl:18px;--rxl:24px;
+  --shm:0 4px 16px rgba(0,0,0,.08);
+  --shl:0 12px 40px rgba(0,0,0,.12);
+  --shxl:0 24px 64px rgba(0,0,0,.16);
+}
+  --shm:0 4px 20px rgba(0,0,0,.08);
+  --shl:0 2px 12px rgba(0,0,0,.05);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--t1);min-height:100vh}
+/* NAV */
+#nav{position:sticky;top:0;z-index:500;background:#fff;border-bottom:1px solid var(--bg3)}
+.nv-in{display:flex;align-items:center;gap:16px;padding:0 24px;height:60px;max-width:1400px;margin:0 auto}
+.nv-logo{display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none;flex-shrink:0}
+.nv-li{display:flex;flex-direction:column;gap:3px}
+.nv-li span{height:3px;border-radius:2px;background:var(--em);display:block}
+.nv-wm{font-family:"Syne",sans-serif;font-size:17px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.nv-ws{font-size:9px;color:var(--t3);letter-spacing:.04em}
+.nv-sw{flex:1;max-width:400px}
+.nv-sb{display:flex;border:1.5px solid var(--bg3);border-radius:24px;overflow:hidden;background:#fff;transition:border-color .2s}
+.nv-sb:focus-within{border-color:var(--em)}
+.nv-sb input{flex:1;border:none;outline:none;padding:8px 14px;font-size:13px;font-family:inherit;background:transparent}
+.nv-sbtn{padding:8px 14px;background:var(--em);cursor:pointer;display:flex;align-items:center}
+.nv-sbtn:hover{background:var(--em-d)}
+.nv-lnks{display:flex;align-items:center;gap:2px;margin-left:auto}
+.nv-lb{display:inline-flex;align-items:center;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;color:var(--t2);text-decoration:none;transition:all .2s;background:none;border:none;cursor:pointer}
+.nv-lb:hover,.nv-lb.active{color:var(--em);background:var(--em-l)}
+.nv-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.ib{background:none;border:none;cursor:pointer;padding:8px;border-radius:50%;color:var(--t2);position:relative;transition:all .2s}
+.ib:hover{background:var(--bg2);color:var(--em)}
+.cbdg{position:absolute;top:2px;right:2px;width:16px;height:16px;background:var(--or);color:#fff;border-radius:50%;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.btn-o{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;border:1.5px solid var(--bg3);background:#fff;color:var(--t2);text-decoration:none;transition:all .2s;cursor:pointer}
+.btn-o:hover{border-color:var(--em);color:var(--em)}
+.btn-p{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:700;background:var(--em);color:#fff;border:none;text-decoration:none;transition:all .2s;cursor:pointer}
+.btn-p:hover{background:var(--em-d);transform:translateY(-1px)}
+/* PROMO BAR */
+#pbar{background:linear-gradient(90deg,var(--sl3),var(--sl2));padding:8px 24px}
+.pb-in{display:flex;align-items:center;gap:12px;max-width:1400px;margin:0 auto;flex-wrap:wrap}
+.pb-txt{font-size:12px;color:rgba(255,255,255,.8);flex:1}
+.pb-tmr{font-size:11px;color:var(--mu);font-weight:700;font-variant-numeric:tabular-nums}
+.btn-ow{font-size:11px;font-weight:700;color:var(--mu);background:none;border:1px solid rgba(245,203,92,.3);border-radius:20px;padding:4px 12px;text-decoration:none;cursor:pointer;white-space:nowrap;transition:all .2s}
+.btn-ow:hover{background:rgba(245,203,92,.15)}
+.tb-x{color:rgba(255,255,255,.4);cursor:pointer;font-size:12px;padding:2px 6px}
+.tb-x:hover{color:#fff}
+/* CART SIDEBAR */
+#cov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:1000}
+#csb{position:fixed;right:0;top:0;bottom:0;width:380px;background:#fff;z-index:1001;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column;box-shadow:-4px 0 24px rgba(0,0,0,.12)}
+#csb.open{transform:translateX(0)}
+.cs-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--bg3)}
+.cs-ti{font-family:"Syne",sans-serif;font-size:18px;font-weight:800}
+.cs-bd{flex:1;overflow-y:auto;padding:16px}
+.cs-ft{padding:16px 20px;border-top:1px solid var(--bg3)}
+.btn-ck{width:100%;padding:14px;background:var(--em);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-ck:hover{background:var(--em-d)}
+.cs-sec{text-align:center;font-size:11px;color:var(--t4);margin-top:8px}
+/* TOAST */
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:9999;pointer-events:none}
+.toast-b{background:var(--sl);color:#fff;padding:10px 22px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;transform:translateY(8px);transition:all .3s;white-space:nowrap}
+.toast-b.show{opacity:1;transform:translateY(0)}
+/* SCROLL TOP */
+#stb{position:fixed;bottom:28px;right:28px;z-index:999;width:42px;height:42px;border-radius:50%;background:var(--em);color:#fff;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,168,150,.3);display:none;align-items:center;justify-content:center}
+/* BREADCRUMB */
+.brcr{padding:14px 0;border-bottom:1px solid var(--bg3)}
+.brcr-in{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.brcr-in a{font-size:13px;color:var(--t3);text-decoration:none;cursor:pointer;transition:color .2s}
+.brcr-in a:hover{color:var(--em)}
+.brcr-sep{color:var(--bg3);font-size:12px}
+.brcr-cur{font-size:13px;color:var(--t1);font-weight:600}
+/* SECTION HEADERS */
+.sh-wrap{margin-bottom:12px}
+.sh-eyb{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--em);text-transform:uppercase;margin-bottom:4px}
+.sh-ti{font-family:"Syne",sans-serif;font-size:26px;font-weight:800;color:var(--t1);letter-spacing:-.02em}
+.sh-sub{font-size:14px;color:var(--t3);margin-top:4px}
+/* SECTION */
+.sec{padding:60px 24px;max-width:1400px;margin:0 auto}
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--sl3);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;animation:ldHide 2.2s ease forwards}
+@keyframes ldHide{0%,55%{opacity:1;visibility:visible}80%{opacity:0}100%{opacity:0;visibility:hidden;pointer-events:none}}
+.ld-icon{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.ld-icon span{height:3px;background:var(--em);border-radius:2px;display:block;animation:ldP 1.2s ease infinite}
+.ld-icon span:nth-child(1){width:40px}.ld-icon span:nth-child(2){width:25px;animation-delay:.15s}.ld-icon span:nth-child(3){width:33px;animation-delay:.3s}
+@keyframes ldP{0%,100%{opacity:.3}50%{opacity:1}}
+.ld-brand{font-family:"Syne",sans-serif;font-size:22px;font-weight:800;color:#fff;letter-spacing:-.03em}
+.ld-brand span{color:var(--em)}
+.ld-sub{font-size:12px;color:rgba(255,255,255,.4);margin-top:6px}
+
+.ph{background:linear-gradient(135deg,var(--sl3) 0%,#0a1f1c 50%,var(--sl2) 100%);padding:56px 24px;text-align:center;color:#fff;position:relative;overflow:hidden}
+.ph::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 60% 50%,rgba(0,168,150,.18) 0%,transparent 70%)}
+.ph-eye{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--em);text-transform:uppercase;margin-bottom:12px;position:relative}
+.ph h1{font-family:"Syne",sans-serif;font-size:40px;font-weight:800;line-height:1.15;margin-bottom:12px;position:relative}
+.ph h1 em{color:var(--mu);font-style:normal}
+.ph p{font-size:15px;color:rgba(255,255,255,.6);max-width:520px;margin:0 auto 32px;position:relative;line-height:1.6}
+.pq{display:flex;gap:0;max-width:440px;margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4);position:relative}
+.pq input{flex:1;border:none;padding:15px 18px;font-size:15px;font-family:inherit;outline:none;background:rgba(255,255,255,.95);color:var(--t1)}
+.pq input::placeholder{color:var(--t4)}
+.pq button{padding:0 24px;background:var(--em);color:#fff;border:none;cursor:pointer;font-size:14px;font-weight:800;font-family:inherit;white-space:nowrap}
+.pq button:hover{background:var(--em-d)}
+.pq-hint{font-size:12px;color:rgba(255,255,255,.4);margin-top:10px;position:relative}
+.pq-hint a{color:var(--mu);cursor:pointer}
+/* CODE CARDS */
+.ac-wrap{max-width:1200px;margin:32px auto;padding:0 24px}
+.ac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+.ac-card{position:relative;border-radius:16px;padding:20px 20px 20px 24px;cursor:pointer;transition:all .25s;overflow:hidden}
+.ac-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;border-radius:16px 0 0 16px}
+.ac-card.g{background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border:1px solid #A7F3D0}.ac-card.g::before{background:var(--em)}
+.ac-card.o{background:linear-gradient(135deg,#FFF7ED,#FED7AA);border:1px solid #FDBA74}.ac-card.o::before{background:var(--or)}
+.ac-card.p{background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border:1px solid #C4B5FD}.ac-card.p::before{background:#7C3AED}
+.ac-card.y{background:linear-gradient(135deg,#FEFCE8,#FEF08A);border:1px solid #FDE047}.ac-card.y::before{background:#EAB308}
+.ac-card:hover{transform:translateY(-3px);box-shadow:var(--shm)}
+.ac-tag{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.ac-card.g .ac-tag{color:var(--em-d)}.ac-card.o .ac-tag{color:var(--or-d)}.ac-card.p .ac-tag{color:#5B21B6}.ac-card.y .ac-tag{color:#A16207}
+.ac-code-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.ac-code{font-family:"Syne",sans-serif;font-size:22px;font-weight:800;letter-spacing:.04em;color:var(--t1)}
+.ac-copy{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:none;transition:all .2s}
+.ac-card.g .ac-copy{background:var(--em);color:#fff}.ac-card.o .ac-copy{background:var(--or);color:#fff}
+.ac-card.p .ac-copy{background:#7C3AED;color:#fff}.ac-card.y .ac-copy{background:#EAB308;color:#fff}
+.ac-desc{font-size:13px;color:var(--t2);margin-bottom:8px;font-weight:600}
+.ac-foot{display:flex;align-items:center;justify-content:space-between}
+.ac-expiry{font-size:11px;color:var(--t3)}
+.ac-ribbon{position:absolute;top:12px;right:-8px;background:var(--or);color:#fff;font-size:10px;font-weight:700;padding:3px 12px 3px 8px}
+/* TABS */
+.ptabs-wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.ptabs{display:flex;gap:4px;border-bottom:2px solid var(--bg3);margin-bottom:32px;overflow-x:auto}
+.ptab{padding:12px 24px;font-size:14px;font-weight:700;color:var(--t3);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit}
+.ptab.on{color:var(--em);border-bottom-color:var(--em)}
+.ptab-pane{display:none}.ptab-pane.on{display:block}
+/* LOYALTY CARD */
+.loy-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
+@media(max-width:768px){.loy-grid{grid-template-columns:1fr}}
+.loy-card{background:linear-gradient(135deg,var(--sl2),var(--sl3),#0a1f1c);border-radius:20px;padding:28px;color:#fff;position:relative;overflow:hidden}
+.loy-card::before{content:"";position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:rgba(0,168,150,.12)}
+.lc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;position:relative}
+.lc-brand{font-family:"Syne",sans-serif;font-size:14px;font-weight:800;letter-spacing:.06em;color:#fff}
+.lc-brand em{color:var(--em);font-style:normal}
+.lc-tier{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700}
+.lc-pts-num{font-family:"Syne",sans-serif;font-size:48px;font-weight:800;line-height:1;color:var(--mu);position:relative}
+.lc-pts-lbl{font-size:13px;color:rgba(255,255,255,.5);margin-top:2px}
+.lc-pts-eq{font-size:12px;color:var(--em);margin-top:4px;font-weight:600}
+.lc-bar-wrap{margin:16px 0}
+.lc-bar-track{height:6px;background:rgba(255,255,255,.15);border-radius:3px;overflow:hidden}
+.lc-bar-fill{height:100%;background:linear-gradient(90deg,var(--em),var(--mu));border-radius:3px}
+.lc-bar-hint{font-size:11px;color:rgba(255,255,255,.4);margin-top:4px}
+.lc-foot{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(255,255,255,.1);position:relative}
+.lc-owner{font-size:14px;font-weight:700}
+.lc-chip{width:36px;height:28px;background:linear-gradient(135deg,var(--mu),#e2a800);border-radius:5px}
+/* TIERS */
+.tiers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:32px}
+.tier-card{background:#fff;border:2px solid var(--bg3);border-radius:16px;padding:20px;text-align:center;transition:all .25s;position:relative}
+.tier-card.active{border-color:var(--em);box-shadow:0 0 0 4px var(--em-l)}
+.tier-card:hover{transform:translateY(-3px);box-shadow:var(--shm)}
+.tier-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--em);color:#fff;font-size:10px;font-weight:700;padding:2px 10px;border-radius:20px;white-space:nowrap}
+/* HISTORY */
+.pts-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--bg3)}
+.pts-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
+.pts-ico.earn{background:var(--em-l)}.pts-ico.spend{background:#FEE2E2}.pts-ico.bonus{background:#FEF3C7}
+.pts-amount.plus{color:var(--em);font-family:"Syne",sans-serif;font-size:16px;font-weight:800}
+.pts-amount.minus{color:var(--or);font-family:"Syne",sans-serif;font-size:16px;font-weight:800}
+/* REWARDS */
+.rew-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:32px}
+.rew-card{background:#fff;border:1px solid var(--bg3);border-radius:14px;overflow:hidden;text-align:center;transition:all .25s}
+.rew-card:hover{transform:translateY(-3px);box-shadow:var(--shm);border-color:var(--em-g)}
+.rew-img{width:100%;height:130px;object-fit:cover;background:var(--bg2)}
+.rew-body{padding:14px}
+.rew-nm{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:8px}
+.rew-pts{font-size:13px;font-weight:700;color:var(--em);margin-bottom:10px}
+.rew-btn{width:100%;padding:9px;background:var(--em);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+.rew-btn:hover{background:var(--em-d)}
+.rew-btn.locked{background:var(--bg3);color:var(--t3);cursor:not-allowed}
+/* REFER */
+.refer-box{background:linear-gradient(135deg,#0a1f1c,var(--sl2));border-radius:20px;padding:32px;color:#fff;text-align:center;margin-bottom:32px;position:relative;overflow:hidden}
+.refer-box h2{font-family:"Syne",sans-serif;font-size:24px;font-weight:800;margin-bottom:8px;position:relative}
+.refer-inp-row{display:flex;gap:8px;max-width:400px;margin:0 auto;position:relative}
+.ref-inp{flex:1;padding:12px 16px;border-radius:10px;border:none;font-size:13px;font-family:inherit;background:rgba(255,255,255,.1);color:#fff;outline:none}
+.ref-inp::placeholder{color:rgba(255,255,255,.3)}
+.ref-copy{padding:12px 20px;background:var(--mu);color:var(--sl3);border:none;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap}
+.sh2{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.sh2 h2{font-family:"Syne",sans-serif;font-size:20px;font-weight:800}
+.sh2 a{font-size:13px;color:var(--em);font-weight:600;cursor:pointer}
+
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="ld-icon"><span></span><span></span><span></span></div>
+  <div class="ld-brand"><span style="color:var(--em)">MIFA</span> LIFE SHOP</div>
+  <div class="ld-sub">Vos avantages...</div>
+</div>
+
+<nav id="nav">
+  <div class="nv-in">
+    <a class="nv-logo" href="index.html">
+      <div class="nv-li"><span style="width:40px"></span><span style="width:25px"></span><span style="width:33px"></span></div>
+      <div><div class="nv-wm"><span style="color:var(--em)">MIFA</span> <span style="color:var(--sl)">LIFE</span> <span style="color:var(--t3);font-weight:600">SHOP</span></div><div class="nv-ws">by Mifa Life Company</div></div>
+    </a>
+    <div class="nv-sw"><div class="nv-sb"><input type="text" id="srchInp" placeholder="Rechercher..."/><div class="nv-sbtn" onclick="doSearch()"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" width="12" height="12"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div></div></div>
+    <div class="nv-lnks">
+      <a class="nv-lb" href="index.html">Accueil</a>
+      <a class="nv-lb" href="catalogue.html">Catalogue</a>
+      <a class="nv-lb active">Promos &amp; Fidelite</a>
+      <a class="nv-lb" href="dashboard.html">Mon compte</a>
+    </div>
+    <div class="nv-r">
+      <button class="ib" onclick="openCart()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cbdg" id="cartBdg" style="display:none">0</span></button>
+      <a class="btn-p" href="auth.html">Connexion</a>
+    </div>
+  </div>
+</nav>
+
+<div class="ph">
+  <div class="ph-eye">Offres exclusives Mifa Life</div>
+  <h1>Promos &amp; Programme<br/><em>MifaPoints</em></h1>
+  <p>Economisez sur chaque achat et accumulez des points pour debloquer des recompenses exclusives</p>
+  <div class="pq">
+    <input type="text" id="promoInp" placeholder="Entrer un code promo..." oninput="this.value=this.value.toUpperCase()"/>
+    <button onclick="applyPromoCode()">Appliquer &rarr;</button>
+  </div>
+  <div class="pq-hint">Codes actifs : <a onclick="fillCode('MALI10')">MALI10</a> &middot; <a onclick="fillCode('MIFA20')">MIFA20</a> &middot; <a onclick="fillCode('FLASH30')">FLASH30</a> &middot; <a onclick="fillCode('WELCOME15')">WELCOME15</a></div>
+</div>
+
+<div class="ac-wrap">
+  <div class="sh2"><h2>Codes actifs en ce moment</h2><a onclick="switchTab('allPromos')">Voir tout &rarr;</a></div>
+  <div class="ac-grid" id="codesGrid"></div>
+</div>
+
+<div class="ptabs-wrap">
+  <div class="ptabs">
+    <button class="ptab on" onclick="switchTab('loyalty')">&#11088; Programme Fidelite</button>
+    <button class="ptab" onclick="switchTab('allPromos')">Toutes les promos</button>
+    <button class="ptab" onclick="switchTab('rewards')">Boutique recompenses</button>
+    <button class="ptab" onclick="switchTab('refer')">Parrainage</button>
+  </div>
+
+  <!-- LOYALTY TAB -->
+  <div class="ptab-pane on" id="tabLoyalty">
+    <div class="loy-grid">
+      <div class="loy-card">
+        <div class="lc-top">
+          <div class="lc-brand"><em>MIFA</em>POINTS</div>
+          <div class="lc-tier"><span style="font-size:16px">&#127947;</span> Or</div>
+        </div>
+        <div class="lc-pts-num">2 450</div>
+        <div class="lc-pts-lbl">MifaPoints disponibles</div>
+        <div class="lc-pts-eq">= 24 500 XOF de reduction</div>
+        <div class="lc-bar-wrap">
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.5);margin-bottom:6px"><span>Niveau Or &middot; 2 450 pts</span><span>Platine a 5 000 pts</span></div>
+          <div class="lc-bar-track"><div class="lc-bar-fill" style="width:49%"></div></div>
+          <div class="lc-bar-hint">2 550 pts pour atteindre le niveau Platine</div>
+        </div>
+        <div class="lc-foot">
+          <div><div class="lc-owner">Aminata Koumate</div><div style="font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.08em;margin-top:2px">ID &middot; MLS-AK-2024</div></div>
+          <div class="lc-chip"></div>
+        </div>
+      </div>
+      <div>
+        <div style="background:#fff;border:1px solid var(--bg3);border-radius:16px;padding:20px;margin-bottom:16px">
+          <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;margin-bottom:16px">Resume de vos points</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div style="background:var(--em-l);border-radius:12px;padding:14px;text-align:center"><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--em)">2 450</div><div style="font-size:12px;color:var(--t3);margin-top:2px">Disponibles</div></div>
+            <div style="background:#FFF7ED;border-radius:12px;padding:14px;text-align:center"><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--or)">850</div><div style="font-size:12px;color:var(--t3);margin-top:2px">Utilises</div></div>
+            <div style="background:#ECFDF5;border-radius:12px;padding:14px;text-align:center"><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#065F46">3 300</div><div style="font-size:12px;color:var(--t3);margin-top:2px">Total gagnes</div></div>
+            <div style="background:var(--bg);border-radius:12px;padding:14px;text-align:center"><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--t1)">x5</div><div style="font-size:12px;color:var(--t3);margin-top:2px">Multiplicateur Or</div></div>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--bg3);border-radius:16px;padding:20px">
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:800;margin-bottom:12px">Comment gagner des points</div>
+          <div style="display:flex;flex-direction:column;gap:10px;font-size:13px">
+            <div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">&#128717;</span><div><strong>Achat :</strong> 1 XOF = 1 MifaPoint</div></div>
+            <div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">&#11088;</span><div><strong>Avis produit :</strong> +50 points</div></div>
+            <div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">&#128101;</span><div><strong>Parrainage :</strong> +500 points par ami</div></div>
+            <div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">&#127874;</span><div><strong>Anniversaire :</strong> x3 points la semaine</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIERS -->
+    <div class="sh2"><h2>Niveaux de fidelite</h2></div>
+    <div class="tiers-grid">
+      <div class="tier-card">
+        <div style="font-size:36px;margin-bottom:10px">&#129515;</div>
+        <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#92400E;margin-bottom:4px">Bronze</div>
+        <div style="font-size:12px;color:var(--t3);margin-bottom:14px">0 - 999 pts</div>
+        <div style="display:flex;flex-direction:column;gap:6px;text-align:left;font-size:12px;color:var(--t2)">
+          <div>&#10003; 1 point par XOF</div><div>&#10003; Acces ventes flash</div><div>&#10003; Newsletter exclusive</div>
+        </div>
+      </div>
+      <div class="tier-card">
+        <div style="font-size:36px;margin-bottom:10px">&#129514;</div>
+        <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#64748B;margin-bottom:4px">Argent</div>
+        <div style="font-size:12px;color:var(--t3);margin-bottom:14px">1 000 - 2 499 pts</div>
+        <div style="display:flex;flex-direction:column;gap:6px;text-align:left;font-size:12px;color:var(--t2)">
+          <div>&#10003; x2 points par achat</div><div>&#10003; Livraison offerte 10 000 XOF+</div><div>&#10003; Acces ventes privees</div><div>&#10003; Support prioritaire</div>
+        </div>
+      </div>
+      <div class="tier-card active">
+        <div class="tier-badge">Votre niveau</div>
+        <div style="font-size:36px;margin-bottom:10px">&#129513;</div>
+        <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#D97706;margin-bottom:4px">Or</div>
+        <div style="font-size:12px;color:var(--t3);margin-bottom:14px">2 500 - 4 999 pts</div>
+        <div style="display:flex;flex-direction:column;gap:6px;text-align:left;font-size:12px;color:var(--t2)">
+          <div>&#10003; x5 points par achat</div><div>&#10003; Livraison gratuite partout</div><div>&#10003; Retours 60 jours</div><div>&#10003; Avant-premieres</div><div>&#10003; Code -10% mensuel</div>
+        </div>
+      </div>
+      <div class="tier-card" style="opacity:.7">
+        <div style="font-size:36px;margin-bottom:10px">&#128142;</div>
+        <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#7C3AED;margin-bottom:4px">Platine</div>
+        <div style="font-size:12px;color:var(--t3);margin-bottom:14px">5 000+ pts</div>
+        <div style="display:flex;flex-direction:column;gap:6px;text-align:left;font-size:12px;color:var(--t2)">
+          <div>&#10003; x10 points par achat</div><div>&#10003; Conseiller dedie</div><div>&#10003; Cadeaux mensuels</div><div>&#10003; Code -20% permanent</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTORY -->
+    <div class="sh2"><h2>Historique des points</h2><a onclick="showToast('Historique complet')">Tout voir</a></div>
+    <div style="background:#fff;border:1px solid var(--bg3);border-radius:16px;padding:8px 20px;margin-bottom:32px" id="ptsHistory"></div>
+  </div>
+
+  <!-- ALL PROMOS TAB -->
+  <div class="ptab-pane" id="tabAllPromos">
+    <div class="sh2"><h2>Toutes les offres actives</h2><span id="promoCount" style="font-size:13px;color:var(--t3)"></span></div>
+    <div id="allPromosList"></div>
+  </div>
+
+  <!-- REWARDS TAB -->
+  <div class="ptab-pane" id="tabRewards">
+    <div style="background:var(--em-l);border:1px solid var(--em-g);border-radius:16px;padding:20px;margin-bottom:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <span style="font-size:32px">&#11088;</span>
+      <div><div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800">Vous avez <span style="color:var(--em)">2 450 MifaPoints</span></div><div style="font-size:13px;color:var(--t3);margin-top:4px">Echangez vos points contre des recompenses</div></div>
+      <a onclick="switchTab('loyalty')" style="margin-left:auto;font-size:13px;color:var(--em);font-weight:700;cursor:pointer">Gagner plus &rarr;</a>
+    </div>
+    <div class="sh2"><h2>Recompenses disponibles</h2></div>
+    <div class="rew-grid" id="rewGrid"></div>
+  </div>
+
+  <!-- REFER TAB -->
+  <div class="ptab-pane" id="tabRefer">
+    <div class="refer-box">
+      <div style="font-size:48px;margin-bottom:16px">&#128101;</div>
+      <h2>Parrainez vos amis, gagnez ensemble !</h2>
+      <p style="font-size:14px;color:rgba(255,255,255,.6);margin-bottom:20px;position:relative">Pour chaque ami inscrit qui commande, vous gagnez <strong>500 MifaPoints</strong> et il recoit <strong>-15%</strong> sur sa premiere commande</p>
+      <div class="refer-inp-row">
+        <input class="ref-inp" id="referLink" value="https://mifalife.store/r/AK2024" readonly/>
+        <button class="ref-copy" onclick="copyReferLink()">Copier</button>
+      </div>
+      <div style="display:flex;justify-content:center;gap:12px;margin-top:16px;flex-wrap:wrap;position:relative">
+        <button onclick="shareRefer('whatsapp')" style="padding:10px 20px;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:10px;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit">WhatsApp</button>
+        <button onclick="shareRefer('facebook')" style="padding:10px 20px;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:10px;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit">Facebook</button>
+        <button onclick="shareRefer('sms')" style="padding:10px 20px;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:10px;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit">SMS</button>
+      </div>
+      <div style="display:flex;justify-content:center;gap:40px;margin-top:24px;position:relative">
+        <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--mu)">3</div><div style="font-size:12px;color:rgba(255,255,255,.5)">Amis parraines</div></div>
+        <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--mu)">1 500</div><div style="font-size:12px;color:rgba(255,255,255,.5)">Points gagnes</div></div>
+      </div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--bg3);border-radius:16px;padding:20px">
+      <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;margin-bottom:16px">Mes filleuls</div>
+      <div id="referList"></div>
+    </div>
+  </div>
+</div>
+
+<div id="cov" onclick="closeCart()"></div>
+<div id="csb">
+  <div class="cs-hd"><span class="cs-ti">Panier</span><button style="background:none;border:none;cursor:pointer;padding:4px" onclick="closeCart()"><svg viewBox="0 0 24 24" width="20" height="20" stroke="var(--t2)" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div class="cs-bd" id="csBody"></div>
+  <div class="cs-ft"><div style="display:flex;justify-content:space-between;font-weight:700;font-size:16px;margin-bottom:12px"><span>Total</span><span id="csTot">0 XOF</span></div><button class="btn-ck" onclick="closeCart();location.href='auth.html#checkout'">Commander &rarr;</button></div>
+</div>
+<div id="toast"><div class="toast-b" id="toastMsg"></div></div>
+<button id="stb" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" width="16" height="16" stroke="#fff" fill="none" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+<script>
+function addToCart(id){
+  const p=PRODS.find(x=>x.id===id);if(!p)return;
+  const ex=cart.find(x=>x.id===id);
+  if(ex)ex.qty++;else cart.push({id,qty:1,nm:p.nm,p:p.p,img:p.img});
+  saveCart();updateCartBadge();renderCart();showToast(p.nm+' ajouté au panier');
+}
+function removeFromCart(id){cart=cart.filter(x=>x.id!==id);saveCart();updateCartBadge();renderCart();}
+function changeQty(id,d){const i=cart.find(x=>x.id===id);if(!i)return;i.qty+=d;if(i.qty<1)removeFromCart(id);else{saveCart();renderCart();};}
+function openCart(){document.getElementById('cov').classList.add('on');document.getElementById('csb').classList.add('on');renderCart();}
+function closeCart(){document.getElementById('cov').classList.remove('on');document.getElementById('csb').classList.remove('on');}
+function renderCart(){
+  const bd=document.getElementById('csBd'),ft=document.getElementById('csFt');if(!bd)return;
+  if(!cart.length){bd.innerHTML=`<div class="cs-em"><div class="cs-em-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div><p style="font-weight:600;color:var(--t3);font-size:13px">Panier vide</p><button class="btn-p" style="margin-top:8px;font-size:11.5px;padding:6px 14px" onclick="closeCart();location.href='catalogue.html'">Découvrir</button></div>`;if(ft)ft.style.display='none';return;}
+  const total=cart.reduce((a,i)=>a+i.p*i.qty,0);
+  bd.innerHTML=cart.map(i=>`<div class="cs-it"><div class="cs-th"><img src="${i.img}" alt=""/></div><div class="cs-in"><div class="cs-nm">${i.nm}</div><div class="cs-pr">${i.p.toLocaleString()} XOF</div><div class="cs-qw"><div class="qb" onclick="changeQty(${i.id},-1)">−</div><span class="qv">${i.qty}</span><div class="qb" onclick="changeQty(${i.id},1)">+</div></div></div><button class="cs-rm" onclick="removeFromCart(${i.id})">✕</button></div>`).join('');
+  if(ft){ft.style.display='block';document.getElementById('csTot').textContent=total.toLocaleString()+' XOF';}
+}
+function updateCartBadge(){const n=cart.reduce((a,i)=>a+i.qty,0);const b=document.getElementById('cartBdg');if(b){b.style.display=n?'flex':'none';b.textContent=n;}}
+function toggleWish(id,el){
+  if(wishlist.includes(id)){wishlist=wishlist.filter(x=>x!==id);if(el)el.classList.remove('on');}
+  else{wishlist.push(id);if(el)el.classList.add('on');showToast('Ajouté aux favoris ♥');}
+  saveWish();updateWishBadge();
+}
+function updateWishBadge(){const b=document.getElementById('wishBdg');if(b){b.style.display=wishlist.length?'flex':'none';b.textContent=wishlist.length;}}
+function showToast(msg,icon='✓'){
+  const t=document.getElementById('toast');
+  t.innerHTML=`<span style="color:var(--em);font-size:14px">${icon}</span>${msg}`;
+  t.classList.add('on'); clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('on'),2800);
+}
+
+var CODES = [
+  {code:"MALI10",disc:"10%",desc:"10% sur toute la boutique",tag:"General",cl:"g",exp:"31 mars 2026",uses:"Illimite",rib:null},
+  {code:"MIFA20",disc:"20%",desc:"20% sur Vetements et Mode",tag:"Mode",cl:"o",exp:"15 mars 2026",uses:"200 restantes",rib:"Populaire"},
+  {code:"WELCOME15",disc:"15%",desc:"15% pour les nouveaux clients",tag:"Bienvenue",cl:"p",exp:"Sans expiration",uses:"1ere commande",rib:null},
+  {code:"FLASH30",disc:"30%",desc:"Flash 24h — Articles selectionnes",tag:"Flash Sale",cl:"y",exp:"Expire dans 6h",uses:"32 restantes",rib:"Flash"},
+  {code:"LIVRAISON0",disc:"Gratuit",desc:"Livraison offerte quelle que soit la commande",tag:"Livraison",cl:"g",exp:"28 mars 2026",uses:"Illimite",rib:null},
+  {code:"WAX25",disc:"25%",desc:"25% sur tout le rayon Wax & Batik",tag:"Wax",cl:"o",exp:"20 mars 2026",uses:"500 commandes max",rib:null}
+];
+
+var HISTORY = [
+  {type:"earn",ico:"shopping",t:"Commande MLS-2024-00842",s:"Robe Wax + Foulard Soie",pts:"+35 500",date:"8 mars 2026"},
+  {type:"bonus",ico:"fire",t:"Bonus Niveau Or x5",s:"Multiplicateur applique",pts:"+142 000",date:"8 mars 2026"},
+  {type:"earn",ico:"star",t:"Avis produit publie",s:"Robe Wax Batik Premium",pts:"+50",date:"5 mars 2026"},
+  {type:"spend",ico:"gift",t:"Recompense echangee",s:"Bon de reduction 5000 XOF",pts:"-500",date:"2 mars 2026"},
+  {type:"earn",ico:"people",t:"Parrainage accepte",s:"Fatoumata Diarra inscrite",pts:"+500",date:"28 fevr. 2026"},
+  {type:"bonus",ico:"cake",t:"Bonus anniversaire",s:"Semaine x3 points",pts:"+300",date:"15 fevr. 2026"}
+];
+
+var REWARDS = [
+  {nm:"Bon de reduction 5 000 XOF",pts:500,img:"https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=300&q=75&fit=crop",locked:false},
+  {nm:"Livraison express gratuite",pts:200,img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=75&fit=crop",locked:false},
+  {nm:"Bon 15 000 XOF",pts:1500,img:"https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=300&q=75&fit=crop",locked:false},
+  {nm:"Acces vente privee VIP",pts:300,img:"https://images.unsplash.com/photo-1445205170230-053b83016050?w=300&q=75&fit=crop",locked:false},
+  {nm:"Robe surprise artisanale",pts:3000,img:"https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=300&q=75&fit=crop",locked:true},
+  {nm:"Coffret beaute Mali",pts:2500,img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=300&q=75&fit=crop",locked:true}
+];
+
+var REFER_LIST = [
+  {nm:"Fatoumata Diarra",date:"28 fevr. 2026",status:"Commande passee",pts:500},
+  {nm:"Kadiatou Bah",date:"10 fevr. 2026",status:"Commande passee",pts:500},
+  {nm:"Mariam Coulibaly",date:"5 jan. 2026",status:"Commande passee",pts:500}
+];
+
+var VALID_CODES = {MALI10:"10% sur tout",MIFA20:"20% Vetements",WELCOME15:"15% premiere commande",FLASH30:"30% Flash",LIVRAISON0:"Livraison gratuite",WAX25:"25% Wax & Batik"};
+
+function initPromo() {
+  renderCodes();
+  renderHistory();
+  renderRewards();
+  renderAllPromos();
+  renderReferList();
+  setTimeout(function(){ var l=document.getElementById('loader'); if(l) l.style.cssText='display:none!important'; }, 1200);
+}
+
+function renderCodes() {
+  var g = document.getElementById('codesGrid');
+  if (!g) return;
+  var html = '';
+  CODES.slice(0,4).forEach(function(c, i) {
+    html += '<div class="ac-card ' + c.cl + '" data-code="' + c.code + '" onclick="fillCode(this.dataset.code)">';
+    if (c.rib) html += '<div class="ac-ribbon">' + c.rib + '</div>';
+    html += '<div class="ac-tag">' + c.tag + '</div>';
+    html += '<div class="ac-code-row">';
+    html += '<div class="ac-code">' + c.code + '</div>';
+    html += '<button class="ac-copy" data-code="' + c.code + '" onclick="event.stopPropagation();copyCode(this.dataset.code)">Copier</button>';
+    html += '</div>';
+    html += '<div class="ac-desc">' + c.desc + ' &mdash; <strong>' + c.disc + '</strong></div>';
+    html += '<div class="ac-foot">';
+    html += '<span class="ac-expiry">' + c.exp + '</span>';
+    html += '<span style="font-size:11px;font-weight:700">' + c.uses + '</span>';
+    html += '</div></div>';
+  });
+  g.innerHTML = html;
+}
+
+function renderHistory() {
+  var g = document.getElementById('ptsHistory');
+  if (!g) return;
+  var emojiMap = {shopping:'🛍️',fire:'🔥',star:'⭐',gift:'🎁',people:'👥',cake:'🎂'};
+  var html = '';
+  HISTORY.forEach(function(p) {
+    var cls = p.type === 'spend' ? 'spend' : p.type === 'bonus' ? 'bonus' : 'earn';
+    var amtCls = p.type === 'spend' ? 'minus' : 'plus';
+    html += '<div class="pts-row">';
+    html += '<div class="pts-ico ' + cls + '">' + (emojiMap[p.ico] || '📦') + '</div>';
+    html += '<div style="flex:1"><div style="font-size:14px;font-weight:700;color:var(--t1)">' + p.t + '</div>';
+    html += '<div style="font-size:12px;color:var(--t3);margin-top:1px">' + p.s + ' &middot; ' + p.date + '</div></div>';
+    html += '<div class="pts-amount ' + amtCls + '">' + p.pts + '</div>';
+    html += '</div>';
+  });
+  g.innerHTML = html;
+}
+
+function renderRewards() {
+  var g = document.getElementById('rewGrid');
+  if (!g) return;
+  var userPts = 2450;
+  var html = '';
+  REWARDS.forEach(function(r) {
+    var canRedeem = !r.locked && userPts >= r.pts;
+    var btnCls = canRedeem ? 'rew-btn' : 'rew-btn locked';
+    var btnLbl = canRedeem ? 'Echanger &rarr;' : r.pts.toLocaleString('fr-FR') + ' pts requis';
+    var nm = r.nm.replace(/'/g, '');
+    var onclick = canRedeem ? ("redeemReward('" + nm + "')") : "showToast('Points insuffisants !')";
+    html += '<div class="rew-card">';
+    html += '<img class="rew-img" src="' + r.img + '" alt="' + nm + '" loading="lazy"/>';
+    html += '<div class="rew-body">';
+    html += '<div class="rew-nm">' + r.nm + '</div>';
+    html += '<div class="rew-pts">&#11088; ' + r.pts.toLocaleString('fr-FR') + ' pts</div>';
+    html += '<button class="' + btnCls + '" onclick="' + onclick + '">' + btnLbl + '</button>';
+    html += '</div></div>';
+  });
+  g.innerHTML = html;
+}
+
+function renderAllPromos() {
+  var g = document.getElementById('allPromosList');
+  if (!g) return;
+  var cnt = document.getElementById('promoCount');
+  if (cnt) cnt.textContent = CODES.length + ' offres actives';
+  var html = '';
+  CODES.forEach(function(c) {
+    var dot = c.cl==='g'?'🟢':c.cl==='o'?'🟠':c.cl==='p'?'🟣':'🟡';
+    html += '<div style="background:#fff;border:2px solid var(--bg3);border-radius:14px;padding:18px 20px;margin-bottom:12px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;cursor:pointer;transition:border-color .2s" data-code="' + c.code + '" onclick="fillCode(this.dataset.code)">';
+    html += '<div style="font-size:28px">' + dot + '</div>';
+    html += '<div style="flex:1">';
+    html += '<div style="font-family:Syne,sans-serif;font-size:18px;font-weight:800;color:var(--t1)">' + c.code + '</div>';
+    html += '<div style="font-size:13px;color:var(--t2);margin-top:2px">' + c.desc + '</div>';
+    html += '<div style="font-size:11px;color:var(--t4);margin-top:4px">' + c.exp + ' &middot; ' + c.uses + '</div>';
+    html += '</div>';
+    html += '<div style="text-align:right">';
+    html += '<div style="font-family:Syne,sans-serif;font-size:24px;font-weight:800;color:var(--em)">' + c.disc + '</div>';
+    html += '<button style="margin-top:6px;padding:7px 16px;background:var(--em);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit" data-code="' + c.code + '" onclick="event.stopPropagation();copyCode(this.dataset.code)">Copier</button>';
+    html += '</div></div>';
+  });
+  g.innerHTML = html;
+}
+
+function renderReferList() {
+  var g = document.getElementById('referList');
+  if (!g) return;
+  var html = '';
+  REFER_LIST.forEach(function(f) {
+    html += '<div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--bg3)">';
+    html += '<div style="width:38px;height:38px;border-radius:50%;background:var(--em);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0">' + f.nm[0] + '</div>';
+    html += '<div style="flex:1"><div style="font-size:14px;font-weight:700">' + f.nm + '</div>';
+    html += '<div style="font-size:12px;color:var(--t3)">' + f.date + ' &middot; ' + f.status + '</div></div>';
+    html += '<div style="font-family:Syne,sans-serif;font-weight:800;color:var(--em)">+' + f.pts + ' pts</div>';
+    html += '</div>';
+  });
+  html += '<div style="padding-top:12px;font-size:13px;color:var(--t3)">Total: <strong style="color:var(--em)">1 500 pts</strong></div>';
+  g.innerHTML = html;
+}
+
+function switchTab(id) {
+  var map = {loyalty:'tabLoyalty',allPromos:'tabAllPromos',rewards:'tabRewards',refer:'tabRefer'};
+  document.querySelectorAll('.ptab-pane').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.ptab').forEach(function(t){t.classList.remove('on');});
+  var pane = document.getElementById(map[id]);
+  if (pane) pane.classList.add('on');
+  var keys = Object.keys(map);
+  var idx = keys.indexOf(id);
+  var tabs = document.querySelectorAll('.ptab');
+  if (tabs[idx]) tabs[idx].classList.add('on');
+}
+
+function applyPromoCode() {
+  var code = document.getElementById('promoInp').value.trim().toUpperCase();
+  if (!code) { showToast('Entrez un code promo'); return; }
+  var found = VALID_CODES[code];
+  if (found) showToast('Code ' + code + ' applique ! ' + found);
+  else showToast('Code invalide ou expire');
+}
+
+function fillCode(code) {
+  document.getElementById('promoInp').value = code;
+  window.scrollTo({top:0,behavior:'smooth'});
+  showToast('Code ' + code + ' pret a appliquer !');
+}
+
+function copyCode(code) {
+  if (navigator.clipboard) navigator.clipboard.writeText(code);
+  showToast('Code ' + code + ' copie !');
+}
+
+function redeemReward(nm) {
+  showToast('Recompense "' + nm + '" echangee ! Email de confirmation envoye.');
+}
+
+function copyReferLink() {
+  var val = document.getElementById('referLink').value;
+  if (navigator.clipboard) navigator.clipboard.writeText(val);
+  showToast('Lien de parrainage copie !');
+}
+
+function shareRefer(via) {
+  var link = document.getElementById('referLink').value;
+  var msg = encodeURIComponent('Rejoins Mifa Life Shop et profite de -15% sur ta premiere commande ! ' + link);
+  if (via === 'whatsapp') window.open('https://wa.me/?text=' + msg, '_blank');
+  else if (via === 'facebook') window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(link), '_blank');
+  else showToast('SMS: ' + link);
+}
+
+function doSearch() {
+  var q = document.getElementById('srchInp') && document.getElementById('srchInp').value.trim();
+  if(q) location.href = 'catalogue.html?q=' + encodeURIComponent(q);
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  initPromo();
+  updateCartBadge();
+  window.addEventListener('scroll', function() {
+    var s = document.getElementById('stb');
+    if(s) s.style.display = window.scrollY > 400 ? 'flex' : 'none';
+  });
+});
+</script>
+</body>
+</html>

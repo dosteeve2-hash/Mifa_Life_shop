@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Comparateur Produits — Mifa Life Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>
+<style>
+
+:root{
+  --em:#00A896;--em-d:#007a6e;--em-l:rgba(0,168,150,.08);--em-g:rgba(0,168,150,.18);
+  --or:#FF6B35;--or-d:#cc5428;
+  --sl:#2F3E46;--sl2:#1a2332;--sl3:#0d1520;
+  --mu:#F5CB5C;
+  --bg:#F8FAFB;--bg2:#EEF2F5;--bg3:#E2E8F0;
+  --t1:#111827;--t2:#374151;--t3:#6B7280;--t4:#9CA3AF;
+  --r:12px;--rl:18px;--rxl:24px;
+  --shm:0 4px 16px rgba(0,0,0,.08);
+  --shl:0 12px 40px rgba(0,0,0,.12);
+  --shxl:0 24px 64px rgba(0,0,0,.16);
+}
+  --shm:0 4px 20px rgba(0,0,0,.08);
+  --shl:0 2px 12px rgba(0,0,0,.05);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--t1);min-height:100vh}
+/* NAV */
+#nav{position:sticky;top:0;z-index:500;background:#fff;border-bottom:1px solid var(--bg3)}
+.nv-in{display:flex;align-items:center;gap:16px;padding:0 24px;height:60px;max-width:1400px;margin:0 auto}
+.nv-logo{display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none;flex-shrink:0}
+.nv-li{display:flex;flex-direction:column;gap:3px}
+.nv-li span{height:3px;border-radius:2px;background:var(--em);display:block}
+.nv-wm{font-family:"Syne",sans-serif;font-size:17px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.nv-ws{font-size:9px;color:var(--t3);letter-spacing:.04em}
+.nv-sw{flex:1;max-width:400px}
+.nv-sb{display:flex;border:1.5px solid var(--bg3);border-radius:24px;overflow:hidden;background:#fff;transition:border-color .2s}
+.nv-sb:focus-within{border-color:var(--em)}
+.nv-sb input{flex:1;border:none;outline:none;padding:8px 14px;font-size:13px;font-family:inherit;background:transparent}
+.nv-sbtn{padding:8px 14px;background:var(--em);cursor:pointer;display:flex;align-items:center}
+.nv-sbtn:hover{background:var(--em-d)}
+.nv-lnks{display:flex;align-items:center;gap:2px;margin-left:auto}
+.nv-lb{display:inline-flex;align-items:center;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;color:var(--t2);text-decoration:none;transition:all .2s;background:none;border:none;cursor:pointer}
+.nv-lb:hover,.nv-lb.active{color:var(--em);background:var(--em-l)}
+.nv-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.ib{background:none;border:none;cursor:pointer;padding:8px;border-radius:50%;color:var(--t2);position:relative;transition:all .2s}
+.ib:hover{background:var(--bg2);color:var(--em)}
+.cbdg{position:absolute;top:2px;right:2px;width:16px;height:16px;background:var(--or);color:#fff;border-radius:50%;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.btn-o{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;border:1.5px solid var(--bg3);background:#fff;color:var(--t2);text-decoration:none;transition:all .2s;cursor:pointer}
+.btn-o:hover{border-color:var(--em);color:var(--em)}
+.btn-p{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:700;background:var(--em);color:#fff;border:none;text-decoration:none;transition:all .2s;cursor:pointer}
+.btn-p:hover{background:var(--em-d);transform:translateY(-1px)}
+/* PROMO BAR */
+#pbar{background:linear-gradient(90deg,var(--sl3),var(--sl2));padding:8px 24px}
+.pb-in{display:flex;align-items:center;gap:12px;max-width:1400px;margin:0 auto;flex-wrap:wrap}
+.pb-txt{font-size:12px;color:rgba(255,255,255,.8);flex:1}
+.pb-tmr{font-size:11px;color:var(--mu);font-weight:700;font-variant-numeric:tabular-nums}
+.btn-ow{font-size:11px;font-weight:700;color:var(--mu);background:none;border:1px solid rgba(245,203,92,.3);border-radius:20px;padding:4px 12px;text-decoration:none;cursor:pointer;white-space:nowrap;transition:all .2s}
+.btn-ow:hover{background:rgba(245,203,92,.15)}
+.tb-x{color:rgba(255,255,255,.4);cursor:pointer;font-size:12px;padding:2px 6px}
+.tb-x:hover{color:#fff}
+/* CART SIDEBAR */
+#cov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:1000}
+#csb{position:fixed;right:0;top:0;bottom:0;width:380px;background:#fff;z-index:1001;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column;box-shadow:-4px 0 24px rgba(0,0,0,.12)}
+#csb.open{transform:translateX(0)}
+.cs-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--bg3)}
+.cs-ti{font-family:"Syne",sans-serif;font-size:18px;font-weight:800}
+.cs-bd{flex:1;overflow-y:auto;padding:16px}
+.cs-ft{padding:16px 20px;border-top:1px solid var(--bg3)}
+.btn-ck{width:100%;padding:14px;background:var(--em);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-ck:hover{background:var(--em-d)}
+.cs-sec{text-align:center;font-size:11px;color:var(--t4);margin-top:8px}
+/* TOAST */
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:9999;pointer-events:none}
+.toast-b{background:var(--sl);color:#fff;padding:10px 22px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;transform:translateY(8px);transition:all .3s;white-space:nowrap}
+.toast-b.show{opacity:1;transform:translateY(0)}
+/* SCROLL TOP */
+#stb{position:fixed;bottom:28px;right:28px;z-index:999;width:42px;height:42px;border-radius:50%;background:var(--em);color:#fff;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,168,150,.3);display:none;align-items:center;justify-content:center}
+/* BREADCRUMB */
+.brcr{padding:14px 0;border-bottom:1px solid var(--bg3)}
+.brcr-in{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.brcr-in a{font-size:13px;color:var(--t3);text-decoration:none;cursor:pointer;transition:color .2s}
+.brcr-in a:hover{color:var(--em)}
+.brcr-sep{color:var(--bg3);font-size:12px}
+.brcr-cur{font-size:13px;color:var(--t1);font-weight:600}
+/* SECTION HEADERS */
+.sh-wrap{margin-bottom:12px}
+.sh-eyb{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--em);text-transform:uppercase;margin-bottom:4px}
+.sh-ti{font-family:"Syne",sans-serif;font-size:26px;font-weight:800;color:var(--t1);letter-spacing:-.02em}
+.sh-sub{font-size:14px;color:var(--t3);margin-top:4px}
+/* SECTION */
+.sec{padding:60px 24px;max-width:1400px;margin:0 auto}
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--sl3);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;animation:ldHide 2.2s ease forwards}
+@keyframes ldHide{0%,55%{opacity:1;visibility:visible}80%{opacity:0}100%{opacity:0;visibility:hidden;pointer-events:none}}
+.ld-icon{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.ld-icon span{height:3px;background:var(--em);border-radius:2px;display:block;animation:ldP 1.2s ease infinite}
+.ld-icon span:nth-child(1){width:40px}.ld-icon span:nth-child(2){width:25px;animation-delay:.15s}.ld-icon span:nth-child(3){width:33px;animation-delay:.3s}
+@keyframes ldP{0%,100%{opacity:.3}50%{opacity:1}}
+.ld-brand{font-family:"Syne",sans-serif;font-size:22px;font-weight:800;color:#fff;letter-spacing:-.03em}
+.ld-brand span{color:var(--em)}
+.ld-sub{font-size:12px;color:rgba(255,255,255,.4);margin-top:6px}
+
+/* ── HERO ── */
+.cmp-hero{background:linear-gradient(135deg,var(--sl3),var(--sl2));padding:44px 24px;text-align:center;color:#fff}
+.cmp-hero h1{font-family:"Syne",sans-serif;font-size:34px;font-weight:800;margin-bottom:8px}
+.cmp-hero h1 span{color:var(--mu)}
+.cmp-hero p{font-size:14px;color:rgba(255,255,255,.55);max-width:480px;margin:0 auto}
+
+/* ── COMPARE BAR (floating) ── */
+.cmp-bar{position:sticky;top:60px;z-index:400;background:#fff;border-bottom:1px solid var(--bg3);box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.cmp-bar-in{max-width:1400px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.cmp-slots{display:flex;gap:10px;flex:1;flex-wrap:wrap}
+.cmp-slot{width:120px;height:52px;border:2px dashed var(--bg3);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:12px;color:var(--t4);font-weight:600;flex-shrink:0;position:relative;overflow:hidden}
+.cmp-slot.filled{border-style:solid;border-color:var(--em);background:var(--em-l)}
+.cmp-slot.filled img{width:100%;height:100%;object-fit:cover;opacity:.9}
+.cmp-slot.filled .slot-rm{position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2}
+.cmp-slot:not(.filled):hover{border-color:var(--em);color:var(--em)}
+.cmp-bar-actions{display:flex;gap:8px;flex-shrink:0}
+.cmp-go-btn{padding:10px 20px;background:var(--em);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;display:flex;align-items:center;gap:6px}
+.cmp-go-btn:hover{background:var(--em-d)}
+.cmp-go-btn:disabled{background:var(--bg3);color:var(--t3);cursor:not-allowed}
+.cmp-clear-btn{padding:10px 16px;border:1.5px solid var(--bg3);background:#fff;color:var(--t3);border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.cmp-clear-btn:hover{border-color:var(--or);color:var(--or)}
+.cmp-cnt{font-size:12px;color:var(--t3);font-weight:600}
+
+/* ── PRODUCT PICKER ── */
+.picker-wrap{max-width:1400px;margin:28px auto;padding:0 24px}
+.picker-search{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.picker-inp{flex:1;min-width:200px;padding:11px 16px;border:1.5px solid var(--bg3);border-radius:10px;font-size:14px;font-family:inherit;outline:none;transition:border-color .2s}
+.picker-inp:focus{border-color:var(--em)}
+.picker-cats{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:20px}
+.picker-cat{padding:7px 16px;border-radius:20px;font-size:12px;font-weight:700;border:1.5px solid var(--bg3);background:#fff;color:var(--t2);cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap}
+.picker-cat.on{background:var(--em);color:#fff;border-color:var(--em)}
+.picker-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.picker-card{background:#fff;border:2px solid var(--bg3);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .2s}
+.picker-card:hover{border-color:var(--em);transform:translateY(-2px);box-shadow:var(--shl)}
+.picker-card.selected{border-color:var(--em);background:var(--em-l)}
+.picker-card img{width:100%;height:110px;object-fit:cover}
+.picker-card-body{padding:10px}
+.picker-card-nm{font-size:12px;font-weight:700;color:var(--t1);margin-bottom:4px;line-height:1.3}
+.picker-card-p{font-size:13px;font-weight:800;color:var(--em)}
+.picker-card-sel{width:20px;height:20px;border-radius:50%;border:2px solid var(--bg3);display:flex;align-items:center;justify-content:center;margin-top:6px;transition:all .2s;background:#fff}
+.picker-card.selected .picker-card-sel{background:var(--em);border-color:var(--em)}
+.picker-card.selected .picker-card-sel::after{content:"✓";color:#fff;font-size:11px;font-weight:700}
+
+/* ── COMPARISON TABLE ── */
+.cmp-table-wrap{max-width:1400px;margin:0 auto;padding:0 24px 60px;display:none}
+.cmp-table-wrap.on{display:block}
+.cmp-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.cmp-title-row h2{font-family:"Syne",sans-serif;font-size:22px;font-weight:800}
+.cmp-edit-btn{padding:9px 18px;border:1.5px solid var(--bg3);border-radius:10px;font-size:13px;font-weight:600;color:var(--t2);cursor:pointer;background:#fff;font-family:inherit}
+.cmp-edit-btn:hover{border-color:var(--em);color:var(--em)}
+
+/* Product header row */
+.cmp-prod-headers{display:grid;gap:16px;margin-bottom:24px}
+.cph-card{background:#fff;border:1px solid var(--bg3);border-radius:16px;overflow:hidden;text-align:center;transition:all .2s}
+.cph-card.winner{border-color:var(--em);box-shadow:0 0 0 3px var(--em-l)}
+.cph-img{width:100%;height:180px;object-fit:cover}
+.cph-body{padding:14px}
+.cph-nm{font-size:14px;font-weight:800;color:var(--t1);margin-bottom:6px;line-height:1.3}
+.cph-price{font-family:"Syne",sans-serif;font-size:20px;font-weight:800;color:var(--t1)}
+.cph-old{font-size:13px;color:var(--t4);text-decoration:line-through;margin-left:6px}
+.cph-stars{font-size:13px;color:var(--t3);margin:4px 0 12px}
+.cph-add{width:100%;padding:10px;background:var(--em);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+.cph-add:hover{background:var(--em-d)}
+.winner-badge{background:var(--em);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:0 0 12px 12px;display:inline-block;margin-bottom:6px}
+
+/* Comparison rows */
+.cmp-section{margin-bottom:28px}
+.cmp-section-title{font-family:"Syne",sans-serif;font-size:14px;font-weight:800;color:var(--t3);letter-spacing:.06em;text-transform:uppercase;padding:12px 16px;background:var(--bg2);border-radius:10px;margin-bottom:2px}
+.cmp-row{display:grid;gap:16px;border-bottom:1px solid var(--bg3)}
+.cmp-row-lbl{padding:14px 16px;font-size:13px;font-weight:700;color:var(--t2);background:var(--bg);display:flex;align-items:center}
+.cmp-cell{padding:14px 16px;font-size:13px;color:var(--t2);display:flex;align-items:center;justify-content:center;text-align:center}
+.cmp-cell.best{background:rgba(0,168,150,.06);font-weight:700;color:var(--em)}
+.cmp-cell.worst{color:var(--t4)}
+.cmp-checkmark{color:var(--em);font-size:16px}
+.cmp-cross{color:var(--bg3);font-size:16px}
+
+/* Score bars */
+.score-bar-wrap{display:flex;align-items:center;gap:8px;width:100%}
+.score-bar{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.score-bar-fill{height:100%;border-radius:3px;transition:width 1s ease}
+.score-num{font-size:12px;font-weight:800;width:28px;text-align:right;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="ld-icon"><span></span><span></span><span></span></div>
+  <div class="ld-brand"><span>MIFA</span> LIFE SHOP</div>
+  <div class="ld-sub">Comparateur de produits…</div>
+</div>
+
+<nav id="nav">
+  <div class="nv-in">
+    <a class="nv-logo" href="index.html">
+      <div class="nv-li"><span style="width:40px"></span><span style="width:25px"></span><span style="width:33px"></span></div>
+      <div><div class="nv-wm"><span style="color:var(--em)">MIFA</span> <span style="color:var(--sl)">LIFE</span> <span style="color:var(--t3);font-weight:600">SHOP</span></div><div class="nv-ws">by Mifa Life Company</div></div>
+    </a>
+    <div class="nv-sw"><div class="nv-sb"><input type="text" id="srchInp" placeholder="Rechercher…"/><div class="nv-sbtn" onclick="doSearch()"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" width="12" height="12"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div></div></div>
+    <div class="nv-lnks">
+      <a class="nv-lb" href="index.html">Accueil</a>
+      <a class="nv-lb" href="catalogue.html">Catalogue</a>
+      <a class="nv-lb active">Comparateur</a>
+    </div>
+    <div class="nv-r">
+      <button class="ib" onclick="openCart()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cbdg" id="cartBdg" style="display:none">0</span></button>
+      <a class="btn-p" href="auth.html">Connexion</a>
+    </div>
+  </div>
+</nav>
+
+<div class="cmp-hero">
+  <h1>Comparez les produits <span>côte à côte</span></h1>
+  <p>Choisissez 2 à 4 produits et comparez prix, qualité, tailles, avis et bien plus encore</p>
+</div>
+
+<!-- STICKY COMPARE BAR -->
+<div class="cmp-bar">
+  <div class="cmp-bar-in">
+    <div class="cmp-slots" id="cmpSlots"></div>
+    <div class="cmp-bar-actions">
+      <span class="cmp-cnt" id="cmpCnt">0/4 produits</span>
+      <button class="cmp-clear-btn" onclick="clearCompare()">Effacer</button>
+      <button class="cmp-go-btn" id="cmpGoBtn" onclick="showComparison()" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" width="14" height="14"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Comparer
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT PICKER -->
+<div class="picker-wrap" id="pickerSection">
+  <div class="sh-wrap" style="margin-bottom:20px">
+    <div class="sh-eyb">Étape 1</div>
+    <div class="sh-ti">Choisissez 2 à 4 produits</div>
+    <div class="sh-sub">Sélectionnez les produits à comparer depuis notre catalogue</div>
+  </div>
+  <div class="picker-search">
+    <input class="picker-inp" type="text" placeholder="Rechercher un produit…" oninput="filterPicker(this.value)" id="pickerSearch"/>
+  </div>
+  <div class="picker-cats">
+    <button class="picker-cat on" onclick="filterPickerCat('all',this)">Tous</button>
+    <button class="picker-cat" onclick="filterPickerCat('vetements',this)">Vetements</button>
+    <button class="picker-cat" onclick="filterPickerCat('bijoux',this)">Bijoux</button>
+    <button class="picker-cat" onclick="filterPickerCat('beaute',this)">Beaute</button>
+    <button class="picker-cat" onclick="filterPickerCat('maison',this)">Maison</button>
+  </div>
+  <div class="picker-grid" id="pickerGrid"></div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="cmp-table-wrap" id="cmpTable">
+  <div class="cmp-title-row">
+    <h2>Comparaison detaillee</h2>
+    <button class="cmp-edit-btn" onclick="editComparison()">Modifier la selection</button>
+  </div>
+  <div id="cmpProdHeaders"></div>
+  <div id="cmpRows"></div>
+  <div style="text-align:center;margin-top:32px;padding:24px;background:var(--em-l);border-radius:14px">
+    <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;margin-bottom:8px">Vous avez fait votre choix ?</div>
+    <div style="font-size:13px;color:var(--t3);margin-bottom:16px">Ajoutez directement au panier ou continuez vos comparaisons</div>
+    <a class="btn-p" href="catalogue.html" style="text-decoration:none;display:inline-flex">Explorer d'autres produits →</a>
+  </div>
+</div>
+
+<!-- CART -->
+<div id="cov" onclick="closeCart()"></div>
+<div id="csb">
+  <div class="cs-hd"><span class="cs-ti">Panier</span><button style="background:none;border:none;cursor:pointer;padding:4px" onclick="closeCart()"><svg viewBox="0 0 24 24" width="20" height="20" stroke="var(--t2)" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div class="cs-bd" id="csBody"></div>
+  <div class="cs-ft"><div style="display:flex;justify-content:space-between;font-weight:700;font-size:16px;margin-bottom:12px"><span>Total</span><span id="csTot">0 XOF</span></div><button class="btn-ck" onclick="closeCart();location.href='auth.html#checkout'">Passer commande</button></div>
+</div>
+<div id="toast"><div class="toast-b" id="toastMsg"></div></div>
+<button id="stb" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" width="16" height="16" stroke="#fff" fill="none" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+<script>
+const ALL_PRODS = [
+  {id:1,nm:"Robe Wax Batik Premium",cat:"vetements",price:18500,old:26000,img:"https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=300&q=75&fit=crop",stars:4.8,revCnt:142,vendor:"Aminata Fashion",material:"100% Coton Wax",sizes:"XS-3XL",origin:"Bamako, Mali",washable:true,warranty:false,stock:8,score:{quality:92,value:88,design:95,comfort:78,durability:82}},
+  {id:2,nm:"Boubou Brode Elite",cat:"vetements",price:32000,old:45000,img:"https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=300&q=75&fit=crop",stars:4.9,revCnt:87,vendor:"Aminata Fashion",material:"Coton brode main",sizes:"S-2XL",origin:"Bamako, Mali",washable:false,warranty:true,stock:5,score:{quality:96,value:82,design:98,comfort:85,durability:90}},
+  {id:3,nm:"Kaftan Soiree Doree",cat:"vetements",price:48000,old:null,img:"https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=300&q=75&fit=crop",stars:5.0,revCnt:29,vendor:"Aminata Fashion",material:"Soie & broderies",sizes:"XS-XL",origin:"Bamako, Mali",washable:false,warranty:true,stock:3,score:{quality:98,value:74,design:99,comfort:90,durability:80}},
+  {id:4,nm:"Ensemble Wax Pagne",cat:"vetements",price:22000,old:null,img:"https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?w=300&q=75&fit=crop",stars:4.7,revCnt:64,vendor:"Aminata Fashion",material:"Wax ivoirien",sizes:"XS-2XL",origin:"Abidjan / Bamako",washable:true,warranty:false,stock:12,score:{quality:88,value:92,design:85,comfort:82,durability:86}},
+  {id:5,nm:"Foulard Soie Tisse",cat:"bijoux",price:8500,old:12000,img:"https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=300&q=75&fit=crop",stars:4.8,revCnt:53,vendor:"Kouyate Accessoires",material:"Soie naturelle",sizes:"Taille unique",origin:"Ségou, Mali",washable:true,warranty:false,stock:20,score:{quality:90,value:86,design:88,comfort:95,durability:75}},
+  {id:6,nm:"Collier Perles Bogolan",cat:"bijoux",price:6500,old:null,img:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=300&q=75&fit=crop",stars:4.5,revCnt:31,vendor:"Binta Bijoux",material:"Perles & fil bogolan",sizes:"Taille unique",origin:"Mopti, Mali",washable:false,warranty:false,stock:15,score:{quality:82,value:90,design:86,comfort:88,durability:78}},
+  {id:7,nm:"Savon Shea Premium",cat:"beaute",price:3500,old:5000,img:"https://images.unsplash.com/photo-1600857062241-98e5dba7f400?w=300&q=75&fit=crop",stars:4.6,revCnt:108,vendor:"Sira Beaute",material:"Beurre de karite pur",sizes:"250g",origin:"Kayes, Mali",washable:true,warranty:false,stock:50,score:{quality:88,value:94,design:72,comfort:96,durability:85}},
+  {id:8,nm:"Huile Argan Artisanale",cat:"beaute",price:12000,old:16000,img:"https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=300&q=75&fit=crop",stars:4.9,revCnt:76,vendor:"Sira Beaute",material:"Huile argan + jojoba",sizes:"100ml",origin:"Bamako, Mali",washable:true,warranty:true,stock:18,score:{quality:95,value:86,design:80,comfort:98,durability:92}}
+];
+
+let compareList = [];
+let pickerCat = 'all';
+
+function initComparator() {
+  renderSlots();
+  renderPicker(ALL_PRODS);
+  setTimeout(function() { var l=document.getElementById('loader'); if(l) l.style.cssText='display:none!important'; }, 1200);
+}
+
+function renderSlots() {
+  var slots = document.getElementById('cmpSlots');
+  var cnt = document.getElementById('cmpCnt');
+  var btn = document.getElementById('cmpGoBtn');
+  slots.innerHTML = '';
+  for (var i = 0; i < 4; i++) {
+    var div = document.createElement('div');
+    div.className = 'cmp-slot' + (compareList[i] ? ' filled' : '');
+    if (compareList[i]) {
+      var p = compareList[i];
+      div.innerHTML = '<img src="' + p.img + '" alt="' + p.nm + '"/><div class="slot-rm" onclick="removeFromCompare(' + p.id + ')">x</div>';
+    } else {
+      div.textContent = '+ Ajouter';
+      div.onclick = function() { document.getElementById('pickerSection').scrollIntoView({behavior:'smooth'}); };
+    }
+    slots.appendChild(div);
+  }
+  cnt.textContent = compareList.length + '/4 produits';
+  btn.disabled = compareList.length < 2;
+}
+
+function renderPicker(prods) {
+  var grid = document.getElementById('pickerGrid');
+  grid.innerHTML = prods.map(function(p) {
+    var sel = compareList.some(function(c) { return c.id === p.id; });
+    return '<div class="picker-card' + (sel ? ' selected' : '') + '" onclick="toggleCompare(' + p.id + ')">' +
+      '<img src="' + p.img + '" alt="' + p.nm + '" loading="lazy"/>' +
+      '<div class="picker-card-body">' +
+      '<div class="picker-card-nm">' + p.nm + '</div>' +
+      '<div class="picker-card-p">' + p.price.toLocaleString('fr-FR') + ' XOF</div>' +
+      '<div class="picker-card-sel"></div>' +
+      '</div></div>';
+  }).join('');
+}
+
+function toggleCompare(id) {
+  var p = ALL_PRODS.find(function(x) { return x.id === id; });
+  var idx = compareList.findIndex(function(x) { return x.id === id; });
+  if (idx >= 0) {
+    compareList.splice(idx, 1);
+  } else {
+    if (compareList.length >= 4) { showToast('Maximum 4 produits comparables'); return; }
+    compareList.push(p);
+  }
+  renderSlots();
+  var prods = getFilteredProds();
+  renderPicker(prods);
+  if (compareList.length >= 2) showToast(compareList.length + ' produits selectionnees - cliquez Comparer !');
+}
+
+function removeFromCompare(id) {
+  compareList = compareList.filter(function(x) { return x.id !== id; });
+  renderSlots();
+  renderPicker(getFilteredProds());
+}
+
+function clearCompare() {
+  compareList = [];
+  renderSlots();
+  renderPicker(getFilteredProds());
+  document.getElementById('cmpTable').classList.remove('on');
+  document.getElementById('pickerSection').style.display = '';
+}
+
+function getFilteredProds() {
+  var q = (document.getElementById('pickerSearch').value || '').toLowerCase();
+  return ALL_PRODS.filter(function(p) {
+    var catOk = pickerCat === 'all' || p.cat === pickerCat;
+    var qOk = !q || p.nm.toLowerCase().includes(q);
+    return catOk && qOk;
+  });
+}
+
+function filterPicker(q) { renderPicker(getFilteredProds()); }
+
+function filterPickerCat(cat, btn) {
+  pickerCat = cat;
+  document.querySelectorAll('.picker-cat').forEach(function(b) { b.classList.remove('on'); });
+  if (btn) btn.classList.add('on');
+  renderPicker(getFilteredProds());
+}
+
+function showComparison() {
+  if (compareList.length < 2) return;
+  renderComparisonTable();
+  document.getElementById('cmpTable').classList.add('on');
+  document.getElementById('pickerSection').style.display = 'none';
+  document.getElementById('cmpTable').scrollIntoView({behavior:'smooth'});
+}
+
+function editComparison() {
+  document.getElementById('cmpTable').classList.remove('on');
+  document.getElementById('pickerSection').style.display = '';
+  document.getElementById('pickerSection').scrollIntoView({behavior:'smooth'});
+}
+
+function renderComparisonTable() {
+  var cols = compareList.length + 1;
+  var gridStyle = 'grid-template-columns: 160px ' + compareList.map(function() { return '1fr'; }).join(' ');
+
+  // Find winners per spec
+  var bestPrice = compareList.reduce(function(a,b) { return a.price < b.price ? a : b; });
+  var bestStars = compareList.reduce(function(a,b) { return a.stars > b.stars ? a : b; });
+  var bestScore = compareList.reduce(function(a,b) {
+    var sa = Object.values(a.score).reduce(function(x,y){return x+y;},0);
+    var sb = Object.values(b.score).reduce(function(x,y){return x+y;},0);
+    return sa > sb ? a : b;
+  });
+
+  // Product headers
+  var hdHtml = '<div style="display:grid;' + gridStyle + ';gap:16px;margin-bottom:24px"><div></div>';
+  compareList.forEach(function(p) {
+    var isWinner = p.id === bestScore.id;
+    var disc = p.old ? Math.round((1-p.price/p.old)*100) : 0;
+    hdHtml += '<div class="cph-card' + (isWinner ? ' winner' : '') + '">';
+    if (isWinner) hdHtml += '<div class="winner-badge">Meilleur rapport qualite</div>';
+    hdHtml += '<img class="cph-img" src="' + p.img + '" alt="' + p.nm + '" loading="lazy"/>';
+    hdHtml += '<div class="cph-body">';
+    hdHtml += '<div class="cph-nm">' + p.nm + '</div>';
+    hdHtml += '<div><span class="cph-price">' + p.price.toLocaleString('fr-FR') + ' XOF</span>';
+    if (p.old) hdHtml += '<span class="cph-old">' + p.old.toLocaleString('fr-FR') + '</span>';
+    hdHtml += '</div>';
+    hdHtml += '<div class="cph-stars">&#11088; ' + p.stars + ' (' + p.revCnt + ')</div>';
+    hdHtml += '<button class="cph-add" onclick="quickAdd(' + p.id + ')">Ajouter au panier</button>';
+    hdHtml += '</div></div>';
+  });
+  hdHtml += '</div>';
+  document.getElementById('cmpProdHeaders').innerHTML = hdHtml;
+
+  // Build comparison rows
+  var sections = [
+    {title: 'Prix & Disponibilite', rows: [
+      {lbl:'Prix', key:'price', fmt:function(v){return v.toLocaleString('fr-FR') + ' XOF';}, best:'min'},
+      {lbl:'Prix original', key:'old', fmt:function(v){return v ? v.toLocaleString('fr-FR') + ' XOF' : 'Prix fixe';}, best:null},
+      {lbl:'Reduction', key:null, fn:function(p){return p.old ? '-' + Math.round((1-p.price/p.old)*100) + '%' : 'Aucune';}, best:null},
+      {lbl:'Stock', key:'stock', fmt:function(v){return v + ' pieces';}, best:'max'}
+    ]},
+    {title: 'Qualite & Specifications', rows: [
+      {lbl:'Note clients', key:'stars', fmt:function(v){return v + ' / 5';}, best:'max'},
+      {lbl:'Nb avis', key:'revCnt', fmt:function(v){return v + ' avis';}, best:'max'},
+      {lbl:'Matiere', key:'material', fmt:function(v){return v;}, best:null},
+      {lbl:'Tailles', key:'sizes', fmt:function(v){return v;}, best:null},
+      {lbl:'Origine', key:'origin', fmt:function(v){return v;}, best:null},
+      {lbl:'Lavable machine', key:'washable', fmt:function(v){return v ? '✅ Oui' : '❌ Non';}, best:null},
+      {lbl:'Garantie', key:'warranty', fmt:function(v){return v ? '✅ Incluse' : '❌ Non';}, best:null}
+    ]},
+    {title: 'Scores de qualite (sur 100)', rows: [
+      {lbl:'Qualite matiere', score:'quality', best:'max'},
+      {lbl:'Rapport qualite/prix', score:'value', best:'max'},
+      {lbl:'Design & Style', score:'design', best:'max'},
+      {lbl:'Confort', score:'comfort', best:'max'},
+      {lbl:'Durabilite', score:'durability', best:'max'}
+    ]}
+  ];
+
+  var rowsHtml = '';
+  sections.forEach(function(sec) {
+    rowsHtml += '<div class="cmp-section"><div class="cmp-section-title">' + sec.title + '</div>';
+    sec.rows.forEach(function(row) {
+      var values = compareList.map(function(p) {
+        if (row.score) return p.score[row.score];
+        if (row.fn) return row.fn(p);
+        return row.fmt(p[row.key]);
+      });
+      var rawVals = compareList.map(function(p) {
+        if (row.score) return p.score[row.score];
+        if (row.key) return p[row.key];
+        return null;
+      });
+      var bestIdx = -1;
+      if (row.best === 'max') bestIdx = rawVals.indexOf(Math.max.apply(null, rawVals));
+      if (row.best === 'min') bestIdx = rawVals.indexOf(Math.min.apply(null, rawVals));
+
+      rowsHtml += '<div class="cmp-row" style="' + gridStyle + '">';
+      rowsHtml += '<div class="cmp-row-lbl">' + row.lbl + '</div>';
+      values.forEach(function(val, i) {
+        var cls = bestIdx === i ? ' best' : '';
+        if (row.score) {
+          var maxV = Math.max.apply(null, rawVals);
+          var color = rawVals[i] >= 90 ? 'var(--em)' : rawVals[i] >= 75 ? 'var(--or)' : '#EF4444';
+          rowsHtml += '<div class="cmp-cell' + cls + '">';
+          rowsHtml += '<div class="score-bar-wrap">';
+          rowsHtml += '<div class="score-bar"><div class="score-bar-fill" style="width:' + rawVals[i] + '%;background:' + color + '"></div></div>';
+          rowsHtml += '<div class="score-num" style="color:' + color + '">' + rawVals[i] + '</div>';
+          rowsHtml += '</div></div>';
+        } else {
+          rowsHtml += '<div class="cmp-cell' + cls + '">' + val + '</div>';
+        }
+      });
+      rowsHtml += '</div>';
+    });
+    rowsHtml += '</div>';
+  });
+
+  document.getElementById('cmpRows').innerHTML = rowsHtml;
+}
+
+function quickAdd(id) {
+  var p = ALL_PRODS.find(function(x) { return x.id === id; });
+  if (!p) return;
+  var cart = JSON.parse(localStorage.getItem('mifa_cart') || '[]');
+  var ex = cart.find(function(c) { return c.id === id; });
+  if (ex) ex.qty += 1;
+  else cart.push({id:id, nm:p.nm, price:p.price, img:p.img, qty:1});
+  localStorage.setItem('mifa_cart', JSON.stringify(cart));
+  updateCartBadge();
+  showToast('Ok! ' + p.nm.substring(0,20) + '... ajoute au panier');
+  openCart();
+}
+
+function doSearch() {
+  var q = document.getElementById('srchInp') && document.getElementById('srchInp').value.trim();
+  if(q) location.href = 'catalogue.html?q=' + encodeURIComponent(q);
+}
+
+function addToCart(id){
+  const p=PRODS.find(x=>x.id===id);if(!p)return;
+  const ex=cart.find(x=>x.id===id);
+  if(ex)ex.qty++;else cart.push({id,qty:1,nm:p.nm,p:p.p,img:p.img});
+  saveCart();updateCartBadge();renderCart();showToast(p.nm+' ajouté au panier');
+}
+function removeFromCart(id){cart=cart.filter(x=>x.id!==id);saveCart();updateCartBadge();renderCart();}
+function changeQty(id,d){const i=cart.find(x=>x.id===id);if(!i)return;i.qty+=d;if(i.qty<1)removeFromCart(id);else{saveCart();renderCart();};}
+function openCart(){document.getElementById('cov').classList.add('on');document.getElementById('csb').classList.add('on');renderCart();}
+function closeCart(){document.getElementById('cov').classList.remove('on');document.getElementById('csb').classList.remove('on');}
+function renderCart(){
+  const bd=document.getElementById('csBd'),ft=document.getElementById('csFt');if(!bd)return;
+  if(!cart.length){bd.innerHTML=`<div class="cs-em"><div class="cs-em-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div><p style="font-weight:600;color:var(--t3);font-size:13px">Panier vide</p><button class="btn-p" style="margin-top:8px;font-size:11.5px;padding:6px 14px" onclick="closeCart();location.href='catalogue.html'">Découvrir</button></div>`;if(ft)ft.style.display='none';return;}
+  const total=cart.reduce((a,i)=>a+i.p*i.qty,0);
+  bd.innerHTML=cart.map(i=>`<div class="cs-it"><div class="cs-th"><img src="${i.img}" alt=""/></div><div class="cs-in"><div class="cs-nm">${i.nm}</div><div class="cs-pr">${i.p.toLocaleString()} XOF</div><div class="cs-qw"><div class="qb" onclick="changeQty(${i.id},-1)">−</div><span class="qv">${i.qty}</span><div class="qb" onclick="changeQty(${i.id},1)">+</div></div></div><button class="cs-rm" onclick="removeFromCart(${i.id})">✕</button></div>`).join('');
+  if(ft){ft.style.display='block';document.getElementById('csTot').textContent=total.toLocaleString()+' XOF';}
+}
+function updateCartBadge(){const n=cart.reduce((a,i)=>a+i.qty,0);const b=document.getElementById('cartBdg');if(b){b.style.display=n?'flex':'none';b.textContent=n;}}
+function toggleWish(id,el){
+  if(wishlist.includes(id)){wishlist=wishlist.filter(x=>x!==id);if(el)el.classList.remove('on');}
+  else{wishlist.push(id);if(el)el.classList.add('on');showToast('Ajouté aux favoris ♥');}
+  saveWish();updateWishBadge();
+}
+function updateWishBadge(){const b=document.getElementById('wishBdg');if(b){b.style.display=wishlist.length?'flex':'none';b.textContent=wishlist.length;}}
+function showToast(msg,icon='✓'){
+  const t=document.getElementById('toast');
+  t.innerHTML=`<span style="color:var(--em);font-size:14px">${icon}</span>${msg}`;
+  t.classList.add('on'); clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('on'),2800);
+}
+
+
+window.addEventListener('DOMContentLoaded', function() {
+  initComparator();
+  updateCartBadge();
+  window.addEventListener('scroll', function() {
+    var s = document.getElementById('stb');
+    if(s) s.style.display = window.scrollY > 400 ? 'flex' : 'none';
+  });
+  // Auto-select 2 products for demo
+  setTimeout(function() { toggleCompare(1); toggleCompare(2); }, 600);
+});
+</script>
+</body>
+</html>
