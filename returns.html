@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Retours &amp; Remboursements &mdash; Mifa Life Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --em:#00A896;--em-d:#007a6e;--em-l:rgba(0,168,150,.08);--em-g:rgba(0,168,150,.18);
+  --or:#FF6B35;--or-d:#cc5428;
+  --sl:#2F3E46;--sl2:#1a2332;--sl3:#0d1520;
+  --mu:#F5CB5C;
+  --bg:#F8FAFB;--bg2:#EEF2F5;--bg3:#E2E8F0;
+  --t1:#111827;--t2:#374151;--t3:#6B7280;--t4:#9CA3AF;
+  --r:12px;--rl:18px;--rxl:24px;
+  --shm:0 4px 16px rgba(0,0,0,.08);
+  --shl:0 12px 40px rgba(0,0,0,.12);
+  --shxl:0 24px 64px rgba(0,0,0,.16);
+}
+  --shm:0 4px 20px rgba(0,0,0,.08);
+  --shl:0 2px 12px rgba(0,0,0,.05);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--t1);min-height:100vh}
+/* NAV */
+#nav{position:sticky;top:0;z-index:500;background:#fff;border-bottom:1px solid var(--bg3)}
+.nv-in{display:flex;align-items:center;gap:16px;padding:0 24px;height:60px;max-width:1400px;margin:0 auto}
+.nv-logo{display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none;flex-shrink:0}
+.nv-li{display:flex;flex-direction:column;gap:3px}
+.nv-li span{height:3px;border-radius:2px;background:var(--em);display:block}
+.nv-wm{font-family:"Syne",sans-serif;font-size:17px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.nv-ws{font-size:9px;color:var(--t3);letter-spacing:.04em}
+.nv-sw{flex:1;max-width:400px}
+.nv-sb{display:flex;border:1.5px solid var(--bg3);border-radius:24px;overflow:hidden;background:#fff;transition:border-color .2s}
+.nv-sb:focus-within{border-color:var(--em)}
+.nv-sb input{flex:1;border:none;outline:none;padding:8px 14px;font-size:13px;font-family:inherit;background:transparent}
+.nv-sbtn{padding:8px 14px;background:var(--em);cursor:pointer;display:flex;align-items:center}
+.nv-sbtn:hover{background:var(--em-d)}
+.nv-lnks{display:flex;align-items:center;gap:2px;margin-left:auto}
+.nv-lb{display:inline-flex;align-items:center;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;color:var(--t2);text-decoration:none;transition:all .2s;background:none;border:none;cursor:pointer}
+.nv-lb:hover,.nv-lb.active{color:var(--em);background:var(--em-l)}
+.nv-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.ib{background:none;border:none;cursor:pointer;padding:8px;border-radius:50%;color:var(--t2);position:relative;transition:all .2s}
+.ib:hover{background:var(--bg2);color:var(--em)}
+.cbdg{position:absolute;top:2px;right:2px;width:16px;height:16px;background:var(--or);color:#fff;border-radius:50%;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.btn-o{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;border:1.5px solid var(--bg3);background:#fff;color:var(--t2);text-decoration:none;transition:all .2s;cursor:pointer}
+.btn-o:hover{border-color:var(--em);color:var(--em)}
+.btn-p{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:700;background:var(--em);color:#fff;border:none;text-decoration:none;transition:all .2s;cursor:pointer}
+.btn-p:hover{background:var(--em-d);transform:translateY(-1px)}
+/* PROMO BAR */
+#pbar{background:linear-gradient(90deg,var(--sl3),var(--sl2));padding:8px 24px}
+.pb-in{display:flex;align-items:center;gap:12px;max-width:1400px;margin:0 auto;flex-wrap:wrap}
+.pb-txt{font-size:12px;color:rgba(255,255,255,.8);flex:1}
+.pb-tmr{font-size:11px;color:var(--mu);font-weight:700;font-variant-numeric:tabular-nums}
+.btn-ow{font-size:11px;font-weight:700;color:var(--mu);background:none;border:1px solid rgba(245,203,92,.3);border-radius:20px;padding:4px 12px;text-decoration:none;cursor:pointer;white-space:nowrap;transition:all .2s}
+.btn-ow:hover{background:rgba(245,203,92,.15)}
+.tb-x{color:rgba(255,255,255,.4);cursor:pointer;font-size:12px;padding:2px 6px}
+.tb-x:hover{color:#fff}
+/* CART SIDEBAR */
+#cov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:1000}
+#csb{position:fixed;right:0;top:0;bottom:0;width:380px;background:#fff;z-index:1001;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column;box-shadow:-4px 0 24px rgba(0,0,0,.12)}
+#csb.open{transform:translateX(0)}
+.cs-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--bg3)}
+.cs-ti{font-family:"Syne",sans-serif;font-size:18px;font-weight:800}
+.cs-bd{flex:1;overflow-y:auto;padding:16px}
+.cs-ft{padding:16px 20px;border-top:1px solid var(--bg3)}
+.btn-ck{width:100%;padding:14px;background:var(--em);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-ck:hover{background:var(--em-d)}
+.cs-sec{text-align:center;font-size:11px;color:var(--t4);margin-top:8px}
+/* TOAST */
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:9999;pointer-events:none}
+.toast-b{background:var(--sl);color:#fff;padding:10px 22px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;transform:translateY(8px);transition:all .3s;white-space:nowrap}
+.toast-b.show{opacity:1;transform:translateY(0)}
+/* SCROLL TOP */
+#stb{position:fixed;bottom:28px;right:28px;z-index:999;width:42px;height:42px;border-radius:50%;background:var(--em);color:#fff;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,168,150,.3);display:none;align-items:center;justify-content:center}
+/* BREADCRUMB */
+.brcr{padding:14px 0;border-bottom:1px solid var(--bg3)}
+.brcr-in{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.brcr-in a{font-size:13px;color:var(--t3);text-decoration:none;cursor:pointer;transition:color .2s}
+.brcr-in a:hover{color:var(--em)}
+.brcr-sep{color:var(--bg3);font-size:12px}
+.brcr-cur{font-size:13px;color:var(--t1);font-weight:600}
+/* SECTION HEADERS */
+.sh-wrap{margin-bottom:12px}
+.sh-eyb{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--em);text-transform:uppercase;margin-bottom:4px}
+.sh-ti{font-family:"Syne",sans-serif;font-size:26px;font-weight:800;color:var(--t1);letter-spacing:-.02em}
+.sh-sub{font-size:14px;color:var(--t3);margin-top:4px}
+/* SECTION */
+.sec{padding:60px 24px;max-width:1400px;margin:0 auto}
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--sl3);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;animation:ldHide 2.2s ease forwards}
+@keyframes ldHide{0%,55%{opacity:1;visibility:visible}80%{opacity:0}100%{opacity:0;visibility:hidden;pointer-events:none}}
+.ld-icon{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.ld-icon span{height:3px;background:var(--em);border-radius:2px;display:block;animation:ldP 1.2s ease infinite}
+.ld-icon span:nth-child(1){width:40px}.ld-icon span:nth-child(2){width:25px;animation-delay:.15s}.ld-icon span:nth-child(3){width:33px;animation-delay:.3s}
+@keyframes ldP{0%,100%{opacity:.3}50%{opacity:1}}
+.ld-brand{font-family:"Syne",sans-serif;font-size:22px;font-weight:800;color:#fff;letter-spacing:-.03em}
+.ld-brand span{color:var(--em)}
+.ld-sub{font-size:12px;color:rgba(255,255,255,.4);margin-top:6px}
+
+.ret-hero{background:var(--bg);border-bottom:1px solid var(--bg3);padding:40px 24px;text-align:center}
+.ret-hero h1{font-family:"Syne",sans-serif;font-size:34px;font-weight:800;margin-bottom:8px}
+.ret-hero p{font-size:15px;color:var(--t3);max-width:520px;margin:0 auto}
+.ret-tabs{display:flex;justify-content:center;gap:8px;margin-top:24px;flex-wrap:wrap}
+.ret-tab{padding:10px 22px;border-radius:20px;font-size:13px;font-weight:700;border:1.5px solid var(--bg3);background:#fff;color:var(--t2);cursor:pointer;font-family:inherit;transition:all .2s}
+.ret-tab.on{background:var(--em);color:#fff;border-color:var(--em)}
+.ret-wrap{max-width:900px;margin:0 auto;padding:40px 24px 80px}
+.ret-pane{display:none}.ret-pane.on{display:block}
+
+/* INITIATE FORM */
+.ret-card{background:#fff;border:1px solid var(--bg3);border-radius:16px;padding:24px;margin-bottom:20px}
+.ret-card h2{font-family:"Syne",sans-serif;font-size:18px;font-weight:800;margin-bottom:16px}
+.ret-order-select{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.ret-order-item{border:2px solid var(--bg3);border-radius:12px;padding:14px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px}
+.ret-order-item.on{border-color:var(--em);background:var(--em-l)}
+.ret-order-img{width:56px;height:56px;border-radius:10px;object-fit:cover;flex-shrink:0}
+.ret-order-info{flex:1}
+.ret-order-nm{font-size:14px;font-weight:700;color:var(--t1)}
+.ret-order-meta{font-size:12px;color:var(--t3);margin-top:2px}
+.ret-order-radio{width:22px;height:22px;border-radius:50%;border:2px solid var(--bg3);flex-shrink:0;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.ret-order-item.on .ret-order-radio{background:var(--em);border-color:var(--em)}
+.ret-order-item.on .ret-order-radio::after{content:"";width:8px;height:8px;background:#fff;border-radius:50%;display:block}
+.ret-reason-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+@media(max-width:500px){.ret-reason-grid{grid-template-columns:1fr}}
+.ret-reason{border:2px solid var(--bg3);border-radius:12px;padding:12px;cursor:pointer;transition:all .2s;font-size:13px;font-weight:600;color:var(--t2);display:flex;align-items:center;gap:8px}
+.ret-reason.on{border-color:var(--em);background:var(--em-l);color:var(--em-d)}
+.ret-refund-opts{display:flex;gap:10px;flex-wrap:wrap}
+.ret-refund-opt{flex:1;min-width:160px;border:2px solid var(--bg3);border-radius:12px;padding:14px;cursor:pointer;transition:all .2s;text-align:center}
+.ret-refund-opt.on{border-color:var(--em);background:var(--em-l)}
+.ret-refund-ico{font-size:24px;margin-bottom:6px}
+.ret-refund-nm{font-size:13px;font-weight:700}
+.ret-refund-sub{font-size:11px;color:var(--t3);margin-top:2px}
+
+/* POLICY TABLE */
+.ret-policy-table{width:100%;border-collapse:collapse;margin-bottom:16px}
+.ret-policy-table th{background:var(--bg2);padding:10px 14px;font-size:12px;font-weight:700;text-align:left;color:var(--t2);border-bottom:1px solid var(--bg3)}
+.ret-policy-table td{padding:10px 14px;font-size:13px;border-bottom:1px solid var(--bg3)}
+.ret-policy-table tr:hover td{background:var(--bg)}
+.tag-ok{background:var(--em-l);color:var(--em-d);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
+.tag-no{background:#FEE2E2;color:#DC2626;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
+.tag-cond{background:#FFF7ED;color:#D97706;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
+
+/* TIMELINE */
+.ret-timeline{display:flex;flex-direction:column;gap:0;position:relative;padding-left:32px}
+.ret-timeline::before{content:"";position:absolute;left:11px;top:0;bottom:0;width:2px;background:var(--bg3)}
+.ret-tl-item{position:relative;padding-bottom:20px}
+.ret-tl-dot{position:absolute;left:-32px;top:4px;width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid var(--bg3);display:flex;align-items:center;justify-content:center;font-size:11px;z-index:1}
+.ret-tl-dot.done{background:var(--em);border-color:var(--em);color:#fff}
+.ret-tl-dot.active{background:var(--or);border-color:var(--or);color:#fff}
+.ret-tl-title{font-size:14px;font-weight:700;margin-bottom:2px}
+.ret-tl-sub{font-size:12px;color:var(--t3)}
+</style>
+</head>
+<body>
+<div id="loader"><div class="ld-icon"><span></span><span></span><span></span></div><div class="ld-brand"><span style="color:var(--em)">MIFA</span> LIFE SHOP</div><div class="ld-sub">Traitement des retours...</div></div>
+<nav id="nav"><div class="nv-in"><a class="nv-logo" href="index.html"><div class="nv-li"><span style="width:40px"></span><span style="width:25px"></span><span style="width:33px"></span></div><div><div class="nv-wm"><span style="color:var(--em)">MIFA</span> <span style="color:var(--sl)">LIFE</span> <span style="color:var(--t3);font-weight:600">SHOP</span></div><div class="nv-ws">by Mifa Life Company</div></div></a><div class="nv-sw"><div class="nv-sb"><input type="text" id="srchInp" placeholder="Rechercher..."/><div class="nv-sbtn" onclick="doSearch()"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" width="12" height="12"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div></div></div><div class="nv-lnks"><a class="nv-lb active" href="index.html">Accueil</a><a class="nv-lb active" href="catalogue.html">Catalogue</a><a class="nv-lb" href="flash.html">Flash Sale</a><a class="nv-lb" href="categories.html">Categories</a></div><div class="nv-r"><a class="ib" href="notifications.html" style="text-decoration:none;color:var(--t2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="cbdg" style="display:flex">3</span></a><button class="ib" onclick="openCart()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cbdg" id="cartBdg" style="display:none">0</span></button><a class="btn-p" href="auth.html">Connexion</a></div></div></nav>
+
+<div class="ret-hero">
+  <h1>Retours &amp; Remboursements</h1>
+  <p>Retours faciles sous 30 jours. Remboursement garanti en 24-72h apres reception.</p>
+  <div class="ret-tabs">
+    <button class="ret-tab on" onclick="retTab(this,'init')">Initier un retour</button>
+    <button class="ret-tab" onclick="retTab(this,'policy')">Politique de retours</button>
+    <button class="ret-tab" onclick="retTab(this,'status')">Mes retours en cours</button>
+    <button class="ret-tab" onclick="retTab(this,'faq')">FAQ Retours</button>
+  </div>
+</div>
+
+<div class="ret-wrap">
+
+  <!-- INITIATE RETURN -->
+  <div class="ret-pane on" id="retInit">
+    <div class="ret-card">
+      <h2>Etape 1 &mdash; Selectionnez le produit a retourner</h2>
+      <div class="ret-order-select">
+        <div class="ret-order-item on" onclick="selRetItem(this)">
+          <img class="ret-order-img" src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=100&q=75&fit=crop" alt=""/>
+          <div class="ret-order-info"><div class="ret-order-nm">Robe Wax Batik Premium (M)</div><div class="ret-order-meta">Commande MLS-2024-00842 &middot; Livre le 5 mars 2026 &middot; 18 500 XOF</div></div>
+          <div class="ret-order-radio"></div>
+        </div>
+        <div class="ret-order-item" onclick="selRetItem(this)">
+          <img class="ret-order-img" src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=100&q=75&fit=crop" alt=""/>
+          <div class="ret-order-info"><div class="ret-order-nm">Foulard Soie Tisse</div><div class="ret-order-meta">Commande MLS-2024-00756 &middot; Livre le 1 mars 2026 &middot; 8 500 XOF</div></div>
+          <div class="ret-order-radio"></div>
+        </div>
+      </div>
+    </div>
+    <div class="ret-card">
+      <h2>Etape 2 &mdash; Motif du retour</h2>
+      <div class="ret-reason-grid">
+        <div class="ret-reason on" onclick="selReason(this)"><span>&#128070;</span>Taille incorrecte</div>
+        <div class="ret-reason" onclick="selReason(this)"><span>&#128531;</span>Ne correspond pas aux photos</div>
+        <div class="ret-reason" onclick="selReason(this)"><span>&#128465;</span>Produit endommage</div>
+        <div class="ret-reason" onclick="selReason(this)"><span>&#128721;</span>Defaut de fabrication</div>
+        <div class="ret-reason" onclick="selReason(this)"><span>&#129300;</span>Commande en double</div>
+        <div class="ret-reason" onclick="selReason(this)"><span>&#128535;</span>Changement d'avis</div>
+      </div>
+      <div style="margin-top:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--t2);margin-bottom:6px">Details supplementaires (optionnel)</div>
+        <textarea style="width:100%;padding:10px 14px;border:1.5px solid var(--bg3);border-radius:10px;font-size:13px;font-family:inherit;outline:none;resize:vertical;min-height:70px;transition:border-color .2s" placeholder="Decrivez le probleme..." onfocus="this.style.borderColor='var(--em)'" onblur="this.style.borderColor='var(--bg3)'"></textarea>
+      </div>
+    </div>
+    <div class="ret-card">
+      <h2>Etape 3 &mdash; Mode de remboursement</h2>
+      <div class="ret-refund-opts">
+        <div class="ret-refund-opt on" onclick="selRefund(this)"><div class="ret-refund-ico">&#128512;</div><div class="ret-refund-nm">Credit boutique</div><div class="ret-refund-sub">+10% bonus &middot; Immediat</div></div>
+        <div class="ret-refund-opt" onclick="selRefund(this)"><div class="ret-refund-ico">&#128241;</div><div class="ret-refund-nm">Orange Money</div><div class="ret-refund-sub">Remboursement 24h</div></div>
+        <div class="ret-refund-opt" onclick="selRefund(this)"><div class="ret-refund-ico">&#127808;</div><div class="ret-refund-nm">Wave</div><div class="ret-refund-sub">Remboursement 24h</div></div>
+        <div class="ret-refund-opt" onclick="selRefund(this)"><div class="ret-refund-ico">&#127968;</div><div class="ret-refund-nm">Virement bancaire</div><div class="ret-refund-sub">3-5 jours ouvrables</div></div>
+      </div>
+    </div>
+    <button onclick="submitReturn()" style="width:100%;padding:15px;background:var(--em);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px">
+      Soumettre la demande de retour &#8594;
+    </button>
+    <div style="margin-top:12px;font-size:12px;color:var(--t3);text-align:center">&#128274; Vos donnees sont protegees &middot; Retour gratuit pour tous les niveaux Or et Platine</div>
+  </div>
+
+  <!-- POLICY -->
+  <div class="ret-pane" id="retPolicy">
+    <div class="ret-card">
+      <h2>Tableau des politiques de retour</h2>
+      <div style="overflow-x:auto">
+        <table class="ret-policy-table">
+          <tr><th>Type de produit</th><th>Delai de retour</th><th>Condition</th><th>Remboursement</th></tr>
+          <tr><td>Vetements standard</td><td>30 jours</td><td><span class="tag-ok">Non porte</span></td><td>100%</td></tr>
+          <tr><td>Bijoux &amp; accessoires</td><td>15 jours</td><td><span class="tag-ok">Emballe original</span></td><td>100%</td></tr>
+          <tr><td>Articles beaute</td><td>7 jours</td><td><span class="tag-cond">Non ouvert</span></td><td>100%</td></tr>
+          <tr><td>Articles en promotion</td><td>15 jours</td><td><span class="tag-cond">Non porte</span></td><td>Avoir boutique</td></tr>
+          <tr><td>Sous-vetements</td><td>&mdash;</td><td><span class="tag-no">Non retournable</span></td><td>&mdash;</td></tr>
+          <tr><td>Produits personnalises</td><td>&mdash;</td><td><span class="tag-no">Non retournable</span></td><td>&mdash;</td></tr>
+          <tr><td>Article defectueux</td><td>90 jours</td><td><span class="tag-ok">Toujours accepte</span></td><td>100% + frais</td></tr>
+        </table>
+      </div>
+      <div style="background:var(--em-l);border:1px solid var(--em-g);border-radius:12px;padding:14px;font-size:13px;color:var(--t2);line-height:1.6">
+        <strong>Membres Or et Platine :</strong> Retour gratuit et remboursement en 12h. Pas besoin de renvoyer le colis en dessous de 10 000 XOF.
+      </div>
+    </div>
+  </div>
+
+  <!-- STATUS -->
+  <div class="ret-pane" id="retStatus">
+    <div class="ret-card">
+      <h2>Retour MLS-RET-2024-0041</h2>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+        <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=80&q=75&fit=crop" style="width:56px;height:56px;border-radius:10px;object-fit:cover"/>
+        <div><div style="font-size:14px;font-weight:700">Boubou Brode Elite</div><div style="font-size:12px;color:var(--t3)">Initie le 3 mars 2026 &middot; Motif : Taille incorrecte</div></div>
+        <div style="margin-left:auto;background:var(--em-l);color:var(--em-d);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px">En cours</div>
+      </div>
+      <div class="ret-timeline">
+        <div class="ret-tl-item"><div class="ret-tl-dot done">&#10003;</div><div class="ret-tl-title">Demande initiee</div><div class="ret-tl-sub">3 mars 2026 a 14h22</div></div>
+        <div class="ret-tl-item"><div class="ret-tl-dot done">&#10003;</div><div class="ret-tl-title">Retour approuve par le vendeur</div><div class="ret-tl-sub">3 mars 2026 a 16h05</div></div>
+        <div class="ret-tl-item"><div class="ret-tl-dot active">&#9654;</div><div class="ret-tl-title">Colis en transit vers le vendeur</div><div class="ret-tl-sub">Attendu le 9 mars 2026</div></div>
+        <div class="ret-tl-item"><div class="ret-tl-dot">4</div><div class="ret-tl-title">Reception &amp; verification par le vendeur</div><div class="ret-tl-sub">A venir</div></div>
+        <div class="ret-tl-item"><div class="ret-tl-dot">5</div><div class="ret-tl-title">Remboursement Orange Money</div><div class="ret-tl-sub">A venir &mdash; 32 000 XOF</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="ret-pane" id="retFaq">
+    <div class="ret-card">
+      <h2>Questions frequentes sur les retours</h2>
+      <div id="faqList"></div>
+    </div>
+  </div>
+
+</div>
+
+<div id="cov" onclick="closeCart()"></div>
+<div id="csb"><div class="cs-hd"><span class="cs-ti">Panier</span><button style="background:none;border:none;cursor:pointer;padding:4px" onclick="closeCart()"><svg viewBox="0 0 24 24" width="20" height="20" stroke="var(--t2)" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="cs-bd" id="csBody"></div><div class="cs-ft"><div style="display:flex;justify-content:space-between;font-weight:700;font-size:16px;margin-bottom:12px"><span>Total</span><span id="csTot">0 XOF</span></div><button class="btn-ck" onclick="closeCart();location.href='checkout.html'">Commander &#8594;</button></div></div>
+<div id="toast"><div class="toast-b" id="toastMsg"></div></div>
+<button id="stb" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" width="16" height="16" stroke="#fff" fill="none" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg></button>
+<script>
+var FAQS = [
+  {q:"Combien de temps ai-je pour retourner un article ?",a:"30 jours a partir de la date de reception pour la plupart des articles. Voir le tableau de politique pour les exceptions."},
+  {q:"Les frais de retour sont-ils a ma charge ?",a:"Non, le retour est gratuit pour tous les membres Mifa Life. Les membres Or et Platine beneficient d'un service de collecte a domicile."},
+  {q:"Quand vais-je etre rembourse ?",a:"Le remboursement est traite dans les 24-72h apres reception du retour par le vendeur. Un avoir boutique est disponible immediatement."},
+  {q:"Puis-je retourner un article en promotion ?",a:"Oui, sous 15 jours. Le remboursement se fait sous forme d'avoir boutique (+10% de bonus) ou en remboursement classique."},
+  {q:"Comment emballer mon retour ?",a:"Utilisez l'emballage original si possible. Sinon, tout emballage protecteur suffira. Notre livreur viendra le chercher a domicile."},
+  {q:"Mon article est endommage, que faire ?",a:"Photographiez l'article et soumettez une demande dans les 90 jours. Remboursement total garanti + compensation pour les desagrements."},
+];
+
+function initFaq() {
+  var list = document.getElementById('faqList');
+  if(!list) return;
+  list.innerHTML = FAQS.map(function(f,i){
+    return '<div style="border-bottom:1px solid var(--bg3);padding:14px 0">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:14px;font-weight:700;gap:12px" onclick="toggleFaq('+i+',this)">'
+      +'<span>'+f.q+'</span>'
+      +'<span id="faqico'+i+'" style="font-size:18px;color:var(--em);flex-shrink:0">+</span>'
+      +'</div>'
+      +'<div id="faqans'+i+'" style="display:none;font-size:13px;color:var(--t3);margin-top:8px;line-height:1.6">'+f.a+'</div>'
+      +'</div>';
+  }).join('');
+}
+
+function toggleFaq(i,btn) {
+  var ans = document.getElementById('faqans'+i);
+  var ico = document.getElementById('faqico'+i);
+  if(!ans) return;
+  var open = ans.style.display !== 'none';
+  ans.style.display = open ? 'none' : '';
+  if(ico) ico.textContent = open ? '+' : '−';
+}
+
+function retTab(btn, id) {
+  document.querySelectorAll('.ret-tab').forEach(function(t){t.classList.remove('on');});
+  btn.classList.add('on');
+  document.querySelectorAll('.ret-pane').forEach(function(p){p.classList.remove('on');});
+  var map = {init:'retInit',policy:'retPolicy',status:'retStatus',faq:'retFaq'};
+  var pane = document.getElementById(map[id]);
+  if(pane) pane.classList.add('on');
+}
+
+function selRetItem(el) {
+  document.querySelectorAll('.ret-order-item').forEach(function(x){x.classList.remove('on');});
+  el.classList.add('on');
+}
+function selReason(el) {
+  document.querySelectorAll('.ret-reason').forEach(function(x){x.classList.remove('on');});
+  el.classList.add('on');
+}
+function selRefund(el) {
+  document.querySelectorAll('.ret-refund-opt').forEach(function(x){x.classList.remove('on');});
+  el.classList.add('on');
+}
+function submitReturn() {
+  showToast('Demande de retour soumise ! Reference: MLS-RET-2024-0042');
+}
+
+window.addEventListener('DOMContentLoaded', initFaq);
+function addToCart(id){
+  const p=PRODS.find(x=>x.id===id);if(!p)return;
+  const ex=cart.find(x=>x.id===id);
+  if(ex)ex.qty++;else cart.push({id,qty:1,nm:p.nm,p:p.p,img:p.img});
+  saveCart();updateCartBadge();renderCart();showToast(p.nm+' ajouté au panier');
+}
+function removeFromCart(id){cart=cart.filter(x=>x.id!==id);saveCart();updateCartBadge();renderCart();}
+function changeQty(id,d){const i=cart.find(x=>x.id===id);if(!i)return;i.qty+=d;if(i.qty<1)removeFromCart(id);else{saveCart();renderCart();};}
+function openCart(){document.getElementById('cov').classList.add('on');document.getElementById('csb').classList.add('on');renderCart();}
+function closeCart(){document.getElementById('cov').classList.remove('on');document.getElementById('csb').classList.remove('on');}
+function renderCart(){
+  const bd=document.getElementById('csBd'),ft=document.getElementById('csFt');if(!bd)return;
+  if(!cart.length){bd.innerHTML=`<div class="cs-em"><div class="cs-em-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div><p style="font-weight:600;color:var(--t3);font-size:13px">Panier vide</p><button class="btn-p" style="margin-top:8px;font-size:11.5px;padding:6px 14px" onclick="closeCart();location.href='catalogue.html'">Découvrir</button></div>`;if(ft)ft.style.display='none';return;}
+  const total=cart.reduce((a,i)=>a+i.p*i.qty,0);
+  bd.innerHTML=cart.map(i=>`<div class="cs-it"><div class="cs-th"><img src="${i.img}" alt=""/></div><div class="cs-in"><div class="cs-nm">${i.nm}</div><div class="cs-pr">${i.p.toLocaleString()} XOF</div><div class="cs-qw"><div class="qb" onclick="changeQty(${i.id},-1)">−</div><span class="qv">${i.qty}</span><div class="qb" onclick="changeQty(${i.id},1)">+</div></div></div><button class="cs-rm" onclick="removeFromCart(${i.id})">✕</button></div>`).join('');
+  if(ft){ft.style.display='block';document.getElementById('csTot').textContent=total.toLocaleString()+' XOF';}
+}
+function updateCartBadge(){const n=cart.reduce((a,i)=>a+i.qty,0);const b=document.getElementById('cartBdg');if(b){b.style.display=n?'flex':'none';b.textContent=n;}}
+function toggleWish(id,el){
+  if(wishlist.includes(id)){wishlist=wishlist.filter(x=>x!==id);if(el)el.classList.remove('on');}
+  else{wishlist.push(id);if(el)el.classList.add('on');showToast('Ajouté aux favoris ♥');}
+  saveWish();updateWishBadge();
+}
+function updateWishBadge(){const b=document.getElementById('wishBdg');if(b){b.style.display=wishlist.length?'flex':'none';b.textContent=wishlist.length;}}
+function showToast(msg,icon='✓'){
+  const t=document.getElementById('toast');
+  t.innerHTML=`<span style="color:var(--em);font-size:14px">${icon}</span>${msg}`;
+  t.classList.add('on'); clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('on'),2800);
+}
+
+function doSearch(){var q=document.getElementById("srchInp")&&document.getElementById("srchInp").value.trim();if(q)location.href="catalogue.html?q="+encodeURIComponent(q);}
+window.addEventListener("DOMContentLoaded",function(){updateCartBadge&&updateCartBadge();window.addEventListener("scroll",function(){var s=document.getElementById("stb");if(s)s.style.display=window.scrollY>400?"flex":"none";});setTimeout(function(){var l=document.getElementById("loader");if(l)l.style.cssText="display:none!important";},1100);});</script>
+</body></html>

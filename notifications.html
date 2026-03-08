@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Notifications &mdash; Mifa Life Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --em:#00A896;--em-d:#007a6e;--em-l:rgba(0,168,150,.08);--em-g:rgba(0,168,150,.18);
+  --or:#FF6B35;--or-d:#cc5428;
+  --sl:#2F3E46;--sl2:#1a2332;--sl3:#0d1520;
+  --mu:#F5CB5C;
+  --bg:#F8FAFB;--bg2:#EEF2F5;--bg3:#E2E8F0;
+  --t1:#111827;--t2:#374151;--t3:#6B7280;--t4:#9CA3AF;
+  --r:12px;--rl:18px;--rxl:24px;
+  --shm:0 4px 16px rgba(0,0,0,.08);
+  --shl:0 12px 40px rgba(0,0,0,.12);
+  --shxl:0 24px 64px rgba(0,0,0,.16);
+}
+  --shm:0 4px 20px rgba(0,0,0,.08);
+  --shl:0 2px 12px rgba(0,0,0,.05);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--t1);min-height:100vh}
+/* NAV */
+#nav{position:sticky;top:0;z-index:500;background:#fff;border-bottom:1px solid var(--bg3)}
+.nv-in{display:flex;align-items:center;gap:16px;padding:0 24px;height:60px;max-width:1400px;margin:0 auto}
+.nv-logo{display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none;flex-shrink:0}
+.nv-li{display:flex;flex-direction:column;gap:3px}
+.nv-li span{height:3px;border-radius:2px;background:var(--em);display:block}
+.nv-wm{font-family:"Syne",sans-serif;font-size:17px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.nv-ws{font-size:9px;color:var(--t3);letter-spacing:.04em}
+.nv-sw{flex:1;max-width:400px}
+.nv-sb{display:flex;border:1.5px solid var(--bg3);border-radius:24px;overflow:hidden;background:#fff;transition:border-color .2s}
+.nv-sb:focus-within{border-color:var(--em)}
+.nv-sb input{flex:1;border:none;outline:none;padding:8px 14px;font-size:13px;font-family:inherit;background:transparent}
+.nv-sbtn{padding:8px 14px;background:var(--em);cursor:pointer;display:flex;align-items:center}
+.nv-sbtn:hover{background:var(--em-d)}
+.nv-lnks{display:flex;align-items:center;gap:2px;margin-left:auto}
+.nv-lb{display:inline-flex;align-items:center;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;color:var(--t2);text-decoration:none;transition:all .2s;background:none;border:none;cursor:pointer}
+.nv-lb:hover,.nv-lb.active{color:var(--em);background:var(--em-l)}
+.nv-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.ib{background:none;border:none;cursor:pointer;padding:8px;border-radius:50%;color:var(--t2);position:relative;transition:all .2s}
+.ib:hover{background:var(--bg2);color:var(--em)}
+.cbdg{position:absolute;top:2px;right:2px;width:16px;height:16px;background:var(--or);color:#fff;border-radius:50%;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.btn-o{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;border:1.5px solid var(--bg3);background:#fff;color:var(--t2);text-decoration:none;transition:all .2s;cursor:pointer}
+.btn-o:hover{border-color:var(--em);color:var(--em)}
+.btn-p{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:700;background:var(--em);color:#fff;border:none;text-decoration:none;transition:all .2s;cursor:pointer}
+.btn-p:hover{background:var(--em-d);transform:translateY(-1px)}
+/* PROMO BAR */
+#pbar{background:linear-gradient(90deg,var(--sl3),var(--sl2));padding:8px 24px}
+.pb-in{display:flex;align-items:center;gap:12px;max-width:1400px;margin:0 auto;flex-wrap:wrap}
+.pb-txt{font-size:12px;color:rgba(255,255,255,.8);flex:1}
+.pb-tmr{font-size:11px;color:var(--mu);font-weight:700;font-variant-numeric:tabular-nums}
+.btn-ow{font-size:11px;font-weight:700;color:var(--mu);background:none;border:1px solid rgba(245,203,92,.3);border-radius:20px;padding:4px 12px;text-decoration:none;cursor:pointer;white-space:nowrap;transition:all .2s}
+.btn-ow:hover{background:rgba(245,203,92,.15)}
+.tb-x{color:rgba(255,255,255,.4);cursor:pointer;font-size:12px;padding:2px 6px}
+.tb-x:hover{color:#fff}
+/* CART SIDEBAR */
+#cov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:1000}
+#csb{position:fixed;right:0;top:0;bottom:0;width:380px;background:#fff;z-index:1001;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column;box-shadow:-4px 0 24px rgba(0,0,0,.12)}
+#csb.open{transform:translateX(0)}
+.cs-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--bg3)}
+.cs-ti{font-family:"Syne",sans-serif;font-size:18px;font-weight:800}
+.cs-bd{flex:1;overflow-y:auto;padding:16px}
+.cs-ft{padding:16px 20px;border-top:1px solid var(--bg3)}
+.btn-ck{width:100%;padding:14px;background:var(--em);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-ck:hover{background:var(--em-d)}
+.cs-sec{text-align:center;font-size:11px;color:var(--t4);margin-top:8px}
+/* TOAST */
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:9999;pointer-events:none}
+.toast-b{background:var(--sl);color:#fff;padding:10px 22px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;transform:translateY(8px);transition:all .3s;white-space:nowrap}
+.toast-b.show{opacity:1;transform:translateY(0)}
+/* SCROLL TOP */
+#stb{position:fixed;bottom:28px;right:28px;z-index:999;width:42px;height:42px;border-radius:50%;background:var(--em);color:#fff;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,168,150,.3);display:none;align-items:center;justify-content:center}
+/* BREADCRUMB */
+.brcr{padding:14px 0;border-bottom:1px solid var(--bg3)}
+.brcr-in{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.brcr-in a{font-size:13px;color:var(--t3);text-decoration:none;cursor:pointer;transition:color .2s}
+.brcr-in a:hover{color:var(--em)}
+.brcr-sep{color:var(--bg3);font-size:12px}
+.brcr-cur{font-size:13px;color:var(--t1);font-weight:600}
+/* SECTION HEADERS */
+.sh-wrap{margin-bottom:12px}
+.sh-eyb{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--em);text-transform:uppercase;margin-bottom:4px}
+.sh-ti{font-family:"Syne",sans-serif;font-size:26px;font-weight:800;color:var(--t1);letter-spacing:-.02em}
+.sh-sub{font-size:14px;color:var(--t3);margin-top:4px}
+/* SECTION */
+.sec{padding:60px 24px;max-width:1400px;margin:0 auto}
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--sl3);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;animation:ldHide 2.2s ease forwards}
+@keyframes ldHide{0%,55%{opacity:1;visibility:visible}80%{opacity:0}100%{opacity:0;visibility:hidden;pointer-events:none}}
+.ld-icon{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.ld-icon span{height:3px;background:var(--em);border-radius:2px;display:block;animation:ldP 1.2s ease infinite}
+.ld-icon span:nth-child(1){width:40px}.ld-icon span:nth-child(2){width:25px;animation-delay:.15s}.ld-icon span:nth-child(3){width:33px;animation-delay:.3s}
+@keyframes ldP{0%,100%{opacity:.3}50%{opacity:1}}
+.ld-brand{font-family:"Syne",sans-serif;font-size:22px;font-weight:800;color:#fff;letter-spacing:-.03em}
+.ld-brand span{color:var(--em)}
+.ld-sub{font-size:12px;color:rgba(255,255,255,.4);margin-top:6px}
+
+.notif-wrap{max-width:800px;margin:0 auto;padding:32px 24px 80px}
+.notif-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.notif-header h1{font-family:"Syne",sans-serif;font-size:26px;font-weight:800}
+.notif-header-actions{display:flex;gap:8px}
+.notif-action-btn{padding:8px 16px;border:1.5px solid var(--bg3);border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;font-family:inherit;color:var(--t2);transition:all .2s}
+.notif-action-btn:hover{border-color:var(--em);color:var(--em)}
+.notif-tabs{display:flex;gap:4px;border-bottom:2px solid var(--bg3);margin-bottom:20px;overflow-x:auto}
+.notif-tab{padding:10px 20px;font-size:13px;font-weight:700;color:var(--t3);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;transition:all .2s;position:relative}
+.notif-tab.on{color:var(--em);border-bottom-color:var(--em)}
+.notif-tab-badge{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--or);color:#fff;font-size:9px;font-weight:800;margin-left:6px;vertical-align:middle}
+.notif-group{margin-bottom:24px}
+.notif-group-lbl{font-size:11px;font-weight:700;color:var(--t4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;padding:0 4px}
+.notif-item{display:flex;gap:14px;padding:14px 16px;border-radius:14px;background:#fff;border:1px solid var(--bg3);margin-bottom:8px;cursor:pointer;transition:all .2s;position:relative}
+.notif-item:hover{border-color:var(--em-g);transform:translateX(2px)}
+.notif-item.unread{background:linear-gradient(to right,var(--em-l),#fff);border-color:var(--em-g)}
+.notif-item.unread::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--em);border-radius:14px 0 0 14px}
+.notif-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.notif-ico.order{background:#ECFDF5}
+.notif-ico.promo{background:#FFF7ED}
+.notif-ico.price{background:#F0FDF4}
+.notif-ico.msg{background:#EFF6FF}
+.notif-ico.system{background:var(--bg2)}
+.notif-ico.review{background:#FFF5F5}
+.notif-body{flex:1;min-width:0}
+.notif-title{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:3px;line-height:1.3}
+.notif-item.unread .notif-title{font-weight:800}
+.notif-desc{font-size:12px;color:var(--t3);line-height:1.5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.notif-time{font-size:11px;color:var(--t4);margin-top:4px}
+.notif-meta{display:flex;align-items:flex-start;gap:8px;flex-shrink:0;flex-direction:column;align-items:flex-end}
+.notif-dot{width:8px;height:8px;border-radius:50%;background:var(--em);margin-top:4px}
+.notif-img-thumb{width:48px;height:48px;border-radius:10px;object-fit:cover;flex-shrink:0}
+.notif-tag{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700}
+.notif-tag.new{background:var(--em-l);color:var(--em-d)}
+.notif-tag.hot{background:#FFF7ED;color:var(--or-d)}
+.notif-tag.urgent{background:#FEE2E2;color:#DC2626}
+.notif-empty{text-align:center;padding:60px 20px;color:var(--t3)}
+.notif-empty-ico{font-size:48px;margin-bottom:12px}
+.pref-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.pref-grid{grid-template-columns:1fr}}
+.pref-card{background:#fff;border:1px solid var(--bg3);border-radius:14px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.pref-info{display:flex;align-items:center;gap:10px}
+.pref-ico{font-size:22px}
+.pref-nm{font-size:14px;font-weight:700}
+.pref-sub{font-size:11px;color:var(--t3)}
+.pref-toggle{position:relative;width:44px;height:24px;flex-shrink:0}
+.pref-toggle input{opacity:0;width:0;height:0;position:absolute}
+.pref-slider{position:absolute;inset:0;background:var(--bg3);border-radius:24px;cursor:pointer;transition:all .3s}
+.pref-slider::before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:all .3s}
+.pref-toggle input:checked + .pref-slider{background:var(--em)}
+.pref-toggle input:checked + .pref-slider::before{transform:translateX(20px)}
+</style>
+</head>
+<body>
+<div id="loader"><div class="ld-icon"><span></span><span></span><span></span></div><div class="ld-brand"><span style="color:var(--em)">MIFA</span> LIFE SHOP</div><div class="ld-sub">Notifications...</div></div>
+<nav id="nav"><div class="nv-in"><a class="nv-logo" href="index.html"><div class="nv-li"><span style="width:40px"></span><span style="width:25px"></span><span style="width:33px"></span></div><div><div class="nv-wm"><span style="color:var(--em)">MIFA</span> <span style="color:var(--sl)">LIFE</span> <span style="color:var(--t3);font-weight:600">SHOP</span></div><div class="nv-ws">by Mifa Life Company</div></div></a><div class="nv-sw"><div class="nv-sb"><input type="text" id="srchInp" placeholder="Rechercher..."/><div class="nv-sbtn" onclick="doSearch()"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" width="12" height="12"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div></div></div><div class="nv-lnks"><a class="nv-lb" href="index.html">Accueil</a><a class="nv-lb" href="catalogue.html">Catalogue</a><a class="nv-lb" href="flash.html">Flash Sale</a><a class="nv-lb" href="categories.html">Categories</a></div><div class="nv-r"><a class="ib" href="notifications.html" style="text-decoration:none;color:var(--t2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="cbdg" style="display:flex">3</span></a><button class="ib" onclick="openCart()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cbdg" id="cartBdg" style="display:none">0</span></button><a class="btn-p" href="auth.html">Connexion</a></div></div></nav>
+
+<div class="notif-wrap">
+  <div class="notif-header">
+    <h1>Centre de notifications</h1>
+    <div class="notif-header-actions">
+      <button class="notif-action-btn" onclick="markAllRead()">Tout marquer lu</button>
+      <button class="notif-action-btn" onclick="clearAll()">Effacer tout</button>
+    </div>
+  </div>
+  <div class="notif-tabs">
+    <button class="notif-tab on" onclick="showTab(this,'all')">Toutes <span class="notif-tab-badge">3</span></button>
+    <button class="notif-tab" onclick="showTab(this,'orders')">Commandes <span class="notif-tab-badge">1</span></button>
+    <button class="notif-tab" onclick="showTab(this,'promos')">Promos &amp; Points</button>
+    <button class="notif-tab" onclick="showTab(this,'prices')">Alertes prix <span class="notif-tab-badge">1</span></button>
+    <button class="notif-tab" onclick="showTab(this,'messages')">Messages</button>
+  </div>
+  <div id="notifList">
+    <div class="notif-group">
+      <div class="notif-group-lbl">Aujourd&apos;hui</div>
+      <div class="notif-item unread" onclick="markRead(0)">
+  <div class="notif-ico order">📦</div>
+  <img class="notif-img-thumb" src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=80&q=75&fit=crop" alt=""/>
+  <div class="notif-body">
+    <div class="notif-title">Votre commande MLS-2024-00842 est en route !</div>
+    <div class="notif-desc">Livraison prevue aujourd'hui entre 15h et 20h — Livreur Moussa appelle avant.</div>
+    <div class="notif-time">Il y a 12 min</div>
+  </div>
+  <div class="notif-meta"><div class="notif-dot"></div><div class="notif-tag urgent">URGENT</div></div>
+</div><div class="notif-item unread" onclick="markRead(1)">
+  <div class="notif-ico promo">🎟️</div>
+  
+  <div class="notif-body">
+    <div class="notif-title">Nouveau code promo : FLASH30 — -30% flash !</div>
+    <div class="notif-desc">Offre valable 6h seulement sur les articles selectionnes. Ne ratez pas !</div>
+    <div class="notif-time">Il y a 1h</div>
+  </div>
+  <div class="notif-meta"><div class="notif-dot"></div><div class="notif-tag hot">HOT</div></div>
+</div><div class="notif-item unread" onclick="markRead(2)">
+  <div class="notif-ico price">📉</div>
+  <img class="notif-img-thumb" src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=80&q=75&fit=crop" alt=""/>
+  <div class="notif-body">
+    <div class="notif-title">Baisse de prix : Robe Wax Batik Premium</div>
+    <div class="notif-desc">Article de votre wishlist passe de 26 000 a 18 500 XOF — economie de 7 500 XOF !</div>
+    <div class="notif-time">Il y a 3h</div>
+  </div>
+  <div class="notif-meta"><div class="notif-dot"></div><div class="notif-tag new">NEW</div></div>
+</div>
+    </div>
+    <div class="notif-group">
+      <div class="notif-group-lbl">Cette semaine</div>
+      <div class="notif-item" onclick="markRead(3)">
+  <div class="notif-ico msg">💬</div>
+  
+  <div class="notif-body">
+    <div class="notif-title">Aminata Fashion a repondu a votre question</div>
+    <div class="notif-desc">Bonjour ! La robe est disponible en rouge et en bleu en taille M...</div>
+    <div class="notif-time">Il y a 5h</div>
+  </div>
+  <div class="notif-meta"></div>
+</div><div class="notif-item" onclick="markRead(4)">
+  <div class="notif-ico order">✅</div>
+  
+  <div class="notif-body">
+    <div class="notif-title">Commande MLS-2024-00756 livree !</div>
+    <div class="notif-desc">Votre commande a ete livree avec succes. Laissez un avis pour gagner +50 MifaPoints !</div>
+    <div class="notif-time">Hier</div>
+  </div>
+  <div class="notif-meta"></div>
+</div><div class="notif-item" onclick="markRead(5)">
+  <div class="notif-ico promo">⭐</div>
+  
+  <div class="notif-body">
+    <div class="notif-title">Vous avez gagne 2 450 MifaPoints !</div>
+    <div class="notif-desc">Votre solde de fidelite : 2 450 pts. Plus que 2 550 pts pour le niveau Platine.</div>
+    <div class="notif-time">Hier</div>
+  </div>
+  <div class="notif-meta"></div>
+</div>
+    </div>
+    <div class="notif-group">
+      <div class="notif-group-lbl">Plus tot</div>
+      <div class="notif-item" onclick="markRead(6)">
+  <div class="notif-ico system">🔐</div>
+  
+  <div class="notif-body">
+    <div class="notif-title">Connexion depuis un nouvel appareil</div>
+    <div class="notif-desc">Connexion detectee depuis Bamako, Mali — Samsung Galaxy A54. C'est bien vous ?</div>
+    <div class="notif-time">Il y a 2j</div>
+  </div>
+  <div class="notif-meta"></div>
+</div><div class="notif-item" onclick="markRead(7)">
+  <div class="notif-ico review">⭐</div>
+  
+  <div class="notif-body">
+    <div class="notif-title">Rappel : Laissez un avis sur vos achats</div>
+    <div class="notif-desc">Vous avez 2 achats sans avis. Chaque avis vaut +50 MifaPoints !</div>
+    <div class="notif-time">Il y a 3j</div>
+  </div>
+  <div class="notif-meta"></div>
+</div>
+    </div>
+  </div>
+  <div style="margin-top:40px;border-top:1px solid var(--bg3);padding-top:32px">
+    <h2 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;margin-bottom:16px">Preferences de notifications</h2>
+    <div class="pref-grid">
+      <div class="pref-card"><div class="pref-info"><span class="pref-ico">📦</span><div><div class="pref-nm">Suivi commandes</div><div class="pref-sub">SMS + App</div></div></div><label class="pref-toggle"><input type="checkbox" checked/><span class="pref-slider"></span></label></div>
+      <div class="pref-card"><div class="pref-info"><span class="pref-ico">🎟️</span><div><div class="pref-nm">Promos &amp; Flash</div><div class="pref-sub">SMS + Email</div></div></div><label class="pref-toggle"><input type="checkbox" checked/><span class="pref-slider"></span></label></div>
+      <div class="pref-card"><div class="pref-info"><span class="pref-ico">📉</span><div><div class="pref-nm">Alertes prix</div><div class="pref-sub">App uniquement</div></div></div><label class="pref-toggle"><input type="checkbox" checked/><span class="pref-slider"></span></label></div>
+      <div class="pref-card"><div class="pref-info"><span class="pref-ico">💬</span><div><div class="pref-nm">Messages vendeurs</div><div class="pref-sub">SMS + App</div></div></div><label class="pref-toggle"><input type="checkbox" checked/><span class="pref-slider"></span></label></div>
+      <div class="pref-card"><div class="pref-info"><span class="pref-ico">⭐</span><div><div class="pref-nm">Points fidelite</div><div class="pref-sub">Email</div></div></div><label class="pref-toggle"><input type="checkbox"/><span class="pref-slider"></span></label></div>
+      <div class="pref-card"><div class="pref-info"><span class="pref-ico">📰</span><div><div class="pref-nm">Newsletter style</div><div class="pref-sub">Email hebdo</div></div></div><label class="pref-toggle"><input type="checkbox"/><span class="pref-slider"></span></label></div>
+    </div>
+  </div>
+</div>
+
+<div id="cov" onclick="closeCart()"></div>
+<div id="csb"><div class="cs-hd"><span class="cs-ti">Panier</span><button style="background:none;border:none;cursor:pointer;padding:4px" onclick="closeCart()"><svg viewBox="0 0 24 24" width="20" height="20" stroke="var(--t2)" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="cs-bd" id="csBody"></div><div class="cs-ft"><div style="display:flex;justify-content:space-between;font-weight:700;font-size:16px;margin-bottom:12px"><span>Total</span><span id="csTot">0 XOF</span></div><button class="btn-ck" onclick="closeCart();location.href='checkout.html'">Commander &#8594;</button></div></div>
+<div id="toast"><div class="toast-b" id="toastMsg"></div></div>
+<button id="stb" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" width="16" height="16" stroke="#fff" fill="none" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg></button>
+<script>
+var allNotifs = document.querySelectorAll('.notif-item');
+
+function markRead(idx) {
+  allNotifs = document.querySelectorAll('.notif-item');
+  var el = allNotifs[idx];
+  if(el && el.classList.contains('unread')) {
+    el.classList.remove('unread');
+    updateBadges();
+    showToast('Notification marquee comme lue');
+  }
+}
+
+function markAllRead() {
+  document.querySelectorAll('.notif-item.unread').forEach(function(el){ el.classList.remove('unread'); });
+  updateBadges();
+  showToast('Toutes les notifications marquees comme lues');
+}
+
+function clearAll() {
+  var list = document.getElementById('notifList');
+  if(list) list.innerHTML = '<div class="notif-empty"><div class="notif-empty-ico">&#128276;</div><div style="font-weight:700;margin-bottom:4px">Aucune notification</div><div style="font-size:13px">Vous etes a jour !</div></div>';
+  showToast('Notifications effacees');
+}
+
+function updateBadges() {
+  var unread = document.querySelectorAll('.notif-item.unread').length;
+  document.querySelectorAll('.notif-tab-badge').forEach(function(b,i){ if(i===0) b.textContent=unread; if(unread===0) b.style.display='none'; });
+}
+
+function showTab(btn, cat) {
+  document.querySelectorAll('.notif-tab').forEach(function(t){t.classList.remove('on');});
+  btn.classList.add('on');
+  document.querySelectorAll('.notif-item').forEach(function(el){
+    if(cat==='all') el.style.display='';
+    else el.style.display = el.closest('[data-cat]') || cat==='all' ? '' : 'none';
+  });
+  showToast('Filtre : ' + btn.textContent.trim().replace(/[0-9]/g,''));
+}
+function addToCart(id){
+  const p=PRODS.find(x=>x.id===id);if(!p)return;
+  const ex=cart.find(x=>x.id===id);
+  if(ex)ex.qty++;else cart.push({id,qty:1,nm:p.nm,p:p.p,img:p.img});
+  saveCart();updateCartBadge();renderCart();showToast(p.nm+' ajouté au panier');
+}
+function removeFromCart(id){cart=cart.filter(x=>x.id!==id);saveCart();updateCartBadge();renderCart();}
+function changeQty(id,d){const i=cart.find(x=>x.id===id);if(!i)return;i.qty+=d;if(i.qty<1)removeFromCart(id);else{saveCart();renderCart();};}
+function openCart(){document.getElementById('cov').classList.add('on');document.getElementById('csb').classList.add('on');renderCart();}
+function closeCart(){document.getElementById('cov').classList.remove('on');document.getElementById('csb').classList.remove('on');}
+function renderCart(){
+  const bd=document.getElementById('csBd'),ft=document.getElementById('csFt');if(!bd)return;
+  if(!cart.length){bd.innerHTML=`<div class="cs-em"><div class="cs-em-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div><p style="font-weight:600;color:var(--t3);font-size:13px">Panier vide</p><button class="btn-p" style="margin-top:8px;font-size:11.5px;padding:6px 14px" onclick="closeCart();location.href='catalogue.html'">Découvrir</button></div>`;if(ft)ft.style.display='none';return;}
+  const total=cart.reduce((a,i)=>a+i.p*i.qty,0);
+  bd.innerHTML=cart.map(i=>`<div class="cs-it"><div class="cs-th"><img src="${i.img}" alt=""/></div><div class="cs-in"><div class="cs-nm">${i.nm}</div><div class="cs-pr">${i.p.toLocaleString()} XOF</div><div class="cs-qw"><div class="qb" onclick="changeQty(${i.id},-1)">−</div><span class="qv">${i.qty}</span><div class="qb" onclick="changeQty(${i.id},1)">+</div></div></div><button class="cs-rm" onclick="removeFromCart(${i.id})">✕</button></div>`).join('');
+  if(ft){ft.style.display='block';document.getElementById('csTot').textContent=total.toLocaleString()+' XOF';}
+}
+function updateCartBadge(){const n=cart.reduce((a,i)=>a+i.qty,0);const b=document.getElementById('cartBdg');if(b){b.style.display=n?'flex':'none';b.textContent=n;}}
+function toggleWish(id,el){
+  if(wishlist.includes(id)){wishlist=wishlist.filter(x=>x!==id);if(el)el.classList.remove('on');}
+  else{wishlist.push(id);if(el)el.classList.add('on');showToast('Ajouté aux favoris ♥');}
+  saveWish();updateWishBadge();
+}
+function updateWishBadge(){const b=document.getElementById('wishBdg');if(b){b.style.display=wishlist.length?'flex':'none';b.textContent=wishlist.length;}}
+function showToast(msg,icon='✓'){
+  const t=document.getElementById('toast');
+  t.innerHTML=`<span style="color:var(--em);font-size:14px">${icon}</span>${msg}`;
+  t.classList.add('on'); clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('on'),2800);
+}
+
+function doSearch(){var q=document.getElementById("srchInp")&&document.getElementById("srchInp").value.trim();if(q)location.href="catalogue.html?q="+encodeURIComponent(q);}
+window.addEventListener("DOMContentLoaded",function(){updateCartBadge&&updateCartBadge();window.addEventListener("scroll",function(){var s=document.getElementById("stb");if(s)s.style.display=window.scrollY>400?"flex":"none";});setTimeout(function(){var l=document.getElementById("loader");if(l)l.style.cssText="display:none!important";},1100);});</script>
+</body></html>

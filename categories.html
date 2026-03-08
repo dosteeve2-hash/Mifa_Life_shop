@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Categories &mdash; Mifa Life Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --em:#00A896;--em-d:#007a6e;--em-l:rgba(0,168,150,.08);--em-g:rgba(0,168,150,.18);
+  --or:#FF6B35;--or-d:#cc5428;
+  --sl:#2F3E46;--sl2:#1a2332;--sl3:#0d1520;
+  --mu:#F5CB5C;
+  --bg:#F8FAFB;--bg2:#EEF2F5;--bg3:#E2E8F0;
+  --t1:#111827;--t2:#374151;--t3:#6B7280;--t4:#9CA3AF;
+  --r:12px;--rl:18px;--rxl:24px;
+  --shm:0 4px 16px rgba(0,0,0,.08);
+  --shl:0 12px 40px rgba(0,0,0,.12);
+  --shxl:0 24px 64px rgba(0,0,0,.16);
+}
+  --shm:0 4px 20px rgba(0,0,0,.08);
+  --shl:0 2px 12px rgba(0,0,0,.05);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--t1);min-height:100vh}
+/* NAV */
+#nav{position:sticky;top:0;z-index:500;background:#fff;border-bottom:1px solid var(--bg3)}
+.nv-in{display:flex;align-items:center;gap:16px;padding:0 24px;height:60px;max-width:1400px;margin:0 auto}
+.nv-logo{display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none;flex-shrink:0}
+.nv-li{display:flex;flex-direction:column;gap:3px}
+.nv-li span{height:3px;border-radius:2px;background:var(--em);display:block}
+.nv-wm{font-family:"Syne",sans-serif;font-size:17px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.nv-ws{font-size:9px;color:var(--t3);letter-spacing:.04em}
+.nv-sw{flex:1;max-width:400px}
+.nv-sb{display:flex;border:1.5px solid var(--bg3);border-radius:24px;overflow:hidden;background:#fff;transition:border-color .2s}
+.nv-sb:focus-within{border-color:var(--em)}
+.nv-sb input{flex:1;border:none;outline:none;padding:8px 14px;font-size:13px;font-family:inherit;background:transparent}
+.nv-sbtn{padding:8px 14px;background:var(--em);cursor:pointer;display:flex;align-items:center}
+.nv-sbtn:hover{background:var(--em-d)}
+.nv-lnks{display:flex;align-items:center;gap:2px;margin-left:auto}
+.nv-lb{display:inline-flex;align-items:center;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;color:var(--t2);text-decoration:none;transition:all .2s;background:none;border:none;cursor:pointer}
+.nv-lb:hover,.nv-lb.active{color:var(--em);background:var(--em-l)}
+.nv-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.ib{background:none;border:none;cursor:pointer;padding:8px;border-radius:50%;color:var(--t2);position:relative;transition:all .2s}
+.ib:hover{background:var(--bg2);color:var(--em)}
+.cbdg{position:absolute;top:2px;right:2px;width:16px;height:16px;background:var(--or);color:#fff;border-radius:50%;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.btn-o{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;border:1.5px solid var(--bg3);background:#fff;color:var(--t2);text-decoration:none;transition:all .2s;cursor:pointer}
+.btn-o:hover{border-color:var(--em);color:var(--em)}
+.btn-p{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:700;background:var(--em);color:#fff;border:none;text-decoration:none;transition:all .2s;cursor:pointer}
+.btn-p:hover{background:var(--em-d);transform:translateY(-1px)}
+/* PROMO BAR */
+#pbar{background:linear-gradient(90deg,var(--sl3),var(--sl2));padding:8px 24px}
+.pb-in{display:flex;align-items:center;gap:12px;max-width:1400px;margin:0 auto;flex-wrap:wrap}
+.pb-txt{font-size:12px;color:rgba(255,255,255,.8);flex:1}
+.pb-tmr{font-size:11px;color:var(--mu);font-weight:700;font-variant-numeric:tabular-nums}
+.btn-ow{font-size:11px;font-weight:700;color:var(--mu);background:none;border:1px solid rgba(245,203,92,.3);border-radius:20px;padding:4px 12px;text-decoration:none;cursor:pointer;white-space:nowrap;transition:all .2s}
+.btn-ow:hover{background:rgba(245,203,92,.15)}
+.tb-x{color:rgba(255,255,255,.4);cursor:pointer;font-size:12px;padding:2px 6px}
+.tb-x:hover{color:#fff}
+/* CART SIDEBAR */
+#cov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:1000}
+#csb{position:fixed;right:0;top:0;bottom:0;width:380px;background:#fff;z-index:1001;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column;box-shadow:-4px 0 24px rgba(0,0,0,.12)}
+#csb.open{transform:translateX(0)}
+.cs-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--bg3)}
+.cs-ti{font-family:"Syne",sans-serif;font-size:18px;font-weight:800}
+.cs-bd{flex:1;overflow-y:auto;padding:16px}
+.cs-ft{padding:16px 20px;border-top:1px solid var(--bg3)}
+.btn-ck{width:100%;padding:14px;background:var(--em);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-ck:hover{background:var(--em-d)}
+.cs-sec{text-align:center;font-size:11px;color:var(--t4);margin-top:8px}
+/* TOAST */
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:9999;pointer-events:none}
+.toast-b{background:var(--sl);color:#fff;padding:10px 22px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;transform:translateY(8px);transition:all .3s;white-space:nowrap}
+.toast-b.show{opacity:1;transform:translateY(0)}
+/* SCROLL TOP */
+#stb{position:fixed;bottom:28px;right:28px;z-index:999;width:42px;height:42px;border-radius:50%;background:var(--em);color:#fff;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,168,150,.3);display:none;align-items:center;justify-content:center}
+/* BREADCRUMB */
+.brcr{padding:14px 0;border-bottom:1px solid var(--bg3)}
+.brcr-in{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.brcr-in a{font-size:13px;color:var(--t3);text-decoration:none;cursor:pointer;transition:color .2s}
+.brcr-in a:hover{color:var(--em)}
+.brcr-sep{color:var(--bg3);font-size:12px}
+.brcr-cur{font-size:13px;color:var(--t1);font-weight:600}
+/* SECTION HEADERS */
+.sh-wrap{margin-bottom:12px}
+.sh-eyb{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--em);text-transform:uppercase;margin-bottom:4px}
+.sh-ti{font-family:"Syne",sans-serif;font-size:26px;font-weight:800;color:var(--t1);letter-spacing:-.02em}
+.sh-sub{font-size:14px;color:var(--t3);margin-top:4px}
+/* SECTION */
+.sec{padding:60px 24px;max-width:1400px;margin:0 auto}
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--sl3);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;animation:ldHide 2.2s ease forwards}
+@keyframes ldHide{0%,55%{opacity:1;visibility:visible}80%{opacity:0}100%{opacity:0;visibility:hidden;pointer-events:none}}
+.ld-icon{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.ld-icon span{height:3px;background:var(--em);border-radius:2px;display:block;animation:ldP 1.2s ease infinite}
+.ld-icon span:nth-child(1){width:40px}.ld-icon span:nth-child(2){width:25px;animation-delay:.15s}.ld-icon span:nth-child(3){width:33px;animation-delay:.3s}
+@keyframes ldP{0%,100%{opacity:.3}50%{opacity:1}}
+.ld-brand{font-family:"Syne",sans-serif;font-size:22px;font-weight:800;color:#fff;letter-spacing:-.03em}
+.ld-brand span{color:var(--em)}
+.ld-sub{font-size:12px;color:rgba(255,255,255,.4);margin-top:6px}
+
+.cat-hero{background:linear-gradient(160deg,var(--sl3),var(--sl2));padding:48px 24px;text-align:center;color:#fff;position:relative;overflow:hidden}
+.cat-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(0,168,150,.15),transparent 60%)}
+.cat-hero h1{font-family:"Syne",sans-serif;font-size:38px;font-weight:800;position:relative;margin-bottom:10px}
+.cat-hero p{font-size:14px;color:rgba(255,255,255,.5);position:relative;max-width:480px;margin:0 auto 24px}
+.cat-search{display:flex;max-width:440px;margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4);position:relative}
+.cat-search input{flex:1;border:none;padding:14px 18px;font-size:14px;font-family:inherit;outline:none}
+.cat-search button{padding:0 22px;background:var(--em);color:#fff;border:none;cursor:pointer;font-size:14px;font-weight:700;font-family:inherit}
+
+.cat-wrap{max-width:1400px;margin:0 auto;padding:0 24px 60px}
+.cat-section{margin-top:40px}
+.cat-section-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--bg3)}
+.cat-section-hd h2{font-family:"Syne",sans-serif;font-size:22px;font-weight:800}
+.cat-section-hd a{font-size:13px;color:var(--em);font-weight:700;cursor:pointer;text-decoration:none}
+
+/* MAIN CATEGORY GRID */
+.main-cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.main-cat-card{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/3;cursor:pointer;transition:all .3s}
+.main-cat-card:hover{transform:translateY(-4px);box-shadow:var(--shl)}
+.main-cat-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.main-cat-card:hover img{transform:scale(1.08)}
+.main-cat-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,rgba(0,0,0,.1) 60%,transparent 100%)}
+.main-cat-info{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:2}
+.main-cat-nm{font-family:"Syne",sans-serif;font-size:16px;font-weight:800;color:#fff;margin-bottom:2px}
+.main-cat-cnt{font-size:11px;color:rgba(255,255,255,.65)}
+.main-cat-badge{display:inline-flex;background:var(--or);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin-bottom:4px}
+
+/* SUB CATEGORY GRID */
+.sub-cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.sub-cat-card{background:#fff;border:1px solid var(--bg3);border-radius:14px;padding:16px 12px;text-align:center;cursor:pointer;transition:all .2s}
+.sub-cat-card:hover{border-color:var(--em);background:var(--em-l);transform:translateY(-2px)}
+.sub-cat-ico{font-size:32px;margin-bottom:8px}
+.sub-cat-nm{font-size:12px;font-weight:700;color:var(--t1);margin-bottom:2px}
+.sub-cat-cnt{font-size:11px;color:var(--t3)}
+
+/* BRAND STRIP */
+.brand-strip{display:flex;gap:16px;overflow-x:auto;padding-bottom:8px}
+.brand-card{background:#fff;border:1px solid var(--bg3);border-radius:12px;padding:16px 24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all .2s;min-width:120px}
+.brand-card:hover{border-color:var(--em);transform:translateY(-2px);box-shadow:var(--shl)}
+.brand-card-nm{font-family:"Syne",sans-serif;font-size:14px;font-weight:800;color:var(--t1)}
+
+/* PROMO BANNERS */
+.promo-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.promo-grid{grid-template-columns:1fr}}
+.promo-bnr{border-radius:16px;padding:28px;position:relative;overflow:hidden;cursor:pointer;transition:all .2s}
+.promo-bnr:hover{transform:translateY(-3px);box-shadow:var(--shl)}
+.promo-bnr h3{font-family:"Syne",sans-serif;font-size:22px;font-weight:800;color:#fff;margin-bottom:6px;position:relative}
+.promo-bnr p{font-size:13px;color:rgba(255,255,255,.7);position:relative;margin-bottom:14px}
+.promo-bnr-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:20px;position:relative;cursor:pointer;border-radius:20px}
+
+/* TRENDING */
+.trending-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+.trend-card{background:#fff;border:1px solid var(--bg3);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .2s}
+.trend-card:hover{transform:translateY(-3px);box-shadow:var(--shm);border-color:var(--em-g)}
+.trend-card img{width:100%;height:140px;object-fit:cover}
+.trend-card-body{padding:10px}
+.trend-card-nm{font-size:12px;font-weight:700;color:var(--t1);margin-bottom:4px;line-height:1.3}
+.trend-card-p{font-size:13px;font-weight:800;color:var(--em)}
+.trend-rank{position:absolute;top:8px;left:8px;width:22px;height:22px;border-radius:50%;background:var(--or);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+</style>
+</head>
+<body>
+<div id="loader"><div class="ld-icon"><span></span><span></span><span></span></div><div class="ld-brand"><span style="color:var(--em)">MIFA</span> LIFE SHOP</div><div class="ld-sub">Parcourir les categories...</div></div>
+<nav id="nav"><div class="nv-in"><a class="nv-logo" href="index.html"><div class="nv-li"><span style="width:40px"></span><span style="width:25px"></span><span style="width:33px"></span></div><div><div class="nv-wm"><span style="color:var(--em)">MIFA</span> <span style="color:var(--sl)">LIFE</span> <span style="color:var(--t3);font-weight:600">SHOP</span></div><div class="nv-ws">by Mifa Life Company</div></div></a><div class="nv-sw"><div class="nv-sb"><input type="text" id="srchInp" placeholder="Rechercher..."/><div class="nv-sbtn" onclick="doSearch()"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" width="12" height="12"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div></div></div><div class="nv-lnks"><a class="nv-lb" href="index.html">Accueil</a><a class="nv-lb" href="catalogue.html">Catalogue</a><a class="nv-lb" href="flash.html">Flash Sale</a><a class="nv-lb active" href="categories.html">Categories</a></div><div class="nv-r"><a class="ib" href="notifications.html" style="text-decoration:none;color:var(--t2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="cbdg" style="display:flex">3</span></a><button class="ib" onclick="openCart()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cbdg" id="cartBdg" style="display:none">0</span></button><a class="btn-p" href="auth.html">Connexion</a></div></div></nav>
+
+<div class="cat-hero">
+  <h1>Toutes les categories</h1>
+  <p>Explorez plus de 3 500 produits artisanaux et de mode maliens</p>
+  <div class="cat-search">
+    <input type="text" id="srchInp" placeholder="Rechercher dans les categories..."/>
+    <button onclick="doSearch()">Chercher</button>
+  </div>
+</div>
+<div class="cat-wrap">
+  <div class="cat-section">
+    <div class="cat-section-hd"><h2>Nos grandes categories</h2><a href="catalogue.html">Tout voir &rarr;</a></div>
+    <div class="main-cat-grid"><div class="main-cat-card" onclick="location.href='catalogue.html?cat=femme'"><img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=400&q=75&fit=crop" alt="Mode Femme" loading="lazy"/><div class="main-cat-info"><div class="main-cat-badge">Populaire</div><div class="main-cat-nm">Mode Femme</div><div class="main-cat-cnt">1 240 produits</div></div></div><div class="main-cat-card" onclick="location.href='catalogue.html?cat=homme'"><img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?w=400&q=75&fit=crop" alt="Mode Homme" loading="lazy"/><div class="main-cat-info"><div class="main-cat-nm">Mode Homme</div><div class="main-cat-cnt">640 produits</div></div></div><div class="main-cat-card" onclick="location.href='catalogue.html?cat=bijoux'"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=75&fit=crop" alt="Bijoux & Accessoires" loading="lazy"/><div class="main-cat-info"><div class="main-cat-badge">Nouveau</div><div class="main-cat-nm">Bijoux & Accessoires</div><div class="main-cat-cnt">520 produits</div></div></div><div class="main-cat-card" onclick="location.href='catalogue.html?cat=beaute'"><img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=400&q=75&fit=crop" alt="Beaute & Soin" loading="lazy"/><div class="main-cat-info"><div class="main-cat-nm">Beaute & Soin</div><div class="main-cat-cnt">380 produits</div></div></div><div class="main-cat-card" onclick="location.href='catalogue.html?cat=maison'"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=75&fit=crop" alt="Maison & Deco" loading="lazy"/><div class="main-cat-info"><div class="main-cat-nm">Maison & Deco</div><div class="main-cat-cnt">290 produits</div></div></div><div class="main-cat-card" onclick="location.href='catalogue.html?cat=chaussures'"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=75&fit=crop" alt="Chaussures" loading="lazy"/><div class="main-cat-info"><div class="main-cat-badge">-50%</div><div class="main-cat-nm">Chaussures</div><div class="main-cat-cnt">180 produits</div></div></div></div>
+  </div>
+  <div class="cat-section">
+    <div class="cat-section-hd"><h2>Sous-categories populaires</h2></div>
+    <div class="sub-cat-grid"><div class="sub-cat-card" onclick="location.href='catalogue.html?cat=robes_&_jupes'"><div class="sub-cat-ico">👗</div><div class="sub-cat-nm">Robes & Jupes</div><div class="sub-cat-cnt">342 articles</div></div><div class="sub-cat-card" onclick="location.href='catalogue.html?cat=wax_&_pagne'"><div class="sub-cat-ico">🧣</div><div class="sub-cat-nm">Wax & Pagne</div><div class="sub-cat-cnt">218 articles</div></div><div class="sub-cat-card" onclick="location.href='catalogue.html?cat=boubous'"><div class="sub-cat-ico">👘</div><div class="sub-cat-nm">Boubous</div><div class="sub-cat-cnt">156 articles</div></div><div class="sub-cat-card" onclick="location.href='catalogue.html?cat=kaftans'"><div class="sub-cat-ico">🥻</div><div class="sub-cat-nm">Kaftans</div><div class="sub-cat-cnt">98 articles</div></div><div class="sub-cat-card" onclick="location.href='catalogue.html?cat=tops_&_blouses'"><div class="sub-cat-ico">👚</div><div class="sub-cat-nm">Tops & Blouses</div><div class="sub-cat-cnt">204 articles</div></div><div class="sub-cat-card" onclick="location.href='catalogue.html?cat=vestes'"><div class="sub-cat-ico">🧥</div><div class="sub-cat-nm">Vestes</div><div class="sub-cat-cnt">87 articles</div></div><div class="sub-cat-card" onclick="location.href='catalogue.html?cat=colliers'"><div class="sub-cat-ico">💍</div><div class="sub-cat-nm">Colliers</div><div class="sub-cat-cnt">134 articles</div></div><div class="sub-cat-card" onclick="location.href='catalogue.html?cat=bracelets'"><div class="sub-cat-ico">📿</div><div class="sub-cat-nm">Bracelets</div><div class="sub-cat-cnt">98 articles</div></div><div class="sub-cat-card" onclick="location.href='catalogue.html?cat=sacs'"><div class="sub-cat-ico">👜</div><div class="sub-cat-nm">Sacs</div><div class="sub-cat-cnt">167 articles</div></div><div class="sub-cat-card" onclick="location.href='catalogue.html?cat=soins_visage'"><div class="sub-cat-ico">🧴</div><div class="sub-cat-nm">Soins visage</div><div class="sub-cat-cnt">112 articles</div></div><div class="sub-cat-card" onclick="location.href='catalogue.html?cat=maquillage'"><div class="sub-cat-ico">💄</div><div class="sub-cat-nm">Maquillage</div><div class="sub-cat-cnt">89 articles</div></div><div class="sub-cat-card" onclick="location.href='catalogue.html?cat=parfums_naturels'"><div class="sub-cat-ico">🪴</div><div class="sub-cat-nm">Parfums naturels</div><div class="sub-cat-cnt">64 articles</div></div></div>
+  </div>
+  <div class="cat-section">
+    <div class="cat-section-hd"><h2>Offres par univers</h2></div>
+    <div class="promo-grid">
+      <div class="promo-bnr" style="background:linear-gradient(135deg,var(--em-d),var(--sl2))" onclick="location.href='catalogue.html?cat=artisanat'">
+        <h3>Artisanat malien</h3><p>Bogolan, Wax, Batik &mdash; creations authentiques</p>
+        <div class="promo-bnr-btn">Decouvrir &#8594;</div>
+      </div>
+      <div class="promo-bnr" style="background:linear-gradient(135deg,#FF6B35,#c9451e)" onclick="location.href='flash.html'">
+        <h3>Ventes Flash &#9889;</h3><p>Jusqu&apos;a -70% &mdash; stock limite</p>
+        <div class="promo-bnr-btn">Voir les offres &#8594;</div>
+      </div>
+      <div class="promo-bnr" style="background:linear-gradient(135deg,#7C3AED,#5B21B6)" onclick="location.href='catalogue.html?cat=mariage'">
+        <h3>Collection Mariage</h3><p>Tenues ceremonie, bijoux &amp; decoration</p>
+        <div class="promo-bnr-btn">Explorer &#8594;</div>
+      </div>
+      <div class="promo-bnr" style="background:linear-gradient(135deg,var(--sl2),#0d1a2a)" onclick="location.href='promo.html'">
+        <h3>Programme Fidelite</h3><p>Gagnez des MifaPoints sur chaque achat</p>
+        <div class="promo-bnr-btn">Mes points &#8594;</div>
+      </div>
+    </div>
+  </div>
+  <div class="cat-section">
+    <div class="cat-section-hd"><h2>Tendances du moment &#128293;</h2><a href="catalogue.html">Voir tout</a></div>
+    <div class="trending-grid"><div class="trend-card" style="position:relative" onclick="location.href='catalogue.html'"><img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=200&q=75&fit=crop" alt="Robe Wax Batik" loading="lazy"/><div class="trend-rank">#1</div><div class="trend-card-body"><div class="trend-card-nm">Robe Wax Batik</div><div class="trend-card-p">18 500 XOF</div></div></div><div class="trend-card" style="position:relative" onclick="location.href='catalogue.html'"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=200&q=75&fit=crop" alt="Collier Bogolan" loading="lazy"/><div class="trend-rank">#2</div><div class="trend-card-body"><div class="trend-card-nm">Collier Bogolan</div><div class="trend-card-p">6 500 XOF</div></div></div><div class="trend-card" style="position:relative" onclick="location.href='catalogue.html'"><img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=200&q=75&fit=crop" alt="Huile Argan" loading="lazy"/><div class="trend-rank">#3</div><div class="trend-card-body"><div class="trend-card-nm">Huile Argan</div><div class="trend-card-p">12 000 XOF</div></div></div><div class="trend-card" style="position:relative" onclick="location.href='catalogue.html'"><img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=200&q=75&fit=crop" alt="Kaftan Soiree" loading="lazy"/><div class="trend-rank">#4</div><div class="trend-card-body"><div class="trend-card-nm">Kaftan Soiree</div><div class="trend-card-p">48 000 XOF</div></div></div><div class="trend-card" style="position:relative" onclick="location.href='catalogue.html'"><img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=200&q=75&fit=crop" alt="Foulard Soie" loading="lazy"/><div class="trend-rank">#5</div><div class="trend-card-body"><div class="trend-card-nm">Foulard Soie</div><div class="trend-card-p">8 500 XOF</div></div></div><div class="trend-card" style="position:relative" onclick="location.href='catalogue.html'"><img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=200&q=75&fit=crop" alt="Boubou Elite" loading="lazy"/><div class="trend-rank">#6</div><div class="trend-card-body"><div class="trend-card-nm">Boubou Elite</div><div class="trend-card-p">32 000 XOF</div></div></div></div>
+  </div>
+  <div class="cat-section">
+    <div class="cat-section-hd"><h2>Nos marques partenaires</h2></div>
+    <div class="brand-strip">
+      <div class="brand-card" onclick="location.href='vendeur.html'"><div class="brand-card-nm">Aminata Fashion</div></div>
+      <div class="brand-card" onclick="location.href='vendeur.html'"><div class="brand-card-nm">Sira Beaute</div></div>
+      <div class="brand-card" onclick="location.href='vendeur.html'"><div class="brand-card-nm">Binta Bijoux</div></div>
+      <div class="brand-card" onclick="location.href='vendeur.html'"><div class="brand-card-nm">Kouyate Style</div></div>
+      <div class="brand-card" onclick="location.href='vendeur.html'"><div class="brand-card-nm">Mali Artisans</div></div>
+      <div class="brand-card" onclick="location.href='vendeur.html'"><div class="brand-card-nm">Bogolan House</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="cov" onclick="closeCart()"></div>
+<div id="csb"><div class="cs-hd"><span class="cs-ti">Panier</span><button style="background:none;border:none;cursor:pointer;padding:4px" onclick="closeCart()"><svg viewBox="0 0 24 24" width="20" height="20" stroke="var(--t2)" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="cs-bd" id="csBody"></div><div class="cs-ft"><div style="display:flex;justify-content:space-between;font-weight:700;font-size:16px;margin-bottom:12px"><span>Total</span><span id="csTot">0 XOF</span></div><button class="btn-ck" onclick="closeCart();location.href='checkout.html'">Commander &#8594;</button></div></div>
+<div id="toast"><div class="toast-b" id="toastMsg"></div></div>
+<button id="stb" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" width="16" height="16" stroke="#fff" fill="none" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg></button>
+<script>function addToCart(id){
+  const p=PRODS.find(x=>x.id===id);if(!p)return;
+  const ex=cart.find(x=>x.id===id);
+  if(ex)ex.qty++;else cart.push({id,qty:1,nm:p.nm,p:p.p,img:p.img});
+  saveCart();updateCartBadge();renderCart();showToast(p.nm+' ajouté au panier');
+}
+function removeFromCart(id){cart=cart.filter(x=>x.id!==id);saveCart();updateCartBadge();renderCart();}
+function changeQty(id,d){const i=cart.find(x=>x.id===id);if(!i)return;i.qty+=d;if(i.qty<1)removeFromCart(id);else{saveCart();renderCart();};}
+function openCart(){document.getElementById('cov').classList.add('on');document.getElementById('csb').classList.add('on');renderCart();}
+function closeCart(){document.getElementById('cov').classList.remove('on');document.getElementById('csb').classList.remove('on');}
+function renderCart(){
+  const bd=document.getElementById('csBd'),ft=document.getElementById('csFt');if(!bd)return;
+  if(!cart.length){bd.innerHTML=`<div class="cs-em"><div class="cs-em-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div><p style="font-weight:600;color:var(--t3);font-size:13px">Panier vide</p><button class="btn-p" style="margin-top:8px;font-size:11.5px;padding:6px 14px" onclick="closeCart();location.href='catalogue.html'">Découvrir</button></div>`;if(ft)ft.style.display='none';return;}
+  const total=cart.reduce((a,i)=>a+i.p*i.qty,0);
+  bd.innerHTML=cart.map(i=>`<div class="cs-it"><div class="cs-th"><img src="${i.img}" alt=""/></div><div class="cs-in"><div class="cs-nm">${i.nm}</div><div class="cs-pr">${i.p.toLocaleString()} XOF</div><div class="cs-qw"><div class="qb" onclick="changeQty(${i.id},-1)">−</div><span class="qv">${i.qty}</span><div class="qb" onclick="changeQty(${i.id},1)">+</div></div></div><button class="cs-rm" onclick="removeFromCart(${i.id})">✕</button></div>`).join('');
+  if(ft){ft.style.display='block';document.getElementById('csTot').textContent=total.toLocaleString()+' XOF';}
+}
+function updateCartBadge(){const n=cart.reduce((a,i)=>a+i.qty,0);const b=document.getElementById('cartBdg');if(b){b.style.display=n?'flex':'none';b.textContent=n;}}
+function toggleWish(id,el){
+  if(wishlist.includes(id)){wishlist=wishlist.filter(x=>x!==id);if(el)el.classList.remove('on');}
+  else{wishlist.push(id);if(el)el.classList.add('on');showToast('Ajouté aux favoris ♥');}
+  saveWish();updateWishBadge();
+}
+function updateWishBadge(){const b=document.getElementById('wishBdg');if(b){b.style.display=wishlist.length?'flex':'none';b.textContent=wishlist.length;}}
+function showToast(msg,icon='✓'){
+  const t=document.getElementById('toast');
+  t.innerHTML=`<span style="color:var(--em);font-size:14px">${icon}</span>${msg}`;
+  t.classList.add('on'); clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('on'),2800);
+}
+
+function doSearch(){var q=document.getElementById("srchInp")&&document.getElementById("srchInp").value.trim();if(q)location.href="catalogue.html?q="+encodeURIComponent(q);}
+window.addEventListener("DOMContentLoaded",function(){updateCartBadge&&updateCartBadge();window.addEventListener("scroll",function(){var s=document.getElementById("stb");if(s)s.style.display=window.scrollY>400?"flex":"none";});setTimeout(function(){var l=document.getElementById("loader");if(l)l.style.cssText="display:none!important";},1100);});</script>
+</body></html>
