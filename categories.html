@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+<meta name="description" content="Toutes les catégories Mifa Life — Électronique, Mode, Maison, Sport, Beauté et bien plus. Livraison au Mali."/>
+<meta name="theme-color" content="#00897B"/>
+<title>Catégories · Mifa Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --em:#00897B;--em-d:#00695C;--em-l:rgba(0,137,123,.10);--em-g:rgba(0,137,123,.22);
+  --or:#B85C38;--or-l:rgba(184,92,56,.10);
+  --sl:#2C3A3F;--sl2:#1C2A30;--sl3:#111B22;
+  --mu:#C9A84C;--mu-l:rgba(201,168,76,.12);
+  --mg:#009A00;--my:#FFD700;--mr:#CE1126;
+  --bg:#F6F4F0;--bg2:#EEE9E1;--bg3:#D4CEC6;--white:#fff;
+  --t1:#1A2422;--t2:#2d4038;--t3:#5a7566;--t4:#9cb5a8;
+  --r:10px;--rl:14px;
+  --sh-s:0 2px 10px rgba(0,0,0,.06);
+  --sh-m:0 6px 22px rgba(0,0,0,.09);
+  --sh-l:0 14px 42px rgba(0,0,0,.12);
+  --tr:.22s cubic-bezier(.25,.46,.45,.94);
+  --max:1280px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:"Nunito Sans",sans-serif;background:var(--bg);color:var(--t1);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%;object-fit:cover}
+button,input{font-family:inherit;border:none;background:none;outline:none;cursor:pointer}
+*:focus-visible{outline:2px solid var(--em);outline-offset:2px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(14px,3vw,28px)}
+
+/* ── BANDE ── */
+.mali-stripe{height:3px;display:flex}
+.mali-stripe span{flex:1}
+
+/* ── NAVBAR ── */
+#nav{position:sticky;top:0;z-index:500;background:rgba(246,244,240,.97);backdrop-filter:blur(18px);border-bottom:1px solid var(--bg3);transition:box-shadow var(--tr)}
+#nav.sc{box-shadow:var(--sh-m)}
+.nv{max-width:var(--max);margin:0 auto;padding:0 clamp(14px,3vw,28px);height:clamp(54px,8vw,62px);display:flex;align-items:center;gap:clamp(8px,2vw,14px)}
+.logo{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.logo-bars{display:flex;flex-direction:column;gap:3px}
+.logo-bars span{height:2px;border-radius:2px;background:var(--em);display:block}
+.logo-bars span:nth-child(1){width:26px}
+.logo-bars span:nth-child(2){width:17px}
+.logo-bars span:nth-child(3){width:22px}
+.logo-text{font-family:"Playfair Display",Georgia,serif;font-size:clamp(13px,3vw,17px);font-weight:700;letter-spacing:-.02em}
+.logo-text em{font-style:normal;color:var(--em)}
+.flag-mini{display:flex;border-radius:2px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.flag-mini span{width:5px;height:10px;display:block}
+.nv-mid{flex:1;display:none}
+@media(min-width:700px){.nv-mid{display:block}}
+.si-wrap{position:relative;max-width:400px}
+.si{width:100%;padding:9px 36px 9px 14px;border:1.5px solid var(--bg3);border-radius:22px;font-size:13px;color:var(--t1);background:var(--bg);transition:all var(--tr)}
+.si:focus{border-color:var(--em);box-shadow:0 0 0 3px var(--em-l);background:var(--white);outline:none}
+.si-ic{position:absolute;right:11px;top:50%;transform:translateY(-50%);color:var(--t4);pointer-events:none}
+.nv-links{display:none;align-items:center;gap:2px}
+@media(min-width:900px){.nv-links{display:flex}}
+.nv-lnk{font-size:13px;font-weight:600;color:var(--t3);padding:6px 10px;border-radius:7px;transition:all var(--tr)}
+.nv-lnk:hover,.nv-lnk.on{color:var(--em);background:var(--em-l)}
+.nv-r{display:flex;align-items:center;gap:4px;margin-left:auto}
+.ic-btn{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--t2);transition:all var(--tr);position:relative}
+.ic-btn:hover{background:var(--bg2);color:var(--em)}
+.ic-bdg{position:absolute;top:4px;right:4px;min-width:14px;height:14px;padding:0 3px;background:var(--or);color:#fff;border-radius:7px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--bg)}
+.burger{width:36px;height:36px;border-radius:8px;border:1.5px solid var(--bg3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:all var(--tr)}
+@media(min-width:900px){.burger{display:none}}
+.burger:hover{border-color:var(--em);background:var(--em-l)}
+.burger span{width:15px;height:2px;background:var(--t2);border-radius:2px;display:block;transition:all var(--tr)}
+.burger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+
+/* ── DRAWER ── */
+#mob-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:498;opacity:0;visibility:hidden;transition:all var(--tr);backdrop-filter:blur(3px)}
+#mob-bg.on{opacity:1;visibility:visible}
+#mob-dr{position:fixed;top:0;right:0;bottom:0;width:min(280px,82vw);background:var(--white);z-index:499;transform:translateX(100%);transition:transform var(--tr);overflow-y:auto;box-shadow:var(--sh-l)}
+#mob-dr.on{transform:translateX(0)}
+.mob-hd{padding:14px 18px;border-bottom:1px solid var(--bg3);display:flex;align-items:center;justify-content:space-between}
+.mob-cl{width:30px;height:30px;border-radius:50%;background:var(--bg2);font-size:14px;color:var(--t2);display:flex;align-items:center;justify-content:center;border:none}
+.mob-l{display:flex;align-items:center;gap:10px;padding:11px 18px;font-size:13px;font-weight:600;color:var(--t2);transition:all var(--tr);border-bottom:1px solid var(--bg)}
+.mob-l:hover{color:var(--em);background:var(--em-l)}
+.mob-l svg{flex-shrink:0;color:var(--t4)}
+
+/* ── BREADCRUMB ── */
+#breadcrumb{background:var(--white);border-bottom:1px solid var(--bg3)}
+.bc-in{max-width:var(--max);margin:0 auto;padding:10px clamp(14px,3vw,28px);display:flex;align-items:center;gap:6px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.bc-in::-webkit-scrollbar{display:none}
+.bc-a{font-size:12px;color:var(--t4);font-weight:500;transition:color var(--tr)}
+.bc-a:hover{color:var(--em)}
+.bc-sep{color:var(--bg3);font-size:12px}
+.bc-cur{font-size:12px;color:var(--t2);font-weight:600}
+
+/* ── PAGE HERO ── */
+#page-hero{background:var(--sl3);padding:clamp(36px,6vw,64px) 0;position:relative;overflow:hidden}
+.ph-geo{position:absolute;right:-60px;top:-60px;width:320px;height:320px;border-radius:50%;background:rgba(0,137,123,.08);pointer-events:none}
+.ph-geo2{position:absolute;left:-80px;bottom:-80px;width:280px;height:280px;border-radius:50%;background:rgba(201,168,76,.05);pointer-events:none}
+.ph-in{position:relative;z-index:1;max-width:640px}
+.ph-eyebrow{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:20px;font-size:11px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px}
+.ph-eyebrow span{width:6px;height:6px;border-radius:50%;background:var(--em);flex-shrink:0}
+.ph-ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(28px,5vw,44px);font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1.15;margin-bottom:12px}
+.ph-sub{font-size:clamp(13px,2.5vw,14px);color:rgba(255,255,255,.42);line-height:1.7;margin-bottom:clamp(18px,3vw,28px)}
+/* Recherche hero */
+.hero-search{display:flex;background:var(--white);border-radius:10px;overflow:hidden;box-shadow:0 6px 28px rgba(0,0,0,.22);max-width:480px}
+.hs-inp{flex:1;padding:clamp(12px,2.5vw,14px) 14px;font-size:13px;color:var(--t1);border:none;outline:none;font-family:inherit;background:transparent}
+.hs-inp::placeholder{color:var(--t4)}
+.hs-btn{padding:clamp(12px,2.5vw,14px) clamp(16px,3vw,24px);background:var(--em);color:#fff;font-size:13px;font-weight:700;white-space:nowrap;transition:background var(--tr);border:none;font-family:inherit;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.hs-btn:hover{background:var(--em-d)}
+
+/* ── CORPS ── */
+#body{padding:clamp(28px,5vw,52px) 0 clamp(40px,6vw,72px)}
+
+/* ── SECTION TITRE ── */
+.sec-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:clamp(16px,3vw,22px);gap:12px;flex-wrap:wrap}
+.sec-eyebrow{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--em);margin-bottom:5px}
+.sec-ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(18px,3.5vw,24px);font-weight:700;color:var(--sl);letter-spacing:-.02em}
+.sec-lnk{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--em);white-space:nowrap;flex-shrink:0;background:none;border:none;padding:0;font-family:inherit}
+.sec-lnk:hover{opacity:.7}
+
+/* ── GRILLE CATÉGORIES HÉROS (grandes) ── */
+.cat-hero-grid{display:grid;gap:clamp(10px,2vw,14px);grid-template-columns:repeat(2,1fr);margin-bottom:clamp(28px,5vw,48px)}
+@media(min-width:560px){.cat-hero-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:860px){.cat-hero-grid{grid-template-columns:repeat(4,1fr)}}
+
+.cat-big{position:relative;border-radius:var(--rl);overflow:hidden;aspect-ratio:1;cursor:pointer;background:var(--bg2);transition:all var(--tr)}
+.cat-big:hover{transform:translateY(-3px);box-shadow:var(--sh-l)}
+.cat-big-img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.cat-big:hover .cat-big-img{transform:scale(1.06)}
+.cat-big-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,27,34,0) 30%,rgba(17,27,34,.82) 100%)}
+.cat-big-body{position:absolute;bottom:0;left:0;right:0;padding:clamp(12px,2.5vw,18px)}
+.cat-big-ico{width:clamp(32px,6vw,42px);height:clamp(32px,6vw,42px);border-radius:clamp(8px,1.5vw,11px);background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+.cat-big-nm{font-size:clamp(13px,2.5vw,16px);font-weight:700;color:#fff;line-height:1.2;font-family:"Playfair Display",Georgia,serif}
+.cat-big-count{font-size:11px;color:rgba(255,255,255,.5);margin-top:3px}
+/* Badge "Populaire" */
+.cat-big-badge{position:absolute;top:10px;left:10px;padding:3px 9px;background:var(--mu);border-radius:20px;font-size:10px;font-weight:700;color:var(--sl);letter-spacing:.02em}
+
+/* ── GRILLE SOUS-CATÉGORIES (petites) ── */
+.subcat-section{margin-bottom:clamp(28px,5vw,48px)}
+.subcat-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:clamp(12px,2vw,18px);padding-bottom:10px;border-bottom:2px solid var(--bg3)}
+.subcat-ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(16px,3vw,20px);font-weight:700;color:var(--sl);display:flex;align-items:center;gap:10px}
+.subcat-ico-wrap{width:32px;height:32px;border-radius:8px;background:var(--em-l);border:1px solid var(--em-g);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.subcat-see-all{font-size:12px;font-weight:700;color:var(--em);display:flex;align-items:center;gap:4px;transition:opacity var(--tr);white-space:nowrap}
+.subcat-see-all:hover{opacity:.7}
+
+.subcat-grid{display:grid;gap:clamp(7px,1.5vw,10px);grid-template-columns:repeat(3,1fr)}
+@media(min-width:420px){.subcat-grid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:600px){.subcat-grid{grid-template-columns:repeat(5,1fr)}}
+@media(min-width:860px){.subcat-grid{grid-template-columns:repeat(7,1fr)}}
+
+.sub-c{display:flex;flex-direction:column;align-items:center;gap:6px;padding:clamp(9px,2vw,13px) 6px;border-radius:var(--r);border:1.5px solid transparent;cursor:pointer;transition:all var(--tr);text-decoration:none;background:var(--white)}
+.sub-c:hover{border-color:var(--em-g);background:var(--em-l);transform:translateY(-2px);box-shadow:var(--sh-s)}
+.sub-ico{width:clamp(36px,7vw,46px);height:clamp(36px,7vw,46px);border-radius:clamp(8px,1.5vw,12px);background:var(--bg2);display:flex;align-items:center;justify-content:center;transition:all var(--tr);border:1px solid var(--bg3)}
+.sub-c:hover .sub-ico{background:var(--em-l);border-color:var(--em-g)}
+.sub-nm{font-size:clamp(10px,2vw,11px);font-weight:700;color:var(--t2);text-align:center;line-height:1.3;transition:color var(--tr)}
+.sub-c:hover .sub-nm{color:var(--em)}
+
+/* ── BANNIÈRE VENDEUR ── */
+#vendeur-band{background:var(--sl3);border-radius:var(--rl);padding:clamp(22px,4vw,36px) clamp(20px,4vw,32px);display:flex;align-items:center;justify-content:space-between;gap:clamp(16px,3vw,24px);flex-wrap:wrap;margin-top:clamp(28px,5vw,48px)}
+.vb-txt{}
+.vb-eyebrow{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px}
+.vb-ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(18px,3.5vw,24px);font-weight:700;color:#fff;margin-bottom:8px;line-height:1.2}
+.vb-sub{font-size:13px;color:rgba(255,255,255,.4);line-height:1.65;max-width:460px}
+.vb-btn{display:inline-flex;align-items:center;gap:7px;padding:clamp(11px,2.5vw,13px) clamp(20px,4vw,28px);background:var(--em);color:#fff;border-radius:9px;font-size:13px;font-weight:700;transition:all var(--tr);white-space:nowrap;flex-shrink:0}
+.vb-btn:hover{background:var(--em-d);transform:translateY(-1px);box-shadow:0 8px 22px rgba(0,137,123,.28)}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:clamp(16px,4vw,24px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--sl);color:#fff;font-size:13px;font-weight:600;padding:11px 20px;border-radius:8px;box-shadow:var(--sh-l);z-index:9999;opacity:0;visibility:hidden;transition:all var(--tr);white-space:nowrap;max-width:min(90vw,400px)}
+#toast.on{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<div class="mali-stripe"><span style="background:var(--mg)"></span><span style="background:var(--my)"></span><span style="background:var(--mr)"></span></div>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <div class="nv">
+    <a class="logo" href="/">
+      <div class="logo-bars"><span></span><span></span><span></span></div>
+      <div class="logo-text"><em>MIFA</em> LIFE</div>
+      <div class="flag-mini"><span style="background:var(--mg)"></span><span style="background:var(--my)"></span><span style="background:var(--mr)"></span></div>
+    </a>
+    <div class="nv-mid">
+      <div class="si-wrap">
+        <input class="si" type="search" id="navSearch" placeholder="Rechercher un produit…" aria-label="Recherche" onkeydown="if(event.key==='Enter')doSearch()"/>
+        <span class="si-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+      </div>
+    </div>
+    <div class="nv-links">
+      <a class="nv-lnk" href="/">Accueil</a>
+      <a class="nv-lnk" href="/catalogue">Catalogue</a>
+      <a class="nv-lnk on" href="/categories">Catégories</a>
+    </div>
+    <div class="nv-r">
+      <a class="ic-btn" href="/dashboard" aria-label="Mon compte">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+      <a class="ic-btn" href="/panier" aria-label="Panier">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="ic-bdg" id="cartBdg" style="display:none">0</span>
+      </a>
+      <button class="burger" id="burger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- DRAWER -->
+<div id="mob-bg" onclick="toggleMenu()"></div>
+<div id="mob-dr">
+  <div class="mob-hd"><div class="logo-text"><em>MIFA</em> LIFE</div><button class="mob-cl" onclick="toggleMenu()">✕</button></div>
+  <a class="mob-l" href="/"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Accueil</a>
+  <a class="mob-l" href="/catalogue"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Catalogue</a>
+  <a class="mob-l" href="/dashboard"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Mon compte</a>
+  <a class="mob-l" href="/suivi-commande"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 5v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Suivi commande</a>
+</div>
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb">
+  <div class="bc-in">
+    <a class="bc-a" href="/">Accueil</a>
+    <span class="bc-sep">›</span>
+    <span class="bc-cur">Toutes les catégories</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="page-hero">
+  <div class="ph-geo"></div><div class="ph-geo2"></div>
+  <div class="wrap">
+    <div class="ph-in">
+      <div class="ph-eyebrow"><span></span>Marketplace généraliste</div>
+      <h1 class="ph-ti">Toutes les catégories</h1>
+      <p class="ph-sub">Électronique, mode, maison, sport, beauté et bien plus — commandez depuis votre téléphone, livré au Mali.</p>
+      <div class="hero-search" role="search">
+        <input class="hs-inp" type="search" id="heroSearch" placeholder="Rechercher dans toutes les catégories…" onkeydown="if(event.key==='Enter')doSearch()"/>
+        <button class="hs-btn" onclick="doSearch()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Rechercher
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORPS -->
+<div id="body">
+  <div class="wrap">
+
+    <!-- GRANDES CATÉGORIES -->
+    <div class="sec-hd">
+      <div>
+        <div class="sec-eyebrow">Explorer</div>
+        <div class="sec-ti">Catégories principales</div>
+      </div>
+    </div>
+    <div class="cat-hero-grid" id="catHeroGrid"></div>
+
+    <!-- SOUS-CATÉGORIES PAR SECTION -->
+    <div id="subcatSections"></div>
+
+    <!-- BANNIÈRE VENDEUR -->
+    <div id="vendeur-band">
+      <div class="vb-txt">
+        <div class="vb-eyebrow">Vous vendez des produits ?</div>
+        <div class="vb-ti">Rejoignez notre réseau de vendeurs</div>
+        <p class="vb-sub">Mettez vos produits en vente sur Mifa Life et accédez à des acheteurs au Mali. Inscription gratuite, commission uniquement sur les ventes.</p>
+      </div>
+      <a class="vb-btn" href="/seller-register">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Devenir vendeur
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:var(--sl3);padding:clamp(28px,5vw,48px) 0 0;margin-top:clamp(40px,6vw,64px)">
+  <div class="wrap">
+    <div style="display:grid;gap:clamp(20px,4vw,32px);grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+      <div>
+        <div style="font-family:'Playfair Display',Georgia,serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:10px"><span style="color:var(--em)">MIFA</span> LIFE</div>
+        <p style="font-size:12px;color:rgba(255,255,255,.35);line-height:1.7;max-width:240px">La marketplace du Mali — Tout produit, livré chez vous.</p>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:10px">Navigation</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <a href="/" style="font-size:12px;color:rgba(255,255,255,.38)" onmouseover="this.style.color='rgba(255,255,255,.75)'" onmouseout="this.style.color='rgba(255,255,255,.38)'">Accueil</a>
+          <a href="/catalogue" style="font-size:12px;color:rgba(255,255,255,.38)" onmouseover="this.style.color='rgba(255,255,255,.75)'" onmouseout="this.style.color='rgba(255,255,255,.38)'">Catalogue</a>
+          <a href="/contact" style="font-size:12px;color:rgba(255,255,255,.38)" onmouseover="this.style.color='rgba(255,255,255,.75)'" onmouseout="this.style.color='rgba(255,255,255,.38)'">Contact</a>
+          <a href="/faq" style="font-size:12px;color:rgba(255,255,255,.38)" onmouseover="this.style.color='rgba(255,255,255,.75)'" onmouseout="this.style.color='rgba(255,255,255,.38)'">FAQ</a>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:clamp(20px,4vw,32px);padding:14px 0;border-top:1px solid rgba(255,255,255,.07);font-size:11px;color:rgba(255,255,255,.2)">
+      © 2024 Mifa Life Company · Bamako, Mali
+    </div>
+  </div>
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+'use strict';
+var toastTimer = null;
+var menuOpen   = false;
+var cart = JSON.parse(localStorage.getItem('mifa_cart') || '[]');
+
+/* ── DONNÉES ── */
+var MAIN_CATS = [
+  {
+    id:'electronique', nm:'Électronique', popular:true,
+    img:'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=600&q=75&fit=crop',
+    ico:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+    subs:['Téléphones','Tablettes','Ordinateurs','Accessoires','Audio','TV & Écrans','Caméras','Gaming','Réseau & WiFi','Batteries & Chargeurs']
+  },
+  {
+    id:'mode', nm:'Mode & Vêtements', popular:true,
+    img:'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=75&fit=crop',
+    ico:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.8"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg>',
+    subs:['Homme','Femme','Enfants','Chaussures','Sacs & Maroquinerie','Montres','Bijoux','Lunettes','Ceintures','Vêtements traditionnels']
+  },
+  {
+    id:'maison', nm:'Maison & Décor', popular:false,
+    img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=75&fit=crop',
+    ico:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+    subs:['Meubles','Literie','Cuisine','Luminaires','Décoration','Rangement','Bain & Sanitaire','Jardin','Outillage','Bricolage']
+  },
+  {
+    id:'sport', nm:'Sport & Fitness', popular:false,
+    img:'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=75&fit=crop',
+    ico:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93l14.14 14.14"/></svg>',
+    subs:['Football','Basketball','Musculation','Yoga & Fitness','Natation','Randonnée','Cyclisme','Running','Arts martiaux','Équipements']
+  },
+  {
+    id:'beaute', nm:'Beauté & Santé', popular:true,
+    img:'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&q=75&fit=crop',
+    ico:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+    subs:['Soins visage','Soins corps','Cheveux','Parfums','Maquillage','Rasage','Hygiène','Santé','Compléments','Bien-être']
+  },
+  {
+    id:'enfants', nm:'Enfants & Bébés', popular:false,
+    img:'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&q=75&fit=crop',
+    ico:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    subs:['Vêtements bébé','Jouets','Puériculture','Scolaire','Jeux éducatifs','Mobilier enfant','Nutrition','Sécurité','Livres jeunesse','Loisirs créatifs']
+  },
+  {
+    id:'auto', nm:'Auto & Moto', popular:false,
+    img:'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=75&fit=crop',
+    ico:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 5v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
+    subs:['Pièces détachées','Entretien & Huiles','Audio & GPS','Sécurité auto','Pneus & Jantes','Accessoires moto','Équipements conducteur','Nettoyage','Chargeurs','Outillage auto']
+  },
+  {
+    id:'alimentation', nm:'Alimentation', popular:false,
+    img:'https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&q=75&fit=crop',
+    ico:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.8"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>',
+    subs:['Épicerie sèche','Boissons','Snacks & Confiseries','Produits laitiers','Épices & Condiments','Céréales','Conserves','Produits bio','Nutrition sportive','Thés & Infusions']
+  },
+];
+
+/* Icons pour sous-catégories (SVG génériques) */
+var SUB_ICONS = [
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>',
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>',
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/></svg>',
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/></svg>',
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>',
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>',
+];
+
+/* ── RENDU ── */
+function render() {
+  /* Grille héros */
+  var heroGrid = document.getElementById('catHeroGrid');
+  heroGrid.innerHTML = MAIN_CATS.map(function(cat){
+    return '<a class="cat-big" href="/catalogue?cat='+cat.id+'" aria-label="'+cat.nm+'">'
+      +'<img class="cat-big-img" src="'+cat.img+'" alt="'+cat.nm+'" loading="lazy"/>'
+      +'<div class="cat-big-overlay"></div>'
+      +(cat.popular ? '<div class="cat-big-badge">Populaire</div>' : '')
+      +'<div class="cat-big-body">'
+      +'<div class="cat-big-ico">'+cat.ico+'</div>'
+      +'<div class="cat-big-nm">'+cat.nm+'</div>'
+      +'<div class="cat-big-count">'+cat.subs.length+' sous-catégories</div>'
+      +'</div>'
+      +'</a>';
+  }).join('');
+
+  /* Sections sous-catégories */
+  var sec = document.getElementById('subcatSections');
+  sec.innerHTML = MAIN_CATS.map(function(cat, ci){
+    var subHtml = cat.subs.map(function(sub, si){
+      var ico = SUB_ICONS[si % SUB_ICONS.length];
+      return '<a class="sub-c" href="/catalogue?cat='+cat.id+'&sub='+encodeURIComponent(sub)+'" aria-label="'+sub+'">'
+        +'<div class="sub-ico">'+ico+'</div>'
+        +'<div class="sub-nm">'+sub+'</div>'
+        +'</a>';
+    }).join('');
+
+    return '<div class="subcat-section" id="sec-'+cat.id+'">'
+      +'<div class="subcat-header">'
+      +'<div class="subcat-ti">'
+      +'<div class="subcat-ico-wrap">'+cat.ico.replace('rgba(255,255,255,.9)','var(--em)').replace('stroke-width="1.8"','stroke-width="1.6"')+'</div>'
+      +cat.nm
+      +'</div>'
+      +'<a class="subcat-see-all" href="/catalogue?cat='+cat.id+'">Voir tout <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>'
+      +'</div>'
+      +'<div class="subcat-grid">'+subHtml+'</div>'
+      +'</div>';
+  }).join('');
+}
+
+/* ── RECHERCHE ── */
+function doSearch() {
+  var q = document.getElementById('heroSearch').value || document.getElementById('navSearch').value;
+  if (q.trim()) window.location.href = '/catalogue?q=' + encodeURIComponent(q.trim());
+}
+
+/* ── CART BADGE ── */
+(function(){
+  var n = cart.reduce(function(s,i){ return s+(i.qty||1); }, 0);
+  var cb = document.getElementById('cartBdg');
+  if (cb) { cb.textContent = n; cb.style.display = n ? 'flex' : 'none'; }
+})();
+
+/* ── MENU ── */
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  document.getElementById('burger').classList.toggle('open', menuOpen);
+  document.getElementById('mob-bg').classList.toggle('on', menuOpen);
+  document.getElementById('mob-dr').classList.toggle('on', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+}
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') { if (menuOpen) toggleMenu(); } });
+window.addEventListener('scroll', function(){ document.getElementById('nav').classList.toggle('sc', window.scrollY > 40); }, { passive:true });
+
+/* ── TOAST ── */
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove('on'); }, 3000);
+}
+
+/* ── SCROLL vers ancre depuis URL ── */
+window.addEventListener('DOMContentLoaded', function(){
+  render();
+  var hash = window.location.hash;
+  if (hash) {
+    setTimeout(function(){
+      var el = document.querySelector(hash);
+      if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+    }, 200);
+  }
+});
+</script>
+</body>
+</html>

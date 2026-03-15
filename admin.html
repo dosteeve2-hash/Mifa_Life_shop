@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Admin · Mifa Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{
+  --em:#00897B;--em-d:#00695C;--em-l:rgba(0,137,123,.10);--em-g:rgba(0,137,123,.22);
+  --or:#B85C38;--or-l:rgba(184,92,56,.10);
+  --sl:#2C3A3F;--sl2:#1C2A30;--sl3:#111B22;
+  --mu:#C9A84C;
+  --mg:#009A00;--my:#FFD700;--mr:#CE1126;
+  --bg:#F6F4F0;--bg2:#EEE9E1;--bg3:#D4CEC6;--white:#fff;
+  --t1:#1A2422;--t2:#2d4038;--t3:#5a7566;--t4:#9cb5a8;
+  --danger:#EF4444;--danger-l:rgba(239,68,68,.1);
+  --success:#009A00;--success-l:rgba(0,154,0,.1);
+  --warn:#C9A84C;--warn-l:rgba(201,168,76,.12);
+  --r:8px;--rl:12px;
+  --sh:0 2px 10px rgba(0,0,0,.06);
+  --sh-m:0 6px 22px rgba(0,0,0,.10);
+  --tr:.18s ease;
+  --sidebar:220px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Nunito Sans",sans-serif;background:var(--bg);color:var(--t1);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%;object-fit:cover}
+button,input,select,textarea{font-family:inherit;border:none;background:none;outline:none;cursor:pointer}
+*:focus-visible{outline:2px solid var(--em);outline-offset:2px}
+p{line-height:1.6}
+
+/* ── LOGIN ── */
+#login-screen{position:fixed;inset:0;background:var(--sl3);display:flex;align-items:center;justify-content:center;z-index:9000;padding:20px}
+.login-box{background:var(--white);border-radius:16px;padding:clamp(28px,5vw,44px);width:100%;max-width:380px;box-shadow:var(--sh-m)}
+.login-logo{font-family:"Playfair Display",Georgia,serif;font-size:22px;font-weight:700;text-align:center;margin-bottom:6px}
+.login-logo em{font-style:normal;color:var(--em)}
+.login-sub{font-size:12px;color:var(--t4);text-align:center;margin-bottom:28px}
+.login-field{margin-bottom:14px}
+.login-field label{font-size:11px;font-weight:700;color:var(--t2);display:block;margin-bottom:5px}
+.login-field input{width:100%;padding:11px 13px;border:1.5px solid var(--bg3);border-radius:8px;font-size:14px;color:var(--t1);background:var(--bg);transition:all var(--tr)}
+.login-field input:focus{border-color:var(--em);box-shadow:0 0 0 3px var(--em-l);background:var(--white);outline:none}
+.login-btn{width:100%;padding:13px;background:var(--em);color:#fff;border-radius:9px;font-size:14px;font-weight:700;margin-top:6px;transition:background var(--tr);border:none;font-family:inherit}
+.login-btn:hover{background:var(--em-d)}
+.login-err{font-size:12px;color:var(--danger);font-weight:600;text-align:center;margin-top:8px;display:none}
+.mali-bar{height:3px;display:flex;border-radius:0 0 3px 3px;overflow:hidden;margin-bottom:20px}
+.mali-bar span{flex:1}
+
+/* ── LAYOUT PRINCIPAL ── */
+#app{display:none;min-height:100vh}
+
+/* SIDEBAR */
+#sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:var(--sl3);display:flex;flex-direction:column;z-index:100;transition:transform var(--tr)}
+.sb-top{padding:18px 16px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-logo{font-family:"Playfair Display",Georgia,serif;font-size:16px;font-weight:700;color:#fff}
+.sb-logo em{font-style:normal;color:var(--em)}
+.sb-badge{display:inline-block;padding:2px 7px;background:var(--em-l);border:1px solid var(--em-g);border-radius:10px;font-size:9px;font-weight:700;color:var(--em);letter-spacing:.06em;margin-top:3px}
+.sb-nav{flex:1;padding:10px 8px;overflow-y:auto;display:flex;flex-direction:column;gap:2px}
+.sb-lnk{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;font-size:12px;font-weight:600;color:rgba(255,255,255,.45);transition:all var(--tr);cursor:pointer;border:none;background:none;font-family:inherit;width:100%;text-align:left}
+.sb-lnk:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.06)}
+.sb-lnk.on{color:#fff;background:rgba(0,137,123,.25);border:1px solid rgba(0,137,123,.3)}
+.sb-lnk svg{flex-shrink:0;opacity:.7}
+.sb-lnk.on svg{opacity:1}
+.sb-sep{height:1px;background:rgba(255,255,255,.07);margin:8px 0}
+.sb-bottom{padding:12px 8px;border-top:1px solid rgba(255,255,255,.08)}
+.sb-user{display:flex;align-items:center;gap:9px;padding:8px 10px}
+.sb-av{width:28px;height:28px;border-radius:50%;background:var(--em-l);border:1px solid var(--em-g);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--em);flex-shrink:0}
+.sb-uname{font-size:11px;font-weight:700;color:rgba(255,255,255,.6)}
+.sb-role{font-size:10px;color:rgba(255,255,255,.3)}
+.sb-logout{margin-left:auto;padding:4px 8px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.2);border-radius:6px;font-size:10px;font-weight:700;color:rgba(239,68,68,.8);transition:all var(--tr);font-family:inherit}
+.sb-logout:hover{background:rgba(239,68,68,.25);color:#EF4444}
+
+/* MAIN */
+#main{margin-left:var(--sidebar);min-height:100vh;display:flex;flex-direction:column}
+.main-top{padding:0 clamp(18px,3vw,28px);height:56px;background:var(--white);border-bottom:1px solid var(--bg3);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.main-ti{font-family:"Playfair Display",Georgia,serif;font-size:17px;font-weight:700;color:var(--sl)}
+.main-actions{display:flex;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;transition:all var(--tr);border:none;font-family:inherit;cursor:pointer}
+.btn-primary{background:var(--em);color:#fff}
+.btn-primary:hover{background:var(--em-d)}
+.btn-sec{background:var(--white);border:1.5px solid var(--bg3);color:var(--t2)}
+.btn-sec:hover{border-color:var(--em);color:var(--em)}
+.btn-danger{background:var(--danger-l);border:1.5px solid rgba(239,68,68,.2);color:var(--danger)}
+.btn-danger:hover{background:rgba(239,68,68,.2)}
+.btn-sm{padding:5px 10px;font-size:11px}
+
+.page-body{padding:clamp(18px,3vw,28px);flex:1}
+
+/* ── DASHBOARD ── */
+.stats-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin-bottom:24px}
+.stat-card{background:var(--white);border:1px solid var(--bg3);border-radius:var(--rl);padding:18px 20px;transition:all var(--tr)}
+.stat-card:hover{box-shadow:var(--sh-m);border-color:var(--em-g)}
+.stat-n{font-family:"Playfair Display",Georgia,serif;font-size:28px;font-weight:700;color:var(--sl);margin-bottom:4px}
+.stat-l{font-size:12px;color:var(--t4);font-weight:600}
+.stat-ico{width:36px;height:36px;border-radius:9px;background:var(--em-l);border:1px solid var(--em-g);display:flex;align-items:center;justify-content:center;float:right;margin-top:-4px}
+
+/* ── TABLES ── */
+.section-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:12px;flex-wrap:wrap}
+.section-ti{font-family:"Playfair Display",Georgia,serif;font-size:16px;font-weight:700;color:var(--sl)}
+.tbl-wrap{background:var(--white);border:1px solid var(--bg3);border-radius:var(--rl);overflow:hidden}
+.tbl-filters{padding:12px 16px;border-bottom:1px solid var(--bg3);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tbl-search{padding:7px 12px;border:1.5px solid var(--bg3);border-radius:7px;font-size:12px;color:var(--t1);background:var(--bg);min-width:200px;transition:all var(--tr);font-family:inherit}
+.tbl-search:focus{border-color:var(--em);background:var(--white);outline:none}
+.tbl-sel{padding:7px 12px;border:1.5px solid var(--bg3);border-radius:7px;font-size:12px;color:var(--t2);background:var(--bg);transition:all var(--tr);font-family:inherit;-webkit-appearance:none;appearance:none;padding-right:28px;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239cb5a8' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+table{width:100%;border-collapse:collapse}
+thead tr{background:var(--bg2)}
+th{padding:10px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--t4);text-align:left;white-space:nowrap;border-bottom:1px solid var(--bg3)}
+td{padding:11px 14px;font-size:12px;color:var(--t2);border-bottom:1px solid var(--bg);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg)}
+.td-img{width:40px;height:40px;border-radius:7px;object-fit:cover;background:var(--bg2);border:1px solid var(--bg3);flex-shrink:0}
+.td-name{font-weight:700;color:var(--t1)}
+.td-sub{font-size:11px;color:var(--t4);margin-top:1px}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700}
+.badge-ok{background:var(--success-l);color:var(--success)}
+.badge-warn{background:var(--warn-l);color:#8a6d00}
+.badge-ko{background:var(--danger-l);color:var(--danger)}
+.badge-em{background:var(--em-l);color:var(--em)}
+.tbl-empty{padding:36px;text-align:center;color:var(--t4);font-size:13px;font-weight:600}
+
+/* ── MODAL ── */
+#modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;opacity:0;visibility:hidden;transition:all var(--tr);backdrop-filter:blur(4px)}
+#modal-bg.on{opacity:1;visibility:visible}
+#modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(.97);z-index:801;width:min(96vw,680px);max-height:90vh;background:var(--white);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.2);opacity:0;visibility:hidden;transition:all var(--tr);overflow:hidden;display:flex;flex-direction:column}
+#modal.on{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1)}
+.modal-hd{padding:18px 22px;border-bottom:1px solid var(--bg3);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.modal-ti{font-family:"Playfair Display",Georgia,serif;font-size:17px;font-weight:700;color:var(--sl)}
+.modal-cl{width:28px;height:28px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--t2);border:none;transition:all var(--tr)}
+.modal-cl:hover{background:var(--bg3)}
+.modal-body{padding:20px 22px;overflow-y:auto;flex:1}
+.modal-ft{padding:14px 22px;border-top:1px solid var(--bg3);display:flex;justify-content:flex-end;gap:10px;flex-shrink:0}
+
+/* FORMULAIRE */
+.form-row{display:grid;gap:14px;margin-bottom:14px;grid-template-columns:1fr}
+.form-row.two{grid-template-columns:1fr 1fr}
+@media(max-width:480px){.form-row.two{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:11px;font-weight:700;color:var(--t2);letter-spacing:.01em}
+.field label span{color:var(--or);margin-left:2px}
+.field input,.field select,.field textarea{padding:9px 12px;border:1.5px solid var(--bg3);border-radius:8px;font-size:13px;color:var(--t1);background:var(--bg);transition:all var(--tr);font-family:inherit;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--em);box-shadow:0 0 0 3px var(--em-l);background:var(--white);outline:none}
+.field textarea{min-height:80px;line-height:1.6}
+.field select{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239cb5a8' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--bg);border-radius:8px}
+.toggle-lbl{font-size:12px;font-weight:700;color:var(--t2)}
+.toggle{position:relative;width:38px;height:20px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0;position:absolute}
+.toggle-slider{position:absolute;inset:0;background:var(--bg3);border-radius:10px;transition:.3s;cursor:pointer}
+.toggle-slider::before{content:'';position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.3s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.toggle input:checked+.toggle-slider{background:var(--em)}
+.toggle input:checked+.toggle-slider::before{transform:translateX(18px)}
+
+/* Upload zone */
+.upload-zone{border:2px dashed var(--bg3);border-radius:9px;padding:18px;text-align:center;cursor:pointer;transition:all var(--tr);background:var(--bg);position:relative}
+.upload-zone:hover{border-color:var(--em-g);background:var(--em-l)}
+.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.uz-ico{width:34px;height:34px;border-radius:8px;background:var(--bg2);display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
+.uz-txt{font-size:12px;font-weight:700;color:var(--t3)}
+.uz-sub{font-size:11px;color:var(--t4);margin-top:3px}
+.img-preview-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.img-prev{position:relative;width:72px;height:72px}
+.img-prev img{width:100%;height:100%;object-fit:cover;border-radius:7px;border:1px solid var(--bg3)}
+.img-prev-del{position:absolute;top:-4px;right:-4px;width:18px;height:18px;border-radius:50%;background:var(--danger);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;font-weight:700}
+.img-loading{position:absolute;inset:0;background:rgba(0,0,0,.4);border-radius:7px;display:flex;align-items:center;justify-content:center}
+.img-spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--sl);color:#fff;font-size:13px;font-weight:600;padding:10px 20px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:9999;opacity:0;visibility:hidden;transition:all var(--tr);white-space:nowrap;max-width:min(90vw,400px);display:flex;align-items:center;gap:8px}
+#toast.on{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+#toast.ok{background:#065F46}
+#toast.err{background:#991B1B}
+
+/* SETUP BANNER */
+.setup-banner{background:var(--warn-l);border:1.5px solid var(--mu);border-radius:var(--rl);padding:14px 18px;margin-bottom:20px;font-size:12px;color:var(--t2)}
+.setup-banner strong{color:var(--sl)}
+
+/* CONFIRM DIALOG */
+#confirm-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:900;opacity:0;visibility:hidden;transition:all var(--tr)}
+#confirm-bg.on{opacity:1;visibility:visible}
+#confirm-box{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--white);border-radius:12px;padding:24px;width:min(90vw,360px);z-index:901;box-shadow:0 20px 60px rgba(0,0,0,.2);opacity:0;visibility:hidden;transition:all var(--tr)}
+#confirm-box.on{opacity:1;visibility:visible}
+.confirm-ti{font-size:15px;font-weight:700;color:var(--sl);margin-bottom:8px}
+.confirm-sub{font-size:13px;color:var(--t3);line-height:1.6;margin-bottom:18px}
+.confirm-btns{display:flex;gap:10px;justify-content:flex-end}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  :root{--sidebar:0px}
+  #sidebar{transform:translateX(-220px);width:220px}
+  #sidebar.mob-open{transform:translateX(0)}
+  #main{margin-left:0}
+  .mob-sidebar-btn{display:flex!important}
+}
+.mob-sidebar-btn{display:none;width:34px;height:34px;border-radius:7px;background:var(--bg2);align-items:center;justify-content:center;border:none;cursor:pointer;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="mali-bar"><span style="background:var(--mg)"></span><span style="background:var(--my)"></span><span style="background:var(--mr)"></span></div>
+    <div class="login-logo"><em>MIFA</em> LIFE</div>
+    <div class="login-sub">Administration · Fondateurs uniquement</div>
+    <div class="login-field">
+      <label>Identifiant</label>
+      <input type="text" id="loginUser" placeholder="admin" autocomplete="username"/>
+    </div>
+    <div class="login-field">
+      <label>Mot de passe</label>
+      <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/>
+    </div>
+    <button class="login-btn" onclick="doLogin()">Se connecter</button>
+    <div class="login-err" id="loginErr">Identifiants incorrects.</div>
+  </div>
+</div>
+
+<!-- ── APP ── -->
+<div id="app">
+
+  <!-- SIDEBAR -->
+  <nav id="sidebar">
+    <div class="sb-top">
+      <div class="sb-logo"><em>MIFA</em> LIFE</div>
+      <div class="sb-badge">ADMIN</div>
+    </div>
+    <div class="sb-nav">
+      <button class="sb-lnk on" onclick="showPage('dashboard')" data-page="dashboard">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Tableau de bord
+      </button>
+      <button class="sb-lnk" onclick="showPage('products')" data-page="products">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Produits
+        <span id="sb-prod-count" style="margin-left:auto;background:rgba(255,255,255,.1);border-radius:10px;padding:1px 7px;font-size:10px;font-weight:700"></span>
+      </button>
+      <button class="sb-lnk" onclick="showPage('suppliers')" data-page="suppliers">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Fournisseurs
+      </button>
+      <button class="sb-lnk" onclick="showPage('categories')" data-page="categories">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        Catégories
+      </button>
+      <div class="sb-sep"></div>
+      <a class="sb-lnk" href="/" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Voir le site
+      </a>
+    </div>
+    <div class="sb-bottom">
+      <div class="sb-user">
+        <div class="sb-av">A</div>
+        <div>
+          <div class="sb-uname">Admin</div>
+          <div class="sb-role">Fondateur</div>
+        </div>
+        <button class="sb-logout" onclick="doLogout()">Quitter</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <div id="main">
+    <div class="main-top">
+      <div style="display:flex;align-items:center;gap:10px">
+        <button class="mob-sidebar-btn" onclick="document.getElementById('sidebar').classList.toggle('mob-open')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t2)" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="main-ti" id="page-title">Tableau de bord</div>
+      </div>
+      <div class="main-actions" id="page-actions"></div>
+    </div>
+    <div class="page-body" id="page-body"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modal-bg" onclick="closeModal()"></div>
+<div id="modal">
+  <div class="modal-hd">
+    <div class="modal-ti" id="modal-title">Modal</div>
+    <button class="modal-cl" onclick="closeModal()">✕</button>
+  </div>
+  <div class="modal-body" id="modal-body"></div>
+  <div class="modal-ft" id="modal-footer"></div>
+</div>
+
+<!-- CONFIRM -->
+<div id="confirm-bg"></div>
+<div id="confirm-box">
+  <div class="confirm-ti" id="confirm-ti">Confirmer</div>
+  <div class="confirm-sub" id="confirm-sub"></div>
+  <div class="confirm-btns">
+    <button class="btn btn-sec" onclick="closeConfirm()">Annuler</button>
+    <button class="btn btn-danger" id="confirm-ok">Supprimer</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+'use strict';
+
+/* ════════════════════════════════════
+   CONFIG
+════════════════════════════════════ */
+var SUPABASE_URL  = 'https://rsvqndmymsflkodubxgb.supabase.co';
+var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJzdnFuZG15bXNmbGtvZHVieGdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMTMyOTQsImV4cCI6MjA4Nzc4OTI5NH0.YnWhKIM5l2AOvpi8pxuUarPdL_ueFlY2QmVODEE4-b4';
+var STORAGE_BUCKET = 'mifa-products';
+/* Mot de passe admin — CHANGEZ-LE APRÈS DÉPLOIEMENT */
+var ADMIN_CREDENTIALS = { user: 'admin', pass: 'mifa2024!' };
+
+var db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+var toastTimer = null;
+var editingId  = null;
+var currentImages = [];
+var allSuppliers = [];
+var allCategories = [];
+
+/* ════════════════════════════════════
+   AUTH
+════════════════════════════════════ */
+function doLogin() {
+  var u = document.getElementById('loginUser').value.trim();
+  var p = document.getElementById('loginPass').value;
+  if (u === ADMIN_CREDENTIALS.user && p === ADMIN_CREDENTIALS.pass) {
+    sessionStorage.setItem('mifa_admin', '1');
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'flex';
+    initApp();
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+  }
+}
+function doLogout() {
+  sessionStorage.removeItem('mifa_admin');
+  location.reload();
+}
+(function checkAuth(){
+  if (sessionStorage.getItem('mifa_admin') === '1') {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'flex';
+    initApp();
+  }
+})();
+
+/* ════════════════════════════════════
+   INIT
+════════════════════════════════════ */
+async function initApp() {
+  await Promise.all([loadSuppliers(), loadCategories()]);
+  showPage('dashboard');
+}
+
+/* ════════════════════════════════════
+   NAVIGATION
+════════════════════════════════════ */
+var PAGES = {
+  dashboard: { title:'Tableau de bord', render: renderDashboard },
+  products:  { title:'Produits',         render: renderProducts  },
+  suppliers: { title:'Fournisseurs',     render: renderSuppliers },
+  categories:{ title:'Catégories',       render: renderCategories}
+};
+function showPage(key) {
+  document.querySelectorAll('.sb-lnk[data-page]').forEach(function(b){
+    b.classList.toggle('on', b.dataset.page === key);
+  });
+  document.getElementById('page-title').textContent = PAGES[key].title;
+  document.getElementById('page-actions').innerHTML = '';
+  document.getElementById('page-body').innerHTML = '<div style="text-align:center;padding:40px;color:var(--t4)"><div style="width:32px;height:32px;border:2px solid var(--bg3);border-top-color:var(--em);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px"></div>Chargement…</div>';
+  PAGES[key].render();
+}
+
+/* ════════════════════════════════════
+   DASHBOARD
+════════════════════════════════════ */
+async function renderDashboard() {
+  var [prods, sups, cats] = await Promise.all([
+    db.from('mifa_products').select('id,active,featured,price'),
+    db.from('mifa_suppliers').select('id,active'),
+    db.from('mifa_categories').select('id')
+  ]);
+  var products   = prods.data  || [];
+  var suppliers  = sups.data   || [];
+  var categories = cats.data   || [];
+  var active = products.filter(function(p){ return p.active; }).length;
+  var featured= products.filter(function(p){ return p.featured; }).length;
+  document.getElementById('sb-prod-count').textContent = products.length;
+  var needSetup = products.length === 0;
+
+  document.getElementById('page-body').innerHTML =
+    (needSetup ? '<div class="setup-banner">'+
+      '<strong>⚠️ Base de données vide.</strong> Vérifiez que vous avez bien exécuté le script SQL dans Supabase (SQL Editor) et créé le bucket Storage "'+STORAGE_BUCKET+'" en mode Public. '+
+      '<a href="#" onclick="showSetupInstructions();return false" style="color:var(--em);font-weight:700">Voir les instructions →</a>'+
+    '</div>' : '') +
+    '<div class="stats-grid">'+
+      statCard(products.length, 'Produits total', '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>')+
+      statCard(active, 'Produits actifs', '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><polyline points="20 6 9 17 4 12"/></svg>')+
+      statCard(featured, 'Mis en avant', '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>')+
+      statCard(suppliers.length, 'Fournisseurs', '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>')+
+    '</div>'+
+    '<div class="section-hd"><div class="section-ti">Actions rapides</div></div>'+
+    '<div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">'+
+      quickCard('Ajouter un produit', 'Nom, photos, prix, fournisseur', "showPage('products');setTimeout(openAddProduct,100)", '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>')+
+      quickCard('Ajouter un fournisseur', 'Nom, pays, contact', "showPage('suppliers');setTimeout(openAddSupplier,100)", '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>')+
+      quickCard('Gérer les catégories', 'Ajouter ou désactiver', "showPage('categories')", '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>')+
+    '</div>';
+}
+function statCard(n, l, ico) {
+  return '<div class="stat-card"><div class="stat-ico">'+ico+'</div><div class="stat-n">'+n+'</div><div class="stat-l">'+l+'</div></div>';
+}
+function quickCard(ti, sub, fn, ico) {
+  return '<div style="background:var(--white);border:1px solid var(--bg3);border-radius:var(--rl);padding:18px 20px;cursor:pointer;transition:all .2s" onclick="'+fn+'" onmouseover="this.style.borderColor=\'var(--em-g)\';this.style.boxShadow=\'var(--sh-m)\'" onmouseout="this.style.borderColor=\'var(--bg3)\';this.style.boxShadow=\'none\'">'
+    +'<div style="width:38px;height:38px;border-radius:9px;background:var(--em-l);border:1px solid var(--em-g);display:flex;align-items:center;justify-content:center;margin-bottom:12px">'+ico+'</div>'
+    +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px">'+ti+'</div>'
+    +'<div style="font-size:11px;color:var(--t4)">'+sub+'</div>'
+    +'</div>';
+}
+function showSetupInstructions() {
+  openModal('Instructions de configuration', '<div style="font-size:13px;color:var(--t3);line-height:1.8">'
+    +'<p style="margin-bottom:10px"><strong style="color:var(--t1)">Étape 1 — SQL</strong><br/>Allez dans <a href="'+SUPABASE_URL+'" target="_blank" style="color:var(--em)">Supabase Dashboard</a> → SQL Editor → New query. Copiez-collez le contenu du fichier <code>supabase_setup.sql</code> et exécutez.</p>'
+    +'<p style="margin-bottom:10px"><strong style="color:var(--t1)">Étape 2 — Storage bucket</strong><br/>Dans Supabase → Storage → Create a new bucket. Nom : <code>mifa-products</code>. Cochez "Public bucket". Cliquez Create.</p>'
+    +'<p><strong style="color:var(--t1)">Étape 3</strong><br/>Revenez ici et ajoutez vos premiers produits !</p>'
+    +'</div>',
+    '<button class="btn btn-primary" onclick="closeModal()">Compris</button>');
+}
+
+/* ════════════════════════════════════
+   PRODUITS
+════════════════════════════════════ */
+async function loadProducts(search, category, activeOnly) {
+  var q = db.from('mifa_products').select('*').order('created_at', {ascending:false});
+  if (search) q = q.ilike('name', '%'+search+'%');
+  if (category) q = q.eq('category', category);
+  if (activeOnly === 'true') q = q.eq('active', true);
+  if (activeOnly === 'false') q = q.eq('active', false);
+  var { data, error } = await q;
+  return data || [];
+}
+
+async function renderProducts() {
+  document.getElementById('page-actions').innerHTML =
+    '<button class="btn btn-primary" onclick="openAddProduct()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Ajouter un produit</button>';
+  var products = await loadProducts();
+  document.getElementById('sb-prod-count').textContent = products.length;
+  drawProductsTable(products);
+}
+function drawProductsTable(products) {
+  var catOptions = allCategories.map(function(c){ return '<option value="'+c.slug+'">'+c.name+'</option>'; }).join('');
+  document.getElementById('page-body').innerHTML =
+    '<div class="tbl-wrap">'+
+    '<div class="tbl-filters">'+
+      '<input class="tbl-search" placeholder="Chercher un produit…" oninput="filterProducts(this)" id="prodSearch"/>'+
+      '<select class="tbl-sel" onchange="filterProducts()" id="prodCatFilter"><option value="">Toutes catégories</option>'+catOptions+'</select>'+
+      '<select class="tbl-sel" onchange="filterProducts()" id="prodActiveFilter"><option value="">Tous</option><option value="true">Actifs</option><option value="false">Inactifs</option></select>'+
+    '</div>'+
+    '<div id="prod-tbl-body">'+renderProductRows(products)+'</div>'+
+    '</div>';
+}
+async function filterProducts(el) {
+  var search = document.getElementById('prodSearch').value;
+  var cat    = document.getElementById('prodCatFilter').value;
+  var active = document.getElementById('prodActiveFilter').value;
+  var products = await loadProducts(search, cat, active || undefined);
+  document.getElementById('prod-tbl-body').innerHTML = renderProductRows(products);
+}
+function renderProductRows(products) {
+  if (!products.length) return '<div class="tbl-empty">Aucun produit trouvé. Cliquez sur "Ajouter un produit" pour commencer.</div>';
+  return '<table><thead><tr><th>Image</th><th>Produit</th><th>Prix</th><th>Catégorie</th><th>Stock</th><th>Statut</th><th>Actions</th></tr></thead><tbody>'
+    + products.map(function(p){
+        var img = p.images && p.images.length ? '<img class="td-img" src="'+p.images[0]+'" alt=""/>' : '<div class="td-img" style="display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--t4)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>';
+        var price = Number(p.price).toLocaleString('fr-FR')+' FCFA';
+        var origPrice = p.original_price ? '<br/><span style="font-size:10px;color:var(--t4);text-decoration:line-through">'+Number(p.original_price).toLocaleString('fr-FR')+'</span>' : '';
+        var badge = p.active
+          ? '<span class="badge badge-ok">Actif</span>'
+          : '<span class="badge badge-ko">Inactif</span>';
+        var feat = p.featured ? ' <span class="badge badge-em" style="margin-left:3px">Mis en avant</span>' : '';
+        return '<tr>'
+          +'<td>'+img+'</td>'
+          +'<td><div class="td-name">'+esc(p.name)+'</div><div class="td-sub">'+esc(p.category||'')+(p.supplier_id?' · '+getSupplierName(p.supplier_id):'')+'</div></td>'
+          +'<td>'+price+origPrice+'</td>'
+          +'<td>'+esc(p.category||'—')+'</td>'
+          +'<td>'+p.stock+'</td>'
+          +'<td>'+badge+feat+'</td>'
+          +'<td style="white-space:nowrap">'
+          +'<button class="btn btn-sec btn-sm" onclick="openEditProduct(\''+p.id+'\')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Modifier</button> '
+          +'<button class="btn btn-danger btn-sm" onclick="confirmDelete(\''+p.id+'\',\''+esc(p.name)+'\',\'product\')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg></button>'
+          +'</td>'
+          +'</tr>';
+      }).join('')
+    +'</tbody></table>';
+}
+function getSupplierName(id) {
+  var s = allSuppliers.find(function(x){ return x.id === id; });
+  return s ? s.name : '';
+}
+
+/* ── FORMULAIRE PRODUIT ── */
+function productFormHTML(p) {
+  p = p || {};
+  var catOpts = allCategories.map(function(c){
+    return '<option value="'+c.slug+'"'+(p.category===c.slug?' selected':'')+'>'+c.name+'</option>';
+  }).join('');
+  var supOpts = allSuppliers.map(function(s){
+    return '<option value="'+s.id+'"'+(p.supplier_id===s.id?' selected':'')+'>'+s.name+'</option>';
+  }).join('');
+  return '<div class="form-row two">'
+    +'<div class="field"><label>Nom du produit <span>*</span></label><input type="text" id="f-name" value="'+esc(p.name||'')+'" placeholder="ex: Casque Bluetooth Sans Fil"/></div>'
+    +'<div class="field"><label>Catégorie</label><select id="f-cat"><option value="">— Choisir —</option>'+catOpts+'</select></div>'
+    +'</div>'
+    +'<div class="form-row"><div class="field"><label>Description</label><textarea id="f-desc" placeholder="Décrivez le produit…">'+esc(p.description||'')+'</textarea></div></div>'
+    +'<div class="form-row two">'
+    +'<div class="field"><label>Prix de vente (FCFA) <span>*</span></label><input type="number" id="f-price" value="'+(p.price||'')+'" placeholder="15000" min="0"/></div>'
+    +'<div class="field"><label>Prix original barré (FCFA)</label><input type="number" id="f-origprice" value="'+(p.original_price||'')+'" placeholder="Laisser vide si aucun" min="0"/></div>'
+    +'</div>'
+    +'<div class="form-row two">'
+    +'<div class="field"><label>Stock disponible</label><input type="number" id="f-stock" value="'+(p.stock||0)+'" min="0"/></div>'
+    +'<div class="field"><label>Délai de livraison</label><input type="text" id="f-shipping" value="'+esc(p.shipping_days||'7-14 jours')+'" placeholder="7-14 jours"/></div>'
+    +'</div>'
+    +'<div class="form-row two">'
+    +'<div class="field"><label>Fournisseur</label><select id="f-supplier"><option value="">— Aucun —</option>'+supOpts+'</select></div>'
+    +'<div class="field"><label>Sous-catégorie</label><input type="text" id="f-subcat" value="'+esc(p.subcategory||'')+'" placeholder="ex: Téléphones"/></div>'
+    +'</div>'
+    +'<div class="form-row"><div class="field"><label>Tags (séparés par des virgules)</label><input type="text" id="f-tags" value="'+(Array.isArray(p.tags)?p.tags.join(', '):'')+'" placeholder="bluetooth, sans fil, audio"/></div></div>'
+    +'<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">'
+    +'<div class="toggle-row"><span class="toggle-lbl">Produit actif (visible sur le site)</span><label class="toggle"><input type="checkbox" id="f-active"'+(p.active!==false?' checked':'')+'/><span class="toggle-slider"></span></label></div>'
+    +'<div class="toggle-row"><span class="toggle-lbl">Mettre en avant (homepage)</span><label class="toggle"><input type="checkbox" id="f-featured"'+(p.featured?' checked':'')+'/><span class="toggle-slider"></span></label></div>'
+    +'</div>'
+    +'<div class="field"><label>Images du produit</label>'
+    +'<div class="upload-zone" onclick="document.getElementById(\'img-input\').click()">'
+    +'<input type="file" id="img-input" accept="image/*" multiple onchange="handleImageUpload(this)"/>'
+    +'<div class="uz-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>'
+    +'<div class="uz-txt">Cliquer pour ajouter des images</div>'
+    +'<div class="uz-sub">JPG, PNG, WebP — Max 5 Mo chacune. Première image = image principale.</div>'
+    +'</div>'
+    +'<div class="img-preview-list" id="img-preview-list"></div>'
+    +'</div>';
+}
+function openAddProduct() {
+  editingId = null;
+  currentImages = [];
+  openModal('Ajouter un produit', productFormHTML(null),
+    '<button class="btn btn-sec" onclick="closeModal()">Annuler</button><button class="btn btn-primary" onclick="saveProduct()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Enregistrer</button>');
+}
+async function openEditProduct(id) {
+  var { data } = await db.from('mifa_products').select('*').eq('id', id).single();
+  if (!data) return showToast('Produit introuvable', 'err');
+  editingId = id;
+  currentImages = Array.isArray(data.images) ? [...data.images] : [];
+  openModal('Modifier le produit', productFormHTML(data),
+    '<button class="btn btn-sec" onclick="closeModal()">Annuler</button><button class="btn btn-primary" onclick="saveProduct()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Enregistrer</button>');
+  renderImagePreviews();
+}
+function renderImagePreviews() {
+  var list = document.getElementById('img-preview-list');
+  if (!list) return;
+  list.innerHTML = currentImages.map(function(url, i){
+    return '<div class="img-prev">'
+      +'<img src="'+url+'" alt=""/>'
+      +'<button class="img-prev-del" onclick="removeImage('+i+')">✕</button>'
+      +(i===0 ? '<div style="position:absolute;bottom:2px;left:2px;font-size:8px;font-weight:700;background:var(--em);color:#fff;padding:1px 5px;border-radius:4px">Principal</div>' : '')
+      +'</div>';
+  }).join('');
+}
+function removeImage(i) { currentImages.splice(i, 1); renderImagePreviews(); }
+
+async function handleImageUpload(input) {
+  var files = Array.from(input.files);
+  for (var i = 0; i < files.length; i++) {
+    var file = files[i];
+    if (file.size > 5 * 1024 * 1024) { showToast('Fichier trop lourd (max 5 Mo)', 'err'); continue; }
+    /* Afficher placeholder chargement */
+    var tempId = 'tmp-' + Date.now() + i;
+    var list = document.getElementById('img-preview-list');
+    if (list) {
+      var div = document.createElement('div'); div.className = 'img-prev'; div.id = tempId;
+      div.innerHTML = '<div style="width:72px;height:72px;border-radius:7px;background:var(--bg2);border:1px solid var(--bg3);display:flex;align-items:center;justify-content:center"><div class="img-spin"></div></div>';
+      list.appendChild(div);
+    }
+    var ext = file.name.split('.').pop();
+    var path = 'products/' + Date.now() + '-' + Math.random().toString(36).slice(2) + '.' + ext;
+    var { data, error } = await db.storage.from(STORAGE_BUCKET).upload(path, file, { upsert: true });
+    var el = document.getElementById(tempId);
+    if (error) {
+      showToast('Erreur upload: ' + error.message, 'err');
+      if (el) el.remove();
+    } else {
+      var { data: pub } = db.storage.from(STORAGE_BUCKET).getPublicUrl(path);
+      currentImages.push(pub.publicUrl);
+      if (el) el.remove();
+      renderImagePreviews();
+    }
+  }
+  input.value = '';
+}
+
+async function saveProduct() {
+  var name  = document.getElementById('f-name').value.trim();
+  var price = parseInt(document.getElementById('f-price').value);
+  if (!name) { showToast('Le nom est requis', 'err'); return; }
+  if (!price || price < 0) { showToast('Le prix est requis', 'err'); return; }
+  var origP = parseInt(document.getElementById('f-origprice').value) || null;
+  var tags  = document.getElementById('f-tags').value.split(',').map(function(t){ return t.trim(); }).filter(Boolean);
+  var payload = {
+    name:          name,
+    description:   document.getElementById('f-desc').value.trim() || null,
+    price:         price,
+    original_price: origP,
+    category:      document.getElementById('f-cat').value || null,
+    subcategory:   document.getElementById('f-subcat').value.trim() || null,
+    images:        currentImages,
+    stock:         parseInt(document.getElementById('f-stock').value) || 0,
+    supplier_id:   document.getElementById('f-supplier').value || null,
+    shipping_days: document.getElementById('f-shipping').value.trim() || '7-14 jours',
+    tags:          tags,
+    active:        document.getElementById('f-active').checked,
+    featured:      document.getElementById('f-featured').checked,
+    updated_at:    new Date().toISOString()
+  };
+  var btn = document.querySelector('.modal-ft .btn-primary');
+  if (btn) { btn.disabled=true; btn.textContent='Enregistrement…'; }
+  var result;
+  if (editingId) {
+    result = await db.from('mifa_products').update(payload).eq('id', editingId);
+  } else {
+    result = await db.from('mifa_products').insert(payload);
+  }
+  if (result.error) {
+    showToast('Erreur: ' + result.error.message, 'err');
+    if (btn) { btn.disabled=false; btn.textContent='Enregistrer'; }
+  } else {
+    showToast(editingId ? 'Produit modifié !' : 'Produit ajouté !', 'ok');
+    closeModal();
+    renderProducts();
+  }
+}
+
+/* ════════════════════════════════════
+   FOURNISSEURS
+════════════════════════════════════ */
+async function loadSuppliers() {
+  var { data } = await db.from('mifa_suppliers').select('*').order('name');
+  allSuppliers = data || [];
+  return allSuppliers;
+}
+async function renderSuppliers() {
+  document.getElementById('page-actions').innerHTML =
+    '<button class="btn btn-primary" onclick="openAddSupplier()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Ajouter</button>';
+  var suppliers = await loadSuppliers();
+  var rows = suppliers.length ? suppliers.map(function(s){
+    return '<tr>'
+      +'<td><div class="td-name">'+esc(s.name)+'</div><div class="td-sub">'+esc(s.country||'')+'</div></td>'
+      +'<td>'+esc(s.email||'—')+'</td>'
+      +'<td>'+esc(s.phone||'—')+'</td>'
+      +'<td>'+(s.active?'<span class="badge badge-ok">Actif</span>':'<span class="badge badge-ko">Inactif</span>')+'</td>'
+      +'<td style="white-space:nowrap">'
+      +'<button class="btn btn-sec btn-sm" onclick="openEditSupplier(\''+s.id+'\')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Modifier</button> '
+      +'<button class="btn btn-danger btn-sm" onclick="confirmDelete(\''+s.id+'\',\''+esc(s.name)+'\',\'supplier\')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>'
+      +'</td>'
+      +'</tr>';
+  }).join('') : '';
+  document.getElementById('page-body').innerHTML =
+    '<div class="tbl-wrap">'
+    +'<div class="tbl-filters"><input class="tbl-search" placeholder="Chercher un fournisseur…" oninput="filterTable(this,\'sup-tbody\')"/></div>'
+    +'<table><thead><tr><th>Nom / Pays</th><th>Email</th><th>Téléphone</th><th>Statut</th><th>Actions</th></tr></thead>'
+    +'<tbody id="sup-tbody">'+(rows||'<tr><td colspan="5" class="tbl-empty">Aucun fournisseur. Cliquez sur Ajouter.</td></tr>')+'</tbody>'
+    +'</table></div>';
+}
+function supplierFormHTML(s) {
+  s = s || {};
+  return '<div class="form-row two">'
+    +'<div class="field"><label>Nom du fournisseur <span>*</span></label><input type="text" id="sf-name" value="'+esc(s.name||'')+'" placeholder="Shenzhen Electronics Co."/></div>'
+    +'<div class="field"><label>Pays</label><input type="text" id="sf-country" value="'+esc(s.country||'Chine')+'" placeholder="Chine"/></div>'
+    +'</div>'
+    +'<div class="form-row two">'
+    +'<div class="field"><label>Email</label><input type="email" id="sf-email" value="'+esc(s.email||'')+'" placeholder="contact@supplier.com"/></div>'
+    +'<div class="field"><label>Téléphone / WeChat / WhatsApp</label><input type="text" id="sf-phone" value="'+esc(s.phone||'')+'" placeholder="+86 xxx"/></div>'
+    +'</div>'
+    +'<div class="form-row"><div class="field"><label>Notes internes</label><textarea id="sf-notes" placeholder="Conditions, délais, historique…">'+esc(s.notes||'')+'</textarea></div></div>'
+    +'<div class="toggle-row"><span class="toggle-lbl">Fournisseur actif</span><label class="toggle"><input type="checkbox" id="sf-active"'+(s.active!==false?' checked':'')+'/><span class="toggle-slider"></span></label></div>';
+}
+function openAddSupplier() {
+  editingId = null;
+  openModal('Ajouter un fournisseur', supplierFormHTML(null),
+    '<button class="btn btn-sec" onclick="closeModal()">Annuler</button><button class="btn btn-primary" onclick="saveSupplier()">Enregistrer</button>');
+}
+async function openEditSupplier(id) {
+  var { data } = await db.from('mifa_suppliers').select('*').eq('id', id).single();
+  if (!data) return;
+  editingId = id;
+  openModal('Modifier le fournisseur', supplierFormHTML(data),
+    '<button class="btn btn-sec" onclick="closeModal()">Annuler</button><button class="btn btn-primary" onclick="saveSupplier()">Enregistrer</button>');
+}
+async function saveSupplier() {
+  var name = document.getElementById('sf-name').value.trim();
+  if (!name) { showToast('Le nom est requis', 'err'); return; }
+  var payload = {
+    name:    name,
+    country: document.getElementById('sf-country').value.trim() || 'Chine',
+    email:   document.getElementById('sf-email').value.trim() || null,
+    phone:   document.getElementById('sf-phone').value.trim() || null,
+    notes:   document.getElementById('sf-notes').value.trim() || null,
+    active:  document.getElementById('sf-active').checked
+  };
+  var result = editingId
+    ? await db.from('mifa_suppliers').update(payload).eq('id', editingId)
+    : await db.from('mifa_suppliers').insert(payload);
+  if (result.error) { showToast('Erreur: ' + result.error.message, 'err'); return; }
+  showToast(editingId ? 'Fournisseur modifié !' : 'Fournisseur ajouté !', 'ok');
+  closeModal();
+  await loadSuppliers();
+  renderSuppliers();
+}
+
+/* ════════════════════════════════════
+   CATÉGORIES
+════════════════════════════════════ */
+async function loadCategories() {
+  var { data } = await db.from('mifa_categories').select('*').order('sort_order');
+  allCategories = data || [];
+  return allCategories;
+}
+async function renderCategories() {
+  document.getElementById('page-actions').innerHTML =
+    '<button class="btn btn-primary" onclick="openAddCategory()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Ajouter</button>';
+  var cats = await loadCategories();
+  var rows = cats.map(function(c){
+    return '<tr>'
+      +'<td><div class="td-name">'+esc(c.name)+'</div><div class="td-sub">'+esc(c.slug)+'</div></td>'
+      +'<td>'+esc(c.icon||'—')+'</td>'
+      +'<td>'+c.sort_order+'</td>'
+      +'<td>'+(c.active?'<span class="badge badge-ok">Active</span>':'<span class="badge badge-ko">Inactive</span>')+'</td>'
+      +'<td style="white-space:nowrap">'
+      +'<button class="btn btn-sec btn-sm" onclick="openEditCategory(\''+c.id+'\')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Modifier</button> '
+      +'<button class="btn btn-danger btn-sm" onclick="confirmDelete(\''+c.id+'\',\''+esc(c.name)+'\',\'category\')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>'
+      +'</td>'
+      +'</tr>';
+  }).join('');
+  document.getElementById('page-body').innerHTML =
+    '<div class="tbl-wrap"><table><thead><tr><th>Nom / Slug</th><th>Icône</th><th>Ordre</th><th>Statut</th><th>Actions</th></tr></thead>'
+    +'<tbody>'+(rows||'<tr><td colspan="5" class="tbl-empty">Aucune catégorie.</td></tr>')+'</tbody>'
+    +'</table></div>';
+}
+function categoryFormHTML(c) {
+  c = c || {};
+  return '<div class="form-row two">'
+    +'<div class="field"><label>Nom <span>*</span></label><input type="text" id="cf-name" value="'+esc(c.name||'')+'" placeholder="Électronique"/></div>'
+    +'<div class="field"><label>Slug (URL) <span>*</span></label><input type="text" id="cf-slug" value="'+esc(c.slug||'')+'" placeholder="electronique"/></div>'
+    +'</div>'
+    +'<div class="form-row two">'
+    +'<div class="field"><label>Icône (emoji ou texte)</label><input type="text" id="cf-icon" value="'+esc(c.icon||'')+'" placeholder="💻"/></div>'
+    +'<div class="field"><label>Ordre d\'affichage</label><input type="number" id="cf-order" value="'+(c.sort_order||0)+'" min="0"/></div>'
+    +'</div>'
+    +'<div class="toggle-row"><span class="toggle-lbl">Catégorie active</span><label class="toggle"><input type="checkbox" id="cf-active"'+(c.active!==false?' checked':'')+'/><span class="toggle-slider"></span></label></div>';
+}
+function openAddCategory() {
+  editingId = null;
+  openModal('Ajouter une catégorie', categoryFormHTML(null),
+    '<button class="btn btn-sec" onclick="closeModal()">Annuler</button><button class="btn btn-primary" onclick="saveCategory()">Enregistrer</button>');
+}
+async function openEditCategory(id) {
+  var cat = allCategories.find(function(c){ return c.id===id; });
+  if (!cat) return;
+  editingId = id;
+  openModal('Modifier la catégorie', categoryFormHTML(cat),
+    '<button class="btn btn-sec" onclick="closeModal()">Annuler</button><button class="btn btn-primary" onclick="saveCategory()">Enregistrer</button>');
+}
+async function saveCategory() {
+  var name = document.getElementById('cf-name').value.trim();
+  var slug = document.getElementById('cf-slug').value.trim().toLowerCase().replace(/\s+/g,'-');
+  if (!name||!slug) { showToast('Nom et slug requis', 'err'); return; }
+  var payload = { name, slug, icon: document.getElementById('cf-icon').value.trim()||null, sort_order: parseInt(document.getElementById('cf-order').value)||0, active: document.getElementById('cf-active').checked };
+  var result = editingId
+    ? await db.from('mifa_categories').update(payload).eq('id', editingId)
+    : await db.from('mifa_categories').insert(payload);
+  if (result.error) { showToast('Erreur: '+result.error.message,'err'); return; }
+  showToast(editingId?'Catégorie modifiée !':'Catégorie ajoutée !','ok');
+  closeModal();
+  await loadCategories();
+  renderCategories();
+}
+
+/* ════════════════════════════════════
+   SUPPRESSION
+════════════════════════════════════ */
+var deleteTarget = null;
+function confirmDelete(id, name, type) {
+  deleteTarget = { id, type };
+  document.getElementById('confirm-ti').textContent = 'Supprimer "'+name+'" ?';
+  document.getElementById('confirm-sub').textContent = 'Cette action est irréversible. '+(type==='product'?'Le produit sera retiré du site immédiatement.':type==='supplier'?'Le fournisseur sera supprimé.':'La catégorie sera supprimée.');
+  document.getElementById('confirm-bg').classList.add('on');
+  document.getElementById('confirm-box').classList.add('on');
+  document.getElementById('confirm-ok').onclick = doDelete;
+}
+function closeConfirm() {
+  document.getElementById('confirm-bg').classList.remove('on');
+  document.getElementById('confirm-box').classList.remove('on');
+  deleteTarget = null;
+}
+async function doDelete() {
+  if (!deleteTarget) return;
+  var tbl = deleteTarget.type==='product'?'mifa_products':deleteTarget.type==='supplier'?'mifa_suppliers':'mifa_categories';
+  var { error } = await db.from(tbl).delete().eq('id', deleteTarget.id);
+  closeConfirm();
+  if (error) { showToast('Erreur: '+error.message,'err'); return; }
+  showToast('Supprimé avec succès', 'ok');
+  if (deleteTarget.type==='product') renderProducts();
+  else if (deleteTarget.type==='supplier') { await loadSuppliers(); renderSuppliers(); }
+  else { await loadCategories(); renderCategories(); }
+}
+
+/* ════════════════════════════════════
+   UTILITAIRES
+════════════════════════════════════ */
+function filterTable(input, tbodyId) {
+  var q = input.value.toLowerCase();
+  var rows = document.getElementById(tbodyId).querySelectorAll('tr');
+  rows.forEach(function(r){ r.style.display = r.textContent.toLowerCase().includes(q) ? '' : 'none'; });
+}
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function openModal(title, bodyHTML, footerHTML) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-body').innerHTML = bodyHTML;
+  document.getElementById('modal-footer').innerHTML = footerHTML||'';
+  document.getElementById('modal-bg').classList.add('on');
+  document.getElementById('modal').classList.add('on');
+}
+function closeModal() {
+  document.getElementById('modal-bg').classList.remove('on');
+  document.getElementById('modal').classList.remove('on');
+  currentImages = [];
+  editingId = null;
+}
+
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'on' + (type?' '+type:'');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.className=''; }, 3200);
+}
+
+document.addEventListener('keydown', function(e){
+  if (e.key==='Escape') { closeModal(); closeConfirm(); }
+});
+</script>
+</body>
+</html>

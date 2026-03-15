@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+<meta name="description" content="Mon espace client Mifa Life — commandes, favoris, adresses, sécurité."/>
+<meta name="theme-color" content="#00897B"/>
+<title>Mon espace · Mifa Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --em:#00897B;--em-d:#00695C;--em-l:rgba(0,137,123,.10);--em-g:rgba(0,137,123,.22);
+  --or:#B85C38;--or-l:rgba(184,92,56,.10);
+  --sl:#2C3A3F;--sl2:#1C2A30;--sl3:#111B22;
+  --mu:#C9A84C;--mu-l:rgba(201,168,76,.12);
+  --mg:#009A00;--my:#FFD700;--mr:#CE1126;
+  --bg:#F6F4F0;--bg2:#EEE9E1;--bg3:#D4CEC6;--white:#fff;
+  --t1:#1A2422;--t2:#2d4038;--t3:#5a7566;--t4:#9cb5a8;
+  --r:10px;--rl:14px;--rx:18px;
+  --sh-s:0 2px 10px rgba(0,0,0,.06);
+  --sh-m:0 6px 22px rgba(0,0,0,.09);
+  --sh-l:0 14px 42px rgba(0,0,0,.12);
+  --tr:.22s cubic-bezier(.25,.46,.45,.94);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:"Nunito Sans",sans-serif;background:var(--bg);color:var(--t1);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%;object-fit:cover}
+button,input,select,textarea{font-family:inherit;border:none;background:none;outline:none;cursor:pointer}
+p{line-height:1.7}
+*:focus-visible{outline:2px solid var(--em);outline-offset:2px}
+
+/* ═══ NAVBAR ═══ */
+#nav{position:sticky;top:0;z-index:500;background:rgba(246,244,240,.97);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--bg3);transition:box-shadow var(--tr)}
+#nav.sc{box-shadow:var(--sh-m)}
+.nv{max-width:1280px;margin:0 auto;padding:0 clamp(14px,3vw,28px);height:clamp(54px,8vw,62px);display:flex;align-items:center;gap:clamp(8px,2vw,14px)}
+.logo{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.logo-bars{display:flex;flex-direction:column;gap:3px;flex-shrink:0}
+.logo-bars span{height:2px;border-radius:2px;background:var(--em);display:block}
+.logo-bars span:nth-child(1){width:26px}
+.logo-bars span:nth-child(2){width:17px}
+.logo-bars span:nth-child(3){width:22px}
+.logo-text{font-family:"Playfair Display",Georgia,serif;font-size:clamp(13px,3vw,16px);font-weight:700;letter-spacing:-.02em}
+.logo-text em{font-style:normal;color:var(--em)}
+.flag-mini{display:flex;border-radius:2px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.2);flex-shrink:0}
+.flag-mini span{width:5px;height:10px;display:block}
+.nv-r{display:flex;align-items:center;gap:6px;margin-left:auto}
+.nv-lnk{font-size:13px;font-weight:600;color:var(--t3);padding:6px 10px;border-radius:7px;transition:all var(--tr)}
+.nv-lnk:hover{color:var(--em);background:var(--em-l)}
+.ic-btn{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--t2);transition:all var(--tr);position:relative}
+.ic-btn:hover{background:var(--bg2);color:var(--em)}
+.ic-bdg{position:absolute;top:4px;right:4px;min-width:14px;height:14px;padding:0 3px;background:var(--or);color:#fff;border-radius:7px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--bg)}
+.burger{width:36px;height:36px;border-radius:8px;border:1.5px solid var(--bg3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:all var(--tr)}
+@media(min-width:900px){.burger{display:none}}
+.burger:hover{border-color:var(--em);background:var(--em-l)}
+.burger span{width:15px;height:2px;background:var(--t2);border-radius:2px;display:block;transition:all var(--tr)}
+.burger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+/* desktop links */
+.nv-links{display:none;align-items:center;gap:2px}
+@media(min-width:900px){.nv-links{display:flex}}
+
+/* ═══ MOBILE DRAWER ═══ */
+#mob-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:498;opacity:0;visibility:hidden;transition:all var(--tr);backdrop-filter:blur(3px)}
+#mob-bg.on{opacity:1;visibility:visible}
+#mob-dr{position:fixed;top:0;right:0;bottom:0;width:min(280px,82vw);background:var(--white);z-index:499;transform:translateX(100%);transition:transform var(--tr);overflow-y:auto;display:flex;flex-direction:column;box-shadow:var(--sh-l)}
+#mob-dr.on{transform:translateX(0)}
+.mob-hd{padding:14px 18px;border-bottom:1px solid var(--bg3);display:flex;align-items:center;justify-content:space-between}
+.mob-cl{width:30px;height:30px;border-radius:50%;background:var(--bg2);font-size:14px;color:var(--t2);display:flex;align-items:center;justify-content:center}
+.mob-links{flex:1;padding:6px 0}
+.mob-l{display:flex;align-items:center;gap:10px;padding:11px 18px;font-size:13px;font-weight:600;color:var(--t2);transition:all var(--tr);border-bottom:1px solid var(--bg)}
+.mob-l:hover,.mob-l.on{color:var(--em);background:var(--em-l)}
+.mob-l svg{flex-shrink:0;color:var(--t4)}
+.mob-l.on svg{color:var(--em)}
+
+/* ═══ BANDE MALI ═══ */
+.mali-stripe{height:3px;display:flex}
+.mali-stripe span{flex:1}
+
+/* ═══ LAYOUT PRINCIPAL ═══ */
+#dash-wrap{max-width:1280px;margin:0 auto;padding:clamp(16px,3vw,28px) clamp(14px,3vw,28px);display:grid;grid-template-columns:1fr;gap:clamp(16px,3vw,24px)}
+@media(min-width:860px){#dash-wrap{grid-template-columns:240px 1fr}}
+@media(min-width:1100px){#dash-wrap{grid-template-columns:260px 1fr}}
+
+/* ═══ SIDEBAR NAV ═══ */
+#dash-nav{position:sticky;top:calc(clamp(54px,8vw,62px) + 16px);height:fit-content}
+@media(max-width:859px){#dash-nav{display:none}}
+.dn-card{background:var(--white);border:1px solid var(--bg3);border-radius:var(--rl);overflow:hidden}
+/* Profil mini */
+.dn-profil{padding:clamp(16px,3vw,20px);border-bottom:1px solid var(--bg2);display:flex;align-items:center;gap:12px}
+.dn-avatar{width:44px;height:44px;border-radius:50%;background:var(--em-l);border:2px solid var(--em-g);display:flex;align-items:center;justify-content:center;font-family:"Playfair Display",Georgia,serif;font-size:16px;font-weight:700;color:var(--em);flex-shrink:0;letter-spacing:.02em}
+.dn-name{font-size:13px;font-weight:700;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dn-email{font-size:11px;color:var(--t4);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Nav items */
+.dn-links{padding:6px 0}
+.dn-link{display:flex;align-items:center;gap:10px;padding:10px 16px;font-size:13px;font-weight:600;color:var(--t2);transition:all var(--tr);cursor:pointer;border:none;width:100%;text-align:left;background:none;font-family:inherit}
+.dn-link:hover{color:var(--em);background:var(--em-l)}
+.dn-link.on{color:var(--em);background:var(--em-l);font-weight:700}
+.dn-link svg{flex-shrink:0;color:var(--t4);transition:color var(--tr)}
+.dn-link:hover svg,.dn-link.on svg{color:var(--em)}
+.dn-sep{height:1px;background:var(--bg2);margin:4px 0}
+.dn-logout{color:var(--or)!important}
+.dn-logout svg{color:var(--or)!important}
+/* Badges compteur */
+.dn-cnt{margin-left:auto;background:var(--bg2);color:var(--t3);font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px;min-width:18px;text-align:center}
+.dn-link.on .dn-cnt{background:var(--em);color:#fff}
+
+/* ═══ CONTENU PRINCIPAL ═══ */
+#dash-content{}
+
+/* En-tête section */
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:clamp(14px,3vw,20px);flex-wrap:wrap;gap:10px}
+.sec-ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(18px,4vw,22px);font-weight:700;color:var(--sl);letter-spacing:-.015em}
+.sec-sub{font-size:12px;color:var(--t4);margin-top:2px;font-weight:500}
+.sec-action{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;color:var(--em);border:1.5px solid var(--em-g);background:var(--em-l);transition:all var(--tr);font-family:inherit}
+.sec-action:hover{background:var(--em);color:#fff}
+
+/* ─── PANNEAUX ─── */
+.dash-panel{display:none}
+.dash-panel.active{display:block;animation:fadeUp .3s ease}
+@keyframes fadeUp{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}
+
+/* ═══ PANEL : APERÇU ═══ */
+/* Cards stats */
+.stat-grid{display:grid;gap:clamp(10px,2vw,14px);grid-template-columns:repeat(2,1fr);margin-bottom:clamp(18px,3vw,24px)}
+@media(min-width:560px){.stat-grid{grid-template-columns:repeat(4,1fr)}}
+.stat-c{background:var(--white);border:1px solid var(--bg3);border-radius:var(--rl);padding:clamp(14px,3vw,18px);transition:all var(--tr)}
+.stat-c:hover{border-color:var(--em-g);transform:translateY(-2px);box-shadow:var(--sh-s)}
+.stat-ico{width:36px;height:36px;border-radius:9px;background:var(--em-l);border:1px solid var(--em-g);display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.stat-n{font-family:"Playfair Display",Georgia,serif;font-size:clamp(20px,4vw,26px);font-weight:700;color:var(--sl);letter-spacing:-.015em;line-height:1}
+.stat-l{font-size:11px;color:var(--t4);margin-top:4px;font-weight:600}
+/* Commandes récentes */
+.orders-list{display:flex;flex-direction:column;gap:10px}
+.order-c{background:var(--white);border:1px solid var(--bg3);border-radius:var(--rl);padding:clamp(14px,3vw,18px);transition:all var(--tr);cursor:pointer}
+.order-c:hover{border-color:var(--em-g);box-shadow:var(--sh-s)}
+.order-hd{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.order-ref{font-size:12px;font-weight:700;color:var(--t2);font-variant-numeric:tabular-nums}
+.order-date{font-size:11px;color:var(--t4)}
+.order-status{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.order-status.delivered{background:rgba(0,137,123,.10);color:var(--em)}
+.order-status.transit{background:rgba(201,168,76,.14);color:#8a6f1a}
+.order-status.pending{background:rgba(184,92,56,.10);color:var(--or)}
+.order-status.cancelled{background:rgba(100,100,100,.08);color:var(--t3)}
+.order-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+.order-items{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.order-thumb{width:44px;height:44px;border-radius:7px;object-fit:cover;background:var(--bg2);border:1px solid var(--bg3)}
+.order-more{width:44px;height:44px;border-radius:7px;background:var(--bg2);border:1px solid var(--bg3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--t3)}
+.order-ft{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.order-total{font-family:"Nunito Sans",sans-serif;font-size:14px;font-weight:700;color:var(--t1)}
+.order-act{display:flex;gap:6px;flex-wrap:wrap}
+.o-btn{padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700;transition:all var(--tr);font-family:inherit;border:none}
+.o-btn.primary{background:var(--em);color:#fff}
+.o-btn.primary:hover{background:var(--em-d)}
+.o-btn.ghost{border:1.5px solid var(--bg3);color:var(--t2);background:none}
+.o-btn.ghost:hover{border-color:var(--em);color:var(--em)}
+
+/* ═══ PANEL : COMMANDES ═══ */
+/* Filtres statut */
+.order-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:clamp(14px,3vw,18px)}
+.of-btn{padding:7px 14px;border-radius:8px;border:1.5px solid var(--bg3);background:var(--white);font-size:12px;font-weight:700;color:var(--t3);transition:all var(--tr);font-family:inherit}
+.of-btn:hover{border-color:var(--em-g);color:var(--t2)}
+.of-btn.on{background:var(--em);border-color:var(--em);color:#fff}
+/* État vide */
+.empty-state{background:var(--white);border:1px solid var(--bg3);border-radius:var(--rl);padding:clamp(40px,8vw,64px) 24px;text-align:center}
+.es-ico{margin:0 auto 16px;opacity:.28;width:fit-content}
+.es-ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(17px,4vw,21px);font-weight:700;color:var(--sl);margin-bottom:7px}
+.es-sub{font-size:13px;color:var(--t3);max-width:320px;margin:0 auto 22px;line-height:1.65}
+.es-btn{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;background:var(--em);color:#fff;border-radius:9px;font-size:13px;font-weight:700;transition:all var(--tr);font-family:inherit;border:none}
+.es-btn:hover{background:var(--em-d)}
+
+/* ═══ PANEL : FAVORIS ═══ */
+.fav-grid{display:grid;gap:clamp(10px,2vw,14px);grid-template-columns:repeat(2,1fr)}
+@media(min-width:500px){.fav-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1100px){.fav-grid{grid-template-columns:repeat(4,1fr)}}
+.fav-c{background:var(--white);border:1px solid var(--bg3);border-radius:var(--rl);overflow:hidden;transition:all var(--tr)}
+.fav-c:hover{transform:translateY(-2px);box-shadow:var(--sh-m);border-color:var(--em-g)}
+.fav-img{aspect-ratio:1;overflow:hidden;background:var(--bg2);position:relative}
+.fav-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.fav-c:hover .fav-img img{transform:scale(1.05)}
+.fav-rm{position:absolute;top:7px;right:7px;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;font-size:12px;transition:all var(--tr);border:none;box-shadow:var(--sh-s)}
+.fav-rm:hover{background:#fee2e2;color:#EF4444}
+.fav-bd{padding:clamp(10px,2vw,12px)}
+.fav-nm{font-size:clamp(11px,2.5vw,13px);font-weight:600;color:var(--t1);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.35;margin-bottom:6px}
+.fav-p{font-size:clamp(12px,3vw,14px);font-weight:700;color:var(--t1);margin-bottom:8px}
+.fav-atc{width:100%;padding:8px;background:var(--em);color:#fff;border-radius:8px;font-size:12px;font-weight:700;transition:all var(--tr);font-family:inherit;border:none;display:flex;align-items:center;justify-content:center;gap:5px}
+.fav-atc:hover{background:var(--em-d)}
+
+/* ═══ PANEL : ADRESSES ═══ */
+.addr-grid{display:grid;gap:clamp(10px,2vw,14px);grid-template-columns:1fr}
+@media(min-width:560px){.addr-grid{grid-template-columns:1fr 1fr}}
+.addr-c{background:var(--white);border:1px solid var(--bg3);border-radius:var(--rl);padding:clamp(16px,3vw,20px);transition:all var(--tr);position:relative}
+.addr-c.default{border-color:var(--em);background:var(--em-l)}
+.addr-c:hover{border-color:var(--em-g)}
+.addr-badge{position:absolute;top:-1px;left:16px;background:var(--em);color:#fff;font-size:10px;font-weight:700;padding:2px 10px;border-radius:0 0 7px 7px;letter-spacing:.04em}
+.addr-nm{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:5px;margin-top:12px}
+.addr-c.default .addr-nm{margin-top:20px}
+.addr-txt{font-size:12px;color:var(--t3);line-height:1.65}
+.addr-phone{font-size:12px;color:var(--t4);margin-top:5px}
+.addr-actions{display:flex;gap:8px;margin-top:12px}
+.addr-btn{padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700;transition:all var(--tr);font-family:inherit;border:1.5px solid var(--bg3);color:var(--t2);background:none}
+.addr-btn:hover{border-color:var(--em);color:var(--em)}
+.addr-btn.danger:hover{border-color:#EF4444;color:#EF4444}
+/* Add address card */
+.addr-add{border:2px dashed var(--bg3);background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;min-height:140px;border-radius:var(--rl);transition:all var(--tr);padding:20px}
+.addr-add:hover{border-color:var(--em);background:var(--em-l)}
+.addr-add-ico{width:38px;height:38px;border-radius:10px;background:var(--bg2);display:flex;align-items:center;justify-content:center;transition:all var(--tr)}
+.addr-add:hover .addr-add-ico{background:var(--em-l)}
+.addr-add-lbl{font-size:13px;font-weight:700;color:var(--t3);transition:color var(--tr)}
+.addr-add:hover .addr-add-lbl{color:var(--em)}
+
+/* ═══ PANEL : PROFIL ═══ */
+.profil-wrap{display:grid;gap:clamp(14px,3vw,18px);grid-template-columns:1fr}
+@media(min-width:700px){.profil-wrap{grid-template-columns:1fr 1fr}}
+.profil-section{background:var(--white);border:1px solid var(--bg3);border-radius:var(--rl);padding:clamp(18px,3vw,24px)}
+.profil-section.full{grid-column:1/-1}
+.ps-hd{display:flex;align-items:center;gap:9px;margin-bottom:clamp(16px,3vw,20px);padding-bottom:12px;border-bottom:1px solid var(--bg2)}
+.ps-ico{width:32px;height:32px;border-radius:8px;background:var(--em-l);border:1px solid var(--em-g);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ps-ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(14px,3vw,16px);font-weight:700;color:var(--sl)}
+/* Avatar changer */
+.avatar-row{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.big-avatar{width:70px;height:70px;border-radius:50%;background:var(--em-l);border:3px solid var(--em);display:flex;align-items:center;justify-content:center;font-family:"Playfair Display",Georgia,serif;font-size:24px;font-weight:700;color:var(--em);flex-shrink:0}
+.avatar-change{font-size:12px;font-weight:700;color:var(--em);background:none;border:1.5px solid var(--em-g);padding:6px 14px;border-radius:8px;transition:all var(--tr);font-family:inherit}
+.avatar-change:hover{background:var(--em-l)}
+/* Champs profil */
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:13px}
+.fg:last-child{margin-bottom:0}
+.fl{font-size:12px;font-weight:700;color:var(--t2);letter-spacing:.02em}
+.fi{width:100%;padding:clamp(10px,2vw,12px) clamp(12px,2vw,14px);border:1.5px solid var(--bg3);border-radius:9px;font-size:clamp(13px,2.5vw,14px);font-weight:500;color:var(--t1);background:var(--white);transition:all var(--tr)}
+.fi::placeholder{color:var(--t4)}
+.fi:focus{border-color:var(--em);box-shadow:0 0 0 3px var(--em-l);outline:none}
+.fi:disabled{background:var(--bg);color:var(--t3);cursor:not-allowed}
+select.fi{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%235a7566'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.fi-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.save-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;background:var(--em);color:#fff;border-radius:9px;font-size:13px;font-weight:700;transition:all var(--tr);border:none;font-family:inherit;margin-top:4px}
+.save-btn:hover{background:var(--em-d);transform:translateY(-1px)}
+/* Sécurité */
+.sec-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--bg2)}
+.sec-row:last-child{border-bottom:none;padding-bottom:0}
+.sec-row-info{flex:1}
+.sec-row-ti{font-size:13px;font-weight:700;color:var(--t1)}
+.sec-row-sub{font-size:11px;color:var(--t4);margin-top:2px}
+.sec-row-btn{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;transition:all var(--tr);font-family:inherit;white-space:nowrap;flex-shrink:0;border:1.5px solid var(--bg3);color:var(--t2);background:none}
+.sec-row-btn:hover{border-color:var(--em);color:var(--em)}
+/* Toggle switch */
+.toggle-sw{width:40px;height:22px;border-radius:11px;background:var(--bg3);border:none;position:relative;transition:all var(--tr);flex-shrink:0;cursor:pointer}
+.toggle-sw.on{background:var(--em)}
+.toggle-sw::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform var(--tr);box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.toggle-sw.on::after{transform:translateX(18px)}
+/* Zone danger */
+.danger-zone{border:1px solid #fecaca;border-radius:var(--rl);padding:clamp(16px,3vw,20px);background:#fff5f5}
+.dz-ti{font-size:13px;font-weight:700;color:#EF4444;margin-bottom:5px}
+.dz-sub{font-size:12px;color:var(--t3);margin-bottom:13px;line-height:1.6}
+.dz-btn{padding:8px 18px;border-radius:8px;font-size:12px;font-weight:700;border:1.5px solid #EF4444;color:#EF4444;background:none;transition:all var(--tr);font-family:inherit}
+.dz-btn:hover{background:#EF4444;color:#fff}
+
+/* ═══ PANEL : NOTIFICATIONS ═══ */
+.notif-list{display:flex;flex-direction:column;gap:1px;background:var(--bg3);border-radius:var(--rl);overflow:hidden;border:1px solid var(--bg3)}
+.notif-item{background:var(--white);padding:clamp(13px,3vw,16px) clamp(14px,3vw,18px);display:flex;align-items:flex-start;gap:12px;transition:background var(--tr);cursor:pointer}
+.notif-item:hover{background:var(--bg)}
+.notif-item.unread{background:var(--em-l)}
+.notif-ico{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.notif-ico.order{background:var(--em-l)}
+.notif-ico.promo{background:var(--mu-l)}
+.notif-ico.system{background:var(--bg2)}
+.notif-body{flex:1;min-width:0}
+.notif-ti{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:2px}
+.notif-sub{font-size:12px;color:var(--t3);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.notif-time{font-size:11px;color:var(--t4);white-space:nowrap;flex-shrink:0;margin-top:1px}
+.notif-dot{width:7px;height:7px;border-radius:50%;background:var(--em);flex-shrink:0;margin-top:4px;display:none}
+.notif-item.unread .notif-dot{display:block}
+
+/* ═══ TOAST ═══ */
+#toast{position:fixed;bottom:clamp(16px,4vw,24px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--sl);color:#fff;font-size:13px;font-weight:600;padding:11px 20px;border-radius:8px;box-shadow:var(--sh-l);z-index:9999;opacity:0;visibility:hidden;transition:all var(--tr);white-space:nowrap;max-width:min(90vw,400px);overflow:hidden;text-overflow:ellipsis}
+#toast.on{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+
+/* ═══ MODAL ADRESSE ═══ */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;display:flex;align-items:flex-end;justify-content:center;padding:0;opacity:0;visibility:hidden;transition:all var(--tr);backdrop-filter:blur(4px)}
+@media(min-width:560px){.modal-ov{align-items:center;padding:24px}}
+.modal-ov.on{opacity:1;visibility:visible}
+.modal-box{background:var(--white);border-radius:var(--rx) var(--rx) 0 0;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;padding:clamp(20px,4vw,28px);transition:transform var(--tr);transform:translateY(30px)}
+@media(min-width:560px){.modal-box{border-radius:var(--rx)}}
+.modal-ov.on .modal-box{transform:translateY(0)}
+.modal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.modal-ti{font-family:"Playfair Display",Georgia,serif;font-size:18px;font-weight:700;color:var(--sl)}
+.modal-cl{width:30px;height:30px;border-radius:50%;background:var(--bg2);font-size:14px;color:var(--t2);display:flex;align-items:center;justify-content:center;transition:background var(--tr);border:none}
+.modal-cl:hover{background:var(--bg3)}
+</style>
+</head>
+<body>
+
+<div class="mali-stripe"><span style="background:var(--mg)"></span><span style="background:var(--my)"></span><span style="background:var(--mr)"></span></div>
+
+<!-- ═══════════════════════ NAVBAR ═══════════════════════ -->
+<nav id="nav">
+  <div class="nv">
+    <a class="logo" href="/">
+      <div class="logo-bars"><span></span><span></span><span></span></div>
+      <div class="logo-text"><em>MIFA</em> LIFE</div>
+      <div class="flag-mini"><span style="background:var(--mg)"></span><span style="background:var(--my)"></span><span style="background:var(--mr)"></span></div>
+    </a>
+    <div class="nv-links">
+      <a class="nv-lnk" href="/">Accueil</a>
+      <a class="nv-lnk" href="/catalogue">Catalogue</a>
+      <a class="nv-lnk" href="/categories">Catégories</a>
+    </div>
+    <div class="nv-r">
+      <a class="ic-btn" href="/favoris" title="Mes favoris">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </a>
+      <a class="ic-btn" href="/panier" title="Panier">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="ic-bdg" id="cartBdg" style="display:none">0</span>
+      </a>
+      <button class="burger" id="burger" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div id="mob-bg" onclick="toggleMenu()"></div>
+<div id="mob-dr">
+  <div class="mob-hd">
+    <div class="logo-text"><em>MIFA</em> LIFE</div>
+    <button class="mob-cl" onclick="toggleMenu()">✕</button>
+  </div>
+  <nav class="mob-links">
+    <a class="mob-l" href="/"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Accueil</a>
+    <a class="mob-l" href="/catalogue"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Catalogue</a>
+    <div class="mob-l on" onclick="toggleMenu()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Mon espace</div>
+    <a class="mob-l" href="/suivi-commande"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 5v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Suivre ma commande</a>
+    <a class="mob-l" href="/contact"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Support</a>
+    <button class="mob-l" onclick="logout()" style="color:#EF4444;width:100%;text-align:left"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Se déconnecter</button>
+  </nav>
+</div>
+
+<!-- ═══════════════════════ DASHBOARD ═══════════════════════ -->
+<div id="dash-wrap">
+
+  <!-- ──── SIDEBAR NAV ──── -->
+  <aside id="dash-nav" aria-label="Navigation espace client">
+    <div class="dn-card">
+      <div class="dn-profil">
+        <div class="dn-avatar" id="sideAvatar">A</div>
+        <div style="min-width:0">
+          <div class="dn-name" id="sideName">Chargement…</div>
+          <div class="dn-email" id="sideEmail">—</div>
+        </div>
+      </div>
+      <div class="dn-links">
+        <button class="dn-link on" onclick="showPanel('apercu')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Aperçu
+        </button>
+        <button class="dn-link" onclick="showPanel('commandes')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Mes commandes
+          <span class="dn-cnt" id="ordCnt">0</span>
+        </button>
+        <button class="dn-link" onclick="showPanel('favoris')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Mes favoris
+          <span class="dn-cnt" id="favCnt">0</span>
+        </button>
+        <button class="dn-link" onclick="showPanel('adresses')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Mes adresses
+        </button>
+        <button class="dn-link" onclick="showPanel('notifications')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          Notifications
+          <span class="dn-cnt" id="notifCnt" style="background:var(--or);color:#fff">0</span>
+        </button>
+        <div class="dn-sep"></div>
+        <button class="dn-link" onclick="showPanel('profil')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Profil & Sécurité
+        </button>
+        <a class="dn-link" href="/suivi-commande">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 5v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          Suivi de commande
+        </a>
+        <div class="dn-sep"></div>
+        <button class="dn-link dn-logout" onclick="logout()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Se déconnecter
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ──── CONTENU ──── -->
+  <main id="dash-content" aria-live="polite">
+
+    <!-- ═══════ APERÇU ═══════ -->
+    <div class="dash-panel active" id="panel-apercu">
+      <div class="sec-hd">
+        <div>
+          <div class="sec-ti" id="welcomeTxt">Bonjour —</div>
+          <div class="sec-sub">Voici un résumé de votre activité</div>
+        </div>
+        <a class="sec-action" href="/catalogue">Explorer le catalogue <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+      </div>
+
+      <!-- Stats (chiffres réels du compte, pas des faux) -->
+      <div class="stat-grid">
+        <div class="stat-c">
+          <div class="stat-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></div>
+          <div class="stat-n" id="statOrders">0</div>
+          <div class="stat-l">Commandes</div>
+        </div>
+        <div class="stat-c">
+          <div class="stat-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <div class="stat-n" id="statFav">0</div>
+          <div class="stat-l">Favoris</div>
+        </div>
+        <div class="stat-c">
+          <div class="stat-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="stat-n" id="statAddr">0</div>
+          <div class="stat-l">Adresses</div>
+        </div>
+        <div class="stat-c">
+          <div class="stat-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <div class="stat-n" id="statSec">—</div>
+          <div class="stat-l">Sécurité</div>
+        </div>
+      </div>
+
+      <!-- Commandes récentes -->
+      <div class="sec-hd" style="margin-top:4px">
+        <div>
+          <div class="sec-ti">Commandes récentes</div>
+        </div>
+        <button class="sec-action" onclick="showPanel('commandes')">Voir tout</button>
+      </div>
+      <div id="recentOrdersList"></div>
+    </div>
+
+    <!-- ═══════ MES COMMANDES ═══════ -->
+    <div class="dash-panel" id="panel-commandes">
+      <div class="sec-hd">
+        <div>
+          <div class="sec-ti">Mes commandes</div>
+          <div class="sec-sub" id="orderSubtitle">—</div>
+        </div>
+        <a class="sec-action" href="/catalogue">Nouvelle commande</a>
+      </div>
+
+      <!-- Filtres -->
+      <div class="order-filters" id="orderFilters">
+        <button class="of-btn on" onclick="filterOrders(this,'all')">Toutes</button>
+        <button class="of-btn" onclick="filterOrders(this,'pending')">En attente</button>
+        <button class="of-btn" onclick="filterOrders(this,'transit')">En cours</button>
+        <button class="of-btn" onclick="filterOrders(this,'delivered')">Livrées</button>
+        <button class="of-btn" onclick="filterOrders(this,'cancelled')">Annulées</button>
+      </div>
+
+      <div class="orders-list" id="ordersList"></div>
+    </div>
+
+    <!-- ═══════ MES FAVORIS ═══════ -->
+    <div class="dash-panel" id="panel-favoris">
+      <div class="sec-hd">
+        <div>
+          <div class="sec-ti">Mes favoris</div>
+          <div class="sec-sub" id="favSubtitle">—</div>
+        </div>
+        <a class="sec-action" href="/catalogue">Parcourir le catalogue</a>
+      </div>
+      <div class="fav-grid" id="favGrid"></div>
+    </div>
+
+    <!-- ═══════ MES ADRESSES ═══════ -->
+    <div class="dash-panel" id="panel-adresses">
+      <div class="sec-hd">
+        <div>
+          <div class="sec-ti">Mes adresses</div>
+          <div class="sec-sub">Adresses de livraison enregistrées</div>
+        </div>
+      </div>
+      <div class="addr-grid" id="addrGrid"></div>
+    </div>
+
+    <!-- ═══════ NOTIFICATIONS ═══════ -->
+    <div class="dash-panel" id="panel-notifications">
+      <div class="sec-hd">
+        <div>
+          <div class="sec-ti">Notifications</div>
+          <div class="sec-sub" id="notifSubtitle">—</div>
+        </div>
+        <button class="sec-action" onclick="markAllRead()">Tout marquer lu</button>
+      </div>
+      <div class="notif-list" id="notifList"></div>
+    </div>
+
+    <!-- ═══════ PROFIL & SÉCURITÉ ═══════ -->
+    <div class="dash-panel" id="panel-profil">
+      <div class="sec-hd">
+        <div>
+          <div class="sec-ti">Profil &amp; Sécurité</div>
+          <div class="sec-sub">Gérez vos informations personnelles</div>
+        </div>
+      </div>
+
+      <div class="profil-wrap">
+
+        <!-- Infos personnelles -->
+        <div class="profil-section">
+          <div class="ps-hd">
+            <div class="ps-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <div class="ps-ti">Informations personnelles</div>
+          </div>
+          <div class="avatar-row">
+            <div class="big-avatar" id="bigAvatar">A</div>
+            <div>
+              <button class="avatar-change" onclick="showToast('Fonctionnalité disponible prochainement')">Changer la photo</button>
+              <div style="font-size:11px;color:var(--t4);margin-top:5px">JPG, PNG · max 2 Mo</div>
+            </div>
+          </div>
+          <div class="fi-row">
+            <div class="fg"><label class="fl" for="pPrenom">Prénom</label><input class="fi" type="text" id="pPrenom" placeholder="Aminata"/></div>
+            <div class="fg"><label class="fl" for="pNom">Nom</label><input class="fi" type="text" id="pNom" placeholder="Coulibaly"/></div>
+          </div>
+          <div class="fg"><label class="fl" for="pEmail">E-mail</label><input class="fi" type="email" id="pEmail" placeholder="votre@email.com"/></div>
+          <div class="fg">
+            <label class="fl" for="pPhone">Téléphone</label>
+            <input class="fi" type="tel" id="pPhone" placeholder="+223 70 00 00 00"/>
+          </div>
+          <div class="fg">
+            <label class="fl" for="pVille">Ville</label>
+            <select class="fi" id="pVille">
+              <option value="">Choisir une ville</option>
+              <option value="bamako">Bamako</option>
+              <option value="sikasso">Sikasso</option>
+              <option value="segou">Ségou</option>
+              <option value="mopti">Mopti</option>
+              <option value="kayes">Kayes</option>
+              <option value="gao">Gao</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+          <button class="save-btn" onclick="saveProfil()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Enregistrer
+          </button>
+        </div>
+
+        <!-- Sécurité -->
+        <div class="profil-section">
+          <div class="ps-hd">
+            <div class="ps-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <div class="ps-ti">Sécurité du compte</div>
+          </div>
+          <div class="sec-row">
+            <div class="sec-row-info">
+              <div class="sec-row-ti">Mot de passe</div>
+              <div class="sec-row-sub">Dernière modification : —</div>
+            </div>
+            <button class="sec-row-btn" onclick="showToast('Lien de réinitialisation envoyé par e-mail')">Modifier</button>
+          </div>
+          <div class="sec-row">
+            <div class="sec-row-info">
+              <div class="sec-row-ti">Vérification par SMS</div>
+              <div class="sec-row-sub">Code OTP à chaque connexion</div>
+            </div>
+            <button class="toggle-sw" id="smsToggle" onclick="toggleSec(this)" aria-label="Activer OTP SMS"></button>
+          </div>
+          <div class="sec-row">
+            <div class="sec-row-info">
+              <div class="sec-row-ti">Notifications par e-mail</div>
+              <div class="sec-row-sub">Confirmations, suivi de commande</div>
+            </div>
+            <button class="toggle-sw on" id="emailToggle" onclick="toggleSec(this)" aria-label="Activer e-mails"></button>
+          </div>
+          <div class="sec-row" style="border-bottom:none">
+            <div class="sec-row-info">
+              <div class="sec-row-ti">Sessions actives</div>
+              <div class="sec-row-sub" id="sessionInfo">Ce navigateur</div>
+            </div>
+            <button class="sec-row-btn" onclick="showToast('Toutes les autres sessions ont été fermées')">Déconnecter tout</button>
+          </div>
+        </div>
+
+        <!-- Préférences de notification -->
+        <div class="profil-section full">
+          <div class="ps-hd">
+            <div class="ps-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+            <div class="ps-ti">Préférences de notification</div>
+          </div>
+          <div style="display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
+            <div class="sec-row" style="border-bottom:none;padding:10px 0">
+              <div class="sec-row-info"><div class="sec-row-ti">Statut de commande</div><div class="sec-row-sub">Mis à jour à chaque étape</div></div>
+              <button class="toggle-sw on" onclick="toggleSec(this)"></button>
+            </div>
+            <div class="sec-row" style="border-bottom:none;padding:10px 0">
+              <div class="sec-row-info"><div class="sec-row-ti">Offres personnalisées</div><div class="sec-row-sub">Basées sur vos achats</div></div>
+              <button class="toggle-sw" onclick="toggleSec(this)"></button>
+            </div>
+            <div class="sec-row" style="border-bottom:none;padding:10px 0">
+              <div class="sec-row-info"><div class="sec-row-ti">Nouveaux produits</div><div class="sec-row-sub">Dans vos catégories préférées</div></div>
+              <button class="toggle-sw" onclick="toggleSec(this)"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Zone danger -->
+        <div class="profil-section full" style="padding:0;background:transparent;border:none">
+          <div class="danger-zone">
+            <div class="dz-ti">Zone de danger</div>
+            <p class="dz-sub">La suppression de votre compte est définitive. Toutes vos données (commandes, adresses, favoris) seront effacées. Cette action ne peut pas être annulée.</p>
+            <button class="dz-btn" onclick="if(confirm('Confirmer la suppression définitive de votre compte ?')) showToast('Demande de suppression enregistrée')">Supprimer mon compte</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ═══ MODAL ADRESSE ═══ -->
+<div class="modal-ov" id="addrModal" onclick="if(event.target===this)closeAddrModal()">
+  <div class="modal-box">
+    <div class="modal-hd">
+      <div class="modal-ti" id="addrModalTi">Nouvelle adresse</div>
+      <button class="modal-cl" onclick="closeAddrModal()">✕</button>
+    </div>
+    <div class="fg"><label class="fl" for="maNom">Nom complet <span style="color:var(--or)">*</span></label><input class="fi" type="text" id="maNom" placeholder="Aminata Coulibaly"/></div>
+    <div class="fg"><label class="fl" for="maPhone">Téléphone <span style="color:var(--or)">*</span></label><input class="fi" type="tel" id="maPhone" placeholder="+223 70 00 00 00"/></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="fg" style="margin-bottom:0"><label class="fl" for="maVille">Ville <span style="color:var(--or)">*</span></label>
+        <select class="fi" id="maVille">
+          <option value="">Choisir</option>
+          <option value="bamako">Bamako</option>
+          <option value="sikasso">Sikasso</option>
+          <option value="segou">Ségou</option>
+          <option value="mopti">Mopti</option>
+          <option value="kayes">Kayes</option>
+        </select>
+      </div>
+      <div class="fg" style="margin-bottom:0"><label class="fl" for="maQuart">Quartier / Commune</label><input class="fi" type="text" id="maQuart" placeholder="Commune V…"/></div>
+    </div>
+    <div class="fg" style="margin-top:13px"><label class="fl" for="maRue">Rue / Repère <span style="color:var(--or)">*</span></label><input class="fi" type="text" id="maRue" placeholder="Ex: Rue 42, derrière la pharmacie…"/></div>
+    <div class="fg"><label class="fl" for="maNote">Note pour le livreur</label><textarea class="fi" id="maNote" rows="2" placeholder="Ex: Appeler 10 min avant, portail bleu…"></textarea></div>
+    <button onclick="saveAddress()" style="width:100%;padding:12px;background:var(--em);color:#fff;border-radius:9px;font-size:14px;font-weight:700;border:none;font-family:inherit;transition:all var(--tr);margin-top:4px">Enregistrer l'adresse</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<script>
+'use strict';
+/* ─── ÉTAT ─── */
+var toastTimer = null;
+var menuOpen   = false;
+var USER = {
+  prenom:'', nom:'', email:'', phone:'', ville:'',
+  createdAt: new Date().toLocaleDateString('fr-FR')
+};
+var ORDERS   = [];
+var WISHLIST = [];
+var ADDRESSES = [];
+var NOTIFS   = [];
+var orderFilter = 'all';
+
+/* ─── INIT : charge depuis localStorage ─── */
+function init() {
+  /* Profil */
+  var saved = localStorage.getItem('mifa_user');
+  if (saved) { try { USER = JSON.parse(saved); } catch(e){} }
+  /* Panier */
+  var cart = JSON.parse(localStorage.getItem('mifa_cart') || '[]');
+  var cb = document.getElementById('cartBdg');
+  var n  = cart.reduce(function(s,i){ return s+i.qty; }, 0);
+  if (cb) { cb.textContent = n; cb.style.display = n ? 'flex' : 'none'; }
+  /* Favoris */
+  var wishIds = JSON.parse(localStorage.getItem('mifa_wish') || '[]');
+  /* Commandes */
+  var savedOrders = localStorage.getItem('mifa_orders');
+  if (savedOrders) { try { ORDERS = JSON.parse(savedOrders); } catch(e){} }
+  /* Adresses */
+  var savedAddr = localStorage.getItem('mifa_addresses');
+  if (savedAddr) { try { ADDRESSES = JSON.parse(savedAddr); } catch(e){} }
+  /* Notifs */
+  var savedNotifs = localStorage.getItem('mifa_notifs');
+  if (savedNotifs) { try { NOTIFS = JSON.parse(savedNotifs); } catch(e){} }
+  else {
+    /* Notifs de bienvenue */
+    NOTIFS = [
+      { id:1, type:'system', ti:'Bienvenue sur Mifa Life !', sub:'Votre compte a bien été créé. Commencez à explorer notre catalogue.', time:'À l\'instant', read:false },
+      { id:2, type:'order', ti:'Votre commande est prête', sub:'Complétez votre profil pour faciliter la livraison.', time:'Il y a 5 min', read:false },
+    ];
+    saveNotifs();
+  }
+
+  updateUI();
+  showPanel('apercu');
+}
+
+/* ─── UI GLOBALE ─── */
+function updateUI() {
+  var initials = (USER.prenom ? USER.prenom[0] : '') + (USER.nom ? USER.nom[0] : '') || '?';
+  initials = initials.toUpperCase() || '?';
+  var fullName = ((USER.prenom || '') + ' ' + (USER.nom || '')).trim() || 'Mon compte';
+  /* Sidebar */
+  var sa = document.getElementById('sideAvatar'); if (sa) sa.textContent = initials;
+  var sn = document.getElementById('sideName');   if (sn) sn.textContent = fullName;
+  var se = document.getElementById('sideEmail');  if (se) se.textContent = USER.email || '—';
+  /* Welcome */
+  var wt = document.getElementById('welcomeTxt');
+  if (wt) wt.textContent = 'Bonjour' + (USER.prenom ? ', ' + USER.prenom : '') + ' —';
+  /* Big avatar */
+  var ba = document.getElementById('bigAvatar'); if (ba) ba.textContent = initials;
+  /* Champs profil */
+  var pp = document.getElementById('pPrenom'); if (pp) pp.value = USER.prenom || '';
+  var pn = document.getElementById('pNom');    if (pn) pn.value = USER.nom || '';
+  var pe = document.getElementById('pEmail');  if (pe) pe.value = USER.email || '';
+  var ph = document.getElementById('pPhone');  if (ph) ph.value = USER.phone || '';
+  var pv = document.getElementById('pVille');  if (pv) pv.value = USER.ville || '';
+  /* Stats */
+  var so = document.getElementById('statOrders'); if (so) so.textContent = ORDERS.length;
+  var sf = document.getElementById('statFav');    if (sf) sf.textContent = JSON.parse(localStorage.getItem('mifa_wish') || '[]').length;
+  var sad = document.getElementById('statAddr');   if (sad) sad.textContent = ADDRESSES.length;
+  var ss  = document.getElementById('statSec');    if (ss)  ss.textContent = USER.email ? 'Active' : '—';
+  /* Compteurs sidebar */
+  var oc = document.getElementById('ordCnt'); if (oc) oc.textContent = ORDERS.length;
+  var fc = document.getElementById('favCnt'); if (fc) fc.textContent = JSON.parse(localStorage.getItem('mifa_wish') || '[]').length;
+  var nc = document.getElementById('notifCnt');
+  var unread = NOTIFS.filter(function(n){ return !n.read; }).length;
+  if (nc) { nc.textContent = unread; nc.style.display = unread ? 'inline' : 'none'; }
+}
+
+/* ─── NAVIGATION PANNEAUX ─── */
+function showPanel(id) {
+  document.querySelectorAll('.dash-panel').forEach(function(p){ p.classList.remove('active'); });
+  var panel = document.getElementById('panel-'+id);
+  if (panel) panel.classList.add('active');
+  document.querySelectorAll('.dn-link').forEach(function(l){ l.classList.remove('on'); });
+  var link = document.querySelector('[onclick*="showPanel(\''+id+'\')"]');
+  if (link) link.classList.add('on');
+  /* Rendu spécifique */
+  if (id === 'apercu')        renderApercu();
+  if (id === 'commandes')     renderOrders();
+  if (id === 'favoris')       renderFavoris();
+  if (id === 'adresses')      renderAddresses();
+  if (id === 'notifications') renderNotifs();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ─── FORMAT PRIX ─── */
+function fmtP(n) { return Number(n).toLocaleString('fr-FR') + ' FCFA'; }
+
+/* ─── STATUS ─── */
+var STATUS_MAP = {
+  pending:   { label:'En attente',  cls:'pending',   dot:true },
+  transit:   { label:'En livraison', cls:'transit',  dot:true },
+  delivered: { label:'Livré',        cls:'delivered', dot:true },
+  cancelled: { label:'Annulé',       cls:'cancelled', dot:true },
+};
+function statusBadge(s) {
+  var m = STATUS_MAP[s] || STATUS_MAP['pending'];
+  return '<span class="order-status '+m.cls+'"><span class="order-dot"></span>'+m.label+'</span>';
+}
+
+/* ─── APERÇU ─── */
+function renderApercu() {
+  updateUI();
+  var list = document.getElementById('recentOrdersList');
+  if (!list) return;
+  if (!ORDERS.length) {
+    list.innerHTML = '<div class="empty-state"><div class="es-ico"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--t4)" stroke-width="1.2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></div><div class="es-ti">Aucune commande pour l\'instant</div><p class="es-sub">Vous n\'avez pas encore passé de commande sur Mifa Life.</p><a class="es-btn" href="/catalogue"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Explorer le catalogue</a></div>';
+    return;
+  }
+  list.innerHTML = '<div class="orders-list">'+ORDERS.slice(0,3).map(orderCard).join('')+'</div>';
+}
+
+/* ─── COMMANDES ─── */
+function renderOrders() {
+  updateUI();
+  var sub = document.getElementById('orderSubtitle');
+  if (sub) sub.textContent = ORDERS.length + ' commande' + (ORDERS.length !== 1 ? 's' : '') + ' au total';
+  var list = document.getElementById('ordersList');
+  if (!list) return;
+  var filtered = orderFilter === 'all' ? ORDERS : ORDERS.filter(function(o){ return o.status === orderFilter; });
+  if (!filtered.length) {
+    list.innerHTML = '<div class="empty-state"><div class="es-ico"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--t4)" stroke-width="1.2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/></svg></div><div class="es-ti">Aucune commande ici</div><p class="es-sub">Aucune commande dans cette catégorie.</p><a class="es-btn" href="/catalogue">Parcourir le catalogue</a></div>';
+    return;
+  }
+  list.innerHTML = filtered.map(orderCard).join('');
+}
+function orderCard(o) {
+  var thumbs = (o.items || []).slice(0,3).map(function(it){
+    return '<img class="order-thumb" src="'+(it.img||'')+'" alt="'+(it.nm||'')+'" loading="lazy"/>';
+  }).join('');
+  var more = (o.items||[]).length > 3 ? '<div class="order-more">+'+((o.items.length-3))+'</div>' : '';
+  return '<div class="order-c" onclick="location.href=\'/suivi-commande?ref='+o.ref+'\'">'
+    +'<div class="order-hd"><div><div class="order-ref">#'+o.ref+'</div><div class="order-date">'+o.date+'</div></div>'+statusBadge(o.status)+'</div>'
+    +'<div class="order-items">'+thumbs+more+'</div>'
+    +'<div class="order-ft"><div class="order-total">'+fmtP(o.total)+'</div>'
+    +'<div class="order-act"><a class="o-btn primary" href="/suivi-commande?ref='+o.ref+'">Suivre</a>'
+    +(o.status==='delivered'?'<button class="o-btn ghost" onclick="event.stopPropagation();showToast(\'Redirection vers le formulaire retour…\')">Retourner</button>':'')
+    +'</div></div></div>';
+}
+function filterOrders(btn, status) {
+  orderFilter = status;
+  document.querySelectorAll('.of-btn').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  renderOrders();
+}
+
+/* ─── FAVORIS ─── */
+function renderFavoris() {
+  updateUI();
+  var wishIds = JSON.parse(localStorage.getItem('mifa_wish') || '[]');
+  var sub = document.getElementById('favSubtitle');
+  if (sub) sub.textContent = wishIds.length + ' article' + (wishIds.length !== 1 ? 's' : '') + ' sauvegardé' + (wishIds.length !== 1 ? 's' : '');
+  var grid = document.getElementById('favGrid');
+  if (!grid) return;
+  if (!wishIds.length) {
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="es-ico"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--t4)" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><div class="es-ti">Aucun favori pour l\'instant</div><p class="es-sub">Ajoutez des produits à vos favoris en cliquant sur le cœur dans le catalogue.</p><a class="es-btn" href="/catalogue">Explorer le catalogue</a></div>';
+    return;
+  }
+  /* On affiche des cards minimalistes avec les IDs sauvegardés */
+  grid.innerHTML = wishIds.map(function(id){
+    return '<div class="fav-c"><div class="fav-img"><div style="width:100%;height:100%;background:var(--bg2);display:flex;align-items:center;justify-content:center;aspect-ratio:1"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--t4)" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>'
+      +'<button class="fav-rm" onclick="removeFav('+id+')" aria-label="Retirer des favoris"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>'
+      +'<div class="fav-bd"><div class="fav-nm">Produit #'+id+'</div><div class="fav-p">—</div>'
+      +'<a class="fav-atc" href="/produit?id='+id+'">Voir le produit</a></div></div>';
+  }).join('');
+}
+function removeFav(id) {
+  var wish = JSON.parse(localStorage.getItem('mifa_wish') || '[]');
+  wish = wish.filter(function(x){ return x !== id; });
+  localStorage.setItem('mifa_wish', JSON.stringify(wish));
+  renderFavoris();
+  updateUI();
+  showToast('Retiré des favoris');
+}
+
+/* ─── ADRESSES ─── */
+function renderAddresses() {
+  updateUI();
+  var grid = document.getElementById('addrGrid');
+  if (!grid) return;
+  var cards = ADDRESSES.map(function(a, i){
+    return '<div class="addr-c'+(i===0?' default':'')+'"><div class="addr-badge" style="'+(i===0?'':'display:none')+'">Par défaut</div>'
+      +'<div class="addr-nm">'+a.nom+'</div>'
+      +'<div class="addr-txt">'+a.ville+(a.quartier?', '+a.quartier:'')+(a.rue?'<br/>'+a.rue:'')+'</div>'
+      +(a.phone?'<div class="addr-phone">'+a.phone+'</div>':'')
+      +'<div class="addr-actions"><button class="addr-btn" onclick="editAddress('+i+')">Modifier</button><button class="addr-btn danger" onclick="deleteAddress('+i+')">Supprimer</button>'
+      +(i!==0?'<button class="addr-btn" onclick="setDefaultAddress('+i+')">Par défaut</button>':'')
+      +'</div></div>';
+  }).join('');
+  grid.innerHTML = cards + '<button class="addr-add" onclick="openAddrModal(-1)"><div class="addr-add-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="addr-add-lbl">Ajouter une adresse</div></button>';
+}
+var editingAddrIdx = -1;
+function openAddrModal(idx) {
+  editingAddrIdx = idx;
+  var ti = document.getElementById('addrModalTi');
+  if (idx === -1) {
+    if (ti) ti.textContent = 'Nouvelle adresse';
+    ['maNom','maPhone','maRue','maNote'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
+    var mv = document.getElementById('maVille'); if (mv) mv.value = '';
+    var mq = document.getElementById('maQuart'); if (mq) mq.value = '';
+  } else {
+    var a = ADDRESSES[idx]; if (!a) return;
+    if (ti) ti.textContent = 'Modifier l\'adresse';
+    var mn=document.getElementById('maNom'); if(mn) mn.value=a.nom||'';
+    var mp=document.getElementById('maPhone'); if(mp) mp.value=a.phone||'';
+    var mv2=document.getElementById('maVille'); if(mv2) mv2.value=a.ville||'';
+    var mq2=document.getElementById('maQuart'); if(mq2) mq2.value=a.quartier||'';
+    var mr=document.getElementById('maRue'); if(mr) mr.value=a.rue||'';
+    var mn2=document.getElementById('maNote'); if(mn2) mn2.value=a.note||'';
+  }
+  document.getElementById('addrModal').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closeAddrModal() { document.getElementById('addrModal').classList.remove('on'); document.body.style.overflow=''; }
+function saveAddress() {
+  var nom  = document.getElementById('maNom').value.trim();
+  var phone= document.getElementById('maPhone').value.trim();
+  var ville= document.getElementById('maVille').value;
+  var quart= document.getElementById('maQuart').value.trim();
+  var rue  = document.getElementById('maRue').value.trim();
+  var note = document.getElementById('maNote').value.trim();
+  if (!nom || !ville || !rue) { showToast('Nom, ville et rue sont requis'); return; }
+  var addr = { nom:nom, phone:phone, ville:ville, quartier:quart, rue:rue, note:note };
+  if (editingAddrIdx === -1) ADDRESSES.push(addr);
+  else ADDRESSES[editingAddrIdx] = addr;
+  localStorage.setItem('mifa_addresses', JSON.stringify(ADDRESSES));
+  closeAddrModal();
+  renderAddresses();
+  updateUI();
+  showToast('Adresse enregistrée');
+}
+function editAddress(idx) { openAddrModal(idx); }
+function deleteAddress(idx) {
+  if (!confirm('Supprimer cette adresse ?')) return;
+  ADDRESSES.splice(idx, 1);
+  localStorage.setItem('mifa_addresses', JSON.stringify(ADDRESSES));
+  renderAddresses();
+  updateUI();
+  showToast('Adresse supprimée');
+}
+function setDefaultAddress(idx) {
+  var moved = ADDRESSES.splice(idx, 1)[0];
+  ADDRESSES.unshift(moved);
+  localStorage.setItem('mifa_addresses', JSON.stringify(ADDRESSES));
+  renderAddresses();
+  showToast('Adresse par défaut mise à jour');
+}
+
+/* ─── NOTIFICATIONS ─── */
+function renderNotifs() {
+  updateUI();
+  var sub = document.getElementById('notifSubtitle');
+  var unread = NOTIFS.filter(function(n){ return !n.read; }).length;
+  if (sub) sub.textContent = unread ? unread + ' non lue' + (unread>1?'s':'') : 'Tout est lu';
+  var list = document.getElementById('notifList');
+  if (!list) return;
+  if (!NOTIFS.length) {
+    list.innerHTML = '<div style="padding:48px 24px;text-align:center;font-size:13px;color:var(--t4)">Aucune notification</div>';
+    return;
+  }
+  var TYPE_ICO = {
+    order:  '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/></svg>',
+    system: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+    promo:  '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--mu)" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+  };
+  list.innerHTML = NOTIFS.map(function(n){
+    var ico = TYPE_ICO[n.type] || TYPE_ICO['system'];
+    return '<div class="notif-item'+(n.read?'':' unread')+'" onclick="readNotif('+n.id+')">'
+      +'<div class="notif-dot"></div>'
+      +'<div class="notif-ico '+n.type+'">'+ico+'</div>'
+      +'<div class="notif-body"><div class="notif-ti">'+n.ti+'</div><div class="notif-sub">'+n.sub+'</div></div>'
+      +'<div class="notif-time">'+n.time+'</div>'
+      +'</div>';
+  }).join('');
+}
+function readNotif(id) {
+  NOTIFS = NOTIFS.map(function(n){ if(n.id===id) n.read=true; return n; });
+  saveNotifs();
+  renderNotifs();
+  updateUI();
+}
+function markAllRead() {
+  NOTIFS = NOTIFS.map(function(n){ n.read=true; return n; });
+  saveNotifs();
+  renderNotifs();
+  updateUI();
+  showToast('Toutes les notifications marquées comme lues');
+}
+function saveNotifs() { localStorage.setItem('mifa_notifs', JSON.stringify(NOTIFS)); }
+
+/* ─── PROFIL ─── */
+function saveProfil() {
+  USER.prenom = (document.getElementById('pPrenom').value||'').trim();
+  USER.nom    = (document.getElementById('pNom').value||'').trim();
+  USER.email  = (document.getElementById('pEmail').value||'').trim();
+  USER.phone  = (document.getElementById('pPhone').value||'').trim();
+  USER.ville  = document.getElementById('pVille').value||'';
+  localStorage.setItem('mifa_user', JSON.stringify(USER));
+  updateUI();
+  showToast('Profil enregistré');
+}
+
+/* ─── SÉCURITÉ ─── */
+function toggleSec(btn) {
+  btn.classList.toggle('on');
+  showToast(btn.classList.contains('on') ? 'Activé' : 'Désactivé');
+}
+
+/* ─── MENU ─── */
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  var b  = document.getElementById('burger');
+  var bg = document.getElementById('mob-bg');
+  var dr = document.getElementById('mob-dr');
+  if (b)  b.classList.toggle('open', menuOpen);
+  if (bg) bg.classList.toggle('on', menuOpen);
+  if (dr) dr.classList.toggle('on', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') {
+    if (menuOpen) toggleMenu();
+    if (document.getElementById('addrModal').classList.contains('on')) closeAddrModal();
+  }
+});
+window.addEventListener('scroll', function(){
+  document.getElementById('nav').classList.toggle('sc', window.scrollY > 40);
+}, { passive:true });
+
+/* ─── TOAST ─── */
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove('on'); }, 3000);
+}
+
+/* ─── DÉCONNEXION ─── */
+function logout() {
+  if (confirm('Se déconnecter ?')) {
+    localStorage.removeItem('mifa_user');
+    window.location.href = '/auth';
+  }
+}
+
+/* ─── URL PARAM ─── */
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var tab = params.get('tab');
+  if (tab) showPanel(tab);
+})();
+
+/* ─── DÉMARRAGE ─── */
+window.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

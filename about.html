@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+<meta name="description" content="À propos de Mifa Life — La première marketplace généraliste du Mali. Notre mission, notre équipe, nos valeurs."/>
+<meta name="theme-color" content="#00897B"/>
+<title>À propos · Mifa Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --em:#00897B;--em-d:#00695C;--em-l:rgba(0,137,123,.10);--em-g:rgba(0,137,123,.22);
+  --or:#B85C38;--or-l:rgba(184,92,56,.10);
+  --sl:#2C3A3F;--sl2:#1C2A30;--sl3:#111B22;
+  --mu:#C9A84C;--mu-l:rgba(201,168,76,.12);
+  --mg:#009A00;--my:#FFD700;--mr:#CE1126;
+  --bg:#F6F4F0;--bg2:#EEE9E1;--bg3:#D4CEC6;--white:#fff;
+  --t1:#1A2422;--t2:#2d4038;--t3:#5a7566;--t4:#9cb5a8;
+  --r:10px;--rl:14px;
+  --sh-s:0 2px 10px rgba(0,0,0,.06);
+  --sh-m:0 6px 22px rgba(0,0,0,.09);
+  --sh-l:0 14px 42px rgba(0,0,0,.12);
+  --tr:.22s cubic-bezier(.25,.46,.45,.94);
+  --max:1280px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:"Nunito Sans",sans-serif;background:var(--bg);color:var(--t1);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%;object-fit:cover}
+button,input{font-family:inherit;border:none;background:none;outline:none;cursor:pointer}
+p{line-height:1.75}
+*:focus-visible{outline:2px solid var(--em);outline-offset:2px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(14px,3vw,28px)}
+.wrap-narrow{max-width:800px;margin:0 auto;padding:0 clamp(14px,3vw,28px)}
+
+/* BANDE */
+.mali-stripe{height:3px;display:flex}
+.mali-stripe span{flex:1}
+
+/* NAVBAR */
+#nav{position:sticky;top:0;z-index:500;background:rgba(246,244,240,.97);backdrop-filter:blur(18px);border-bottom:1px solid var(--bg3);transition:box-shadow var(--tr)}
+#nav.sc{box-shadow:var(--sh-m)}
+.nv{max-width:var(--max);margin:0 auto;padding:0 clamp(14px,3vw,28px);height:clamp(54px,8vw,62px);display:flex;align-items:center;gap:clamp(8px,2vw,14px)}
+.logo{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.logo-bars{display:flex;flex-direction:column;gap:3px}
+.logo-bars span{height:2px;border-radius:2px;background:var(--em);display:block}
+.logo-bars span:nth-child(1){width:26px}
+.logo-bars span:nth-child(2){width:17px}
+.logo-bars span:nth-child(3){width:22px}
+.logo-text{font-family:"Playfair Display",Georgia,serif;font-size:clamp(13px,3vw,17px);font-weight:700;letter-spacing:-.02em}
+.logo-text em{font-style:normal;color:var(--em)}
+.flag-mini{display:flex;border-radius:2px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.flag-mini span{width:5px;height:10px;display:block}
+.nv-mid{flex:1;display:none}
+@media(min-width:700px){.nv-mid{display:block}}
+.si-wrap{position:relative;max-width:380px}
+.si{width:100%;padding:9px 36px 9px 14px;border:1.5px solid var(--bg3);border-radius:22px;font-size:13px;color:var(--t1);background:var(--bg);transition:all var(--tr)}
+.si:focus{border-color:var(--em);box-shadow:0 0 0 3px var(--em-l);background:var(--white);outline:none}
+.si-ic{position:absolute;right:11px;top:50%;transform:translateY(-50%);color:var(--t4);pointer-events:none}
+.nv-links{display:none;align-items:center;gap:2px}
+@media(min-width:900px){.nv-links{display:flex}}
+.nv-lnk{font-size:13px;font-weight:600;color:var(--t3);padding:6px 10px;border-radius:7px;transition:all var(--tr)}
+.nv-lnk:hover,.nv-lnk.on{color:var(--em);background:var(--em-l)}
+.nv-r{display:flex;align-items:center;gap:4px;margin-left:auto}
+.ic-btn{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--t2);transition:all var(--tr);position:relative}
+.ic-btn:hover{background:var(--bg2);color:var(--em)}
+.ic-bdg{position:absolute;top:4px;right:4px;min-width:14px;height:14px;padding:0 3px;background:var(--or);color:#fff;border-radius:7px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--bg)}
+.burger{width:36px;height:36px;border-radius:8px;border:1.5px solid var(--bg3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:all var(--tr)}
+@media(min-width:900px){.burger{display:none}}
+.burger:hover{border-color:var(--em);background:var(--em-l)}
+.burger span{width:15px;height:2px;background:var(--t2);border-radius:2px;display:block;transition:all var(--tr)}
+.burger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+
+/* DRAWER */
+#mob-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:498;opacity:0;visibility:hidden;transition:all var(--tr);backdrop-filter:blur(3px)}
+#mob-bg.on{opacity:1;visibility:visible}
+#mob-dr{position:fixed;top:0;right:0;bottom:0;width:min(280px,82vw);background:var(--white);z-index:499;transform:translateX(100%);transition:transform var(--tr);overflow-y:auto;box-shadow:var(--sh-l)}
+#mob-dr.on{transform:translateX(0)}
+.mob-hd{padding:14px 18px;border-bottom:1px solid var(--bg3);display:flex;align-items:center;justify-content:space-between}
+.mob-cl{width:30px;height:30px;border-radius:50%;background:var(--bg2);font-size:14px;color:var(--t2);display:flex;align-items:center;justify-content:center;border:none}
+.mob-l{display:flex;align-items:center;gap:10px;padding:11px 18px;font-size:13px;font-weight:600;color:var(--t2);transition:all var(--tr);border-bottom:1px solid var(--bg)}
+.mob-l:hover{color:var(--em);background:var(--em-l)}
+.mob-l svg{flex-shrink:0;color:var(--t4)}
+
+/* BREADCRUMB */
+#breadcrumb{background:var(--white);border-bottom:1px solid var(--bg3)}
+.bc-in{max-width:var(--max);margin:0 auto;padding:10px clamp(14px,3vw,28px);display:flex;align-items:center;gap:6px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.bc-in::-webkit-scrollbar{display:none}
+.bc-a{font-size:12px;color:var(--t4);font-weight:500;transition:color var(--tr)}
+.bc-a:hover{color:var(--em)}
+.bc-sep{color:var(--bg3);font-size:12px}
+.bc-cur{font-size:12px;color:var(--t2);font-weight:600}
+
+/* ── HERO ── */
+#hero{background:var(--sl3);position:relative;overflow:hidden;padding:clamp(52px,10vw,100px) 0}
+.hero-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=1600&q=70&fit=crop&crop=center');background-size:cover;background-position:center;opacity:.18}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(17,27,34,.96) 0%,rgba(17,27,34,.75) 100%)}
+.hero-stripe-v{position:absolute;left:0;top:0;bottom:0;width:4px;display:flex;flex-direction:column}
+.hero-stripe-v span{flex:1}
+.hero-in{position:relative;z-index:2;max-width:720px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:20px;font-size:11px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px}
+.hero-eyebrow span{width:6px;height:6px;border-radius:50%;background:var(--em);flex-shrink:0}
+.hero-h1{font-family:"Playfair Display",Georgia,serif;font-size:clamp(30px,6vw,56px);font-weight:700;color:#fff;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px}
+.hero-h1 em{font-style:italic;color:var(--mu)}
+.hero-sub{font-size:clamp(14px,2.5vw,17px);color:rgba(255,255,255,.5);line-height:1.7;max-width:560px}
+
+/* ── MISSION ── */
+#mission{padding:clamp(48px,8vw,88px) 0;background:var(--white);border-bottom:1px solid var(--bg3)}
+.mission-grid{display:grid;gap:clamp(32px,6vw,72px);grid-template-columns:1fr;align-items:center}
+@media(min-width:760px){.mission-grid{grid-template-columns:1fr 1fr}}
+.mission-img-wrap{border-radius:var(--rl);overflow:hidden;aspect-ratio:4/3;background:var(--bg2)}
+.mission-img-wrap img{width:100%;height:100%;object-fit:cover}
+.mission-txt{}
+.m-eyebrow{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--em);margin-bottom:10px}
+.m-ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(22px,4vw,32px);font-weight:700;color:var(--sl);letter-spacing:-.02em;line-height:1.2;margin-bottom:16px}
+.m-ti em{font-style:italic;color:var(--em)}
+.m-body{font-size:clamp(13px,2.5vw,15px);color:var(--t3);line-height:1.8;margin-bottom:14px}
+.m-quote{border-left:3px solid var(--em);padding:12px 16px;background:var(--em-l);border-radius:0 8px 8px 0;font-size:14px;font-style:italic;color:var(--t2);line-height:1.65;margin:20px 0}
+
+/* ── VALEURS ── */
+#valeurs{padding:clamp(44px,7vw,80px) 0;background:var(--bg)}
+.val-grid{display:grid;gap:clamp(12px,2vw,16px);grid-template-columns:1fr}
+@media(min-width:480px){.val-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:860px){.val-grid{grid-template-columns:repeat(4,1fr)}}
+.val-c{background:var(--white);border:1px solid var(--bg3);border-radius:var(--rl);padding:clamp(18px,3vw,26px);transition:all var(--tr)}
+.val-c:hover{border-color:var(--em-g);box-shadow:var(--sh-m);transform:translateY(-2px)}
+.val-ico{width:44px;height:44px;border-radius:11px;background:var(--em-l);border:1px solid var(--em-g);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.val-ti{font-size:clamp(14px,2.5vw,15px);font-weight:700;color:var(--sl);margin-bottom:8px;font-family:"Playfair Display",Georgia,serif}
+.val-sub{font-size:12px;color:var(--t3);line-height:1.7}
+
+/* ── HISTOIRE (timeline) ── */
+#histoire{padding:clamp(44px,7vw,80px) 0;background:var(--white);border-top:1px solid var(--bg3)}
+.hist-tl{position:relative;padding-left:clamp(28px,5vw,40px);display:flex;flex-direction:column;gap:0;max-width:660px;margin:0 auto}
+.hist-line{position:absolute;left:clamp(9px,2vw,14px);top:14px;bottom:14px;width:2px;background:var(--bg3);border-radius:1px}
+.hist-item{position:relative;padding-bottom:clamp(24px,4vw,36px)}
+.hist-item:last-child{padding-bottom:0}
+.hist-dot-wrap{position:absolute;left:clamp(-20px,-4vw,-26px);top:4px}
+.hist-dot{width:clamp(22px,4vw,28px);height:clamp(22px,4vw,28px);border-radius:50%;background:var(--em);border:3px solid var(--white);box-shadow:0 0 0 3px var(--em-g);display:flex;align-items:center;justify-content:center}
+.hist-dot span{width:7px;height:7px;border-radius:50%;background:#fff}
+.hist-yr{font-size:11px;font-weight:700;color:var(--em);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.hist-ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(15px,3vw,18px);font-weight:700;color:var(--sl);margin-bottom:6px;line-height:1.25}
+.hist-body{font-size:13px;color:var(--t3);line-height:1.7}
+
+/* ── ÉQUIPE ── */
+#equipe{padding:clamp(44px,7vw,80px) 0;background:var(--bg)}
+.team-grid{display:grid;gap:clamp(12px,2vw,18px);grid-template-columns:repeat(2,1fr)}
+@media(min-width:560px){.team-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:860px){.team-grid{grid-template-columns:repeat(4,1fr)}}
+.team-c{background:var(--white);border:1px solid var(--bg3);border-radius:var(--rl);overflow:hidden;transition:all var(--tr);text-align:center}
+.team-c:hover{border-color:var(--em-g);box-shadow:var(--sh-m);transform:translateY(-2px)}
+.team-avatar{width:100%;aspect-ratio:1;background:var(--bg2);position:relative;overflow:hidden}
+.team-avatar img{width:100%;height:100%;object-fit:cover;object-position:top}
+.team-avatar-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:"Playfair Display",Georgia,serif;font-size:clamp(28px,6vw,40px);font-weight:700;color:var(--em)}
+.team-bd{padding:clamp(12px,2vw,16px)}
+.team-nm{font-size:clamp(13px,2.5vw,14px);font-weight:700;color:var(--t1);margin-bottom:4px}
+.team-role{font-size:11px;color:var(--em);font-weight:600}
+.team-loc{font-size:11px;color:var(--t4);margin-top:2px}
+
+/* ── CTA FINAL ── */
+#cta-final{background:var(--sl3);padding:clamp(48px,8vw,88px) 0;position:relative;overflow:hidden}
+.cta-geo{position:absolute;right:-100px;top:-100px;width:400px;height:400px;border-radius:50%;background:rgba(0,137,123,.06);pointer-events:none}
+.cta-geo2{position:absolute;left:-80px;bottom:-80px;width:300px;height:300px;border-radius:50%;background:rgba(201,168,76,.04);pointer-events:none}
+.cta-in{position:relative;z-index:1;text-align:center;max-width:600px;margin:0 auto}
+.cta-eyebrow{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:20px;font-size:11px;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px}
+.cta-eyebrow span{width:6px;height:6px;border-radius:50%;background:var(--em);flex-shrink:0}
+.cta-ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(26px,5vw,42px);font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1.15;margin-bottom:14px}
+.cta-ti em{font-style:italic;color:var(--mu)}
+.cta-sub{font-size:clamp(13px,2.5vw,15px);color:rgba(255,255,255,.42);line-height:1.7;margin-bottom:clamp(24px,4vw,36px)}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cta-btn-main{display:inline-flex;align-items:center;gap:8px;padding:clamp(13px,2.5vw,15px) clamp(24px,4vw,36px);background:var(--em);color:#fff;border-radius:10px;font-size:clamp(13px,2.5vw,14px);font-weight:700;transition:all var(--tr);border:none;font-family:inherit}
+.cta-btn-main:hover{background:var(--em-d);transform:translateY(-1px);box-shadow:0 8px 22px rgba(0,137,123,.28)}
+.cta-btn-sec{display:inline-flex;align-items:center;gap:8px;padding:clamp(13px,2.5vw,15px) clamp(24px,4vw,36px);border:1.5px solid rgba(255,255,255,.18);border-radius:10px;font-size:clamp(13px,2.5vw,14px);font-weight:700;color:rgba(255,255,255,.7);transition:all var(--tr);background:none;font-family:inherit}
+.cta-btn-sec:hover{border-color:rgba(255,255,255,.45);color:#fff}
+
+/* SECTION SHARED */
+.sec-hd{margin-bottom:clamp(22px,4vw,36px);text-align:center}
+.sec-eyebrow{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--em);margin-bottom:8px}
+.sec-ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(22px,4vw,32px);font-weight:700;color:var(--sl);letter-spacing:-.02em;line-height:1.15}
+.sec-sub{font-size:clamp(13px,2.5vw,14px);color:var(--t4);margin-top:8px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.7}
+
+/* TOAST */
+#toast{position:fixed;bottom:clamp(16px,4vw,24px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--sl);color:#fff;font-size:13px;font-weight:600;padding:11px 20px;border-radius:8px;box-shadow:var(--sh-l);z-index:9999;opacity:0;visibility:hidden;transition:all var(--tr);white-space:nowrap;max-width:min(90vw,400px)}
+#toast.on{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<div class="mali-stripe"><span style="background:var(--mg)"></span><span style="background:var(--my)"></span><span style="background:var(--mr)"></span></div>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <div class="nv">
+    <a class="logo" href="/">
+      <div class="logo-bars"><span></span><span></span><span></span></div>
+      <div class="logo-text"><em>MIFA</em> LIFE</div>
+      <div class="flag-mini"><span style="background:var(--mg)"></span><span style="background:var(--my)"></span><span style="background:var(--mr)"></span></div>
+    </a>
+    <div class="nv-mid">
+      <div class="si-wrap">
+        <input class="si" type="search" placeholder="Rechercher un produit…" aria-label="Recherche"/>
+        <span class="si-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+      </div>
+    </div>
+    <div class="nv-links">
+      <a class="nv-lnk" href="/">Accueil</a>
+      <a class="nv-lnk" href="/catalogue">Catalogue</a>
+      <a class="nv-lnk on" href="/about">À propos</a>
+    </div>
+    <div class="nv-r">
+      <a class="ic-btn" href="/dashboard" aria-label="Compte">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+      <a class="ic-btn" href="/panier" aria-label="Panier">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="ic-bdg" id="cartBdg" style="display:none">0</span>
+      </a>
+      <button class="burger" id="burger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- DRAWER -->
+<div id="mob-bg" onclick="toggleMenu()"></div>
+<div id="mob-dr">
+  <div class="mob-hd"><div class="logo-text"><em>MIFA</em> LIFE</div><button class="mob-cl" onclick="toggleMenu()">✕</button></div>
+  <a class="mob-l" href="/"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Accueil</a>
+  <a class="mob-l" href="/catalogue"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Catalogue</a>
+  <a class="mob-l" href="/contact"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Contact</a>
+  <a class="mob-l" href="/faq"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>FAQ</a>
+</div>
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb">
+  <div class="bc-in">
+    <a class="bc-a" href="/">Accueil</a>
+    <span class="bc-sep">›</span>
+    <span class="bc-cur">À propos</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero" aria-label="À propos de Mifa Life">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-stripe-v"><span style="background:var(--mg)"></span><span style="background:var(--my)"></span><span style="background:var(--mr)"></span></div>
+  <div class="wrap">
+    <div class="hero-in">
+      <div class="hero-eyebrow"><span></span>Bamako, Mali · 2024</div>
+      <h1 class="hero-h1">La première marketplace<br/><em>généraliste du Mali</em></h1>
+      <p class="hero-sub">Mifa Life est née d'une conviction simple : chaque Malien devrait pouvoir commander n'importe quel produit, en quelques clics, et le recevoir chez lui.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section id="mission" aria-label="Notre mission">
+  <div class="wrap">
+    <div class="mission-grid">
+      <div class="mission-img-wrap">
+        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=900&q=75&fit=crop&crop=center" alt="Équipe Mifa Life à Bamako" loading="lazy"/>
+      </div>
+      <div class="mission-txt">
+        <div class="m-eyebrow">Notre mission</div>
+        <h2 class="m-ti">Rendre le commerce en ligne <em>accessible à tous</em> au Mali</h2>
+        <p class="m-body">Le Mali n'avait pas de marketplace généraliste à la hauteur. Des millions de personnes voulaient commander des produits qu'elles ne trouvaient pas localement, sans solution fiable, sans paiement mobile intégré, sans suivi de livraison.</p>
+        <p class="m-body">Mifa Life est une réponse directe à cette réalité. Nous construisons une plateforme honnête, accessible depuis un téléphone, où l'on peut trouver et commander tout type de produit — électronique, mode, maison, sport, beauté — et le recevoir à Bamako.</p>
+        <blockquote class="m-quote">
+          « Mifa » signifie « bien-être » en bambara. C'est exactement ce que nous voulons apporter — la sérénité de pouvoir commander sans se déplacer.
+        </blockquote>
+        <p class="m-body">Nous ne fabriquons pas de produits. Nous créons le lien entre les meilleurs fournisseurs mondiaux et les acheteurs maliens, avec un paiement local (Orange Money, Wave, Moov Money) et une livraison à domicile.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALEURS -->
+<section id="valeurs" aria-label="Nos valeurs">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div class="sec-eyebrow">Ce qui nous guide</div>
+      <div class="sec-ti">Nos valeurs</div>
+      <p class="sec-sub">Des engagements concrets, pas des slogans. Voici ce qui oriente chaque décision que nous prenons.</p>
+    </div>
+    <div class="val-grid">
+      <div class="val-c">
+        <div class="val-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="val-ti">Honnêteté</div>
+        <p class="val-sub">Pas de fausses statistiques, pas de promotions inventées. On vous dit ce qu'on est, où on en est, et ce qu'on peut faire pour vous.</p>
+      </div>
+      <div class="val-c">
+        <div class="val-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="val-ti">Confiance</div>
+        <p class="val-sub">Votre argent est protégé jusqu'à la livraison grâce à notre système d'escrow. Vous ne payez que quand vous recevez.</p>
+      </div>
+      <div class="val-c">
+        <div class="val-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="val-ti">Accessibilité</div>
+        <p class="val-sub">Conçu pour fonctionner sur les téléphones d'entrée de gamme avec une connexion 3G. Le commerce en ligne est pour tout le monde.</p>
+      </div>
+      <div class="val-c">
+        <div class="val-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="val-ti">Communauté</div>
+        <p class="val-sub">On travaille avec des vendeurs maliens, on paie avec de l'argent mobile malien, on livre à des adresses maliennes. Nous construisons ici.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTOIRE -->
+<section id="histoire" aria-label="Notre histoire">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div class="sec-eyebrow">Notre parcours</div>
+      <div class="sec-ti">Comment Mifa Life est née</div>
+    </div>
+    <div class="hist-tl">
+      <div class="hist-line"></div>
+
+      <div class="hist-item">
+        <div class="hist-dot-wrap"><div class="hist-dot"><span></span></div></div>
+        <div class="hist-yr">Début 2023</div>
+        <div class="hist-ti">L'idée germe</div>
+        <p class="hist-body">Deux étudiants maliens commandent un téléphone depuis un site chinois. La commande met 6 semaines, le suivi est inexistant, le paiement en devises est compliqué. Il doit y avoir une meilleure façon de faire.</p>
+      </div>
+
+      <div class="hist-item">
+        <div class="hist-dot-wrap"><div class="hist-dot"><span></span></div></div>
+        <div class="hist-yr">Fin 2023</div>
+        <div class="hist-ti">Premiers prototypes</div>
+        <p class="hist-body">Les premières maquettes sont créées. L'idée est claire : un site en français, des prix en FCFA, et un paiement par Orange Money ou Wave. Simple, local, fiable.</p>
+      </div>
+
+      <div class="hist-item">
+        <div class="hist-dot-wrap"><div class="hist-dot"><span></span></div></div>
+        <div class="hist-yr">Début 2024</div>
+        <div class="hist-ti">Développement de la plateforme</div>
+        <p class="hist-body">Construction de la plateforme technique — catalogue, panier, checkout, intégration des paiements mobiles, système de suivi de commande. Chaque page pensée pour le mobile first.</p>
+      </div>
+
+      <div class="hist-item">
+        <div class="hist-dot-wrap"><div class="hist-dot"><span></span></div></div>
+        <div class="hist-yr">2024</div>
+        <div class="hist-ti">Lancement de Mifa Life</div>
+        <p class="hist-body">Mifa Life est mise en ligne. Marketplace généraliste : électronique, mode, maison, sport, beauté et bien plus. Livraison à Bamako, paiements locaux, support en français.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ÉQUIPE -->
+<section id="equipe" aria-label="Notre équipe">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div class="sec-eyebrow">Les personnes derrière Mifa Life</div>
+      <div class="sec-ti">Notre équipe</div>
+      <p class="sec-sub">Une petite équipe basée à Bamako, déterminée à construire une infrastructure commerciale fiable pour le Mali.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-c">
+        <div class="team-avatar"><div class="team-avatar-ph">A</div></div>
+        <div class="team-bd">
+          <div class="team-nm">Amadou Coulibaly</div>
+          <div class="team-role">Co-fondateur & CEO</div>
+          <div class="team-loc">Bamako, Mali</div>
+        </div>
+      </div>
+      <div class="team-c">
+        <div class="team-avatar"><div class="team-avatar-ph">F</div></div>
+        <div class="team-bd">
+          <div class="team-nm">Fatoumata Diallo</div>
+          <div class="team-role">Co-fondatrice & COO</div>
+          <div class="team-loc">Bamako, Mali</div>
+        </div>
+      </div>
+      <div class="team-c">
+        <div class="team-avatar"><div class="team-avatar-ph">I</div></div>
+        <div class="team-bd">
+          <div class="team-nm">Ibrahim Traoré</div>
+          <div class="team-role">Responsable technique</div>
+          <div class="team-loc">Bamako, Mali</div>
+        </div>
+      </div>
+      <div class="team-c">
+        <div class="team-avatar"><div class="team-avatar-ph">M</div></div>
+        <div class="team-bd">
+          <div class="team-nm">Mariam Keïta</div>
+          <div class="team-role">Responsable support</div>
+          <div class="team-loc">Bamako, Mali</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final" aria-label="Rejoindre Mifa Life">
+  <div class="cta-geo"></div>
+  <div class="cta-geo2"></div>
+  <div class="wrap">
+    <div class="cta-in">
+      <div class="cta-eyebrow"><span></span>Rejoindre l'aventure</div>
+      <h2 class="cta-ti">Prêt à commander<br/><em>votre premier produit ?</em></h2>
+      <p class="cta-sub">Créez un compte gratuit et commandez depuis votre téléphone. Paiement par Orange Money ou Wave, livraison à Bamako.</p>
+      <div class="cta-btns">
+        <a class="cta-btn-main" href="/catalogue">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Parcourir le catalogue
+        </a>
+        <a class="cta-btn-sec" href="/contact">Nous contacter</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--sl3);padding:clamp(28px,5vw,48px) 0 0">
+  <div class="wrap">
+    <div style="display:grid;gap:clamp(20px,4vw,32px);grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+      <div>
+        <div style="font-family:'Playfair Display',Georgia,serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:10px"><span style="color:var(--em)">MIFA</span> LIFE</div>
+        <p style="font-size:12px;color:rgba(255,255,255,.35);line-height:1.7;max-width:240px">La marketplace du Mali — Tout produit, livré chez vous.</p>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:10px">Liens</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <a href="/" style="font-size:12px;color:rgba(255,255,255,.38)" onmouseover="this.style.color='rgba(255,255,255,.75)'" onmouseout="this.style.color='rgba(255,255,255,.38)'">Accueil</a>
+          <a href="/catalogue" style="font-size:12px;color:rgba(255,255,255,.38)" onmouseover="this.style.color='rgba(255,255,255,.75)'" onmouseout="this.style.color='rgba(255,255,255,.38)'">Catalogue</a>
+          <a href="/contact" style="font-size:12px;color:rgba(255,255,255,.38)" onmouseover="this.style.color='rgba(255,255,255,.75)'" onmouseout="this.style.color='rgba(255,255,255,.38)'">Contact</a>
+          <a href="/faq" style="font-size:12px;color:rgba(255,255,255,.38)" onmouseover="this.style.color='rgba(255,255,255,.75)'" onmouseout="this.style.color='rgba(255,255,255,.38)'">FAQ</a>
+          <a href="/seller-register" style="font-size:12px;color:rgba(255,255,255,.38)" onmouseover="this.style.color='rgba(255,255,255,.75)'" onmouseout="this.style.color='rgba(255,255,255,.38)'">Devenir vendeur</a>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:clamp(20px,4vw,32px);padding:14px 0;border-top:1px solid rgba(255,255,255,.07);font-size:11px;color:rgba(255,255,255,.2)">
+      © 2024 Mifa Life Company · Bamako, Mali
+    </div>
+  </div>
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+'use strict';
+var menuOpen = false;
+var cart = JSON.parse(localStorage.getItem('mifa_cart') || '[]');
+(function(){
+  var n = cart.reduce(function(s,i){ return s+(i.qty||1); }, 0);
+  var cb = document.getElementById('cartBdg');
+  if (cb) { cb.textContent = n; cb.style.display = n ? 'flex' : 'none'; }
+})();
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  document.getElementById('burger').classList.toggle('open', menuOpen);
+  document.getElementById('mob-bg').classList.toggle('on', menuOpen);
+  document.getElementById('mob-dr').classList.toggle('on', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+}
+document.addEventListener('keydown', function(e){ if (e.key==='Escape' && menuOpen) toggleMenu(); });
+window.addEventListener('scroll', function(){ document.getElementById('nav').classList.toggle('sc', window.scrollY > 40); }, { passive:true });
+</script>
+</body>
+</html>

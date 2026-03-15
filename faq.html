@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+<meta name="description" content="Questions fréquentes Mifa Life — Commandes, livraison, paiements Orange Money Wave, retours au Mali."/>
+<meta name="theme-color" content="#00897B"/>
+<title>FAQ · Mifa Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --em:#00897B;--em-d:#00695C;--em-l:rgba(0,137,123,.10);--em-g:rgba(0,137,123,.22);
+  --or:#B85C38;--or-l:rgba(184,92,56,.10);
+  --sl:#2C3A3F;--sl2:#1C2A30;--sl3:#111B22;
+  --mu:#C9A84C;--mu-l:rgba(201,168,76,.12);
+  --mg:#009A00;--my:#FFD700;--mr:#CE1126;
+  --bg:#F6F4F0;--bg2:#EEE9E1;--bg3:#D4CEC6;--white:#fff;
+  --t1:#1A2422;--t2:#2d4038;--t3:#5a7566;--t4:#9cb5a8;
+  --r:10px;--rl:14px;
+  --sh-s:0 2px 10px rgba(0,0,0,.06);
+  --sh-m:0 6px 22px rgba(0,0,0,.09);
+  --sh-l:0 14px 42px rgba(0,0,0,.12);
+  --tr:.22s cubic-bezier(.25,.46,.45,.94);
+  --max:1280px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:"Nunito Sans",sans-serif;background:var(--bg);color:var(--t1);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+button,input{font-family:inherit;border:none;background:none;outline:none;cursor:pointer}
+p{line-height:1.75}
+*:focus-visible{outline:2px solid var(--em);outline-offset:2px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(14px,3vw,28px)}
+
+/* BANDE */
+.mali-stripe{height:3px;display:flex}
+.mali-stripe span{flex:1}
+
+/* NAVBAR */
+#nav{position:sticky;top:0;z-index:500;background:rgba(246,244,240,.97);backdrop-filter:blur(18px);border-bottom:1px solid var(--bg3);transition:box-shadow var(--tr)}
+#nav.sc{box-shadow:var(--sh-m)}
+.nv{max-width:var(--max);margin:0 auto;padding:0 clamp(14px,3vw,28px);height:clamp(54px,8vw,62px);display:flex;align-items:center;gap:clamp(8px,2vw,14px)}
+.logo{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.logo-bars{display:flex;flex-direction:column;gap:3px}
+.logo-bars span{height:2px;border-radius:2px;background:var(--em);display:block}
+.logo-bars span:nth-child(1){width:26px}
+.logo-bars span:nth-child(2){width:17px}
+.logo-bars span:nth-child(3){width:22px}
+.logo-text{font-family:"Playfair Display",Georgia,serif;font-size:clamp(13px,3vw,17px);font-weight:700;letter-spacing:-.02em}
+.logo-text em{font-style:normal;color:var(--em)}
+.flag-mini{display:flex;border-radius:2px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.flag-mini span{width:5px;height:10px;display:block}
+.nv-mid{flex:1;display:none}
+@media(min-width:700px){.nv-mid{display:block}}
+.si-wrap{position:relative;max-width:380px}
+.si{width:100%;padding:9px 36px 9px 14px;border:1.5px solid var(--bg3);border-radius:22px;font-size:13px;color:var(--t1);background:var(--bg);transition:all var(--tr)}
+.si:focus{border-color:var(--em);box-shadow:0 0 0 3px var(--em-l);background:var(--white);outline:none}
+.si-ic{position:absolute;right:11px;top:50%;transform:translateY(-50%);color:var(--t4);pointer-events:none}
+.nv-links{display:none;align-items:center;gap:2px}
+@media(min-width:900px){.nv-links{display:flex}}
+.nv-lnk{font-size:13px;font-weight:600;color:var(--t3);padding:6px 10px;border-radius:7px;transition:all var(--tr)}
+.nv-lnk:hover,.nv-lnk.on{color:var(--em);background:var(--em-l)}
+.nv-r{display:flex;align-items:center;gap:4px;margin-left:auto}
+.ic-btn{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--t2);transition:all var(--tr);position:relative}
+.ic-btn:hover{background:var(--bg2);color:var(--em)}
+.ic-bdg{position:absolute;top:4px;right:4px;min-width:14px;height:14px;padding:0 3px;background:var(--or);color:#fff;border-radius:7px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--bg)}
+.burger{width:36px;height:36px;border-radius:8px;border:1.5px solid var(--bg3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:all var(--tr)}
+@media(min-width:900px){.burger{display:none}}
+.burger:hover{border-color:var(--em);background:var(--em-l)}
+.burger span{width:15px;height:2px;background:var(--t2);border-radius:2px;display:block;transition:all var(--tr)}
+.burger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+
+/* DRAWER */
+#mob-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:498;opacity:0;visibility:hidden;transition:all var(--tr);backdrop-filter:blur(3px)}
+#mob-bg.on{opacity:1;visibility:visible}
+#mob-dr{position:fixed;top:0;right:0;bottom:0;width:min(280px,82vw);background:var(--white);z-index:499;transform:translateX(100%);transition:transform var(--tr);overflow-y:auto;box-shadow:var(--sh-l)}
+#mob-dr.on{transform:translateX(0)}
+.mob-hd{padding:14px 18px;border-bottom:1px solid var(--bg3);display:flex;align-items:center;justify-content:space-between}
+.mob-cl{width:30px;height:30px;border-radius:50%;background:var(--bg2);font-size:14px;color:var(--t2);display:flex;align-items:center;justify-content:center;border:none}
+.mob-l{display:flex;align-items:center;gap:10px;padding:11px 18px;font-size:13px;font-weight:600;color:var(--t2);transition:all var(--tr);border-bottom:1px solid var(--bg)}
+.mob-l:hover{color:var(--em);background:var(--em-l)}
+.mob-l svg{flex-shrink:0;color:var(--t4)}
+
+/* BREADCRUMB */
+#breadcrumb{background:var(--white);border-bottom:1px solid var(--bg3)}
+.bc-in{max-width:var(--max);margin:0 auto;padding:10px clamp(14px,3vw,28px);display:flex;align-items:center;gap:6px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.bc-in::-webkit-scrollbar{display:none}
+.bc-a{font-size:12px;color:var(--t4);font-weight:500;transition:color var(--tr)}
+.bc-a:hover{color:var(--em)}
+.bc-sep{color:var(--bg3);font-size:12px}
+.bc-cur{font-size:12px;color:var(--t2);font-weight:600}
+
+/* HERO */
+#page-hero{background:var(--sl3);padding:clamp(40px,7vw,80px) 0;position:relative;overflow:hidden}
+.ph-geo{position:absolute;right:-80px;top:-80px;width:360px;height:360px;border-radius:50%;background:rgba(0,137,123,.07);pointer-events:none}
+.ph-geo2{position:absolute;left:-60px;bottom:-60px;width:260px;height:260px;border-radius:50%;background:rgba(201,168,76,.05);pointer-events:none}
+.ph-in{position:relative;z-index:1;text-align:center;max-width:640px;margin:0 auto}
+.ph-eyebrow{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:20px;font-size:11px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px}
+.ph-eyebrow span{width:6px;height:6px;border-radius:50%;background:var(--em);flex-shrink:0}
+.ph-ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(28px,5vw,46px);font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1.12;margin-bottom:14px}
+.ph-sub{font-size:clamp(13px,2.5vw,15px);color:rgba(255,255,255,.42);line-height:1.7;margin-bottom:clamp(20px,4vw,32px)}
+/* Barre recherche FAQ */
+.faq-search{display:flex;background:var(--white);border-radius:10px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.22);max-width:480px;margin:0 auto}
+.fs-inp{flex:1;padding:clamp(12px,2.5vw,14px) 16px;font-size:13px;color:var(--t1);border:none;outline:none;font-family:inherit;background:transparent}
+.fs-inp::placeholder{color:var(--t4)}
+.fs-btn{padding:clamp(12px,2.5vw,14px) clamp(18px,3vw,26px);background:var(--em);color:#fff;font-size:13px;font-weight:700;white-space:nowrap;transition:background var(--tr);border:none;font-family:inherit;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.fs-btn:hover{background:var(--em-d)}
+
+/* LAYOUT */
+#faq-body{max-width:var(--max);margin:0 auto;padding:clamp(28px,5vw,56px) clamp(14px,3vw,28px);display:grid;grid-template-columns:1fr;gap:clamp(24px,4vw,48px);align-items:start}
+@media(min-width:860px){#faq-body{grid-template-columns:220px 1fr}}
+@media(min-width:1100px){#faq-body{grid-template-columns:260px 1fr}}
+
+/* SIDEBAR CATÉGORIES */
+.faq-nav{position:sticky;top:calc(clamp(54px,8vw,62px) + 16px)}
+@media(max-width:859px){.faq-nav{position:static}}
+.faq-nav-ti{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t4);margin-bottom:10px;padding:0 4px}
+.faq-nav-list{display:flex;flex-direction:column;gap:2px}
+@media(max-width:859px){.faq-nav-list{flex-direction:row;flex-wrap:wrap;gap:6px}}
+.faq-cat-btn{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:9px;font-size:13px;font-weight:600;color:var(--t3);transition:all var(--tr);width:100%;text-align:left;background:none;font-family:inherit;border:1.5px solid transparent}
+@media(max-width:859px){.faq-cat-btn{width:auto;border:1.5px solid var(--bg3);padding:6px 12px}}
+.faq-cat-btn:hover{color:var(--em);background:var(--em-l)}
+.faq-cat-btn.on{color:var(--em);background:var(--em-l);border-color:var(--em-g);font-weight:700}
+.faq-cat-ico{width:26px;height:26px;border-radius:6px;background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background var(--tr)}
+@media(max-width:859px){.faq-cat-ico{display:none}}
+.faq-cat-btn.on .faq-cat-ico{background:var(--em-l)}
+.faq-cat-count{margin-left:auto;font-size:10px;font-weight:700;color:var(--t4);background:var(--bg2);border-radius:10px;padding:1px 6px;flex-shrink:0}
+@media(max-width:859px){.faq-cat-count{display:none}}
+
+/* CONTENU FAQ */
+.faq-content{}
+.faq-section{margin-bottom:clamp(28px,5vw,44px)}
+.faq-section:last-child{margin-bottom:0}
+.fs-hd{display:flex;align-items:center;gap:10px;margin-bottom:clamp(12px,2.5vw,18px);padding-bottom:12px;border-bottom:2px solid var(--bg3)}
+.fs-ico{width:34px;height:34px;border-radius:8px;background:var(--em-l);border:1px solid var(--em-g);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fs-ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(16px,3vw,20px);font-weight:700;color:var(--sl)}
+/* Items FAQ */
+.faq-list{display:flex;flex-direction:column;gap:0}
+.faq-item{border-bottom:1px solid var(--bg2)}
+.faq-item:last-child{border-bottom:none}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:clamp(13px,2.5vw,16px) 0;font-size:clamp(13px,2.5vw,14px);font-weight:700;color:var(--t1);cursor:pointer;width:100%;text-align:left;background:none;border:none;font-family:inherit;transition:color var(--tr)}
+.faq-q:hover{color:var(--em)}
+.faq-q.on{color:var(--em)}
+.faq-ic{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;transition:all var(--tr);color:var(--t4)}
+.faq-q.on .faq-ic{background:var(--em-l);color:var(--em);transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-a.open{max-height:600px}
+.faq-a-in{padding-bottom:clamp(12px,2.5vw,16px);font-size:13px;color:var(--t3);line-height:1.75}
+.faq-a-in p{margin-bottom:8px}
+.faq-a-in p:last-child{margin-bottom:0}
+.faq-a-in a{color:var(--em);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.faq-a-in ul{padding-left:18px;margin:8px 0;display:flex;flex-direction:column;gap:5px}
+.faq-a-in li{color:var(--t3)}
+/* Badge utile */
+.faq-helpful{display:flex;align-items:center;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--bg2)}
+.faq-helpful-lbl{font-size:11px;color:var(--t4);font-weight:600}
+.fh-btn{padding:4px 10px;border:1.5px solid var(--bg3);border-radius:7px;font-size:11px;font-weight:700;color:var(--t3);transition:all var(--tr);font-family:inherit}
+.fh-btn:hover{border-color:var(--em-g);color:var(--em)}
+.fh-btn.voted{border-color:var(--em);background:var(--em-l);color:var(--em)}
+
+/* Aucun résultat */
+#no-results{display:none;text-align:center;padding:clamp(24px,5vw,48px);background:var(--white);border:1px solid var(--bg3);border-radius:var(--rl)}
+.nr-ti{font-size:15px;font-weight:700;color:var(--sl);margin-bottom:8px}
+.nr-sub{font-size:13px;color:var(--t4)}
+
+/* BLOC CONTACT */
+#contact-band{background:var(--white);border:1px solid var(--bg3);border-radius:var(--rl);padding:clamp(22px,4vw,32px);margin-top:clamp(28px,5vw,48px);display:flex;align-items:center;justify-content:space-between;gap:clamp(16px,3vw,24px);flex-wrap:wrap}
+.cb-txt{}
+.cb-ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(16px,3vw,20px);font-weight:700;color:var(--sl);margin-bottom:6px}
+.cb-sub{font-size:13px;color:var(--t3);line-height:1.6;max-width:440px}
+.cb-btns{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0}
+.cb-btn{padding:10px 18px;border-radius:9px;font-size:13px;font-weight:700;transition:all var(--tr);display:flex;align-items:center;gap:7px;font-family:inherit}
+.cb-btn.primary{background:var(--em);color:#fff;border:none}
+.cb-btn.primary:hover{background:var(--em-d)}
+.cb-btn.sec{border:1.5px solid var(--bg3);color:var(--t2);background:none}
+.cb-btn.sec:hover{border-color:var(--em);color:var(--em)}
+
+/* TOAST */
+#toast{position:fixed;bottom:clamp(16px,4vw,24px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--sl);color:#fff;font-size:13px;font-weight:600;padding:11px 20px;border-radius:8px;box-shadow:var(--sh-l);z-index:9999;opacity:0;visibility:hidden;transition:all var(--tr);white-space:nowrap;max-width:min(90vw,400px)}
+#toast.on{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<div class="mali-stripe"><span style="background:var(--mg)"></span><span style="background:var(--my)"></span><span style="background:var(--mr)"></span></div>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <div class="nv">
+    <a class="logo" href="/">
+      <div class="logo-bars"><span></span><span></span><span></span></div>
+      <div class="logo-text"><em>MIFA</em> LIFE</div>
+      <div class="flag-mini"><span style="background:var(--mg)"></span><span style="background:var(--my)"></span><span style="background:var(--mr)"></span></div>
+    </a>
+    <div class="nv-mid">
+      <div class="si-wrap">
+        <input class="si" type="search" placeholder="Rechercher un produit…" aria-label="Recherche"/>
+        <span class="si-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+      </div>
+    </div>
+    <div class="nv-links">
+      <a class="nv-lnk" href="/">Accueil</a>
+      <a class="nv-lnk" href="/catalogue">Catalogue</a>
+      <a class="nv-lnk on" href="/faq">FAQ</a>
+    </div>
+    <div class="nv-r">
+      <a class="ic-btn" href="/dashboard" aria-label="Compte">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+      <a class="ic-btn" href="/panier" aria-label="Panier">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="ic-bdg" id="cartBdg" style="display:none">0</span>
+      </a>
+      <button class="burger" id="burger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- DRAWER -->
+<div id="mob-bg" onclick="toggleMenu()"></div>
+<div id="mob-dr">
+  <div class="mob-hd"><div class="logo-text"><em>MIFA</em> LIFE</div><button class="mob-cl" onclick="toggleMenu()">✕</button></div>
+  <a class="mob-l" href="/"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Accueil</a>
+  <a class="mob-l" href="/catalogue"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Catalogue</a>
+  <a class="mob-l" href="/contact"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Contact</a>
+  <a class="mob-l" href="/suivi-commande"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 5v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Suivi commande</a>
+</div>
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb">
+  <div class="bc-in">
+    <a class="bc-a" href="/">Accueil</a>
+    <span class="bc-sep">›</span>
+    <span class="bc-cur">Questions fréquentes</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="page-hero">
+  <div class="ph-geo"></div><div class="ph-geo2"></div>
+  <div class="wrap">
+    <div class="ph-in">
+      <div class="ph-eyebrow"><span></span>Centre d'aide</div>
+      <h1 class="ph-ti">Questions fréquentes</h1>
+      <p class="ph-sub">Trouvez rapidement une réponse à votre question sur les commandes, la livraison, les paiements et les retours.</p>
+      <div class="faq-search" role="search">
+        <input class="fs-inp" type="search" id="faqSearch" placeholder="Rechercher dans la FAQ…" oninput="filterFaq(this.value)" aria-label="Rechercher dans la FAQ"/>
+        <button class="fs-btn" onclick="filterFaq(document.getElementById('faqSearch').value)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Chercher
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORPS -->
+<div id="faq-body">
+
+  <!-- SIDEBAR -->
+  <aside class="faq-nav" aria-label="Catégories FAQ">
+    <div class="faq-nav-ti">Catégories</div>
+    <div class="faq-nav-list" id="faqNavList"></div>
+  </aside>
+
+  <!-- CONTENU -->
+  <div>
+    <div id="faq-sections"></div>
+    <div id="no-results">
+      <div class="nr-ti">Aucun résultat</div>
+      <p class="nr-sub">Aucune question ne correspond à votre recherche. Essayez un autre mot-clé ou contactez notre support.</p>
+    </div>
+
+    <!-- BLOC CONTACT -->
+    <div id="contact-band">
+      <div class="cb-txt">
+        <div class="cb-ti">Vous n'avez pas trouvé votre réponse ?</div>
+        <p class="cb-sub">Notre équipe à Bamako est disponible du lundi au samedi, de 8h à 18h. Réponse sous 24h par email.</p>
+      </div>
+      <div class="cb-btns">
+        <a class="cb-btn primary" href="/contact">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Nous contacter
+        </a>
+        <a class="cb-btn sec" href="/suivi-commande">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 5v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          Suivre une commande
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:var(--sl3);padding:clamp(28px,5vw,44px) 0 0;margin-top:clamp(40px,6vw,64px)">
+  <div class="wrap">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px">
+      <div style="font-family:'Playfair Display',Georgia,serif;font-size:16px;font-weight:700;color:#fff"><span style="color:var(--em)">MIFA</span> LIFE</div>
+      <div style="display:flex;gap:clamp(14px,3vw,28px);flex-wrap:wrap">
+        <a href="/" style="font-size:12px;color:rgba(255,255,255,.38)" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.38)'">Accueil</a>
+        <a href="/catalogue" style="font-size:12px;color:rgba(255,255,255,.38)" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.38)'">Catalogue</a>
+        <a href="/contact" style="font-size:12px;color:rgba(255,255,255,.38)" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.38)'">Contact</a>
+        <a href="/about" style="font-size:12px;color:rgba(255,255,255,.38)" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.38)'">À propos</a>
+      </div>
+    </div>
+    <div style="margin-top:20px;padding:12px 0;border-top:1px solid rgba(255,255,255,.07);font-size:11px;color:rgba(255,255,255,.2)">
+      © 2024 Mifa Life Company · Bamako, Mali
+    </div>
+  </div>
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+'use strict';
+var toastTimer = null;
+var menuOpen   = false;
+var cart = JSON.parse(localStorage.getItem('mifa_cart') || '[]');
+var activeSection = null;
+
+/* ── DONNÉES FAQ ── */
+var FAQ = [
+  {
+    id: 'commandes',
+    label: 'Commandes',
+    ico: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>',
+    items: [
+      {
+        q: 'Comment passer une commande sur Mifa Life ?',
+        a: '<p>Parcourez le catalogue, sélectionnez votre produit, choisissez les variantes si nécessaire (taille, couleur), puis cliquez sur "Ajouter au panier" ou "Commander maintenant". Vous serez guidé vers le tunnel de commande en 3 étapes : adresse de livraison, mode de paiement, confirmation.</p>'
+      },
+      {
+        q: 'Puis-je modifier ou annuler ma commande après confirmation ?',
+        a: '<p>Vous pouvez annuler votre commande tant qu\'elle n\'est pas encore expédiée. Connectez-vous à votre espace client, rendez-vous dans "Mes commandes" et cliquez sur "Annuler". Si la commande est déjà en cours d\'expédition, contactez notre support le plus rapidement possible.</p>'
+      },
+      {
+        q: 'Comment savoir si ma commande a bien été reçue ?',
+        a: '<p>Vous recevrez un email de confirmation avec votre numéro de commande (format ML-XXXXXX) dès que votre paiement sera validé. Ce numéro vous permet de suivre votre commande à tout moment sur la page <a href="/suivi-commande">Suivi de commande</a>.</p>'
+      },
+      {
+        q: 'Puis-je commander sans créer de compte ?',
+        a: '<p>La création d\'un compte est recommandée pour suivre vos commandes, enregistrer vos adresses et accéder à l\'historique de vos achats. Cependant, vous pouvez passer commande en mode invité en fournissant simplement votre email et votre adresse de livraison.</p>'
+      },
+      {
+        q: 'Combien d\'articles puis-je commander à la fois ?',
+        a: '<p>Il n\'y a pas de limite stricte au nombre d\'articles. Cependant, les quantités disponibles sont limitées par le stock de chaque produit. Pour les commandes importantes (usage professionnel ou revente), contactez-nous directement.</p>'
+      }
+    ]
+  },
+  {
+    id: 'livraison',
+    label: 'Livraison',
+    ico: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 5v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
+    items: [
+      {
+        q: 'Quels sont les délais de livraison ?',
+        a: '<p>Les délais varient selon le produit et son origine. Ils sont indiqués sur chaque fiche produit avant que vous confirmiez votre commande. En général, comptez entre 7 et 21 jours pour les produits venant de Chine, selon le mode de livraison choisi.</p>'
+      },
+      {
+        q: 'Livrez-vous partout au Mali ?',
+        a: '<p>Nous livrons actuellement à Bamako et dans les communes environnantes. La livraison en région est en cours de déploiement. Lors de la commande, renseignez votre adresse complète et nous vous confirmons la disponibilité.</p>'
+      },
+      {
+        q: 'Comment suivre mon colis en temps réel ?',
+        a: '<p>Connectez-vous à votre compte et accédez à "Mes commandes", ou utilisez directement la page <a href="/suivi-commande">Suivi de commande</a> avec votre numéro ML-XXXXXX. Un email de mise à jour vous est envoyé à chaque étape importante.</p>'
+      },
+      {
+        q: 'Que faire si mon colis n\'arrive pas dans les délais prévus ?',
+        a: '<p>Si votre délai de livraison estimé est dépassé de plus de 3 jours, contactez notre support via la page <a href="/contact">Contact</a> en indiquant votre numéro de commande. Nous faisons le point avec le transporteur et vous tenons informé.</p>'
+      },
+      {
+        q: 'Quelqu\'un doit-il être présent pour recevoir la livraison ?',
+        a: '<p>Idéalement oui. Notre livreur vous contactera avant la livraison. Si vous n\'êtes pas disponible, vous pouvez indiquer un voisin ou un responsable de gardiennage dans les instructions de livraison lors de la commande.</p>'
+      }
+    ]
+  },
+  {
+    id: 'paiement',
+    label: 'Paiement',
+    ico: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>',
+    items: [
+      {
+        q: 'Quels modes de paiement sont acceptés ?',
+        a: '<p>Nous acceptons :</p><ul><li><strong>Orange Money</strong> — numéro Orange Mali</li><li><strong>Wave</strong> — compte Wave Mali</li><li><strong>Moov Money</strong> — numéro Moov Mali</li><li><strong>Carte bancaire</strong> — Visa, Mastercard</li><li><strong>Paiement à la livraison</strong> — en espèces à Bamako (selon disponibilité)</li></ul>'
+      },
+      {
+        q: 'Mon paiement Orange Money a échoué, que faire ?',
+        a: '<p>Vérifiez d\'abord votre solde et que votre numéro est bien actif. Si le problème persiste, vérifiez si le montant a été débité de votre compte. Si oui, contactez immédiatement notre support avec votre numéro de commande — nous vérifierons et validerons manuellement si nécessaire.</p>'
+      },
+      {
+        q: 'Mon argent est-il en sécurité si je ne reçois pas mon colis ?',
+        a: '<p>Oui. Nous utilisons un système d\'escrow (séquestre) : votre paiement est conservé jusqu\'à confirmation de la réception de votre commande. Si vous ne recevez pas votre colis, vous êtes remboursé intégralement. Votre argent ne va au vendeur qu\'une fois la livraison confirmée.</p>'
+      },
+      {
+        q: 'Puis-je payer en plusieurs fois ?',
+        a: '<p>Le paiement en plusieurs fois n\'est pas encore disponible. Nous travaillons à l\'intégration de cette option dans une prochaine mise à jour.</p>'
+      },
+      {
+        q: 'Les prix sont-ils en FCFA ou en devises étrangères ?',
+        a: '<p>Tous les prix affichés sur Mifa Life sont en Francs CFA (FCFA). Il n\'y a aucune surprise de conversion ou de frais cachés. Le montant affiché est le montant que vous payez.</p>'
+      }
+    ]
+  },
+  {
+    id: 'retours',
+    label: 'Retours & Remboursements',
+    ico: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.36"/></svg>',
+    items: [
+      {
+        q: 'Comment retourner un produit ?',
+        a: '<p>Contactez notre support dans les 7 jours suivant la réception en indiquant votre numéro de commande et la raison du retour (produit endommagé, non conforme, défaut). Notre équipe vous guidera sur la procédure à suivre.</p>'
+      },
+      {
+        q: 'Dans quels cas puis-je obtenir un remboursement ?',
+        a: '<p>Vous êtes éligible au remboursement si :</p><ul><li>Le produit reçu ne correspond pas à la description</li><li>Le produit est arrivé endommagé</li><li>La commande n\'est pas arrivée dans le délai maximum garanti</li></ul><p>Les retours pour simple changement d\'avis ne sont pas systématiquement acceptés — consultez la <a href="/returns">politique de retour</a> complète.</p>'
+      },
+      {
+        q: 'Combien de temps prend le remboursement ?',
+        a: '<p>Une fois votre demande validée, le remboursement est traité sous 3 à 7 jours ouvrables. Il sera effectué via le même moyen de paiement que celui utilisé lors de l\'achat (Orange Money, Wave, Moov Money ou carte bancaire).</p>'
+      },
+      {
+        q: 'Que faire si je reçois un produit endommagé ?',
+        a: '<p>Photographiez immédiatement le colis et le produit avant de l\'ouvrir complètement. Contactez notre support avec les photos et votre numéro de commande. Ne renvoyez rien sans avoir eu notre confirmation au préalable.</p>'
+      }
+    ]
+  },
+  {
+    id: 'compte',
+    label: 'Compte & Sécurité',
+    ico: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    items: [
+      {
+        q: 'Comment créer un compte Mifa Life ?',
+        a: '<p>Rendez-vous sur la page <a href="/auth?mode=register">Créer un compte</a>. Renseignez votre email, un mot de passe, et votre numéro de téléphone. Vous recevrez un code de vérification par SMS pour valider votre compte.</p>'
+      },
+      {
+        q: 'J\'ai oublié mon mot de passe, que faire ?',
+        a: '<p>Sur la page de connexion, cliquez sur "Mot de passe oublié". Entrez votre email et vous recevrez un lien de réinitialisation. Si vous n\'avez pas accès à cet email, contactez notre support.</p>'
+      },
+      {
+        q: 'Comment modifier mon adresse de livraison ?',
+        a: '<p>Connectez-vous à votre espace client et allez dans "Mes adresses". Vous pouvez y ajouter, modifier ou supprimer vos adresses. Note : l\'adresse d\'une commande déjà passée ne peut pas être modifiée si le colis est en cours d\'expédition.</p>'
+      },
+      {
+        q: 'Mes données personnelles sont-elles protégées ?',
+        a: '<p>Oui. Vos données ne sont utilisées que pour traiter vos commandes. Nous ne vendons ni ne partageons vos informations à des tiers à des fins commerciales. Consultez notre <a href="/confidentialite">politique de confidentialité</a> pour plus de détails.</p>'
+      }
+    ]
+  }
+];
+
+/* ── RENDU ── */
+function render(data) {
+  /* Sidebar nav */
+  var nav = document.getElementById('faqNavList');
+  nav.innerHTML = data.map(function(sec){
+    return '<button class="faq-cat-btn'+(activeSection===sec.id?' on':'')+'" onclick="scrollToSection(\''+sec.id+'\')" data-id="'+sec.id+'">'
+      +'<div class="faq-cat-ico">'+sec.ico+'</div>'
+      +sec.label
+      +'<span class="faq-cat-count">'+sec.items.length+'</span>'
+      +'</button>';
+  }).join('');
+
+  /* Sections */
+  var sections = document.getElementById('faq-sections');
+  if (!data.length) {
+    sections.innerHTML = '';
+    document.getElementById('no-results').style.display = 'block';
+    return;
+  }
+  document.getElementById('no-results').style.display = 'none';
+  sections.innerHTML = data.map(function(sec){
+    var items = sec.items.map(function(item, idx){
+      var itemId = sec.id + '-' + idx;
+      return '<div class="faq-item" data-q="'+encodeQ(item.q)+'">'
+        +'<button class="faq-q" onclick="toggleItem(this)" id="btn-'+itemId+'" aria-expanded="false">'
+        +item.q
+        +'<span class="faq-ic"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>'
+        +'</button>'
+        +'<div class="faq-a" id="ans-'+itemId+'"><div class="faq-a-in">'+item.a
+        +'<div class="faq-helpful"><span class="faq-helpful-lbl">Cette réponse vous a aidé ?</span>'
+        +'<button class="fh-btn" onclick="markHelpful(this,true)">Oui</button>'
+        +'<button class="fh-btn" onclick="markHelpful(this,false)">Non</button>'
+        +'</div></div></div>'
+        +'</div>';
+    }).join('');
+    return '<div class="faq-section" id="sec-'+sec.id+'">'
+      +'<div class="fs-hd"><div class="fs-ico">'+sec.ico+'</div><div class="fs-ti">'+sec.label+'</div></div>'
+      +'<div class="faq-list">'+items+'</div>'
+      +'</div>';
+  }).join('');
+}
+
+function encodeQ(q) { return q.replace(/"/g, '&quot;'); }
+
+/* ── TOGGLE ITEM ── */
+function toggleItem(btn) {
+  var isOpen = btn.classList.contains('on');
+  /* Fermer tous */
+  document.querySelectorAll('.faq-q.on').forEach(function(b){
+    b.classList.remove('on');
+    b.setAttribute('aria-expanded','false');
+    b.nextElementSibling.classList.remove('open');
+  });
+  if (!isOpen) {
+    btn.classList.add('on');
+    btn.setAttribute('aria-expanded','true');
+    btn.nextElementSibling.classList.add('open');
+  }
+}
+
+/* ── SCROLL SECTION ── */
+function scrollToSection(id) {
+  activeSection = id;
+  document.querySelectorAll('.faq-cat-btn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.id === id);
+  });
+  var el = document.getElementById('sec-'+id);
+  if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+/* ── FILTRE RECHERCHE ── */
+function filterFaq(q) {
+  q = q.trim().toLowerCase();
+  if (!q) { render(FAQ); return; }
+  var filtered = FAQ.map(function(sec){
+    var items = sec.items.filter(function(item){
+      return item.q.toLowerCase().includes(q) || item.a.replace(/<[^>]+>/g,'').toLowerCase().includes(q);
+    });
+    return items.length ? { id:sec.id, label:sec.label, ico:sec.ico, items:items } : null;
+  }).filter(Boolean);
+  render(filtered);
+}
+
+/* ── UTILE ── */
+function markHelpful(btn, yes) {
+  var row = btn.closest('.faq-helpful');
+  row.querySelectorAll('.fh-btn').forEach(function(b){ b.classList.remove('voted'); });
+  btn.classList.add('voted');
+  showToast(yes ? 'Merci pour votre retour !' : 'Nous allons améliorer cette réponse.');
+}
+
+/* ── CART BADGE ── */
+(function(){
+  var n = cart.reduce(function(s,i){ return s+(i.qty||1); }, 0);
+  var cb = document.getElementById('cartBdg');
+  if (cb){ cb.textContent = n; cb.style.display = n?'flex':'none'; }
+})();
+
+/* ── SCROLL SPY ── */
+window.addEventListener('scroll', function(){
+  document.getElementById('nav').classList.toggle('sc', window.scrollY > 40);
+  var secs = document.querySelectorAll('.faq-section');
+  secs.forEach(function(sec){
+    var rect = sec.getBoundingClientRect();
+    if (rect.top <= 120 && rect.bottom > 120) {
+      var id = sec.id.replace('sec-','');
+      document.querySelectorAll('.faq-cat-btn').forEach(function(b){
+        b.classList.toggle('on', b.dataset.id === id);
+      });
+    }
+  });
+}, { passive:true });
+
+/* ── MENU ── */
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  document.getElementById('burger').classList.toggle('open', menuOpen);
+  document.getElementById('mob-bg').classList.toggle('on', menuOpen);
+  document.getElementById('mob-dr').classList.toggle('on', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+}
+document.addEventListener('keydown', function(e){ if (e.key==='Escape' && menuOpen) toggleMenu(); });
+
+/* ── TOAST ── */
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove('on'); }, 3000);
+}
+
+/* ── INIT ── */
+window.addEventListener('DOMContentLoaded', function(){
+  render(FAQ);
+  var hash = window.location.hash;
+  if (hash) setTimeout(function(){ scrollToSection(hash.replace('#','')); }, 300);
+});
+</script>
+</body>
+</html>
