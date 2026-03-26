@@ -6,7 +6,7 @@ import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 
 export default function HomePage() {
   const [email, setEmail] = useState("");
-  const [pending, setPending] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,15 +19,15 @@ export default function HomePage() {
       return;
     }
 
-    setPending(true);
+    setIsSubmitting(true);
     setMessage(null);
     setError(null);
 
     try {
       const supabase = createBrowserSupabaseClient();
-      const { error: insertError } = await supabase
-        .from("callback_requests")
-        .insert([{ email: normalizedEmail }]);
+      const { error: insertError } = await supabase.from("callback_requests").insert([
+        { email: normalizedEmail },
+      ]);
 
       if (insertError) {
         setError(insertError.message);
@@ -43,7 +43,7 @@ export default function HomePage() {
           : "Une erreur est survenue.",
       );
     } finally {
-      setPending(false);
+      setIsSubmitting(false);
     }
   }
 
@@ -111,10 +111,14 @@ export default function HomePage() {
                 />
                 <button
                   type="submit"
-                  disabled={pending}
+                  disabled={isSubmitting}
                   className="inline-flex min-h-12 items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#08100b] transition hover:bg-[var(--my)]"
                 >
-                  {pending ? "Envoi..." : message ? "C'est note !" : "Etre rappelle"}
+                  {isSubmitting
+                    ? "Envoi..."
+                    : message
+                      ? "C'est note !"
+                      : "Etre rappelle"}
                 </button>
               </div>
 
