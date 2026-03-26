@@ -45,7 +45,7 @@ export default function LoginPage() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setPending(true);
-    setMessage(null);
+    setMessage("Verification en cours. Verifiez votre boite mail !");
     setError(null);
 
     try {
@@ -58,6 +58,7 @@ export default function LoginPage() {
       });
 
       if (authError) {
+        setMessage(null);
         setError(authError.message);
         return;
       }
