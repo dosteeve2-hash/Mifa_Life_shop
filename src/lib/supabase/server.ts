@@ -18,14 +18,14 @@ export async function createServerSupabaseClient() {
       getAll() {
         return cookieStore.getAll();
       },
-      setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value, options }) => {
-          if (options) {
+      setAll(cookiesToSet: { name: string; value: string; options: any }[]) {
+        try {
+          cookiesToSet.forEach(({ name, value, options }) => {
             cookieStore.set(name, value, options);
-          } else {
-            cookieStore.set(name, value);
-          }
-        });
+          });
+        } catch (error) {
+          // Le middleware gere le rafraichissement des sessions
+        }
       },
     },
   });
