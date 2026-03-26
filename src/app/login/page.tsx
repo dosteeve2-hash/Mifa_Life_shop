@@ -1,13 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const supabase = createBrowserSupabaseClient();
+
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) {
+        router.replace("/shop");
+      }
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) {
+        router.replace("/shop");
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [router]);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -17,11 +41,10 @@ export default function LoginPage() {
 
     try {
       const supabase = createBrowserSupabaseClient();
-      const origin = window.location.origin;
       const { error: authError } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: `${origin}/`,
+          emailRedirectTo: "https://mifa-life-shop-9k55.vercel.app/shop",
         },
       });
 
@@ -30,7 +53,9 @@ export default function LoginPage() {
         return;
       }
 
-      setMessage("Lien de connexion envoye. Verifiez votre boite mail.");
+      setMessage(
+        "Lien de connexion envoye. Verifiez votre boite mail pour acceder a la boutique.",
+      );
     } catch (submitError) {
       setError(
         submitError instanceof Error

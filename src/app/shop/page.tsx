@@ -1,16 +1,7 @@
-import Image from "next/image";
 import { fetchActiveProducts } from "@/lib/data/products";
-import type { ShopProduct } from "@/lib/types/store";
+import { ProductCard } from "@/components/ProductCard";
 
 export const dynamic = "force-dynamic";
-
-function formatPriceCfa(value: number | null) {
-  if (value === null) {
-    return "Prix indisponible";
-  }
-
-  return `${new Intl.NumberFormat("fr-FR").format(value)} FCFA`;
-}
 
 function MaliBanner() {
   return (
@@ -67,39 +58,7 @@ export default async function ShopPage() {
           ) : (
             <div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
               {products.map((product) => (
-                <article key={product.id} className="mifa-card">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-[24px] bg-[var(--surface-muted)]">
-                    {product.image_url ? (
-                      <Image
-                        src={product.image_url}
-                        alt={product.name ?? "Produit Mifa Life"}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                      />
-                    ) : (
-                      <div className="flex h-full items-center justify-center text-xs font-semibold uppercase tracking-[0.28em] text-[var(--muted)]">
-                        Sans image
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="mt-5">
-                    <p className="text-sm font-medium text-[var(--mg)]">
-                      {formatPriceCfa(product.price_cfa)}
-                    </p>
-                    <h2 className="mt-2 text-2xl font-semibold tracking-tight">
-                      {product.name ?? "Produit sans nom"}
-                    </h2>
-                    <p className="mt-3 min-h-12 text-sm leading-6 text-[var(--muted)]">
-                      {product.description || "Description non disponible."}
-                    </p>
-                  </div>
-
-                  <button type="button" className="mifa-button-primary mt-6 w-full">
-                    Ajouter
-                  </button>
-                </article>
+                <ProductCard key={product.id} product={product} />
               ))}
             </div>
           )}
