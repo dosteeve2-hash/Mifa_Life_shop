@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { logAuthConfirmationAction } from "@/actions/auth";
 import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
   const router = useRouter();
+  const hasLoggedConfirmation = useRef(false);
   const [email, setEmail] = useState("");
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -24,6 +26,13 @@ export default function LoginPage() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
+        if (!hasLoggedConfirmation.current) {
+          hasLoggedConfirmation.current = true;
+          void logAuthConfirmationAction({
+            email: session.user.email ?? null,
+            provider: session.user.app_metadata.provider ?? "email",
+          });
+        }
         router.replace("/shop");
       }
     });
