@@ -25,9 +25,9 @@ export default function HomePage() {
 
     try {
       const supabase = createBrowserSupabaseClient();
-      const { error: insertError } = await supabase.from("callback_requests").insert([
-        { email: normalizedEmail },
-      ]);
+      const { error: insertError } = await supabase
+        .from("callback_requests")
+        .insert([{ email: normalizedEmail }]);
 
       if (insertError) {
         setError(insertError.message);
@@ -48,92 +48,165 @@ export default function HomePage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#050806] text-white">
-      <section className="mx-auto flex min-h-screen max-w-5xl items-center px-6 py-16">
-        <div className="w-full overflow-hidden rounded-[36px] border border-white/10 bg-[linear-gradient(180deg,#0a120d_0%,#101813_100%)] shadow-[0_22px_80px_rgba(0,0,0,0.35)]">
-          <div className="grid h-2 grid-cols-3">
-            <div className="bg-[var(--mg)]" />
-            <div className="bg-[var(--my)]" />
-            <div className="bg-[var(--mr)]" />
-          </div>
-
-          <div className="px-6 py-12 text-center sm:px-12 sm:py-16">
-            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-[var(--mg)]">
-              Mifa Life
-            </p>
-            <h1 className="mx-auto mt-6 max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl">
-              MIFA LIFE - Plateforme en cours de synchronisation. Revenez dans
-              quelques instants.
-            </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/65">
-              Notre experience principale est en cours de mise a jour. Vous
-              pouvez nous contacter directement pendant la synchronisation.
-            </p>
-
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link
-                href="https://wa.me/22300000000?text=Bonjour%20Mifa%20Life"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[var(--mg)] px-8 py-3 text-sm font-semibold text-white transition hover:brightness-110"
-              >
-                Nous contacter sur WhatsApp
-              </Link>
-              <Link
-                href="/login"
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/15 px-8 py-3 text-sm font-semibold text-white transition hover:bg-white/5"
-              >
-                Se connecter
-              </Link>
+    <main>
+      <section id="hero">
+        <div className="hero-bg" />
+        <div className="hero-overlay" />
+        <div className="hero-in">
+          <div>
+            <div className="hero-eyebrow">
+              <span />
+              Votre marketplace au Mali
             </div>
+            <h1 className="hero-h1">
+              Mifa Life, commandez des produits du monde entier, livres
+              directement au <em>Mali</em>.
+            </h1>
+            <p className="hero-sub">
+              Produits du monde entier livres au Mali. Payez par Orange Money,
+              Wave ou Moov, avec une experience boutique inspiree de votre
+              design HTML original.
+            </p>
 
             <form
-              className="mx-auto mt-10 max-w-xl rounded-[28px] border border-white/10 bg-white/5 p-5 text-left"
+              className="hero-search"
               onSubmit={(event) => {
                 event.preventDefault();
                 void handleCallback();
               }}
             >
-              <label
-                htmlFor="contact-email"
-                className="text-xs font-semibold uppercase tracking-[0.3em] text-white/45"
-              >
-                Contact rapide
-              </label>
-              <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-                <input
-                  id="contact-email"
-                  type="email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  placeholder="Votre email"
-                  className="min-h-12 flex-1 rounded-full border border-white/10 bg-[#0b100d] px-5 py-3 text-sm text-white outline-none placeholder:text-white/30 focus:border-[var(--mg)]"
-                />
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#08100b] transition hover:bg-[var(--my)]"
-                >
-                  {isSubmitting
-                    ? "Envoi..."
-                    : message
-                      ? "C'est note !"
-                      : "Etre rappelle"}
-                </button>
-              </div>
-
-              {error ? (
-                <p className="mt-4 rounded-2xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-100">
-                  {error}
-                </p>
-              ) : null}
-
-              {message ? (
-                <p className="mt-4 rounded-2xl border border-[var(--mg)]/30 bg-[var(--mg)]/10 px-4 py-3 text-sm text-green-100">
-                  {message}
-                </p>
-              ) : null}
+              <select className="hs-cat" defaultValue="rappel" aria-label="Action">
+                <option value="rappel">Rappel</option>
+                <option value="shop">Boutique</option>
+              </select>
+              <input
+                id="contact-email"
+                type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder="Entrez votre email"
+                className="hs-inp"
+              />
+              <button type="submit" className="hs-btn" disabled={isSubmitting}>
+                {isSubmitting ? "Envoi..." : message ? "C'est note !" : "Etre rappele"}
+              </button>
             </form>
+
+            {error ? <p className="hero-feedback error">{error}</p> : null}
+            {message ? <p className="hero-feedback success">{message}</p> : null}
+
+            <div className="hero-chips">
+              <Link href="/shop" className="hc">
+                Electronique
+              </Link>
+              <Link href="/shop" className="hc">
+                Mode
+              </Link>
+              <Link href="/shop" className="hc">
+                Maison
+              </Link>
+              <Link href="/login" className="hc">
+                Connexion
+              </Link>
+            </div>
+          </div>
+
+          <div className="hero-cards">
+            <div className="hc-card">
+              <div className="hc-img-ph">Wax</div>
+              <div className="hc-info">
+                <div className="hc-name">Selection mode Mifa Life</div>
+                <div className="hc-price">Nouveautes</div>
+              </div>
+            </div>
+            <div className="hc-card">
+              <div className="hc-img-ph">Maison</div>
+              <div className="hc-info">
+                <div className="hc-name">Maison & cadeaux</div>
+                <div className="hc-price">Livraison rapide</div>
+              </div>
+            </div>
+            <div className="hc-card">
+              <div className="hc-img-ph">Tech</div>
+              <div className="hc-info">
+                <div className="hc-name">Produits internationaux</div>
+                <div className="hc-price">Paiement mobile</div>
+              </div>
+            </div>
+            <div className="hc-card">
+              <div className="hc-img-ph">Sport</div>
+              <div className="hc-info">
+                <div className="hc-name">Support WhatsApp</div>
+                <div className="hc-price">Mifa Life</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap">
+          <div className="sec-hd">
+            <div>
+              <p className="sec-eyebrow">Mifa Life</p>
+              <h2 className="sec-ti">Explorez les univers de la marketplace</h2>
+            </div>
+            <Link href="/shop" className="sec-link">
+              Voir le catalogue
+            </Link>
+          </div>
+
+          <div id="cats-grid">
+            <Link href="/shop" className="cat-card">
+              <div className="cat-ico">A</div>
+              <div className="cat-name">Accessoires</div>
+            </Link>
+            <Link href="/shop" className="cat-card">
+              <div className="cat-ico">M</div>
+              <div className="cat-name">Mode</div>
+            </Link>
+            <Link href="/shop" className="cat-card">
+              <div className="cat-ico">B</div>
+              <div className="cat-name">Beaute</div>
+            </Link>
+            <Link href="/shop" className="cat-card">
+              <div className="cat-ico">T</div>
+              <div className="cat-name">Tech</div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section id="trust">
+        <div className="wrap">
+          <div className="trust-grid">
+            <div className="trust-card">
+              <div className="trust-ico">1</div>
+              <div>
+                <div className="trust-ti">Paiement mobile</div>
+                <div className="trust-sub">
+                  Orange Money, Wave et Moov selon votre preference.
+                </div>
+              </div>
+            </div>
+            <div className="trust-card">
+              <div className="trust-ico">2</div>
+              <div>
+                <div className="trust-ti">Support humain</div>
+                <div className="trust-sub">
+                  WhatsApp et callback pour accompagner chaque commande.
+                </div>
+              </div>
+            </div>
+            <div className="trust-card">
+              <div className="trust-ico">3</div>
+              <div>
+                <div className="trust-ti">Identite Mifa Life</div>
+                <div className="trust-sub">
+                  Une interface calquee sur la direction visuelle originale.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

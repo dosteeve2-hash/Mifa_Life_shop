@@ -38,52 +38,57 @@ export function ProductCard({ product }: ProductCardProps) {
   const canRenderImage = isSupabaseStorageUrl(product.image_url);
 
   return (
-    <article className="mifa-card">
-      <Link href={`/shop/${product.id}`} className="block">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-[24px] bg-[var(--surface-muted)]">
+    <article className="pc">
+      <Link href={`/shop/${product.id}`} className="pc-img block">
+        <div className="relative h-full w-full overflow-hidden bg-[var(--bg2)]">
           {canRenderImage && product.image_url ? (
             <Image
               src={product.image_url}
               alt={product.name ?? "Produit Mifa Life"}
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
             />
           ) : (
-            <div className="flex h-full items-center justify-center text-xs font-semibold uppercase tracking-[0.28em] text-[var(--muted)]">
-              Sans image
-            </div>
+            <div className="pc-img-ph h-full">Sans image</div>
           )}
         </div>
       </Link>
 
-      <div className="mt-5">
-        <p className="text-sm font-medium text-[var(--mg)]">
-          {formatPriceCfa(product.price_cfa)}
+      <div className="pc-bd">
+        <p className="pc-vnd">
+          <span className="pc-vck">●</span>
+          Mifa Life
         </p>
-        <h2 className="mt-2 text-2xl font-semibold tracking-tight">
-          {product.name ?? "Produit sans nom"}
-        </h2>
-        <p className="mt-3 min-h-12 text-sm leading-6 text-[var(--muted)]">
+        <h2 className="pc-nm">{product.name ?? "Produit sans nom"}</h2>
+        <div className="pc-prices">
+          <span className="pc-p">{formatPriceCfa(product.price_cfa)}</span>
+        </div>
+        <p className="text-sm leading-6 text-[var(--t3)]">
           {product.description || "Description non disponible."}
         </p>
       </div>
 
-      <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-        <Link
-          href={`/shop/${product.id}`}
-          className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full border border-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/5"
-        >
-          Voir le produit
+      <div className="pc-hov">
+        <Link href={`/shop/${product.id}`} className="pc-ha">
+          Voir
         </Link>
         <button
           type="button"
-          className="mifa-button-primary flex-1"
+          className="pc-ha add"
           onClick={() => addToCart(product.id, 1)}
         >
           Acheter
         </button>
       </div>
+
+      <button
+        type="button"
+        className="pc-atc-m"
+        onClick={() => addToCart(product.id, 1)}
+      >
+        Acheter
+      </button>
     </article>
   );
 }

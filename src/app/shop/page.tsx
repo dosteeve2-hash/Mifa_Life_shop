@@ -1,67 +1,140 @@
+import Link from "next/link";
 import { fetchActiveProducts } from "@/lib/data/products";
 import { ProductCard } from "@/components/ProductCard";
 
 export const dynamic = "force-dynamic";
-
-function MaliBanner() {
-  return (
-    <div className="mifa-banner">
-      <div className="mifa-flag">
-        <span className="bg-[var(--mg)]" />
-        <span className="bg-[var(--my)]" />
-        <span className="bg-[var(--mr)]" />
-      </div>
-      <div className="px-5 py-4 sm:px-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.38em] text-[var(--mg)]">
-          Mifa Life
-        </p>
-        <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
-          Boutique synchronisee en temps reel avec Supabase, optimisee pour mobile.
-        </p>
-      </div>
-    </div>
-  );
-}
 
 export default async function ShopPage() {
   try {
     const products = await fetchActiveProducts();
 
     return (
-      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
-        <MaliBanner />
-
-        <section className="mt-8">
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[var(--mg)]">
-              Boutique
-            </p>
-            <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
-              Produits disponibles
-            </h1>
-            <p className="mt-4 text-base leading-7 text-[var(--muted)]">
-              Une selection Mifa Life responsive, claire et stable sur mobile comme
-              sur desktop.
-            </p>
-          </div>
-
-          <div className="mifa-panel mt-6">
-            <p className="text-sm text-[var(--muted)]">
-              {products.length} produit(s) actif(s)
-            </p>
-          </div>
-
-          {products.length === 0 ? (
-            <div className="mifa-panel mt-6 text-[var(--muted)]">
-              Aucun produit actif trouve pour le moment.
+      <main>
+        <section id="cat-hero">
+          <div className="ch-in">
+            <div className="ch-row">
+              <div>
+                <h1 className="ch-title">Catalogue Mifa Life</h1>
+                <p className="ch-sub">
+                  Wax, bijoux bogolan, beaute naturelle et essentiels lifestyle.
+                  Une boutique synchronisee sur Supabase avec l'identite visuelle
+                  du catalogue HTML original.
+                </p>
+              </div>
+              <div className="ch-stats">
+                <div className="chs">
+                  <div className="chs-n">{products.length}</div>
+                  <div className="chs-l">Produits</div>
+                </div>
+                <div className="chs">
+                  <div className="chs-n">2h</div>
+                  <div className="chs-l">Bamako</div>
+                </div>
+                <div className="chs">
+                  <div className="chs-n">Wave</div>
+                  <div className="chs-l">Paiement</div>
+                </div>
+              </div>
             </div>
-          ) : (
-            <div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+            <div className="ch-stripe">
+              <span className="bg-[var(--mg)]" />
+              <span className="bg-[var(--my)]" />
+              <span className="bg-[var(--mr)]" />
             </div>
-          )}
+          </div>
+        </section>
+
+        <section id="breadcrumb">
+          <div className="bc-in">
+            <Link href="/">Accueil</Link>
+            <span className="bc-sep">/</span>
+            <span className="bc-cur">Catalogue</span>
+          </div>
+        </section>
+
+        <section id="main">
+          <aside id="sidebar">
+            <div id="sidebar-inner">
+              <div className="filt-hd">
+                <h2 className="filt-ti">Filtres</h2>
+                <button type="button" className="filt-reset">
+                  Reinitialiser
+                </button>
+              </div>
+
+              <div className="filt-block">
+                <div className="filt-label">Categories</div>
+                <div className="fcat">
+                  <div className="fcat-item on">
+                    <span>Tous les produits</span>
+                    <span className="cnt">{products.length}</span>
+                  </div>
+                  <div className="fcat-item">
+                    <span>Mode</span>
+                    <span className="cnt">Live</span>
+                  </div>
+                  <div className="fcat-item">
+                    <span>Accessoires</span>
+                    <span className="cnt">Live</span>
+                  </div>
+                  <div className="fcat-item">
+                    <span>Beaute</span>
+                    <span className="cnt">Live</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="filt-block">
+                <div className="filt-label">Services</div>
+                <div className="filt-checks">
+                  <label className="fcheck">
+                    <span className="fcheck-box" />
+                    <span className="fcheck-lbl">Livraison Bamako</span>
+                  </label>
+                  <label className="fcheck">
+                    <span className="fcheck-box" />
+                    <span className="fcheck-lbl">Paiement mobile</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <div id="prod-zone">
+            <div className="sort-bar">
+              <div className="sort-left">
+                <p className="result-count">
+                  <b>{products.length}</b> produits disponibles
+                </p>
+                <div className="active-filters">
+                  <span className="af-tag">Catalogue Mali</span>
+                  <span className="af-tag">Supabase live</span>
+                </div>
+              </div>
+              <div className="sort-right">
+                <select className="sort-sel" defaultValue="recent">
+                  <option value="recent">Plus recent</option>
+                  <option value="price">Prix</option>
+                </select>
+              </div>
+            </div>
+
+            {products.length === 0 ? (
+              <div className="empty-state">
+                <div className="empty-ico">?</div>
+                <div className="empty-ti">Aucun produit actif pour le moment</div>
+                <div className="empty-sub">
+                  Revenez dans quelques instants ou contactez l'equipe Mifa Life.
+                </div>
+              </div>
+            ) : (
+              <div id="grid">
+                {products.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            )}
+          </div>
         </section>
       </main>
     );
@@ -70,19 +143,25 @@ export default async function ShopPage() {
       error instanceof Error ? error.message : "Erreur de synchronisation.";
 
     return (
-      <main className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14">
-        <MaliBanner />
-        <div className="mt-8 rounded-[28px] border border-[var(--mr)]/30 bg-[var(--surface)] px-6 py-8 shadow-[var(--bg3)]">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[var(--mr)]">
-            Erreur
-          </p>
-          <h1 className="mt-4 text-3xl font-semibold tracking-tight">
-            La boutique est temporairement indisponible
-          </h1>
-          <p className="mt-4 text-base leading-7 text-[var(--muted)]">
-            Impossible de charger les produits pour le moment : {message}
-          </p>
-        </div>
+      <main>
+        <section id="cat-hero">
+          <div className="ch-in">
+            <h1 className="ch-title">Catalogue Mifa Life</h1>
+            <p className="ch-sub">Le chargement du catalogue a rencontre une erreur.</p>
+            <div className="ch-stripe">
+              <span className="bg-[var(--mg)]" />
+              <span className="bg-[var(--my)]" />
+              <span className="bg-[var(--mr)]" />
+            </div>
+          </div>
+        </section>
+
+        <section id="main">
+          <div className="empty-state">
+            <div className="empty-ti">Boutique temporairement indisponible</div>
+            <div className="empty-sub">{message}</div>
+          </div>
+        </section>
       </main>
     );
   }
