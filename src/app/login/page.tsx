@@ -50,25 +50,48 @@ export default function LoginPage() {
 
     try {
       const supabase = createBrowserSupabaseClient();
-      const { error: authError } = await supabase.auth.signInWithOtp({
+      const authRequest = supabase.auth.signInWithOtp({
         email,
         options: {
           emailRedirectTo: `${window.location.origin}/shop`,
         },
       });
+      const timeoutRequest = new Promise<never>((_, reject) => {
+        window.setTimeout(() => {
+          reject(new Error("Timeout while waiting for Supabase response."));
+        }, 10000);
+      });
+      const { error: authError } = await Promise.race([
+        authRequest,
+        timeoutRequest,
+      ]);
 
       if (authError) {
-        setError(authError.message);
+        const isDomainError =
+          authError.message.toLowerCase().includes("redirect") ||
+          authError.message.toLowerCase().includes("domain") ||
+          authError.message.toLowerCase().includes("site url");
+
+        setError(
+          isDomainError ? "Erreur de configuration du domaine" : authError.message,
+        );
         return;
       }
 
       setMessage("Email envoye!");
     } catch (submitError) {
       setMessage(null);
-      setError(
+      const fallbackMessage =
         submitError instanceof Error
           ? submitError.message
-          : "Une erreur est survenue.",
+          : "Une erreur est survenue.";
+      const isDomainError =
+        fallbackMessage.toLowerCase().includes("redirect") ||
+        fallbackMessage.toLowerCase().includes("domain") ||
+        fallbackMessage.toLowerCase().includes("site url");
+
+      setError(
+        isDomainError ? "Erreur de configuration du domaine" : fallbackMessage,
       );
     } finally {
       setPending(false);
