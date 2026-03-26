@@ -45,7 +45,7 @@ export default function LoginPage() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setPending(true);
-    setMessage("Verification en cours. Verifiez votre boite mail !");
+    setMessage(null);
     setError(null);
 
     try {
@@ -53,20 +53,18 @@ export default function LoginPage() {
       const { error: authError } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: "https://mifa-life-shop-9k55.vercel.app/shop",
+          emailRedirectTo: `${window.location.origin}/shop`,
         },
       });
 
       if (authError) {
-        setMessage(null);
         setError(authError.message);
         return;
       }
 
-      setMessage(
-        "Lien de connexion envoye. Verifiez votre boite mail pour acceder a la boutique.",
-      );
+      setMessage("Email envoye!");
     } catch (submitError) {
+      setMessage(null);
       setError(
         submitError instanceof Error
           ? submitError.message
