@@ -27,7 +27,17 @@ async function fetchActiveProductsNoStore() {
   );
 
   if (!response.ok) {
-    throw new Error(`fetch failed (${response.status})`);
+    let errorDetails = "";
+
+    try {
+      errorDetails = await response.text();
+    } catch {
+      errorDetails = "";
+    }
+
+    throw new Error(
+      `fetch failed (${response.status})${errorDetails ? ` - ${errorDetails}` : ""}`,
+    );
   }
 
   return ((await response.json()) as ShopProduct[]) ?? [];
@@ -169,7 +179,7 @@ export default async function ShopPage() {
     );
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : "Erreur de synchronisation.";
+      error instanceof Error ? error.message : "Erreur de synchronisation inconnue.";
 
     return (
       <main>
@@ -188,7 +198,7 @@ export default async function ShopPage() {
         <section id="main">
           <div className="empty-state">
             <div className="empty-ti">Boutique temporairement indisponible</div>
-            <div className="empty-sub">{message}</div>
+            <div className="empty-sub">Erreur detaillee: {message}</div>
           </div>
         </section>
       </main>
