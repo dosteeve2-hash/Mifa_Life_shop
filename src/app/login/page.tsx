@@ -1,167 +1,297 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import { logAuthConfirmationAction } from "@/actions/auth";
-import { createBrowserSupabaseClient } from "@/lib/supabase/client";
+import Link from "next/link";
+import { useState } from "react";
+import { createBrowserClient } from "@supabase/ssr";
+
+type Step = "email" | "otp" | "success" | "error";
+
+const supabase = createBrowserClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+);
 
 export default function LoginPage() {
-  const router = useRouter();
-  const hasLoggedConfirmation = useRef(false);
   const [email, setEmail] = useState("");
-  const [pending, setPending] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [otp, setOtp] = useState("");
+  const [step, setStep] = useState<Step>("email");
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [countdown, setCountdown] = useState(0);
 
-  useEffect(() => {
-    const supabase = createBrowserSupabaseClient();
+  async function sendOtp(e: React.FormEvent) {
+    e.preventDefault();
+    setErrorMsg(null);
 
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session) {
-        router.replace("/shop");
-      }
-    });
+    if (!email.trim()) {
+      setErrorMsg("Veuillez entrer votre adresse email.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setErrorMsg("Adresse email invalide.");
+      return;
+    }
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session) {
-        if (!hasLoggedConfirmation.current) {
-          hasLoggedConfirmation.current = true;
-          void logAuthConfirmationAction({
-            email: session.user.email ?? null,
-            provider: session.user.app_metadata.provider ?? "email",
-          });
-        }
-        router.replace("/shop");
-      }
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [router]);
-
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setPending(true);
-    setMessage(null);
-    setError(null);
+    setLoading(true);
 
     try {
-      const supabase = createBrowserSupabaseClient();
-      const authRequest = supabase.auth.signInWithOtp({
-        email,
+      const { error } = await supabase.auth.signInWithOtp({
+        email: email.trim().toLowerCase(),
         options: {
-          emailRedirectTo: `${window.location.origin}/shop`,
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          shouldCreateUser: true,
         },
       });
-      const timeoutRequest = new Promise<never>((_, reject) => {
-        window.setTimeout(() => {
-          reject(new Error("Timeout while waiting for Supabase response."));
-        }, 10000);
-      });
-      const { error: authError } = await Promise.race([
-        authRequest,
-        timeoutRequest,
-      ]);
 
-      if (authError) {
-        const isDomainError =
-          authError.message.toLowerCase().includes("redirect") ||
-          authError.message.toLowerCase().includes("domain") ||
-          authError.message.toLowerCase().includes("site url");
-
-        setError(
-          isDomainError ? "Erreur de configuration du domaine" : authError.message,
-        );
+      if (error) {
+        if (error.message.includes("rate limit") || error.status === 429) {
+          setErrorMsg("Trop de tentatives. Attendez 60 secondes avant de reessayer.");
+        } else if (error.message.includes("invalid email")) {
+          setErrorMsg("Adresse email non acceptee par le serveur.");
+        } else {
+          setErrorMsg(`Erreur : ${error.message}`);
+        }
+        setLoading(false);
         return;
       }
 
-      setMessage("Email envoye!");
-    } catch (submitError) {
-      setMessage(null);
-      const fallbackMessage =
-        submitError instanceof Error
-          ? submitError.message
-          : "Une erreur est survenue.";
-      const isDomainError =
-        fallbackMessage.toLowerCase().includes("redirect") ||
-        fallbackMessage.toLowerCase().includes("domain") ||
-        fallbackMessage.toLowerCase().includes("site url");
-
-      setError(
-        isDomainError ? "Erreur de configuration du domaine" : fallbackMessage,
-      );
+      setStep("otp");
+      startCountdown(60);
+    } catch (err) {
+      setErrorMsg("Erreur reseau. Verifiez votre connexion et reessayez.");
+      console.error("[sendOtp]", err);
     } finally {
-      setPending(false);
+      setLoading(false);
     }
   }
 
+  async function verifyOtp(e: React.FormEvent) {
+    e.preventDefault();
+    setErrorMsg(null);
+
+    if (!otp.trim() || otp.length < 6) {
+      setErrorMsg("Le code doit contenir 6 chiffres.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const { error } = await supabase.auth.verifyOtp({
+        email: email.trim().toLowerCase(),
+        token: otp.trim(),
+        type: "email",
+      });
+
+      if (error) {
+        if (error.message.includes("expired") || error.message.includes("invalid")) {
+          setErrorMsg("Code expire ou invalide. Demandez un nouveau code.");
+        } else {
+          setErrorMsg(`Erreur : ${error.message}`);
+        }
+        setLoading(false);
+        return;
+      }
+
+      setStep("success");
+      setTimeout(() => {
+        window.location.href = "/shop";
+      }, 1500);
+    } catch (err) {
+      setErrorMsg("Erreur reseau lors de la verification.");
+      console.error("[verifyOtp]", err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function resendOtp() {
+    if (countdown > 0) return;
+    setErrorMsg(null);
+    setLoading(true);
+
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        email: email.trim().toLowerCase(),
+        options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+      });
+
+      if (error) {
+        setErrorMsg(error.message);
+      } else {
+        startCountdown(60);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function startCountdown(seconds: number) {
+    setCountdown(seconds);
+    const iv = setInterval(() => {
+      setCountdown((c) => {
+        if (c <= 1) {
+          clearInterval(iv);
+          return 0;
+        }
+        return c - 1;
+      });
+    }, 1000);
+  }
+
   return (
-    <main className="min-h-screen bg-[#050806] px-6 py-16 text-white">
-      <section className="mx-auto max-w-lg">
-        <div className="overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,#0a120d_0%,#101813_100%)] shadow-[0_22px_80px_rgba(0,0,0,0.35)]">
-          <div className="grid h-2 grid-cols-3">
-            <div className="bg-[var(--mg)]" />
-            <div className="bg-[var(--my)]" />
-            <div className="bg-[var(--mr)]" />
-          </div>
+    <main className="login-main">
+      <div className="login-card">
+        <div className="mali-bar" style={{ marginBottom: "1.5rem" }}>
+          <span style={{ background: "var(--mg)" }} />
+          <span style={{ background: "var(--my)" }} />
+          <span style={{ background: "var(--mr)" }} />
+        </div>
 
-          <div className="px-6 py-10 sm:px-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[var(--mg)]">
-              Connexion
-            </p>
-            <h1 className="mt-4 text-3xl font-semibold tracking-tight">
-              Accedez a votre espace Mifa Life
-            </h1>
-            <p className="mt-3 text-sm leading-6 text-white/65">
-              Saisissez votre email pour recevoir un lien magique de connexion.
+        {step === "email" && (
+          <>
+            <h1 className="login-title">Connexion</h1>
+            <p className="login-sub">
+              Entrez votre email, nous vous envoyons un code de connexion.
             </p>
 
-            <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
-              <div className="flex flex-col gap-2">
-                <label
-                  htmlFor="email"
-                  className="text-xs font-semibold uppercase tracking-[0.25em] text-white/45"
-                >
-                  Email
+            <form onSubmit={sendOtp} className="login-form">
+              <div className="form-field">
+                <label htmlFor="email" className="form-label">
+                  Adresse email <span style={{ color: "var(--mr)" }}>*</span>
                 </label>
                 <input
                   id="email"
                   type="email"
                   value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="votre@email.com"
+                  className="form-input"
                   autoComplete="email"
-                  className="min-h-12 rounded-2xl border border-white/10 bg-[#0b100d] px-4 py-3 text-sm text-white outline-none placeholder:text-white/30 focus:border-[var(--mg)]"
-                  placeholder="vous@exemple.com"
+                  disabled={loading}
+                  autoFocus
                 />
               </div>
 
-              {error ? (
-                <p className="rounded-2xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-100">
-                  {error}
-                </p>
-              ) : null}
+              {errorMsg && (
+                <div className="form-error" role="alert">
+                  {errorMsg}
+                </div>
+              )}
 
-              {message ? (
-                <p className="rounded-2xl border border-[var(--mg)]/30 bg-[var(--mg)]/10 px-4 py-3 text-sm text-green-100">
-                  {message}
-                </p>
-              ) : null}
-
-              <button
-                type="submit"
-                disabled={pending}
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[var(--mg)] px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                {pending ? "Envoi..." : "Recevoir mon lien magique"}
+              <button type="submit" className="btn-submit" disabled={loading}>
+                {loading ? (
+                  <>
+                    <span className="btn-spinner" /> Envoi en cours...
+                  </>
+                ) : (
+                  "Recevoir le code"
+                )}
               </button>
             </form>
+
+            <p className="login-footer-txt">
+              Premiere visite ?{" "}
+              <span style={{ color: "var(--mg)", fontWeight: 600 }}>
+                Un compte sera cree automatiquement.
+              </span>
+            </p>
+          </>
+        )}
+
+        {step === "otp" && (
+          <>
+            <h1 className="login-title">Verification</h1>
+            <p className="login-sub">
+              Code envoye a <strong>{email}</strong>. Verifiez vos spams si
+              necessaire.
+            </p>
+
+            <form onSubmit={verifyOtp} className="login-form">
+              <div className="form-field">
+                <label htmlFor="otp" className="form-label">
+                  Code a 6 chiffres <span style={{ color: "var(--mr)" }}>*</span>
+                </label>
+                <input
+                  id="otp"
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  maxLength={6}
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
+                  placeholder="123456"
+                  className="form-input"
+                  style={{
+                    letterSpacing: "0.2em",
+                    fontSize: "1.25rem",
+                    textAlign: "center",
+                  }}
+                  disabled={loading}
+                  autoFocus
+                />
+              </div>
+
+              {errorMsg && (
+                <div className="form-error" role="alert">
+                  {errorMsg}
+                </div>
+              )}
+
+              <button type="submit" className="btn-submit" disabled={loading}>
+                {loading ? (
+                  <>
+                    <span className="btn-spinner" /> Verification...
+                  </>
+                ) : (
+                  "Valider le code"
+                )}
+              </button>
+            </form>
+
+            <div style={{ textAlign: "center", marginTop: "1rem" }}>
+              <button
+                onClick={resendOtp}
+                disabled={countdown > 0 || loading}
+                className="btn-resend"
+              >
+                {countdown > 0
+                  ? `Renvoyer dans ${countdown}s`
+                  : "Renvoyer le code"}
+              </button>
+              <button
+                onClick={() => {
+                  setStep("email");
+                  setErrorMsg(null);
+                  setOtp("");
+                }}
+                className="btn-back"
+                style={{ display: "block", margin: "8px auto 0" }}
+              >
+                {"<- Changer d'email"}
+              </button>
+            </div>
+          </>
+        )}
+
+        {step === "success" && (
+          <div style={{ textAlign: "center" }}>
+            <div className="success-icon">OK</div>
+            <h1 className="login-title">Connecte !</h1>
+            <p className="login-sub">
+              Bienvenue sur Mifa Life. Redirection en cours...
+            </p>
           </div>
-        </div>
-      </section>
+        )}
+
+        {step !== "success" && (
+          <p style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "12px" }}>
+            <Link href="/" style={{ color: "var(--muted)", textDecoration: "none" }}>
+              {"<- Retour a l'accueil"}
+            </Link>
+          </p>
+        )}
+      </div>
     </main>
   );
 }

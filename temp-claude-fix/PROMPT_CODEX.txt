@@ -1,0 +1,104 @@
+Tu es expert Next.js 15 + Supabase SSR. Mon projet Mifa Life a 3 bugs 
+critiques à corriger. Applique exactement le code ci-dessous sans rien changer.
+
+═══════════════════════════════════════════════════════
+FICHIER 1 : src/lib/supabase/server.ts
+═══════════════════════════════════════════════════════
+Remplace tout le contenu par :
+
+import { createServerClient } from '@supabase/ssr';
+import { cookies } from 'next/headers';
+import type { CookieOptions } from '@supabase/ssr';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl)     throw new Error('NEXT_PUBLIC_SUPABASE_URL manquante');
+if (!supabaseAnonKey) throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY manquante');
+
+export async function createServerSupabaseClient() {
+  const cookieStore = await cookies();
+  return createServerClient(supabaseUrl!, supabaseAnonKey!, {
+    cookies: {
+      getAll() {
+        return cookieStore.getAll();
+      },
+      setAll(
+        cookiesToSet: Array<{ name: string; value: string; options?: CookieOptions }>
+      ) {
+        try {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            cookieStore.set(name, value, options ?? {});
+          });
+        } catch {}
+      },
+    },
+  });
+}
+
+═══════════════════════════════════════════════════════
+FICHIER 2 : src/app/auth/callback/route.ts  (CRÉER si absent)
+═══════════════════════════════════════════════════════
+import { NextResponse } from 'next/server';
+import { createServerSupabaseClient } from '@/lib/supabase/server';
+
+export async function GET(request: Request) {
+  const { searchParams, origin } = new URL(request.url);
+  const code = searchParams.get('code');
+  const next = searchParams.get('next') ?? '/shop';
+
+  if (code) {
+    const supabase = await createServerSupabaseClient();
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    if (!error) {
+      return NextResponse.redirect(`${origin}${next}`);
+    }
+  }
+  return NextResponse.redirect(`${origin}/login?error=auth_callback_failed`);
+}
+
+═══════════════════════════════════════════════════════
+FICHIER 3 : src/app/login/page.tsx
+═══════════════════════════════════════════════════════
+Remplace tout le contenu par le fichier login/page.tsx 
+fourni par Claude (version avec step email → otp → success,
+gestion d'erreurs complète, countdown 60s, createBrowserClient).
+
+═══════════════════════════════════════════════════════
+FICHIER 4 : Ajouter dans src/app/globals.css (à la fin)
+═══════════════════════════════════════════════════════
+Ajouter le CSS de la section "PAGE LOGIN" fourni par Claude.
+
+═══════════════════════════════════════════════════════
+VÉRIFICATIONS OBLIGATOIRES AVANT COMMIT
+═══════════════════════════════════════════════════════
+1. Dans src/lib/supabase/server.ts : 
+   - cookiesToSet doit être typé Array<{name:string;value:string;options?:CookieOptions}>
+   - PAS de `any` implicite
+
+2. Dans src/app/shop/page.tsx :
+   - Doit avoir en tête : export const dynamic = 'force-dynamic';
+   - Le fetch Supabase doit être dans un try/catch
+   - Si createServerSupabaseClient() échoue, afficher un message d'erreur 
+     (pas une page blanche ni une 404)
+
+3. Vérifier que middleware.ts n'intercepte PAS /auth/callback
+   (la route callback doit être publique)
+
+═══════════════════════════════════════════════════════
+COMMIT ET PUSH
+═══════════════════════════════════════════════════════
+git add .
+git commit -m "fix: supabase server typing, OTP login flow, auth callback route"
+git push origin HEAD:main
+
+═══════════════════════════════════════════════════════
+APRÈS LE PUSH — VÉRIFIER SUR VERCEL
+═══════════════════════════════════════════════════════
+Le build doit passer sans :
+- "error TS7006: Parameter implicitly has an 'any' type"  
+- "TypeError: fetch failed"
+- "npm error EBADPLATFORM"
+
+Si une erreur TypeScript apparaît dans les logs Vercel,
+la corriger et repusher immédiatement.
