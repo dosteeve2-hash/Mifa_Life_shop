@@ -5,6 +5,7 @@ import { useState } from "react";
 import { createBrowserClient } from "@supabase/ssr";
 
 type Step = "email" | "otp" | "success" | "error";
+const APP_URL = "https://mifa-life-shop-9k55.vercel.app";
 
 const supabase = createBrowserClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -38,7 +39,7 @@ export default function LoginPage() {
       const { error } = await supabase.auth.signInWithOtp({
         email: email.trim().toLowerCase(),
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          emailRedirectTo: `${APP_URL}/auth/callback?next=/shop`,
           shouldCreateUser: true,
         },
       });
@@ -113,7 +114,7 @@ export default function LoginPage() {
     try {
       const { error } = await supabase.auth.signInWithOtp({
         email: email.trim().toLowerCase(),
-        options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+        options: { emailRedirectTo: `${APP_URL}/auth/callback?next=/shop` },
       });
 
       if (error) {

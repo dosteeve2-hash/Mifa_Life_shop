@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+<meta name="description" content="Catalogue Mifa Life — Wax, bijoux bogolan, beauté naturelle. Plus de 12 000 produits maliens authentiques. Filtres, recherche, livraison 2h Bamako."/>
+<meta name="theme-color" content="#00897B"/>
+<title>Catalogue · Mifa Life 🇲🇱</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700&family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════
+   DESIGN SYSTEM — identique à l'index
+═══════════════════════════════════════ */
+:root {
+  --em:#00897B; --em-d:#00695C; --em-l:rgba(0,137,123,.10); --em-g:rgba(0,137,123,.22); --em-glow:0 0 32px rgba(0,137,123,.30);
+  --or:#B85C38; --or-d:#974932; --or-l:rgba(184,92,56,.10);
+  --sl:#2C3A3F; --sl2:#1C2A30; --sl3:#111B22;
+  --mu:#C9A84C; --mu-l:rgba(201,168,76,.14);
+  --mg:#009A00; --my:#FFD700; --mr:#CE1126;
+  --bg:#F6F4F0; --bg2:#EEE9E1; --bg3:#D4CEC6; --white:#fff;
+  --t1:#1A2422; --t2:#2d4038; --t3:#5a7566; --t4:#9cb5a8;
+  --r:10px; --rl:14px; --rx:20px;
+  --sh-s:0 2px 10px rgba(0,0,0,.06);
+  --sh-m:0 6px 22px rgba(0,0,0,.09);
+  --sh-l:0 14px 42px rgba(0,0,0,.13);
+  --sh-xl:0 28px 70px rgba(0,0,0,.18);
+  --tr:.22s cubic-bezier(.25,.46,.45,.94);
+  --tr-s:.42s cubic-bezier(.25,.46,.45,.94);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:"Nunito Sans",sans-serif;background:var(--bg);color:var(--t1);overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:auto}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%;height:auto;object-fit:cover}
+button,input,select,textarea{font-family:inherit;border:none;background:none;outline:none;cursor:pointer}
+ul{list-style:none}
+p{line-height:1.72}
+*:focus-visible{outline:2px solid var(--em);outline-offset:2px}
+
+/* ════════ NAVBAR ════════ */
+#nav{
+  position:sticky;top:0;z-index:500;
+  background:rgba(246,244,240,.97);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--bg3);
+  transition:box-shadow var(--tr);
+}
+#nav.sc{box-shadow:var(--sh-m)}
+.nv{
+  max-width:1440px;margin:0 auto;
+  padding:0 clamp(16px,4vw,32px);
+  height:clamp(56px,8vw,64px);
+  display:flex;align-items:center;gap:clamp(8px,2vw,16px);
+}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo-bars{display:flex;flex-direction:column;gap:3.5px;flex-shrink:0}
+.logo-bars span{height:2.5px;border-radius:2px;background:var(--em);display:block;transition:width var(--tr)}
+.logo-bars span:nth-child(1){width:30px}
+.logo-bars span:nth-child(2){width:19px}
+.logo-bars span:nth-child(3){width:25px}
+.logo:hover .logo-bars span:nth-child(2){width:30px}
+.logo-text{font-family:"Playfair Display",Georgia,serif;font-size:clamp(14px,3.5vw,17px);font-weight:700;letter-spacing:-.02em;line-height:1}
+.logo-text em{font-style:normal;color:var(--em)}
+.logo-sub{font-size:9px;color:var(--t4);margin-top:2px;letter-spacing:.04em}
+.flag-stripes{display:flex;border-radius:3px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.2);flex-shrink:0}
+.flag-stripes span{width:6px;height:11px;display:block}
+/* Search */
+.nv-srch{flex:1;max-width:480px;display:none}
+@media(min-width:600px){.nv-srch{display:block}}
+.srch-box{display:flex;border:1.5px solid var(--bg3);border-radius:8px;overflow:hidden;background:var(--white);transition:all .25s}
+.srch-box:focus-within{border-color:var(--em);box-shadow:0 0 0 3px var(--em-l)}
+.srch-inp{flex:1;min-width:0;padding:9px 14px;font-size:13px;color:var(--t1);background:transparent}
+.srch-inp::placeholder{color:var(--t4)}
+.srch-btn{width:40px;flex-shrink:0;background:var(--em);display:flex;align-items:center;justify-content:center;transition:background var(--tr)}
+.srch-btn:hover{background:var(--em-d)}
+/* Desktop links */
+.nv-links{display:none;align-items:center;gap:2px}
+@media(min-width:1020px){.nv-links{display:flex}}
+.nv-a{display:inline-flex;align-items:center;gap:5px;padding:7px 12px;border-radius:7px;font-size:13px;font-weight:600;color:var(--t2);transition:all var(--tr);white-space:nowrap}
+.nv-a:hover{color:var(--em);background:var(--em-l)}
+.nv-a.on{color:var(--em);background:var(--em-l);font-weight:700}
+.nv-r{display:flex;align-items:center;gap:3px;margin-left:auto}
+@media(min-width:1020px){.nv-r{margin-left:0}}
+.ic-btn{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--t2);transition:all var(--tr);text-decoration:none;position:relative;flex-shrink:0}
+.ic-btn:hover{background:var(--bg2);color:var(--em)}
+.ic-bdg{position:absolute;top:4px;right:4px;min-width:15px;height:15px;padding:0 3px;background:var(--or);color:#fff;border-radius:8px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--bg)}
+.btn-login{display:none;align-items:center;gap:7px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;background:var(--em);color:#fff;transition:all var(--tr)}
+@media(min-width:480px){.btn-login{display:inline-flex}}
+.btn-login:hover{background:var(--em-d)}
+.burger{width:38px;height:38px;border-radius:8px;border:1.5px solid var(--bg3);background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;transition:all var(--tr);flex-shrink:0}
+@media(min-width:1020px){.burger{display:none}}
+.burger:hover{border-color:var(--em);background:var(--em-l)}
+.burger span{width:16px;height:2px;background:var(--t2);border-radius:2px;transition:all var(--tr);display:block}
+.burger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* ════════ MOBILE DRAWER ════════ */
+#mob-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:498;opacity:0;visibility:hidden;transition:all var(--tr);backdrop-filter:blur(3px)}
+#mob-bg.on{opacity:1;visibility:visible}
+#mob-dr{position:fixed;top:0;right:0;bottom:0;width:min(300px,84vw);background:var(--white);z-index:499;transform:translateX(100%);transition:transform var(--tr);overflow-y:auto;display:flex;flex-direction:column;box-shadow:var(--sh-xl)}
+#mob-dr.on{transform:translateX(0)}
+.mob-hd{padding:16px 20px;border-bottom:1px solid var(--bg3);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.mob-cl{width:32px;height:32px;border-radius:50%;background:var(--bg2);font-size:15px;color:var(--t2);display:flex;align-items:center;justify-content:center}
+.mob-links{flex:1;padding:8px 0}
+.mob-l{display:flex;align-items:center;gap:12px;padding:12px 20px;font-size:14px;font-weight:600;color:var(--t2);transition:all var(--tr);border-bottom:1px solid var(--bg)}
+.mob-l:hover,.mob-l.on{color:var(--em);background:var(--em-l)}
+.mob-ft{padding:16px 20px;border-top:1px solid var(--bg3);display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+.mob-ft-a{display:block;width:100%;padding:12px;border-radius:10px;font-size:14px;font-weight:700;text-align:center;transition:all var(--tr)}
+.mob-ft-a.primary{background:var(--em);color:#fff}
+.mob-ft-a.secondary{background:var(--bg2);color:var(--t2);border:1.5px solid var(--bg3)}
+
+/* ════════ BREADCRUMB ════════ */
+#breadcrumb{background:var(--white);border-bottom:1px solid var(--bg3);padding:10px clamp(16px,4vw,32px)}
+.bc-in{max-width:1440px;margin:0 auto;display:flex;align-items:center;gap:7px;font-size:12px;color:var(--t4);flex-wrap:wrap}
+.bc-in a{color:var(--t3);font-weight:600;transition:color var(--tr)}
+.bc-in a:hover{color:var(--em)}
+.bc-sep{color:var(--bg3)}
+.bc-cur{color:var(--t2);font-weight:600}
+
+/* ════════ HERO CATALOGUE ════════ */
+#cat-hero{
+  background:linear-gradient(105deg,var(--sl3) 0%,var(--sl2) 60%,var(--sl) 100%);
+  padding:clamp(32px,5vw,56px) clamp(16px,4vw,32px);
+  position:relative;overflow:hidden;
+}
+#cat-hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 55% 90% at 80% 50%,rgba(0,137,123,.18),transparent),
+    radial-gradient(ellipse 40% 70% at 15% 50%,rgba(201,168,76,.08),transparent);
+}
+.ch-in{max-width:1440px;margin:0 auto;position:relative;z-index:2}
+.ch-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:clamp(16px,3vw,28px)}
+.ch-title{font-family:"Playfair Display",Georgia,serif;font-size:clamp(22px,4.5vw,38px);font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1.15;margin-bottom:8px}
+.ch-sub{font-size:clamp(12px,2.5vw,14px);color:rgba(255,255,255,.5);font-weight:500;line-height:1.55;max-width:480px}
+.ch-stats{display:flex;gap:clamp(16px,3vw,28px);flex-wrap:wrap;flex-shrink:0}
+.chs{text-align:center}
+.chs-n{font-family:"Playfair Display",Georgia,serif;font-size:clamp(20px,3.5vw,28px);font-weight:700;color:var(--mu)}
+.chs-l{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px;letter-spacing:.04em;text-transform:uppercase}
+/* Bande Mali */
+.ch-stripe{height:3px;display:flex;margin-top:clamp(24px,4vw,36px)}
+.ch-stripe span{flex:1}
+
+/* ════════ MOBILE SEARCH BAR (visible <600px) ════════ */
+#mob-search{
+  display:block;background:var(--white);border-bottom:1px solid var(--bg3);
+  padding:12px clamp(16px,4vw,24px);
+}
+@media(min-width:600px){#mob-search{display:none}}
+.msrch{display:flex;border:1.5px solid var(--bg3);border-radius:8px;overflow:hidden;background:var(--bg)}
+.msrch input{flex:1;min-width:0;padding:10px 14px;font-size:14px;background:transparent}
+.msrch button{width:42px;background:var(--em);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background var(--tr)}
+.msrch button:hover{background:var(--em-d)}
+
+/* ════════ LAYOUT PRINCIPAL ════════ */
+#main{max-width:1440px;margin:0 auto;padding:clamp(16px,3vw,28px) clamp(16px,4vw,32px);display:grid;grid-template-columns:1fr;gap:clamp(20px,3vw,28px)}
+@media(min-width:900px){#main{grid-template-columns:260px 1fr}}
+@media(min-width:1100px){#main{grid-template-columns:280px 1fr}}
+
+/* ════════ SIDEBAR FILTRES ════════ */
+#sidebar{position:relative}
+@media(min-width:900px){
+  #sidebar{position:sticky;top:calc(clamp(56px,8vw,64px) + 16px);height:fit-content;max-height:calc(100vh - 100px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--bg3) transparent}
+  #sidebar::-webkit-scrollbar{width:4px}
+  #sidebar::-webkit-scrollbar-track{background:transparent}
+  #sidebar::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:4px}
+}
+/* Mobile: sidebar = drawer bas */
+#filt-overlay{position:fixed;inset:0;background:rgba(0,0,0,.48);z-index:600;opacity:0;visibility:hidden;transition:all var(--tr);backdrop-filter:blur(3px)}
+#filt-overlay.on{opacity:1;visibility:visible}
+#sidebar-inner{background:var(--white);border-radius:var(--rx) var(--rx) 0 0;padding:clamp(20px,4vw,28px);display:flex;flex-direction:column;gap:22px}
+@media(max-width:899px){
+  #sidebar-inner{position:fixed;bottom:0;left:0;right:0;z-index:601;max-height:88vh;overflow-y:auto;transform:translateY(100%);transition:transform var(--tr);border-radius:var(--rx) var(--rx) 0 0}
+  #sidebar-inner.on{transform:translateY(0)}
+}
+.filt-hd{display:flex;align-items:center;justify-content:space-between}
+.filt-ti{font-family:"Playfair Display",Georgia,serif;font-size:18px;font-weight:700;color:var(--sl)}
+.filt-reset{font-size:12px;font-weight:700;color:var(--em);background:none;border:none;transition:opacity var(--tr)}
+.filt-reset:hover{opacity:.7}
+.filt-block{border-bottom:1px solid var(--bg2);padding-bottom:20px}
+.filt-block:last-child{border-bottom:none;padding-bottom:0}
+.filt-label{font-size:11px;font-weight:700;color:var(--t4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+/* Catégories arbo */
+.fcat{display:flex;flex-direction:column;gap:2px}
+.fcat-item{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;transition:all var(--tr);font-size:13px;font-weight:600;color:var(--t2)}
+.fcat-item:hover{background:var(--bg2)}
+.fcat-item.on{background:var(--em-l);color:var(--em)}
+.fcat-item .cnt{font-size:11px;color:var(--t4);font-weight:500}
+.fcat-item.on .cnt{color:var(--em);opacity:.7}
+/* Prix range */
+.price-range{display:flex;flex-direction:column;gap:12px}
+.price-inputs{display:flex;gap:8px;align-items:center}
+.price-inp{flex:1;min-width:0;padding:8px 10px;border:1.5px solid var(--bg3);border-radius:8px;font-size:13px;font-weight:600;color:var(--t1);transition:border-color .2s}
+.price-inp:focus{border-color:var(--em)}
+.price-sep{font-size:12px;color:var(--t4);flex-shrink:0}
+.price-slider{position:relative;height:4px;background:var(--bg3);border-radius:2px;margin:6px 0}
+.price-fill{position:absolute;height:100%;background:var(--em);border-radius:2px;left:0;right:20%}
+.price-apply{width:100%;padding:9px;background:var(--em);color:#fff;border-radius:8px;font-size:13px;font-weight:700;transition:background var(--tr);border:none;font-family:inherit}
+.price-apply:hover{background:var(--em-d)}
+/* Checkboxes filtres */
+.filt-checks{display:flex;flex-direction:column;gap:6px}
+.fcheck{display:flex;align-items:center;gap:9px;cursor:pointer;padding:4px 2px;transition:color var(--tr)}
+.fcheck:hover .fcheck-box{border-color:var(--em)}
+.fcheck-box{width:17px;height:17px;border:2px solid var(--bg3);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all var(--tr)}
+.fcheck.on .fcheck-box{background:var(--em);border-color:var(--em)}
+.fcheck-lbl{font-size:13px;font-weight:500;color:var(--t2)}
+.fcheck .cnt{font-size:11px;color:var(--t4);margin-left:auto}
+/* Tris étoiles */
+.fstars{display:flex;flex-direction:column;gap:6px}
+.fstar-row{display:flex;align-items:center;gap:8px;cursor:pointer;padding:4px 6px;border-radius:7px;transition:background var(--tr)}
+.fstar-row:hover,.fstar-row.on{background:var(--mu-l)}
+.fstar-row.on .fstar-cnt{color:var(--mu)}
+.fstar-ico{color:var(--mu);font-size:13px;letter-spacing:-.5px;white-space:nowrap}
+.fstar-cnt{font-size:12px;color:var(--t4);margin-left:auto}
+/* Tags couleurs */
+.fcolors{display:flex;flex-wrap:wrap;gap:8px}
+.fclr{width:28px;height:28px;border-radius:50%;cursor:pointer;transition:all var(--tr);border:2.5px solid transparent;position:relative}
+.fclr:hover,.fclr.on{transform:scale(1.15);border-color:var(--sl)}
+.fclr.on::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:800}
+/* Bouton filtres mobile */
+.filt-mob-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+@media(min-width:900px){.filt-mob-bar{display:none}}
+.filt-open-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;background:var(--white);border:1.5px solid var(--bg3);border-radius:8px;font-size:13px;font-weight:700;color:var(--t2);transition:all var(--tr)}
+.filt-open-btn:hover{border-color:var(--em);color:var(--em)}
+.filt-open-btn svg{flex-shrink:0}
+.filt-count-badge{background:var(--em);color:#fff;font-size:10px;font-weight:800;padding:1px 6px;border-radius:10px}
+.filt-close-mob{display:none}
+@media(max-width:899px){.filt-close-mob{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;padding-bottom:16px;border-bottom:1px solid var(--bg2)}}
+
+/* ════════ ZONE PRODUITS ════════ */
+#prod-zone{}
+/* Barre de tri */
+.sort-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:clamp(16px,3vw,22px);flex-wrap:wrap}
+.sort-left{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.result-count{font-size:13px;color:var(--t3);font-weight:500}
+.result-count b{color:var(--t1);font-weight:700}
+/* Breadcrumb tags actifs */
+.active-filters{display:flex;gap:6px;flex-wrap:wrap}
+.af-tag{display:inline-flex;align-items:center;gap:5px;background:var(--em-l);border:1px solid var(--em-g);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;color:var(--em)}
+.af-tag button{background:none;color:var(--em);font-size:12px;display:flex;align-items:center;transition:opacity var(--tr);line-height:1}
+.af-tag button:hover{opacity:.6}
+.sort-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.sort-sel{padding:8px 12px;border:1.5px solid var(--bg3);border-radius:8px;font-size:13px;font-weight:600;color:var(--t2);background:var(--white);transition:border-color .2s;-webkit-appearance:none;appearance:none;padding-right:28px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%235a7566'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.sort-sel:focus{outline:none;border-color:var(--em)}
+/* Switcher grille/liste */
+.view-btns{display:flex;border:1.5px solid var(--bg3);border-radius:8px;overflow:hidden}
+.vbtn{width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:var(--t3);transition:all var(--tr)}
+.vbtn.on{background:var(--em);color:#fff}
+.vbtn:not(.on):hover{background:var(--bg2);color:var(--t2)}
+
+/* ════════ GRILLE PRODUITS ════════ */
+#grid{display:grid;gap:clamp(10px,2vw,18px);grid-template-columns:repeat(2,1fr)}
+@media(min-width:560px){#grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){#grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){#grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1300px){#grid{grid-template-columns:repeat(4,1fr)}}
+/* Vue liste */
+#grid.list-view{grid-template-columns:1fr}
+#grid.list-view .pc-img{width:130px;aspect-ratio:1;flex-shrink:0;border-radius:var(--rl) 0 0 var(--rl)}
+#grid.list-view .pc{display:flex;flex-direction:row}
+#grid.list-view .pc-img{aspect-ratio:auto;height:130px}
+#grid.list-view .pc-bd{flex:1}
+/* Carte produit */
+.pc{background:var(--white);border:1px solid var(--bg3);border-radius:var(--rl);overflow:hidden;transition:all var(--tr);position:relative}
+.pc:hover{transform:translateY(-3px);box-shadow:var(--sh-l);border-color:var(--em-g)}
+.pc-img{position:relative;aspect-ratio:1;overflow:hidden;background:var(--bg2)}
+.pc-img img{width:100%;height:100%;object-fit:cover;transition:transform .55s}
+.pc:hover .pc-img img{transform:scale(1.06)}
+.pc-badges{position:absolute;top:8px;left:8px;z-index:2;display:flex;flex-direction:column;gap:3px}
+.bdg{display:inline-block;font-size:clamp(9px,2vw,10px);font-weight:700;padding:2px 8px;border-radius:4px;white-space:nowrap;letter-spacing:.02em}
+.bdg.sale{background:var(--or);color:#fff}
+.bdg.new{background:var(--em);color:#fff}
+.bdg.hot{background:#5C4A3A;color:#fff}
+.bdg.eco{background:#5A8A5A;color:#fff}
+.pc-wish{position:absolute;top:8px;right:8px;z-index:2;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.92);font-size:12px;display:flex;align-items:center;justify-content:center;transition:all var(--tr);box-shadow:var(--sh-s)}
+.pc-wish:hover{transform:scale(1.12);background:var(--white)}
+.pc-wish.on svg path{fill:#EF4444;stroke:#EF4444}
+/* Hover overlay (desktop) */
+.pc-hov{position:absolute;bottom:0;left:0;right:0;padding:8px;background:linear-gradient(to top,rgba(0,0,0,.62),transparent);opacity:0;transform:translateY(6px);transition:all var(--tr);display:flex;gap:5px;z-index:2}
+@media(hover:none){.pc-hov{display:none}}
+.pc:hover .pc-hov{opacity:1;transform:translateY(0)}
+.pc-ha{flex:1;padding:8px 4px;background:rgba(255,255,255,.93);border-radius:7px;font-size:10px;font-weight:700;color:var(--t1);font-family:inherit;transition:all var(--tr);display:flex;align-items:center;justify-content:center;gap:3px;border:none}
+.pc-ha:hover{background:var(--em);color:#fff}
+.pc-ha.add{background:var(--em);color:#fff}
+.pc-ha.add:hover{background:var(--em-d)}
+/* Body */
+.pc-bd{padding:clamp(10px,2.5vw,14px)}
+.pc-vnd{font-size:11px;color:var(--t3);margin-bottom:3px;display:flex;align-items:center;gap:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pc-vck{color:var(--em);font-size:9px;flex-shrink:0}
+.pc-nm{font-size:clamp(12px,2.5vw,14px);font-weight:600;color:var(--t1);margin-bottom:6px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc-stars{display:flex;align-items:center;gap:4px;margin-bottom:7px}
+.stars{font-size:clamp(10px,2.5vw,11px);color:var(--mu);letter-spacing:-.5px}
+.pc-rv{font-size:11px;color:var(--t4)}
+.pc-prices{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin-bottom:4px}
+.pc-p{font-family:"Nunito Sans",sans-serif;font-size:clamp(14px,3vw,16px);font-weight:700;color:var(--t1);letter-spacing:-.015em}
+.pc-p.sale{color:var(--or)}
+.pc-old{font-size:clamp(10px,2vw,12px);color:var(--t4);text-decoration:line-through}
+.pc-sav{font-size:10px;color:var(--em);font-weight:700;background:var(--em-l);padding:1px 6px;border-radius:4px}
+/* ATC mobile */
+.pc-atc-m{display:none;width:100%;margin-top:9px;padding:9px;background:var(--em);color:#fff;border-radius:8px;font-size:12px;font-weight:700;font-family:inherit;transition:all var(--tr);align-items:center;justify-content:center;gap:6px;border:none}
+@media(hover:none){.pc-atc-m{display:flex}}
+.pc-atc-m:active{background:var(--em-d)}
+/* Bell alerte prix */
+.pc-bell{position:absolute;bottom:8px;right:8px;z-index:2;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.92);display:none;align-items:center;justify-content:center;box-shadow:var(--sh-s);transition:all var(--tr);border:none}
+@media(hover:hover){.pc:hover .pc-bell{display:flex}}
+.pc-bell:hover{background:var(--mu-l)}
+.pc-bell.on{background:var(--mu-l)}
+/* Skeleton loader */
+.skel{animation:skelA 1.4s ease infinite}
+@keyframes skelA{0%,100%{opacity:1}50%{opacity:.45}}
+.skel-card{background:var(--white);border:1px solid var(--bg3);border-radius:var(--rl);overflow:hidden}
+.skel-img{aspect-ratio:1;background:var(--bg2)}
+.skel-bd{padding:14px;display:flex;flex-direction:column;gap:8px}
+.skel-line{height:11px;background:var(--bg2);border-radius:4px}
+.skel-line.w60{width:60%}
+.skel-line.w80{width:80%}
+.skel-line.w40{width:40%}
+
+/* ════════ PAGINATION ════════ */
+.pagination{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:clamp(28px,5vw,44px);flex-wrap:wrap}
+.pag-btn{min-width:36px;height:36px;border-radius:8px;border:1.5px solid var(--bg3);background:var(--white);font-size:13px;font-weight:600;color:var(--t2);display:flex;align-items:center;justify-content:center;transition:all var(--tr);padding:0 10px}
+.pag-btn:hover{border-color:var(--em);color:var(--em);background:var(--em-l)}
+.pag-btn.on{background:var(--em);border-color:var(--em);color:#fff;font-weight:700}
+.pag-btn:disabled{opacity:.35;cursor:not-allowed;pointer-events:none}
+.pag-dots{color:var(--t4);font-size:13px;padding:0 4px}
+
+/* ════════ CART SIDEBAR ════════ */
+#cov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;opacity:0;visibility:hidden;transition:all var(--tr);backdrop-filter:blur(3px)}
+#cov.on{opacity:1;visibility:visible}
+#csb{position:fixed;right:0;top:0;bottom:0;width:min(400px,94vw);background:var(--white);z-index:801;transform:translateX(100%);transition:transform .35s cubic-bezier(.25,.46,.45,.94);display:flex;flex-direction:column;box-shadow:var(--sh-xl)}
+#csb.on{transform:translateX(0)}
+.cs-hd{display:flex;align-items:center;justify-content:space-between;padding:clamp(14px,3vw,18px) clamp(16px,4vw,22px);border-bottom:1px solid var(--bg3);flex-shrink:0}
+.cs-ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(16px,4vw,18px);font-weight:700}
+.cs-cl{width:32px;height:32px;border-radius:50%;background:var(--bg2);font-size:15px;color:var(--t2);display:flex;align-items:center;justify-content:center;transition:background var(--tr)}
+.cs-cl:hover{background:var(--bg3)}
+.cs-body{flex:1;overflow-y:auto;padding:clamp(14px,3vw,18px) clamp(16px,4vw,22px)}
+.cs-it{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--bg3)}
+.cs-thumb{width:56px;height:56px;border-radius:8px;object-fit:cover;flex-shrink:0}
+.cs-info{flex:1;min-width:0}
+.cs-nm{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-pr{font-size:13px;color:var(--em);font-weight:700}
+.cs-qw{display:flex;align-items:center;gap:7px;margin-top:5px}
+.qb{width:24px;height:24px;border-radius:6px;background:var(--bg2);font-size:14px;font-weight:700;color:var(--t2);display:flex;align-items:center;justify-content:center;transition:all var(--tr)}
+.qb:hover{background:var(--em-l);color:var(--em)}
+.cs-qv{font-size:13px;font-weight:700;min-width:16px;text-align:center}
+.cs-rm{background:none;color:var(--t4);font-size:13px;margin-left:auto;align-self:flex-start;transition:color var(--tr)}
+.cs-rm:hover{color:#EF4444}
+.cs-ft{padding:clamp(14px,3vw,18px) clamp(16px,4vw,22px);border-top:1px solid var(--bg3);flex-shrink:0}
+.cs-row{display:flex;justify-content:space-between;font-size:13px;color:var(--t3);margin-bottom:6px}
+.cs-tot-row{display:flex;justify-content:space-between;font-family:"Playfair Display",Georgia,serif;font-size:clamp(16px,4vw,18px);font-weight:700;margin-bottom:13px}
+.cs-ck{width:100%;padding:13px;background:var(--em);color:#fff;border-radius:10px;font-size:14px;font-weight:700;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px;transition:all var(--tr);border:none}
+.cs-ck:hover{background:var(--em-d);transform:translateY(-1px);box-shadow:0 8px 22px rgba(0,137,123,.28)}
+.cs-cont{width:100%;padding:9px;background:none;border:1.5px solid var(--bg3);border-radius:9px;font-size:13px;font-weight:600;color:var(--t2);font-family:inherit;margin-top:8px;transition:all var(--tr)}
+.cs-cont:hover{border-color:var(--em);color:var(--em)}
+
+/* ════════ QUICK VIEW ════════ */
+.qv-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:2000;display:flex;align-items:center;justify-content:center;padding:clamp(12px,3vw,24px);opacity:0;visibility:hidden;transition:all var(--tr);backdrop-filter:blur(5px)}
+.qv-ov.on{opacity:1;visibility:visible}
+.qv-mod{background:var(--white);border-radius:var(--rx);max-width:780px;width:100%;max-height:90vh;overflow-y:auto;display:grid;grid-template-columns:1fr;box-shadow:var(--sh-xl)}
+@media(min-width:540px){.qv-mod{grid-template-columns:1fr 1fr}}
+.qv-img{aspect-ratio:1;overflow:hidden;border-radius:var(--rx)}
+@media(min-width:540px){.qv-img{border-radius:var(--rx) 0 0 var(--rx)}}
+.qv-img img{width:100%;height:100%;object-fit:cover}
+.qv-bd{padding:clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:13px;position:relative}
+.qv-cl{position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:50%;background:var(--bg2);font-size:14px;color:var(--t2);display:flex;align-items:center;justify-content:center;transition:background var(--tr);border:none}
+.qv-cl:hover{background:var(--bg3)}
+.qv-nm{font-family:"Playfair Display",Georgia,serif;font-size:clamp(17px,4vw,22px);font-weight:700;line-height:1.3;color:var(--sl)}
+.qv-desc{font-size:clamp(12px,2.5vw,13px);color:var(--t3);line-height:1.7;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+/* Sizes selector */
+.qv-sizes{display:flex;flex-direction:column;gap:8px}
+.qv-sizes label{font-size:11px;font-weight:700;color:var(--t4);letter-spacing:.06em;text-transform:uppercase}
+.sizes-row{display:flex;gap:6px;flex-wrap:wrap}
+.size-btn{min-width:36px;padding:5px 8px;border:1.5px solid var(--bg3);border-radius:6px;font-size:12px;font-weight:600;color:var(--t2);background:var(--white);transition:all var(--tr);font-family:inherit}
+.size-btn:hover{border-color:var(--em);color:var(--em)}
+.size-btn.on{background:var(--sl);color:#fff;border-color:var(--sl)}
+.size-btn:disabled{opacity:.38;cursor:not-allowed}
+/* Alerte prix */
+.price-alert-row{display:flex;align-items:center;gap:9px;background:var(--mu-l);border:1px solid rgba(201,168,76,.32);border-radius:9px;padding:10px 13px}
+.pa-txt{flex:1;min-width:0}
+.pa-ti{font-size:12px;font-weight:700;color:var(--t2)}
+.pa-sub{font-size:11px;color:var(--t3)}
+.pa-btn{padding:5px 12px;background:var(--mu);color:var(--sl3);border-radius:7px;font-size:11px;font-weight:700;font-family:inherit;transition:all var(--tr);border:none;white-space:nowrap;flex-shrink:0}
+.pa-btn:hover{background:#b8973e}
+
+/* ════════ TOAST ════════ */
+#toast{position:fixed;bottom:clamp(16px,4vw,28px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--sl);color:#fff;font-size:13px;font-weight:600;padding:11px 20px;border-radius:8px;box-shadow:var(--sh-l);z-index:9999;opacity:0;visibility:hidden;transition:all var(--tr);white-space:nowrap;display:flex;align-items:center;gap:7px;max-width:min(90vw,420px);overflow:hidden;text-overflow:ellipsis}
+#toast.on{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+
+/* ════════ WA BUTTON ════════ */
+#wa-btn{position:fixed;bottom:clamp(16px,4vw,28px);right:clamp(16px,4vw,28px);z-index:700;width:50px;height:50px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(37,211,102,.42);transition:all var(--tr);text-decoration:none}
+#wa-btn:hover{transform:scale(1.08) translateY(-2px);box-shadow:0 10px 30px rgba(37,211,102,.52)}
+#wa-btn::before{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(37,211,102,.28);animation:waPulse 2s ease infinite}
+@keyframes waPulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.12);opacity:0}}
+.wa-lbl{position:absolute;right:calc(100% + 10px);background:var(--sl);color:#fff;font-size:12px;font-weight:600;padding:6px 12px;border-radius:7px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity var(--tr)}
+#wa-btn:hover .wa-lbl{opacity:1}
+
+/* ════════ SCROLL TOP ════════ */
+#stt{position:fixed;bottom:calc(clamp(16px,4vw,28px) + 62px);right:clamp(16px,4vw,28px);width:40px;height:40px;border-radius:50%;background:var(--sl2);color:#fff;border:none;display:none;align-items:center;justify-content:center;box-shadow:var(--sh-m);z-index:699;font-size:15px;transition:all var(--tr)}
+#stt:hover{background:var(--em);transform:translateY(-2px)}
+#stt.show{display:flex}
+
+/* ════════ ANIMATION ENTRÉE ════════ */
+@keyframes fadeUp{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:translateY(0)}}
+.anim{opacity:0}
+.anim.in{animation:fadeUp .5s ease forwards}
+
+/* ════════ EMPTY STATE ════════ */
+#empty{display:none;flex-direction:column;align-items:center;justify-content:center;padding:clamp(48px,8vw,80px) 20px;text-align:center;grid-column:1/-1}
+#empty.show{display:flex}
+.empty-ico{margin-bottom:18px;opacity:.22}
+.empty-ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(18px,4vw,24px);font-weight:700;color:var(--sl);margin-bottom:8px}
+.empty-sub{font-size:14px;color:var(--t3);margin-bottom:24px;max-width:320px;line-height:1.65}
+.empty-btn{padding:11px 24px;background:var(--em);color:#fff;border-radius:8px;font-size:14px;font-weight:700;font-family:inherit;transition:background var(--tr);border:none}
+.empty-btn:hover{background:var(--em-d)}
+
+/* ════════ SECTION BANNIÈRE VENDEUR (bas catalogue) ════════ */
+#vendor-cta{
+  background:linear-gradient(105deg,var(--sl3),var(--sl2));
+  margin-top:clamp(40px,6vw,64px);
+  padding:clamp(32px,5vw,52px) clamp(16px,4vw,32px);
+  position:relative;overflow:hidden;
+}
+#vendor-cta::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 75% 50%,rgba(0,137,123,.16),transparent)}
+.vcta-in{max-width:1440px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:clamp(20px,4vw,40px);flex-wrap:wrap;position:relative;z-index:2}
+.vcta-txt .pre{font-size:11px;font-weight:700;letter-spacing:.09em;color:var(--mu);text-transform:uppercase;margin-bottom:8px}
+.vcta-txt .ti{font-family:"Playfair Display",Georgia,serif;font-size:clamp(20px,4vw,30px);font-weight:700;color:#fff;letter-spacing:-.015em;line-height:1.2}
+.vcta-txt .sub{font-size:clamp(12px,2.5vw,14px);color:rgba(255,255,255,.48);margin-top:8px;max-width:460px;line-height:1.6}
+.vcta-btn{display:inline-flex;align-items:center;gap:8px;padding:clamp(12px,2.5vw,14px) clamp(22px,4vw,32px);background:var(--em);color:#fff;font-size:clamp(13px,3vw,15px);font-weight:700;border-radius:10px;font-family:inherit;transition:all var(--tr);white-space:nowrap;flex-shrink:0;border:none}
+.vcta-btn:hover{background:var(--em-d);transform:translateY(-2px);box-shadow:var(--em-glow)}
+
+/* ════════ FOOTER ════════ */
+footer{background:var(--sl3);color:#fff;padding:clamp(36px,5vw,48px) 0 0;margin-top:0}
+.ft-in{max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,32px)}
+.ft-grid{display:grid;gap:clamp(20px,4vw,32px);grid-template-columns:1fr 1fr;padding-bottom:clamp(28px,5vw,40px);border-bottom:1px solid rgba(255,255,255,.07)}
+@media(min-width:600px){.ft-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){.ft-grid{grid-template-columns:2fr 1fr 1fr 1fr}}
+.ft-brand{grid-column:1/-1}
+@media(min-width:900px){.ft-brand{grid-column:span 1}}
+.ft-logo{font-family:"Playfair Display",Georgia,serif;font-size:16px;font-weight:700;margin-bottom:10px}
+.ft-logo em{font-style:normal;color:var(--em)}
+.ft-desc{font-size:13px;color:rgba(255,255,255,.35);line-height:1.7;margin-bottom:16px;max-width:260px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.ft-mali{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.ft-flag{display:flex;border-radius:3px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.28)}
+.ft-flag span{width:12px;height:18px;display:block}
+.ft-mali-lbl{font-size:10px;color:rgba(255,255,255,.38);letter-spacing:.07em;text-transform:uppercase;font-weight:600}
+.ft-ch{font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:13px}
+.ft-links{display:flex;flex-direction:column;gap:9px}
+.ft-lnk{font-size:13px;color:rgba(255,255,255,.46);transition:color var(--tr);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ft-lnk:hover{color:#fff}
+.ft-bot{padding:clamp(14px,3vw,18px) 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12px;color:rgba(255,255,255,.24)}
+.ft-pays{display:flex;gap:5px;flex-wrap:wrap}
+.fpay{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:5px;padding:3px 8px;font-size:10px;font-weight:700;color:rgba(255,255,255,.4);white-space:nowrap}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════ -->
+<header>
+  <nav id="nav" aria-label="Navigation principale">
+    <div class="nv">
+      <a class="logo" href="/" aria-label="Mifa Life — Accueil">
+        <div class="logo-bars" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div>
+          <div class="logo-text"><em>MIFA</em> LIFE</div>
+          <div class="logo-sub">by Mifa Life Company</div>
+        </div>
+        <div class="flag-stripes" aria-label="Mali" style="margin-left:4px">
+          <span style="background:var(--mg)"></span>
+          <span style="background:var(--my)"></span>
+          <span style="background:var(--mr)"></span>
+        </div>
+      </a>
+
+      <div class="nv-srch" role="search">
+        <div class="srch-box">
+          <input class="srch-inp" type="search" id="si" placeholder="Wax, bijoux, bogolan, karité…" aria-label="Rechercher" onkeydown="if(event.key==='Enter')doSearch()"/>
+          <button class="srch-btn" onclick="doSearch()" aria-label="Rechercher">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" width="13" height="13"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="nv-links">
+        <a class="nv-a" href="/">Accueil</a>
+        <a class="nv-a on" href="/catalogue">Catalogue</a>
+        <a class="nv-a" href="/flash">Vente Flash</a>
+        <a class="nv-a" href="/promos">Promos</a>
+        <a class="nv-a" href="/blog">Blog</a>
+      </div>
+
+      <div class="nv-r">
+        <a class="ic-btn" href="/notifications" aria-label="Notifications" title="Notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="17" height="17"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </a>
+        <a class="ic-btn" href="/favoris" aria-label="Favoris" title="Mes favoris">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="17" height="17"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="ic-bdg" id="wishBdg" style="display:none">0</span>
+        </a>
+        <button class="ic-btn" onclick="openCart()" aria-label="Panier" title="Mon panier">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="17" height="17"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="ic-bdg" id="cartBdg" style="display:none">0</span>
+        </button>
+        <a class="btn-login" href="/auth">Connexion</a>
+        <button class="burger" id="burger" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false" aria-controls="mob-dr">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- MOBILE DRAWER -->
+<div id="mob-bg" onclick="toggleMenu()" aria-hidden="true"></div>
+<div id="mob-dr" role="dialog" aria-modal="true" aria-label="Navigation">
+  <div class="mob-hd">
+    <div class="logo-text"><em>MIFA</em> LIFE</div>
+    <button class="mob-cl" onclick="toggleMenu()" aria-label="Fermer">✕</button>
+  </div>
+  <nav class="mob-links">
+    <a class="mob-l" href="/">Accueil</a>
+    <a class="mob-l on" href="/catalogue">Catalogue</a>
+    <a class="mob-l" href="/categories">Catégories</a>
+    <a class="mob-l" href="/flash">Vente Flash</a>
+    <a class="mob-l" href="/promos">Promos & Codes</a>
+    <a class="mob-l" href="/favoris">Mes Favoris</a>
+    <a class="mob-l" href="/suivi-commande">Suivre ma commande</a>
+    <a class="mob-l" href="/blog">Blog & Culture</a>
+    <a class="mob-l" href="/partenaires">Devenir Partenaire</a>
+    <a class="mob-l" href="/faq">FAQ</a>
+  </nav>
+  <div class="mob-ft">
+    <a class="mob-ft-a primary" href="/auth">Connexion / Inscription</a>
+    <a class="mob-ft-a secondary" href="/partenaires">Devenir Partenaire Vendeur</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     BREADCRUMB
+══════════════════════════════════════ -->
+<div id="breadcrumb">
+  <div class="bc-in">
+    <a href="/">Accueil</a>
+    <span class="bc-sep">›</span>
+    <span class="bc-cur" id="bcCur">Catalogue</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SEARCH BAR MOBILE
+══════════════════════════════════════ -->
+<div id="mob-search">
+  <div class="msrch">
+    <input type="search" id="mob-si" placeholder="Rechercher un produit…" aria-label="Rechercher" onkeydown="if(event.key==='Enter')doMobSearch()"/>
+    <button onclick="doMobSearch()" aria-label="Rechercher">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" width="14" height="14"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     HERO CATALOGUE
+══════════════════════════════════════ -->
+<section id="cat-hero" aria-label="En-tête catalogue">
+  <div class="ch-in">
+    <div class="ch-row">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.09em;color:var(--mu);text-transform:uppercase;margin-bottom:8px">Artisanat & Mode Malienne</div>
+        <h1 class="ch-title" id="heroTitle">Catalogue Mifa Life</h1>
+        <p class="ch-sub">Plus de 12 000 produits — wax, bijoux bogolan, beauté naturelle, artisanat de Ségou, Mopti et Bamako.</p>
+      </div>
+      <div class="ch-stats">
+        <div class="chs"><div class="chs-n">12 480</div><div class="chs-l">Produits</div></div>
+        <div class="chs"><div class="chs-n">850</div><div class="chs-l">Artisans</div></div>
+        <div class="chs"><div class="chs-n">4.8</div><div class="chs-l">Note moyenne</div></div>
+      </div>
+    </div>
+    <div class="ch-stripe">
+      <span style="background:var(--mg)"></span>
+      <span style="background:var(--my)"></span>
+      <span style="background:var(--mr)"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     MAIN — Sidebar + Grille
+══════════════════════════════════════ -->
+<div id="main">
+
+  <!-- ─── SIDEBAR FILTRES ─── -->
+  <aside id="sidebar" aria-label="Filtres produits">
+
+    <!-- Overlay mobile pour fermer le drawer -->
+    <div id="filt-overlay" onclick="closeFilt()" aria-hidden="true"></div>
+
+    <!-- Bouton ouverture filtres (mobile uniquement) -->
+    <div class="filt-mob-bar">
+      <button class="filt-open-btn" onclick="openFilt()" aria-label="Ouvrir les filtres">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+        Filtres
+        <span class="filt-count-badge" id="filtBadge" style="display:none">0</span>
+      </button>
+      <select class="sort-sel" id="sort-mob" onchange="applySort(this.value)" aria-label="Trier par">
+        <option value="pop">Les plus populaires</option>
+        <option value="new">Nouveautés</option>
+        <option value="price-asc">Prix croissant</option>
+        <option value="price-desc">Prix décroissant</option>
+        <option value="rating">Mieux notés</option>
+      </select>
+    </div>
+
+    <div id="sidebar-inner">
+      <!-- Header sidebar (mobile) -->
+      <div class="filt-close-mob">
+        <div class="filt-ti">Filtres</div>
+        <button class="mob-cl" onclick="closeFilt()" aria-label="Fermer les filtres">✕</button>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div class="filt-ti" style="display:none" aria-hidden="true">Filtres</div>
+        <button class="filt-reset" onclick="resetAll()" id="resetBtn" style="display:none">Tout effacer</button>
+      </div>
+
+      <!-- Catégories -->
+      <div class="filt-block">
+        <div class="filt-label">Catégorie</div>
+        <div class="fcat" id="fcats">
+          <div class="fcat-item on" data-cat="all" onclick="setCat(this,'all')">Tout <span class="cnt">12 480</span></div>
+          <div class="fcat-item" data-cat="femme" onclick="setCat(this,'femme')">Mode Femme <span class="cnt">3 240</span></div>
+          <div class="fcat-item" data-cat="homme" onclick="setCat(this,'homme')">Mode Homme <span class="cnt">1 840</span></div>
+          <div class="fcat-item" data-cat="bijoux" onclick="setCat(this,'bijoux')">Bijoux & Accessoires <span class="cnt">2 110</span></div>
+          <div class="fcat-item" data-cat="beaute" onclick="setCat(this,'beaute')">Beauté & Soin <span class="cnt">1 380</span></div>
+          <div class="fcat-item" data-cat="maison" onclick="setCat(this,'maison')">Maison & Décoration <span class="cnt">890</span></div>
+          <div class="fcat-item" data-cat="artisanat" onclick="setCat(this,'artisanat')">Artisanat traditionnel <span class="cnt">1 020</span></div>
+          <div class="fcat-item" data-cat="enfant" onclick="setCat(this,'enfant')">Mode Enfant <span class="cnt">640</span></div>
+          <div class="fcat-item" data-cat="ceremonie" onclick="setCat(this,'ceremonie')">Tenues de cérémonie <span class="cnt">520</span></div>
+        </div>
+      </div>
+
+      <!-- Prix -->
+      <div class="filt-block">
+        <div class="filt-label">Fourchette de prix</div>
+        <div class="price-range">
+          <div class="price-inputs">
+            <input class="price-inp" type="number" id="pMin" placeholder="Min" value="0" min="0" aria-label="Prix minimum"/>
+            <span class="price-sep">—</span>
+            <input class="price-inp" type="number" id="pMax" placeholder="Max" value="100000" min="0" aria-label="Prix maximum"/>
+          </div>
+          <div style="font-size:11px;color:var(--t4);text-align:right" id="priceDisplay">0 — 100 000 FCFA</div>
+          <div class="price-slider" aria-hidden="true"><div class="price-fill"></div></div>
+          <button class="price-apply" onclick="applyPrice()">Appliquer</button>
+        </div>
+      </div>
+
+      <!-- Vendeurs -->
+      <div class="filt-block">
+        <div class="filt-label">Boutiques certifiées</div>
+        <div class="filt-checks" id="fvendors">
+          <label class="fcheck" onclick="toggleCheck(this,'vnd-aminata')"><div class="fcheck-box"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" stroke="#fff" stroke-width="2"><polyline points="1 3.5 3.5 6 8 1"/></svg></div><span class="fcheck-lbl">Aminata Fashion</span><span class="cnt">248</span></label>
+          <label class="fcheck" onclick="toggleCheck(this,'vnd-sira')"><div class="fcheck-box"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" stroke="#fff" stroke-width="2"><polyline points="1 3.5 3.5 6 8 1"/></svg></div><span class="fcheck-lbl">Sira Beauté</span><span class="cnt">86</span></label>
+          <label class="fcheck" onclick="toggleCheck(this,'vnd-binta')"><div class="fcheck-box"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" stroke="#fff" stroke-width="2"><polyline points="1 3.5 3.5 6 8 1"/></svg></div><span class="fcheck-lbl">Binta Bijoux</span><span class="cnt">134</span></label>
+          <label class="fcheck" onclick="toggleCheck(this,'vnd-kouyate')"><div class="fcheck-box"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" stroke="#fff" stroke-width="2"><polyline points="1 3.5 3.5 6 8 1"/></svg></div><span class="fcheck-lbl">Kouyaté Style</span><span class="cnt">67</span></label>
+          <label class="fcheck" onclick="toggleCheck(this,'vnd-dembele')"><div class="fcheck-box"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" stroke="#fff" stroke-width="2"><polyline points="1 3.5 3.5 6 8 1"/></svg></div><span class="fcheck-lbl">Dembélé Couture</span><span class="cnt">112</span></label>
+        </div>
+      </div>
+
+      <!-- Note clients -->
+      <div class="filt-block">
+        <div class="filt-label">Note minimale</div>
+        <div class="fstars" id="fstars">
+          <div class="fstar-row" onclick="setStars(this,4.5)"><span class="fstar-ico">★★★★★</span><span style="font-size:12px;color:var(--t2);font-weight:600">4.5 et +</span><span class="fstar-cnt">3 240</span></div>
+          <div class="fstar-row" onclick="setStars(this,4)"><span class="fstar-ico">★★★★☆</span><span style="font-size:12px;color:var(--t2);font-weight:600">4.0 et +</span><span class="fstar-cnt">6 810</span></div>
+          <div class="fstar-row" onclick="setStars(this,3)"><span class="fstar-ico">★★★☆☆</span><span style="font-size:12px;color:var(--t2);font-weight:600">3.0 et +</span><span class="fstar-cnt">9 450</span></div>
+        </div>
+      </div>
+
+      <!-- Options -->
+      <div class="filt-block">
+        <div class="filt-label">Options</div>
+        <div class="filt-checks">
+          <label class="fcheck" onclick="toggleCheck(this,'opt-promo')"><div class="fcheck-box"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" stroke="#fff" stroke-width="2"><polyline points="1 3.5 3.5 6 8 1"/></svg></div><span class="fcheck-lbl">En promotion</span></label>
+          <label class="fcheck" onclick="toggleCheck(this,'opt-new')"><div class="fcheck-box"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" stroke="#fff" stroke-width="2"><polyline points="1 3.5 3.5 6 8 1"/></svg></div><span class="fcheck-lbl">Nouveautés (7 jours)</span></label>
+          <label class="fcheck" onclick="toggleCheck(this,'opt-dispo')"><div class="fcheck-box"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" stroke="#fff" stroke-width="2"><polyline points="1 3.5 3.5 6 8 1"/></svg></div><span class="fcheck-lbl">En stock uniquement</span></label>
+          <label class="fcheck" onclick="toggleCheck(this,'opt-livraison')"><div class="fcheck-box"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" stroke="#fff" stroke-width="2"><polyline points="1 3.5 3.5 6 8 1"/></svg></div><span class="fcheck-lbl">Livraison gratuite</span></label>
+          <label class="fcheck" onclick="toggleCheck(this,'opt-mali')"><div class="fcheck-box"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" stroke="#fff" stroke-width="2"><polyline points="1 3.5 3.5 6 8 1"/></svg></div><span class="fcheck-lbl">Fait au Mali</span></label>
+        </div>
+      </div>
+
+      <!-- Appliquer (mobile) -->
+      <div style="display:none" id="filt-apply-mob" class="filt-close-mob" style="display:block">
+        <button onclick="closeFilt();applyFilters()" style="width:100%;padding:13px;background:var(--em);color:#fff;border-radius:10px;font-size:14px;font-weight:700;font-family:inherit;border:none;transition:background var(--tr)">Voir les résultats</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ─── ZONE PRODUITS ─── -->
+  <div id="prod-zone">
+
+    <!-- Barre de tri -->
+    <div class="sort-bar">
+      <div class="sort-left">
+        <span class="result-count" id="resCount"><b id="resN">24</b> produits</span>
+        <div class="active-filters" id="activeTags"></div>
+      </div>
+      <div class="sort-right">
+        <select class="sort-sel" id="sortSel" onchange="applySort(this.value)" aria-label="Trier" style="display:none">
+          <option value="pop">Les plus populaires</option>
+          <option value="new">Nouveautés</option>
+          <option value="price-asc">Prix croissant</option>
+          <option value="price-desc">Prix décroissant</option>
+          <option value="rating">Mieux notés</option>
+        </select>
+        <div id="sort-desktop" style="display:none">
+          <select class="sort-sel" id="sortSelD" onchange="applySort(this.value)" aria-label="Trier par">
+            <option value="pop">Les plus populaires</option>
+            <option value="new">Nouveautés</option>
+            <option value="price-asc">Prix croissant</option>
+            <option value="price-desc">Prix décroissant</option>
+            <option value="rating">Mieux notés</option>
+          </select>
+        </div>
+        <div class="view-btns" role="group" aria-label="Mode d'affichage">
+          <button class="vbtn on" id="vGrid" onclick="setView('grid')" aria-label="Grille" aria-pressed="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="0" y="0" width="6" height="6" rx="1"/><rect x="10" y="0" width="6" height="6" rx="1"/><rect x="0" y="10" width="6" height="6" rx="1"/><rect x="10" y="10" width="6" height="6" rx="1"/></svg>
+          </button>
+          <button class="vbtn" id="vList" onclick="setView('list')" aria-label="Liste" aria-pressed="false">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="0" y="1" width="16" height="2" rx="1"/><rect x="0" y="7" width="16" height="2" rx="1"/><rect x="0" y="13" width="16" height="2" rx="1"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grille -->
+    <div id="grid" role="list" aria-label="Produits du catalogue"></div>
+
+    <!-- État vide -->
+    <div id="empty" role="status" aria-live="polite">
+      <div class="empty-ico">
+        <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="var(--t4)" stroke-width="1.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </div>
+      <div class="empty-ti">Aucun produit trouvé</div>
+      <p class="empty-sub">Essayez de modifier vos filtres ou recherchez avec d'autres mots-clés.</p>
+      <button class="empty-btn" onclick="resetAll()">Effacer les filtres</button>
+    </div>
+
+    <!-- Pagination -->
+    <nav class="pagination" id="paginationNav" aria-label="Pagination"></nav>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     BANNIÈRE VENDEUR
+══════════════════════════════════════ -->
+<div id="vendor-cta">
+  <div class="vcta-in">
+    <div class="vcta-txt">
+      <div class="pre">Opportunité Business</div>
+      <div class="ti">Votre boutique sur Mifa Life</div>
+      <div class="sub">Rejoignez 850 artisans et vendeurs maliens. Plan Starter gratuit, 8% de commission uniquement sur vos ventes.</div>
+    </div>
+    <a class="vcta-btn" href="/partenaires">
+      Créer ma boutique
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer>
+  <div class="ft-in">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <div class="ft-mali">
+          <div class="ft-flag"><span style="background:var(--mg)"></span><span style="background:var(--my)"></span><span style="background:var(--mr)"></span></div>
+          <span class="ft-mali-lbl">Fièrement Malien — Bamako</span>
+        </div>
+        <div class="ft-logo"><em>MIFA</em> LIFE</div>
+        <p class="ft-desc">La marketplace de mode & artisanat malien. Wax, bijoux, bogolan, cosmétiques naturels. Livraison dans tout le Mali.</p>
+      </div>
+      <div>
+        <div class="ft-ch">Acheter</div>
+        <nav class="ft-links">
+          <a class="ft-lnk" href="/catalogue">Catalogue complet</a>
+          <a class="ft-lnk" href="/flash">Ventes flash</a>
+          <a class="ft-lnk" href="/categories">Catégories</a>
+          <a class="ft-lnk" href="/promos">Promos & codes</a>
+          <a class="ft-lnk" href="/cartes-cadeaux">Cartes cadeaux</a>
+        </nav>
+      </div>
+      <div>
+        <div class="ft-ch">Mon Compte</div>
+        <nav class="ft-links">
+          <a class="ft-lnk" href="/auth">Connexion</a>
+          <a class="ft-lnk" href="/dashboard">Mon espace</a>
+          <a class="ft-lnk" href="/favoris">Mes favoris</a>
+          <a class="ft-lnk" href="/suivi-commande">Suivi commande</a>
+          <a class="ft-lnk" href="/retours">Retours</a>
+        </nav>
+      </div>
+      <div>
+        <div class="ft-ch">Aide</div>
+        <nav class="ft-links">
+          <a class="ft-lnk" href="/faq">FAQ</a>
+          <a class="ft-lnk" href="/contact">Nous contacter</a>
+          <a class="ft-lnk" href="/guide-tailles">Guide des tailles</a>
+          <a class="ft-lnk" href="/partenaires">Devenir vendeur</a>
+          <a class="ft-lnk" href="/a-propos">À propos</a>
+        </nav>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span>© 2026 Mifa Life Company · Bamako, Mali · Tous droits réservés</span>
+      <div class="ft-pays"><span class="fpay">Orange Money</span><span class="fpay">Wave</span><span class="fpay">Moov Money</span><span class="fpay">Visa</span><span class="fpay">Mastercard</span></div>
+    </div>
+  </div>
+</footer>
+
+<!-- Cart Sidebar -->
+<div id="cov" onclick="closeCart()" aria-hidden="true"></div>
+<aside id="csb" role="dialog" aria-label="Mon panier" aria-modal="true">
+  <div class="cs-hd">
+    <div class="cs-ti">Mon panier <span id="cartCount" style="font-size:12px;color:var(--t3);font-weight:500"></span></div>
+    <button class="cs-cl" onclick="closeCart()" aria-label="Fermer">✕</button>
+  </div>
+  <div class="cs-body" id="csBody"></div>
+  <div class="cs-ft" id="csFt" style="display:none">
+    <div class="cs-row"><span>Sous-total</span><span id="csSub">0 FCFA</span></div>
+    <div class="cs-row"><span>Livraison</span><span style="color:var(--em)">Gratuite</span></div>
+    <div class="cs-tot-row"><span>Total</span><span id="csTot">0 FCFA</span></div>
+    <button class="cs-ck" onclick="location.href='/checkout'">Commander maintenant</button>
+    <button class="cs-cont" onclick="closeCart()">Continuer mes achats</button>
+  </div>
+</aside>
+
+<!-- Quick View -->
+<div class="qv-ov" id="qvOv" role="dialog" aria-label="Aperçu produit" aria-modal="true" onclick="if(event.target===this)closeQV()">
+  <div class="qv-mod">
+    <div class="qv-img"><img id="qvImg" src="" alt="" loading="lazy"/></div>
+    <div class="qv-bd">
+      <button class="qv-cl" onclick="closeQV()" aria-label="Fermer">✕</button>
+      <div style="font-size:11px;color:var(--t3)" id="qvVnd"></div>
+      <div class="qv-nm" id="qvNm"></div>
+      <div id="qvPr"></div>
+      <div style="display:flex;align-items:center;gap:4px" id="qvStars"></div>
+      <div class="qv-desc" id="qvDesc"></div>
+      <div class="qv-sizes" id="qvSizes" style="display:none">
+        <label>Taille</label>
+        <div class="sizes-row" id="sizesRow"></div>
+      </div>
+      <div class="price-alert-row">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--mu)" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div class="pa-txt"><div class="pa-ti">Alerte baisse de prix</div><div class="pa-sub">Soyez notifié quand le prix baisse</div></div>
+        <button class="pa-btn" onclick="setPriceAlert()">Activer</button>
+      </div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:4px">
+        <button onclick="qvAdd()" style="flex:1;min-width:130px;padding:13px;background:var(--em);color:#fff;border:none;border-radius:9px;font-size:14px;font-weight:700;font-family:inherit;transition:all var(--tr)">Ajouter au panier</button>
+        <button id="qvGoBtn" style="flex:1;min-width:120px;padding:13px;background:var(--bg);border:1.5px solid var(--bg3);border-radius:9px;font-size:13px;font-weight:600;font-family:inherit;color:var(--t2);transition:all var(--tr)">Voir la fiche</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" role="status" aria-live="polite"><span id="toastTxt"></span></div>
+
+<!-- WhatsApp -->
+<a id="wa-btn" href="https://wa.me/22370000000" target="_blank" rel="noopener" aria-label="Support WhatsApp">
+  <div class="wa-lbl">Support Mifa Life</div>
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+<button id="stt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut">↑</button>
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════ -->
+<script>
+'use strict';
+/* ─── ÉTAT GLOBAL ─── */
+var cart     = JSON.parse(localStorage.getItem('mifa_cart') || '[]');
+var wishlist = JSON.parse(localStorage.getItem('mifa_wish') || '[]');
+var toastTimer   = null;
+var menuOpen     = false;
+var filtOpen     = false;
+var currentQV    = null;
+var currentView  = 'grid';
+var currentPage  = 1;
+var ITEMS_PER    = 12;
+var activeFilters = { cat:'all', minP:0, maxP:100000, stars:0, vendors:[], opts:[] };
+var activeSortVal = 'pop';
+
+/* ─── CATALOGUE PRODUITS (données étendues) ─── */
+var CATALOG = [
+  { id:1,  nm:'Robe Wax Batik Indigo',         vnd:'Aminata Fashion', cat:'femme',    p:18500,  old:26000,  img:'https://images.unsplash.com/photo-1622495842673-73e8c43da3a8?w=500&q=80&fit=crop', stars:4.8, rev:142, badge:'sale', sizes:['S','M','L','XL'], desc:'Robe wax batik artisanale confectionnée à Bamako. Tissu 100% coton certifié, teinture naturelle indigo de Ségou.' },
+  { id:2,  nm:'Boubou Brodé Grand Homme',       vnd:'Aminata Fashion', cat:'homme',    p:32000,  old:null,   img:'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=500&q=80&fit=crop', stars:4.9, rev:87,  badge:'new', sizes:['M','L','XL','XXL'], desc:'Boubou grand homme brodé main par les artisans de Ségou. Tissu haut de gamme, confection sur mesure possible.' },
+  { id:3,  nm:"Huile d'Argan Pure Bio",         vnd:'Sira Beauté',     cat:'beaute',   p:12000,  old:22000,  img:'https://images.unsplash.com/photo-1590439471364-192aa70c0b53?w=500&q=80&fit=crop', stars:4.9, rev:76,  badge:'sale', sizes:[], desc:"Huile d'argan 100% pure pressée à froid depuis les régions de Kayes. Certifiée biologique et naturelle." },
+  { id:4,  nm:'Kaftan Cérémonie Doré',          vnd:'Aminata Fashion', cat:'ceremonie',p:48000,  old:null,   img:'https://images.unsplash.com/photo-1614251056798-0a63eda2bb25?w=500&q=80&fit=crop', stars:5.0, rev:29,  badge:'hot', sizes:['S','M','L','XL'], desc:'Kaftan luxe pour soirées de prestige. Broderies dorées à la main, tissu soyeux premium, pièce artisanale unique.' },
+  { id:5,  nm:'Collier Perles Bogolan',         vnd:'Binta Bijoux',    cat:'bijoux',   p:6500,   old:9200,   img:'https://images.unsplash.com/photo-1610028870686-4acbc32a34b9?w=500&q=80&fit=crop', stars:4.5, rev:31,  badge:'sale', sizes:[], desc:'Collier perles véritables avec motifs bogolan peints à la main. Pièce unique, artisanat traditionnel de Ségou.' },
+  { id:6,  nm:'Ensemble Wax Femme Bamako',      vnd:'Aminata Fashion', cat:'femme',    p:22000,  old:30000,  img:'https://images.unsplash.com/photo-1594938298603-c8148c4b4e51?w=500&q=80&fit=crop', stars:4.7, rev:64,  badge:'sale', sizes:['XS','S','M','L','XL'], desc:'Ensemble deux pièces en tissu wax pagne authentique. Couture sur mesure disponible en 48h à Bamako.' },
+  { id:7,  nm:'Savon Karité & Neem Naturel',    vnd:'Sira Beauté',     cat:'beaute',   p:3500,   old:6000,   img:'https://images.unsplash.com/photo-1590439471364-192aa70c0b53?w=500&q=80&fit=crop', stars:4.6, rev:108, badge:'sale', sizes:[], desc:'Savon surgras au karité du Mali, enrichi au neem. Peau douce, cicatrisante. 100% naturel sans conservateur.' },
+  { id:8,  nm:'Chemise Bogolan Homme',          vnd:'Kouyaté Style',   cat:'homme',    p:15000,  old:null,   img:'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=500&q=80&fit=crop', stars:4.6, rev:42,  badge:'new', sizes:['S','M','L','XL'], desc:'Chemise en tissu bogolan teint à la main selon les techniques ancestrales de Ségou.' },
+  { id:9,  nm:'Bracelet Or Africain',           vnd:'Binta Bijoux',    cat:'bijoux',   p:8500,   old:12000,  img:'https://images.unsplash.com/photo-1610028870686-4acbc32a34b9?w=500&q=80&fit=crop', stars:4.8, rev:53,  badge:'sale', sizes:[], desc:'Bracelet en laiton plaqué or, motifs géographiques africains gravés à la main. Artisan joaillier de Bamako.' },
+  { id:10, nm:'Tenue Baptême Enfant Wax',       vnd:'Aminata Fashion', cat:'enfant',   p:14000,  old:20000,  img:'https://images.unsplash.com/photo-1622495842673-73e8c43da3a8?w=500&q=80&fit=crop', stars:4.7, rev:38,  badge:'sale', sizes:['2ans','4ans','6ans','8ans'], desc:'Tenue de baptême en wax premium pour enfant. Finitions soignées, confort garanti pour les petits.' },
+  { id:11, nm:'Panier Osier Décoratif',         vnd:'Kouyaté Style',   cat:'maison',   p:9500,   old:null,   img:'https://images.unsplash.com/photo-1572635148818-ef6fd45eb394?w=500&q=80&fit=crop', stars:4.4, rev:19,  badge:'new', sizes:[], desc:"Panier en osier tressé à la main par les artisans de Mopti. Décoration intérieure africaine authentique." },
+  { id:12, nm:'Robe Bogolan Ségou',             vnd:'Dembélé Couture', cat:'femme',    p:26000,  old:38000,  img:'https://images.unsplash.com/photo-1594938298603-c8148c4b4e51?w=500&q=80&fit=crop', stars:4.9, rev:91,  badge:'sale', sizes:['S','M','L','XL'], desc:'Robe en bogolan authentique de Ségou. Teinture naturelle au beurre de karité, motifs traditionnels maliens.' },
+  { id:13, nm:'Beurre de Karité Brut',          vnd:'Sira Beauté',     cat:'beaute',   p:5500,   old:8500,   img:'https://images.unsplash.com/photo-1590439471364-192aa70c0b53?w=500&q=80&fit=crop', stars:4.9, rev:204, badge:'sale', sizes:[], desc:'Beurre de karité brut non raffiné récolté dans le nord du Mali. Hydratation intense peau et cheveux.' },
+  { id:14, nm:'Boubou Cérémonie Femme',         vnd:'Dembélé Couture', cat:'ceremonie',p:38000,  old:null,   img:'https://images.unsplash.com/photo-1614251056798-0a63eda2bb25?w=500&q=80&fit=crop', stars:4.8, rev:47,  badge:'hot', sizes:['S','M','L','XL','XXL'], desc:'Boubou de cérémonie pour femme, soie naturelle et broderies main. Confection sur mesure à Bamako.' },
+  { id:15, nm:'Statue Bois Dogon',              vnd:'Kouyaté Style',   cat:'artisanat',p:28000,  old:null,   img:'https://images.unsplash.com/photo-1572635148818-ef6fd45eb394?w=500&q=80&fit=crop', stars:4.7, rev:14,  badge:'new', sizes:[], desc:'Statue en bois de vène sculptée à la main selon les traditions Dogon du pays de Bandiagara.' },
+  { id:16, nm:'Tissu Wax Coton Premium',        vnd:'Aminata Fashion', cat:'artisanat',p:7500,   old:12000,  img:'https://images.unsplash.com/photo-1622495842673-73e8c43da3a8?w=500&q=80&fit=crop', stars:4.6, rev:67,  badge:'sale', sizes:[], desc:'Tissu wax 100% coton certifié, 6 yards. Motifs exclusifs dessinés par les créateurs Mifa Life.' },
+  { id:17, nm:'Sandales Cuir Artisanal',        vnd:'Kouyaté Style',   cat:'femme',    p:11000,  old:16000,  img:'https://images.unsplash.com/photo-1594938298603-c8148c4b4e51?w=500&q=80&fit=crop', stars:4.5, rev:33,  badge:'sale', sizes:['36','37','38','39','40','41'], desc:'Sandales en cuir naturel tannées artisanalement à Bamako. Semelle confort, boucle dorée.' },
+  { id:18, nm:'Tapis Bogolan Salon',            vnd:'Dembélé Couture', cat:'maison',   p:45000,  old:null,   img:'https://images.unsplash.com/photo-1572635148818-ef6fd45eb394?w=500&q=80&fit=crop', stars:4.8, rev:22,  badge:'new', sizes:[], desc:'Tapis bogolan tissé main, motifs géométriques traditionnels. Laine naturelle, 120 × 180 cm.' },
+  { id:19, nm:'Parfum Musc Ambré Mali',         vnd:'Sira Beauté',     cat:'beaute',   p:18000,  old:28000,  img:'https://images.unsplash.com/photo-1590439471364-192aa70c0b53?w=500&q=80&fit=crop', stars:4.7, rev:58,  badge:'sale', sizes:[], desc:'Parfum naturel musc ambré, distillé selon les recettes traditionnelles maliennes. Tenue 12 heures.' },
+  { id:20, nm:'Pendentif Argent Malien',        vnd:'Binta Bijoux',    cat:'bijoux',   p:14500,  old:null,   img:'https://images.unsplash.com/photo-1610028870686-4acbc32a34b9?w=500&q=80&fit=crop', stars:4.9, rev:76,  badge:'hot', sizes:[], desc:'Pendentif en argent sterling, motif croix d\'Agadez symbole traditionnel malien. Artisan de Tombouctou.' },
+  { id:21, nm:'Djellaba Coton Légère',          vnd:'Dembélé Couture', cat:'homme',    p:19000,  old:27000,  img:'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=500&q=80&fit=crop', stars:4.6, rev:45,  badge:'sale', sizes:['S','M','L','XL'], desc:'Djellaba en coton léger, idéale pour le climat malien. Broderies col et manches, lavage facile.' },
+  { id:22, nm:'Huile Baobab Capillaire',        vnd:'Sira Beauté',     cat:'beaute',   p:9800,   old:15000,  img:'https://images.unsplash.com/photo-1590439471364-192aa70c0b53?w=500&q=80&fit=crop', stars:4.8, rev:89,  badge:'sale', sizes:[], desc:'Huile de baobab pure pour soins capillaires et peau. Récolte responsable dans le Sahel malien.' },
+  { id:23, nm:'Pagnes Wax Mariée',              vnd:'Aminata Fashion', cat:'ceremonie',p:62000,  old:null,   img:'https://images.unsplash.com/photo-1614251056798-0a63eda2bb25?w=500&q=80&fit=crop', stars:5.0, rev:18,  badge:'hot', sizes:['S','M','L','XL'], desc:'Ensemble pagnes wax pour la mariée malienne — 3 tenues distinctes, finitions brodées or et argent.' },
+  { id:24, nm:'Sac Cuir Bogolan Femme',         vnd:'Binta Bijoux',    cat:'femme',    p:16000,  old:24000,  img:'https://images.unsplash.com/photo-1594938298603-c8148c4b4e51?w=500&q=80&fit=crop', stars:4.6, rev:37,  badge:'sale', sizes:[], desc:'Sac à main en cuir naturel orné de tissus bogolan. Fermeture magnétique, doublure coton.' },
+];
+
+/* ─── FILTRES ─── */
+function setCat(el, cat) {
+  document.querySelectorAll('.fcat-item').forEach(function(e){ e.classList.remove('on'); });
+  el.classList.add('on');
+  activeFilters.cat = cat;
+  currentPage = 1;
+  updateBC(cat);
+  renderGrid();
+  updateFilterBadge();
+}
+function applyPrice() {
+  var mn = parseInt(document.getElementById('pMin').value) || 0;
+  var mx = parseInt(document.getElementById('pMax').value) || 999999;
+  activeFilters.minP = mn;
+  activeFilters.maxP = mx;
+  var d = document.getElementById('priceDisplay');
+  if (d) d.textContent = mn.toLocaleString('fr-FR') + ' — ' + mx.toLocaleString('fr-FR') + ' FCFA';
+  currentPage = 1; renderGrid(); updateFilterBadge();
+  showToast('Filtre prix appliqué');
+}
+function setStars(el, v) {
+  document.querySelectorAll('.fstar-row').forEach(function(r){ r.classList.remove('on'); });
+  el.classList.toggle('on', activeFilters.stars !== v);
+  activeFilters.stars = activeFilters.stars === v ? 0 : v;
+  currentPage = 1; renderGrid(); updateFilterBadge();
+}
+function toggleCheck(el, key) {
+  el.classList.toggle('on');
+  var isOn = el.classList.contains('on');
+  if (key.startsWith('vnd-')) {
+    if (isOn) activeFilters.vendors.push(key);
+    else activeFilters.vendors = activeFilters.vendors.filter(function(v){ return v !== key; });
+  } else {
+    if (isOn) activeFilters.opts.push(key);
+    else activeFilters.opts = activeFilters.opts.filter(function(o){ return o !== key; });
+  }
+  currentPage = 1; renderGrid(); updateFilterBadge();
+}
+function resetAll() {
+  activeFilters = { cat:'all', minP:0, maxP:100000, stars:0, vendors:[], opts:[] };
+  document.querySelectorAll('.fcat-item').forEach(function(e){ e.classList.remove('on'); });
+  document.querySelector('.fcat-item[data-cat="all"]').classList.add('on');
+  document.querySelectorAll('.fcheck').forEach(function(e){ e.classList.remove('on'); });
+  document.querySelectorAll('.fstar-row').forEach(function(e){ e.classList.remove('on'); });
+  document.getElementById('pMin').value = 0;
+  document.getElementById('pMax').value = 100000;
+  var d = document.getElementById('priceDisplay'); if (d) d.textContent = '0 — 100 000 FCFA';
+  currentPage = 1; renderGrid(); updateFilterBadge();
+  updateBC('all');
+}
+function updateFilterBadge() {
+  var n = 0;
+  if (activeFilters.cat !== 'all') n++;
+  if (activeFilters.minP > 0 || activeFilters.maxP < 100000) n++;
+  if (activeFilters.stars > 0) n++;
+  n += activeFilters.vendors.length + activeFilters.opts.length;
+  var b = document.getElementById('filtBadge');
+  var r = document.getElementById('resetBtn');
+  if (b) { b.textContent = n; b.style.display = n ? 'inline' : 'none'; }
+  if (r) r.style.display = n ? 'block' : 'none';
+  renderActiveTags();
+}
+function renderActiveTags() {
+  var tags = document.getElementById('activeTags'); if (!tags) return;
+  var html = '';
+  if (activeFilters.cat !== 'all') {
+    var catEl = document.querySelector('.fcat-item.on');
+    var nm = catEl ? catEl.textContent.replace(/\d+/, '').trim() : activeFilters.cat;
+    html += '<span class="af-tag">' + nm + '<button onclick="setCatByKey(\'all\')" aria-label="Retirer">✕</button></span>';
+  }
+  if (activeFilters.stars > 0) html += '<span class="af-tag">★ ' + activeFilters.stars + '+<button onclick="resetStars()" aria-label="Retirer">✕</button></span>';
+  if (activeFilters.opts.indexOf('opt-promo') !== -1) html += '<span class="af-tag">En promotion<button onclick="toggleCheckByKey(\'opt-promo\')" aria-label="Retirer">✕</button></span>';
+  if (activeFilters.opts.indexOf('opt-new') !== -1) html += '<span class="af-tag">Nouveautés<button onclick="toggleCheckByKey(\'opt-new\')" aria-label="Retirer">✕</button></span>';
+  tags.innerHTML = html;
+}
+function setCatByKey(cat) {
+  var el = document.querySelector('.fcat-item[data-cat="' + cat + '"]');
+  if (el) setCat(el, cat);
+}
+function resetStars() { activeFilters.stars = 0; document.querySelectorAll('.fstar-row').forEach(function(e){ e.classList.remove('on'); }); currentPage=1; renderGrid(); updateFilterBadge(); }
+function toggleCheckByKey(key) { var el = document.querySelector('[onclick*="' + key + '"]'); if (el) toggleCheck(el, key); }
+function applySort(val) { activeSortVal = val; renderGrid(); }
+function updateBC(cat) {
+  var names = { all:'Catalogue', femme:'Mode Femme', homme:'Mode Homme', bijoux:'Bijoux', beaute:'Beauté & Soin', maison:'Maison', artisanat:'Artisanat', enfant:'Mode Enfant', ceremonie:'Tenues de cérémonie' };
+  var bc = document.getElementById('bcCur'); if (bc) bc.textContent = names[cat] || 'Catalogue';
+  var ht = document.getElementById('heroTitle'); if (ht) ht.textContent = names[cat] || 'Catalogue Mifa Life';
+}
+
+/* ─── FILTRER LES DONNÉES ─── */
+function getFiltered() {
+  var list = CATALOG.slice();
+  // Catégorie
+  if (activeFilters.cat !== 'all') list = list.filter(function(p){ return p.cat === activeFilters.cat; });
+  // Prix
+  list = list.filter(function(p){ return p.p >= activeFilters.minP && p.p <= activeFilters.maxP; });
+  // Note
+  if (activeFilters.stars > 0) list = list.filter(function(p){ return p.stars >= activeFilters.stars; });
+  // Options
+  if (activeFilters.opts.indexOf('opt-promo') !== -1) list = list.filter(function(p){ return p.old !== null; });
+  if (activeFilters.opts.indexOf('opt-new') !== -1) list = list.filter(function(p){ return p.badge === 'new'; });
+  if (activeFilters.opts.indexOf('opt-mali') !== -1) list = list.filter(function(p){ return true; }); // tous sont maliens
+  // Tri
+  if (activeSortVal === 'price-asc') list.sort(function(a,b){ return a.p - b.p; });
+  else if (activeSortVal === 'price-desc') list.sort(function(a,b){ return b.p - a.p; });
+  else if (activeSortVal === 'rating') list.sort(function(a,b){ return b.stars - a.stars; });
+  else if (activeSortVal === 'new') list.sort(function(a,b){ return (b.badge==='new'?1:0) - (a.badge==='new'?1:0); });
+  return list;
+}
+
+/* ─── RENDU GRILLE ─── */
+function fmtP(p) { return p.toLocaleString('fr-FR') + ' FCFA'; }
+function stars(n) { var s=''; for(var i=0;i<5;i++) s+=(i<Math.floor(n)?'★':'☆'); return s; }
+function prodCard(p) {
+  var disc = p.old ? Math.round((1 - p.p/p.old)*100) : 0;
+  var badge = p.badge === 'sale' ? '<span class="bdg sale">−'+disc+'%</span>' : p.badge === 'new' ? '<span class="bdg new">Nouveau</span>' : p.badge === 'hot' ? '<span class="bdg hot">Tendance</span>' : '';
+  var wIcon = wishlist.indexOf(p.id)!==-1 ? '<svg width="13" height="13" viewBox="0 0 24 24" fill="#EF4444" stroke="#EF4444" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' : '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+  return '<article class="pc" role="listitem">'
+    + '<div class="pc-img">'
+    + '<img src="'+p.img+'" alt="'+p.nm+'" loading="lazy" width="300" height="300"/>'
+    + '<div class="pc-badges">'+badge+'</div>'
+    + '<button class="pc-wish'+(wishlist.indexOf(p.id)!==-1?' on':'')+'" data-id="'+p.id+'" onclick="event.stopPropagation();twish(this,'+p.id+')" aria-label="Favoris">'+wIcon+'</button>'
+    + '<div class="pc-hov"><button class="pc-ha" onclick="event.stopPropagation();openQV('+p.id+')">Aperçu rapide</button><button class="pc-ha add" onclick="event.stopPropagation();addCart('+p.id+')">Ajouter</button></div>'
+    + '<button class="pc-bell" onclick="event.stopPropagation();setPriceAlertById('+p.id+')" aria-label="Alerte prix"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>'
+    + '</div>'
+    + '<div class="pc-bd">'
+    + '<div class="pc-vnd">'+p.vnd+'<span class="pc-vck">✓</span></div>'
+    + '<div class="pc-nm" onclick="location.href=\'/produit?id='+p.id+'\'" style="cursor:pointer">'+p.nm+'</div>'
+    + '<div class="pc-stars"><span class="stars">'+stars(p.stars)+'</span><span class="pc-rv">'+p.stars+' ('+p.rev+')</span></div>'
+    + '<div class="pc-prices">'
+    + '<span class="pc-p'+(p.old?' sale':'')+'">'+fmtP(p.p)+'</span>'
+    + (p.old ? '<span class="pc-old">'+fmtP(p.old)+'</span><span class="pc-sav">−'+disc+'%</span>' : '')
+    + '</div>'
+    + '<button class="pc-atc-m" onclick="addCart('+p.id+')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Ajouter</button>'
+    + '</div></article>';
+}
+function renderGrid() {
+  var all = getFiltered();
+  var grid = document.getElementById('grid');
+  var empty = document.getElementById('empty');
+  var resN = document.getElementById('resN');
+  if (resN) resN.textContent = all.length;
+  if (!all.length) {
+    if (grid) grid.innerHTML = '';
+    if (empty) empty.classList.add('show');
+    renderPagination(0);
+    return;
+  }
+  if (empty) empty.classList.remove('show');
+  var start = (currentPage - 1) * ITEMS_PER;
+  var page  = all.slice(start, start + ITEMS_PER);
+  if (grid) grid.innerHTML = page.map(prodCard).join('');
+  renderPagination(all.length);
+  // Animate cards
+  if (grid) {
+    var cards = grid.querySelectorAll('.pc');
+    cards.forEach(function(c, i) {
+      c.style.opacity = '0';
+      c.style.transform = 'translateY(14px)';
+      setTimeout(function() {
+        c.style.transition = 'opacity .35s ease, transform .35s ease';
+        c.style.opacity = '1';
+        c.style.transform = 'translateY(0)';
+      }, i * 40);
+    });
+  }
+}
+function renderPagination(total) {
+  var nav = document.getElementById('paginationNav'); if (!nav) return;
+  var pages = Math.ceil(total / ITEMS_PER);
+  if (pages <= 1) { nav.innerHTML = ''; return; }
+  var html = '';
+  html += '<button class="pag-btn" onclick="goPage('+Math.max(1,currentPage-1)+')" '+(currentPage===1?'disabled':'')+' aria-label="Page précédente">‹</button>';
+  for (var i = 1; i <= pages; i++) {
+    if (i===1 || i===pages || (i>=currentPage-1 && i<=currentPage+1)) {
+      html += '<button class="pag-btn'+(i===currentPage?' on':'')+'" onclick="goPage('+i+')" aria-label="Page '+i+'">'+i+'</button>';
+    } else if (i===currentPage-2 || i===currentPage+2) {
+      html += '<span class="pag-dots">…</span>';
+    }
+  }
+  html += '<button class="pag-btn" onclick="goPage('+Math.min(pages,currentPage+1)+')" '+(currentPage===pages?'disabled':'')+' aria-label="Page suivante">›</button>';
+  nav.innerHTML = html;
+}
+function goPage(n) {
+  currentPage = n;
+  renderGrid();
+  window.scrollTo({ top: document.getElementById('main').offsetTop - 80, behavior: 'smooth' });
+}
+
+/* ─── FILTRE MOBILE ─── */
+function openFilt() {
+  filtOpen = true;
+  document.getElementById('filt-overlay').classList.add('on');
+  document.getElementById('sidebar-inner').classList.add('on');
+  document.getElementById('filt-apply-mob').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function closeFilt() {
+  filtOpen = false;
+  document.getElementById('filt-overlay').classList.remove('on');
+  document.getElementById('sidebar-inner').classList.remove('on');
+  document.body.style.overflow = '';
+}
+
+/* ─── VUE GRILLE/LISTE ─── */
+function setView(v) {
+  currentView = v;
+  var grid = document.getElementById('grid');
+  var vg = document.getElementById('vGrid');
+  var vl = document.getElementById('vList');
+  if (v === 'list') {
+    if (grid) grid.classList.add('list-view');
+    if (vg) { vg.classList.remove('on'); vg.setAttribute('aria-pressed','false'); }
+    if (vl) { vl.classList.add('on'); vl.setAttribute('aria-pressed','true'); }
+  } else {
+    if (grid) grid.classList.remove('list-view');
+    if (vg) { vg.classList.add('on'); vg.setAttribute('aria-pressed','true'); }
+    if (vl) { vl.classList.remove('on'); vl.setAttribute('aria-pressed','false'); }
+  }
+}
+
+/* ─── CART ─── */
+function addCart(id) {
+  var p = CATALOG.find(function(x){ return x.id===id; }); if (!p) return;
+  var ex = cart.find(function(c){ return c.id===id; });
+  if (ex) ex.qty++; else cart.push({ id:id, nm:p.nm, p:p.p, img:p.img, qty:1 });
+  saveCart(); updateBdg(); renderCartUI();
+  showToast(p.nm.substring(0,26)+'… ajouté au panier');
+  openCart();
+}
+function removeCart(id) { cart=cart.filter(function(c){ return c.id!==id; }); saveCart(); updateBdg(); renderCartUI(); }
+function changeQty(id,d) { var it=cart.find(function(c){ return c.id===id; }); if(!it) return; it.qty+=d; if(it.qty<1) removeCart(id); else { saveCart(); renderCartUI(); } }
+function openCart() { document.getElementById('cov').classList.add('on'); document.getElementById('csb').classList.add('on'); document.body.style.overflow='hidden'; renderCartUI(); }
+function closeCart() { document.getElementById('cov').classList.remove('on'); document.getElementById('csb').classList.remove('on'); document.body.style.overflow=''; }
+function saveCart() { localStorage.setItem('mifa_cart',JSON.stringify(cart)); }
+function renderCartUI() {
+  var body=document.getElementById('csBody'); var ft=document.getElementById('csFt'); var cnt=document.getElementById('cartCount'); if(!body) return;
+  var total=cart.reduce(function(s,i){ return s+i.p*i.qty; },0);
+  var count=cart.reduce(function(s,i){ return s+i.qty; },0);
+  if(cnt) cnt.textContent=count?'('+count+')':'';
+  if(!cart.length) { body.innerHTML='<div style="text-align:center;padding:52px 16px"><div style="font-size:11px;color:var(--t4);margin-bottom:8px">PANIER VIDE</div><div style="font-weight:700;font-size:15px;margin-bottom:6px">Aucun article</div><div style="font-size:13px;color:var(--t3)">Parcourez le catalogue</div></div>'; if(ft) ft.style.display='none'; return; }
+  body.innerHTML=cart.map(function(it){ return '<div class="cs-it"><img class="cs-thumb" src="'+it.img+'" alt="" loading="lazy"/><div class="cs-info"><div class="cs-nm">'+it.nm+'</div><div class="cs-pr">'+fmtP(it.p)+'</div><div class="cs-qw"><button class="qb" onclick="changeQty('+it.id+',-1)">−</button><span class="cs-qv">'+it.qty+'</span><button class="qb" onclick="changeQty('+it.id+',1)">+</button></div></div><button class="cs-rm" onclick="removeCart('+it.id+')" aria-label="Supprimer">✕</button></div>'; }).join('');
+  if(ft){ ft.style.display='block'; var s=document.getElementById('csSub'); if(s) s.textContent=fmtP(total); var t=document.getElementById('csTot'); if(t) t.textContent=fmtP(total); }
+}
+function updateBdg() {
+  var n=cart.reduce(function(s,i){ return s+i.qty; },0); var cb=document.getElementById('cartBdg'); if(cb){ cb.textContent=n; cb.style.display=n?'flex':'none'; }
+  var wn=wishlist.length; var wb=document.getElementById('wishBdg'); if(wb){ wb.textContent=wn; wb.style.display=wn?'flex':'none'; }
+}
+
+/* ─── WISHLIST ─── */
+function twish(btn, id) {
+  var idx=wishlist.indexOf(id);
+  var svgOn='<svg width="13" height="13" viewBox="0 0 24 24" fill="#EF4444" stroke="#EF4444" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+  var svgOff='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+  if(idx!==-1){ wishlist.splice(idx,1); btn.innerHTML=svgOff; btn.classList.remove('on'); showToast('Retiré des favoris'); }
+  else { wishlist.push(id); btn.innerHTML=svgOn; btn.classList.add('on'); showToast('Ajouté aux favoris'); }
+  localStorage.setItem('mifa_wish',JSON.stringify(wishlist)); updateBdg();
+}
+
+/* ─── QUICK VIEW ─── */
+function openQV(id) {
+  var p=CATALOG.find(function(x){ return x.id===id; }); if(!p) return;
+  currentQV=id;
+  var disc=p.old?Math.round((1-p.p/p.old)*100):0;
+  document.getElementById('qvImg').src=p.img; document.getElementById('qvImg').alt=p.nm;
+  document.getElementById('qvVnd').textContent='Boutique : '+p.vnd;
+  document.getElementById('qvNm').textContent=p.nm;
+  document.getElementById('qvDesc').textContent=p.desc;
+  document.getElementById('qvPr').innerHTML='<span style="font-family:\'Nunito Sans\',sans-serif;font-size:clamp(18px,4vw,22px);font-weight:700;color:'+(p.old?'var(--or)':'var(--t1)')+'">'+fmtP(p.p)+'</span>'+(p.old?'<span style="font-size:13px;color:var(--t4);text-decoration:line-through;margin-left:8px">'+fmtP(p.old)+'</span><span style="font-size:11px;color:var(--em);background:var(--em-l);padding:2px 7px;border-radius:4px;font-weight:700;margin-left:6px">−'+disc+'%</span>':'');
+  document.getElementById('qvStars').innerHTML='<span style="color:var(--mu);font-size:13px">'+stars(p.stars)+'</span><span style="font-size:12px;color:var(--t3);margin-left:5px">'+p.stars+' ('+p.rev+' avis)</span>';
+  var ss=document.getElementById('qvSizes'); var sr=document.getElementById('sizesRow');
+  if(p.sizes&&p.sizes.length){ ss.style.display='block'; sr.innerHTML=p.sizes.map(function(s){ return '<button class="size-btn" onclick="selectSize(this)">'+s+'</button>'; }).join(''); } else { ss.style.display='none'; }
+  document.getElementById('qvGoBtn').onclick=function(){ location.href='/produit?id='+id; };
+  document.getElementById('qvOv').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closeQV() { document.getElementById('qvOv').classList.remove('on'); document.body.style.overflow=''; currentQV=null; }
+function qvAdd() { if(currentQV) { addCart(currentQV); closeQV(); } }
+function selectSize(btn) { document.querySelectorAll('.size-btn').forEach(function(b){ b.classList.remove('on'); }); btn.classList.add('on'); }
+function setPriceAlert() { showToast('Alerte prix activée pour ce produit'); }
+function setPriceAlertById(id) { var p=CATALOG.find(function(x){ return x.id===id; }); if(p) showToast('Alerte activée — '+p.nm.substring(0,22)+'…'); }
+
+/* ─── MENU ─── */
+function toggleMenu() {
+  menuOpen=!menuOpen;
+  var b=document.getElementById('burger'); var bg=document.getElementById('mob-bg'); var dr=document.getElementById('mob-dr');
+  if(b){ b.classList.toggle('open',menuOpen); b.setAttribute('aria-expanded',String(menuOpen)); }
+  if(bg) bg.classList.toggle('on',menuOpen);
+  if(dr) dr.classList.toggle('on',menuOpen);
+  document.body.style.overflow=menuOpen?'hidden':'';
+}
+document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ if(menuOpen) toggleMenu(); if(filtOpen) closeFilt(); if(document.getElementById('qvOv').classList.contains('on')) closeQV(); if(document.getElementById('csb').classList.contains('on')) closeCart(); } });
+
+/* ─── SEARCH ─── */
+function doSearch() { var q=document.getElementById('si'); if(q&&q.value.trim()) location.href='/catalogue?q='+encodeURIComponent(q.value.trim()); }
+function doMobSearch() { var q=document.getElementById('mob-si'); if(q&&q.value.trim()) location.href='/catalogue?q='+encodeURIComponent(q.value.trim()); }
+
+/* ─── TOAST ─── */
+function showToast(msg) {
+  var t=document.getElementById('toast'); var tx=document.getElementById('toastTxt');
+  if(tx) tx.textContent=msg; t.classList.add('on');
+  clearTimeout(toastTimer); toastTimer=setTimeout(function(){ t.classList.remove('on'); },3000);
+}
+
+/* ─── SCROLL ─── */
+window.addEventListener('scroll',function(){
+  document.getElementById('nav').classList.toggle('sc',window.scrollY>50);
+  document.getElementById('stt').classList.toggle('show',window.scrollY>500);
+},{passive:true});
+
+/* ─── REQUÊTE URL ─── */
+(function(){
+  var params=new URLSearchParams(window.location.search);
+  var q=params.get('q');
+  var cat=params.get('cat');
+  if(q){ var si=document.getElementById('si'); if(si) si.value=q; showToast('Résultats pour "'+q+'"'); }
+  if(cat){ var el=document.querySelector('.fcat-item[data-cat="'+cat+'"]'); if(el) setCat(el,cat); }
+})();
+
+/* ─── SORT SELECTOR DESKTOP ─── */
+window.addEventListener('resize',function(){
+  var sd=document.getElementById('sort-desktop'); var ss=document.getElementById('sortSel');
+  if(window.innerWidth>=900){ if(sd) sd.style.display='block'; if(ss) ss.style.display='none'; }
+  else { if(sd) sd.style.display='none'; if(ss) ss.style.display='block'; }
+},{passive:true});
+
+/* ─── INIT ─── */
+window.addEventListener('DOMContentLoaded',function(){
+  renderGrid();
+  updateBdg();
+  renderCartUI();
+  // Sort desktop
+  if(window.innerWidth>=900){ var sd=document.getElementById('sort-desktop'); if(sd) sd.style.display='block'; }
+  // IntersectionObserver animations
+  var obs=new IntersectionObserver(function(entries){ entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); obs.unobserve(en.target); } }); },{threshold:.1});
+  document.querySelectorAll('.anim').forEach(function(el){ obs.observe(el); });
+});
+</script>
+</body>
+</html>
