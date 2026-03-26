@@ -1,15 +1,8 @@
 import Image from "next/image";
-import { createClient } from "@supabase/supabase-js";
+import { fetchActiveProducts } from "@/lib/data/products";
+import type { ShopProduct } from "@/lib/types/store";
 
 export const dynamic = "force-dynamic";
-
-type Product = {
-  id: string;
-  name: string | null;
-  price_cfa: number | null;
-  image_url: string | null;
-  description: string | null;
-};
 
 function formatPriceCfa(value: number | null) {
   if (value === null) {
@@ -17,34 +10,6 @@ function formatPriceCfa(value: number | null) {
   }
 
   return `${new Intl.NumberFormat("fr-FR").format(value)} FCFA`;
-}
-
-function createSupabaseServerClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-  if (!url || !anonKey) {
-    throw new Error(
-      "Variables NEXT_PUBLIC_SUPABASE_URL ou NEXT_PUBLIC_SUPABASE_ANON_KEY manquantes.",
-    );
-  }
-
-  return createClient(url, anonKey);
-}
-
-async function getProducts(): Promise<Product[]> {
-  const supabase = createSupabaseServerClient();
-  const { data, error } = await supabase
-    .from("products")
-    .select("id, name, price_cfa, image_url, description")
-    .eq("active", true)
-    .order("id", { ascending: false });
-
-  if (error) {
-    throw new Error(error.message);
-  }
-
-  return (data ?? []) as Product[];
 }
 
 function MaliBanner() {
@@ -69,7 +34,7 @@ function MaliBanner() {
 
 export default async function ShopPage() {
   try {
-    const products = await getProducts();
+    const products = await fetchActiveProducts();
 
     return (
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
