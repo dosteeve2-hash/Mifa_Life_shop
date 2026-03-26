@@ -1,12 +1,41 @@
 import Link from "next/link";
-import { fetchActiveProducts } from "@/lib/data/products";
 import { ProductCard } from "@/components/ProductCard";
+import type { ShopProduct } from "@/lib/types/store";
 
 export const dynamic = "force-dynamic";
 
+async function fetchActiveProductsNoStore() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error(
+      "Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY.",
+    );
+  }
+
+  const response = await fetch(
+    `${supabaseUrl}/rest/v1/products?select=id,name,price_cfa,image_url,description,active&active=eq.true&order=id.desc`,
+    {
+      cache: "no-store",
+      headers: {
+        apikey: supabaseAnonKey,
+        Authorization: `Bearer ${supabaseAnonKey}`,
+        Accept: "application/json",
+      },
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(`fetch failed (${response.status})`);
+  }
+
+  return ((await response.json()) as ShopProduct[]) ?? [];
+}
+
 export default async function ShopPage() {
   try {
-    const products = await fetchActiveProducts();
+    const products = await fetchActiveProductsNoStore();
 
     return (
       <main>
@@ -17,8 +46,8 @@ export default async function ShopPage() {
                 <h1 className="ch-title">Catalogue Mifa Life</h1>
                 <p className="ch-sub">
                   Wax, bijoux bogolan, beaute naturelle et essentiels lifestyle.
-                  Une boutique synchronisee sur Supabase avec l'identite visuelle
-                  du catalogue HTML original.
+                  Une boutique synchronisee sur Supabase avec un fetch temps reel
+                  force sans cache Vercel.
                 </p>
               </div>
               <div className="ch-stats">
