@@ -114,7 +114,7 @@ export default function HomePage() {
                   disabled={pending}
                   className="inline-flex min-h-12 items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#08100b] transition hover:bg-[var(--my)]"
                 >
-                  {pending ? "Envoi..." : "Etre rappelle"}
+                  {pending ? "Envoi..." : message ? "C'est note !" : "Etre rappelle"}
                 </button>
               </div>
 
