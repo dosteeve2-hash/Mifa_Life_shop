@@ -1,29 +1,57 @@
-"use client";
+'use client';
 
-import { useCart } from "../context/CartContext";
+import { useState } from 'react';
+import { useCart } from '@/context/CartContext';
 
-type AddToCartButtonProps = {
-  product: {
-    id: number;
-    name: string;
-    price_cfa: number;
-    image_url: string | null;
-  };
+type Product = {
+  id:        number;
+  name:      string;
+  price_cfa: number;
+  image_url: string | null;
 };
 
-export function AddToCartButton({ product }: AddToCartButtonProps) {
+export default function AddToCartButton({ product }: { product: Product }) {
   const { addItem } = useCart();
+  const [added, setAdded] = useState(false);
+
+  function handle() {
+    addItem({
+      id:        product.id,
+      name:      product.name,
+      price_cfa: product.price_cfa,
+      image_url: product.image_url,
+    });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1500);
+  }
 
   return (
     <button
-      type="button"
-      onClick={() => {
-        addItem(product);
-        console.log("Produit ajouté :", product.name);
-      }}
-      className="w-full rounded-lg bg-emerald-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700"
+      onClick={handle}
+      className={`flex w-full items-center justify-center gap-1.5 rounded-xl py-2 text-sm font-bold text-white transition-all duration-200 ${
+        added
+          ? 'bg-emerald-600 scale-95'
+          : 'bg-[#009739] hover:bg-[#007a2e] active:scale-95'
+      }`}
     >
-      Ajouter au panier
+      {added ? (
+        <>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" strokeWidth="3">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          Ajouté !
+        </>
+      ) : (
+        <>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" strokeWidth="2.5">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          Ajouter
+        </>
+      )}
     </button>
   );
 }
