@@ -17,13 +17,14 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:"Nunito Sans",sans-serif;background:var(--bg);color:var(--t1);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:"Nunito Sans",sans-serif;background:var(--bg);color:var(--t1);-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%;object-fit:cover}
 button,input,select{font-family:inherit;border:none;background:none;outline:none;cursor:pointer}
 p{line-height:1.72}
 *:focus-visible{outline:2px solid var(--em);outline-offset:2px}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(14px,3vw,28px)}
+main{width:100%}
 
 /* ── BANDE MALI ── */
 .mali-stripe{height:3px;display:flex}
@@ -294,3 +295,7 @@ p{line-height:1.72}
 .ldr-bar{width:120px;height:2px;background:rgba(255,255,255,.1);border-radius:1px;overflow:hidden}
 .ldr-fill{height:100%;background:var(--em);border-radius:1px;animation:ldr-anim 1.4s ease-in-out infinite}
 @keyframes ldr-anim{0%{width:0;margin-left:0}60%{width:100%;margin-left:0}100%{width:0;margin-left:100%}}
+
+/* Responsive shop override */
+#grid{display:grid;gap:clamp(12px,2vw,18px);grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(min-width:1024px){#grid{grid-template-columns:repeat(4,minmax(0,1fr))}}

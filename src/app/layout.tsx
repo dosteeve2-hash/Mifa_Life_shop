@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { CartProvider } from "@/components/providers/CartProvider";
 import "./globals.css";
@@ -18,7 +19,8 @@ export default function RootLayout({
       <body>
         <CartProvider>
           <Navbar />
-          {children}
+          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">{children}</main>
+          <Footer />
         </CartProvider>
       </body>
     </html>

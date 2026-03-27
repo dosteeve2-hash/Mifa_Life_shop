@@ -1,17 +1,18 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
+import Link from 'next/link';
+import { useState } from 'react';
+import { useCart } from '@/context/CartContext';
 
 const navLinks = [
   { href: "/", label: "Accueil" },
-  { href: "/shop", label: "Catalogue" },
-  { href: "/categories", label: "Categories" },
-  { href: "/contact", label: "Contact" },
+  { href: "/shop", label: "Boutique" },
+  { href: "/login", label: "Connexion" },
 ];
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { itemCount } = useCart();
 
   function closeMenu() {
     setMenuOpen(false);
@@ -82,10 +83,9 @@ export function Navbar() {
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <path d="M16 10a4 4 0 0 1-8 0" />
               </svg>
-            </Link>
-
-            <Link href="/login" className="auth-btn">
-              Connexion
+              <span className="ic-bdg" style={{ display: itemCount ? "flex" : "none" }}>
+                {itemCount}
+              </span>
             </Link>
 
             <button
@@ -127,11 +127,14 @@ export function Navbar() {
             {link.label}
           </Link>
         ))}
+        <Link href="/cart" className="mob-l" onClick={closeMenu}>
+          Panier{itemCount ? ` (${itemCount})` : ""}
+        </Link>
 
         <div className="mob-sep" />
         <div className="mob-auth">
           <Link href="/login" onClick={closeMenu}>
-            Creer un compte
+            Connexion
           </Link>
         </div>
       </aside>
