@@ -60,8 +60,8 @@ export default async function ShopPage() {
                 <h1 className="ch-title">Catalogue Mifa Life</h1>
                 <p className="ch-sub">
                   Wax, bijoux bogolan, beaute naturelle et essentiels lifestyle.
-                  Une boutique synchronisee sur Supabase avec un fetch temps reel
-                  force sans cache Vercel.
+                  Plus de 12 000 references d&apos;inspiration marketplace,
+                  synchronisees en temps reel avec Supabase.
                 </p>
               </div>
               <div className="ch-stats">

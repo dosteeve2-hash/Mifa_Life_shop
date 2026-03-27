@@ -59,13 +59,13 @@ export default function HomePage() {
               Votre marketplace au Mali
             </div>
             <h1 className="hero-h1">
-              Mifa Life, commandez des produits du monde entier, livres
-              directement au <em>Mali</em>.
+              Mifa Life, commandez n&apos;importe quel produit depuis la Chine,
+              livre directement au <em>Mali</em>.
             </h1>
             <p className="hero-sub">
               Produits du monde entier livres au Mali. Payez par Orange Money,
-              Wave ou Moov, avec une experience boutique inspiree de votre
-              design HTML original.
+              Wave ou Moov et retrouvez l&apos;identite visuelle originale de
+              Mifa Life dans chaque page du site.
             </p>
 
             <form
@@ -106,7 +106,7 @@ export default function HomePage() {
                 Maison
               </Link>
               <Link href="/login" className="hc">
-                Connexion
+                Creer un compte
               </Link>
             </div>
           </div>
@@ -152,7 +152,7 @@ export default function HomePage() {
               <h2 className="sec-ti">Explorez les univers de la marketplace</h2>
             </div>
             <Link href="/shop" className="sec-link">
-              Voir le catalogue
+              Parcourir le catalogue
             </Link>
           </div>
 
