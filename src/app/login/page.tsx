@@ -144,24 +144,24 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="login-main">
-      <div className="login-card">
-        <div className="mali-bar" style={{ marginBottom: "1.5rem" }}>
-          <span style={{ background: "var(--mg)" }} />
-          <span style={{ background: "var(--my)" }} />
-          <span style={{ background: "var(--mr)" }} />
+    <section className="flex min-h-[calc(100vh-10rem)] items-center justify-center py-10">
+      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
+        <div className="mb-6 flex h-1 overflow-hidden rounded-full">
+          <span className="flex-1 bg-emerald-600" />
+          <span className="flex-1 bg-yellow-400" />
+          <span className="flex-1 bg-red-600" />
         </div>
 
         {step === "email" && (
           <>
-            <h1 className="login-title">Connexion</h1>
-            <p className="login-sub">
+            <h1 className="mb-2 text-3xl font-bold text-gray-900">Connexion</h1>
+            <p className="mb-6 text-sm leading-6 text-gray-600">
               Entrez votre email, nous vous envoyons un code de connexion.
             </p>
 
-            <form onSubmit={sendOtp} className="login-form">
-              <div className="form-field">
-                <label htmlFor="email" className="form-label">
+            <form onSubmit={sendOtp} className="space-y-4">
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-sm font-medium text-gray-700">
                   Adresse email <span style={{ color: "var(--mr)" }}>*</span>
                 </label>
                 <input
@@ -170,7 +170,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="votre@email.com"
-                  className="form-input"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100"
                   autoComplete="email"
                   disabled={loading}
                   autoFocus
@@ -178,15 +178,20 @@ export default function LoginPage() {
               </div>
 
               {errorMsg && (
-                <div className="form-error" role="alert">
+                <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600" role="alert">
                   {errorMsg}
                 </div>
               )}
 
-              <button type="submit" className="btn-submit" disabled={loading}>
+              <button
+                type="submit"
+                className="w-full rounded-lg bg-emerald-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700 disabled:opacity-60"
+                disabled={loading}
+              >
                 {loading ? (
                   <>
-                    <span className="btn-spinner" /> Envoi en cours...
+                    <span className="mr-2 inline-block h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
+                    Envoi en cours...
                   </>
                 ) : (
                   "Recevoir le code"
@@ -194,7 +199,7 @@ export default function LoginPage() {
               </button>
             </form>
 
-            <p className="login-footer-txt">
+            <p className="mt-5 text-center text-xs leading-6 text-gray-500">
               Premiere visite ?{" "}
               <span style={{ color: "var(--mg)", fontWeight: 600 }}>
                 Un compte sera cree automatiquement.
@@ -205,15 +210,15 @@ export default function LoginPage() {
 
         {step === "otp" && (
           <>
-            <h1 className="login-title">Verification</h1>
-            <p className="login-sub">
+            <h1 className="mb-2 text-3xl font-bold text-gray-900">Verification</h1>
+            <p className="mb-6 text-sm leading-6 text-gray-600">
               Code envoye a <strong>{email}</strong>. Verifiez vos spams si
               necessaire.
             </p>
 
-            <form onSubmit={verifyOtp} className="login-form">
-              <div className="form-field">
-                <label htmlFor="otp" className="form-label">
+            <form onSubmit={verifyOtp} className="space-y-4">
+              <div className="space-y-2">
+                <label htmlFor="otp" className="text-sm font-medium text-gray-700">
                   Code a 6 chiffres <span style={{ color: "var(--mr)" }}>*</span>
                 </label>
                 <input
@@ -225,7 +230,7 @@ export default function LoginPage() {
                   value={otp}
                   onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
                   placeholder="123456"
-                  className="form-input"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100"
                   style={{
                     letterSpacing: "0.2em",
                     fontSize: "1.25rem",
@@ -237,15 +242,20 @@ export default function LoginPage() {
               </div>
 
               {errorMsg && (
-                <div className="form-error" role="alert">
+                <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600" role="alert">
                   {errorMsg}
                 </div>
               )}
 
-              <button type="submit" className="btn-submit" disabled={loading}>
+              <button
+                type="submit"
+                className="w-full rounded-lg bg-emerald-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700 disabled:opacity-60"
+                disabled={loading}
+              >
                 {loading ? (
                   <>
-                    <span className="btn-spinner" /> Verification...
+                    <span className="mr-2 inline-block h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
+                    Verification...
                   </>
                 ) : (
                   "Valider le code"
@@ -253,11 +263,11 @@ export default function LoginPage() {
               </button>
             </form>
 
-            <div style={{ textAlign: "center", marginTop: "1rem" }}>
+            <div className="mt-4 text-center">
               <button
                 onClick={resendOtp}
                 disabled={countdown > 0 || loading}
-                className="btn-resend"
+                className="text-sm font-medium text-emerald-700 transition hover:text-emerald-800 disabled:text-gray-400"
               >
                 {countdown > 0
                   ? `Renvoyer dans ${countdown}s`
@@ -269,8 +279,7 @@ export default function LoginPage() {
                   setErrorMsg(null);
                   setOtp("");
                 }}
-                className="btn-back"
-                style={{ display: "block", margin: "8px auto 0" }}
+                className="mt-2 block w-full text-sm text-gray-500 transition hover:text-gray-700"
               >
                 {"<- Changer d'email"}
               </button>
@@ -279,23 +288,25 @@ export default function LoginPage() {
         )}
 
         {step === "success" && (
-          <div style={{ textAlign: "center" }}>
-            <div className="success-icon">OK</div>
-            <h1 className="login-title">Connecte !</h1>
-            <p className="login-sub">
+          <div className="text-center">
+            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-lg font-bold text-emerald-700">
+              OK
+            </div>
+            <h1 className="mb-2 text-3xl font-bold text-gray-900">Connecte !</h1>
+            <p className="text-sm leading-6 text-gray-600">
               Bienvenue sur Mifa Life. Redirection en cours...
             </p>
           </div>
         )}
 
         {step !== "success" && (
-          <p style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "12px" }}>
-            <Link href="/" style={{ color: "var(--muted)", textDecoration: "none" }}>
+          <p className="mt-6 text-center text-xs text-gray-500">
+            <Link href="/" className="transition hover:text-gray-700">
               {"<- Retour a l'accueil"}
             </Link>
           </p>
         )}
       </div>
-    </main>
+    </section>
   );
 }

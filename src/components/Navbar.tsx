@@ -1,8 +1,8 @@
 "use client";
 
-import Link from 'next/link';
-import { useState } from 'react';
-import { useCart } from '../context/CartContext';
+import Link from "next/link";
+import { useState } from "react";
+import { useCart } from "../context/CartContext";
 
 const navLinks = [
   { href: "/", label: "Accueil" },
@@ -11,69 +11,46 @@ const navLinks = [
 ];
 
 export function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const { itemCount } = useCart();
 
   function closeMenu() {
-    setMenuOpen(false);
+    setOpen(false);
   }
 
   return (
     <>
-      <header id="nav">
-        <div className="nv">
-          <Link href="/" className="logo" onClick={closeMenu}>
-            <div className="logo-bars">
-              <span />
-              <span />
-              <span />
-            </div>
-            <div className="logo-text">
-              <em>MIFA</em> LIFE
-            </div>
-            <div className="flag-mini" aria-hidden="true">
-              <span style={{ background: "var(--mg)" }} />
-              <span style={{ background: "var(--my)" }} />
-              <span style={{ background: "var(--mr)" }} />
-            </div>
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-gray-200 bg-white/95 shadow-sm backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+          <Link
+            href="/"
+            onClick={closeMenu}
+            className="text-sm font-semibold uppercase tracking-[0.38em] text-emerald-700"
+          >
+            MIFA LIFE
           </Link>
 
-          <form action="/shop" className="nv-search">
-            <input
-              id="navSearch"
-              name="q"
-              className="si"
-              type="search"
-              placeholder="Rechercher un produit..."
-            />
-            <button type="submit" className="si-btn" aria-label="Rechercher">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              </svg>
-            </button>
-          </form>
-
-          <nav className="nv-links" aria-label="Navigation principale">
+          <nav className="hidden items-center gap-8 md:flex">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="nv-lnk">
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-gray-700 transition hover:text-emerald-700"
+              >
                 {link.label}
               </Link>
             ))}
           </nav>
 
-          <div className="nv-r">
-            <Link href="/cart" className="ic-btn" aria-label="Panier">
+          <div className="flex items-center gap-3">
+            <Link
+              href="/cart"
+              className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-700 transition hover:border-emerald-600 hover:text-emerald-700"
+              aria-label="Panier"
+            >
               <svg
-                width="16"
-                height="16"
+                width="18"
+                height="18"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -83,61 +60,62 @@ export function Navbar() {
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <path d="M16 10a4 4 0 0 1-8 0" />
               </svg>
-              <span className="ic-bdg" style={{ display: itemCount ? "flex" : "none" }}>
-                {itemCount}
-              </span>
+              {itemCount ? (
+                <span className="absolute -right-1 -top-1 inline-flex min-h-5 min-w-5 items-center justify-center rounded-full bg-emerald-600 px-1 text-[10px] font-bold text-white">
+                  {itemCount}
+                </span>
+              ) : null}
             </Link>
 
             <button
-              id="burger"
               type="button"
-              className={`burger ${menuOpen ? "open" : ""}`}
-              onClick={() => setMenuOpen((value) => !value)}
-              aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-              aria-expanded={menuOpen}
+              onClick={() => setOpen((value) => !value)}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-700 md:hidden"
+              aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={open}
             >
-              <span />
-              <span />
-              <span />
+              <span className="sr-only">Menu</span>
+              <div className="flex flex-col gap-1.5">
+                <span className="block h-0.5 w-5 bg-current" />
+                <span className="block h-0.5 w-5 bg-current" />
+                <span className="block h-0.5 w-5 bg-current" />
+              </div>
             </button>
           </div>
         </div>
       </header>
 
-      <button
-        id="mob-bg"
-        className={menuOpen ? "on" : ""}
-        onClick={closeMenu}
-        aria-label="Fermer le menu"
-      />
-
-      <aside id="mob-dr" className={menuOpen ? "on" : ""} aria-label="Menu mobile">
-        <div className="mob-hd">
-          <div className="mob-logo">
-            <em>MIFA</em> LIFE
+      {open ? (
+        <div className="fixed inset-0 z-40 bg-black/30 md:hidden" onClick={closeMenu}>
+          <div
+            className="absolute right-0 top-0 flex h-full w-72 flex-col bg-white px-6 py-20 shadow-xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="mb-6 text-xs font-semibold uppercase tracking-[0.32em] text-emerald-700">
+              Navigation
+            </div>
+            <div className="flex flex-col gap-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={closeMenu}
+                  className="rounded-xl border border-gray-200 px-4 py-3 text-sm font-medium text-gray-800 transition hover:border-emerald-600 hover:text-emerald-700"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href="/cart"
+                onClick={closeMenu}
+                className="rounded-xl border border-gray-200 px-4 py-3 text-sm font-medium text-gray-800 transition hover:border-emerald-600 hover:text-emerald-700"
+              >
+                Panier{itemCount ? ` (${itemCount})` : ""}
+              </Link>
+            </div>
           </div>
-          <button type="button" className="mob-cl" onClick={closeMenu} aria-label="Fermer">
-            ×
-          </button>
         </div>
-
-        <div className="mob-sec-ti">Navigation</div>
-        {navLinks.map((link) => (
-          <Link key={link.href} href={link.href} className="mob-l" onClick={closeMenu}>
-            {link.label}
-          </Link>
-        ))}
-        <Link href="/cart" className="mob-l" onClick={closeMenu}>
-          Panier{itemCount ? ` (${itemCount})` : ""}
-        </Link>
-
-        <div className="mob-sep" />
-        <div className="mob-auth">
-          <Link href="/login" onClick={closeMenu}>
-            Connexion
-          </Link>
-        </div>
-      </aside>
+      ) : null}
     </>
   );
 }
