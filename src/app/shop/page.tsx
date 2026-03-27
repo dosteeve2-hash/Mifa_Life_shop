@@ -5,6 +5,10 @@ import type { ShopProduct } from "@/lib/types/store";
 export const dynamic = "force-dynamic";
 
 async function fetchActiveProductsNoStore() {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    throw new Error("URL Supabase manquante dans Vercel");
+  }
+
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -178,6 +182,8 @@ export default async function ShopPage() {
       </main>
     );
   } catch (error) {
+    console.error("DEBUG SHOP FETCH ERROR:", error);
+
     const message =
       error instanceof Error ? error.message : "Erreur de synchronisation inconnue.";
 

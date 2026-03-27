@@ -6,6 +6,7 @@ import { createBrowserClient } from "@supabase/ssr";
 
 type Step = "email" | "otp" | "success" | "error";
 const CALLBACK_URL = "https://mifa-life-shop-9k55.vercel.app/auth/callback?next=/shop";
+export const dynamic = "force-dynamic";
 
 const supabase = createBrowserClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
