@@ -1,109 +1,341 @@
-"use client";
+'use client';
+
+/**
+ * MIFA LIFE — LOGIQUE PANIER
+ * src/context/CartContext.tsx
+ *
+ * Stratégie :
+ * 1. Stockage immédiat en localStorage (hors-ligne, instantané)
+ * 2. Si utilisateur connecté → sync automatique avec Supabase cart_items
+ * 3. Merge localStorage + DB à la connexion
+ */
 
 import {
   createContext,
-  useCallback,
   useContext,
+  useReducer,
   useEffect,
+  useCallback,
   useMemo,
-  useState,
   type ReactNode,
-} from "react";
+} from 'react';
+import { createBrowserClient } from '@supabase/ssr';
 
+// ─── Types ────────────────────────────────────────────────────
 export type CartItem = {
-  productId: string;
+  id: number;          // product id
+  name: string;
+  price_cfa: number;
+  image_url: string | null;
   quantity: number;
 };
 
-type CartContextValue = {
+type CartState = {
   items: CartItem[];
-  itemCount: number;
-  addToCart: (productId: string, quantity?: number) => void;
-  removeFromCart: (productId: string) => void;
-  clearCart: () => void;
+  syncing: boolean;
 };
 
-const STORAGE_KEY = "mifa-life-cart";
-const CartContext = createContext<CartContextValue | null>(null);
+type CartAction =
+  | { type: 'SET';      items: CartItem[] }
+  | { type: 'ADD';      item: Omit<CartItem, 'quantity'> }
+  | { type: 'REMOVE';   id: number }
+  | { type: 'UPDATE';   id: number; quantity: number }
+  | { type: 'CLEAR' }
+  | { type: 'SYNCING';  value: boolean };
 
-function readCart(): CartItem[] {
-  if (typeof window === "undefined") return [];
+type CartContextType = {
+  items:       CartItem[];
+  syncing:     boolean;
+  addItem:     (item: Omit<CartItem, 'quantity'>) => void;
+  removeItem:  (id: number) => void;
+  updateQty:   (id: number, quantity: number) => void;
+  clearCart:   () => void;
+  totalItems:  number;
+  totalPrice:  number;
+  addToCart:   (productId: string | number, quantity?: number) => Promise<void>;
+  removeFromCart: (productId: string | number) => void;
+  itemCount:   number;
+};
+
+// ─── Constantes ────────────────────────────────────────────────
+const STORAGE_KEY = 'mifa_cart';
+const supabase = createBrowserClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
+async function fetchProductSnapshot(productId: number): Promise<Omit<CartItem, 'quantity'> | null> {
+  const { data, error } = await supabase
+    .from('products')
+    .select('id,name,price_cfa,image_url')
+    .eq('id', productId)
+    .single();
+
+  if (error || !data) return null;
+
+  return {
+    id: data.id,
+    name: data.name,
+    price_cfa: data.price_cfa,
+    image_url: data.image_url,
+  };
+}
+
+// ─── Reducer ──────────────────────────────────────────────────
+function cartReducer(state: CartState, action: CartAction): CartState {
+  switch (action.type) {
+    case 'SET':
+      return { ...state, items: action.items };
+
+    case 'ADD': {
+      const exists = state.items.find((i) => i.id === action.item.id);
+      const items = exists
+        ? state.items.map((i) =>
+            i.id === action.item.id
+              ? { ...i, quantity: i.quantity + 1 }
+              : i
+          )
+        : [...state.items, { ...action.item, quantity: 1 }];
+      return { ...state, items };
+    }
+
+    case 'REMOVE':
+      return { ...state, items: state.items.filter((i) => i.id !== action.id) };
+
+    case 'UPDATE': {
+      if (action.quantity <= 0) {
+        return { ...state, items: state.items.filter((i) => i.id !== action.id) };
+      }
+      return {
+        ...state,
+        items: state.items.map((i) =>
+          i.id === action.id ? { ...i, quantity: action.quantity } : i
+        ),
+      };
+    }
+
+    case 'CLEAR':
+      return { ...state, items: [] };
+
+    case 'SYNCING':
+      return { ...state, syncing: action.value };
+
+    default:
+      return state;
+  }
+}
+
+// ─── Helpers localStorage ──────────────────────────────────────
+function loadFromStorage(): CartItem[] {
+  if (typeof window === 'undefined') return [];
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw) as unknown;
-    return Array.isArray(parsed) ? (parsed as CartItem[]) : [];
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as CartItem[]) : [];
   } catch {
     return [];
   }
 }
 
-function persistCart(items: CartItem[]) {
+function saveToStorage(items: CartItem[]) {
   try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   } catch {
-    // ignore storage errors
+    // Quota dépassé — ignorer
   }
 }
 
-export function CartContextProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>([]);
+// ─── Sync Supabase ─────────────────────────────────────────────
+async function syncToSupabase(items: CartItem[], userId: string) {
+  if (!items.length) {
+    await supabase.from('cart_items').delete().eq('user_id', userId);
+    return;
+  }
 
+  // Upsert chaque item (UNIQUE sur user_id + product_id)
+  await supabase.from('cart_items').upsert(
+    items.map((item) => ({
+      user_id:    userId,
+      product_id: item.id,
+      quantity:   item.quantity,
+    })),
+    { onConflict: 'user_id,product_id' }
+  );
+}
+
+async function loadFromSupabase(userId: string): Promise<CartItem[]> {
+  const { data, error } = await supabase
+    .from('cart_items')
+    .select(`
+      quantity,
+      products (
+        id,
+        name,
+        price_cfa,
+        image_url
+      )
+    `)
+    .eq('user_id', userId);
+
+  if (error || !data) return [];
+
+  return data
+    .filter((row) => row.products)
+    .map((row) => {
+      const p = row.products as {
+        id: number;
+        name: string;
+        price_cfa: number;
+        image_url: string | null;
+      };
+      return {
+        id:        p.id,
+        name:      p.name,
+        price_cfa: p.price_cfa,
+        image_url: p.image_url,
+        quantity:  row.quantity,
+      };
+    });
+}
+
+// ─── Merge (localStorage + DB, localStorage prioritaire) ───────
+function mergeItems(local: CartItem[], remote: CartItem[]): CartItem[] {
+  const merged = new Map<number, CartItem>();
+  // Remote en base
+  remote.forEach((item) => merged.set(item.id, item));
+  // Local écrase (plus récent)
+  local.forEach((item) => {
+    const existing = merged.get(item.id);
+    merged.set(item.id, {
+      ...item,
+      quantity: existing
+        ? Math.max(item.quantity, existing.quantity)
+        : item.quantity,
+    });
+  });
+  return Array.from(merged.values());
+}
+
+// ─── Context ──────────────────────────────────────────────────
+const CartContext = createContext<CartContextType | null>(null);
+
+export function CartProvider({ children }: { children: ReactNode }) {
+  const [state, dispatch] = useReducer(cartReducer, {
+    items:   loadFromStorage(),
+    syncing: false,
+  });
+
+  // Persist localStorage à chaque changement
   useEffect(() => {
-    setItems(readCart());
+    saveToStorage(state.items);
+  }, [state.items]);
+
+  // Sync Supabase quand utilisateur connecté
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (event === 'SIGNED_IN' && session?.user) {
+          dispatch({ type: 'SYNCING', value: true });
+
+          // Charger le panier DB et merger avec localStorage
+          const remote = await loadFromSupabase(session.user.id);
+          const local  = loadFromStorage();
+          const merged = mergeItems(local, remote);
+
+          dispatch({ type: 'SET', items: merged });
+          saveToStorage(merged);
+          await syncToSupabase(merged, session.user.id);
+
+          dispatch({ type: 'SYNCING', value: false });
+        }
+
+        if (event === 'SIGNED_OUT') {
+          // Garder le panier en local mais effacer la DB
+          dispatch({ type: 'SYNCING', value: false });
+        }
+      }
+    );
+
+    return () => subscription.unsubscribe();
   }, []);
 
-  const setAndPersist = useCallback((next: CartItem[]) => {
-    setItems(next);
-    persistCart(next);
-  }, []);
+  // Sync DB après chaque modification si connecté
+  useEffect(() => {
+    let cancelled = false;
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user && !cancelled) {
+        syncToSupabase(state.items, user.id);
+      }
+    });
+    return () => { cancelled = true; };
+  }, [state.items]);
+
+  // Actions mémoïsées
+  const addItem    = useCallback((item: Omit<CartItem, 'quantity'>) =>
+    dispatch({ type: 'ADD', item }), []);
+  const removeItem = useCallback((id: number) =>
+    dispatch({ type: 'REMOVE', id }), []);
+  const updateQty  = useCallback((id: number, quantity: number) =>
+    dispatch({ type: 'UPDATE', id, quantity }), []);
+  const clearCart  = useCallback(() =>
+    dispatch({ type: 'CLEAR' }), []);
+
+  // Dérivés mémoïsés
+  const totalItems = useMemo(
+    () => state.items.reduce((s, i) => s + i.quantity, 0),
+    [state.items]
+  );
+  const totalPrice = useMemo(
+    () => state.items.reduce((s, i) => s + i.price_cfa * i.quantity, 0),
+    [state.items]
+  );
 
   const addToCart = useCallback(
-    (productId: string, quantity = 1) => {
-      const current = readCart();
-      const index = current.findIndex((item) => item.productId === productId);
-      const next =
-        index === -1
-          ? [...current, { productId, quantity }]
-          : current.map((item, itemIndex) =>
-              itemIndex === index
-                ? { ...item, quantity: item.quantity + quantity }
-                : item,
-            );
-      setAndPersist(next);
+    async (productId: string | number, quantity = 1) => {
+      const numericId = Number(productId);
+      if (Number.isNaN(numericId)) return;
+
+      const snapshot = await fetchProductSnapshot(numericId);
+      if (!snapshot) return;
+
+      for (let index = 0; index < quantity; index += 1) {
+        dispatch({ type: 'ADD', item: snapshot });
+      }
     },
-    [setAndPersist],
+    []
   );
 
   const removeFromCart = useCallback(
-    (productId: string) => {
-      setAndPersist(readCart().filter((item) => item.productId !== productId));
+    (productId: string | number) => {
+      const numericId = Number(productId);
+      if (Number.isNaN(numericId)) return;
+      dispatch({ type: 'REMOVE', id: numericId });
     },
-    [setAndPersist],
+    []
   );
 
-  const clearCart = useCallback(() => {
-    setAndPersist([]);
-  }, [setAndPersist]);
-
-  const value = useMemo(
-    () => ({
-      items,
-      itemCount: items.reduce((sum, item) => sum + item.quantity, 0),
+  return (
+    <CartContext.Provider value={{
+      items:      state.items,
+      syncing:    state.syncing,
+      addItem,
+      removeItem,
+      updateQty,
+      clearCart,
+      totalItems,
+      totalPrice,
       addToCart,
       removeFromCart,
-      clearCart,
-    }),
-    [items, addToCart, removeFromCart, clearCart],
+      itemCount: totalItems,
+    }}>
+      {children}
+    </CartContext.Provider>
   );
-
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
-export function useCart() {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error("useCart must be used within CartContextProvider");
-  }
-  return context;
+export const CartContextProvider = CartProvider;
+
+export function useCart(): CartContextType {
+  const ctx = useContext(CartContext);
+  if (!ctx) throw new Error('useCart doit être utilisé dans <CartProvider>');
+  return ctx;
 }
