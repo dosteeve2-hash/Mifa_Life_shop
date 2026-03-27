@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 type Product = {
   id: number;
   name: string;
-  price_cfa: number | null;
+  price: number | null;
   image_url: string | null;
   active?: boolean | null;
 };
@@ -16,7 +16,7 @@ async function fetchProducts() {
   const supabase = await createServerSupabaseClient();
   const { data, error } = await supabase
     .from("products")
-    .select("id,name,price_cfa,image_url,active")
+    .select("id,name,price:price_cfa,image_url,active")
     .eq("active", true)
     .order("created_at", { ascending: false });
 
@@ -83,11 +83,18 @@ export default async function ShopPage() {
                     {product.name}
                   </h2>
                   <p className="mt-2 text-base font-bold text-gray-900">
-                    {formatPrice(product.price_cfa)}
+                    {formatPrice(product.price)}
                   </p>
                 </div>
 
-                <AddToCartButton productId={String(product.id)} />
+                <AddToCartButton
+                  product={{
+                    id: product.id,
+                    name: product.name,
+                    price_cfa: product.price ?? 0,
+                    image_url: product.image_url,
+                  }}
+                />
               </div>
             </article>
           ))}
