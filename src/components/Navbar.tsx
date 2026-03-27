@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { useCart } from '@/context/CartContext';
+import { useCart } from '../context/CartContext';
 
 const navLinks = [
   { href: "/", label: "Accueil" },
