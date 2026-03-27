@@ -1,3 +1,3 @@
 export default function Page() {
-  return <div>Mifa Life Check: OK</div>;
+  return <h1>Mifa Life Check OK</h1>;
 }
