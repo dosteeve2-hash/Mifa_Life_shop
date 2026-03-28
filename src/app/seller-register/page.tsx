@@ -1,5 +1,5 @@
-import { LegacyHtmlPage } from "@/components/LegacyHtmlPage";
+import { StitchPage } from "@/components/StitchPage";
 
 export default async function SellerRegisterPage() {
-  return <LegacyHtmlPage slug="seller-register" />;
+  return <StitchPage page="sellerRegister" title="Mifa Life - Devenir vendeur" />;
 }

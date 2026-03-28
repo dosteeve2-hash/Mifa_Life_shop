@@ -1,5 +1,5 @@
-import { LegacyHtmlPage } from "@/components/LegacyHtmlPage";
+import { StitchPage } from "@/components/StitchPage";
 
 export default async function ContactPage() {
-  return <LegacyHtmlPage slug="contact" />;
+  return <StitchPage page="contact" title="Mifa Life - Contact" />;
 }

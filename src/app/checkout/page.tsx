@@ -1,5 +1,7 @@
-import { LegacyHtmlPage } from "@/components/LegacyHtmlPage";
+import { StitchPage } from "@/components/StitchPage";
+
+export const dynamic = "force-dynamic";
 
 export default async function CheckoutPage() {
-  return <LegacyHtmlPage slug="checkout" />;
+  return <StitchPage page="checkout" title="Mifa Life - Checkout" />;
 }
