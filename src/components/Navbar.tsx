@@ -83,7 +83,7 @@ export default function Navbar() {
         <motion.header
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
+          transition={{ duration: 0.4, ease: 'easeOut' as const }}
           style={{ background: 'rgba(246,244,240,0.97)', backdropFilter: 'blur(18px)', borderBottom: '1px solid var(--bg3)' }}
         >
           <div className="nv">

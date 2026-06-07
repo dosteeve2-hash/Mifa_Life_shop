@@ -28,7 +28,7 @@ const containerVariants = {
 };
 const itemVariants = {
   hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' as const } },
 };
 
 export default function HeroSection({ products }: HeroSectionProps) {
@@ -121,7 +121,7 @@ export default function HeroSection({ products }: HeroSectionProps) {
           className="hero-cards"
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.35, duration: 0.6, ease: 'easeOut' }}
+          transition={{ delay: 0.35, duration: 0.6, ease: 'easeOut' as const }}
         >
           {heroProducts.length > 0
             ? heroProducts.map((p, i) => (

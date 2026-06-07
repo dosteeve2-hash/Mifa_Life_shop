@@ -56,7 +56,7 @@ export default async function ProductPage({ params }: PageProps) {
     .single();
 
   if (mifaProduct) {
-    product = mifaProduct as typeof product;
+    product = mifaProduct as unknown as typeof product;
   } else {
     // Fallback: products table (int id)
     const numId = parseInt(id, 10);

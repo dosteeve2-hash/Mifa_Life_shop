@@ -94,7 +94,7 @@ export default function LoginPage() {
         className="w-full max-w-md"
         initial={{ opacity: 0, y: 32 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, ease: 'easeOut' }}
+        transition={{ duration: 0.45, ease: 'easeOut' as const }}
       >
 
         {/* Carte principale */}

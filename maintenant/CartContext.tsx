@@ -161,7 +161,7 @@ async function loadFromSupabase(userId: string): Promise<CartItem[]> {
   return data
     .filter((row) => row.products)
     .map((row) => {
-      const p = row.products as {
+      const p = row.products as unknown as {
         id: number;
         name: string;
         price_cfa: number;
