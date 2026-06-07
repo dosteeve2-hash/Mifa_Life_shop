@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Logo from './Logo';
 
 export default function Footer() {
   return (
@@ -8,7 +9,7 @@ export default function Footer() {
           {/* Col 1 */}
           <div>
             <div className="ft-logo">
-              <em>MIFA</em> LIFE
+              <Logo variant="compact" size="sm" dark />
             </div>
             <p className="ft-desc">
               La marketplace premium du Mali. Des milliers de produits, un paiement simplifié,

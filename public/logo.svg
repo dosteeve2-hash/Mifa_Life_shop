@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 56" fill="none" role="img" aria-label="Mifa Life">
+  <!-- Background shape -->
+  <rect x="0" y="0" width="200" height="56" rx="10" fill="white"/>
+
+  <!-- Mali flag stripe (left accent bar) -->
+  <rect x="8" y="10" width="4" height="36" rx="2" fill="#009A00"/>
+  <rect x="13" y="10" width="4" height="36" rx="2" fill="#FFD700"/>
+  <rect x="18" y="10" width="4" height="36" rx="2" fill="#CE1126"/>
+
+  <!-- Letter M - stylized -->
+  <g transform="translate(30, 10)">
+    <path d="M2 36 L2 8 L14 24 L26 8 L26 36" stroke="#009A00" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <!-- MIFA text -->
+  <text x="60" y="30" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-weight="700" fill="#1A2422" letter-spacing="2">MIFA</text>
+
+  <!-- Separator dot -->
+  <circle cx="115" cy="27" r="2.5" fill="#009A00"/>
+
+  <!-- LIFE text -->
+  <text x="122" y="30" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-weight="400" fill="#009A00" letter-spacing="2">LIFE</text>
+
+  <!-- Tagline -->
+  <text x="60" y="44" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" font-weight="600" fill="#9cb5a8" letter-spacing="3">MALI PREMIUM</text>
+
+  <!-- Bottom mali stripe accent line -->
+  <rect x="60" y="48" width="22" height="2" rx="1" fill="#009A00"/>
+  <rect x="83" y="48" width="22" height="2" rx="1" fill="#FFD700"/>
+  <rect x="106" y="48" width="22" height="2" rx="1" fill="#CE1126"/>
+</svg>

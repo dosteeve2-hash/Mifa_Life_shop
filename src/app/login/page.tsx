@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { createBrowserClient } from '@supabase/ssr';
+import Logo from '@/components/Logo';
 
 type Step = 'email' | 'otp' | 'success';
 
@@ -110,10 +111,8 @@ export default function LoginPage() {
           <div className="p-8">
             {/* Logo */}
             <div className="mb-6 flex justify-center">
-              <Link href="/" className="flex items-center gap-2">
-                <span className="font-serif text-xl font-bold tracking-tight">
-                  <span className="text-[#009739]">MIFA</span> LIFE
-                </span>
+              <Link href="/" aria-label="Retour à l'accueil">
+                <Logo variant="full" size="md" />
               </Link>
             </div>
 

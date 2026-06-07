@@ -9,12 +9,12 @@ import {
   Heart,
   User,
   Search,
-  Menu,
   X,
   ChevronRight,
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import CartDrawer from './CartDrawer';
+import Logo from './Logo';
 
 const NAV_LINKS = [
   { href: '/', label: 'Accueil' },
@@ -89,25 +89,8 @@ export default function Navbar() {
         >
           <div className="nv">
             {/* Logo */}
-            <Link href="/" className="logo" style={{ textDecoration: 'none' }}>
-              <div className="logo-bars">
-                <span />
-                <span />
-                <span />
-              </div>
-              <div>
-                <div className="logo-text">
-                  <em>MIFA</em> LIFE
-                </div>
-                <div style={{ fontSize: '9px', color: 'var(--t4)', fontWeight: 600, letterSpacing: '0.06em' }}>
-                  MALI PREMIUM
-                </div>
-              </div>
-              <div className="flag-mini">
-                <span style={{ background: '#009A00' }} />
-                <span style={{ background: '#FFD700' }} />
-                <span style={{ background: '#CE1126' }} />
-              </div>
+            <Link href="/" aria-label="Mifa Life — Accueil" style={{ textDecoration: 'none', flexShrink: 0 }}>
+              <Logo variant="compact" size="sm" />
             </Link>
 
             {/* Desktop nav links */}
