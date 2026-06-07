@@ -19,7 +19,8 @@ import CartDrawer from './CartDrawer';
 const NAV_LINKS = [
   { href: '/', label: 'Accueil' },
   { href: '/shop', label: 'Boutique' },
-  { href: '/shop?sort=sale', label: 'Promos' },
+  { href: '/promo', label: 'Promos' },
+  { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -175,9 +176,9 @@ export default function Navbar() {
 
             {/* Right icons */}
             <div className="nv-r">
-              <button className="ic-btn" aria-label="Liste de souhaits">
+              <Link href="/wishlist" className="ic-btn" aria-label="Liste de souhaits">
                 <Heart size={18} />
-              </button>
+              </Link>
 
               <button
                 className="ic-btn"
@@ -201,9 +202,9 @@ export default function Navbar() {
                 </AnimatePresence>
               </button>
 
-              <button className="ic-btn" aria-label="Mon compte">
+              <Link href="/account" className="ic-btn" aria-label="Mon compte">
                 <User size={18} />
-              </button>
+              </Link>
 
               <Link href="/login" className="auth-btn">
                 <User size={14} />
