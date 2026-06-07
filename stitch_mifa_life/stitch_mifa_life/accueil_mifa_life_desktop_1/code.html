@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Editorial Marketplace | Mifa Life</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-on-surface": "#e8f2fc",
+              "surface-container-lowest": "#ffffff",
+              "secondary-container": "#fed000",
+              "on-secondary-fixed": "#231b00",
+              "background": "#f6faff",
+              "error-container": "#ffdad6",
+              "secondary-fixed-dim": "#edc200",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "surface-container-high": "#dfe9f3",
+              "on-tertiary-container": "#fffbff",
+              "tertiary-container": "#e12531",
+              "outline-variant": "#bdcab9",
+              "error": "#ba1a1a",
+              "secondary-fixed": "#ffe07f",
+              "on-error-container": "#93000a",
+              "on-primary-fixed": "#002107",
+              "surface-tint": "#006e27",
+              "on-secondary-fixed-variant": "#564500",
+              "primary-fixed-dim": "#65df76",
+              "on-tertiary-fixed-variant": "#930015",
+              "primary-container": "#008732",
+              "on-tertiary-fixed": "#410004",
+              "on-error": "#ffffff",
+              "on-surface-variant": "#3e4a3d",
+              "tertiary": "#bb001e",
+              "surface": "#f6faff",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#65df76",
+              "on-surface": "#131d24",
+              "surface-variant": "#d9e4ee",
+              "tertiary-fixed": "#ffdad7",
+              "primary": "#006b26",
+              "surface-container": "#e5eff9",
+              "outline": "#6e7b6b",
+              "on-secondary-container": "#6f5900",
+              "secondary": "#725c00",
+              "surface-container-low": "#eaf5ff",
+              "inverse-surface": "#283239",
+              "on-tertiary": "#ffffff",
+              "primary-fixed": "#81fc90",
+              "surface-bright": "#f6faff",
+              "on-background": "#131d24",
+              "surface-dim": "#d1dbe5",
+              "surface-container-highest": "#d9e4ee",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#f7fff2",
+              "on-primary-fixed-variant": "#00531c"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .mali-flag-strip {
+            background: linear-gradient(90deg, #14B53A 33.33%, #FCD116 33.33%, #FCD116 66.66%, #CE1126 66.66%);
+            height: 4px;
+        }
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .asymmetric-hero {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Mali Flag Strip -->
+<div class="mali-flag-strip w-full sticky top-0 z-[60]"></div>
+<!-- TopNavBar (Shared Component) -->
+<nav class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-1 z-50 shadow-sm dark:shadow-none font-plus-jakarta-sans antialiased w-full">
+<div class="flex items-center justify-between px-10 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black tracking-tighter text-emerald-900 dark:text-white">The Editorial Marketplace</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-emerald-700 dark:text-emerald-400 font-bold border-b-2 border-emerald-700 pb-1" href="#">Collections</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-opacity duration-200" href="#">Artisanal</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-opacity duration-200" href="#">Fashion</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-opacity duration-200" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-opacity duration-200" href="#">Gourmet</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative flex items-center bg-surface-container-highest rounded-full px-4 py-2 w-64">
+<span class="material-symbols-outlined text-outline mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full outline-none" placeholder="Rechercher..." type="text"/>
+</div>
+<button class="p-2 text-emerald-800 hover:opacity-80 transition-transform active:scale-95">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+<button class="p-2 text-emerald-800 hover:opacity-80 transition-transform active:scale-95">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative h-[600px] overflow-hidden bg-primary-container">
+<div class="absolute inset-0 opacity-40">
+<img alt="" class="w-full h-full object-cover" data-alt="Vibrant bustling market in Bamako Mali with colorful textiles and golden evening sunlight filtering through stalls" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNvj6_5I_wd3Yu2W2RjVF9MRJEuMpzP6KNz27WXRQj7_k9wclEae3YUUTVA0IIjrfo7iBN4YwliNOzHbZjzMz3mQ0khYbg-H_uDZ1OZ4IZeVk3C4YuMAcn2K6SlO8PIhj4cj7lv6z5uIFNMUnb5_DdXIt7Xfye2YM-5plHyDtgaaMAebZRW38oXWyyVCbtn-ER7qr-eZjmEjKh4CZji4OXEN_goZmGBNhn4jMoIIAuq0k8noY8eG--NzDY9Of_k8vnO1NT-Kmobu0M"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-primary-container via-primary-container/60 to-transparent"></div>
+<div class="relative max-w-screen-2xl mx-auto px-10 h-full flex flex-col justify-center items-start">
+<div class="max-w-2xl space-y-8">
+<h1 class="font-headline text-6xl md:text-7xl font-extrabold text-white leading-tight tracking-tight">
+                        Tout ce que tu veux, <br/><span class="text-secondary-container">livré au Mali</span>
+</h1>
+<p class="text-on-primary-container text-xl max-w-lg font-medium opacity-90">
+                        Découvrez le meilleur de l'artisanat et des produits locaux maliens, livrés directement chez vous avec Mifa Life.
+                    </p>
+<div class="flex items-center w-full max-w-xl bg-white rounded-full p-2 shadow-2xl transition-transform hover:scale-[1.01]">
+<div class="flex-grow flex items-center px-4">
+<span class="material-symbols-outlined text-primary mr-3">storefront</span>
+<input class="w-full border-none focus:ring-0 text-on-surface py-3 text-lg font-medium" placeholder="Qu'est-ce qui vous ferait plaisir ?" type="text"/>
+</div>
+<button class="bg-primary hover:bg-primary-container text-white px-8 py-4 rounded-full font-bold transition-all shadow-lg active:scale-95">
+                            Rechercher
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Mali Pulse Categories -->
+<section class="max-w-screen-2xl mx-auto px-10 -mt-16 relative z-20">
+<div class="bg-white rounded-2xl shadow-xl p-8 grid grid-cols-6 gap-4">
+<div class="flex flex-col items-center gap-3 group cursor-pointer">
+<div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center group-hover:ring-2 ring-primary ring-offset-4 transition-all duration-300">
+<span class="material-symbols-outlined text-primary text-3xl">restaurant</span>
+</div>
+<span class="font-bold text-sm text-slate-700">Gastronomie</span>
+</div>
+<div class="flex flex-col items-center gap-3 group cursor-pointer">
+<div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center group-hover:ring-2 ring-primary ring-offset-4 transition-all duration-300">
+<span class="material-symbols-outlined text-primary text-3xl">styler</span>
+</div>
+<span class="font-bold text-sm text-slate-700">Mode</span>
+</div>
+<div class="flex flex-col items-center gap-3 group cursor-pointer">
+<div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center group-hover:ring-2 ring-primary ring-offset-4 transition-all duration-300">
+<span class="material-symbols-outlined text-primary text-3xl">chair</span>
+</div>
+<span class="font-bold text-sm text-slate-700">Maison</span>
+</div>
+<div class="flex flex-col items-center gap-3 group cursor-pointer">
+<div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center group-hover:ring-2 ring-primary ring-offset-4 transition-all duration-300">
+<span class="material-symbols-outlined text-primary text-3xl">diamond</span>
+</div>
+<span class="font-bold text-sm text-slate-700">Artisanat</span>
+</div>
+<div class="flex flex-col items-center gap-3 group cursor-pointer">
+<div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center group-hover:ring-2 ring-primary ring-offset-4 transition-all duration-300">
+<span class="material-symbols-outlined text-primary text-3xl">bolt</span>
+</div>
+<span class="font-bold text-sm text-slate-700">Flash Sales</span>
+</div>
+<div class="flex flex-col items-center gap-3 group cursor-pointer">
+<div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center group-hover:ring-2 ring-primary ring-offset-4 transition-all duration-300">
+<span class="material-symbols-outlined text-primary text-3xl">grid_view</span>
+</div>
+<span class="font-bold text-sm text-slate-700">Tout voir</span>
+</div>
+</div>
+</section>
+<!-- Flash Sales Grid -->
+<section class="max-w-screen-2xl mx-auto px-10 py-20">
+<div class="flex items-end justify-between mb-12">
+<div class="space-y-2">
+<div class="flex items-center gap-3 text-tertiary font-bold uppercase tracking-widest text-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                        Mali Pulse Flash Sales
+                    </div>
+<h2 class="font-headline text-4xl font-extrabold text-on-surface">Offres Éclair du Moment</h2>
+</div>
+<div class="flex items-center gap-4 bg-tertiary-fixed text-on-tertiary-fixed-variant px-6 py-3 rounded-2xl font-black">
+<span class="text-sm opacity-70">SE TERMINE DANS</span>
+<span class="text-2xl font-mono tracking-widest">04:12:59</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<!-- Product 1 -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
+<div class="relative aspect-square overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Bag of premium Riz Gambiaka rice grain details on rustic sack background in soft daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdc9GP9YLi6W3DvWXQfUxoCOFamdsCutFyrfn_JeMa3gDAgi4bX4yPdn2HmeBzsGXIJ2FKdffc4zmm-qLryjnMb4JJCLdLHU6nZuT-EdO7YHF1vwWZJDC3oBYtIQ4EXDxm3xaMU8r8tdtbeXFvyFUS4bz9qy0enR09UawgX1k5SsDAxVb-z2mIpGW9X7hsLws8rTV6bbWrz9IsFQyOK1EZxDEvYSdtYaqJH8w11B2zuX_sf3cOJNb6fMXTGXyrED0rn-v15IwUU9tN"/>
+<div class="absolute top-4 left-4 bg-tertiary text-white px-3 py-1 rounded-lg font-bold text-sm">-15%</div>
+</div>
+<div class="p-6 space-y-3">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-slate-500 text-xs font-bold uppercase tracking-tighter">Épicerie Fine</p>
+<h3 class="font-headline font-bold text-lg">Riz Gambiaka (50kg)</h3>
+</div>
+<div class="text-right">
+<p class="text-tertiary font-black text-xl leading-none">22.500 FCFA</p>
+<p class="text-slate-400 line-through text-sm font-medium">26.500 FCFA</p>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-3 rounded-full font-bold flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-lg">shopping_basket</span>
+                            Ajouter au panier
+                        </button>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
+<div class="relative aspect-square overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close-up of golden vegetable oil being poured into a glass bottle with warm natural lighting and clean minimalist background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjNPCDs34I7vkzcAwshqjzrUrwXyvWg9bWr31eBUYQsEgiqn2IjEmvih00yWYnFkE76bwUYGuIXPeCl-qmVp_lp_iNUz1Y1N9VQWqHEY4uffo7su-osCjcO4qMhl2FyZZt2xoGvEFJg_i4uCZ1swYGF-KhF8EhyB5hO4_x4hiTLpvXx55uK9uhifK4QdaVNER0t0xuuFbfpZf2k_6gRWqxii3vOQaJB9t41OAk0I-Tr6QzaXTT-UF7EdgDS7jaPhYL1CAPFQn185Sg"/>
+<div class="absolute top-4 left-4 bg-tertiary text-white px-3 py-1 rounded-lg font-bold text-sm">-10%</div>
+</div>
+<div class="p-6 space-y-3">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-slate-500 text-xs font-bold uppercase tracking-tighter">Produits Ménagers</p>
+<h3 class="font-headline font-bold text-lg">Huile Dinor (5L)</h3>
+</div>
+<div class="text-right">
+<p class="text-tertiary font-black text-xl leading-none">6.800 FCFA</p>
+<p class="text-slate-400 line-through text-sm font-medium">7.500 FCFA</p>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-3 rounded-full font-bold flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-lg">shopping_basket</span>
+                            Ajouter au panier
+                        </button>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
+<div class="relative aspect-square overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="High-quality traditional Malian fabric with intricate geometric patterns in deep blue and ochre tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPEa4fKqJYfsT3dqZEfHSNWwYl8loX-H_qYaledPpVNs-GHn5AM0-kTrHsR_Ok4jZQzwukv7u1b4kdlncW0f_7GY70X82c1oTEUL6nbOArKdZo6g4OXAr3U6Rkq1Jge2YUltUWykO6Ptp2z7wdZ83wnvZA6Im8S0DgZuHY_BoFjZMnICA5dvgjVCTDNa9EdvtgQKro-MsSymf8TlCFA2_ZaQDLz71Z4pooWnP-BY3wQ_jjnRgTsOH9k_iGrtEj7q4CJv-bztWDIPlU"/>
+</div>
+<div class="p-6 space-y-3">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-slate-500 text-xs font-bold uppercase tracking-tighter">Artisanat</p>
+<h3 class="font-headline font-bold text-lg">Bogolan Artisanal</h3>
+</div>
+<div class="text-right">
+<p class="text-primary font-black text-xl leading-none">15.000 FCFA</p>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-3 rounded-full font-bold flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-lg">shopping_basket</span>
+                            Ajouter au panier
+                        </button>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
+<div class="relative aspect-square overflow-hidden">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Premium glass bottle of shea butter cream with natural nuts on a clean marble surface with minimalist aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMXE6eWyjRm9nLRK5FSdllS-dHlDFbg51qf8jx1xzxgWMQzp_NHAYLpoPdZBOtP-Mh9fof3MFP8nulZB_KB4J5gIsryAP9XfyMDiCppqq4FQu1kYEb5_WxtOWW53nk1lHllBliINJN_tpp4qAD6JjBh78-yZZ2PAV97Lk401elWQLnglDwR8vwl606hAtKZhYUtg6S0XUUiBpU500jk8JSm3Ju_V38NArvNfd39nLNnrKo2yjHScy0qjpPIrtvyJwUZoRgFLh_SnPn"/>
+<div class="absolute top-4 left-4 bg-tertiary text-white px-3 py-1 rounded-lg font-bold text-sm">-20%</div>
+</div>
+<div class="p-6 space-y-3">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-slate-500 text-xs font-bold uppercase tracking-tighter">Bien-être</p>
+<h3 class="font-headline font-bold text-lg">Beurre de Karité Bio</h3>
+</div>
+<div class="text-right">
+<p class="text-tertiary font-black text-xl leading-none">3.200 FCFA</p>
+<p class="text-slate-400 line-through text-sm font-medium">4.000 FCFA</p>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-3 rounded-full font-bold flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-lg">shopping_basket</span>
+                            Ajouter au panier
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Section -->
+<section class="bg-surface-container-high py-24">
+<div class="max-w-screen-2xl mx-auto px-10">
+<div class="text-center mb-16 space-y-4">
+<h2 class="font-headline text-4xl font-extrabold">Une Confiance Totale au Mali</h2>
+<p class="text-slate-600 max-w-2xl mx-auto">Nous simplifions vos achats avec des solutions de paiement locales sécurisées et une logistique de pointe adaptée au terrain.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="bg-white p-10 rounded-2xl shadow-sm text-center space-y-6">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined text-primary text-3xl">payments</span>
+</div>
+<h4 class="font-headline font-bold text-xl">Paiements Locaux</h4>
+<div class="flex justify-center items-center gap-4 opacity-70">
+<span class="px-3 py-1 bg-surface rounded font-bold text-xs">ORANGE MONEY</span>
+<span class="px-3 py-1 bg-surface rounded font-bold text-xs">WAVE</span>
+<span class="px-3 py-1 bg-surface rounded font-bold text-xs">MOOV MONEY</span>
+</div>
+</div>
+<div class="bg-white p-10 rounded-2xl shadow-sm text-center space-y-6">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined text-primary text-3xl">local_shipping</span>
+</div>
+<h4 class="font-headline font-bold text-xl">Livraison Rapide</h4>
+<p class="text-slate-500 text-sm">Livraison express dans tout Bamako en moins de 24h et dans toutes les régions du Mali.</p>
+</div>
+<div class="bg-white p-10 rounded-2xl shadow-sm text-center space-y-6">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
+</div>
+<h4 class="font-headline font-bold text-xl">Garantie Mifa Life</h4>
+<p class="text-slate-500 text-sm">Produits 100% authentiques vérifiés par nos experts avant chaque expédition.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Section with Asymmetric Layout -->
+<section class="max-w-screen-2xl mx-auto px-10 py-24">
+<div class="flex flex-col md:flex-row gap-12 items-center">
+<div class="md:w-1/2 relative">
+<div class="absolute -top-6 -left-6 w-32 h-32 bg-secondary-container/20 rounded-full -z-10"></div>
+<img alt="" class="rounded-2xl shadow-2xl w-full h-[500px] object-cover" data-alt="Aerial view of beautiful Mali landscape with traditional architecture and lush greenery during sunrise" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDN52TuIi60DC4JQwBcs1UfPGHcpe4xhtqkZjOhBt0bLtZCJdvxZvVeNAAh9IufjBL4rbiThZCMs6FZBkXaFLkCA7QMsW0Lwm-SDDUvcxc09vsfoWnMhgcYQUbciyXC7ibwUHT-I348QnDK2Wr03Ck3AoUlnI3bbk0JXnr9IJ8YdcMAgW2GJgliLsTbLBLIjMTIE3N1HuFloDo397MHu9KllNoIUn0uPuv1PazCIvvsTjW61EGHo_aGgp_1L3RE9eRjtt0iTKnM3-q"/>
+<div class="absolute -bottom-8 -right-8 bg-white p-6 rounded-2xl shadow-xl max-w-xs border-l-4 border-primary">
+<p class="text-on-surface font-bold italic">"Mifa Life est né d'une volonté simple : connecter chaque malien au meilleur de son terroir."</p>
+<p class="text-primary font-bold mt-2 text-sm">— L'équipe Mifa Life</p>
+</div>
+</div>
+<div class="md:w-1/2 space-y-8 pl-0 md:pl-12">
+<h2 class="font-headline text-5xl font-extrabold text-on-surface leading-tight">L'Excellence du Mali à portée de main</h2>
+<p class="text-lg text-slate-600">
+                        Notre catalogue est soigneusement sélectionné auprès des meilleurs artisans et producteurs de la région. Du riz de l'Office du Niger aux textiles du pays Mandé, nous apportons le salon malien dans votre foyer digital.
+                    </p>
+<ul class="space-y-4">
+<li class="flex items-center gap-4 text-on-surface font-bold">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+                            Soutien direct aux producteurs locaux
+                        </li>
+<li class="flex items-center gap-4 text-on-surface font-bold">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+                            Contrôle qualité rigoureux (Label Mifa)
+                        </li>
+<li class="flex items-center gap-4 text-on-surface font-bold">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+                            Service client réactif 7j/7
+                        </li>
+</ul>
+<button class="bg-primary text-white px-10 py-5 rounded-full font-black text-lg hover:scale-105 transition-all shadow-xl">
+                        Découvrir nos Collections
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-slate-50 dark:bg-slate-950 w-full pt-16 pb-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-10 max-w-screen-2xl mx-auto border-t border-slate-200/50 dark:border-slate-800/50 pt-16">
+<div class="space-y-6">
+<span class="text-lg font-bold text-slate-900 dark:text-white">The Editorial Marketplace</span>
+<p class="text-slate-500 font-inter text-sm leading-relaxed">Le premier espace de curation digital dédié aux trésors du Mali et d'Afrique de l'Ouest.</p>
+<div class="flex gap-4">
+<div class="w-10 h-10 bg-slate-200 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-100 transition-colors">
+<span class="material-symbols-outlined text-emerald-800 text-lg">public</span>
+</div>
+<div class="w-10 h-10 bg-slate-200 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-100 transition-colors">
+<span class="material-symbols-outlined text-emerald-800 text-lg">share</span>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<h4 class="font-bold text-emerald-800 dark:text-emerald-400">Entreprise</h4>
+<ul class="space-y-4 font-inter text-sm">
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors" href="#">About Us</a></li>
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors" href="#">Careers</a></li>
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors" href="#">Our Blog</a></li>
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors" href="#">Sustainability</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h4 class="font-bold text-emerald-800 dark:text-emerald-400">Service Client</h4>
+<ul class="space-y-4 font-inter text-sm">
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors" href="#">Shipping Policy</a></li>
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors" href="#">Terms of Service</a></li>
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors" href="#">Refund Policy</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h4 class="font-bold text-emerald-800 dark:text-emerald-400">Paiements Acceptés</h4>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs px-3 py-1 bg-white border border-slate-200 text-slate-500 rounded-md font-bold">Orange Money</span>
+<span class="text-xs px-3 py-1 bg-white border border-slate-200 text-slate-500 rounded-md font-bold">Wave</span>
+<span class="text-xs px-3 py-1 bg-white border border-slate-200 text-slate-500 rounded-md font-bold">Moov Money</span>
+</div>
+<div class="mt-8">
+<p class="text-xs text-slate-400">Newsletter</p>
+<div class="flex mt-2">
+<input class="bg-white border border-slate-200 rounded-l-lg px-4 py-2 w-full text-xs focus:ring-1 focus:ring-emerald-500 outline-none" placeholder="Votre email" type="text"/>
+<button class="bg-emerald-800 text-white px-4 py-2 rounded-r-lg text-xs font-bold">OK</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-16 text-center text-slate-500 font-inter text-sm">
+            © 2024 The Editorial Marketplace. Designed with pride in Mali.
+        </div>
+</footer>
+</body></html>

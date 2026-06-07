@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mifa Life - The Dynamic Shop</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#3e4a3d",
+              "inverse-primary": "#65df76",
+              "surface-container-lowest": "#ffffff",
+              "outline": "#6e7b6b",
+              "on-error-container": "#93000a",
+              "error-container": "#ffdad6",
+              "surface-bright": "#f6faff",
+              "inverse-on-surface": "#e8f2fc",
+              "error": "#ba1a1a",
+              "on-error": "#ffffff",
+              "surface-tint": "#006e27",
+              "tertiary-fixed": "#ffdad7",
+              "primary-fixed": "#81fc90",
+              "on-secondary": "#ffffff",
+              "on-primary-fixed": "#002107",
+              "surface-variant": "#d9e4ee",
+              "surface-dim": "#d1dbe5",
+              "secondary-container": "#fed000",
+              "on-primary-fixed-variant": "#00531c",
+              "surface-container": "#e5eff9",
+              "secondary-fixed": "#ffe07f",
+              "inverse-surface": "#283239",
+              "on-surface": "#131d24",
+              "background": "#f6faff",
+              "on-background": "#131d24",
+              "on-secondary-container": "#6f5900",
+              "surface-container-high": "#dfe9f3",
+              "on-primary-container": "#f7fff2",
+              "tertiary": "#bb001e",
+              "surface-container-highest": "#d9e4ee",
+              "surface-container-low": "#eaf5ff",
+              "on-tertiary-fixed-variant": "#930015",
+              "secondary-fixed-dim": "#edc200",
+              "on-secondary-fixed-variant": "#564500",
+              "primary-container": "#008732",
+              "on-tertiary-container": "#fffbff",
+              "on-primary": "#ffffff",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed": "#410004",
+              "primary": "#006b26",
+              "on-secondary-fixed": "#231b00",
+              "primary-fixed-dim": "#65df76",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "outline-variant": "#bdcab9",
+              "secondary": "#725c00",
+              "surface": "#f6faff",
+              "tertiary-container": "#e12531"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body { font-family: 'Inter', sans-serif; }
+      h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<nav class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md fixed top-0 w-full z-50 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-green-700 dark:text-green-500 active:scale-95 transition-transform" data-icon="menu">menu</button>
+<span class="text-2xl font-black text-green-800 dark:text-green-400 tracking-tighter">Mifa Life</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 dark:text-slate-400 hover:text-green-600 font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight" href="#">Home</a>
+<a class="text-green-700 dark:text-green-400 font-bold border-b-2 border-green-600 font-['Plus_Jakarta_Sans'] text-lg tracking-tight" href="#">Shop</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-green-600 font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight" href="#">Cart</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-green-600 font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight" href="#">Account</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-green-700 dark:text-green-500 active:scale-95 transition-transform" data-icon="shopping_cart">shopping_cart</button>
+</div>
+</div>
+<div class="bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 h-0.5 w-full absolute bottom-0"></div>
+</nav>
+<main class="flex-grow pt-24 pb-32 px-4 md:px-8 max-w-7xl mx-auto w-full">
+<!-- Editorial Header -->
+<header class="mb-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="max-w-2xl">
+<span class="text-secondary font-bold tracking-widest text-xs uppercase mb-2 block">Premium Curation</span>
+<h1 class="text-4xl md:text-6xl font-extrabold text-on-surface leading-tight tracking-tighter">Artisanat Malien &amp; <br/><span class="text-primary">Produits Locaux.</span></h1>
+</div>
+<!-- Quick Filter Chips -->
+<div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+<button class="px-6 py-2 rounded-full bg-primary text-white text-sm font-semibold whitespace-nowrap shadow-md">All Products</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-medium whitespace-nowrap hover:bg-surface-variant transition-colors">Food</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-medium whitespace-nowrap hover:bg-surface-variant transition-colors">Crafts</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-medium whitespace-nowrap hover:bg-surface-variant transition-colors">Fashion</button>
+</div>
+</div>
+</header>
+<!-- Product Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+<!-- Product Card 1 -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)]">
+<div class="relative aspect-[4/5] overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="close-up of vibrant traditional malian mud cloth with intricate geometric patterns in earth tones and natural textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCa986EkwFiZaYFcdkDUo9WxiZHEQ1PE3IMUVXTqHtZ-ePpiGfEOP_F9QQ3WbBMWl49cyHACCwMnewnhfr-ua_D89EtKr4ecYPQZyGLk3OJLUwptgg46D3SL7WMykwcg23iNGsKNw45uaPQu_JsHHulGPRZe0rOmivwPSH0EBnERKrgGu39Zo4Pcb5cqdswqmy9fjX6zcGHzB0BTNaiiG_ZVJCB-oSynqkgpnEsNkZnbyy0EqyYdMkgZsE3v3JSIG7q70TKPO8_0Hzc"/>
+<div class="absolute top-3 left-3 flex flex-col gap-2">
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-sm">IN STOCK</span>
+<span class="bg-tertiary text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-sm">-15%</span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-on-surface-variant text-[10px] font-medium uppercase tracking-wider mb-1">Mali Crafts</span>
+<h3 class="text-on-surface font-bold text-sm md:text-base leading-snug mb-2 line-clamp-2">Bogolanfini Handmade Textile</h3>
+<div class="mt-auto flex flex-col gap-3">
+<div class="flex items-baseline gap-2">
+<span class="text-primary font-extrabold text-lg">12.500 FCFA</span>
+<span class="text-outline text-xs line-through">14.700 FCFA</span>
+</div>
+<button class="w-full py-2.5 rounded-full bg-gradient-to-r from-primary to-primary-container text-white text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="shopping_cart">shopping_cart</span>
+                            Add to Cart
+                        </button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)]">
+<div class="relative aspect-[4/5] overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="artisanal malian honey in a glass jar on a rustic wooden table with honeycomb and warm afternoon sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2piyK7_BZF4wWROIKLPQoYbYYor0zC9SGj9iwezFR3kdl1w9GKv-6wuX95kNu1RVsHSrLEtclIsf3gPcQilpMmfJ9glk5dwaM7nud7dZz7ZmZDwixOXgzTruDBXyGnCrFgml22uHnEnRQmZg75I9CZ_eAjS0-WzP1sNrUvFaUcutBJodR0uXPSM_Eeg_k3B2hKQYZQ8AxFrIubydzZWaBe1i20WyA2Sx-giv2biAgJEbAc1cVJkKlT90SmeqdeEdXoiXotl4HLfOM"/>
+<div class="absolute top-3 left-3 flex flex-col gap-2">
+<span class="bg-secondary text-on-secondary-container text-[10px] font-bold px-2 py-1 rounded-full shadow-sm">STOCK LOW</span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-on-surface-variant text-[10px] font-medium uppercase tracking-wider mb-1">Local Grocery</span>
+<h3 class="text-on-surface font-bold text-sm md:text-base leading-snug mb-2 line-clamp-2">Pure Artisanal Dogon Honey (500g)</h3>
+<div class="mt-auto flex flex-col gap-3">
+<div class="flex items-baseline gap-2">
+<span class="text-primary font-extrabold text-lg">4.500 FCFA</span>
+</div>
+<button class="w-full py-2.5 rounded-full bg-gradient-to-r from-primary to-primary-container text-white text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="shopping_cart">shopping_cart</span>
+                            Add to Cart
+                        </button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)]">
+<div class="relative aspect-[4/5] overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="luxury shea butter container with natural wood lid surrounded by raw shea nuts on a soft beige linen background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADMz7Uau7wa5Sy7bkO9YIcpYLvdmPAVkmzzIWu0dMz-0-hGbG-ljZM02VR1UAqz6AGHg-bfNpgE_EWb8cUh_BmbPSrQ4kH7El4vMjf96BoM1YBNtoTMsMJV7M62KMlXvXTNRAmxqF1Cl97PQvONth080keQ-aui0JXLAU1CuOBLEaSIh99Dc-PCaEUc6rtMHXjIvEM03LYnDmDn3kJnJCwUsPC7YMoYhgNtR5GWd9MW2tPefuuasCs9xrNa1YxWQkaq89nxHy6_28q"/>
+<div class="absolute top-3 left-3">
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-sm">IN STOCK</span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-on-surface-variant text-[10px] font-medium uppercase tracking-wider mb-1">Beauty &amp; Wellness</span>
+<h3 class="text-on-surface font-bold text-sm md:text-base leading-snug mb-2 line-clamp-2">Premium Shea Butter - Bamako Gold</h3>
+<div class="mt-auto flex flex-col gap-3">
+<div class="flex items-baseline gap-2">
+<span class="text-primary font-extrabold text-lg">3.200 FCFA</span>
+<span class="text-outline text-xs line-through">4.000 FCFA</span>
+</div>
+<button class="w-full py-2.5 rounded-full bg-gradient-to-r from-primary to-primary-container text-white text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="shopping_cart">shopping_cart</span>
+                            Add to Cart
+                        </button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)]">
+<div class="relative aspect-[4/5] overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="artisan hand-woven wicker basket with leather handles and traditional african patterns in natural straw colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnRAU7nxP2Wj_MLtEAWfUsS9rjwBCCAGEDmbK-HC64xpOJXbbz3wJwGeG1Ce4cUKRSAWpJPSOTiordsjx02QU5-93qXEtbUMpEQ8hZIZxBpM6Q1EGwa5h9nJk8rgg3B9lBN0v1i-tR_72WaKR_CeTQMxbNA32TrWlLTeGO2nazKklLgi2A5L5lhIkeaNZmSdRIox12rEWxbwrziTvsY-b2LhO0CUVHSucmIgkuJ-r2fSJ-jgvJ7qDmhIt9pQaDhHq3mJZwjYdVh6u4"/>
+<div class="absolute top-3 left-3 flex flex-col gap-2">
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-sm">IN STOCK</span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-on-surface-variant text-[10px] font-medium uppercase tracking-wider mb-1">Home Decor</span>
+<h3 class="text-on-surface font-bold text-sm md:text-base leading-snug mb-2 line-clamp-2">Woven Storage Basket - Ségou Series</h3>
+<div class="mt-auto flex flex-col gap-3">
+<div class="flex items-baseline gap-2">
+<span class="text-primary font-extrabold text-lg">8.900 FCFA</span>
+</div>
+<button class="w-full py-2.5 rounded-full bg-gradient-to-r from-primary to-primary-container text-white text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="shopping_cart">shopping_cart</span>
+                            Add to Cart
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Section (Bento Style) -->
+<section class="mt-20">
+<h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+<span class="w-8 h-1 bg-secondary rounded-full"></span>
+                Collections Vedettes
+            </h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 relative h-64 md:h-96 rounded-2xl overflow-hidden group">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="modern fashion studio featuring traditional malian textiles and bold colorful fabrics in a bright minimalist setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9vrX4z9Vg6zmOgs5cY9ZATJtNEcLqsNVcT3r1lGjwMN1E3MkOXQpYwef9liVdrjMrM4imPDRD9-smhrzIWB3aABvv78mdC9ZdxRFrlVvDKPEOmjq5jsCO6qOpUzu5cjQ6ChF7VS9cweK4SeoXsfZgfAOt2p2T1dzJC7gtLBtw0v4voHCXbdT1KWObNP1QwX9fLT1nCBneLzrat6Ap5hBnPPfzD1PNLDqdRdp-9dSyB8uIawCXO8oheNJHEzDgX6tjH8DykWk7Aw_K"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-8 flex flex-col justify-end">
+<h3 class="text-white text-3xl font-black mb-2">Collection Signature</h3>
+<p class="text-white/80 max-w-md mb-6">L'élégance du Bogolan revisitée pour le style de vie moderne.</p>
+<button class="w-fit px-8 py-3 bg-white text-on-surface rounded-full font-bold text-sm uppercase tracking-widest hover:bg-primary hover:text-white transition-all">Découvrir</button>
+</div>
+</div>
+<div class="relative h-64 md:h-96 rounded-2xl overflow-hidden group bg-surface-container-high">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80" data-alt="top view of diverse spices and grains from malian markets including hibiscus and fonio in ceramic bowls" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY-TnA20jx3ZMWXsF1gl9quSpQC3_afjCTaqcz7_Np5RJjcHpGAItrseXjljy4JdBCMBAcXCTfRuxOZb-xh0gPoPjZrtJtIBTAb_QQH4yQmcLxb8VJQaFB9mheAKpNsKLTdJz2Wm1eOZXcCuIkCfWY8jywEHz8HA_f0Gh41Qbm_AFHQOlka-UCUIwb4OZhy8MDGSobDcYztQGjEoFqhL7luBwc4oV0xYnYMba0PyJUdtvBiDo85832RKyuwWMLc1HyeipTNLaGppli"/>
+<div class="absolute inset-0 p-8 flex flex-col justify-between">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="restaurant">restaurant</span>
+<div>
+<h3 class="text-on-surface text-2xl font-black mb-2">Terroir &amp; Goût</h3>
+<p class="text-on-surface-variant text-sm mb-4">Le meilleur de l'agriculture locale malienne.</p>
+<a class="text-primary font-bold text-sm underline decoration-2 underline-offset-4" href="#">Voir l'épicerie</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 w-full mt-auto">
+<div class="bg-slate-200 dark:bg-slate-800 h-px"></div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 py-16 max-w-7xl mx-auto font-['Inter'] text-sm leading-relaxed">
+<div class="flex flex-col gap-6">
+<span class="font-['Plus_Jakarta_Sans'] font-black text-xl text-slate-900 dark:text-white">Mifa Life</span>
+<p class="text-slate-500 dark:text-slate-400">© 2024 Mifa Life. Mali Digital Curator. L'excellence de l'artisanat et du terroir malien à portée de main.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-slate-900 dark:text-white uppercase tracking-widest text-xs">Shop</h4>
+<nav class="flex flex-col gap-3">
+<a class="text-slate-500 dark:text-slate-400 hover:text-green-600 transition-all underline underline-offset-4" href="#">About Us</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-green-600 transition-all underline underline-offset-4" href="#">Shipping Policy</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-slate-900 dark:text-white uppercase tracking-widest text-xs">Payment</h4>
+<nav class="flex flex-col gap-3 text-slate-500 dark:text-slate-400">
+<span class="hover:text-green-600 transition-all">Orange Money</span>
+<span class="hover:text-green-600 transition-all">Wave</span>
+<span class="hover:text-green-600 transition-all">Moov</span>
+</nav>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-slate-900 dark:text-white uppercase tracking-widest text-xs">Support</h4>
+<p class="text-slate-500 dark:text-slate-400">Besoin d'aide? Contactez notre support 24/7 au Mali.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-green-700" data-icon="support_agent">support_agent</span>
+<span class="font-bold">+223 00 00 00 00</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pb-6 pt-3 px-4 md:hidden bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] rounded-t-3xl border-t border-slate-100 dark:border-slate-800">
+<a class="flex flex-col items-center text-slate-400 dark:text-slate-500 hover:text-green-600 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] font-medium font-['Inter']">Home</span>
+</a>
+<a class="flex flex-col items-center text-green-700 dark:text-green-400 ring-2 ring-green-600 ring-offset-4 rounded-full p-1 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="text-[10px] font-medium font-['Inter']">Shop</span>
+</a>
+<a class="flex flex-col items-center text-slate-400 dark:text-slate-500 hover:text-green-600 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="text-[10px] font-medium font-['Inter']">Cart</span>
+</a>
+<a class="flex flex-col items-center text-slate-400 dark:text-slate-500 hover:text-green-600 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-medium font-['Inter']">Account</span>
+</a>
+</nav>
+<!-- FAB for Search (Mobile Contextual) -->
+<button class="fixed right-6 bottom-24 md:hidden w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center z-40 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+</body></html>

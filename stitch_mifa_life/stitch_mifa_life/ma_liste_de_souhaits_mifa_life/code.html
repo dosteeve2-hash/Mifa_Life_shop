@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ma Liste de Souhaits - Mifa Life</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary": "#bb001e",
+                        "on-secondary-container": "#6f5900",
+                        "surface-container-high": "#dfe9f3",
+                        "secondary-fixed-dim": "#edc200",
+                        "on-primary-container": "#f7fff2",
+                        "inverse-on-surface": "#e8f2fc",
+                        "outline": "#6e7b6b",
+                        "background": "#f6faff",
+                        "surface-variant": "#d9e4ee",
+                        "surface-tint": "#006e27",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#ffe07f",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#eaf5ff",
+                        "on-tertiary-fixed": "#410004",
+                        "on-background": "#131d24",
+                        "surface-dim": "#d1dbe5",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#008732",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#231b00",
+                        "inverse-surface": "#283239",
+                        "tertiary-fixed": "#ffdad7",
+                        "surface-container-highest": "#d9e4ee",
+                        "secondary": "#725c00",
+                        "outline-variant": "#bdcab9",
+                        "on-surface-variant": "#3e4a3d",
+                        "on-secondary-fixed-variant": "#564500",
+                        "on-primary-fixed-variant": "#00531c",
+                        "secondary-container": "#fed000",
+                        "primary": "#006b26",
+                        "surface": "#f6faff",
+                        "primary-fixed": "#81fc90",
+                        "tertiary-fixed-dim": "#ffb3ae",
+                        "surface-bright": "#f6faff",
+                        "on-tertiary-fixed-variant": "#930015",
+                        "on-tertiary-container": "#fffbff",
+                        "on-primary-fixed": "#002107",
+                        "on-surface": "#131d24",
+                        "surface-container": "#e5eff9",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#65df76",
+                        "tertiary-container": "#e12531",
+                        "primary-fixed-dim": "#65df76"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-glass {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f6faff;
+            color: #131d24;
+        }
+        h1, h2, h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm dark:shadow-none">
+<div class="flex items-center justify-between px-6 h-16 w-full">
+<button class="text-green-700 dark:text-green-500 hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight text-green-700 dark:text-green-500">Wishlist</h1>
+<button class="text-green-700 dark:text-green-500 hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</div>
+<div class="bg-slate-100 dark:bg-slate-800 h-[1px] w-full"></div>
+</header>
+<main class="pt-24 px-4 max-w-2xl mx-auto">
+<!-- Wishlist Count/Context -->
+<div class="mb-6 flex items-center justify-between">
+<h2 class="text-xl font-bold text-on-background">Ma Liste de Souhaits</h2>
+<span class="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">3 Articles</span>
+</div>
+<!-- Wishlist Items -->
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 shadow-[0_4px_20px_0_rgba(19,29,36,0.04)] flex gap-4 relative group">
+<div class="w-24 h-24 rounded-xl overflow-hidden bg-surface-variant shrink-0">
+<img alt="Riz Gambiaka" class="w-full h-full object-cover" data-alt="Premium long grain rice in a rustic burlap sack on a clean wooden surface with bright daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlpyoOVdYJRnT9OPErjPtNeF0us6rG2E78IvfvZEpZ7vcGCaDGHOkLOwHKV0Tu7aj-0Cvx0Y5hnQTHyqiZGT63Q08kGhZzXpOA55FIIhWKre2JN37KEZ2n2Kk98EYZOIGezddvyA7qwlNk250JHC2Zk0K6F8uDdzbC2cBetRm2CTPfKN1GjWWMixBCrejW8CAjWvLonoR27HdRxZr3ZOwCynbs1ydFfu4tEJk-7VA1moWB-btM4kOao4ugocWL07kF0DTG4XBVn2lA"/>
+</div>
+<div class="flex flex-col justify-between grow">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-on-background text-base leading-tight">Riz Gambiaka 50kg</h3>
+<button class="text-outline-variant hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+</button>
+</div>
+<p class="text-on-surface-variant text-sm mt-1">Qualité Supérieure</p>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="text-lg font-extrabold text-on-background">27.500 FCFA</span>
+<button class="bg-gradient-to-br from-primary to-primary-container text-white px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[16px]" data-icon="add_shopping_cart" style="font-variation-settings: 'FILL' 1;">add_shopping_cart</span>
+                            Ajouter
+                        </button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 shadow-[0_4px_20px_0_rgba(19,29,36,0.04)] flex gap-4 relative">
+<div class="w-24 h-24 rounded-xl overflow-hidden bg-surface-variant shrink-0">
+<img alt="Huile Dinor" class="w-full h-full object-cover" data-alt="Clear bottle of golden cooking oil sitting on a modern kitchen counter with soft bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6_J4MACqhyoFifKsb932zZgl4LLbYdgFssv722VHSUSY9IpWp6Urxmo0hlXfjxfvE0wGQO-7sBqXNSeBw5Ka8lK4eiOynO1zCjgvMc5cmYcFBr8zxn2USi8Q1y9KpnTZ0wvHLOw7YUAdc5zv6pVctXXwIDtvO4kbOF6Rkq0v09HuTrba3gW8LrxBkMYJurOomA5KAcjYzXeA58-2CM6T54UBsNkvx9f1KbCoSJXJqbb6KpPX-DyR1vb6q_LAI0cEv51NyjGSgWuEq"/>
+</div>
+<div class="flex flex-col justify-between grow">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-on-background text-base leading-tight">Huile Dinor 5L</h3>
+<button class="text-outline-variant hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+</button>
+</div>
+<p class="text-on-surface-variant text-sm mt-1">Huile Végétale</p>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="text-lg font-extrabold text-on-background">6.250 FCFA</span>
+<button class="bg-gradient-to-br from-primary to-primary-container text-white px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[16px]" data-icon="add_shopping_cart" style="font-variation-settings: 'FILL' 1;">add_shopping_cart</span>
+                            Ajouter
+                        </button>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 shadow-[0_4px_20px_0_rgba(19,29,36,0.04)] flex gap-4 relative">
+<div class="w-24 h-24 rounded-xl overflow-hidden bg-surface-variant shrink-0">
+<img alt="Sucre de canne" class="w-full h-full object-cover" data-alt="Close up of white granulated sugar in a clean minimalist bowl with bright studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaI0ilIYwBX74WyGt0mifZrYr-vKejGHNP8wf0Rvsveiy-zxG1syk0LoA925V32LDDmnqWU8j4FF5HzzvWPD0p_HPF7Wt2n3osHZqICVJbO4KJ3uQDmmKA6v_Y8DzTdZ3-gM9WiEjPQe40yTtX_dZFURYlP4O6p6d-vnpDcdOlFOkz8zyKdQZdX1TNlARcsVcHkYGJijlgSuoQY4x4_4sHIZsN7Td9XPnZX0Y8xt-KyQONMwjmXdtuHGi22IVTXsFpm0zt3zVNd0-y"/>
+</div>
+<div class="flex flex-col justify-between grow">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-on-background text-base leading-tight">Sucre Suka-Mali 5kg</h3>
+<button class="text-outline-variant hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+</button>
+</div>
+<p class="text-on-surface-variant text-sm mt-1">Production Locale</p>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="text-lg font-extrabold text-on-background">4.500 FCFA</span>
+<button class="bg-gradient-to-br from-primary to-primary-container text-white px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[16px]" data-icon="add_shopping_cart" style="font-variation-settings: 'FILL' 1;">add_shopping_cart</span>
+                            Ajouter
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Section (Asymmetric Editorial Style) -->
+<section class="mt-12 mb-8">
+<h3 class="text-lg font-bold mb-4 px-2">Recommandé pour vous</h3>
+<div class="bg-surface-container-high rounded-2xl overflow-hidden relative min-h-[180px] flex items-center">
+<div class="p-6 w-1/2 z-10">
+<span class="text-[10px] font-extrabold uppercase tracking-widest text-secondary mb-1 block">Offre Spéciale</span>
+<h4 class="text-xl font-bold leading-tight mb-3">Le Pack Famille à prix réduit</h4>
+<button class="text-primary font-bold text-sm flex items-center gap-1 group">
+                        Découvrir 
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="absolute right-0 top-0 bottom-0 w-2/3 h-full">
+<img alt="Fresh produce" class="w-full h-full object-cover scale-110 -rotate-3 origin-center" data-alt="Lush arrangement of fresh colorful vegetables and fruits in a wooden crate, warm natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjnU75EgfJHsw343UL9GlegpS-51-aP6kdVsBaD2Jb1prfilah0doXXd0Fo4QH7nWb0xD1hRaChTGl-pcuWcgc-r6M3nZ8mLouM-fXpCvwnN2HfqH0BpHQfchIVrqjPHc5_Fjx8CH3fkJQICCE_7edM29NczWdNatyp_99TWQnC7-x3jA8kdzqsuF8bis-BwD5yQxgIUA0Ie6vCaXF7lH_z-LFpm846GkSDBm8GwYDrhT3nCCJitEpE_4IMG9f1nHwhZSv3y0K5UOg"/>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full h-20 flex justify-around items-center px-4 pb-safe bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 rounded-t-2xl shadow-[0_-4px_20px_0_rgba(19,29,36,0.04)] border-t border-slate-100 dark:border-slate-800">
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-green-600 active:scale-98 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Inter'] text-[11px] font-medium mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-green-600 active:scale-98 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-['Inter'] text-[11px] font-medium mt-1">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-green-600 active:scale-98 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-['Inter'] text-[11px] font-medium mt-1">Community</span>
+</a>
+<a class="flex flex-col items-center justify-center text-green-700 dark:text-green-400 ring-2 ring-green-700 ring-offset-4 rounded-full w-12 h-12 active:scale-98 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-['Inter'] text-[9px] font-bold">Account</span>
+</a>
+</nav>
+</body></html>

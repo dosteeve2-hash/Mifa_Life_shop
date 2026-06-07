@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mifa Life | Smart Catalog</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline": "#6e7b6b",
+              "inverse-on-surface": "#e8f2fc",
+              "secondary-fixed-dim": "#edc200",
+              "on-error-container": "#93000a",
+              "surface-container-lowest": "#ffffff",
+              "primary": "#006b26",
+              "on-primary-container": "#f7fff2",
+              "on-tertiary-container": "#fffbff",
+              "secondary-container": "#fed000",
+              "surface-dim": "#d1dbe5",
+              "surface-container-low": "#eaf5ff",
+              "surface-container-highest": "#d9e4ee",
+              "on-background": "#131d24",
+              "on-error": "#ffffff",
+              "secondary-fixed": "#ffe07f",
+              "on-tertiary": "#ffffff",
+              "on-secondary-fixed": "#231b00",
+              "error-container": "#ffdad6",
+              "on-secondary-container": "#6f5900",
+              "surface-bright": "#f6faff",
+              "surface-variant": "#d9e4ee",
+              "outline-variant": "#bdcab9",
+              "on-primary-fixed": "#002107",
+              "tertiary-fixed": "#ffdad7",
+              "primary-container": "#008732",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "inverse-primary": "#65df76",
+              "surface-tint": "#006e27",
+              "tertiary": "#bb001e",
+              "surface-container-high": "#dfe9f3",
+              "surface": "#f6faff",
+              "primary-fixed-dim": "#65df76",
+              "on-tertiary-fixed-variant": "#930015",
+              "on-secondary": "#ffffff",
+              "on-primary-fixed-variant": "#00531c",
+              "secondary": "#725c00",
+              "on-surface-variant": "#3e4a3d",
+              "background": "#f6faff",
+              "tertiary-container": "#e12531",
+              "primary-fixed": "#81fc90",
+              "on-tertiary-fixed": "#410004",
+              "on-secondary-fixed-variant": "#564500",
+              "error": "#ba1a1a",
+              "inverse-surface": "#283239",
+              "surface-container": "#e5eff9",
+              "on-surface": "#131d24",
+              "on-primary": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm">
+<div class="flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-slate-500" data-icon="menu">menu</span>
+</button>
+<h1 class="text-xl font-black text-green-700 dark:text-green-500 tracking-tight font-headline">Mifa Life</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-slate-500" data-icon="shopping_bag">shopping_bag</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-20 pb-28 px-4 max-w-5xl mx-auto">
+<!-- Search & Filter Section -->
+<section class="mb-8">
+<div class="flex items-center bg-surface-container-highest rounded-full px-5 py-3 mb-6">
+<span class="material-symbols-outlined text-outline mr-3" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-on-surface placeholder:text-outline/70" placeholder="Search curated products..." type="text"/>
+</div>
+<!-- Asymmetrical Category Bar -->
+<div class="flex overflow-x-auto hide-scrollbar gap-4 py-2">
+<div class="flex flex-col items-center flex-shrink-0 group">
+<div class="w-16 h-16 rounded-full flex items-center justify-center ring-2 ring-primary ring-offset-4 bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-primary" data-icon="dashboard">dashboard</span>
+</div>
+<span class="text-[10px] font-bold mt-4 text-primary uppercase tracking-widest">All</span>
+</div>
+<div class="flex flex-col items-center flex-shrink-0 group">
+<div class="w-16 h-16 rounded-full flex items-center justify-center bg-surface-container-high hover:ring-2 hover:ring-primary/30 hover:ring-offset-2 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="eco">eco</span>
+</div>
+<span class="text-[10px] font-medium mt-4 text-on-surface-variant uppercase tracking-widest">Organic</span>
+</div>
+<div class="flex flex-col items-center flex-shrink-0 group">
+<div class="w-16 h-16 rounded-full flex items-center justify-center bg-surface-container-high hover:ring-2 hover:ring-primary/30 hover:ring-offset-2 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="diamond">diamond</span>
+</div>
+<span class="text-[10px] font-medium mt-4 text-on-surface-variant uppercase tracking-widest">Premium</span>
+</div>
+<div class="flex flex-col items-center flex-shrink-0 group">
+<div class="w-16 h-16 rounded-full flex items-center justify-center bg-surface-container-high hover:ring-2 hover:ring-primary/30 hover:ring-offset-2 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="local_mall">local_mall</span>
+</div>
+<span class="text-[10px] font-medium mt-4 text-on-surface-variant uppercase tracking-widest">Fashion</span>
+</div>
+<div class="flex flex-col items-center flex-shrink-0 group">
+<div class="w-16 h-16 rounded-full flex items-center justify-center bg-surface-container-high hover:ring-2 hover:ring-primary/30 hover:ring-offset-2 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="skillet">skillet</span>
+</div>
+<span class="text-[10px] font-medium mt-4 text-on-surface-variant uppercase tracking-widest">Kitchen</span>
+</div>
+</div>
+</section>
+<!-- Product Grid (2-Column Premium) -->
+<div class="grid grid-cols-2 gap-x-4 gap-y-8">
+<!-- Product Card 1 -->
+<div class="flex flex-col">
+<div class="relative rounded-xl overflow-hidden bg-surface-variant aspect-[3/4] mb-3 group">
+<img alt="Premium minimal chair" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Modern sculptural wooden chair in a sunlit minimalist room with soft shadows and organic textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMUgnXYEPfjrjbTP4i2P4EYD1-IfQoRdLK6HADWjzwspy2lC35t-NpBZmVnpYzNQGY6k68AsbtRZtFDoEDvcQ3qjHNLs5Vy4Pl5HjWpp-Syp2cFBVtj9h7TGAmn_1BySePTGSQZnAJKnwHj2yr10oeto-6krvfwaoy73IAoBb7nUPrJdNKw7AJonZ5EYgR_wDB56BA_M3I6FvS2NyCqtq9C1LF99zdWazFi97wIkDDsTmfQqbD7ZtQoXER22MqeuVpRkRQ3iyFxssE"/>
+<div class="absolute top-3 left-3 bg-secondary-container text-on-secondary-container px-2 py-1 rounded text-[10px] font-bold tracking-tighter uppercase">New Arrival</div>
+<button class="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+<h3 class="font-headline font-bold text-sm text-on-surface leading-tight">Handcrafted Baobab Stool</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="text-primary font-bold text-lg">75.000 FCFA</span>
+<span class="text-[10px] font-medium text-primary bg-primary/10 px-1.5 rounded">In Stock</span>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="flex flex-col">
+<div class="relative rounded-xl overflow-hidden bg-surface-variant aspect-[3/4] mb-3 group">
+<img alt="Organic oils" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Collection of artisanal organic essential oil bottles on a dark stone surface with fresh green herbs nearby" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHseVfKyim2n_825MAmThCRamuiIKPoWtRWeIq2Yl9L6sTaR0S5bu_yYxCfXFGxz5SpBHlMxTJKws-LvWe95-DloKi2zrWbbO_9VXGnHf1v1TMgsU_u_0WM_Jrc5YJq5cZSlGYtZ_t2W9x9_eh_kLGIPQBQ3T1IpZpaHCth9ENkll4YU5AWGj8mhx_zW4qm4uNPSNf0iRx4pORYSaoS9m7WC8KavI57xNjTCBH8RHbELw4oPKAVWxe573Rm7jx4wCCbxOAxkU87dNh"/>
+<div class="absolute top-3 right-3 bg-tertiary text-on-tertiary px-2 py-1 rounded text-[10px] font-bold tracking-tighter uppercase">Limited</div>
+<button class="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+<h3 class="font-headline font-bold text-sm text-on-surface leading-tight">Organic Shea Butter Essence</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="text-primary font-bold text-lg">12.500 FCFA</span>
+<span class="text-[10px] font-medium text-primary bg-primary/10 px-1.5 rounded">12 left</span>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="flex flex-col">
+<div class="relative rounded-xl overflow-hidden bg-surface-variant aspect-[3/4] mb-3 group">
+<img alt="Textile art" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Detailed close-up of hand-woven Malian Bogolanfini mud cloth with traditional geometric patterns in earth tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcbfFLKH--j0JXcVv76YoVxkQA1uyDW2WNin_G9tnVMJC_NkSdsn8Hyyz5nyfOG2i4bAPJRSsr9RAqQyeEr-jKTSWvA9mFaeKHmh46qYj3mSySrDkVFAsN8VZfH-Tqum4DCcydQ8PR8103DT2_FNpxkuDB9Ji-f0jnZGmcvdjONWOiPDHKc8w1ga5YHBQG3U8m13aBwKxD6Eqk-DmOOdTX845jEIblWqyINguKE36rYvg7jb92VM-GDd9hHAwDF7Gba5_NqmipD_ty"/>
+<button class="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+<h3 class="font-headline font-bold text-sm text-on-surface leading-tight">Authentic Bogolan Wall Art</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="text-primary font-bold text-lg">45.000 FCFA</span>
+<span class="text-[10px] font-medium text-primary bg-primary/10 px-1.5 rounded">In Stock</span>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="flex flex-col">
+<div class="relative rounded-xl overflow-hidden bg-surface-variant aspect-[3/4] mb-3 group">
+<img alt="Luxury basket" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Luxury hand-woven vibrant basket with intricate spiraling patterns and high-quality straw texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiGbsluydfCOL4prLNHnV1JC97KDSYN3g4n9v1UivbtyKEGp1RYHTKZx45BHVne0jw5kmE9vK91dikCCpjLWrwNlVaLv9_hHfJKOyckgL0NxUQkbQAs-aCUiq1uIXkhDsEeKf8JOniV_HaEmQB9LWgpQlHxPtQ8JgdZna47ME6LlrqXfEIjgsaHAto-I7tCfJ54B6CNOxlnlA1mv282DUrfPW_TjBCiDKaRGSTjnu5VWYL6s5V4r0MgR9RCw0BhTvK42kD_Td6Oq3Q"/>
+<button class="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+<h3 class="font-headline font-bold text-sm text-on-surface leading-tight">Ndomo Studio Basket</h3>
+<div class="flex items-center justify-between mt-1">
+<span class="text-primary font-bold text-lg">28.000 FCFA</span>
+<span class="text-[10px] font-medium text-primary bg-primary/10 px-1.5 rounded">In Stock</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 rounded-t-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 active:scale-95 transition-all duration-200 hover:text-green-600" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-inter text-[10px] font-medium">Home</span>
+</a>
+<!-- Active Tab: Shop -->
+<a class="flex flex-col items-center justify-center text-green-700 dark:text-green-400 font-bold ring-2 ring-green-700 ring-offset-4 rounded-full p-2 active:scale-95 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="storefront" style="font-variation-settings: 'FILL' 1;">storefront</span>
+<span class="font-inter text-[10px]">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 active:scale-95 transition-all duration-200 hover:text-green-600" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="sensors_kronecker">sensors_krx</span>
+<span class="font-inter text-[10px] font-medium">Pulse</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 active:scale-95 transition-all duration-200 hover:text-green-600" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-inter text-[10px] font-medium">Account</span>
+</a>
+</nav>
+</body></html>

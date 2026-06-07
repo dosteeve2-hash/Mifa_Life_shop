@@ -1,0 +1,487 @@
+# 📄 Product Requirements Document (PRD) — Version 2.0
+## Mifa Life — *Vivez mieux, ensemble*
+### Plateforme E-commerce Dropshipping + Application Mobile
+
+---
+
+| | |
+|---|---|
+| **Version** | 2.0 |
+| **Date** | Mars 2026 |
+| **Statut** | Document de référence officiel |
+| **Équipe** | Mifa Life Tokat — 11 fondateurs, Tokat / Turquie 🇹🇷 |
+| **Marché cible** | Mali 🇲🇱 (Phase 1) → Afrique de l'Ouest (Phase 2+) |
+
+---
+
+## 1. 🎯 Vision & Histoire du Projet
+
+### 1.1 Origine
+Mifa Life est un projet entrepreneurial collectif né d'une initiative de **11 étudiants maliens** réunis à Tokat, Turquie, sous le groupe **Mifa Life Tokat**. Partageant le même pays d'origine et le même désir d'entreprendre, ils ont décidé de transformer leur position géographique stratégique (à la croisée de la Chine et de la Turquie) en avantage compétitif pour créer une boutique en ligne au Mali.
+
+### 1.2 Vision
+> *"Connecter le Mali aux meilleurs produits du monde, à prix imbattables, livrés directement chez vous."*
+
+**Mifa Life** — slogan : **"Vivez mieux, ensemble"** — est une plateforme e-commerce dropshipping qui met en relation les consommateurs maliens avec des fournisseurs sélectionnés en **Chine 🇨🇳** et en **Turquie 🇹🇷**, avec une livraison rapide et des paiements adaptés au Mali.
+
+### 1.3 Modèle économique
+Le modèle est basé sur le **dropshipping automatisé** :
+1. Le client commande sur la plateforme Mifa Life
+2. La commande est transmise **automatiquement** au fournisseur via API
+3. Le fournisseur expédie directement (ou via transitaire) au Mali
+4. Mifa Life perçoit la **marge** intégrée dans le prix affiché
+5. L'équipe se concentre sur les **partenariats stratégiques** et la croissance
+
+### 1.4 Ambition long terme
+L'objectif est d'atteindre un **niveau d'automatisation maximal** : le site et l'application fonctionnent de manière autonome, libérant l'équipe pour se consacrer aux négociations fournisseurs, aux partenariats logistiques et au développement des marchés.
+
+---
+
+## 2. 🎨 Identité de Marque
+
+### 2.1 Nom & Slogan
+- **Nom :** Mifa Life
+- **Slogan :** *Vivez mieux, ensemble*
+- **Domaine :** mifalife.ml
+
+### 2.2 Charte Graphique Officielle
+
+| Couleur | Code HEX | Usage |
+|---------|----------|-------|
+| **Émeraude Tropical** | `#00A896` | Couleur principale, logo, accents |
+| **Orange Tangerine** | `#FF6B35` | CTA, boutons d'action, badges promo |
+| **Gris Ardoise Foncée** | `#2F3E46` | Fond hero, navbar sombre, textes |
+| **Jaune Moutarde** | `#F5CB5C` | Étoiles, highlights secondaires |
+| **Blanc** | `#FFFFFF` | Fond principal, cartes |
+
+### 2.3 Typographies
+- **Display / Titres :** Syne (Bold 700-800)
+- **Corps / Interface :** DM Sans (Regular 400, Medium 500, SemiBold 600)
+
+### 2.4 Éléments visuels clés
+- Logo avec icône distinctif (3 barres horizontales dans un carré arrondi émeraude)
+- Icône d'application mobile identifiable (fond émeraude, logo blanc)
+- Hero avec famille africaine souriante recevant un colis
+- Split-layout : fond sombre à gauche (texte) / photo à droite
+
+---
+
+## 3. 🛒 Périmètre Produit
+
+### 3.1 Deliverables Phase 1
+1. **Site web** e-commerce (desktop + mobile responsive)
+2. **Dashboard admin** pour la gestion de la plateforme
+
+### 3.2 Deliverables Phase 2
+3. **Application mobile** iOS & Android (React Native)
+4. Intégrations API fournisseurs automatisées
+
+### 3.3 Catalogue produits (large spectrum)
+
+| Catégorie | Sous-catégories |
+|-----------|----------------|
+| 👗 Vêtements | Femme, Homme, Enfant |
+| 💍 Bijoux & Accessoires | Colliers, bracelets, bagues, montres |
+| 👜 Sacs & Maroquinerie | Sacs à main, sacs de voyage, portefeuilles |
+| 👟 Chaussures | Sport, ville, sandales |
+| 💄 Cosmétiques | Soins visage, maquillage, parfums |
+| 🏠 Maison & Décoration | Déco, cuisine, textile de maison |
+| 📱 Électronique & Gadgets | Accessoires téléphone, gadgets, audio |
+| 🏋️ Sport & Bien-être | Équipements, vêtements de sport |
+
+### 3.4 Fournisseurs
+
+| Pays | Statut actuel | Intégration prévue |
+|------|--------------|-------------------|
+| 🇨🇳 Chine | Recherche active en cours | API AliExpress / 1688 / direct |
+| 🇹🇷 Turquie | À identifier (proximité équipe) | API ou webhook |
+
+> L'architecture backend sera **multi-fournisseur** : chaque fournisseur est une source indépendante, sélectionnée automatiquement selon disponibilité, délai et coût.
+
+---
+
+## 4. 👥 Utilisateurs & Rôles
+
+### 4.1 Côté Client (B2C — Mali)
+
+| Type | Accès | Fonctions |
+|------|-------|-----------|
+| **Visiteur** | Public | Navigation, recherche, consultation produits |
+| **Client connecté** | Compte | Commande, suivi, historique, favoris, profil |
+
+### 4.2 Côté Administration
+
+| Rôle | Nombre | Accès |
+|------|--------|-------|
+| **Super Admin** | 1 (Steeve Donald) | Configuration globale, gestion des rôles, paramètres système, accès total |
+| **Admin** | Jusqu'à 10 membres | Gestion produits, commandes, fournisseurs, analytics |
+| **Manager** | Variable | Suivi commandes, service client, livraisons |
+
+---
+
+## 5. ⚙️ Fonctionnalités Complètes
+
+### 5.1 Catalogue & Produits
+- Affichage par catégorie, sous-catégorie, filtres (prix, couleur, taille, fournisseur, pays)
+- Fiche produit : photos multiples, description, variantes, avis clients, délai estimé
+- Moteur de recherche avec auto-complétion
+- Sections : Promos Flash (avec compte à rebours), Nouveautés, Tendances, Recommandés
+- Gestion des stocks en temps réel via API fournisseurs
+
+### 5.2 Système de Commandes & Dropshipping *(cœur du système)*
+- Panier multi-articles, checkout multi-étapes
+- **Transmission automatique** de la commande au fournisseur dès validation du paiement
+- Sélection intelligente du fournisseur (disponibilité, prix, délai)
+- Suivi de commande en temps réel (côté client + admin)
+- Notifications automatiques à chaque étape (email + SMS + WhatsApp)
+- Gestion des retours, remboursements et litiges
+
+### 5.3 Paiements
+Intégration de **tous les moyens de paiement disponibles au Mali** :
+
+| Moyen | Type | Statut |
+|-------|------|--------|
+| Orange Money Mali | Mobile Money | Prioritaire |
+| Wave | Mobile Money | Prioritaire |
+| Moov Money | Mobile Money | Prioritaire |
+| Visa / Mastercard | Carte bancaire | Via PayDunya |
+| PayDunya | Agrégateur local | Recommandé |
+
+> Toutes les transactions en **XOF (Franc CFA)**. Conversion automatique pour les fournisseurs si nécessaire.
+
+### 5.4 Livraison
+
+| Phase | Solution | Zone |
+|-------|----------|------|
+| Phase 1 | Moto-taxis partenaires | Bamako |
+| Phase 2 | Partenariat Teliman ou équivalent | Mali entier |
+| Futur | Réseau propre | Afrique de l'Ouest |
+
+- Calcul automatique des frais selon zone géographique
+- Suivi en temps réel avec numéro de tracking
+- Notification automatique du livreur à la préparation de commande
+
+### 5.5 Dashboard Admin
+- Vue globale : commandes du jour, revenus, taux de conversion, produits top
+- Gestion catalogue (CRUD produits, variantes, catégories)
+- Gestion commandes (statut, intervention manuelle, logs)
+- Gestion fournisseurs (API keys, performance, disponibilité)
+- Gestion livreurs et zones
+- Analytics & rapports (CA, marge, clients, géographie)
+- Gestion des rôles et permissions des 11 membres
+- Monitoring des APIs fournisseurs (alertes en cas d'échec)
+
+### 5.6 Application Mobile *(Phase 2)*
+Interface fidèle au mockup validé :
+- Navigation bas de page : Home / Catégories / Commandes / Compte
+- Hero avec même charte graphique que le site
+- Notifications push pour suivi commandes et promos
+- Mode hors-ligne partiel (consultation catalogue)
+- Compatible iOS & Android
+
+### 5.7 Automatisation *(objectif principal)*
+- Transmission commandes → fournisseurs via API (sans intervention humaine)
+- Mise à jour automatique des stocks
+- Calcul automatique des marges et prix de vente
+- Génération automatique de factures PDF
+- Alertes automatiques (rupture stock, échec API, retards livraison)
+- Rapports automatiques hebdomadaires envoyés par email
+
+---
+
+## 6. 🏗️ Architecture Technique
+
+### 6.1 Stack Technologique
+
+| Couche | Technologie | Justification |
+|--------|-------------|---------------|
+| **Frontend Web** | Next.js (React) | SSR pour SEO, dynamique, réutilisable pour mobile |
+| **Application Mobile** | React Native | Partage de code avec Next.js, iOS + Android |
+| **Backend** | Node.js + Fastify | Rapide, léger, idéal pour API REST & webhooks |
+| **Base de données** | Supabase (PostgreSQL) | BDD relationnelle, Auth intégrée, Realtime, Storage |
+| **Déploiement Frontend** | Vercel | Scalable, CI/CD intégré, gratuit au départ |
+| **Déploiement Backend** | Railway / Render | Scalable, simple, adapté Node.js |
+| **API Fournisseurs** | AliExpress API, 1688, APIs turques | Dropshipping automatisé |
+| **Paiements** | PayDunya, Orange Money API, Wave API | Adapté au marché malien |
+
+### 6.2 Architecture Système
+
+```
+┌─────────────────────────────────────────────┐
+│         CLIENT (Browser / App Mobile)        │
+└─────────────────┬───────────────────────────┘
+                  │
+┌─────────────────▼───────────────────────────┐
+│        Next.js Frontend (Vercel)             │
+└─────────────────┬───────────────────────────┘
+                  │
+┌─────────────────▼───────────────────────────┐
+│         Fastify API Backend                  │
+│    ┌──────────┐  ┌───────────────────┐       │
+│    │ Auth     │  │ Order Engine      │       │
+│    │ Products │  │ Auto-Dispatch API │       │
+│    │ Payments │  │ Notifications     │       │
+│    └──────────┘  └───────────────────┘       │
+└────────┬─────────────────┬──────────────────┘
+         │                 │
+┌────────▼──────┐  ┌───────▼────────────────┐
+│  Supabase DB  │  │  APIs Externes         │
+│  (PostgreSQL  │  │  - Fournisseurs 🇨🇳🇹🇷  │
+│  + Auth       │  │  - PayDunya / MoMo     │
+│  + Storage)   │  │  - SMS / WhatsApp      │
+└───────────────┘  └────────────────────────┘
+```
+
+### 6.3 Schéma Base de Données (Supabase)
+
+**Tables principales :**
+- `users` — clients et admins
+- `products` — catalogue produits
+- `product_variants` — variantes (taille, couleur, matière)
+- `categories` — arbre de catégories
+- `suppliers` — fournisseurs + configuration API
+- `orders` — commandes clients
+- `order_items` — lignes de commandes
+- `supplier_orders` — commandes transmises aux fournisseurs
+- `deliveries` — suivi livraisons
+- `payments` — transactions
+- `admin_roles` — rôles et permissions
+- `notifications` — historique des notifications
+
+---
+
+## 7. 👨‍💻 Organisation de l'Équipe & Répartition des Tâches
+
+> Répartition basée sur les domaines d'étude de chaque membre, avec focus sur les compétences naturelles et la complémentarité.
+
+---
+
+### 🖥️ PÔLE TECH & DÉVELOPPEMENT
+
+#### **Steeve Donald Compaoré** — *Génie Informatique*
+**Rôle : Chef de Projet Technique & Lead Developer**
+- Architecture globale du projet (frontend + backend)
+- Développement du backend Node.js + Fastify
+- Intégration des APIs fournisseurs (AliExpress, 1688)
+- Mise en place de Supabase (schéma BDD, Auth, RLS)
+- Déploiement Vercel + Railway
+- Code review et supervision technique de l'équipe dev
+- Automatisation des flux commandes → fournisseurs
+
+#### **Demba Kébé** — *Génie Informatique*
+**Rôle : Développeur Frontend**
+- Développement Next.js (pages, composants, routing)
+- Intégration de la charte graphique Mifa Life
+- Développement du Dashboard Admin
+- Optimisation des performances (SEO, Core Web Vitals)
+- Tests unitaires et intégration frontend
+- Support au développement de l'application mobile (React Native, Phase 2)
+
+#### **Idris Aly Ongoiba** — *Génie Électrique & Électronique*
+**Rôle : Développeur Intégrations & Systèmes**
+- Intégration des APIs de paiement (PayDunya, Orange Money, Wave)
+- Intégration des APIs de notification (SMS, WhatsApp Business)
+- Monitoring des APIs fournisseurs (alertes, logs, uptime)
+- Gestion des webhooks et automatisations
+- Sécurité des échanges de données (chiffrement, tokens)
+- Tests d'intégration bout-en-bout
+
+---
+
+### 💼 PÔLE BUSINESS & ÉCONOMIE
+
+#### **Mahamadou Maiga** — *Économie (Iktisat)*
+**Rôle : Directeur Financier & Stratégie Prix**
+- Définition de la stratégie de pricing et des marges par catégorie
+- Suivi des KPIs financiers (CA, marge nette, coût d'acquisition)
+- Analyse de rentabilité par produit et par fournisseur
+- Gestion du budget de lancement et des investissements
+- Prévisions financières et modélisation des revenus
+- Veille économique sur le marché malien e-commerce
+
+#### **Abdoul Diallo** — *Économie (Iktisat)*
+**Rôle : Responsable Business Development & Partenariats Fournisseurs**
+- Identification et négociation avec les fournisseurs chinois et turcs
+- Établissement et suivi des contrats fournisseurs
+- Développement des partenariats logistiques (Teliman, moto-taxis)
+- Analyse de la concurrence et positionnement marché
+- Développement des partenariats paiement (Orange Money, Wave)
+- Veille marché e-commerce en Afrique de l'Ouest
+
+---
+
+### 🎨 PÔLE PRODUIT, DESIGN & EXPÉRIENCE CLIENT
+
+#### **Mohamed Babasy Keita** — *Conseil Psychologique & Orientation*
+**Rôle : Responsable Expérience Utilisateur (UX) & Service Client**
+- Recherche utilisateur : comprendre les besoins des clients maliens
+- Définition des personas clients et parcours d'achat
+- Tests utilisateurs et collecte de feedback
+- Rédaction des textes de l'interface (UX writing)
+- Mise en place et gestion du service client (chat, WhatsApp)
+- Stratégie de fidélisation et satisfaction client
+- Formation de l'équipe aux bonnes pratiques de communication client
+
+#### **Kola Touré** — *Domaine à préciser*
+**Rôle : Responsable Design & Contenu Visuel** *(proposition selon profil)*
+- Création et gestion du contenu visuel (photos produits, bannières)
+- Coordination avec le développement sur l'implémentation du design
+- Gestion du catalogue produits (fiches, descriptions, traductions)
+- Création des assets marketing (visuels réseaux sociaux, emailings)
+> ⚠️ *Le rôle définitif de Kola sera ajusté selon son domaine d'études réel.*
+
+---
+
+### 📣 PÔLE MARKETING & COMMUNICATION
+
+#### **Ousmane Coulibaly** — *Génie Civil (İnşaat Mühendisliği)*
+**Rôle : Responsable Logistique & Opérations**
+- Conception et optimisation du processus logistique end-to-end
+- Gestion des flux physiques (de la commande à la livraison)
+- Planification et coordination des partenaires de livraison
+- Gestion des entrepôts/points relais potentiels à Bamako
+- Contrôle qualité à réception (si stockage intermédiaire)
+- Optimisation des coûts logistiques
+> *Le Génie Civil apporte des compétences en gestion de projet, planification et optimisation des flux physiques — parfaitement adaptées à la logistique.*
+
+#### **Mohamed Touré** — *Biologie / Sciences de la Vie*
+**Rôle : Responsable Qualité Produits & Réglementation**
+- Contrôle qualité des produits (notamment cosmétiques, alimentation, santé)
+- Veille réglementaire sur les produits importés au Mali
+- Conformité des produits avec les normes maliennes et CEDEAO
+- Gestion des retours liés à des problèmes de qualité
+- Documentation produits (fiches techniques, compositions)
+- Interface avec les douanes et services sanitaires maliens
+> *La formation en biologie est précieuse pour gérer la conformité des cosmétiques, produits de soin et autres articles sensibles.*
+
+#### **Abdrahamane Koné** — *Génie Chimique (Kimya Mühendisliği)*
+**Rôle : Responsable Sourcing & Analyse Produits**
+- Analyse de la qualité des matériaux et compositions des produits sourcés
+- Évaluation technique des fournisseurs (standards de fabrication)
+- Sélection des produits chimiques/cosmétiques conformes aux normes
+- Optimisation des emballages et conditions de transport
+- Analyse des risques produits (sécurité, durée de vie, stockage)
+- Support à la négociation fournisseurs sur les aspects techniques
+
+#### **Manssa Makan Kouyaté** — *Génie Mécanique (Makine Mühendisliği)*
+**Rôle : Responsable Marketing Digital & Croissance**
+- Stratégie et exécution du marketing digital (réseaux sociaux, SEO, SEM)
+- Gestion des pages Facebook, Instagram, TikTok de Mifa Life
+- Campagnes de lancement et d'acquisition clients
+- Création de contenu (vidéos, stories, posts)
+- Analyse des métriques marketing (ROAS, CPA, taux de conversion)
+- Community management et animation de la communauté Mifa Life
+> *Avec des compétences analytiques solides issues du Génie Mécanique, Manssa apportera rigueur et méthode à la croissance digitale.*
+
+---
+
+### 📊 TABLEAU RÉCAPITULATIF DE L'ÉQUIPE
+
+| Membre | Domaine | Rôle Mifa Life | Pôle |
+|--------|---------|---------------|------|
+| **Steeve Donald Compaoré** | Génie Informatique | Chef Projet Tech & Lead Dev | 🖥️ Tech |
+| **Demba Kébé** | Génie Informatique | Développeur Frontend | 🖥️ Tech |
+| **Idris Aly Ongoiba** | Génie Élec. & Électronique | Dev Intégrations & Systèmes | 🖥️ Tech |
+| **Mahamadou Maiga** | Économie | Directeur Financier | 💼 Business |
+| **Abdoul Diallo** | Économie | Business Dev & Partenariats | 💼 Business |
+| **Mohamed Babasy Keita** | Conseil Psycho. | Responsable UX & Service Client | 🎨 Produit |
+| **Kola Touré** | À préciser | Responsable Design & Contenu | 🎨 Produit |
+| **Ousmane Coulibaly** | Génie Civil | Responsable Logistique & Ops | 📣 Ops |
+| **Mohamed Touré** | Biologie | Responsable Qualité & Réglementation | 📣 Ops |
+| **Abdrahamane Koné** | Génie Chimique | Responsable Sourcing & Analyse | 📣 Ops |
+| **Manssa Makan Kouyaté** | Génie Mécanique | Responsable Marketing Digital | 📣 Marketing |
+
+---
+
+## 8. 🗺️ Roadmap & Phases
+
+### Phase 1 — MVP Site Web *(3-4 mois)*
+| Tâche | Responsable | Priorité |
+|-------|-------------|----------|
+| Design system & maquettes finales | Kola Touré + Demba | 🔴 |
+| Schéma BDD Supabase | Steeve Donald | 🔴 |
+| Développement frontend Next.js | Demba Kébé | 🔴 |
+| Développement backend Fastify | Steeve Donald | 🔴 |
+| Intégration paiements Mali | Idris Aly | 🔴 |
+| Intégration 1er fournisseur Chine | Steeve + Abdoul | 🔴 |
+| Automatisation commandes → fournisseur | Steeve + Idris | 🔴 |
+| Dashboard admin | Demba + Steeve | 🟡 |
+| Partenariat livraison Bamako | Ousmane + Abdoul | 🔴 |
+| Catalogue produits initial | Abdrahamane + Kola | 🟡 |
+| Stratégie de lancement | Manssa + Mahamadou | 🟡 |
+| Tests & déploiement | Steeve + Demba + Idris | 🔴 |
+
+### Phase 2 — Consolidation *(6 mois post-MVP)*
+- Application mobile React Native (Demba + Steeve)
+- Intégration fournisseurs turcs (Abdoul + Steeve)
+- Système de fidélité clients (Mohamed B. + Demba)
+- Partenariat Teliman (Ousmane + Abdoul)
+- Analytics avancés (Mahamadou + Steeve)
+- Expansion marketing (Manssa)
+
+### Phase 3 — Expansion *(12+ mois)*
+- Expansion Afrique de l'Ouest
+- Multi-langue (Français, Bambara, Anglais)
+- Marketplace (vendeurs tiers)
+- Logistique propre
+
+---
+
+## 9. 📊 Indicateurs de Succès (KPIs)
+
+| KPI | Objectif à 6 mois |
+|-----|------------------|
+| Commandes / mois | 200+ |
+| Taux de conversion | > 2% |
+| Taux d'automatisation commandes | > 90% |
+| NPS (satisfaction client) | > 60 |
+| Délai moyen livraison Bamako | < 24h |
+| Disponibilité plateforme | > 99% |
+| Coût d'acquisition client (CAC) | < 2 000 XOF |
+| Panier moyen | > 20 000 XOF |
+
+---
+
+## 10. 🔒 Sécurité & Conformité
+
+- Authentification sécurisée via Supabase Auth (JWT + RLS)
+- Chiffrement des données sensibles (paiements, données personnelles)
+- HTTPS obligatoire sur tous les environnements
+- Protection OWASP Top 10 (SQL injection, XSS, CSRF)
+- Conformité RGPD adaptée (données clients maliens)
+- Conformité réglementaire Mali e-commerce (Mohamed Touré)
+- Politique de confidentialité et CGV rédigées
+
+---
+
+## 11. ❓ Points Ouverts & Décisions Restantes
+
+| # | Question | Priorité | Responsable |
+|---|----------|----------|-------------|
+| 1 | Domaine d'études de **Kola Touré** → ajuster son rôle | 🔴 | Équipe |
+| 2 | Identification du 1er fournisseur chinois signé | 🔴 | Abdoul Diallo |
+| 3 | Ouverture compte PayDunya | 🔴 | Mahamadou Maiga |
+| 4 | Définition des marges par catégorie | 🔴 | Mahamadou + Abdoul |
+| 5 | Partenaire livraison initial Bamako | 🟡 | Ousmane Coulibaly |
+| 6 | Budget de lancement (répartition entre les 11) | 🔴 | Mahamadou Maiga |
+| 7 | Nom de domaine mifalife.ml → enregistrement | 🟡 | Steeve Donald |
+| 8 | Statut juridique de l'entreprise au Mali | 🟡 | Abdoul Diallo |
+
+---
+
+## 12. 💰 Estimation Budget Minimum de Lancement
+
+| Poste | Coût estimé / mois | Notes |
+|-------|-------------------|-------|
+| Hébergement (Vercel + Railway) | Gratuit → ~15$/mois | Plans gratuits suffisants au départ |
+| Supabase | Gratuit → ~25$/mois | Plan free généreux |
+| Domaine .ml | ~10$/an | Enregistrement unique |
+| PayDunya (commission) | ~1.5% par transaction | Pas de frais fixes |
+| Orange Money (commission) | ~1% par transaction | Pas de frais fixes |
+| Marketing lancement | 50 000 – 150 000 XOF | Réseaux sociaux Mali |
+| **Total fixe mois 1** | **~50$/mois + marketing** | Très accessible |
+
+---
+
+*Document rédigé sur base des informations fournies par l'équipe Mifa Life Tokat*
+*Version 2.0 — Mars 2026 — À valider et compléter par l'ensemble des fondateurs*

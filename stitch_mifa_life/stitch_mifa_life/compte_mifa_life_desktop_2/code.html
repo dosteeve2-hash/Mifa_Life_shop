@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#f7fff2",
+                        "surface-container-high": "#dfe9f3",
+                        "secondary-fixed": "#ffe07f",
+                        "outline-variant": "#bdcab9",
+                        "on-surface": "#131d24",
+                        "tertiary-container": "#e12531",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-container-highest": "#d9e4ee",
+                        "inverse-on-surface": "#e8f2fc",
+                        "on-background": "#131d24",
+                        "secondary-container": "#fed000",
+                        "surface-container-low": "#eaf5ff",
+                        "on-secondary-fixed": "#231b00",
+                        "primary-fixed": "#81fc90",
+                        "primary-fixed-dim": "#65df76",
+                        "secondary": "#725c00",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#008732",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#930015",
+                        "on-surface-variant": "#3e4a3d",
+                        "tertiary-fixed": "#ffdad7",
+                        "on-primary-fixed-variant": "#00531c",
+                        "tertiary": "#bb001e",
+                        "surface-bright": "#f6faff",
+                        "on-primary-fixed": "#002107",
+                        "surface-container": "#e5eff9",
+                        "on-secondary-fixed-variant": "#564500",
+                        "surface-dim": "#d1dbe5",
+                        "surface": "#f6faff",
+                        "surface-variant": "#d9e4ee",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#ffb3ae",
+                        "on-tertiary-fixed": "#410004",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#6f5900",
+                        "outline": "#6e7b6b",
+                        "surface-tint": "#006e27",
+                        "background": "#f6faff",
+                        "error": "#ba1a1a",
+                        "primary": "#006b26",
+                        "secondary-fixed-dim": "#edc200",
+                        "inverse-primary": "#65df76",
+                        "inverse-surface": "#283239"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #006b26 0%, #008732 100%);
+        }
+        .ghost-shadow {
+            box-shadow: 0 12px 32px -4px rgba(19, 29, 36, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-background min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 glass-nav shadow-sm">
+<div class="flex items-center justify-between px-8 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-black tracking-tighter text-emerald-800 font-headline">Mifa Life</div>
+<div class="hidden md:flex items-center space-x-8 font-headline font-semibold text-sm tracking-tight">
+<a class="text-slate-600 hover:text-emerald-600 transition-colors" href="#">Alimentation</a>
+<a class="text-slate-600 hover:text-emerald-600 transition-colors" href="#">Électronique</a>
+<a class="text-slate-600 hover:text-emerald-600 transition-colors" href="#">Mode</a>
+<a class="text-slate-600 hover:text-emerald-600 transition-colors" href="#">Maison</a>
+</div>
+<div class="flex items-center space-x-6">
+<div class="relative hidden lg:block">
+<input class="bg-surface-container-highest border-none rounded-full px-4 py-2 text-sm w-64 focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" placeholder="Rechercher..." type="text"/>
+</div>
+<button class="text-emerald-800 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button class="text-emerald-700 border-b-2 border-emerald-700 pb-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content Layout -->
+<main class="pt-24 pb-12 max-w-7xl mx-auto px-8 grid grid-cols-12 gap-8">
+<!-- Sidebar Navigation -->
+<aside class="col-span-3">
+<div class="bg-surface-container-lowest rounded-xl p-6 ghost-shadow sticky top-24">
+<div class="flex items-center space-x-4 mb-8">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover" data-alt="portrait of a confident West African woman with elegant braided hair against a soft neutral studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeeEqQmaWIw21CXa4WxajtXkB47WUpohgiugZOx3ikiaNQJpjUTEtFktQawLm8y2j14RJZcpyigWcm8KPmzJ1adxBpQPcB6qYKviW5EdGcoDOe9RwH8lZSuQWD4X5o_Ra8OhqNSOOrXZPiTcpCmViefUd58jiaqHzt_cAYWmicrmyKXf6Yd05D0e8x8SOkQxq95ldXY-f8BY7EG8DroT_UiUQs2nQln0H6gAfKbKKSOhkBB5Rkqshb6InOoRTTo25dw08uiLwzs-gD"/>
+</div>
+<div>
+<h2 class="font-headline font-bold text-on-surface">Fatoumata Keïta</h2>
+<p class="text-xs text-slate-500 font-label">Membre Premium</p>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg bg-surface-container text-primary font-medium transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-sm">Tableau de bord</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">package</span>
+<span class="text-sm">Mes Commandes</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-sm">Liste de souhaits</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm">Moyens de paiement</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm">Paramètres du compte</span>
+</a>
+<div class="pt-4 mt-4 border-t border-slate-100">
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg text-tertiary hover:bg-error-container/20 transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm">Déconnexion</span>
+</a>
+</div>
+</nav>
+</div>
+</aside>
+<!-- Dashboard Content -->
+<section class="col-span-9 space-y-8">
+<!-- Quick Stats Bento Grid -->
+<div class="grid grid-cols-3 gap-6">
+<div class="bg-primary-container/10 p-6 rounded-xl border-l-4 border-primary">
+<p class="text-xs font-label uppercase tracking-widest text-primary mb-1">Commandes en cours</p>
+<div class="flex items-baseline space-x-2">
+<span class="text-3xl font-headline font-extrabold text-on-surface">02</span>
+<span class="text-xs text-slate-500">Livraison prévue demain</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl ghost-shadow">
+<p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-1">Points Fidélité</p>
+<div class="flex items-baseline space-x-2">
+<span class="text-3xl font-headline font-extrabold text-secondary">1,240</span>
+<span class="text-xs text-slate-500">pts</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl ghost-shadow">
+<p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-1">Total Dépensé</p>
+<div class="flex items-baseline space-x-2">
+<span class="text-3xl font-headline font-extrabold text-on-surface">45.000</span>
+<span class="text-xs text-slate-500">FCFA</span>
+</div>
+</div>
+</div>
+<!-- Active Order Tracking -->
+<div class="bg-surface-container-lowest rounded-xl p-8 ghost-shadow relative overflow-hidden">
+<div class="absolute top-0 right-0 p-6 opacity-10">
+<span class="material-symbols-outlined text-8xl">local_shipping</span>
+</div>
+<div class="flex justify-between items-start mb-8">
+<div>
+<h3 class="font-headline font-bold text-xl text-on-surface">Suivi de commande #ML-9042</h3>
+<p class="text-sm text-slate-500">Passée le 22 Octobre 2024 • Prévue le 24 Octobre</p>
+</div>
+<button class="px-6 py-2 rounded-full border border-slate-200 text-sm font-medium hover:bg-slate-50 transition-all">Détails</button>
+</div>
+<!-- Stepper -->
+<div class="relative flex items-center justify-between">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-slate-100 -z-10"></div>
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-2/3 h-1 bg-primary -z-10"></div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center ring-4 ring-white">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<span class="mt-2 text-xs font-medium text-on-surface">Confirmée</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center ring-4 ring-white">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<span class="mt-2 text-xs font-medium text-on-surface">Préparée</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center ring-4 ring-white">
+<span class="material-symbols-outlined text-sm">local_shipping</span>
+</div>
+<span class="mt-2 text-xs font-medium text-on-surface">En route</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center ring-4 ring-white">
+<span class="material-symbols-outlined text-sm">home</span>
+</div>
+<span class="mt-2 text-xs font-medium text-slate-400">Livrée</span>
+</div>
+</div>
+</div>
+<!-- Recent Orders & Settings Grid -->
+<div class="grid grid-cols-5 gap-8">
+<!-- Recent Orders List -->
+<div class="col-span-3 space-y-4">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-headline font-bold text-lg text-on-surface">Commandes récentes</h3>
+<a class="text-sm text-primary font-medium hover:underline" href="#">Voir tout</a>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl ghost-shadow flex items-center justify-between group cursor-pointer hover:bg-slate-50 transition-all">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+</div>
+<div>
+<p class="font-semibold text-sm">Smartphone X12 + Accessoires</p>
+<p class="text-xs text-slate-500">12 Oct 2024 • 120.000 FCFA</p>
+</div>
+</div>
+<div class="text-right">
+<span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-[10px] font-bold uppercase rounded-full">Livré</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl ghost-shadow flex items-center justify-between group cursor-pointer hover:bg-slate-50 transition-all">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">kitchen</span>
+</div>
+<div>
+<p class="font-semibold text-sm">Pack Maison Malienne</p>
+<p class="text-xs text-slate-500">05 Oct 2024 • 15.500 FCFA</p>
+</div>
+</div>
+<div class="text-right">
+<span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-[10px] font-bold uppercase rounded-full">Livré</span>
+</div>
+</div>
+</div>
+<!-- Account Settings Quick Access -->
+<div class="col-span-2 space-y-4">
+<h3 class="font-headline font-bold text-lg text-on-surface">Mon Profil</h3>
+<div class="bg-surface-container-high rounded-xl p-6 space-y-4">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-xs text-slate-500 font-label">Email Principal</p>
+<p class="text-sm font-medium">fatoumata.k@gmail.com</p>
+</div>
+<button class="text-primary"><span class="material-symbols-outlined text-xl">edit</span></button>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-xs text-slate-500 font-label">Téléphone</p>
+<p class="text-sm font-medium">+223 76 00 00 00</p>
+</div>
+<button class="text-primary"><span class="material-symbols-outlined text-xl">edit</span></button>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-xs text-slate-500 font-label">Adresse par défaut</p>
+<p class="text-sm font-medium leading-tight">Badalabougou, Rue 125, Bamako, Mali</p>
+</div>
+<button class="text-primary"><span class="material-symbols-outlined text-xl">edit</span></button>
+</div>
+<button class="w-full primary-gradient text-white py-3 rounded-xl font-bold text-sm mt-2 hover:opacity-90 active:scale-95 transition-all">Sauvegarder les modifications</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-slate-200 bg-slate-50">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-12 py-12 max-w-7xl mx-auto">
+<div class="space-y-4">
+<div class="text-lg font-bold text-slate-900">Mifa Life</div>
+<p class="font-['Inter'] text-xs text-slate-500 leading-relaxed max-w-md">
+                    Votre marketplace de confiance pour une vie simplifiée. Qualité premium et service client dédié pour tous vos besoins quotidiens.
+                </p>
+<div class="font-['Inter'] text-xs text-slate-500 mt-4">
+                    © 2024 Mifa Life. Paiements sécurisés via Orange Money, Wave, Moov.
+                </div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<h4 class="text-emerald-800 font-bold text-sm">Navigation</h4>
+<ul class="space-y-1 font-['Inter'] text-xs text-slate-500">
+<li><a class="hover:underline transition-all hover:text-emerald-700" href="#">À propos</a></li>
+<li><a class="hover:underline transition-all hover:text-emerald-700" href="#">Livraison</a></li>
+<li><a class="hover:underline transition-all hover:text-emerald-700" href="#">Conditions Générales</a></li>
+</ul>
+</div>
+<div class="space-y-2">
+<h4 class="text-emerald-800 font-bold text-sm">Support</h4>
+<ul class="space-y-1 font-['Inter'] text-xs text-slate-500">
+<li><a class="hover:underline transition-all hover:text-emerald-700" href="#">Contact</a></li>
+<li><a class="hover:underline transition-all hover:text-emerald-700" href="#">FAQ</a></li>
+<li><a class="hover:underline transition-all hover:text-emerald-700" href="#">Assistance WhatsApp</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

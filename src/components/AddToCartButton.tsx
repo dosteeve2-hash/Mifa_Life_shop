@@ -10,16 +10,18 @@ type Product = {
   image_url: string | null;
 };
 
-export default function AddToCartButton({ product }: { product: Product }) {
+export default function AddToCartButton({ product, item }: { product?: Product; item?: Product }) {
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
+  const p = product ?? item;
 
   function handle() {
+    if (!p) return;
     addItem({
-      id:        product.id,
-      name:      product.name,
-      price_cfa: product.price_cfa,
-      image_url: product.image_url,
+      id:        p.id,
+      name:      p.name,
+      price_cfa: p.price_cfa,
+      image_url: p.image_url,
     });
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);

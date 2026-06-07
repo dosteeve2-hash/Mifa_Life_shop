@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard | The Editorial Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-on-surface": "#e8f2fc",
+              "surface-container-lowest": "#ffffff",
+              "secondary-container": "#fed000",
+              "on-secondary-fixed": "#231b00",
+              "background": "#f6faff",
+              "error-container": "#ffdad6",
+              "secondary-fixed-dim": "#edc200",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "surface-container-high": "#dfe9f3",
+              "on-tertiary-container": "#fffbff",
+              "tertiary-container": "#e12531",
+              "outline-variant": "#bdcab9",
+              "error": "#ba1a1a",
+              "secondary-fixed": "#ffe07f",
+              "on-error-container": "#93000a",
+              "on-primary-fixed": "#002107",
+              "surface-tint": "#006e27",
+              "on-secondary-fixed-variant": "#564500",
+              "primary-fixed-dim": "#65df76",
+              "on-tertiary-fixed-variant": "#930015",
+              "primary-container": "#008732",
+              "on-tertiary-fixed": "#410004",
+              "on-error": "#ffffff",
+              "on-surface-variant": "#3e4a3d",
+              "tertiary": "#bb001e",
+              "surface": "#f6faff",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#65df76",
+              "on-surface": "#131d24",
+              "surface-variant": "#d9e4ee",
+              "tertiary-fixed": "#ffdad7",
+              "primary": "#006b26",
+              "surface-container": "#e5eff9",
+              "outline": "#6e7b6b",
+              "on-secondary-container": "#6f5900",
+              "secondary": "#725c00",
+              "surface-container-low": "#eaf5ff",
+              "inverse-surface": "#283239",
+              "on-tertiary": "#ffffff",
+              "primary-fixed": "#81fc90",
+              "surface-bright": "#f6faff",
+              "on-background": "#131d24",
+              "surface-dim": "#d1dbe5",
+              "surface-container-highest": "#d9e4ee",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#f7fff2",
+              "on-primary-fixed-variant": "#00531c"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .premium-gradient {
+            background: linear-gradient(135deg, #006b26 0%, #008732 100%);
+        }
+        .asymmetric-hero {
+            padding-left: 10%;
+            padding-right: 5%;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopNavBar Implementation -->
+<nav class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-0 z-50 shadow-sm dark:shadow-none font-plus-jakarta-sans antialiased w-full">
+<div class="flex items-center justify-between px-10 py-4 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-black tracking-tighter text-emerald-900 dark:text-white">
+                The Editorial Marketplace
+            </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-opacity duration-200" href="#">Artisanal</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-opacity duration-200" href="#">Fashion</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-opacity duration-200" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-opacity duration-200" href="#">Gourmet</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-opacity duration-200" href="#">Collections</a>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="material-symbols-outlined text-emerald-800 text-2xl cursor-pointer hover:opacity-80 active:scale-95 transition-all" data-icon="account_circle" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<div class="absolute right-0 top-full mt-2 w-4 bg-emerald-700 h-1 rounded-full"></div>
+</div>
+<span class="material-symbols-outlined text-slate-600 text-2xl cursor-pointer hover:opacity-80 active:scale-95 transition-all" data-icon="shopping_cart">shopping_cart</span>
+</div>
+</div>
+</nav>
+<main class="max-w-screen-2xl mx-auto px-10 py-12">
+<!-- Profile Header Section -->
+<header class="asymmetric-hero mb-16 flex flex-col md:flex-row items-end justify-between gap-8">
+<div class="flex items-center gap-8">
+<div class="relative">
+<div class="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-xl">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="portrait of a confident West African woman with elegant braided hair against a soft teal studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmqmPGqMNUA4uOgilSGpcCfBo406RFrgT5hiCD7xL5v_XHacamASHIiE_Gpq575dsZlVzMVWANhMUBHtgq-9G-yBccZ7Yj8ExrZbKMw-VUIBZZSAzOnWG8PhatBmGVRUo-_1wFMaJOUGajkXgz5n9Do9_bAooq3KBaAoBu8r6vP4rZzR1FBJg8dI6j6URkfAFNQjtqNJc1dKd0WQGF7crL3TkSL3UwVNXVbL3gJGSHcy02qd3J4YmoH8QhMqEUNzKrv6wN9NWkPGCg"/>
+</div>
+<div class="absolute -bottom-2 -right-2 premium-gradient text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
+                        Mifa Elite
+                    </div>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h1 class="font-headline text-4xl font-extrabold tracking-tight text-on-surface">Fatoumata Traoré</h1>
+<span class="bg-secondary-fixed text-on-secondary-fixed text-xs font-bold px-2 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">verified</span>
+                            Membre Mifa Life
+                        </span>
+</div>
+<p class="text-on-surface-variant font-medium">BKO-2024-8849 • Membre depuis Janvier 2023</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 w-full md:w-auto">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm min-w-[180px]">
+<p class="text-xs font-bold text-outline uppercase tracking-wider mb-2">Commandes</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-primary">12</span>
+<span class="text-xs text-on-surface-variant font-semibold">Actives (2)</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm min-w-[180px]">
+<p class="text-xs font-bold text-outline uppercase tracking-wider mb-2">Points Mifa</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-secondary">2,450</span>
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Active Order Tracking -->
+<section class="mb-16">
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-headline text-2xl font-bold">Suivi de commande active</h2>
+<span class="text-primary font-semibold flex items-center gap-2 cursor-pointer hover:underline">
+                    Détails de la livraison <span class="material-symbols-outlined">arrow_forward</span>
+</span>
+</div>
+<div class="bg-surface-container-low p-10 rounded-2xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-5">
+<span class="material-symbols-outlined text-[120px]" data-icon="local_shipping">local_shipping</span>
+</div>
+<div class="flex flex-col md:flex-row justify-between relative z-10 gap-8">
+<div class="flex-1">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<div>
+<h3 class="font-bold text-lg">Commande #MF-9921</h3>
+<p class="text-sm text-on-surface-variant">Prévue pour : Demain, 14:00 - 16:00</p>
+</div>
+</div>
+</div>
+<!-- Stepper -->
+<div class="flex-grow max-w-3xl flex items-center">
+<div class="relative w-full flex justify-between">
+<!-- Progress Line -->
+<div class="absolute top-1/2 left-0 w-full h-0.5 bg-surface-variant -translate-y-1/2"></div>
+<div class="absolute top-1/2 left-0 w-2/3 h-0.5 bg-primary -translate-y-1/2 transition-all duration-700"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center mb-3 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-tight text-on-surface">Commande Reçue</span>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center mb-3 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-tight text-on-surface">Préparation</span>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-white border-4 border-primary text-primary flex items-center justify-center mb-2 -mt-1 shadow-md">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+</div>
+<span class="text-xs font-black uppercase tracking-tight text-primary">Livraison</span>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-outline flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-sm">home</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-tight text-outline">Livré</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+<!-- Left Column: Recent Orders -->
+<div class="lg:col-span-2 space-y-8">
+<div class="flex items-baseline justify-between">
+<h2 class="font-headline text-2xl font-bold">Commandes Récentes</h2>
+<a class="text-sm font-bold text-outline hover:text-primary transition-colors" href="#">Voir tout l'historique</a>
+</div>
+<div class="space-y-4">
+<!-- Order Card 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl flex items-center gap-6 group hover:shadow-md transition-shadow">
+<div class="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-surface-variant">
+<img alt="Product" class="w-full h-full object-cover" data-alt="hand-woven traditional Malian textile with intricate geometric patterns in indigo and cream" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKqC2DaqWNbSl02ooxC_Z27kzuyhAlmOeFaBiIdCwC1JdQHj3_mVqH0zbmV1p_TMDu5DLtvlaP-rQzegm5XfbFCSctW2ADBNgn5fsRaAUo6Sjo7f7jtLYlEm2JaF1_yGA_OeFEWr5HAbog8kQfUWZ5rIjyDNC-DaxSP1nRJct7WJZXhnpsQITT_57oplGFapitOf0n-JFFUWXKh4oc27uPISRzpKAzv4b88UetRuhFWA4T7qXneD0rMphnEXqbPOQSPwYl3nwa6KTt"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-bold text-lg">Pagne Tissé Indigo 'Mopti'</h4>
+<span class="text-lg font-black text-on-surface">45.000 FCFA</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-3">Livré le 12 Mai 2024 • ID: #MF-8820</p>
+<div class="flex gap-2">
+<button class="px-4 py-2 text-xs font-bold border border-outline-variant rounded-full hover:bg-surface-variant transition-colors">Suivre</button>
+<button class="px-4 py-2 text-xs font-bold bg-primary text-on-primary rounded-full hover:opacity-90 transition-opacity">Commander à nouveau</button>
+</div>
+</div>
+</div>
+<!-- Order Card 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl flex items-center gap-6 group hover:shadow-md transition-shadow">
+<div class="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-surface-variant">
+<img alt="Product" class="w-full h-full object-cover" data-alt="set of artisanal hand-carved wooden kitchen utensils arranged on a neutral linen background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuDsR0J1fzKdpuYamiTHSYSxo7whNIDEcVKPjgV0IlyG-JWEFhGg4JboPDq2iNS039GXfujaIqfcyRvMU9IMRk9z4L1LWXRTx1wZ4Kbp6Gy0sIJzwy6TwvcQNqxDR_Q7wn4_1QNj-pxhQnnm9scnWMjp-EDZcVIbUNqKMo9fqRuqFYS6z_uTD6wBICl5P3gsoXUZbeHYzFOLhv7xHn9h9OGqso8Jzn-V2SkmaQq9k9H3y_HNzXVaDO-gzpG3zfzKIQfIQk3HsdpY9l"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-bold text-lg">Set Ustensiles en Bois de Karité</h4>
+<span class="text-lg font-black text-on-surface">12.500 FCFA</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-3">Livré le 05 Mai 2024 • ID: #MF-8755</p>
+<div class="flex gap-2">
+<button class="px-4 py-2 text-xs font-bold border border-outline-variant rounded-full hover:bg-surface-variant transition-colors">Avis</button>
+<button class="px-4 py-2 text-xs font-bold bg-primary text-on-primary rounded-full hover:opacity-90 transition-opacity">Commander à nouveau</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Settings & Quick Actions -->
+<div class="space-y-8">
+<h2 class="font-headline text-2xl font-bold">Paramètres du Compte</h2>
+<div class="bg-surface-container-high rounded-2xl p-2 space-y-1">
+<a class="flex items-center justify-between p-4 rounded-xl hover:bg-white transition-all group" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div>
+<p class="font-bold text-sm">Adresses de livraison</p>
+<p class="text-xs text-on-surface-variant">2 adresses enregistrées</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4 rounded-xl hover:bg-white transition-all group" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<p class="font-bold text-sm">Moyens de paiement</p>
+<p class="text-xs text-on-surface-variant">Orange Money, Wave</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4 rounded-xl hover:bg-white transition-all group" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">security</span>
+</div>
+<div>
+<p class="font-bold text-sm">Confidentialité &amp; Sécurité</p>
+<p class="text-xs text-on-surface-variant">Mot de passe, 2FA</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4 rounded-xl hover:bg-white transition-all group" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<div>
+<p class="font-bold text-sm">Support Client Mifa</p>
+<p class="text-xs text-on-surface-variant">Besoin d'aide ?</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</a>
+</div>
+<!-- Banner/Callout -->
+<div class="premium-gradient rounded-2xl p-8 text-white relative overflow-hidden group cursor-pointer">
+<div class="relative z-10">
+<h3 class="font-headline text-xl font-extrabold mb-2">Parrainez un ami</h3>
+<p class="text-white/80 text-sm mb-6">Offrez 5.000 FCFA et recevez 5.000 FCFA sur votre prochain achat.</p>
+<button class="bg-white text-primary px-6 py-2 rounded-full font-bold text-xs uppercase tracking-widest hover:scale-105 transition-transform">Partager</button>
+</div>
+<div class="absolute -bottom-8 -right-8 opacity-20 transform group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[160px]" style="font-variation-settings: 'FILL' 1;">redeem</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Implementation -->
+<footer class="bg-slate-50 dark:bg-slate-950 font-inter text-sm w-full pt-16 pb-8 border-t border-slate-200/50 dark:border-slate-800/50">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-10 max-w-screen-2xl mx-auto">
+<div class="space-y-4">
+<div class="text-lg font-bold text-slate-900 dark:text-white">The Editorial Marketplace</div>
+<p class="text-slate-500 max-w-xs">La destination privilégiée pour l'artisanat d'exception et le luxe africain contemporain.</p>
+</div>
+<div>
+<h5 class="font-bold text-emerald-800 dark:text-emerald-400 mb-6">Société</h5>
+<ul class="space-y-4 text-slate-500">
+<li><a class="hover:text-emerald-600 dark:hover:text-emerald-300 transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-emerald-600 dark:hover:text-emerald-300 transition-colors" href="#">Shipping Policy</a></li>
+<li><a class="hover:text-emerald-600 dark:hover:text-emerald-300 transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-emerald-800 dark:text-emerald-400 mb-6">Paiements</h5>
+<ul class="space-y-4 text-slate-500">
+<li><a class="hover:text-emerald-600 dark:hover:text-emerald-300 transition-colors" href="#">Orange Money</a></li>
+<li><a class="hover:text-emerald-600 dark:hover:text-emerald-300 transition-colors" href="#">Wave</a></li>
+<li><a class="hover:text-emerald-600 dark:hover:text-emerald-300 transition-colors" href="#">Moov Money</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h5 class="font-bold text-emerald-800 dark:text-emerald-400">Newsletter</h5>
+<div class="flex">
+<input class="bg-slate-100 dark:bg-slate-900 border-none rounded-l-lg px-4 py-2 w-full focus:ring-1 focus:ring-emerald-500" placeholder="Email" type="email"/>
+<button class="bg-emerald-800 text-white px-4 py-2 rounded-r-lg hover:bg-emerald-700 transition-colors">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-screen-2xl mx-auto px-10 mt-16 pt-8 border-t border-slate-200/30 text-center text-slate-400 text-xs">
+            © 2024 The Editorial Marketplace. Designed with pride in Mali.
+        </div>
+</footer>
+</body></html>

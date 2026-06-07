@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mifa Life | The Digital Curator of Mali</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline": "#6e7b6b",
+              "inverse-on-surface": "#e8f2fc",
+              "secondary-fixed-dim": "#edc200",
+              "on-error-container": "#93000a",
+              "surface-container-lowest": "#ffffff",
+              "primary": "#006b26",
+              "on-primary-container": "#f7fff2",
+              "on-tertiary-container": "#fffbff",
+              "secondary-container": "#fed000",
+              "surface-dim": "#d1dbe5",
+              "surface-container-low": "#eaf5ff",
+              "surface-container-highest": "#d9e4ee",
+              "on-background": "#131d24",
+              "on-error": "#ffffff",
+              "secondary-fixed": "#ffe07f",
+              "on-tertiary": "#ffffff",
+              "on-secondary-fixed": "#231b00",
+              "error-container": "#ffdad6",
+              "on-secondary-container": "#6f5900",
+              "surface-bright": "#f6faff",
+              "surface-variant": "#d9e4ee",
+              "outline-variant": "#bdcab9",
+              "on-primary-fixed": "#002107",
+              "tertiary-fixed": "#ffdad7",
+              "primary-container": "#008732",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "inverse-primary": "#65df76",
+              "surface-tint": "#006e27",
+              "tertiary": "#bb001e",
+              "surface-container-high": "#dfe9f3",
+              "surface": "#f6faff",
+              "primary-fixed-dim": "#65df76",
+              "on-tertiary-fixed-variant": "#930015",
+              "on-secondary": "#ffffff",
+              "on-primary-fixed-variant": "#00531c",
+              "secondary": "#725c00",
+              "on-surface-variant": "#3e4a3d",
+              "background": "#f6faff",
+              "tertiary-container": "#e12531",
+              "primary-fixed": "#81fc90",
+              "on-tertiary-fixed": "#410004",
+              "on-secondary-fixed-variant": "#564500",
+              "error": "#ba1a1a",
+              "inverse-surface": "#283239",
+              "surface-container": "#e5eff9",
+              "on-surface": "#131d24",
+              "on-primary": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm">
+<div class="flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-green-700 dark:text-green-500 active:scale-95 transition-transform cursor-pointer" data-icon="menu">menu</span>
+<span class="text-xl font-black text-green-700 dark:text-green-500 tracking-tight font-plus-jakarta">Mifa Life</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-green-700 dark:text-green-500 font-bold hover:opacity-80 transition-opacity" href="#">Home</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:opacity-80 transition-opacity" href="#">Shop</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:opacity-80 transition-opacity" href="#">Pulse</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:opacity-80 transition-opacity" href="#">Account</a>
+</nav>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-green-700 dark:text-green-500 active:scale-95 transition-transform cursor-pointer" data-icon="search">search</span>
+<span class="material-symbols-outlined text-green-700 dark:text-green-500 active:scale-95 transition-transform cursor-pointer" data-icon="shopping_bag" onclick="window.location.href='{{DATA:SCREEN:SCREEN_29}}'">shopping_bag</span>
+</div>
+</div>
+</header>
+<main class="pt-16 pb-24">
+<!-- Hero Section: Editorial Style -->
+<section class="relative px-6 py-8 md:py-16 overflow-hidden">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<div class="z-10 order-2 md:order-1" onclick="window.location.href='{{DATA:SCREEN:SCREEN_5}}'">
+<span class="inline-block px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container font-label text-xs font-bold tracking-widest uppercase mb-4">New Collection</span>
+<h1 class="text-5xl md:text-7xl font-extrabold text-on-surface leading-[1.1] mb-6 tracking-tight">
+                        Authentic <span class="text-primary">Malian</span> Elegance.
+                    </h1>
+<p class="text-lg text-on-surface-variant mb-8 max-w-md leading-relaxed">
+                        Curated lifestyle products from the heart of Bamako. Blending ancestral heritage with modern luxury.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="px-8 py-4 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold shadow-lg hover:shadow-primary/20 active:scale-95 transition-all" onclick="window.location.href='{{DATA:SCREEN:SCREEN_75}}'">
+                            Shop The Look
+                        </button>
+<button class="px-8 py-4 rounded-full border-2 border-primary/20 text-primary font-bold hover:bg-primary/5 active:scale-95 transition-all">
+                            Explore Stories
+                        </button>
+</div>
+</div>
+<div class="relative order-1 md:order-2" onclick="window.location.href='{{DATA:SCREEN:SCREEN_5}}'">
+<div class="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl transform md:rotate-2 md:translate-x-4">
+<img alt="Malian Lifestyle" class="w-full h-full object-cover" data-alt="Stunning portrait of a Malian fashion model wearing vibrant traditional indigo dyed textiles against a warm terracotta wall background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbbnrHSq_WM_ydoArW6VSWg5v9tU14MzbMhYYn0M-PAZHne3zrCdaJWSMwOnv7UsdVmaDN0wVvM4lybUOtH6UQgTwms2RScFKqWgp-HYF_EtixW7lq4MOjeCsqhWPSVx2rOQJa9GVB316rkrwTBxiIBUo_h7wQnzY7N-l-qcXlqqXdWJisKD_zmcSAROO_4aLPw2qJZp8Rs18Kn1fOCZoVaB7-KLeo8NwT9hSeRsgXtXvL3ZrXCMiNjuncHxSjO1Gic2WkS5mjZu83"/>
+</div>
+<div class="absolute -bottom-6 -left-6 w-48 h-48 rounded-2xl overflow-hidden shadow-xl hidden md:block border-4 border-surface">
+<img alt="Textile Detail" class="w-full h-full object-cover" data-alt="Close-up detail of hand-woven Malian Bogolanfini mud cloth texture with intricate geometric patterns in black and cream" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeFsRctyTy9NGjhtAvsvGBFielpaSbp_GRizaBp4waQeb8Y8MvxSIDDYXAqv4FN2dYUGLPDY7SLSGwxgu1J1pgG6uFxP6v0nSR0WpYUxpLBqJr64dWYcZivheIAiAWg6RvD2in09euo5SNgLT0_4_dewVXwSNWGC1FYpGQoUpdbauXqVmFN3R7uzyyaGZ4lToNdq8We2jsPFFGHtGO-cNVUk-pIf9R1Tsp9FcZtHqPAjxhnYTaGwhmUPcEcPoRA5DRVUAPnSf7MFZK"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Mali Pulse: Horizontal Categories -->
+<section class="py-12 bg-surface-container-low">
+<div class="px-6 mb-8 flex justify-between items-end max-w-7xl mx-auto">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-on-surface">Mali Pulse</h2>
+<p class="text-on-surface-variant font-medium">Trending across the nation</p>
+</div>
+<button class="text-primary font-bold flex items-center gap-1 group">
+                    View All <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="flex overflow-x-auto no-scrollbar gap-6 px-6 max-w-7xl mx-auto pb-4">
+<!-- Category Item -->
+<div class="flex-none w-24 flex flex-col items-center gap-3" onclick="window.location.href='{{DATA:SCREEN:SCREEN_16}}'">
+<div class="w-20 h-20 rounded-full ring-2 ring-primary ring-offset-4 bg-white shadow-sm flex items-center justify-center p-1">
+<img alt="Jewelry" class="w-full h-full object-cover rounded-full" data-alt="Elegant silver Tuareg jewelry piece with intricate engraving on a soft velvet cushion" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHtx-e0m2zUKRdAJXdny3AH_CJmUdFzcgCuBGQsrZCvdL2EuQrkVS_WZfxfZppoLH7epLWBdz_3FC8jemSoDCFlR6kB2Cni1hojaMQdG-FlL3iraVtEN03MK184813Yl68Guv0B4uptjhs2xSnt6cqoM4y7aGJhlWLoYno9ztA_AouL21vPJSDMD5ldJxhXGM4jFg-GVjx538gw3N9-KUAR2UGDqh00QZtKMGdjRbmkJylPjHPwWfa4txOfRucU6s3GGzQPauUeAVI"/>
+</div>
+<span class="text-xs font-bold text-on-surface">Jewelry</span>
+</div>
+<!-- Category Item -->
+<div class="flex-none w-24 flex flex-col items-center gap-3" onclick="window.location.href='{{DATA:SCREEN:SCREEN_79}}'">
+<div class="w-20 h-20 rounded-full bg-white shadow-sm flex items-center justify-center p-1 hover:ring-2 hover:ring-primary/40 hover:ring-offset-2 transition-all cursor-pointer">
+<img alt="Decor" class="w-full h-full object-cover rounded-full" data-alt="Modern minimalist wooden chair inspired by West African design placed in a sunlit contemporary room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCu2Qi3LPwnyJgOSN0tCg7L5hlJgdi9_D7nh6kfzUS3lEX21G88Hpo7pgtJCKC2qV4h0UIJtunI9N_EA8nA_JVfFvAe0Pu74d4LMvX3e0non97dru8sXxgVEmBAiB8SqoquKMsYKzB-VmcXhdGqX-kL-MzyVcC2lp8ZL4wrFD7i3JQr-I0H_FQOI39_t_qcEIKspI3D6mxZ3PBp34ChXNpB0eo8a-DthOaETkblKwsPf0yQLXDvQqRrMVsAyylhVJ8Km0Tufv9bN4wy"/>
+</div>
+<span class="text-xs font-medium text-on-surface-variant">Home</span>
+</div>
+<!-- Category Item -->
+<div class="flex-none w-24 flex flex-col items-center gap-3" onclick="window.location.href='{{DATA:SCREEN:SCREEN_16}}'">
+<div class="w-20 h-20 rounded-full bg-white shadow-sm flex items-center justify-center p-1 hover:ring-2 hover:ring-primary/40 hover:ring-offset-2 transition-all cursor-pointer">
+<img alt="Beauty" class="w-full h-full object-cover rounded-full" data-alt="Artisanal glass bottles of organic cold-pressed oil with minimalist labels on a clean wooden surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAosWKavPl_VgZfc-HNlgQqmzw1h7rfBfPImMHmQTTDDSe8v2KhED6LCuzcmMyzfUr3UIi4h9RXYUBRlLJQXLQxAyev6y8UiJ9J6A0F-RRxyKCXEnE12_tSCOG3kaJN_Vjylhn-HS2ah-gBiI5zHmsgFd-uoCIAmwx9wNl2twC-SL2ju5EQLkSBWeebhCtVGX6OaaHGRCD59EGOPgq4AVFxW7Hz07jjK9jowsRw5gL4df_Fo9CSlXMRgnoI9s_ZDOEAaHkNe36nDrUg"/>
+</div>
+<span class="text-xs font-medium text-on-surface-variant">Beauty</span>
+</div>
+<!-- Category Item -->
+<div class="flex-none w-24 flex flex-col items-center gap-3">
+<div class="w-20 h-20 rounded-full bg-white shadow-sm flex items-center justify-center p-1 hover:ring-2 hover:ring-primary/40 hover:ring-offset-2 transition-all cursor-pointer">
+<img alt="Apparel" class="w-full h-full object-cover rounded-full" data-alt="Selection of handcrafted colorful West African textiles neatly folded in a boutique setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSRU4onpoK7pLnlmhvlrdH6NAnz87kjE1fieRpwqryAh1fkKgZcYrbRmgXoKmT8sW747JXTmC3d8xyO3wEjaY-w5D-lMsRx4pcOR_QhS4ZV1BOJTU_aGIAbEWYkiMrhZfS9OuYX-gtjdtQQg28s54-OUQMin3fJeiCr_emWZ58W75u1ZCq4bJbgXERv6NhYdB0Prh1PNo-xCwr09Dx85-9EJFXiyZ_7qv0Nc9IA10GGIyn3hudgmi8dxxdJzbKlNp9Y3QV7UNx1-yD"/>
+</div>
+<span class="text-xs font-medium text-on-surface-variant">Apparel</span>
+</div>
+<!-- Category Item -->
+<div class="flex-none w-24 flex flex-col items-center gap-3">
+<div class="w-20 h-20 rounded-full bg-white shadow-sm flex items-center justify-center p-1 hover:ring-2 hover:ring-primary/40 hover:ring-offset-2 transition-all cursor-pointer">
+<img alt="Gourmet" class="w-full h-full object-cover rounded-full" data-alt="A heap of golden fonio grains in a traditional carved wooden bowl on a rustic kitchen table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAh_oy-lEPU2WI7A9v1uopI8P5pklrbkLi5K8-VSup6oOUom3tY3f9aO7-Rc7zMKQUAL6JYuWkDGptLkoR5EPfYWgVa9oKE9JuO4ZIWSz7RaCrxxrB1kVlvcjop65J1zX8iOzRnwX4HV-ctwT_Lu6lTktSIGjXgl-WDXY5680xTxUOrpBwVM79nNHt1V40iQIsboLnLN4zv5RC6nIUb6JNGdjxO78WB2CIc_vdc0uv8C960U5juUMmPu-9gPA26W6gJESNVPFI6JkRE"/>
+</div>
+<span class="text-xs font-medium text-on-surface-variant">Gourmet</span>
+</div>
+<!-- Category Item -->
+<div class="flex-none w-24 flex flex-col items-center gap-3">
+<div class="w-20 h-20 rounded-full bg-white shadow-sm flex items-center justify-center p-1 hover:ring-2 hover:ring-primary/40 hover:ring-offset-2 transition-all cursor-pointer">
+<img alt="Art" class="w-full h-full object-cover rounded-full" data-alt="Artisanal hand-carved Malian masks and statues arranged artistically on a gallery wall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3bpJhC5zfDqulQlw5fwl9UtOhjqxDdhPdT41ksY84ck7SaQBhgqZgWC4Ew2M1ycFDKbiGRWXwIi3n3pgvnBL98BKXM4wp0SJs6jKpgfotPxo6_f_7T-ZojzJea3HEH9WEwLQDcnCAc7eVWsaBOnP6Hu_JX-zbo17bV9O7bK1tg540Ek1Y7w0aGEZ-9GFrJdudBiJNKQaG4RUnrdhntcNYv8lyVnWX-5hakIsiFI3esE_gI8P8difC4AvtNGQRWouhwaO7xl2NtDsk"/>
+</div>
+<span class="text-xs font-medium text-on-surface-variant">Art</span>
+</div>
+</div>
+</section>
+<!-- Flash Sales: Bento Grid Style -->
+<section class="py-16 px-6 max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
+<div class="flex items-center gap-4">
+<h2 class="text-4xl font-extrabold tracking-tight text-on-surface">Flash Sales</h2>
+<div class="flex items-center gap-2 bg-tertiary/10 text-tertiary px-4 py-2 rounded-xl font-bold font-mono">
+<span class="animate-pulse">08:45:22</span>
+<span class="material-symbols-outlined text-sm" data-icon="bolt">bolt</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 h-auto md:h-[600px]">
+<!-- Featured Deal -->
+<div class="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-2xl bg-surface-container-highest" onclick="window.location.href='{{DATA:SCREEN:SCREEN_5}}'">
+<img alt="Flash Sale 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Premium wireless headphones on a clean marble surface with professional studio lighting and soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvgqY_Q6nFa3WhVpYPU9o30IHLsMTUvMQoAfhEWCJxi-qAYb_AA6N-NqlsqV8FWex_d-NlAg4UGtyAWTfgei-J0_A3fHj02EBC2RMfpMK49DfKHqbRwywuIJjYC8YHVyrvsRF-KOJcTBXYIQnPu7cth45gLEeYSxOQ2HlvWXh1dOvLaq4zjvAM-cVY2OKKtxdxzWl_n2xljs7kBLH5RxHWcNiW7dzsGxviAvXXJOzEHeCnoCgY89pWdmtRv47Tr9qRw73eqwgM4qbU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<span class="bg-tertiary text-white px-3 py-1 rounded-lg text-sm font-bold mb-4 inline-block">-45% OFF</span>
+<h3 class="text-3xl font-bold text-white mb-2 leading-tight">Elite Sound Headphones</h3>
+<div class="flex items-baseline gap-2 mb-4">
+<span class="text-2xl font-bold text-white">45,000 CFA</span>
+<span class="text-lg text-white/60 line-through">82,000 CFA</span>
+</div>
+<button class="bg-white text-on-background px-6 py-3 rounded-full font-bold active:scale-95 transition-all">Claim Offer</button>
+</div>
+</div>
+<!-- Secondary Deal -->
+<div class="md:col-span-2 relative group overflow-hidden rounded-2xl bg-surface-container-highest" onclick="window.location.href='{{DATA:SCREEN:SCREEN_5}}'">
+<img alt="Flash Sale 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A sleek minimalist white wristwatch with a light grey leather strap on a textured slate background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqqNYGJVPDdfI1AaabBCSkBpeDzn3XZSiTgp8OwxyQPwlIpnGuwMHXB6li7LKuNtc-yoPATRRUCZrDQ4fHxY1P1R6I6BnHkByFw3bPGeIDOnyUqwTFoUkUqwEicDsZYREHaKLLQYRpRQVTOY-qZUT3CADJMkKLCboCxpQ6B9c0Kte76f22C2Yvt8E_lM7OTzPTz5fVMK9MJKAxQeddxjSrCrWdzUisfC-tmO2AP3gmaOOvOhJ2z16qMEAUV3pFk0sM1zWc8h9bPyAv"/>
+<div class="absolute inset-0 bg-gradient-to-r from-on-background/60 to-transparent"></div>
+<div class="absolute inset-y-0 left-0 flex flex-col justify-center p-6">
+<span class="bg-secondary-container text-on-secondary-container px-2 py-1 rounded-md text-xs font-bold mb-2 w-fit">FLASH DEAL</span>
+<h3 class="text-xl font-bold text-white mb-1">Nexus Minimal Watch</h3>
+<p class="text-white/80 font-bold mb-3">15,500 CFA</p>
+<button class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-on-background shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+</div>
+<!-- Small Deal 1 -->
+<div class="relative group overflow-hidden rounded-2xl bg-surface-container-highest" onclick="window.location.href='{{DATA:SCREEN:SCREEN_5}}'">
+<img alt="Flash Sale 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Close-up profile of a bright red athletic sneaker with high-tech sole features on a plain white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGU0xh6VL2CakA2ErJUXXnCRA9EJdL0YrcePxWEN7Y0e14bhIgszbVajh2-5DOmaepCzJoVd1q83pmHsf-E5bLynHRntpLQq8z5g0hT3c9t_lsC9Ly18Q6esdIyuFz8q7QuYMC1Vi41ri9EgcRfcDXaxXbAtto7AnbfPpPQOujHDgVpX7hc4GilZzSCV2KJ6aJBtVzl9JNq0azM9rSi86K_RovYqUtkqpz_WK_jNW1Y2jOiUdTKIiC0Z-lPLSs7M-vZTl0JyviNE5t"/>
+<div class="absolute top-3 left-3 bg-tertiary text-white text-[10px] font-bold px-2 py-1 rounded-full">-30%</div>
+</div>
+<!-- Small Deal 2 -->
+<div class="relative group overflow-hidden rounded-2xl bg-surface-container-highest" onclick="window.location.href='{{DATA:SCREEN:SCREEN_5}}'">
+<img alt="Flash Sale 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Stylish oversized tortoiseshell sunglasses placed on a bed of fresh tropical leaves" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBJd8wK0W24XrlEAeMr45i-giXGdkZvJkfEhsCUuYE9ZHmTrEPtl5O2cUM-vBMASY3DYYNHBlfVp7YI7Xbys2jgZf4FNCfV63OtU5GEGr9hA-bKoOoaJl1WDrriopU5cnypEJeak2fMaDcDRCD25DPtm--StUQw4BmN69MhWUhoO1Ou8N75w74-ZDzGqwk6K7zuTrbCOPJ8-X-ulOfh1QOIj9ejf1ffYq0caVHN3cTGcMfaF_-JRpfLW8bjVzwXFbg7eTbIXSksmBu"/>
+<div class="absolute top-3 left-3 bg-tertiary text-white text-[10px] font-bold px-2 py-1 rounded-full">-20%</div>
+</div>
+</div>
+</section>
+<!-- Trust Section: Minimal & Functional -->
+<section class="py-20 bg-surface-container-highest">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+<div class="flex flex-col items-center" onclick="window.location.href='{{DATA:SCREEN:SCREEN_5}}'">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined text-4xl" data-icon="local_shipping">local_shipping</span>
+</div>
+<h4 class="text-xl font-bold text-on-surface mb-2">Bamako Fast Delivery</h4>
+<p class="text-on-surface-variant leading-relaxed">Same-day delivery within Bamako and 48h nationwide shipping across Mali.</p>
+</div>
+<div class="flex flex-col items-center" onclick="window.location.href='{{DATA:SCREEN:SCREEN_5}}'">
+<div class="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center text-secondary mb-6">
+<span class="material-symbols-outlined text-4xl" data-icon="verified_user">verified_user</span>
+</div>
+<h4 class="text-xl font-bold text-on-surface mb-2">Secure Payments</h4>
+<p class="text-on-surface-variant leading-relaxed">Pay safely via Orange Money, Moov Money, or Cash on Delivery for total peace of mind.</p>
+</div>
+<div class="flex flex-col items-center" onclick="window.location.href='{{DATA:SCREEN:SCREEN_5}}'">
+<div class="w-16 h-16 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary mb-6">
+<span class="material-symbols-outlined text-4xl" data-icon="support_agent">support_agent</span>
+</div>
+<h4 class="text-xl font-bold text-on-surface mb-2">24/7 Local Support</h4>
+<p class="text-on-surface-variant leading-relaxed">Our team is available round the clock in French and Bambara to assist you.</p>
+</div>
+</div>
+</section>
+<!-- Mifa Footer -->
+<footer class="bg-inverse-surface text-surface py-16 px-6">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-1" onclick="window.location.href='{{DATA:SCREEN:SCREEN_5}}'">
+<h2 class="text-3xl font-black text-primary tracking-tighter mb-6">Mifa Life</h2>
+<p class="text-surface-dim/70 leading-relaxed mb-8">
+                        The premiere destination for West African lifestyle, fashion, and artisanal heritage. Curated with love in Bamako.
+                    </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="public">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+</a>
+</div>
+</div>
+<div onclick="window.location.href='{{DATA:SCREEN:SCREEN_5}}'">
+<h5 class="font-bold text-lg mb-6">Navigation</h5>
+<ul class="space-y-4 text-surface-dim/60">
+<li><a class="hover:text-primary transition-colors" href="#">New Arrivals</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Best Sellers</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Mali Pulse</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Artisan Stories</a></li>
+</ul>
+</div>
+<div onclick="window.location.href='{{DATA:SCREEN:SCREEN_5}}'">
+<h5 class="font-bold text-lg mb-6">Customer Care</h5>
+<ul class="space-y-4 text-surface-dim/60">
+<li><a class="hover:text-primary transition-colors" href="#">Shipping Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Return Center</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Track Order</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">FAQ</a></li>
+</ul>
+</div>
+<div onclick="window.location.href='{{DATA:SCREEN:SCREEN_5}}'">
+<h5 class="font-bold text-lg mb-6">Newsletter</h5>
+<p class="text-surface-dim/60 mb-4">Join the tribe for exclusive drops and cultural insights.</p>
+<div class="flex flex-col gap-3">
+<input class="bg-white/5 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary" placeholder="Your email address" type="email"/>
+<button class="bg-primary text-white font-bold py-3 rounded-xl hover:opacity-90 active:scale-95 transition-all">Subscribe</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto pt-16 mt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-xs text-surface-dim/40">© 2024 Mifa Life. Designed for the Modern Curator.</p>
+<div class="flex gap-6 text-xs text-surface-dim/40">
+<a href="#">Privacy</a>
+<a href="#">Terms</a>
+<a href="#">Cookies</a>
+</div>
+</div>
+</footer>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] rounded-t-2xl">
+<a class="flex flex-col items-center justify-center text-green-700 dark:text-green-400 font-bold ring-2 ring-green-700 ring-offset-4 rounded-full p-2 active:scale-95 transition-all duration-200" href="{{DATA:SCREEN:SCREEN_58}}">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[10px] font-medium font-inter">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-green-600 active:scale-95 transition-all duration-200" href="{{DATA:SCREEN:SCREEN_75}}">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="text-[10px] font-medium font-inter">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-green-600 active:scale-95 transition-all duration-200" href="{{DATA:SCREEN:SCREEN_41}}">
+<span class="material-symbols-outlined" data-icon="sensors_kronecker">sensors_krx</span>
+<span class="text-[10px] font-medium font-inter">Pulse</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-green-600 active:scale-95 transition-all duration-200" href="{{DATA:SCREEN:SCREEN_84}}">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-medium font-inter">Account</span>
+</a>
+</nav>
+<!-- FAB: Contextual Search / Create Story -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center z-40 active:scale-90 transition-transform md:bottom-12">
+<span class="material-symbols-outlined text-2xl" data-icon="add">add</span>
+</button>
+</body></html>

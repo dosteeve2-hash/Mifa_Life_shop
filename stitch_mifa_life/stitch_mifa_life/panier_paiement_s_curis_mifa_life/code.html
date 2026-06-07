@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mon Panier - Mifa Life</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-surface": "#283239",
+              "on-tertiary-container": "#fffbff",
+              "error": "#ba1a1a",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "primary-fixed-dim": "#65df76",
+              "tertiary-fixed": "#ffdad7",
+              "outline": "#6e7b6b",
+              "primary-container": "#008732",
+              "error-container": "#ffdad6",
+              "tertiary-container": "#e12531",
+              "on-tertiary-fixed": "#410004",
+              "on-secondary-container": "#6f5900",
+              "surface": "#f6faff",
+              "secondary": "#725c00",
+              "on-tertiary-fixed-variant": "#930015",
+              "on-secondary-fixed": "#231b00",
+              "outline-variant": "#bdcab9",
+              "on-background": "#131d24",
+              "on-secondary": "#ffffff",
+              "secondary-fixed-dim": "#edc200",
+              "on-surface-variant": "#3e4a3d",
+              "surface-container-highest": "#d9e4ee",
+              "surface-container-high": "#dfe9f3",
+              "background": "#f6faff",
+              "surface-tint": "#006e27",
+              "inverse-on-surface": "#e8f2fc",
+              "surface-bright": "#f6faff",
+              "surface-dim": "#d1dbe5",
+              "surface-variant": "#d9e4ee",
+              "tertiary": "#bb001e",
+              "on-secondary-fixed-variant": "#564500",
+              "surface-container-low": "#eaf5ff",
+              "on-error": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#131d24",
+              "primary-fixed": "#81fc90",
+              "surface-container": "#e5eff9",
+              "secondary-fixed": "#ffe07f",
+              "on-primary-fixed-variant": "#00531c",
+              "on-primary-container": "#f7fff2",
+              "on-tertiary": "#ffffff",
+              "secondary-container": "#fed000",
+              "on-primary-fixed": "#002107",
+              "on-error-container": "#93000a",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#65df76",
+              "primary": "#006b26"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+      .glass-effect { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-background antialiased pb-40">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="text-green-800 dark:text-green-500 hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-green-800 dark:text-green-500">Mon Panier</h1>
+</div>
+<div class="flex items-center">
+<button class="text-green-800 dark:text-green-500 hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+</button>
+</div>
+</header>
+<main class="mt-20 px-4 max-w-2xl mx-auto space-y-8">
+<!-- Cart Items Section -->
+<section class="space-y-4">
+<div class="flex items-center justify-between mb-2">
+<h2 class="font-headline font-bold text-xl tracking-tight">Vos articles (2)</h2>
+<span class="text-secondary font-semibold text-sm">Vider le panier</span>
+</div>
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest rounded-3xl p-4 flex gap-4 items-center shadow-[0_4px_20px_-4px_rgba(19,29,36,0.04)]">
+<div class="w-24 h-24 rounded-2xl overflow-hidden bg-surface-variant flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Premium organic shea butter in a luxury minimalist glass jar with wooden lid on a clean white surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9LAwVFA8t9BP0BB5Cu-dQrhRJN1_4fIkyd2WeaaEMavEwD8UZ43jLfPQtL4DwP7HyGI2epUd8XgNwukXCpWlok47aSsZdPqw0Exn9z3cOKq6eXnN7x1_diHwGON5qiVr70Bx82Lk0FjofQfpefyTshLYTSOpG6XkEpFO5ZDeVPRRb_q75F5dIgrSinMOFQkVd7aF9ul_SCKmyqu_cM7fSrb9FKhGzaA7GG5pL7cUdupJVvfg_XFJYe2nayDAaJ9EoILckW3-VERGb"/>
+</div>
+<div class="flex-1 flex flex-col justify-between h-24 py-1">
+<div>
+<h3 class="font-headline font-bold text-on-surface leading-tight">Beurre de Karité Bio</h3>
+<p class="text-slate-500 text-xs">Extraction à froid, 250g</p>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-bold text-primary">7.500 FCFA</span>
+<div class="flex items-center bg-surface-container-high rounded-full p-1 gap-3">
+<button class="w-7 h-7 flex items-center justify-center bg-white rounded-full shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="text-sm font-bold w-4 text-center">1</span>
+<button class="w-7 h-7 flex items-center justify-center bg-primary text-white rounded-full shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest rounded-3xl p-4 flex gap-4 items-center shadow-[0_4px_20px_-4px_rgba(19,29,36,0.04)]">
+<div class="w-24 h-24 rounded-2xl overflow-hidden bg-surface-variant flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Pure golden honey in a clear hexagonal jar with honey dipper in soft morning sunlight and bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFE7xPGslXOtQ2TRT6Vk8ftbX9imXKEcE-1nTm7K8DFKqNZRx1M40Lvz9pDFz2WuAPqg5W-CWzItcoZidzb3ozQ0MeDppYxojjocuX8hyiIusYg1UaK_RSUBLMElNtXW7Sblnwuc38TGKzNpf3cWRbp4yCBDt4qpeluluj3vC2r326qGxDcla8wSlb6ZCd58hlvIz5UViVDy3Swmq2U3E1v_3jjb2EZrHi8RJ6Ld8Io1SbQ9m7TCeWvbuyGFt26rYVWPd1ObvYN6uj"/>
+</div>
+<div class="flex-1 flex flex-col justify-between h-24 py-1">
+<div>
+<h3 class="font-headline font-bold text-on-surface leading-tight">Miel pur du Mandé</h3>
+<p class="text-slate-500 text-xs">Sauvage, 500ml</p>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-bold text-primary">5.000 FCFA</span>
+<div class="flex items-center bg-surface-container-high rounded-full p-1 gap-3">
+<button class="w-7 h-7 flex items-center justify-center bg-white rounded-full shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="text-sm font-bold w-4 text-center">2</span>
+<button class="w-7 h-7 flex items-center justify-center bg-primary text-white rounded-full shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Shipping Form -->
+<section class="space-y-4">
+<h2 class="font-headline font-bold text-xl tracking-tight">Détails de livraison</h2>
+<div class="bg-surface-container-lowest rounded-3xl p-6 space-y-5 shadow-[0_4px_20px_-4px_rgba(19,29,36,0.04)]">
+<div class="space-y-1">
+<label class="text-xs font-bold text-slate-500 px-1 uppercase tracking-wider">Nom Complet</label>
+<input class="w-full bg-surface-container-highest border-none rounded-2xl p-4 font-medium focus:ring-0 focus:bg-white focus:border-b-2 focus:border-primary transition-all" placeholder="Entrez votre nom" type="text" value="Ousmane Keïta"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-xs font-bold text-slate-500 px-1 uppercase tracking-wider">Téléphone</label>
+<input class="w-full bg-surface-container-highest border-none rounded-2xl p-4 font-medium focus:ring-0 focus:bg-white focus:border-b-2 focus:border-primary transition-all" type="tel" value="+223 70 00 00 00"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-slate-500 px-1 uppercase tracking-wider">Ville</label>
+<select class="w-full bg-surface-container-highest border-none rounded-2xl p-4 font-medium focus:ring-0 focus:bg-white focus:border-b-2 focus:border-primary transition-all appearance-none">
+<option>Bamako</option>
+<option>Ségou</option>
+<option>Mopti</option>
+<option>Sikasso</option>
+</select>
+</div>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-slate-500 px-1 uppercase tracking-wider">Quartier / Adresse</label>
+<input class="w-full bg-surface-container-highest border-none rounded-2xl p-4 font-medium focus:ring-0 focus:bg-white focus:border-b-2 focus:border-primary transition-all" placeholder="Ex: Badalabougou, Rue 125" type="text"/>
+</div>
+</div>
+</section>
+<!-- Payment Method -->
+<section class="space-y-4">
+<h2 class="font-headline font-bold text-xl tracking-tight">Mode de paiement</h2>
+<div class="grid grid-cols-2 gap-3">
+<!-- Orange Money -->
+<label class="relative cursor-pointer group">
+<input checked="" class="peer sr-only" name="payment" type="radio"/>
+<div class="p-4 bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary rounded-3xl transition-all h-full flex flex-col items-center gap-2 group-active:scale-95">
+<div class="w-12 h-12 bg-[#ff6600]/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[#ff6600]">smartphone</span>
+</div>
+<span class="font-bold text-xs text-center">Orange Money</span>
+<div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+</div>
+</div>
+</label>
+<!-- Wave -->
+<label class="relative cursor-pointer group">
+<input class="peer sr-only" name="payment" type="radio"/>
+<div class="p-4 bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary rounded-3xl transition-all h-full flex flex-col items-center gap-2 group-active:scale-95">
+<div class="w-12 h-12 bg-[#1da1f2]/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[#1da1f2]">payments</span>
+</div>
+<span class="font-bold text-xs text-center">Wave Mali</span>
+<div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+</div>
+</div>
+</label>
+<!-- Moov -->
+<label class="relative cursor-pointer group">
+<input class="peer sr-only" name="payment" type="radio"/>
+<div class="p-4 bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary rounded-3xl transition-all h-full flex flex-col items-center gap-2 group-active:scale-95">
+<div class="w-12 h-12 bg-blue-600/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-600">account_balance_wallet</span>
+</div>
+<span class="font-bold text-xs text-center">Moov Money</span>
+<div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+</div>
+</div>
+</label>
+<!-- Cash -->
+<label class="relative cursor-pointer group">
+<input class="peer sr-only" name="payment" type="radio"/>
+<div class="p-4 bg-surface-container-lowest border-2 border-transparent peer-checked:border-primary rounded-3xl transition-all h-full flex flex-col items-center gap-2 group-active:scale-95">
+<div class="w-12 h-12 bg-green-600/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-green-600">handshake</span>
+</div>
+<span class="font-bold text-xs text-center leading-tight">Paiement à la livraison</span>
+<div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+</div>
+</div>
+</label>
+</div>
+</section>
+<!-- Trust Badges -->
+<div class="flex items-center justify-center gap-6 py-4">
+<div class="flex flex-col items-center gap-1">
+<div class="w-10 h-10 bg-primary/5 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">verified_user</span>
+</div>
+<span class="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">100% Sécurisé</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-10 h-10 bg-primary/5 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">support_agent</span>
+</div>
+<span class="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Support 24/7</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-10 h-10 bg-primary/5 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">local_shipping</span>
+</div>
+<span class="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Suivi Réel</span>
+</div>
+</div>
+</main>
+<!-- Sticky Checkout Section -->
+<div class="fixed bottom-0 left-0 w-full z-50">
+<!-- Bottom Nav Shell Logic integrated with Checkout Card -->
+<div class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-t-[2.5rem] px-6 pt-6 pb-8 shadow-[0_-12px_40px_-4px_rgba(19,29,36,0.12)] space-y-4">
+<div class="space-y-2">
+<div class="flex justify-between items-center text-sm font-medium text-slate-500">
+<span>Sous-total</span>
+<span class="font-bold text-on-surface">17.500 FCFA</span>
+</div>
+<div class="flex justify-between items-center text-sm font-medium text-slate-500">
+<span>Livraison (Bamako)</span>
+<span class="font-bold text-green-600">GRATUIT</span>
+</div>
+<div class="pt-2 flex justify-between items-end">
+<div class="flex flex-col">
+<span class="text-[10px] font-black uppercase text-slate-400 tracking-[0.1em]">Total à payer</span>
+<span class="text-2xl font-black text-on-surface leading-none">17.500 FCFA</span>
+</div>
+<button class="bg-primary hover:opacity-90 active:scale-95 transition-all duration-200 text-white rounded-full px-8 py-4 font-headline font-extrabold text-sm shadow-lg shadow-primary/20 flex items-center gap-2">
+<span>Commander</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Visual placeholder for BottomNavBar destinations if needed, 
+                 but keeping it focused on checkout for this transactional page -->
+<div class="flex justify-around items-center pt-2 opacity-40 grayscale pointer-events-none">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined">storefront</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Boutique</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Favoris</span>
+</div>
+<div class="flex flex-col items-center justify-center text-green-700 ring-2 ring-green-700 ring-offset-4 rounded-full p-1 scale-75">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Compte</span>
+</div>
+</div>
+</div>
+</div>
+</body></html>

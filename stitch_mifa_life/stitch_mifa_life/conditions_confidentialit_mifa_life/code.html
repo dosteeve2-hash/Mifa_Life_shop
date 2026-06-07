@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mifa Life — Legal Shield</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed-variant": "#00531c",
+              "surface-container-high": "#dfe9f3",
+              "on-surface-variant": "#3e4a3d",
+              "outline": "#6e7b6b",
+              "inverse-on-surface": "#e8f2fc",
+              "primary": "#006b26",
+              "surface-container": "#e5eff9",
+              "on-primary-fixed": "#002107",
+              "on-background": "#131d24",
+              "secondary": "#725c00",
+              "background": "#f6faff",
+              "on-tertiary-fixed-variant": "#930015",
+              "surface-container-lowest": "#ffffff",
+              "inverse-surface": "#283239",
+              "on-tertiary-container": "#fffbff",
+              "on-surface": "#131d24",
+              "tertiary-container": "#e12531",
+              "on-tertiary": "#ffffff",
+              "surface": "#f6faff",
+              "secondary-container": "#fed000",
+              "on-secondary-fixed-variant": "#564500",
+              "surface-dim": "#d1dbe5",
+              "primary-fixed-dim": "#65df76",
+              "on-error": "#ffffff",
+              "surface-tint": "#006e27",
+              "on-secondary": "#ffffff",
+              "error-container": "#ffdad6",
+              "surface-variant": "#d9e4ee",
+              "on-tertiary-fixed": "#410004",
+              "surface-container-highest": "#d9e4ee",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "secondary-fixed-dim": "#edc200",
+              "primary-fixed": "#81fc90",
+              "surface-bright": "#f6faff",
+              "primary-container": "#008732",
+              "on-secondary-fixed": "#231b00",
+              "surface-container-low": "#eaf5ff",
+              "on-primary-container": "#f7fff2",
+              "on-secondary-container": "#6f5900",
+              "tertiary-fixed": "#ffdad7",
+              "tertiary": "#bb001e",
+              "secondary-fixed": "#ffe07f",
+              "on-primary": "#ffffff",
+              "error": "#ba1a1a",
+              "outline-variant": "#bdcab9",
+              "inverse-primary": "#65df76",
+              "on-error-container": "#93000a"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body leading-[1.7]">
+<!-- Top Navigation Anchor Shell (JSON: TopAppBar) -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)]">
+<div class="flex items-center px-6 h-16 max-w-7xl mx-auto justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-emerald-800 dark:text-emerald-400 cursor-pointer active:scale-95 duration-200">arrow_back</span>
+<h1 class="font-headline font-bold text-lg text-emerald-800 dark:text-emerald-400">Legal &amp; Privacy</h1>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-emerald-700 dark:text-emerald-300 font-headline font-semibold transition-colors" href="#Utilisation">Utilisation</a>
+<a class="text-slate-500 dark:text-slate-400 font-headline hover:bg-slate-100/50 transition-colors px-3 py-1 rounded-lg" href="#Ventes">Ventes</a>
+<a class="text-slate-500 dark:text-slate-400 font-headline hover:bg-slate-100/50 transition-colors px-3 py-1 rounded-lg" href="#Livraison">Livraison</a>
+<a class="text-slate-500 dark:text-slate-400 font-headline hover:bg-slate-100/50 transition-colors px-3 py-1 rounded-lg" href="#Données">Données</a>
+</div>
+</div>
+<!-- Mobile Anchor Scroll -->
+<div class="md:hidden flex overflow-x-auto no-scrollbar gap-6 px-6 py-3 border-t border-outline-variant/10 bg-surface">
+<a class="whitespace-nowrap text-sm font-semibold text-primary underline underline-offset-8 decoration-2" href="#Utilisation">Utilisation</a>
+<a class="whitespace-nowrap text-sm font-medium text-on-surface-variant" href="#Ventes">Ventes</a>
+<a class="whitespace-nowrap text-sm font-medium text-on-surface-variant" href="#Livraison">Livraison</a>
+<a class="whitespace-nowrap text-sm font-medium text-on-surface-variant" href="#Données">Données</a>
+<a class="whitespace-nowrap text-sm font-medium text-on-surface-variant" href="#Litiges">Litiges</a>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-6 max-w-4xl mx-auto">
+<!-- Header Section -->
+<header class="mb-16">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary font-headline text-xs font-bold uppercase tracking-wider mb-6">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                Document Officiel
+            </div>
+<h2 class="font-headline text-4xl md:text-5xl font-extrabold text-on-background tracking-tight mb-6">
+                Conditions Générales &amp; <span class="text-primary">Confidentialité</span>
+</h2>
+<p class="text-on-surface-variant text-lg max-w-2xl">
+                Mifa Life s'engage pour une transparence totale au Mali. Ce document définit les règles de notre place de marché pour garantir une expérience sûre et équitable pour tous.
+            </p>
+</header>
+<!-- Key Takeaways Bento -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-20">
+<div class="bg-surface-container-low p-6 rounded-xl flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center flex-shrink-0 text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-background mb-1">Paiements</h4>
+<p class="text-sm text-on-surface-variant">Retraits : Vos fonds Wave/OM sont disponibles sous 24h ouvrées après validation.</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-background mb-1">Données</h4>
+<p class="text-sm text-on-surface-variant">Confidentialité : Vos coordonnées à Bamako ne sont jamais vendues à des tiers.</p>
+</div>
+</div>
+</section>
+<!-- Mifa Rules Cards -->
+<section class="mb-20">
+<h3 class="font-headline text-2xl font-bold mb-8">Les Règles d'Or Mifa</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-white p-5 rounded-xl shadow-sm border border-outline-variant/20 text-center">
+<span class="material-symbols-outlined text-primary text-3xl mb-3">gavel</span>
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Commission</p>
+<p class="font-headline font-extrabold text-xl text-on-background">12%</p>
+</div>
+<div class="bg-white p-5 rounded-xl shadow-sm border border-outline-variant/20 text-center">
+<span class="material-symbols-outlined text-primary text-3xl mb-3">shield</span>
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Qualité</p>
+<p class="font-headline font-extrabold text-xl text-on-background">100% Pro</p>
+</div>
+<div class="bg-white p-5 rounded-xl shadow-sm border border-outline-variant/20 text-center">
+<span class="material-symbols-outlined text-primary text-3xl mb-3">local_shipping</span>
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Livraison</p>
+<p class="font-headline font-extrabold text-xl text-on-background">48H Max</p>
+</div>
+<div class="bg-white p-5 rounded-xl shadow-sm border border-outline-variant/20 text-center">
+<span class="material-symbols-outlined text-primary text-3xl mb-3">lock</span>
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Sécurité</p>
+<p class="font-headline font-extrabold text-xl text-on-background">SSL 256</p>
+</div>
+</div>
+</section>
+<!-- Main Legal Content -->
+<div class="space-y-20">
+<!-- Section 1 -->
+<section id="Utilisation">
+<div class="flex items-center gap-4 mb-6">
+<span class="font-headline text-4xl font-black text-outline-variant/30">01</span>
+<h3 class="font-headline text-2xl font-bold text-on-background">Conditions d'Utilisation</h3>
+</div>
+<div class="space-y-6 text-on-surface-variant">
+<div>
+<h4 class="font-bold text-on-background mb-2">1.1 Éligibilité</h4>
+<p>L'utilisation de la plateforme Mifa Life est réservée aux personnes majeures résidant en République du Mali. Chaque utilisateur doit fournir une identité réelle vérifiable via un numéro de téléphone actif (Orange Money ou Wave).</p>
+</div>
+<div>
+<h4 class="font-bold text-on-background mb-2">1.2 Responsabilité du compte</h4>
+<p>Vous êtes responsable de la confidentialité de vos accès. Toute transaction effectuée depuis votre compte est réputée avoir été validée par vous-même. En cas de vol de téléphone, contactez immédiatement notre support à Bamako.</p>
+</div>
+</div>
+</section>
+<!-- Section 2 -->
+<section id="Ventes">
+<div class="flex items-center gap-4 mb-6">
+<span class="font-headline text-4xl font-black text-outline-variant/30">02</span>
+<h3 class="font-headline text-2xl font-bold text-on-background">Conditions de Vente</h3>
+</div>
+<div class="bg-surface-container-high/50 p-8 rounded-xl mb-8">
+<div class="flex items-center gap-2 mb-4 text-primary">
+<span class="material-symbols-outlined">info</span>
+<span class="font-bold">L'essentiel pour les Vendeurs</span>
+</div>
+<p class="text-sm leading-relaxed">Les vendeurs s'engagent à ne proposer que des produits en stock physique. La falsification de photos ou la description trompeuse entraîne une suspension immédiate du compte vendeur.</p>
+</div>
+<div class="space-y-6 text-on-surface-variant">
+<div>
+<h4 class="font-bold text-on-background mb-2">2.1 Processus de Paiement</h4>
+<p>Mifa Life agit comme tiers de confiance. Le paiement de l'acheteur est séquestré jusqu'à confirmation de la réception du colis. Une fois validé, le solde est transféré sur le porte-monnaie Mifa du vendeur.</p>
+</div>
+</div>
+</section>
+<!-- Section 3: Privacy -->
+<section class="relative overflow-hidden bg-on-background text-white p-10 rounded-[2rem]" id="Données">
+<div class="relative z-10">
+<h3 class="font-headline text-2xl font-bold mb-8 text-primary-fixed">Protection des Données</h3>
+<div class="grid md:grid-cols-2 gap-10">
+<div class="space-y-4">
+<h4 class="font-bold text-surface-bright italic">Pas de jargon, juste des faits :</h4>
+<ul class="space-y-3 text-sm text-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+<span>Nous stockons votre numéro uniquement pour les transactions.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+<span>Votre adresse à Bamako n'est visible que par le livreur.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+<span>Vous pouvez demander la suppression de vos données à tout moment.</span>
+</li>
+</ul>
+</div>
+<div class="p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm">
+<p class="text-sm italic mb-4">"Votre vie privée est notre priorité. À Bamako comme ailleurs, nous respectons les normes internationales de protection RGPD adaptées au contexte malien."</p>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-slate-700">
+<img class="w-full h-full object-cover" data-alt="portrait of a professional malian legal officer in a suit smiling confidently" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwNrDwf68-i2d4syWVW9gljWO2_ya2QMkVDu53Q_Icz4KTfZWRwPVR-IctHY-B42lX0W29uIxtph3GUsp-z4cnpAardrAps16mpQwN-ovNHAX2v5ZAgRMXtT_U7hTzGypHRbVbpPa3PmX7TpYu4eJPVeEJN1eua_clnQFLZOj0VJ7VVWEVKRv8_Wz3QFa_nmzsawSGrLnlbrMXB-acBuA0lXnj40zc-V8mewAepx2vlWHhyCJxr6JoDSr2OO6X10Lidh3v7ZI6aE-A"/>
+</div>
+<span class="text-xs font-bold text-primary-fixed">Responsable Conformité Mifa</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Decorative background pulse -->
+<div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/20 rounded-full blur-3xl"></div>
+</section>
+</div>
+<!-- Contact / Legal Identity -->
+<section class="mt-20 pt-12 border-t border-outline-variant/20 grid md:grid-cols-2 gap-12">
+<div>
+<h4 class="font-headline font-bold text-on-background mb-4 text-xl">Siège Social</h4>
+<div class="space-y-2 text-on-surface-variant">
+<p class="font-semibold text-on-background">Mifa Life SA</p>
+<p>Immeuble BMS, 3ème Étage</p>
+<p>Quartier ACI 2000, Bamako</p>
+<p>République du Mali</p>
+</div>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-background mb-4 text-xl">Contact Juridique</h4>
+<div class="space-y-4">
+<a class="flex items-center gap-3 group" href="mailto:legal@mifalife.ml">
+<span class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">mail</span>
+</span>
+<span class="font-semibold text-primary underline underline-offset-4">legal@mifalife.ml</span>
+</a>
+<div class="flex items-center gap-3">
+<span class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">call</span>
+</span>
+<span class="font-semibold text-on-background">+223 20 22 XX XX</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full rounded-t-[2rem] mt-12 bg-slate-50 dark:bg-slate-950 font-body text-sm leading-relaxed">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 px-8 py-16 max-w-7xl mx-auto">
+<div class="col-span-2 md:col-span-1">
+<div class="text-lg font-black text-slate-900 dark:text-slate-100 mb-4 tracking-tight">Mifa Life</div>
+<p class="text-slate-600 dark:text-slate-400 max-w-xs">La marketplace de confiance pour tous les Maliens.</p>
+</div>
+<div class="flex flex-col gap-3">
+<h5 class="font-bold text-slate-900 dark:text-slate-100 mb-2">Plateforme</h5>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline underline-offset-4 transition-all duration-300" href="#">Vendre</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline underline-offset-4 transition-all duration-300" href="#">Acheter</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline underline-offset-4 transition-all duration-300" href="#">Aide</a>
+</div>
+<div class="flex flex-col gap-3">
+<h5 class="font-bold text-slate-900 dark:text-slate-100 mb-2">Légal</h5>
+<a class="text-emerald-600 dark:text-emerald-400 font-semibold underline underline-offset-4 transition-all duration-300" href="#">Terms of Service</a>
+<a class="text-emerald-600 dark:text-emerald-400 font-semibold underline underline-offset-4 transition-all duration-300" href="#">Privacy Policy</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline underline-offset-4 transition-all duration-300" href="#">Cookie Policy</a>
+</div>
+<div class="flex flex-col gap-3">
+<h5 class="font-bold text-slate-900 dark:text-slate-100 mb-2">Sécurité</h5>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline underline-offset-4 transition-all duration-300" href="#">Compliance</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline underline-offset-4 transition-all duration-300" href="#">Payment Methods</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-300 underline underline-offset-4 transition-all duration-300" href="#">Security</a>
+</div>
+</div>
+<div class="border-t border-slate-200 dark:border-slate-800 px-8 py-6 text-center text-slate-500 dark:text-slate-500 text-xs">
+            © 2024 Mifa Life. All rights reserved.
+        </div>
+</footer>
+</body></html>

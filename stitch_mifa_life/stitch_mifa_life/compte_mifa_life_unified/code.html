@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Customer Dashboard | Mifa Life</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline": "#6e7b6b",
+              "inverse-on-surface": "#e8f2fc",
+              "secondary-fixed-dim": "#edc200",
+              "on-error-container": "#93000a",
+              "surface-container-lowest": "#ffffff",
+              "primary": "#006b26",
+              "on-primary-container": "#f7fff2",
+              "on-tertiary-container": "#fffbff",
+              "secondary-container": "#fed000",
+              "surface-dim": "#d1dbe5",
+              "surface-container-low": "#eaf5ff",
+              "surface-container-highest": "#d9e4ee",
+              "on-background": "#131d24",
+              "on-error": "#ffffff",
+              "secondary-fixed": "#ffe07f",
+              "on-tertiary": "#ffffff",
+              "on-secondary-fixed": "#231b00",
+              "error-container": "#ffdad6",
+              "on-secondary-container": "#6f5900",
+              "surface-bright": "#f6faff",
+              "surface-variant": "#d9e4ee",
+              "outline-variant": "#bdcab9",
+              "on-primary-fixed": "#002107",
+              "tertiary-fixed": "#ffdad7",
+              "primary-container": "#008732",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "inverse-primary": "#65df76",
+              "surface-tint": "#006e27",
+              "tertiary": "#bb001e",
+              "surface-container-high": "#dfe9f3",
+              "surface": "#f6faff",
+              "primary-fixed-dim": "#65df76",
+              "on-tertiary-fixed-variant": "#930015",
+              "on-secondary": "#ffffff",
+              "on-primary-fixed-variant": "#00531c",
+              "secondary": "#725c00",
+              "on-surface-variant": "#3e4a3d",
+              "background": "#f6faff",
+              "tertiary-container": "#e12531",
+              "primary-fixed": "#81fc90",
+              "on-tertiary-fixed": "#410004",
+              "on-secondary-fixed-variant": "#564500",
+              "error": "#ba1a1a",
+              "inverse-surface": "#283239",
+              "surface-container": "#e5eff9",
+              "on-surface": "#131d24",
+              "on-primary": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md fixed top-0 w-full z-50 shadow-sm flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform text-green-700 dark:text-green-500">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="text-xl font-black text-green-700 dark:text-green-500 tracking-tight font-headline">Mifa Life</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform text-green-700 dark:text-green-500">
+<span class="material-symbols-outlined">shopping_bag</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-28 px-4 md:px-8 max-w-7xl mx-auto">
+<!-- Profile Header: Asymmetrical Layout -->
+<section class="mb-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
+<div class="md:col-span-8 flex flex-col md:flex-row gap-6 items-center md:items-start text-center md:text-left">
+<div class="relative">
+<div class="w-32 h-32 rounded-full overflow-hidden ring-4 ring-white shadow-lg">
+<img alt="Profile Photo" data-alt="close-up portrait of a radiant young West African woman with braided hair smiling softly in warm golden afternoon sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATRkh_ks3SuTMzE7_udsCHnTTsJBJ0D5HL3XTW-yFrsVzgmQyU8XwBNk7KocjdfoeVZU0Vksj8IfzZd5TwRoeV_xwsb8Ezy3ENsQa0ivFYDEBGy0uPhgt147k_T7Xfrj8aYklmGjCBB-bjDWFS9MuAMeYp4hnY2W3eu2aOFc3p_gqwJhTS45MSlxMTLqr2bSLlGOOOU_b_opAOjuSXtaQN-l-5krxeMwTGcEb4WZmziNkgof2mi-zxhu5oGX4sE2A9hTdUoUJnnfxK"/>
+</div>
+<div class="absolute bottom-1 right-1 bg-primary text-white p-2 rounded-full border-4 border-white">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="flex-1">
+<span class="text-secondary font-bold text-xs tracking-widest uppercase font-headline">Premium Member</span>
+<h2 class="text-4xl font-extrabold font-headline tracking-tight text-on-surface mb-2">Fatoumata Keïta</h2>
+<p class="text-on-surface-variant max-w-md">Curating life through quality and tradition. Based in Bamako, Mali.</p>
+</div>
+</div>
+<div class="md:col-span-4 flex justify-center md:justify-end gap-3">
+<button class="px-6 py-3 rounded-full bg-white text-primary border border-outline-variant/20 font-semibold active:scale-95 transition-all">Edit Profile</button>
+<button class="px-6 py-3 rounded-full bg-primary text-white font-semibold shadow-lg shadow-primary/20 active:scale-95 transition-all">Account Settings</button>
+</div>
+</section>
+<!-- Bento Grid Stats -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+<div class="p-6 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<span class="material-symbols-outlined text-primary mb-4">stars</span>
+<div>
+<div class="text-2xl font-bold font-headline">1,240</div>
+<div class="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Mifa Points</div>
+</div>
+</div>
+<div class="p-6 rounded-xl bg-surface-container-low flex flex-col justify-between">
+<span class="material-symbols-outlined text-secondary mb-4">shopping_basket</span>
+<div>
+<div class="text-2xl font-bold font-headline">24</div>
+<div class="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Total Orders</div>
+</div>
+</div>
+<div class="p-6 rounded-xl bg-surface-container-high flex flex-col justify-between">
+<span class="material-symbols-outlined text-tertiary mb-4">favorite</span>
+<div>
+<div class="text-2xl font-bold font-headline">08</div>
+<div class="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Saved Items</div>
+</div>
+</div>
+<div class="p-6 rounded-xl bg-primary text-white flex flex-col justify-between shadow-xl shadow-primary/10">
+<span class="material-symbols-outlined mb-4">local_shipping</span>
+<div>
+<div class="text-2xl font-bold font-headline">02</div>
+<div class="text-xs text-white/80 uppercase tracking-wider font-semibold">Active Shipments</div>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Active Order Tracking: Mali Pulse Stepper -->
+<div class="lg:col-span-2 space-y-6">
+<div class="bg-white rounded-xl p-6 shadow-sm overflow-hidden relative">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h3 class="font-headline font-bold text-xl text-on-surface">Order #MF-88291</h3>
+<p class="text-on-surface-variant text-sm">Estimated arrival: Oct 24, 2023</p>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold">In Transit</span>
+</div>
+<!-- Pulse Stepper -->
+<div class="relative flex justify-between items-center mb-10">
+<div class="absolute top-1/2 left-0 w-full h-1 bg-surface-container-highest -translate-y-1/2 -z-0"></div>
+<div class="absolute top-1/2 left-0 w-2/3 h-1 bg-primary -translate-y-1/2 -z-0"></div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center ring-4 ring-white">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<span class="text-[10px] font-bold uppercase text-on-surface-variant">Confirmed</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center ring-4 ring-white">
+<span class="material-symbols-outlined text-sm">inventory_2</span>
+</div>
+<span class="text-[10px] font-bold uppercase text-on-surface-variant">Packed</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center ring-8 ring-primary/20">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<span class="text-[10px] font-bold uppercase text-primary">Shipping</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center ring-4 ring-white">
+<span class="material-symbols-outlined text-sm">home</span>
+</div>
+<span class="text-[10px] font-bold uppercase text-on-surface-variant">Delivered</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-4 flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Product" data-alt="high-quality organic shea butter in a luxury minimalist glass jar on a light wooden surface with soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiH-Cl5wYz3yidBmtIQxAcrc_EfCJLUNTHXzprdFMLmaxUgTn6_IEOJB_0sNXwRLV63qIjZ1ZlLaIg6FLz7vIWyjXAe6HUab32zSlDle2aMpWjzy-XELOPeEX-Wx4aov8aSMTlwI94JwlppBlKCwNxX6EQ9xS1M1YIX-hPEIP1cE15HhORUxUa1jY06AYydx0gqbHbTm_oWRPpOC3AQKgaN4hgjDRkEcW9iOCZWprtHRN5J8rzm_qoEWGbebrlWUYiKkwPFCyil0Hb"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-sm">Premium Organic Shea Butter</h4>
+<p class="text-xs text-on-surface-variant">Quantity: 2 • Size: 500g</p>
+</div>
+<div class="text-right">
+<div class="font-bold text-primary">24,500 FCFA</div>
+<a class="text-[10px] font-bold text-secondary uppercase underline underline-offset-4" href="#">Track Package</a>
+</div>
+</div>
+</div>
+<!-- Order History -->
+<div class="bg-white rounded-xl p-6 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline font-bold text-xl text-on-surface">Recent Orders</h3>
+<button class="text-sm font-semibold text-primary">View All</button>
+</div>
+<div class="space-y-4">
+<!-- Order Row 1 -->
+<div class="flex items-center justify-between py-3">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface rounded-full flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">package</span>
+</div>
+<div>
+<div class="font-bold">Handwoven Mudcloth Throw</div>
+<div class="text-xs text-on-surface-variant">Order #MF-87720 • Oct 12, 2023</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-bold">45,000 FCFA</div>
+<span class="text-[10px] font-bold text-green-600 uppercase">Completed</span>
+</div>
+</div>
+<!-- Order Row 2 -->
+<div class="flex items-center justify-between py-3">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface rounded-full flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">package</span>
+</div>
+<div>
+<div class="font-bold">Artisan Spices Collection</div>
+<div class="text-xs text-on-surface-variant">Order #MF-86512 • Sept 28, 2023</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-bold">12,200 FCFA</div>
+<span class="text-[10px] font-bold text-green-600 uppercase">Completed</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Account & Quick Actions -->
+<div class="space-y-6">
+<!-- Loyalty Card -->
+<div class="bg-gradient-to-br from-primary to-primary-container rounded-xl p-6 text-white shadow-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-10">
+<span class="font-headline font-black text-lg">MIFA GOLD</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">qr_code_2</span>
+</div>
+<div class="mb-6">
+<p class="text-white/60 text-[10px] uppercase tracking-widest font-bold">Current Balance</p>
+<div class="text-3xl font-headline font-extrabold tracking-tight">1,240 <span class="text-sm font-medium">pts</span></div>
+</div>
+<div class="h-1 w-full bg-white/20 rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-3/4"></div>
+</div>
+<p class="mt-2 text-[10px] text-white/80 font-medium text-right">260 points until next reward</p>
+</div>
+</div>
+<!-- Account Settings Quick Links -->
+<div class="bg-white rounded-xl p-6 shadow-sm">
+<h4 class="font-headline font-bold text-on-surface mb-4">Account Settings</h4>
+<nav class="space-y-2">
+<a class="flex items-center justify-between p-3 hover:bg-surface-container-low rounded-lg transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">person_outline</span>
+<span class="text-sm font-semibold">Personal Information</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-3 hover:bg-surface-container-low rounded-lg transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">credit_card</span>
+<span class="text-sm font-semibold">Payment Methods</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-3 hover:bg-surface-container-low rounded-lg transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">location_on</span>
+<span class="text-sm font-semibold">Delivery Addresses</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-3 hover:bg-surface-container-low rounded-lg transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">notifications</span>
+<span class="text-sm font-semibold">Notifications</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">chevron_right</span>
+</a>
+<div class="pt-4 border-t border-surface-container-highest mt-4">
+<button class="flex items-center gap-3 p-3 text-tertiary font-bold w-full hover:bg-error-container/20 rounded-lg transition-colors">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm">Sign Out</span>
+</button>
+</div>
+</nav>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 rounded-t-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] md:hidden">
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-green-600 transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-inter text-[10px] font-medium mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-green-600 transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-inter text-[10px] font-medium mt-1">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-green-600 transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined">sensors_krx</span>
+<span class="font-inter text-[10px] font-medium mt-1">Pulse</span>
+</a>
+<a class="flex flex-col items-center justify-center text-green-700 dark:text-green-400 font-bold ring-2 ring-green-700 ring-offset-4 rounded-full p-2 transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-inter text-[10px] font-medium mt-0.5">Account</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-variant": "#d9e4ee",
+              "background": "#f6faff",
+              "primary-fixed-dim": "#65df76",
+              "surface-container-high": "#dfe9f3",
+              "surface-bright": "#f6faff",
+              "on-tertiary-container": "#fffbff",
+              "on-error-container": "#93000a",
+              "on-secondary-container": "#6f5900",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "error-container": "#ffdad6",
+              "inverse-primary": "#65df76",
+              "on-background": "#131d24",
+              "on-secondary": "#ffffff",
+              "surface-container": "#e5eff9",
+              "surface": "#f6faff",
+              "primary": "#006b26",
+              "error": "#ba1a1a",
+              "tertiary-container": "#e12531",
+              "on-primary": "#ffffff",
+              "primary-container": "#008732",
+              "tertiary-fixed": "#ffdad7",
+              "tertiary": "#bb001e",
+              "surface-container-highest": "#d9e4ee",
+              "on-primary-fixed-variant": "#00531c",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#d1dbe5",
+              "on-primary-container": "#f7fff2",
+              "outline-variant": "#bdcab9",
+              "secondary-fixed-dim": "#edc200",
+              "secondary-fixed": "#ffe07f",
+              "outline": "#6e7b6b",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed": "#81fc90",
+              "inverse-surface": "#283239",
+              "on-tertiary-fixed-variant": "#930015",
+              "surface-tint": "#006e27",
+              "on-surface-variant": "#3e4a3d",
+              "on-surface": "#131d24",
+              "on-primary-fixed": "#002107",
+              "inverse-on-surface": "#e8f2fc",
+              "secondary-container": "#fed000",
+              "on-error": "#ffffff",
+              "on-secondary-fixed-variant": "#564500",
+              "on-tertiary-fixed": "#410004",
+              "surface-container-low": "#eaf5ff",
+              "secondary": "#725c00",
+              "on-secondary-fixed": "#231b00"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md flex items-center justify-between px-6 h-16 w-full no-border bg-slate-50 dark:bg-slate-800/50 shadow-none">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-emerald-900 dark:text-emerald-50 hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200 cursor-pointer" data-icon="arrow_back">arrow_back</span>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight text-emerald-900 dark:text-emerald-50">Order Details</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-emerald-900 dark:text-emerald-50 hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200 cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+</header>
+<main class="pt-20 px-4 md:px-8 max-w-5xl mx-auto space-y-8">
+<!-- User Profile Header -->
+<section class="relative overflow-hidden p-6 rounded-2xl bg-surface-container-lowest shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)] flex flex-col md:flex-row items-center md:items-start gap-6">
+<div class="relative">
+<div class="w-24 h-24 rounded-full border-4 border-surface-container-high overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of Ousmane Keïta, a sophisticated West African man with a friendly expression in a modern professional setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvsiWJJeFz_Q-gyZWQGfMJ2toBC6lW9SApM1PnDnSwfTG9PVguYPMWbQ_8nXEr2mZKe1RUg1QBGbzPgV6IPjGh4schmvZTtM9hRPn6GWlzSovyCQd8YQInLDx2dqL2XrQKz301-kZqzz01T9wKp7j9yXtXpogkE0mVs8gNLNAkdB5U_13FLHjsBrsz2EOLrntHMyMnH6DuWKmfqtH8P2vsw8YvuuCodIn2DHZKfX0Oiq7R4I3HDNjrAuF1H7gSda-ASLUlrn_ZxGzH"/>
+</div>
+<div class="absolute bottom-0 right-0 bg-primary text-white p-1.5 rounded-full border-2 border-white shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="text-center md:text-left space-y-2">
+<h2 class="font-headline font-bold text-2xl md:text-3xl tracking-tight text-on-background">Ousmane Keïta</h2>
+<div class="inline-flex items-center gap-2 bg-secondary/10 px-3 py-1 rounded-full border border-secondary/20">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-secondary font-semibold text-xs uppercase tracking-wider">Membre Mifa Life</span>
+</div>
+</div>
+<button class="md:ml-auto bg-surface-container-high hover:bg-surface-variant transition-colors rounded-full p-2 h-10 w-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="settings">settings</span>
+</button>
+</section>
+<!-- Quick Stats Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<div class="bg-surface-container-lowest p-5 rounded-2xl shadow-[0_4px_20px_-2px_rgba(19,29,36,0.04)] border border-outline-variant/10 group hover:translate-y-[-2px] transition-all duration-300">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-primary/10 rounded-xl">
+<span class="material-symbols-outlined text-primary" data-icon="shopping_bag" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+</div>
+<span class="text-xs font-bold text-primary bg-primary-fixed p-1 rounded-md px-2">Actif</span>
+</div>
+<p class="text-on-surface-variant text-sm font-medium mb-1">Commandes en cours</p>
+<p class="text-2xl font-bold font-headline text-on-background">01</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-2xl shadow-[0_4px_20px_-2px_rgba(19,29,36,0.04)] border border-outline-variant/10 hover:translate-y-[-2px] transition-all duration-300">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-secondary/10 rounded-xl">
+<span class="material-symbols-outlined text-secondary" data-icon="payments" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm font-medium mb-1">Total dépensé</p>
+<p class="text-2xl font-bold font-headline text-on-background">175.500 <span class="text-xs font-semibold text-on-surface-variant">FCFA</span></p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-2xl shadow-[0_4px_20px_-2px_rgba(19,29,36,0.04)] border border-outline-variant/10 hover:translate-y-[-2px] transition-all duration-300">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-tertiary/10 rounded-xl">
+<span class="material-symbols-outlined text-tertiary" data-icon="loyalty" style="font-variation-settings: 'FILL' 1;">loyalty</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm font-medium mb-1">Points de fidélité</p>
+<p class="text-2xl font-bold font-headline text-on-background">450 <span class="text-xs font-semibold text-on-surface-variant">pts</span></p>
+</div>
+</section>
+<!-- Active Order Tracking Bento Grid -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Order Status Card -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-2xl shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)] overflow-hidden flex flex-col">
+<div class="p-6 border-b border-surface-container-high flex items-center justify-between">
+<div>
+<h3 class="text-lg font-bold font-headline text-on-background">Suivi de commande</h3>
+<p class="text-sm text-on-surface-variant font-medium">Référence: #MIFA-9876</p>
+</div>
+<span class="bg-primary/10 text-primary font-bold text-xs px-3 py-1.5 rounded-full ring-1 ring-primary/20">En cours de livraison</span>
+</div>
+<div class="p-8 flex-1">
+<!-- Vertical Stepper -->
+<div class="relative space-y-8">
+<!-- Connecting Line -->
+<div class="absolute left-4 top-2 bottom-2 w-0.5 bg-surface-container-high"></div>
+<div class="absolute left-4 top-2 h-[66%] w-0.5 bg-primary"></div>
+<!-- Steps -->
+<div class="relative flex items-center gap-6">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center z-10 shadow-[0_0_12px_rgba(0,107,38,0.3)]">
+<span class="material-symbols-outlined text-white text-lg" data-icon="check">check</span>
+</div>
+<div>
+<h4 class="font-bold text-on-background leading-none mb-1">Commande Reçue</h4>
+<p class="text-xs text-on-surface-variant">Aujourd'hui, 11:20</p>
+</div>
+</div>
+<div class="relative flex items-center gap-6">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center z-10 shadow-[0_0_12px_rgba(0,107,38,0.3)]">
+<span class="material-symbols-outlined text-white text-lg" data-icon="check">check</span>
+</div>
+<div>
+<h4 class="font-bold text-on-background leading-none mb-1">Préparation</h4>
+<p class="text-xs text-on-surface-variant">Aujourd'hui, 12:45</p>
+</div>
+</div>
+<div class="relative flex items-center gap-6">
+<div class="w-8 h-8 rounded-full bg-primary-container border-4 border-white flex items-center justify-center z-10 shadow-lg">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="local_shipping" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+</div>
+<div>
+<h4 class="font-bold text-primary leading-none mb-1">En cours de livraison</h4>
+<p class="text-xs text-on-surface-variant">Estimé à 14:30</p>
+</div>
+</div>
+<div class="relative flex items-center gap-6 opacity-40">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-on-surface-variant text-lg" data-icon="home">home</span>
+</div>
+<div>
+<h4 class="font-bold text-on-background leading-none mb-1">Livré</h4>
+<p class="text-xs text-on-surface-variant">En attente...</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Delivery Info Card -->
+<div class="bg-surface-container-high p-6 rounded-2xl flex flex-col justify-between space-y-6">
+<div class="space-y-4">
+<h3 class="font-headline font-bold text-lg text-on-background">Infos Livreur</h3>
+<div class="flex items-center gap-4 bg-surface-container-lowest p-3 rounded-xl shadow-sm">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of Mamadou Coulibaly, a professional delivery driver in a neat uniform with a friendly smile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD98UVRgPHgHWFMiERU7k0tMvdm1VXicZdAzm5aGiAsg39b2NVA6NnDqoabZQ-4_aPYqdvOjvU61RCEvd1PublGQBECCqCIejZuWe6KfbwtDZ0YG-nMwFpVpmxviEY1PcOwLINfQz14ec5qhmA69JM5QTphwvaJt60OzzHnpl15p-JFWWpGrL4VK_ylY74gKjeOgGm8ibO6lrqxjqSbUQ8ymlq7EmZ7T5WVmkGCXetNq6B_ZyZ0xvq4ReiAe7pvMpuT9cbSYH-5N8i8"/>
+</div>
+<div>
+<p class="font-bold text-on-background">Mamadou Coulibaly</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-xs" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs text-on-surface-variant font-medium">4.9 (120+ courses)</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-surface-container-lowest p-3 rounded-xl">
+<p class="text-[10px] uppercase tracking-wider font-bold text-on-surface-variant mb-1">Estimation</p>
+<p class="text-lg font-bold text-primary">14:30</p>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-xl">
+<p class="text-[10px] uppercase tracking-wider font-bold text-on-surface-variant mb-1">Véhicule</p>
+<p class="text-lg font-bold text-on-background">Scooter</p>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white font-bold py-4 rounded-full shadow-[0_8px_20px_-4px_rgba(0,107,38,0.4)] flex items-center justify-center gap-3 hover:scale-[0.98] transition-transform active:scale-95">
+<span class="material-symbols-outlined" data-icon="call" style="font-variation-settings: 'FILL' 1;">call</span>
+                    Appeler le livreur
+                </button>
+</div>
+</section>
+<!-- Order History -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-headline font-bold text-xl text-on-background">Historique des commandes</h3>
+<a class="text-primary font-bold text-sm hover:underline" href="#">Voir tout</a>
+</div>
+<div class="space-y-3">
+<!-- History Item 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-[0_4px_16px_rgba(19,29,36,0.03)] border border-outline-variant/5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center rounded-xl">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="receipt_long">receipt_long</span>
+</div>
+<div>
+<p class="font-bold text-on-background">Commande #MIFA-9102</p>
+<p class="text-xs text-on-surface-variant font-medium">20 Octobre 2023 • 25.000 FCFA</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider">Succès</span>
+<button class="bg-surface-container-high text-on-background font-bold text-sm px-5 py-2 rounded-full hover:bg-surface-variant transition-colors whitespace-nowrap">
+                            Commander à nouveau
+                        </button>
+</div>
+</div>
+<!-- History Item 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-[0_4px_16px_rgba(19,29,36,0.03)] border border-outline-variant/5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center rounded-xl">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="receipt_long">receipt_long</span>
+</div>
+<div>
+<p class="font-bold text-on-background">Commande #MIFA-8854</p>
+<p class="text-xs text-on-surface-variant font-medium">12 Octobre 2023 • 12.400 FCFA</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="bg-error/10 text-error text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider">Annulée</span>
+<button class="bg-surface-container-high text-on-background font-bold text-sm px-5 py-2 rounded-full hover:bg-surface-variant transition-colors whitespace-nowrap">
+                            Commander à nouveau
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Account Settings Bento -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<!-- Adresses -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+<h4 class="font-bold text-on-background">Mes Adresses</h4>
+</div>
+<div class="space-y-4">
+<div class="flex items-start gap-3">
+<div class="p-2 bg-surface-container-high rounded-lg mt-0.5">
+<span class="material-symbols-outlined text-sm" data-icon="home">home</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-background">Domicile</p>
+<p class="text-xs text-on-surface-variant">ACI 2000, Près de l'Ambassade des USA, Bamako</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="p-2 bg-surface-container-high rounded-lg mt-0.5">
+<span class="material-symbols-outlined text-sm" data-icon="work">work</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-background">Bureau</p>
+<p class="text-xs text-on-surface-variant">Immeuble BMS, Quartier du Fleuve</p>
+</div>
+</div>
+</div>
+<button class="mt-6 w-full py-2 text-primary text-xs font-bold uppercase tracking-widest border border-primary/20 rounded-xl hover:bg-primary/5 transition-colors">Gérer les adresses</button>
+</div>
+<!-- Paiement -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-secondary" data-icon="account_balance_wallet">account_balance_wallet</span>
+<h4 class="font-bold text-on-background">Moyens de Paiement</h4>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between bg-surface-container-low p-3 rounded-xl">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-[#ff6600] rounded-md flex items-center justify-center font-bold text-white text-[10px]">O.M</div>
+<div>
+<p class="text-sm font-bold text-on-background">Orange Money</p>
+<p class="text-xs text-on-surface-variant">•••• 76 54</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-low p-3 rounded-xl opacity-60">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-[#3391ff] rounded-md flex items-center justify-center font-bold text-white text-[10px]">W.</div>
+<div>
+<p class="text-sm font-bold text-on-background">Wave</p>
+<p class="text-xs text-on-surface-variant">•••• 90 22</p>
+</div>
+</div>
+</div>
+</div>
+<button class="mt-6 w-full py-2 text-on-surface-variant text-xs font-bold uppercase tracking-widest border border-outline-variant/30 rounded-xl">Ajouter une méthode</button>
+</div>
+<!-- Support -->
+<div class="bg-primary p-6 rounded-2xl shadow-[0_12px_24px_-8px_rgba(0,107,38,0.3)] text-white flex flex-col justify-between">
+<div>
+<h4 class="font-bold text-xl font-headline mb-2">Besoin d'aide ?</h4>
+<p class="text-white/80 text-sm mb-6">Notre équipe est disponible 24/7 pour vous accompagner.</p>
+</div>
+<a class="bg-white text-primary font-bold py-3 rounded-xl flex items-center justify-center gap-3 hover:bg-on-primary-container transition-colors" href="https://wa.me/22300000000">
+<span class="material-symbols-outlined" data-icon="chat" style="font-variation-settings: 'FILL' 1;">chat</span>
+                    WhatsApp Support
+                </a>
+</div>
+</section>
+<!-- Logout Zone -->
+<section class="flex justify-center pt-8 pb-12">
+<button class="flex items-center gap-2 text-error font-bold text-sm uppercase tracking-widest px-8 py-3 rounded-full bg-error/5 hover:bg-error/10 transition-colors border border-error/20">
+<span class="material-symbols-outlined text-lg" data-icon="logout">logout</span>
+                Déconnexion
+            </button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full h-20 flex justify-around items-center px-8 pb-safe bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-t-3xl z-50 no-border shadow-[0_-12px_32px_-4px_rgba(19,29,36,0.06)]">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-emerald-700 dark:hover:text-emerald-300 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-emerald-700 dark:hover:text-emerald-300 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-emerald-800 dark:text-emerald-400 ring-2 ring-emerald-800/20 ring-offset-4 rounded-full p-1 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Profile</span>
+</a>
+</nav>
+</body></html>

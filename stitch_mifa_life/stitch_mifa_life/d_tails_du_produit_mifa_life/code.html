@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#dfe9f3",
+              "on-tertiary-container": "#fffbff",
+              "inverse-on-surface": "#e8f2fc",
+              "secondary-fixed-dim": "#edc200",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "tertiary-container": "#e12531",
+              "primary-container": "#008732",
+              "secondary-container": "#fed000",
+              "on-primary-container": "#f7fff2",
+              "surface": "#f6faff",
+              "on-secondary-container": "#6f5900",
+              "on-primary-fixed-variant": "#00531c",
+              "inverse-surface": "#283239",
+              "surface-tint": "#006e27",
+              "primary": "#006b26",
+              "outline-variant": "#bdcab9",
+              "surface-container-low": "#eaf5ff",
+              "on-tertiary-fixed-variant": "#930015",
+              "on-primary-fixed": "#002107",
+              "surface-container-highest": "#d9e4ee",
+              "on-secondary-fixed": "#231b00",
+              "tertiary": "#bb001e",
+              "primary-fixed": "#81fc90",
+              "on-secondary": "#ffffff",
+              "on-primary": "#ffffff",
+              "primary-fixed-dim": "#65df76",
+              "background": "#f6faff",
+              "on-tertiary-fixed": "#410004",
+              "inverse-primary": "#65df76",
+              "surface-variant": "#d9e4ee",
+              "surface-container": "#e5eff9",
+              "outline": "#6e7b6b",
+              "on-error": "#ffffff",
+              "surface-dim": "#d1dbe5",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#131d24",
+              "on-tertiary": "#ffffff",
+              "error-container": "#ffdad6",
+              "secondary": "#725c00",
+              "surface-bright": "#f6faff",
+              "on-surface-variant": "#3e4a3d",
+              "on-background": "#131d24",
+              "error": "#ba1a1a",
+              "on-error-container": "#93000a",
+              "tertiary-fixed": "#ffdad7",
+              "secondary-fixed": "#ffe07f",
+              "on-secondary-fixed-variant": "#564500"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .tonal-layering {
+            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(223,233,243,0.3) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface">
+<!-- Top Navigation -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md flex justify-between items-center px-6 h-16 w-full shadow-none">
+<button class="text-green-800 dark:text-green-400 hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-green-800 dark:text-green-400">Mifa Life</h1>
+<button class="text-green-800 dark:text-green-400 hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+</header>
+<main class="pt-16 pb-32">
+<!-- Hero Section: Asymmetric Editorial Layout -->
+<section class="relative px-4 pt-6">
+<div class="relative overflow-hidden rounded-3xl aspect-[4/5] md:aspect-video shadow-2xl shadow-on-surface/5">
+<img alt="Beurre de Karité Bio Premium" class="w-full h-full object-cover" data-alt="Close-up of creamy artisanal shea butter in a rustic wooden bowl, soft natural morning sunlight, warm earthy tones, organic texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgV3dy2bUYmzGRjMqU91vn6rH8ESCyxbQYfNUoXXCKxYgH4YAErSPwr0Anwz0tsaOyub9TTV3ZH96UA3lpiyWS8hp9QHnotqA3RihBfSdu8x0sVQyhWS0INZL1cBlS5EeAgojJd0wBIAGQwRbAJ-5rehMsG8JAC6jS_HgvqrWLJvi_flqeebgdio2q5-s-kAK_GIKX6EfhkIuZ2Yqnu_KtpDuIxM8asOvxES3lPn1ZoDFC6uFnbsb3Vpx3ukzCl9XnxHnb4jMO_aSw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/40 to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 inline-block">Premium Qualité</span>
+<h2 class="text-white font-headline font-extrabold text-3xl leading-tight">Beurre de Karité Bio Premium</h2>
+</div>
+</div>
+</section>
+<!-- Product Core Info -->
+<section class="px-6 mt-8 flex flex-col gap-6">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-primary font-bold text-sm tracking-wide uppercase">Maison du Karité</p>
+<h3 class="font-headline font-bold text-2xl mt-1">Éclat du Mali</h3>
+</div>
+<div class="text-right">
+<p class="text-on-surface/60 text-sm line-through">5.200 FCFA</p>
+<p class="text-primary font-headline font-extrabold text-2xl">4.500 FCFA</p>
+</div>
+</div>
+<!-- Bento Grid Highlights -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-4 rounded-2xl flex flex-col gap-2">
+<span class="material-symbols-outlined text-primary">eco</span>
+<div>
+<p class="font-bold text-sm">100% Bio</p>
+<p class="text-xs text-on-surface/70 leading-relaxed">Certifié origine Mali, sans additifs chimiques.</p>
+</div>
+</div>
+<div class="bg-surface-container-high p-4 rounded-2xl flex flex-col gap-2">
+<span class="material-symbols-outlined text-secondary">flare</span>
+<div>
+<p class="font-bold text-sm">Multi-usage</p>
+<p class="text-xs text-on-surface/70 leading-relaxed">Visage, corps et cheveux secs.</p>
+</div>
+</div>
+</div>
+<!-- Description Section -->
+<div class="space-y-4">
+<h4 class="font-headline font-bold text-lg border-b border-outline-variant/20 pb-2 inline-block">Origine &amp; Bienfaits</h4>
+<p class="text-on-surface/80 leading-relaxed text-sm">
+                    Directement issu des savanes maliennes, notre beurre de karité est extrait par pression à froid pour préserver toutes ses vitamines (A, E, F). Sa texture onctueuse fond instantanément au contact de la peau.
+                </p>
+<p class="text-on-surface/80 leading-relaxed text-sm">
+                    Idéal pour apaiser les peaux sensibles, hydrater en profondeur après le soleil ou redonner de la brillance aux cheveux crépus et bouclés. Un trésor ancestral pour votre rituel beauté moderne.
+                </p>
+</div>
+<!-- Interaction Controls -->
+<div class="flex flex-col gap-4 mt-4">
+<div class="flex items-center justify-between bg-surface-container-lowest p-2 rounded-full border border-outline-variant/15">
+<span class="px-4 font-semibold text-sm">Quantité</span>
+<div class="flex items-center gap-6 bg-surface-container rounded-full px-2 py-1">
+<button class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-primary shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="font-bold">1</span>
+<button class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center shadow-md active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+</div>
+<button class="flex items-center justify-center gap-2 border-2 border-primary/20 text-primary py-4 rounded-full font-bold active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">favorite</span>
+                    Ajouter à la Liste de Souhaits
+                </button>
+</div>
+</section>
+<!-- Asymmetric Editorial Gallery -->
+<section class="mt-12 px-6">
+<h4 class="font-headline font-bold text-lg mb-6">Détails de Production</h4>
+<div class="grid grid-cols-12 gap-4">
+<div class="col-span-8 overflow-hidden rounded-2xl h-48">
+<img alt="Production artisanale" class="w-full h-full object-cover" data-alt="Artisanal hands harvesting nuts from a shea tree in a sunny savanna landscape, vibrant green and gold tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDswvtCpuiBP7urwrdPoggaMHKhwZEh_vDoEnyv3z__XXEg4-wuoxJU_--TOV4oAchCTRt_4Y1vE73b7tUh9fBZcZSlpDqrIBRVRnqodWE0eNIDPJKxdHFy6z_uyRblrk4RHHgs9EGgNA4sY9dkymImf5uXzbQbfoR36f454u4QlRFcGl_04zHw4ABmxugyniPqXgXwmfRXyUWHGBE8HfHTspyZz4jTiCcf-uI_ELuleAneN2pB6mv8wEUGAJ9u7HwYp4f3Lq6O22ok"/>
+</div>
+<div class="col-span-4 overflow-hidden rounded-2xl h-48">
+<img alt="Texture du beurre" class="w-full h-full object-cover" data-alt="Macro photo of smooth creamy white shea butter texture, elegant swirls, high end cosmetic look" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_rpmW9oIy-a42jKTqteg9evkDsHoqTrUBG3h3itcINQ6nLNcdiRuvN7xgaMuz_J_jmdQFsxUmy9XomKILhxA6K3hyZ7Wtcf7NZgy_oBPWOBlMuh9dCQYtDjxltMQXO1CTJIhvLbQd3tUk--PVLX9DoSRV85hRfhI5c2xRlhPDns5CFubTwM0tGz15GPkJrpbW6FOfarjR35_vNQ2Zr6II-Qzid_faXcT3vQMBH_V1vXBOa0SU_9stQZl5uNvwIJoOc_6rhH8bhEhi"/>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Bar (Transactional Shell) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-6 bg-white dark:bg-slate-900 shadow-[0_-12px_32px_-4px_rgba(19,29,36,0.06)] rounded-t-3xl z-50">
+<!-- Using style_inactive_navigation classes for secondary intent -->
+<div class="flex-1 flex flex-col items-center justify-center text-green-800 dark:text-green-400 py-3 mx-2 border border-green-700/20 rounded-full font-['Inter'] font-semibold text-sm hover:brightness-110 active:scale-[0.98] transition-all duration-200">
+<span class="material-symbols-outlined mb-1">bolt</span>
+            Buy Now
+        </div>
+<!-- Using style_active_navigation classes for primary intent -->
+<div class="flex-1 flex flex-col items-center justify-center bg-gradient-to-br from-green-700 to-green-600 text-white rounded-full py-3 mx-2 font-['Inter'] font-semibold text-sm hover:brightness-110 active:scale-[0.98] transition-all duration-200">
+<span class="material-symbols-outlined mb-1">add_shopping_cart</span>
+            Add to Cart
+        </div>
+</nav>
+</body></html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mifa Command Center | Super-Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-tint": "#006e27",
+              "surface-dim": "#d1dbe5",
+              "surface-container": "#e5eff9",
+              "primary-container": "#008732",
+              "on-secondary-fixed-variant": "#564500",
+              "secondary-fixed-dim": "#edc200",
+              "surface-container-lowest": "#ffffff",
+              "inverse-primary": "#65df76",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#eaf5ff",
+              "on-surface": "#131d24",
+              "on-error-container": "#93000a",
+              "error": "#ba1a1a",
+              "on-tertiary-fixed-variant": "#930015",
+              "on-surface-variant": "#3e4a3d",
+              "secondary": "#725c00",
+              "outline-variant": "#bdcab9",
+              "on-tertiary-container": "#fffbff",
+              "inverse-surface": "#283239",
+              "on-primary-fixed-variant": "#00531c",
+              "background": "#f6faff",
+              "tertiary-fixed": "#ffdad7",
+              "surface-bright": "#f6faff",
+              "on-primary-fixed": "#002107",
+              "tertiary": "#bb001e",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#d9e4ee",
+              "on-tertiary-fixed": "#410004",
+              "surface-container-highest": "#d9e4ee",
+              "on-background": "#131d24",
+              "secondary-container": "#fed000",
+              "on-primary-container": "#f7fff2",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "primary": "#006b26",
+              "on-secondary-fixed": "#231b00",
+              "surface": "#f6faff",
+              "primary-fixed-dim": "#65df76",
+              "secondary-fixed": "#ffe07f",
+              "on-secondary": "#ffffff",
+              "inverse-on-surface": "#e8f2fc",
+              "outline": "#6e7b6b",
+              "surface-container-high": "#dfe9f3",
+              "primary-fixed": "#81fc90",
+              "on-secondary-container": "#6f5900",
+              "on-error": "#ffffff",
+              "tertiary-container": "#e12531",
+              "error-container": "#ffdad6"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-background min-h-screen flex">
+<!-- Sidebar: NavigationDrawer -->
+<aside class="hidden md:flex flex-col fixed left-0 top-0 h-full z-40 w-72 bg-slate-50 dark:bg-slate-950 border-r border-slate-200/50">
+<div class="px-6 py-8 flex flex-col h-full">
+<div class="flex items-center gap-3 mb-10">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+</div>
+<h1 class="text-lg font-black text-emerald-900 dark:text-emerald-400">Mifa Admin</h1>
+</div>
+<div class="flex items-center gap-3 p-4 mb-8 bg-emerald-50 dark:bg-emerald-900/10 rounded-2xl">
+<img alt="Super Admin Avatar" class="w-12 h-12 rounded-full object-cover ring-2 ring-emerald-600/20" data-alt="Portrait of a professional African man in a tailored suit, modern corporate photography style with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4WcYfT7a5SZ1dzjsTzxa-DEpTEqbOG-0LE0tJs13ISrTYC6RAgzCbD6BEZwgtvO_GguzLpuLr6AZaxYkCdW52iGPCgUzqh2cOJhh67jMvS4kTmWZYAH0fo6piclV_BmpWVycMJTGWHNqU10OBchfnxRCPE-Fek6KSuWiD0t90cCbt-DggtKFTkiLCBMhiH9RIz2AyADAe0XXFRpHgGCEYbQGGRGFc5qljgAszim7fu_i0C4aP7OZ2IRJPGD8sx4GJgRY_txKU2TRU"/>
+<div>
+<p class="font-['Inter'] text-sm font-bold text-emerald-900">Mifa Admin</p>
+<p class="text-[10px] text-slate-500 font-medium">Institutional Access</p>
+<span class="inline-block px-2 py-0.5 mt-1 bg-emerald-100 text-[10px] text-emerald-800 rounded-full font-bold">Level 5</span>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-emerald-100/50 dark:bg-emerald-900/40 text-emerald-900 dark:text-emerald-200 border-l-4 border-emerald-700 font-['Inter'] text-sm font-medium scale-98 transition-transform" href="#">
+<span class="material-symbols-outlined">dashboard</span> Overview
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:pl-6 hover:bg-slate-200/50 transition-all font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined">storefront</span> Vendors
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:pl-6 hover:bg-slate-200/50 transition-all font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined">group</span> Customers
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:pl-6 hover:bg-slate-200/50 transition-all font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined">payments</span> Finance
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:pl-6 hover:bg-slate-200/50 transition-all font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined">settings_suggest</span> System Settings
+                </a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-200/50">
+<button class="w-full flex items-center justify-center gap-2 py-3 bg-slate-900 text-white rounded-xl font-bold text-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm">logout</span> Se Déconnecter
+                </button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-72 min-h-screen relative pb-24 md:pb-8">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)] px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined md:hidden text-emerald-900">menu</span>
+<h2 class="font-['Plus_Jakarta_Sans'] font-bold tracking-tight text-emerald-900 dark:text-emerald-400 text-lg">The Editorial Marketplace</h2>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined p-2 text-slate-500 hover:bg-emerald-50/50 rounded-full cursor-pointer transition-all">notifications_active</span>
+<button class="hidden sm:flex items-center gap-2 bg-emerald-900 text-white px-4 py-2 rounded-full text-xs font-bold active:scale-95 duration-200">
+<span class="material-symbols-outlined text-sm">admin_panel_settings</span> Super-Admin Access
+                </button>
+</div>
+</header>
+<div class="p-6 space-y-8">
+<!-- Market Pulse Bento Grid -->
+<section>
+<div class="flex items-end justify-between mb-6">
+<div>
+<h3 class="font-headline text-2xl font-extrabold text-on-surface tracking-tight">Market Pulse</h3>
+<p class="text-on-surface-variant text-sm mt-1">Real-time performance metrics across Mali</p>
+</div>
+<div class="bg-surface-container-high px-3 py-1.5 rounded-lg flex items-center gap-2 text-xs font-bold text-primary">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span> LIVE
+                    </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0_8px_20px_-6px_rgba(0,0,0,0.05)] border-l-4 border-emerald-500">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Chiffre d'Affaires Global</p>
+<h4 class="text-xl font-extrabold text-emerald-900">4.250.000.000 <span class="text-xs">FCFA</span></h4>
+<div class="mt-4 flex items-center gap-1 text-emerald-600 text-[10px] font-bold">
+<span class="material-symbols-outlined text-sm">trending_up</span> +14.2% ce mois
+                        </div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0_8px_20px_-6px_rgba(0,0,0,0.05)] border-l-4 border-secondary">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Total Vendeurs</p>
+<h4 class="text-xl font-extrabold text-on-surface">1.250 <span class="text-xs">ACTIFS</span></h4>
+<div class="mt-4 flex items-center gap-1 text-slate-500 text-[10px] font-bold">
+<span class="material-symbols-outlined text-sm">group</span> Dans 8 régions
+                        </div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0_8px_20px_-6px_rgba(0,0,0,0.05)] border-l-4 border-primary-container">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Commandes Actives</p>
+<h4 class="text-xl font-extrabold text-on-surface">342 <span class="text-xs">EN COURS</span></h4>
+<div class="mt-4 flex items-center gap-1 text-emerald-600 text-[10px] font-bold">
+<span class="material-symbols-outlined text-sm">local_shipping</span> 92% Ponctualité
+                        </div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0_8px_20px_-6px_rgba(0,0,0,0.05)] border-l-4 border-tertiary">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Taux de Commission</p>
+<h4 class="text-xl font-extrabold text-on-surface">12% <span class="text-xs">AVG</span></h4>
+<div class="mt-4 flex items-center gap-1 text-slate-500 text-[10px] font-bold">
+<span class="material-symbols-outlined text-sm">analytics</span> Stable vs Q3
+                        </div>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Vendor Management Table -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-3xl p-6 shadow-sm overflow-hidden">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline text-lg font-bold">Gestion des Vendeurs</h3>
+<button class="text-primary text-xs font-bold flex items-center gap-1">Voir tout <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
+</div>
+<div class="overflow-x-auto no-scrollbar">
+<table class="w-full text-left">
+<thead>
+<tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50">
+<th class="pb-4">Nom du Vendeur</th>
+<th class="pb-4">Ville</th>
+<th class="pb-4">Statut</th>
+<th class="pb-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-50">
+<tr class="group hover:bg-slate-50/50 transition-all">
+<td class="py-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 text-xs font-bold">AB</div>
+<span class="text-sm font-semibold text-on-surface">Artisanat Bamako</span>
+</td>
+<td class="py-4 text-sm text-on-surface-variant">Bamako</td>
+<td class="py-4">
+<span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase">Vérifié</span>
+</td>
+<td class="py-4 text-right">
+<button class="px-4 py-1.5 bg-surface-container-high rounded-full text-[10px] font-bold text-on-surface hover:bg-emerald-900 hover:text-white transition-colors">Voir Documents</button>
+</td>
+</tr>
+<tr class="group hover:bg-slate-50/50 transition-all">
+<td class="py-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-700 text-xs font-bold">TN</div>
+<span class="text-sm font-semibold text-on-surface">Tissus du Nord</span>
+</td>
+<td class="py-4 text-sm text-on-surface-variant">Ségou</td>
+<td class="py-4">
+<span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 text-[10px] font-black uppercase">En attente</span>
+</td>
+<td class="py-4 text-right">
+<button class="px-4 py-1.5 bg-surface-container-high rounded-full text-[10px] font-bold text-on-surface hover:bg-emerald-900 hover:text-white transition-colors">Voir Documents</button>
+</td>
+</tr>
+<tr class="group hover:bg-slate-50/50 transition-all">
+<td class="py-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 text-xs font-bold">SM</div>
+<span class="text-sm font-semibold text-on-surface">Sikasso Maraîchers</span>
+</td>
+<td class="py-4 text-sm text-on-surface-variant">Sikasso</td>
+<td class="py-4">
+<span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase">Vérifié</span>
+</td>
+<td class="py-4 text-right">
+<button class="px-4 py-1.5 bg-surface-container-high rounded-full text-[10px] font-bold text-on-surface hover:bg-emerald-900 hover:text-white transition-colors">Voir Documents</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Marketplace Health Charts -->
+<div class="space-y-8">
+<div class="bg-surface-container-lowest rounded-3xl p-6 shadow-sm border-t-4 border-emerald-900">
+<h3 class="font-headline text-sm font-black mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">insights</span> Daily Revenue
+                        </h3>
+<div class="h-32 flex items-end gap-2 px-2">
+<div class="flex-1 bg-slate-100 rounded-t-sm h-[40%] hover:bg-emerald-200 transition-colors"></div>
+<div class="flex-1 bg-slate-100 rounded-t-sm h-[60%] hover:bg-emerald-200 transition-colors"></div>
+<div class="flex-1 bg-slate-100 rounded-t-sm h-[45%] hover:bg-emerald-200 transition-colors"></div>
+<div class="flex-1 bg-emerald-900 rounded-t-sm h-[85%]"></div>
+<div class="flex-1 bg-slate-100 rounded-t-sm h-[50%] hover:bg-emerald-200 transition-colors"></div>
+<div class="flex-1 bg-slate-100 rounded-t-sm h-[70%] hover:bg-emerald-200 transition-colors"></div>
+<div class="flex-1 bg-emerald-600 rounded-t-sm h-[95%]"></div>
+</div>
+<div class="flex justify-between mt-3 px-1 text-[8px] font-bold text-slate-400">
+<span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span>
+</div>
+</div>
+<div class="bg-emerald-900 rounded-3xl p-6 shadow-sm text-white overflow-hidden relative">
+<div class="relative z-10">
+<h3 class="font-headline text-sm font-black mb-6">Top Categories</h3>
+<div class="flex items-center gap-4">
+<div class="relative w-24 h-24">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-emerald-700" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="6"></path>
+<path class="text-white" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="65, 100" stroke-linecap="round" stroke-width="6"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center text-[10px] font-black italic">65%</div>
+</div>
+<div class="space-y-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-white"></span>
+<span class="text-xs font-medium">Alimentation (65%)</span>
+</div>
+<div class="flex items-center gap-2 opacity-60">
+<span class="w-2 h-2 rounded-full bg-emerald-700"></span>
+<span class="text-xs font-medium">Tech &amp; Acc. (35%)</span>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">pie_chart</span>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Financial Oversight -->
+<section class="bg-surface-container-low rounded-3xl p-6 border border-emerald-100">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline text-lg font-bold text-emerald-950">Financial Oversight</h3>
+<span class="text-[10px] font-black px-2 py-0.5 bg-emerald-900 text-white rounded italic">PAYOUTS PENDING</span>
+</div>
+<div class="space-y-4">
+<div class="bg-white p-4 rounded-2xl flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-orange-600">smartphone</span>
+</div>
+<div>
+<p class="text-sm font-bold">Koulikoro Foods</p>
+<p class="text-[10px] text-slate-500 font-medium italic">Orange Money • #4492</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-black text-emerald-900">45.000 FCFA</p>
+<button class="mt-1 text-[9px] font-black uppercase tracking-wider text-emerald-600 hover:underline">Approuver le Paiement</button>
+</div>
+</div>
+<div class="bg-white p-4 rounded-2xl flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-600">waves</span>
+</div>
+<div>
+<p class="text-sm font-bold">Mali Tech Hub</p>
+<p class="text-[10px] text-slate-500 font-medium italic">Wave • #8821</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-black text-emerald-900">128.500 FCFA</p>
+<button class="mt-1 text-[9px] font-black uppercase tracking-wider text-emerald-600 hover:underline">Approuver le Paiement</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Dispute Center -->
+<section class="bg-surface-container-lowest rounded-3xl p-6 shadow-sm border-t-4 border-tertiary">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline text-lg font-bold">Dispute Center</h3>
+<div class="w-8 h-8 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-sm">report</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="p-3 hover:bg-slate-50 rounded-xl transition-colors cursor-pointer group">
+<div class="flex items-start justify-between">
+<div>
+<h4 class="text-sm font-bold text-on-surface">Colis non reçu à Mopti</h4>
+<p class="text-[10px] text-on-surface-variant line-clamp-1">Client: Amadou Keita • Order #88219</p>
+</div>
+<span class="px-2 py-0.5 rounded bg-tertiary text-white text-[9px] font-black uppercase">Ouvert</span>
+</div>
+</div>
+<div class="p-3 hover:bg-slate-50 rounded-xl transition-colors cursor-pointer group">
+<div class="flex items-start justify-between">
+<div>
+<h4 class="text-sm font-bold text-on-surface">Produit endommagé (Ségou)</h4>
+<p class="text-[10px] text-on-surface-variant line-clamp-1">Client: Fatoumata Diarra • Order #88204</p>
+</div>
+<span class="px-2 py-0.5 rounded bg-amber-500 text-white text-[9px] font-black uppercase">En cours</span>
+</div>
+</div>
+<div class="p-3 hover:bg-slate-50 rounded-xl transition-colors cursor-pointer group">
+<div class="flex items-start justify-between">
+<div>
+<h4 class="text-sm font-bold text-on-surface">Remboursement initié</h4>
+<p class="text-[10px] text-on-surface-variant line-clamp-1">Client: Moussa Traoré • Order #88190</p>
+</div>
+<span class="px-2 py-0.5 rounded bg-emerald-500 text-white text-[9px] font-black uppercase">Résolu</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 md:hidden bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_-8px_24px_-6px_rgba(0,0,0,0.04)] rounded-t-3xl">
+<a class="flex flex-col items-center justify-center text-emerald-800 dark:text-emerald-300 ring-2 ring-emerald-600 ring-offset-4 rounded-full p-1 transition-all scale-90 active:scale-75" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider mt-1">Overview</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 opacity-70 hover:text-emerald-600 transition-all scale-90 active:scale-75" href="#">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider mt-1">Vendors</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 opacity-70 hover:text-emerald-600 transition-all scale-90 active:scale-75" href="#">
+<span class="material-symbols-outlined">person_search</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider mt-1">Customers</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 opacity-70 hover:text-emerald-600 transition-all scale-90 active:scale-75" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider mt-1">Finance</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 opacity-70 hover:text-emerald-600 transition-all scale-90 active:scale-75" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider mt-1">Settings</span>
+</a>
+</nav>
+</body></html>

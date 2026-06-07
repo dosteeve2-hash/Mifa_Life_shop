@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suivi de commande - L'Éditorial</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-dim": "#d1dbe5",
+              "surface-container-highest": "#d9e4ee",
+              "on-primary-container": "#f7fff2",
+              "on-secondary": "#ffffff",
+              "on-primary-fixed-variant": "#00531c",
+              "surface-container-low": "#eaf5ff",
+              "inverse-surface": "#283239",
+              "on-tertiary": "#ffffff",
+              "surface-bright": "#f6faff",
+              "on-background": "#131d24",
+              "primary-fixed": "#81fc90",
+              "outline": "#6e7b6b",
+              "on-secondary-container": "#6f5900",
+              "surface-container": "#e5eff9",
+              "secondary": "#725c00",
+              "surface-variant": "#d9e4ee",
+              "on-surface": "#131d24",
+              "tertiary-fixed": "#ffdad7",
+              "primary": "#006b26",
+              "on-surface-variant": "#3e4a3d",
+              "tertiary": "#bb001e",
+              "surface": "#f6faff",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#65df76",
+              "on-secondary-fixed-variant": "#564500",
+              "primary-container": "#008732",
+              "on-tertiary-fixed": "#410004",
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#65df76",
+              "on-tertiary-fixed-variant": "#930015",
+              "tertiary-container": "#e12531",
+              "outline-variant": "#bdcab9",
+              "error": "#ba1a1a",
+              "secondary-fixed": "#ffe07f",
+              "on-error-container": "#93000a",
+              "surface-tint": "#006e27",
+              "on-primary-fixed": "#002107",
+              "inverse-on-surface": "#e8f2fc",
+              "secondary-container": "#fed000",
+              "on-secondary-fixed": "#231b00",
+              "background": "#f6faff",
+              "surface-container-lowest": "#ffffff",
+              "error-container": "#ffdad6",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "surface-container-high": "#dfe9f3",
+              "on-tertiary-container": "#fffbff",
+              "secondary-fixed-dim": "#edc200"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-active::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: #006b26;
+            opacity: 0.2;
+            border-radius: 50%;
+            z-index: -1;
+            transform: scale(1.5);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md fixed top-0 w-full z-50 shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)]">
+<div class="flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="text-[#006b26] active:scale-95 duration-200 transition-opacity hover:opacity-80">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline text-lg font-bold text-[#006b26] dark:text-[#008732]">Suivi de commande</h1>
+</div>
+<button class="text-slate-500 hover:opacity-80 transition-opacity active:scale-95">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</header>
+<main class="pt-20 px-4 space-y-6 max-w-lg mx-auto">
+<!-- Status Hero Card -->
+<section class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)] relative overflow-hidden">
+<div class="relative z-10 flex items-center justify-between">
+<div>
+<span class="text-secondary font-headline text-sm font-bold uppercase tracking-wider">Statut actuel</span>
+<h2 class="text-2xl font-headline font-extrabold text-on-surface mt-1">En cours de livraison</h2>
+<p class="text-on-surface-variant text-sm mt-1 font-medium">Arrivée prévue à 15:00</p>
+</div>
+<div class="bg-primary-container/10 p-4 rounded-full">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+</div>
+</div>
+<!-- Decorative Background Element -->
+<div class="absolute -right-8 -bottom-8 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
+</section>
+<!-- Vertical Timeline -->
+<section class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)]">
+<h3 class="font-headline font-bold text-on-surface mb-6">Détails du parcours</h3>
+<div class="space-y-0 relative">
+<!-- Timeline Line -->
+<div class="absolute left-[11px] top-2 bottom-2 w-0.5 bg-outline-variant/30"></div>
+<!-- Step 1: Validated -->
+<div class="relative flex gap-6 pb-8">
+<div class="z-10 bg-primary w-6 h-6 rounded-full flex items-center justify-center border-4 border-white">
+<span class="material-symbols-outlined text-white text-xs font-bold">check</span>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold text-sm">Commande passée</span>
+<span class="text-on-surface-variant text-xs">12 Mars, 10:30</span>
+</div>
+</div>
+<!-- Step 2: Validated -->
+<div class="relative flex gap-6 pb-8">
+<div class="z-10 bg-primary w-6 h-6 rounded-full flex items-center justify-center border-4 border-white">
+<span class="material-symbols-outlined text-white text-xs font-bold">check</span>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold text-sm">En préparation</span>
+<span class="text-on-surface-variant text-xs">12 Mars, 14:00</span>
+</div>
+</div>
+<!-- Step 3: Validated -->
+<div class="relative flex gap-6 pb-8">
+<div class="z-10 bg-primary w-6 h-6 rounded-full flex items-center justify-center border-4 border-white">
+<span class="material-symbols-outlined text-white text-xs font-bold">check</span>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold text-sm">Expédié</span>
+<span class="text-on-surface-variant text-xs">13 Mars, 09:00</span>
+</div>
+</div>
+<!-- Step 4: Active -->
+<div class="relative flex gap-6 pb-8">
+<div class="z-10 bg-primary w-6 h-6 rounded-full flex items-center justify-center border-4 border-white step-active">
+<div class="w-2 h-2 bg-white rounded-full"></div>
+</div>
+<div class="flex flex-col">
+<span class="text-primary font-bold text-sm">En cours de livraison</span>
+<span class="text-on-surface-variant text-xs">Prévu aujourd'hui à 15:00</span>
+</div>
+</div>
+<!-- Step 5: Upcoming -->
+<div class="relative flex gap-6">
+<div class="z-10 bg-outline-variant w-6 h-6 rounded-full flex items-center justify-center border-4 border-white">
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface-variant font-medium text-sm">Livré</span>
+<span class="text-on-surface-variant/50 text-xs">À venir</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Map Section -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)] overflow-hidden">
+<div class="p-4 flex items-center justify-between">
+<h3 class="font-headline font-bold text-on-surface">Localisation en direct</h3>
+<span class="bg-primary/10 text-primary text-[10px] px-2 py-1 rounded-full font-bold uppercase">Live</span>
+</div>
+<div class="h-48 w-full bg-surface-container relative">
+<img alt="Map view of Bamako district" class="w-full h-full object-cover opacity-60 grayscale-[0.5]" data-alt="stylized vector map of Bamako city streets with soft pastel colors and a primary green dotted line path" data-location="Bamako" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdvmQm73ifySDs1jMp1isvloI42Q3Kz45zErJ264JjsT2d303a8fyMfDobgwsaYlGU8ZrDScex8INl_1eMATg_T2gbU70H-FbNscv8q89ptyBzqmhXPwaqDKP731-YtLSnlNY2FYvinv3gL1WcS2cEA3rXi3JNkDWEPNqHco4ZvIRUOC9y85JdMQ6k_mEFSNfmuH47TMLFJHqjobprFxIRPsIe5_DH7_g__87Cjx2yzdff6FI-CmS2_bOj_ybhSAepqdDfPtGPx8US"/>
+<!-- Stylized Path Over Map -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" viewbox="0 0 400 200">
+<path d="M 50 150 Q 200 50 350 100" fill="none" stroke="#006b26" stroke-dasharray="8 8" stroke-width="3"></path>
+<!-- Seller Marker -->
+<circle cx="50" cy="150" fill="#725c00" r="6"></circle>
+<!-- User Marker -->
+<circle cx="350" cy="100" fill="#006b26" r="6"></circle>
+</svg>
+<div class="absolute bottom-4 right-4 bg-white p-2 rounded-lg shadow-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">navigation</span>
+<span class="text-[10px] font-bold text-on-surface">2.4 km restants</span>
+</div>
+</div>
+</section>
+<!-- Order Information -->
+<section class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)] space-y-4">
+<div class="flex justify-between items-start">
+<div class="space-y-1">
+<p class="text-xs text-on-surface-variant font-medium">N° de commande</p>
+<p class="font-headline font-bold text-on-surface">#MIFA-98765</p>
+</div>
+<button class="bg-surface-container p-2 rounded-lg text-on-surface-variant active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+</button>
+</div>
+<div class="space-y-1">
+<p class="text-xs text-on-surface-variant font-medium">Adresse de livraison</p>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-sm mt-0.5">location_on</span>
+<p class="text-sm font-medium text-on-surface leading-snug">ACI 2000, Immeuble Mifa, Bamako, Mali.</p>
+</div>
+</div>
+<div class="pt-4 border-t border-outline-variant/10">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="Delivery agent portrait" class="w-full h-full object-cover" data-alt="portrait of a smiling West African male delivery driver wearing a professional green uniform polo shirt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuoZCpQBR9hfrTIzbU72ITCoMmFppblLTaZA-AtYvEdi9_SSPbX0iuvNjYfHVOxM3ps1qRrFNy3WELNkaQEcU_IFhK_TELRDV4iRn7cD4bC2Yagmb-S8NuQedM3YIVawWNJCG1haqwBsZro80gitO7yoDhZnQDbfsr8Tr0wZMUa1BBIECC4BQZygbv9_DDuacbdXdvrbHTXl70NTEJTBlHdX91xdxRQqSTIYutJFfHBj7jc1Kt7UBcqYrQrTF3IkpFtf22nsyJfrSQ"/>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant font-medium">Votre livreur</p>
+<p class="font-bold text-on-surface">Moussa D.</p>
+</div>
+</div>
+<button class="bg-primary text-white flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm active:scale-95 transition-transform shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">call</span>
+                        Appeler
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md fixed bottom-0 w-full z-50 rounded-t-3xl shadow-[0_-8px_24px_-4px_rgba(19,29,36,0.04)]">
+<div class="flex justify-around items-center px-4 pb-6 pt-3 w-full">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#006b26] transition-colors active:scale-98" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-inter text-[10px] font-medium mt-1">Accueil</span>
+</a>
+<!-- Shop -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#006b26] transition-colors active:scale-98" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-inter text-[10px] font-medium mt-1">Boutique</span>
+</a>
+<!-- Orders (Active) -->
+<a class="flex flex-col items-center justify-center text-[#006b26] dark:text-[#008732] ring-2 ring-[#006b26] ring-offset-4 rounded-full p-1 active:scale-98" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+<span class="font-inter text-[10px] font-medium mt-0.5">Commandes</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#006b26] transition-colors active:scale-98" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-inter text-[10px] font-medium mt-1">Profil</span>
+</a>
+</div>
+</nav>
+</body></html>

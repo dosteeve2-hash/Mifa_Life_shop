@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-on-surface": "#e8f2fc",
+              "surface-container-lowest": "#ffffff",
+              "secondary-container": "#fed000",
+              "on-secondary-fixed": "#231b00",
+              "background": "#f6faff",
+              "error-container": "#ffdad6",
+              "secondary-fixed-dim": "#edc200",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "surface-container-high": "#dfe9f3",
+              "on-tertiary-container": "#fffbff",
+              "tertiary-container": "#e12531",
+              "outline-variant": "#bdcab9",
+              "error": "#ba1a1a",
+              "secondary-fixed": "#ffe07f",
+              "on-error-container": "#93000a",
+              "on-primary-fixed": "#002107",
+              "surface-tint": "#006e27",
+              "on-secondary-fixed-variant": "#564500",
+              "primary-fixed-dim": "#65df76",
+              "on-tertiary-fixed-variant": "#930015",
+              "primary-container": "#008732",
+              "on-tertiary-fixed": "#410004",
+              "on-error": "#ffffff",
+              "on-surface-variant": "#3e4a3d",
+              "tertiary": "#bb001e",
+              "surface": "#f6faff",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#65df76",
+              "on-surface": "#131d24",
+              "surface-variant": "#d9e4ee",
+              "tertiary-fixed": "#ffdad7",
+              "primary": "#006b26",
+              "surface-container": "#e5eff9",
+              "outline": "#6e7b6b",
+              "on-secondary-container": "#6f5900",
+              "secondary": "#725c00",
+              "surface-container-low": "#eaf5ff",
+              "inverse-surface": "#283239",
+              "on-tertiary": "#ffffff",
+              "primary-fixed": "#81fc90",
+              "surface-bright": "#f6faff",
+              "on-background": "#131d24",
+              "surface-dim": "#d1dbe5",
+              "surface-container-highest": "#d9e4ee",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#f7fff2",
+              "on-primary-fixed-variant": "#00531c"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased">
+<!-- TopNavBar -->
+<nav class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-0 z-50 shadow-sm dark:shadow-none font-plus-jakarta-sans antialiased w-full">
+<div class="flex items-center justify-between px-10 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black tracking-tighter text-emerald-900 dark:text-white">The Editorial Marketplace</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-emerald-700 dark:text-emerald-400 font-bold border-b-2 border-emerald-700 pb-1" href="#">Artisanal</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-opacity duration-200" href="#">Fashion</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-opacity duration-200" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-opacity duration-200" href="#">Gourmet</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-opacity duration-200" href="#">Collections</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<input class="bg-surface-container-highest border-none rounded-full py-2 pl-10 pr-4 w-64 focus:ring-2 focus:ring-primary text-sm transition-all" placeholder="Rechercher des produits..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">search</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:opacity-80 transition-opacity active:scale-95"><span class="material-symbols-outlined text-emerald-800 dark:text-emerald-400" data-icon="account_circle">account_circle</span></button>
+<button class="p-2 hover:opacity-80 transition-opacity active:scale-95 relative">
+<span class="material-symbols-outlined text-emerald-800 dark:text-emerald-400" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute top-0 right-0 bg-tertiary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-screen-2xl mx-auto px-10 py-10 flex gap-10">
+<!-- Sidebar Filters -->
+<aside class="w-72 flex-shrink-0 space-y-8">
+<div>
+<h3 class="font-headline font-bold text-lg mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">filter_list</span>
+                    Filtres
+                </h3>
+<!-- Categories -->
+<div class="space-y-4 mb-8">
+<h4 class="font-headline font-semibold text-sm uppercase tracking-wider text-slate-500">Catégories</h4>
+<ul class="space-y-2">
+<li><button class="flex items-center justify-between w-full text-left text-sm font-medium hover:text-primary transition-colors py-1 group"><span>Tout</span><span class="text-slate-400 text-xs group-hover:text-primary">(248)</span></button></li>
+<li><button class="flex items-center justify-between w-full text-left text-sm font-medium text-primary py-1 group"><span>Alimentation</span><span class="text-primary text-xs">(112)</span></button></li>
+<li><button class="flex items-center justify-between w-full text-left text-sm font-medium hover:text-primary transition-colors py-1 group"><span>Mode &amp; Textile</span><span class="text-slate-400 text-xs group-hover:text-primary">(45)</span></button></li>
+<li><button class="flex items-center justify-between w-full text-left text-sm font-medium hover:text-primary transition-colors py-1 group"><span>Beauté Malienne</span><span class="text-slate-400 text-xs group-hover:text-primary">(32)</span></button></li>
+<li><button class="flex items-center justify-between w-full text-left text-sm font-medium hover:text-primary transition-colors py-1 group"><span>Artisanat Local</span><span class="text-slate-400 text-xs group-hover:text-primary">(59)</span></button></li>
+</ul>
+</div>
+<!-- Price Range -->
+<div class="space-y-4 mb-8">
+<h4 class="font-headline font-semibold text-sm uppercase tracking-wider text-slate-500">Prix (FCFA)</h4>
+<div class="px-2">
+<input class="w-full accent-primary h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer" max="1000000" min="0" step="50000" type="range"/>
+<div class="flex justify-between mt-2 text-xs font-medium text-slate-600">
+<span>0 FCFA</span>
+<span>1M FCFA</span>
+</div>
+</div>
+</div>
+<!-- Vendors -->
+<div class="space-y-4">
+<h4 class="font-headline font-semibold text-sm uppercase tracking-wider text-slate-500">Vendeurs Locaux</h4>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20 transition-all" type="checkbox"/>
+<span class="text-sm font-medium text-on-surface group-hover:text-primary transition-colors">Grands Moulins du Mali</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20 transition-all" type="checkbox"/>
+<span class="text-sm font-medium text-on-surface group-hover:text-primary transition-colors">Sodima Mali</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20 transition-all" type="checkbox"/>
+<span class="text-sm font-medium text-on-surface group-hover:text-primary transition-colors">Coopérative N'Sukala</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Promotional Banner in Sidebar -->
+<div class="rounded-xl overflow-hidden bg-primary p-6 text-white relative group cursor-pointer">
+<div class="relative z-10">
+<span class="text-[10px] font-bold uppercase tracking-widest bg-white/20 px-2 py-1 rounded mb-4 inline-block">Flash Deal</span>
+<h5 class="font-headline font-bold text-xl mb-2">Semaine du Riz Gambiaka</h5>
+<p class="text-sm text-white/80 mb-4">-15% sur tous les sacs de 50kg</p>
+<button class="text-sm font-bold underline">Voir l'offre</button>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10 scale-150 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-8xl">local_mall</span>
+</div>
+</div>
+</aside>
+<!-- Product Content Area -->
+<section class="flex-grow">
+<!-- Header & Sorting -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+<div>
+<h1 class="font-headline font-extrabold text-4xl tracking-tight text-on-surface mb-2">Mifa Life Marketplace</h1>
+<p class="text-slate-500 font-medium">Découvrez l'excellence du Mali : 112 produits trouvés</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Trier par:</span>
+<select class="bg-transparent border-none font-bold text-sm text-primary focus:ring-0 cursor-pointer">
+<option>Les plus récents</option>
+<option>Prix croissant</option>
+<option>Prix décroissant</option>
+<option>Meilleures ventes</option>
+</select>
+</div>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+<!-- Product Card 1: Riz Gambiaka -->
+<div class="group flex flex-col">
+<div class="relative aspect-[4/5] rounded-2xl overflow-hidden bg-surface-variant mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="high-quality burlap sack of premium mali gambiaka rice in a sunny market setting, rustic textures, warm natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbDQkntC3WFcAQGmTLqxCmb_9JmcagzY9BaTmtjJWCYzCPfwEQLX4dcwiEmOe55Ki8rfudagGSlwzbmIHgnpWphTORbo22xw3KTiRptCkzwtt9DlDBZZ9QKe2WKWf-4O_as_MdoxZ0cSwmPAYPUPlAiDH8uYlzjEMLdpH8xbIao4BNk6NC13ywUZDmSLIx377xoV21XEK9RenLh1MLFx4BxCdEo3Mv5Slq3kVRPPTYOBp1G01ogwcxiO1yIVknQNcPMJxkZMI08e3X"/>
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<span class="bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">Promo</span>
+<span class="bg-secondary-container text-on-secondary-fixed text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">Top Vente</span>
+</div>
+<button class="absolute bottom-4 right-4 bg-white/90 backdrop-blur text-primary p-3 rounded-full shadow-xl opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Céréales</span>
+<h3 class="font-headline font-bold text-lg leading-tight group-hover:text-primary transition-colors">Riz Gambiaka Long Grain - 50kg</h3>
+<p class="text-xs text-slate-500 italic mb-2">Vendu par Grands Moulins du Mali</p>
+<div class="flex items-baseline gap-2">
+<span class="text-xl font-extrabold text-on-surface">22.500 FCFA</span>
+<span class="text-sm text-slate-400 line-through">25.000 FCFA</span>
+</div>
+</div>
+</div>
+<!-- Product Card 2: Huile Dinor -->
+<div class="group flex flex-col">
+<div class="relative aspect-[4/5] rounded-2xl overflow-hidden bg-surface-variant mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="professional product photography of a golden vegetable oil bottle with clean label, bright white studio lighting, sharp focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZSEntyExM1vu292bpA09KDWsvWnjch3KKYbcZJXLignl21Mif4hP6I1n0IBX9G7YN6xbzkF5-kxWuDUZB5IAlJgbapNzrcoYMJKu8JJnQT3Lv41xBYk27gowyXyPdZxc6h0zI0NlmmuZ-lt0x4M082BcD-PxhT38TDC6JdKiWb52P24cb9IA2GX5DB4t_IRnDqJv6bshVeWVULgVtsc5gVv7m4JItFG6zonHs8nNGzEmMIDxRV3iAqMaoJScQWS2ermFSRNp7pvBf"/>
+<div class="absolute top-4 left-4">
+<span class="bg-tertiary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">Stock Faible</span>
+</div>
+<button class="absolute bottom-4 right-4 bg-white/90 backdrop-blur text-primary p-3 rounded-full shadow-xl opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Épicerie</span>
+<h3 class="font-headline font-bold text-lg leading-tight group-hover:text-primary transition-colors">Huile Dinor Végétale - 5L</h3>
+<p class="text-xs text-slate-500 italic mb-2">Vendu par Sodima Mali</p>
+<div class="flex items-baseline gap-2">
+<span class="text-xl font-extrabold text-on-surface">6.750 FCFA</span>
+</div>
+</div>
+</div>
+<!-- Product Card 3: Bogolan -->
+<div class="group flex flex-col">
+<div class="relative aspect-[4/5] rounded-2xl overflow-hidden bg-surface-variant mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="close-up of intricate malian bogolan mud cloth patterns, earth tones and geometric designs, soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMpC9CFV5wHna6Gie8iFx3q5UuhLUdnBuesGTXVkKaKGdPAaL92w2O69bnzNWaWqza5lPOc7V6SinmBoSCAIp3NhLsaPxVBVet9g3tSd4oG3zHiWChKXmijnCAIZjGtFDsj7hpXTfJDyK2jII8lAFDwJuxsqauF6iotLO4XlX6cNYgfACkR_a0rcyvLe60GmSK57EF_qHMDdLJS9PVVlUQK-w-BB6hMBFLyA_mhG2tRhKa8tA2MNQXw1Q2D17qcx1AwseNRJh7870a"/>
+<button class="absolute bottom-4 right-4 bg-white/90 backdrop-blur text-primary p-3 rounded-full shadow-xl opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Artisanat</span>
+<h3 class="font-headline font-bold text-lg leading-tight group-hover:text-primary transition-colors">Tissu Bogolan Traditionnel - Fait Main</h3>
+<p class="text-xs text-slate-500 italic mb-2">Vendu par Atelier Ségou Artisanat</p>
+<div class="flex items-baseline gap-2">
+<span class="text-xl font-extrabold text-on-surface">15.000 FCFA</span>
+</div>
+</div>
+</div>
+<!-- Product Card 4: Savon Noir -->
+<div class="group flex flex-col">
+<div class="relative aspect-[4/5] rounded-2xl overflow-hidden bg-surface-variant mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="authentic dark textured traditional black soap bars on a wooden surface, organic feeling, soft natural morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhL1QQcBDiIwXxiUEaJ-YesBo2PK6TxgmP_pwVVCXCW1GWW2JsigEr5UfmVICWANdwXersknkI9ryKzx0Ax3KiumEbBzyX35KgCknTOgymWvyORsnjE3yoNBP8eutRsYJG9Zb6MSsrYV74WhFYlU5ER1gINFouQGR5TqCo8gem5O3jAZx5lEhBDox_DH7_1eipA8sT8Qeo2PxwL0IISe5qHNcN2ATzDjwvCXTWDzhyfmXsg_PFbN422-trRvbOySm85-dZR7vuJImx"/>
+<div class="absolute top-4 left-4">
+<span class="bg-secondary-container text-on-secondary-fixed text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">Premium</span>
+</div>
+<button class="absolute bottom-4 right-4 bg-white/90 backdrop-blur text-primary p-3 rounded-full shadow-xl opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Beauté</span>
+<h3 class="font-headline font-bold text-lg leading-tight group-hover:text-primary transition-colors">Savon Noir Traditionnel 100% Bio</h3>
+<p class="text-xs text-slate-500 italic mb-2">Vendu par Mali Bio Nature</p>
+<div class="flex items-baseline gap-2">
+<span class="text-xl font-extrabold text-on-surface">2.500 FCFA</span>
+</div>
+</div>
+</div>
+<!-- Product Card 5: Beurre de Karité -->
+<div class="group flex flex-col">
+<div class="relative aspect-[4/5] rounded-2xl overflow-hidden bg-surface-variant mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="creamy textured shea butter in a rustic wooden bowl with natural elements, soft earthy background, zen lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEbQi4XsiF3-vcUdxFa0MZWEep-omg7_h_Yxc1plY2cOQXEDRuSClZjhoxXUhDUZQrNSikOVIGr2Np9JyQCrh3wm8DCjrn6y1bOHli1fXqkoWZmfSl7JdUWm5EZl8McyXWs8M0PFCHZK4u3o8xKs8NTZ1hp97MothKjjG14aLkDIo3c9eEMQtL0Si8ZFzxweAVvXOc21nPhdnYPj8v993LRySRBXZz-IRYBeQp2XkiHkPJGlpG6r2bxK4_q2hXfzno_p0DzXzCYGhA"/>
+<button class="absolute bottom-4 right-4 bg-white/90 backdrop-blur text-primary p-3 rounded-full shadow-xl opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Beauté</span>
+<h3 class="font-headline font-bold text-lg leading-tight group-hover:text-primary transition-colors">Beurre de Karité Pur du Mandé - 500g</h3>
+<p class="text-xs text-slate-500 italic mb-2">Vendu par Femmes du Mandé</p>
+<div class="flex items-baseline gap-2">
+<span class="text-xl font-extrabold text-on-surface">3.200 FCFA</span>
+</div>
+</div>
+</div>
+<!-- Product Card 6: Thé Vert -->
+<div class="group flex flex-col">
+<div class="relative aspect-[4/5] rounded-2xl overflow-hidden bg-surface-variant mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="loose green tea leaves in a traditional tin canister, dramatic spotlighting on texture, dark elegant background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVLqlbKjs31NzlG6hRn2FP-pcB9AxlY6D5d2le0qezaIRJibwRODvklHCptaPt-QjkrNRZh-NjBB9YMHDPcOhNJ8z5ZxFMhcyurF0t8ZCfYpLr5TcmWHyWPbYi3IQnxJvwXZYab0UxJP3V-Pc6LH8DU75l7i53hVF_q0G_jUqnAfWCJbofsRbf4GWINNCFnHHU3bK6Hvs6iMesaZUOsJbmUJB8mONz5FQbLE3wZWRLhL2SnHyxP8U25EydKsyOM_VLzpNSqWsS81Rq"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">Promo</span>
+</div>
+<button class="absolute bottom-4 right-4 bg-white/90 backdrop-blur text-primary p-3 rounded-full shadow-xl opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Boissons</span>
+<h3 class="font-headline font-bold text-lg leading-tight group-hover:text-primary transition-colors">Thé Vert de Chine - Marque Lion</h3>
+<p class="text-xs text-slate-500 italic mb-2">Vendu par Mali Distribution</p>
+<div class="flex items-baseline gap-2">
+<span class="text-xl font-extrabold text-on-surface">1.250 FCFA</span>
+<span class="text-sm text-slate-400 line-through">1.500 FCFA</span>
+</div>
+</div>
+</div>
+<!-- Product Card 7: Piment Séché -->
+<div class="group flex flex-col">
+<div class="relative aspect-[4/5] rounded-2xl overflow-hidden bg-surface-variant mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="vibrant red dried chili peppers in a woven basket, spicy textures, high contrast lighting, culinary aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbLkIImlmQghnjAypOHz7EUm0fmyFbqqJ4Gn6fYn9pZd9umpzAwT2F4qYvgl7ZPVCQFCWxqVUT6UjuDSjHAlbQl7yUTw4T4VjgzesEV0nGqL2gQi4-UrGoYau2l5hzRq2Yakz74dSf3lsaHrSmJkRMOftGrQtUOfb58_6UMm21QraoC4uD_8jvx0rjdwOY5aqESCjZJXTxVnKhU623qeWKIll4FUsJadcLCJK-27cH30du_bgPVZHiKAV-AozFIRpgKU3aAhOffd8Y"/>
+<button class="absolute bottom-4 right-4 bg-white/90 backdrop-blur text-primary p-3 rounded-full shadow-xl opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Épices</span>
+<h3 class="font-headline font-bold text-lg leading-tight group-hover:text-primary transition-colors">Piment Rouge Séché du Mali - 250g</h3>
+<p class="text-xs text-slate-500 italic mb-2">Vendu par Marché Rose de Bamako</p>
+<div class="flex items-baseline gap-2">
+<span class="text-xl font-extrabold text-on-surface">1.800 FCFA</span>
+</div>
+</div>
+</div>
+<!-- Product Card 8: Farine de Mil -->
+<div class="group flex flex-col">
+<div class="relative aspect-[4/5] rounded-2xl overflow-hidden bg-surface-variant mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="close up of fine millet flour dust on a dark countertop with wooden spoon, cinematic food photography, soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMN1HHgNk5alQ_ULdqPs_4tETcslfsPBKO2OpvSTYSDn7LPLlIPG9QYUwxb-hlycmsUU4j1qUDWenDzfQZXRaYAv9onUuFxmxraWwPaBCEGPOXwpE_mISCAsMI2scfaRk9ytrtsoCykgDGP4QVXhLzn3E8OK07Y1omm8GUkAHSjisoYEfIGFqd-WZ7nmTCK6eYgzpZ_Hg5LRpW0Y7MNn5-w_6zmXThSJGV1WUM80uqlcylkVUpZgJR19OwbXTkTvYJGf5XRFe2QDM1"/>
+<button class="absolute bottom-4 right-4 bg-white/90 backdrop-blur text-primary p-3 rounded-full shadow-xl opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Céréales</span>
+<h3 class="font-headline font-bold text-lg leading-tight group-hover:text-primary transition-colors">Farine de Mil Naturelle - 5kg</h3>
+<p class="text-xs text-slate-500 italic mb-2">Vendu par Coopérative Sahel</p>
+<div class="flex items-baseline gap-2">
+<span class="text-xl font-extrabold text-on-surface">4.500 FCFA</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-16 flex justify-center items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-slate-400">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white font-bold shadow-lg shadow-primary/20">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors font-medium">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors font-medium">3</button>
+<span class="text-slate-400">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors font-medium">12</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-slate-400">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 w-full pt-16 pb-8 border-t border-slate-200/50 dark:border-slate-800/50">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-10 max-w-screen-2xl mx-auto">
+<div class="space-y-4">
+<span class="text-lg font-bold text-slate-900 dark:text-white">The Editorial Marketplace</span>
+<p class="font-inter text-sm text-slate-500 max-w-xs">La destination premium pour les produits authentiques du Mali. Qualité, Tradition et Engagement Local.</p>
+</div>
+<div class="space-y-4">
+<h5 class="font-bold text-emerald-800 dark:text-emerald-400 uppercase text-xs tracking-widest">Informations</h5>
+<ul class="space-y-2 font-inter text-sm">
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors" href="#">About Us</a></li>
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors" href="#">Shipping Policy</a></li>
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="font-bold text-emerald-800 dark:text-emerald-400 uppercase text-xs tracking-widest">Paiements Locaux</h5>
+<ul class="space-y-2 font-inter text-sm">
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors" href="#">Orange Money</a></li>
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors" href="#">Wave</a></li>
+<li><a class="text-slate-500 hover:text-emerald-600 transition-colors" href="#">Moov Money</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="font-bold text-emerald-800 dark:text-emerald-400 uppercase text-xs tracking-widest">Newsletter</h5>
+<div class="flex gap-2">
+<input class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-2 text-sm w-full focus:ring-primary" placeholder="Email" type="email"/>
+<button class="bg-primary text-white p-2 rounded-lg"><span class="material-symbols-outlined">send</span></button>
+</div>
+</div>
+</div>
+<div class="mt-16 text-center border-t border-slate-100 dark:border-slate-900 pt-8">
+<p class="font-inter text-sm text-slate-500">© 2024 The Editorial Marketplace. Designed with pride in Mali.</p>
+</div>
+</footer>
+</body></html>

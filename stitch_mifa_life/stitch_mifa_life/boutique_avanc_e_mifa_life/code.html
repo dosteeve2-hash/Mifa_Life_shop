@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mifa Life - Advanced Smart Catalog</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#ffffff",
+              "inverse-primary": "#65df76",
+              "on-error-container": "#93000a",
+              "primary": "#006b26",
+              "on-primary-fixed": "#002107",
+              "secondary-container": "#fed000",
+              "on-tertiary": "#ffffff",
+              "on-primary-fixed-variant": "#00531c",
+              "on-primary-container": "#f7fff2",
+              "primary-fixed": "#81fc90",
+              "secondary-fixed": "#ffe07f",
+              "surface-container": "#e5eff9",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#131d24",
+              "surface-variant": "#d9e4ee",
+              "surface-container-low": "#eaf5ff",
+              "on-error": "#ffffff",
+              "tertiary": "#bb001e",
+              "on-secondary-fixed-variant": "#564500",
+              "surface-bright": "#f6faff",
+              "surface-dim": "#d1dbe5",
+              "surface-container-highest": "#d9e4ee",
+              "surface-container-high": "#dfe9f3",
+              "background": "#f6faff",
+              "secondary-fixed-dim": "#edc200",
+              "on-surface-variant": "#3e4a3d",
+              "surface-tint": "#006e27",
+              "inverse-on-surface": "#e8f2fc",
+              "on-secondary": "#ffffff",
+              "on-tertiary-fixed-variant": "#930015",
+              "on-secondary-fixed": "#231b00",
+              "secondary": "#725c00",
+              "outline-variant": "#bdcab9",
+              "on-background": "#131d24",
+              "primary-container": "#008732",
+              "error-container": "#ffdad6",
+              "tertiary-fixed": "#ffdad7",
+              "outline": "#6e7b6b",
+              "surface": "#f6faff",
+              "tertiary-container": "#e12531",
+              "on-tertiary-fixed": "#410004",
+              "on-secondary-container": "#6f5900",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "primary-fixed-dim": "#65df76",
+              "error": "#ba1a1a",
+              "on-tertiary-container": "#fffbff",
+              "inverse-surface": "#283239"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #006b26 0%, #008732 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface">
+<!-- Sticky Glassmorphism Header -->
+<header class="fixed top-0 w-full z-50 glass-header shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)] h-16 flex items-center px-4 md:px-8">
+<div class="flex items-center justify-between w-full max-w-7xl mx-auto gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary cursor-pointer">menu</span>
+<h1 class="font-headline font-black text-xl tracking-tight text-primary">Mifa Life</h1>
+</div>
+<div class="flex-1 max-w-xl relative">
+<input class="w-full h-10 px-10 bg-surface-container-highest border-none rounded-full text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none" placeholder="Chercher du riz, huile, électronique..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="relative cursor-pointer p-2 hover:bg-surface-variant rounded-full transition-colors">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+<span class="absolute top-1 right-1 bg-tertiary text-white text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full">3</span>
+</div>
+<div class="hidden md:flex items-center gap-2 bg-surface-container rounded-full px-3 py-1.5 cursor-pointer">
+<div class="w-6 h-6 rounded-full overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="portrait of a confident West African woman with braids and vibrant traditional jewelry on soft blue background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvUO1lZLiJRaVU_L95ueO_DcLgjAOzXgta9PluJEWAFuXBIZHWR9No3CvJ7TEjbmntMa_X7g7sEEJZQSZk_Iep7QizJxhHzzgwMKFZkqZFJ2DP8DhaKnIgO4aA12wFiUO1FDJp1bEgjdfy7yjQKJPKaMRz5hGhp_YDo0rEi7hkg2397KqA9_r1jB-UAXTD1hs1x674c2hjm5qoNyDdEth8S41p0d9wyRNUkHPHF7hb7zOBzxzDns9ocRyRobMTMlTXDEcG9spV5tfR"/>
+</div>
+<span class="text-xs font-semibold text-primary">Mifa Member</span>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-20 pb-28 px-4 md:px-8 max-w-7xl mx-auto">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 mb-6 overflow-x-auto hide-scrollbar text-[11px] font-medium tracking-wide uppercase text-outline">
+<span class="hover:text-primary cursor-pointer">Accueil</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="hover:text-primary cursor-pointer">Boutique</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-bold">Alimentation</span>
+</nav>
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Dynamic Filter Drawer (Sidebar for Desktop) -->
+<aside class="hidden lg:block w-72 shrink-0 space-y-8">
+<section>
+<h3 class="font-headline font-bold text-lg mb-4">Catégories</h3>
+<div class="space-y-2">
+<label class="flex items-center justify-between p-3 rounded-xl bg-primary/10 text-primary font-semibold cursor-pointer">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-xl">restaurant</span> Alimentation</span>
+<span class="text-xs">240</span>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container transition-colors cursor-pointer text-outline">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-xl">devices</span> Électronique</span>
+<span class="text-xs">128</span>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container transition-colors cursor-pointer text-outline">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-xl">face</span> Beauté</span>
+<span class="text-xs">84</span>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container transition-colors cursor-pointer text-outline">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-xl">home_iot_device</span> Maison</span>
+<span class="text-xs">92</span>
+</label>
+</div>
+</section>
+<section>
+<h3 class="font-headline font-bold text-lg mb-4">Gamme de Prix</h3>
+<div class="px-2">
+<input class="w-full h-1.5 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-primary" max="1000000" min="0" step="5000" type="range"/>
+<div class="flex justify-between mt-3 text-xs font-medium text-outline">
+<span>0 FCFA</span>
+<span>1.000.000 FCFA</span>
+</div>
+</div>
+</section>
+<section>
+<h3 class="font-headline font-bold text-lg mb-4">Vendeurs Premium</h3>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 border-2 border-outline-variant rounded group-hover:border-primary transition-colors"></div>
+<span class="text-sm">Sogeb Mali</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 border-2 border-outline-variant rounded group-hover:border-primary transition-colors"></div>
+<span class="text-sm">Mali Tech</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 border-2 border-outline-variant rounded group-hover:border-primary transition-colors"></div>
+<span class="text-sm">Artisanat du Mali</span>
+</label>
+</div>
+</section>
+</aside>
+<!-- Product Grid -->
+<div class="flex-1">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline font-bold text-2xl">Explorer la Boutique</h2>
+<div class="hidden md:flex gap-2">
+<button class="p-2 bg-white rounded-lg shadow-sm text-primary"><span class="material-symbols-outlined">grid_view</span></button>
+<button class="p-2 text-outline"><span class="material-symbols-outlined">list</span></button>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
+<!-- Card 1 -->
+<div class="group relative bg-surface-container-lowest rounded-3xl overflow-hidden shadow-[0_4px_20px_-4px_rgba(19,29,36,0.04)] transition-all hover:shadow-xl hover:-translate-y-1">
+<div class="aspect-[4/5] relative overflow-hidden bg-surface-variant">
+<img alt="Riz Gambiaka" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="close-up of premium raw Gambiaka rice grains in a large rustic burlap sack under natural warm warehouse lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH8aj_7sKbAwPiwzxiWFAQD2KVpdxQGaHGQFn2V60GR0oYiX6wFNah9bvme_uchLNVblsKwCMjoZrlWWRdo81TGxKCJwHnFlu1PGJiHnn3Hy0Rl0FxPVjG1Iq_x_KZ2tJbVYih2s3p6DrDuQiyLRZdhK8PnC0eySuhsxOTDa4GujlUZpa3L20i-leGWS4KPH98Jkkv3PtRZenu3G_8FNu1dLnnBzvbseK-6At3ePRf2tZ8acmh4JvW5vSM9VXrD4dP8RsTvAEWSm8b"/>
+<span class="absolute top-3 left-3 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Top Vente</span>
+<button class="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur rounded-full flex items-center justify-center text-primary shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="p-4">
+<p class="text-[10px] font-bold text-secondary uppercase mb-1">Sogeb Mali</p>
+<h3 class="font-headline font-bold text-sm md:text-base mb-1 line-clamp-1">Riz Gambiaka 50kg</h3>
+<div class="flex items-baseline gap-2 mb-4">
+<span class="text-primary font-black text-lg">35.000 FCFA</span>
+</div>
+<button class="w-full py-2.5 hero-gradient text-white rounded-full text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                                Ajouter au Panier
+                            </button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative bg-surface-container-lowest rounded-3xl overflow-hidden shadow-[0_4px_20px_-4px_rgba(19,29,36,0.04)] transition-all hover:shadow-xl hover:-translate-y-1">
+<div class="aspect-[4/5] relative overflow-hidden bg-surface-variant">
+<img alt="Huile Dinor" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="golden refined cooking oil in a large clear bottle glistening under bright studio lights against a clean kitchen background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWar0H4l4Q5hne5b6NUaEPbGBnCZiJzEHJchS_92lw9UYx1dwqmgDvEcV5HFIAkhjC1Erk4SjL3noV3COWc5z2lvr6jcMUphBuK6SEa-yJyAzC-XD5HdatOAi_oVXY4f40UmAtV3_fuBczirpQ5WTBpqh-ijn-6E4i6lAl7GxkIvhGog_fQTsxJIL7GVd-XROb2vs86yT0lu58SOP3vrYx_ZqQHM_d0-pEQ1k61RigJ_0lTmDXTmaMBIZylVOoUm1goe100lIJLhVP"/>
+<span class="absolute top-3 left-3 bg-tertiary text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Promo</span>
+<button class="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur rounded-full flex items-center justify-center text-primary shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="p-4">
+<p class="text-[10px] font-bold text-secondary uppercase mb-1">Distribution Mali</p>
+<h3 class="font-headline font-bold text-sm md:text-base mb-1 line-clamp-1">Huile Dinor 5L</h3>
+<div class="flex items-baseline gap-2 mb-4">
+<span class="text-primary font-black text-lg">8.500 FCFA</span>
+<span class="text-outline text-xs line-through">9.200 FCFA</span>
+</div>
+<button class="w-full py-2.5 hero-gradient text-white rounded-full text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                                Ajouter au Panier
+                            </button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative bg-surface-container-lowest rounded-3xl overflow-hidden shadow-[0_4px_20px_-4px_rgba(19,29,36,0.04)] transition-all hover:shadow-xl hover:-translate-y-1">
+<div class="aspect-[4/5] relative overflow-hidden bg-surface-variant">
+<img alt="Samsung S24" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="modern smartphone Samsung Galaxy S24 with sleek titanium finish and vibrant high-resolution display reflecting soft purple light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfkJiKsPHRF0nokkhIUDpFuoLDFaG4vAV2q3WQ97N2xOFSYyGVqVWpcyTp_WQ2ulRHyF9SA6SwI_QgonAIob2lRtOiO4Mtse5xDLS-GzTgWnBRXuWYRblow8h1ggTjEyJOOZr3GVdkQGPNDest4MUrshblNT2JJxRgpaUR6lmg1s2yVnKfWl4JpaKKpIIcIEJq60WB1kb-iUaRqtb-03l0EJOe_oBqsa7lnfKEBVFpIxvDQRF0KLP9tWzm7Z1Rju-i2BmYlRE3ckVo"/>
+<span class="absolute top-3 left-3 bg-primary-container text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">En Stock</span>
+<button class="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur rounded-full flex items-center justify-center text-primary shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="p-4">
+<p class="text-[10px] font-bold text-secondary uppercase mb-1">Mali Tech</p>
+<h3 class="font-headline font-bold text-sm md:text-base mb-1 line-clamp-1">Samsung Galaxy S24</h3>
+<div class="flex items-baseline gap-2 mb-4">
+<span class="text-primary font-black text-lg">650.000 FCFA</span>
+</div>
+<button class="w-full py-2.5 hero-gradient text-white rounded-full text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                                Ajouter au Panier
+                            </button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative bg-surface-container-lowest rounded-3xl overflow-hidden shadow-[0_4px_20px_-4px_rgba(19,29,36,0.04)] transition-all hover:shadow-xl hover:-translate-y-1">
+<div class="aspect-[4/5] relative overflow-hidden bg-surface-variant">
+<img alt="Beurre de Karité" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="natural raw shea butter in an authentic wooden bowl with traditional textures and soft ambient lighting from a sunlit window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV5seaF8ycgoVlxiRG-ov6QYkiSzf2Po6kIgEjGm4lfoMQbBZ8-jLZ4ZJHedUZRAUWTe5OJ1d2Z2-HubnKFg_ExBq-uuuIXJ7GPKL30CMVpKF7b5vmyS0YeghLtLH9G3BbzpYwSGi_-BdFVCA-6yRrwclbpVPU7xcLZvmWJHF8YUK6qI4vVXJYCd94BDaB4ADyjMx90_CMmDU1kREvE3F1BRuQezHgJXUGdXMoHjEUY-ZhRUuB4ORKdpWlF77n9h4ke0VVBtB246rQ"/>
+<span class="absolute top-3 left-3 bg-secondary-container text-on-secondary-container text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Stock Faible</span>
+<button class="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur rounded-full flex items-center justify-center text-primary shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="p-4">
+<p class="text-[10px] font-bold text-secondary uppercase mb-1">Artisanat du Mali</p>
+<h3 class="font-headline font-bold text-sm md:text-base mb-1 line-clamp-1">Beurre de Karité 1kg</h3>
+<div class="flex items-baseline gap-2 mb-4">
+<span class="text-primary font-black text-lg">4.500 FCFA</span>
+</div>
+<button class="w-full py-2.5 hero-gradient text-white rounded-full text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                                Ajouter au Panier
+                            </button>
+</div>
+</div>
+</div>
+<!-- Load More -->
+<div class="mt-12 flex flex-col items-center gap-4">
+<p class="text-xs text-outline font-medium">Affichage de 4 sur 1,240 produits</p>
+<div class="w-full max-w-xs h-1 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/12 rounded-full"></div>
+</div>
+<button class="mt-4 px-8 py-3 bg-surface-container-high hover:bg-surface-variant text-primary font-bold rounded-full flex items-center gap-3 transition-colors active:scale-95">
+                        Charger plus
+                        <span class="material-symbols-outlined animate-spin text-lg">sync</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Filter Button (Mobile) -->
+<button class="lg:hidden fixed bottom-24 right-6 w-14 h-14 hero-gradient text-white rounded-full shadow-2xl flex items-center justify-center z-40 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<!-- Bottom Navigation Bar -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-white/80 backdrop-blur-xl h-20 px-4 pb-safe flex justify-around items-center rounded-t-3xl shadow-[0_-8px_24px_-4px_rgba(19,29,36,0.04)]">
+<div class="flex flex-col items-center justify-center text-primary ring-2 ring-primary ring-offset-4 rounded-full w-10 h-10">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">storefront</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400">
+<span class="material-symbols-outlined text-xl">explore</span>
+<span class="text-[10px] font-medium font-inter">Discover</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400">
+<span class="material-symbols-outlined text-xl">shopping_cart</span>
+<span class="text-[10px] font-medium font-inter">Cart</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400">
+<span class="material-symbols-outlined text-xl">person</span>
+<span class="text-[10px] font-medium font-inter">Profile</span>
+</div>
+</nav>
+<!-- Footer (Briefly stylized) -->
+<footer class="bg-slate-100 mt-12 pt-12 pb-28 md:pb-12 px-8">
+<div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="col-span-2">
+<h2 class="font-headline font-black text-2xl text-primary mb-4">Mifa Life</h2>
+<p class="text-sm text-outline max-w-sm mb-6">Le curateur digital de l'excellence Malienne. Produits de qualité, services authentiques.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer">social_leaderboard</span>
+<span class="material-symbols-outlined text-primary cursor-pointer">language</span>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-4">Boutique</h4>
+<ul class="text-sm text-outline space-y-2">
+<li class="hover:text-primary cursor-pointer transition-colors">Alimentation</li>
+<li class="hover:text-primary cursor-pointer transition-colors">Vendeurs</li>
+<li class="hover:text-primary cursor-pointer transition-colors">Livraison</li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-4">Support</h4>
+<ul class="text-sm text-outline space-y-2">
+<li class="hover:text-primary cursor-pointer transition-colors">Contact</li>
+<li class="hover:text-primary cursor-pointer transition-colors">Aide</li>
+<li class="hover:text-primary cursor-pointer transition-colors">Sécurité</li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-200 text-center">
+<p class="text-xs text-outline font-medium">© 2024 Mifa Life. Marketplace Éditoriale.</p>
+</div>
+</footer>
+</body></html>

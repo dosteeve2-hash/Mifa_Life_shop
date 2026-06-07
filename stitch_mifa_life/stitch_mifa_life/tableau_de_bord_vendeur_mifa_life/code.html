@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vendor Dashboard - Mifa Life</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#ffe07f",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#d1dbe5",
+                        "surface-container-low": "#eaf5ff",
+                        "on-tertiary-fixed": "#410004",
+                        "on-background": "#131d24",
+                        "surface-container-high": "#dfe9f3",
+                        "on-secondary-container": "#6f5900",
+                        "tertiary": "#bb001e",
+                        "outline": "#6e7b6b",
+                        "background": "#f6faff",
+                        "surface-variant": "#d9e4ee",
+                        "surface-tint": "#006e27",
+                        "inverse-on-surface": "#e8f2fc",
+                        "secondary-fixed-dim": "#edc200",
+                        "on-primary-container": "#f7fff2",
+                        "surface-bright": "#f6faff",
+                        "on-tertiary-fixed-variant": "#930015",
+                        "on-tertiary-container": "#fffbff",
+                        "on-primary-fixed": "#002107",
+                        "surface": "#f6faff",
+                        "primary-fixed": "#81fc90",
+                        "tertiary-fixed-dim": "#ffb3ae",
+                        "on-secondary-fixed-variant": "#564500",
+                        "on-primary-fixed-variant": "#00531c",
+                        "secondary-container": "#fed000",
+                        "primary": "#006b26",
+                        "outline-variant": "#bdcab9",
+                        "on-surface-variant": "#3e4a3d",
+                        "primary-fixed-dim": "#65df76",
+                        "tertiary-container": "#e12531",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#65df76",
+                        "on-surface": "#131d24",
+                        "surface-container": "#e5eff9",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#008732",
+                        "error-container": "#ffdad6",
+                        "secondary": "#725c00",
+                        "tertiary-fixed": "#ffdad7",
+                        "surface-container-highest": "#d9e4ee",
+                        "on-secondary-fixed": "#231b00",
+                        "inverse-surface": "#283239"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chart-gradient {
+            background: linear-gradient(180deg, rgba(0, 107, 38, 0.1) 0%, rgba(0, 107, 38, 0) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-40 bg-white/80 backdrop-blur-xl shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)] flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-700">menu</span>
+<h1 class="font-headline font-bold text-xl tracking-tight text-green-700">Tableau de Bord Vendeur</h1>
+</div>
+<span class="material-symbols-outlined text-slate-500">account_circle</span>
+</header>
+<main class="px-5 pt-6 space-y-8 max-w-md mx-auto">
+<!-- Stats Grid (2x2) -->
+<section>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest p-5 rounded-2xl shadow-[0_8px_20px_-6px_rgba(19,29,36,0.04)] flex flex-col justify-between min-h-[140px]">
+<span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Ventes Totales</span>
+<div class="mt-2">
+<span class="text-primary font-headline font-extrabold text-lg block leading-tight">2.450.000 FCFA</span>
+<div class="flex items-center text-[10px] text-primary mt-1 font-medium">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span class="ml-1">+12.5%</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-2xl shadow-[0_8px_20px_-6px_rgba(19,29,36,0.04)] flex flex-col justify-between min-h-[140px]">
+<span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Commandes</span>
+<div class="mt-2">
+<div class="inline-flex items-center justify-center bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-sm font-bold">
+                            12
+                        </div>
+<span class="block text-[10px] text-slate-400 mt-2">Aujourd'hui</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-2xl shadow-[0_8px_20px_-6px_rgba(19,29,36,0.04)] flex flex-col justify-between min-h-[140px]">
+<span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Solde</span>
+<div class="mt-2 text-secondary font-headline font-extrabold text-lg block leading-tight">
+                        850.000 FCFA
+                    </div>
+<span class="text-[10px] text-secondary/70 font-medium">Disponible</span>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-2xl shadow-[0_8px_20px_-6px_rgba(19,29,36,0.04)] flex flex-col justify-between min-h-[140px]">
+<span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Rupture</span>
+<div class="mt-2">
+<div class="inline-flex items-center justify-center bg-tertiary text-white px-4 py-1 rounded-full text-sm font-bold">
+                            3
+                        </div>
+<span class="block text-[10px] text-tertiary mt-2">Produits alertés</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Analytics Chart -->
+<section class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0_8px_24px_-8px_rgba(19,29,36,0.08)] overflow-hidden">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline font-bold text-base">Tendance des ventes</h3>
+<span class="text-xs font-medium text-slate-400">7 derniers jours</span>
+</div>
+<div class="relative h-40 w-full flex items-end justify-between gap-1">
+<!-- Simple Vector-like visualization using divs and heights to simulate area chart -->
+<div class="w-full h-full relative">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 40">
+<path d="M0,40 L0,30 C15,25 25,35 40,20 C55,5 75,25 100,10 L100,40 Z" fill="rgba(0,107,38,0.08)"></path>
+<path d="M0,30 C15,25 25,35 40,20 C55,5 75,25 100,10" fill="none" stroke="#006b26" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+</svg>
+<div class="flex justify-between mt-2 px-1">
+<span class="text-[9px] text-slate-400">Lun</span>
+<span class="text-[9px] text-slate-400">Mar</span>
+<span class="text-[9px] text-slate-400 font-bold text-primary">Mer</span>
+<span class="text-[9px] text-slate-400">Jeu</span>
+<span class="text-[9px] text-slate-400">Ven</span>
+<span class="text-[9px] text-slate-400">Sam</span>
+<span class="text-[9px] text-slate-400">Dim</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Inventory Management -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-headline font-bold text-lg">Inventaire</h3>
+<button class="text-primary text-sm font-semibold">Voir tout</button>
+</div>
+<div class="space-y-4">
+<!-- Product Card 1 -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 flex gap-4 shadow-[0_4px_12px_-4px_rgba(19,29,36,0.05)]">
+<div class="w-20 h-20 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0">
+<img alt="Riz Gambiaka" class="w-full h-full object-cover" data-alt="Close up of high quality white rice grains in a burlap sack, professional studio lighting, macro photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlWPI9V8hJcDTZAkmq4JwHP6Y-nKqwDUSKtARD9IcMpOqp_etSEVY3QmKzDBG5DuLCcVVLE4uGzUDtPDnAV_4e3fpVkKjGHex-Dzxkfp1rYoFexcqzhMApDguMt2nCaRbSlXN9pUQrrNxvnI__MhIE-3qtnGtaDHoSulkEA-50h-yuBiuAloJK3RGET9HSyQ_lb0Q5jsIJzK7dRbu5YjgI2x7f5nT2ZzA-BkE3IQyb7aekcM5UdGQWkgtr45NCn5BWuhKalmSHykD7"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-sm leading-tight">Riz Gambiaka 50kg</h4>
+<div class="w-8 h-4 bg-primary/20 rounded-full relative">
+<div class="absolute right-1 top-0.5 w-3 h-3 bg-primary rounded-full"></div>
+</div>
+</div>
+<p class="text-[11px] text-slate-500 mt-1">Stock: 45 sacs</p>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm font-bold text-on-background">35.000 FCFA</span>
+<span class="text-[10px] font-bold text-primary uppercase tracking-tighter">Actif</span>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 flex gap-4 shadow-[0_4px_12px_-4px_rgba(19,29,36,0.05)] opacity-80">
+<div class="w-20 h-20 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 grayscale">
+<img alt="Huile Dinor" class="w-full h-full object-cover" data-alt="Plastic bottle of cooking oil on a wooden table, warm sunlight, professional food photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbELCXcNzF0XvIflNNBJNacivkxFOuFBC_p2VlpUcxngVCuGD9c91TK0PYxsfm8x8vpFIKm6xnxEAYpB5fp4WxMZ49RWrBGy0jDWBnA_zapPQ7H3sCSuGlsdjMaU2oVDRBaAAlYitAUu4yb6DBgnrkvrpXQE39tNcA6_IMfnduqr7wxXkgNq-Zj8JtSsaPjQOEUxy2UAgJU5KBwNMHErhKe_pTQLaXCEXJhCOYrNU8wKBXDMtqj2aMKaChZvn36wrd0p1YMnDLpc0K"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-sm leading-tight">Huile Dinor 5L</h4>
+<div class="w-8 h-4 bg-slate-200 rounded-full relative">
+<div class="absolute left-1 top-0.5 w-3 h-3 bg-slate-400 rounded-full"></div>
+</div>
+</div>
+<p class="text-[11px] text-tertiary mt-1 font-semibold">Stock: 0</p>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm font-bold text-on-background">7.500 FCFA</span>
+<span class="text-[10px] font-bold text-tertiary uppercase tracking-tighter">Rupture de Stock</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Orders to Ship -->
+<section class="space-y-4">
+<h3 class="font-headline font-bold text-lg">Commandes à expédier</h3>
+<div class="bg-surface-container-low p-5 rounded-2xl space-y-4">
+<div class="flex items-center justify-between border-b border-white/40 pb-3">
+<div>
+<p class="text-xs font-bold text-on-background">Commande #V-9872</p>
+<p class="text-[11px] text-slate-500">Quartier: Hamdallaye ACI</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-extrabold text-primary">75.000 FCFA</p>
+</div>
+</div>
+<button class="w-full py-3 bg-primary text-white rounded-full font-bold text-sm shadow-lg shadow-primary/20 active:scale-95 transition-transform">
+                    Confirmer l'Expédition
+                </button>
+</div>
+</section>
+<!-- Mifa Wallet -->
+<section class="space-y-4">
+<h3 class="font-headline font-bold text-lg">Portefeuille Mifa</h3>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)] space-y-6">
+<div class="space-y-2">
+<label class="text-[11px] font-bold text-slate-500 uppercase ml-1">Montant du retrait</label>
+<div class="relative">
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 px-5 text-on-background font-bold focus:ring-2 focus:ring-primary focus:bg-white transition-all" placeholder="Entrez le montant" type="text"/>
+<span class="absolute right-5 top-1/2 -translate-y-1/2 font-bold text-slate-400">FCFA</span>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-3">
+<button class="flex items-center justify-center gap-3 w-full py-4 rounded-xl font-bold text-sm bg-[#FF6600] text-white shadow-md active:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+                        Retrait via Orange Money
+                    </button>
+<button class="flex items-center justify-center gap-3 w-full py-4 rounded-xl font-bold text-sm bg-[#1A9FFF] text-white shadow-md active:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">waves</span>
+                        Retrait via Wave
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center shadow-xl z-50 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-white/80 backdrop-blur-xl border-t border-slate-100/10 shadow-[0_-8px_24px_-6px_rgba(19,29,36,0.08)] rounded-t-[2.5rem]">
+<div class="flex flex-col items-center justify-center text-green-700 font-semibold transition-transform active:scale-95">
+<div class="ring-2 ring-green-600 ring-offset-4 rounded-full p-1.5 flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+</div>
+<span class="font-label text-[10px] mt-2 tracking-wide">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 opacity-70 hover:opacity-100 transition-opacity active:scale-95">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label text-[10px] mt-1 tracking-wide">Produits</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 opacity-70 hover:opacity-100 transition-opacity active:scale-95">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="font-label text-[10px] mt-1 tracking-wide">Commandes</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 opacity-70 hover:opacity-100 transition-opacity active:scale-95">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-label text-[10px] mt-1 tracking-wide">Portefeuille</span>
+</div>
+</nav>
+</body></html>

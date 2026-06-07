@@ -1,157 +1,311 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import {
+  ShoppingBag,
+  Heart,
+  User,
+  Search,
+  Menu,
+  X,
+  ChevronRight,
+} from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import CartDrawer from './CartDrawer';
 
 const NAV_LINKS = [
-  { href: '/',      label: 'Accueil'  },
-  { href: '/shop',  label: 'Boutique' },
-  { href: '/login', label: 'Connexion'},
+  { href: '/', label: 'Accueil' },
+  { href: '/shop', label: 'Boutique' },
+  { href: '/shop?sort=sale', label: 'Promos' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const CATEGORIES = [
+  { label: 'Électronique', emoji: '💻', href: '/shop?cat=electronique' },
+  { label: 'Mode', emoji: '👗', href: '/shop?cat=mode' },
+  { label: 'Maison', emoji: '🏠', href: '/shop?cat=maison' },
+  { label: 'Sport', emoji: '⚽', href: '/shop?cat=sport' },
+  { label: 'Beauté', emoji: '💄', href: '/shop?cat=beaute' },
+  { label: 'Enfants', emoji: '🧸', href: '/shop?cat=enfants' },
+  { label: 'Auto', emoji: '🚗', href: '/shop?cat=auto' },
+  { label: 'Alimentation', emoji: '🛒', href: '/shop?cat=alimentation' },
 ];
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const pathname        = usePathname();
-  const { totalItems }  = useCart();
+  const pathname = usePathname();
+  const { totalItems } = useCart();
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [searchFocused, setSearchFocused] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [badgePulse, setBadgePulse] = useState(false);
+  const prevTotalRef = useRef(totalItems);
+
+  const { scrollY } = useScroll();
+  const shadowOpacity = useTransform(scrollY, [0, 60], [0, 1]);
+
+  // Pulse cart badge when items added
+  useEffect(() => {
+    if (totalItems > prevTotalRef.current) {
+      setBadgePulse(true);
+      const t = setTimeout(() => setBadgePulse(false), 600);
+      return () => clearTimeout(t);
+    }
+    prevTotalRef.current = totalItems;
+  }, [totalItems]);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      window.location.href = `/shop?q=${encodeURIComponent(searchQuery.trim())}`;
+    }
+  };
 
   return (
     <>
-      {/* Bande tricolore Mali */}
-      <div className="flex h-[3px] w-full">
-        <span className="flex-1 bg-[#009739]" />
-        <span className="flex-1 bg-[#FCD116]" />
-        <span className="flex-1 bg-[#CE1126]" />
+      {/* Mali stripe */}
+      <div className="mali-stripe" style={{ position: 'sticky', top: 0, zIndex: 601 }}>
+        <span style={{ background: '#009A00' }} />
+        <span style={{ background: '#FFD700' }} />
+        <span style={{ background: '#CE1126' }} />
       </div>
 
-      <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur-md shadow-sm">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <motion.div
+        style={{ boxShadow: useTransform(shadowOpacity, (v) => `0 2px 20px rgba(0,0,0,${v * 0.12})`) }}
+        className="sticky z-[600]"
+        id="nav"
+      >
+        {/* Main navbar */}
+        <motion.header
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
+          style={{ background: 'rgba(246,244,240,0.97)', backdropFilter: 'blur(18px)', borderBottom: '1px solid var(--bg3)' }}
+        >
+          <div className="nv">
+            {/* Logo */}
+            <Link href="/" className="logo" style={{ textDecoration: 'none' }}>
+              <div className="logo-bars">
+                <span />
+                <span />
+                <span />
+              </div>
+              <div>
+                <div className="logo-text">
+                  <em>MIFA</em> LIFE
+                </div>
+                <div style={{ fontSize: '9px', color: 'var(--t4)', fontWeight: 600, letterSpacing: '0.06em' }}>
+                  MALI PREMIUM
+                </div>
+              </div>
+              <div className="flag-mini">
+                <span style={{ background: '#009A00' }} />
+                <span style={{ background: '#FFD700' }} />
+                <span style={{ background: '#CE1126' }} />
+              </div>
+            </Link>
 
-          {/* ── LOGO ── */}
-          <Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
-            {/* Barres décoratives */}
-            <div className="flex flex-col gap-[3px]">
-              <span className="block h-[2px] w-6 rounded-full bg-[#009739]" />
-              <span className="block h-[2px] w-4 rounded-full bg-[#009739]" />
-              <span className="block h-[2px] w-5 rounded-full bg-[#009739]" />
-            </div>
-            <span className="font-serif text-[17px] font-bold tracking-tight text-gray-900">
-              <span className="text-[#009739]">MIFA</span> LIFE
-            </span>
-            {/* Mini drapeau */}
-            <div className="flex overflow-hidden rounded-[2px] shadow-sm">
-              <span className="block h-2.5 w-[5px] bg-[#009739]" />
-              <span className="block h-2.5 w-[5px] bg-[#FCD116]" />
-              <span className="block h-2.5 w-[5px] bg-[#CE1126]" />
-            </div>
-          </Link>
-
-          {/* ── LIENS DESKTOP ── */}
-          <nav className="hidden md:flex items-center gap-1">
-            {NAV_LINKS.map(({ href, label }) => {
-              const active = pathname === href;
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  className={`rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
-                    active
-                      ? 'bg-[#009739]/10 text-[#009739]'
-                      : 'text-gray-500 hover:bg-gray-100 hover:text-gray-800'
-                  }`}
+            {/* Desktop nav links */}
+            <motion.nav
+              className="nv-links"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.07, delayChildren: 0.2 } },
+              }}
+            >
+              {NAV_LINKS.map((link) => (
+                <motion.div
+                  key={link.href}
+                  variants={{ hidden: { opacity: 0, y: -8 }, visible: { opacity: 1, y: 0 } }}
                 >
-                  {label}
-                </Link>
-              );
-            })}
-          </nav>
+                  <Link
+                    href={link.href}
+                    className="nv-lnk"
+                    style={{
+                      color: pathname === link.href ? 'var(--em)' : undefined,
+                      background: pathname === link.href ? 'var(--em-l)' : undefined,
+                    }}
+                  >
+                    {link.label}
+                    {pathname === link.href && (
+                      <motion.div
+                        layoutId="nav-underline"
+                        style={{
+                          position: 'absolute',
+                          bottom: -2,
+                          left: 8,
+                          right: 8,
+                          height: 2,
+                          background: 'var(--em)',
+                          borderRadius: 1,
+                        }}
+                      />
+                    )}
+                  </Link>
+                </motion.div>
+              ))}
+            </motion.nav>
 
-          {/* ── ACTIONS DROITE ── */}
-          <div className="flex items-center gap-2">
-
-            {/* Panier */}
-            <Link
-              href="/cart"
-              aria-label="Panier"
-              className="relative flex h-9 w-9 items-center justify-center rounded-lg text-gray-600 transition-colors hover:bg-gray-100 hover:text-[#009739]"
+            {/* Search bar */}
+            <motion.form
+              className="nv-search"
+              onSubmit={handleSearch}
+              animate={{ width: searchFocused ? '560px' : undefined }}
+              transition={{ duration: 0.3 }}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="1.8">
-                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                <line x1="3" y1="6" x2="21" y2="6"/>
-                <path d="M16 10a4 4 0 0 1-8 0"/>
-              </svg>
-              {totalItems > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#CE1126] px-1 text-[9px] font-bold text-white">
-                  {totalItems > 99 ? '99+' : totalItems}
-                </span>
-              )}
-            </Link>
+              <input
+                className="si"
+                type="text"
+                placeholder="Rechercher un produit..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() => setSearchFocused(true)}
+                onBlur={() => setSearchFocused(false)}
+              />
+              <button type="submit" className="si-btn" aria-label="Rechercher">
+                <Search size={14} />
+              </button>
+            </motion.form>
 
-            {/* Bouton connexion desktop */}
-            <Link
-              href="/login"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-lg bg-[#009739] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#007a2e]"
-            >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2">
-                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-                <polyline points="10 17 15 12 10 7"/>
-                <line x1="15" y1="12" x2="3" y2="12"/>
-              </svg>
-              Connexion
-            </Link>
+            {/* Right icons */}
+            <div className="nv-r">
+              <button className="ic-btn" aria-label="Liste de souhaits">
+                <Heart size={18} />
+              </button>
 
-            {/* Burger mobile */}
-            <button
-              onClick={() => setOpen(!open)}
-              aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
-              aria-expanded={open}
-              className="flex h-9 w-9 flex-col items-center justify-center gap-[4px] rounded-lg border border-gray-200 transition-colors hover:border-[#009739] hover:bg-[#009739]/5 md:hidden"
-            >
-              <span className={`block h-[2px] w-[15px] rounded-full bg-gray-700 transition-transform duration-200 ${open ? 'translate-y-[6px] rotate-45' : ''}`} />
-              <span className={`block h-[2px] w-[15px] rounded-full bg-gray-700 transition-opacity duration-200 ${open ? 'opacity-0' : ''}`} />
-              <span className={`block h-[2px] w-[15px] rounded-full bg-gray-700 transition-transform duration-200 ${open ? '-translate-y-[6px] -rotate-45' : ''}`} />
-            </button>
+              <button
+                className="ic-btn"
+                aria-label="Mon panier"
+                onClick={() => setCartOpen(true)}
+              >
+                <ShoppingBag size={18} />
+                <AnimatePresence>
+                  {totalItems > 0 && (
+                    <motion.span
+                      key="badge"
+                      className="ic-bdg"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: badgePulse ? 1.35 : 1 }}
+                      exit={{ scale: 0 }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                    >
+                      {totalItems > 99 ? '99+' : totalItems}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </button>
+
+              <button className="ic-btn" aria-label="Mon compte">
+                <User size={18} />
+              </button>
+
+              <Link href="/login" className="auth-btn">
+                <User size={14} />
+                Connexion
+              </Link>
+
+              {/* Hamburger */}
+              <button
+                className={`burger ${drawerOpen ? 'open' : ''}`}
+                onClick={() => setDrawerOpen((o) => !o)}
+                aria-label="Menu"
+              >
+                <span />
+                <span />
+                <span />
+              </button>
+            </div>
+          </div>
+        </motion.header>
+
+        {/* Category subnav */}
+        <div id="subnav" className="hidden sm:block">
+          <div className="sn-in">
+            {CATEGORIES.map((cat) => (
+              <Link
+                key={cat.href}
+                href={cat.href}
+                className={`sn-a ${pathname.includes(cat.href.split('?')[1] ?? '__') ? 'on' : ''}`}
+              >
+                <span>{cat.emoji}</span>
+                {cat.label}
+              </Link>
+            ))}
           </div>
         </div>
+      </motion.div>
 
-        {/* ── MENU MOBILE DÉROULANT ── */}
-        <div className={`overflow-hidden border-t border-gray-100 transition-all duration-300 ease-in-out md:hidden ${open ? 'max-h-96' : 'max-h-0'}`}>
-          <nav className="flex flex-col px-4 py-3 gap-1">
-            {NAV_LINKS.map(({ href, label }) => {
-              const active = pathname === href;
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  onClick={() => setOpen(false)}
-                  className={`rounded-lg px-3 py-3 text-sm font-semibold transition-colors ${
-                    active
-                      ? 'bg-[#009739]/10 text-[#009739]'
-                      : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  {label}
-                </Link>
-              );
-            })}
-            <Link
-              href="/cart"
-              onClick={() => setOpen(false)}
-              className="flex items-center justify-between rounded-lg px-3 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50"
-            >
-              <span>Panier</span>
-              {totalItems > 0 && (
-                <span className="rounded-full bg-[#CE1126] px-2 py-0.5 text-xs font-bold text-white">
-                  {totalItems}
-                </span>
-              )}
-            </Link>
-          </nav>
-        </div>
-      </header>
+      {/* Mobile drawer backdrop */}
+      <div
+        id="mob-bg"
+        className={drawerOpen ? 'on' : ''}
+        onClick={() => setDrawerOpen(false)}
+      />
+
+      {/* Mobile drawer */}
+      <AnimatePresence>
+        {drawerOpen && (
+          <motion.div
+            id="mob-dr"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            style={{ position: 'fixed', top: 0, right: 0, bottom: 0, width: 'min(290px, 86vw)', background: 'var(--white)', zIndex: 499, overflowY: 'auto', boxShadow: 'var(--sh-l)' }}
+          >
+            <div className="mob-hd">
+              <Link href="/" className="mob-logo" onClick={() => setDrawerOpen(false)}>
+                <em>MIFA</em> LIFE
+              </Link>
+              <button className="mob-cl" onClick={() => setDrawerOpen(false)}>
+                <X size={16} />
+              </button>
+            </div>
+
+            <div className="mob-sec-ti">Navigation</div>
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="mob-l"
+                onClick={() => setDrawerOpen(false)}
+              >
+                <ChevronRight size={14} />
+                {link.label}
+              </Link>
+            ))}
+
+            <div className="mob-sep" />
+            <div className="mob-sec-ti">Catégories</div>
+            {CATEGORIES.map((cat) => (
+              <Link
+                key={cat.href}
+                href={cat.href}
+                className="mob-l"
+                onClick={() => setDrawerOpen(false)}
+              >
+                <span>{cat.emoji}</span>
+                {cat.label}
+              </Link>
+            ))}
+
+            <div className="mob-auth">
+              <Link href="/login" onClick={() => setDrawerOpen(false)}>
+                Se connecter / S&apos;inscrire
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Cart Drawer */}
+      <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
     </>
   );
 }

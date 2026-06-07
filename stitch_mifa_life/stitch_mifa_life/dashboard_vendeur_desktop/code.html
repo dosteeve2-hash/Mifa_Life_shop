@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mifa Life Vendor Dashboard | Sahel Luxe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "#f6faff",
+              "on-surface": "#131d24",
+              "inverse-surface": "#283239",
+              "tertiary": "#bb001e",
+              "on-primary-container": "#f7fff2",
+              "surface-container-high": "#dfe9f3",
+              "on-secondary-container": "#6f5900",
+              "on-background": "#131d24",
+              "on-tertiary-fixed-variant": "#930015",
+              "surface-container-low": "#eaf5ff",
+              "surface-container-highest": "#d9e4ee",
+              "on-tertiary-container": "#fffbff",
+              "primary-container": "#008732",
+              "on-secondary-fixed-variant": "#564500",
+              "secondary-fixed-dim": "#edc200",
+              "on-tertiary-fixed": "#410004",
+              "on-tertiary": "#ffffff",
+              "on-primary": "#ffffff",
+              "primary-fixed-dim": "#65df76",
+              "on-secondary-fixed": "#231b00",
+              "primary": "#006b26",
+              "surface": "#f6faff",
+              "secondary": "#725c00",
+              "outline-variant": "#bdcab9",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "tertiary-container": "#e12531",
+              "surface-container-lowest": "#ffffff",
+              "inverse-primary": "#65df76",
+              "on-surface-variant": "#3e4a3d",
+              "on-error-container": "#93000a",
+              "outline": "#6e7b6b",
+              "inverse-on-surface": "#e8f2fc",
+              "error": "#ba1a1a",
+              "surface-bright": "#f6faff",
+              "error-container": "#ffdad6",
+              "tertiary-fixed": "#ffdad7",
+              "surface-tint": "#006e27",
+              "on-error": "#ffffff",
+              "primary-fixed": "#81fc90",
+              "on-secondary": "#ffffff",
+              "surface-variant": "#d9e4ee",
+              "surface-dim": "#d1dbe5",
+              "on-primary-fixed": "#002107",
+              "surface-container": "#e5eff9",
+              "on-primary-fixed-variant": "#00531c",
+              "secondary-container": "#fed000",
+              "secondary-fixed": "#ffe07f"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<div class="flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="w-72 bg-white flex flex-col sticky top-0 h-screen shadow-sm shadow-emerald-900/5 z-40">
+<div class="p-8">
+<h1 class="text-2xl font-extrabold tracking-tighter text-emerald-900 font-headline">Sahel Luxe</h1>
+<p class="text-[10px] uppercase tracking-[0.2em] text-outline font-bold mt-1">Vendor Portal</p>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 bg-surface-container-low text-primary font-bold rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-sm font-headline">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-sm font-headline">Inventory</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="text-sm font-headline">Active Orders</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-sm font-headline">Payouts</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-sm font-headline">Reports</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-headline">Store Settings</span>
+</a>
+</nav>
+<div class="p-6 mt-auto">
+<div class="bg-surface-container-high rounded-2xl p-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface">Mali Artisans Co.</p>
+<p class="text-[10px] text-outline uppercase">Premium Vendor</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 p-10 max-w-7xl mx-auto w-full">
+<!-- Header -->
+<header class="flex justify-between items-center mb-10">
+<div>
+<h2 class="text-3xl font-extrabold font-headline tracking-tight text-on-surface">Vendor Dashboard</h2>
+<p class="text-on-surface-variant mt-1">Welcome back. Here is your supply chain overview for today.</p>
+</div>
+<div class="flex gap-4">
+<button class="bg-surface-container-lowest text-on-surface-variant p-3 rounded-full hover:scale-95 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="bg-primary text-white px-6 py-3 rounded-full font-bold text-sm flex items-center gap-2 hover:scale-95 transition-transform shadow-lg shadow-emerald-900/10">
+<span class="material-symbols-outlined text-sm">add</span>
+                        New Product
+                    </button>
+</div>
+</header>
+<!-- Stats Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<div class="bg-white p-6 rounded-[2rem] shadow-sm shadow-emerald-900/5 relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-surface-container-low rounded-2xl text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-emerald-600 text-xs font-bold bg-emerald-50 px-2 py-1 rounded-lg">+12.5%</span>
+</div>
+<p class="text-outline text-xs uppercase font-bold tracking-widest">Total Sales</p>
+<h3 class="text-3xl font-extrabold font-headline mt-1">4.250.000 <span class="text-sm text-outline">FCFA</span></h3>
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-9xl">trending_up</span>
+</div>
+</div>
+<div class="bg-white p-6 rounded-[2rem] shadow-sm shadow-emerald-900/5 relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-surface-container-low rounded-2xl text-secondary">
+<span class="material-symbols-outlined">shopping_bag</span>
+</div>
+<span class="text-emerald-600 text-xs font-bold bg-emerald-50 px-2 py-1 rounded-lg">+8 new</span>
+</div>
+<p class="text-outline text-xs uppercase font-bold tracking-widest">Active Orders</p>
+<h3 class="text-3xl font-extrabold font-headline mt-1">142</h3>
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-9xl">local_shipping</span>
+</div>
+</div>
+<div class="bg-primary text-white p-6 rounded-[2rem] shadow-xl shadow-emerald-900/20 relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-white/10 rounded-2xl text-white">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<span class="text-white/80 text-xs font-bold">Ready to Payout</span>
+</div>
+<p class="text-white/60 text-xs uppercase font-bold tracking-widest">Payout Balance</p>
+<h3 class="text-3xl font-extrabold font-headline mt-1">890.400 <span class="text-sm text-white/50 font-medium">FCFA</span></h3>
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-9xl">wallet</span>
+</div>
+</div>
+</section>
+<!-- Performance Chart -->
+<section class="mb-10">
+<div class="bg-white p-8 rounded-[2rem] shadow-sm shadow-emerald-900/5">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h4 class="text-xl font-extrabold font-headline">Sales Performance</h4>
+<p class="text-on-surface-variant text-sm">Revenue distribution over the last 30 days</p>
+</div>
+<div class="flex gap-2 bg-surface-container-low p-1 rounded-xl">
+<button class="px-4 py-2 bg-white rounded-lg text-xs font-bold shadow-sm">Revenue</button>
+<button class="px-4 py-2 text-xs font-bold text-outline">Orders</button>
+</div>
+</div>
+<!-- Mock Chart Visualization -->
+<div class="h-64 w-full flex items-end justify-between gap-4 px-4">
+<div class="flex-1 bg-surface-container-highest rounded-t-xl hover:bg-primary/20 transition-colors h-[40%]" title="Day 1: 120k"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-xl hover:bg-primary/20 transition-colors h-[55%]" title="Day 2: 180k"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-xl hover:bg-primary/20 transition-colors h-[45%]" title="Day 3: 140k"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-xl hover:bg-primary/20 transition-colors h-[70%]" title="Day 4: 220k"></div>
+<div class="flex-1 bg-primary rounded-t-xl hover:bg-primary/80 transition-colors h-[90%]" title="Day 5: 310k"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-xl hover:bg-primary/20 transition-colors h-[60%]" title="Day 6: 190k"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-xl hover:bg-primary/20 transition-colors h-[50%]" title="Day 7: 160k"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-xl hover:bg-primary/20 transition-colors h-[80%]" title="Day 8: 260k"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-xl hover:bg-primary/20 transition-colors h-[65%]" title="Day 9: 210k"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-xl hover:bg-primary/20 transition-colors h-[40%]" title="Day 10: 120k"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t-xl hover:bg-primary/20 transition-colors h-[75%]" title="Day 11: 240k"></div>
+<div class="flex-1 bg-primary rounded-t-xl hover:bg-primary/80 transition-colors h-[100%]" title="Day 12: 340k"></div>
+</div>
+</div>
+</section>
+<!-- Two Column Layout: Orders & Payouts -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+<!-- Active Orders Table -->
+<section class="lg:col-span-2 bg-white rounded-[2rem] shadow-sm shadow-emerald-900/5 p-8">
+<div class="flex justify-between items-center mb-6">
+<h4 class="text-xl font-extrabold font-headline">Recent Orders</h4>
+<a class="text-primary font-bold text-xs uppercase tracking-widest hover:underline" href="#">View All</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-outline text-[10px] uppercase tracking-widest border-b border-surface-container-high">
+<th class="pb-4 font-bold">Order ID</th>
+<th class="pb-4 font-bold">Product</th>
+<th class="pb-4 font-bold">Customer</th>
+<th class="pb-4 font-bold">Status</th>
+<th class="pb-4 font-bold">Amount</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low">
+<tr>
+<td class="py-4 font-headline text-sm font-bold">#ML-8921</td>
+<td class="py-4 text-sm">Hand-woven Bogolan Shawl</td>
+<td class="py-4 text-sm text-on-surface-variant">S. Touré</td>
+<td class="py-4">
+<span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-[10px] font-bold rounded-full">SHIPPED</span>
+</td>
+<td class="py-4 font-bold text-sm">45.000 FCFA</td>
+</tr>
+<tr>
+<td class="py-4 font-headline text-sm font-bold">#ML-8922</td>
+<td class="py-4 text-sm">Leather Timbuktu Sandals</td>
+<td class="py-4 text-sm text-on-surface-variant">M. Diallo</td>
+<td class="py-4">
+<span class="px-3 py-1 bg-secondary/10 text-secondary text-[10px] font-bold rounded-full">PENDING</span>
+</td>
+<td class="py-4 font-bold text-sm">32.500 FCFA</td>
+</tr>
+<tr>
+<td class="py-4 font-headline text-sm font-bold">#ML-8923</td>
+<td class="py-4 text-sm">Bronze Dogon Statue</td>
+<td class="py-4 text-sm text-on-surface-variant">F. Keita</td>
+<td class="py-4">
+<span class="px-3 py-1 bg-tertiary/10 text-tertiary text-[10px] font-bold rounded-full">CANCELLED</span>
+</td>
+<td class="py-4 font-bold text-sm">120.000 FCFA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Payout Section -->
+<section class="bg-white rounded-[2rem] shadow-sm shadow-emerald-900/5 p-8">
+<h4 class="text-xl font-extrabold font-headline mb-6">Withdraw Funds</h4>
+<p class="text-on-surface-variant text-sm mb-6">Select your preferred payment provider for fast payout.</p>
+<div class="space-y-4">
+<button class="w-full group p-4 rounded-2xl bg-surface-container-low hover:bg-orange-50 transition-colors flex items-center gap-4">
+<div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center p-2">
+<img alt="Orange Money" class="w-full h-auto rounded-md" data-alt="Logotype of Orange Money mobile money service with orange and white branding on clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJmox4s_EZW_cY3kTcL15kOnTSdtdaHtWNXLOQz4Y7tKdBgXIfPy-PViN5f_Q8fpo1oIzU7kNaehOTrWGWJdu_guLa46ywfBOmheamHRDaAqmlgw6GCkO7ffg207Bzb80ic_2GWEoppAfeS89TK6oR-OfIap6g4cXE_Wl1x8HqhHFdMfC-6tr_mkQxaqh40R0BrNzFgP_1kpkiMBYH3eRNi9z2u3i8z3W0xLr6bxOZTzxwpf6FPiR2AFcsd2GRkWx8OgKCIVL7E3xD"/>
+</div>
+<div class="text-left">
+<p class="text-sm font-bold">Orange Money</p>
+<p class="text-[10px] text-outline font-medium">Instant Payout • 1% Fee</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</button>
+<button class="w-full group p-4 rounded-2xl bg-surface-container-low hover:bg-blue-50 transition-colors flex items-center gap-4">
+<div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center p-2">
+<img alt="Wave" class="w-full h-auto" data-alt="Wave mobile money logo with blue branding and white bird icon symbol" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoTj6FIJn0vtBeNqzciR2X1qdmsy-K6n0TWO0qA_ffGJp1bqnAZura4mkCoM-Bm1oy4c9Zb0i-madJYBTR6VsD49M1y4_aooxixhRH-dVdnoLB80zsa8xec1D9jldVmL-SyhtT5uAcCVc__qRE2TgnO_4lcQOws7aIb5QyDeoVk98rNb8CSleTHWV3UVCyUAGBty8SrNwavqSHXNWUcRSp6MHjxNEIbm3qnxrqv9SKgG9c7pOcxCZlHVcsTtWZSUHUuWZFbdtL-XEJ"/>
+</div>
+<div class="text-left">
+<p class="text-sm font-bold">Wave</p>
+<p class="text-[10px] text-outline font-medium">Fast Transfer • No Fee</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</button>
+</div>
+<div class="mt-8 pt-8 border-t border-surface-container-high">
+<div class="flex justify-between items-center mb-4">
+<span class="text-sm font-medium text-on-surface-variant">Minimum withdrawal</span>
+<span class="text-sm font-bold">5.000 FCFA</span>
+</div>
+<button class="w-full py-4 bg-on-surface text-white rounded-2xl font-bold text-sm hover:scale-[0.98] transition-all">
+                            Configure Payout Wallet
+                        </button>
+</div>
+</section>
+</div>
+<!-- Inventory Insights Section -->
+<section class="bg-surface-container-low rounded-[2rem] p-8">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+<div>
+<h4 class="text-xl font-extrabold font-headline">Inventory Health</h4>
+<p class="text-on-surface-variant text-sm">Monitor stock levels and supply chain status</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-white px-4 py-2 rounded-xl flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+<span class="text-xs font-bold">85% In Stock</span>
+</div>
+<div class="bg-white px-4 py-2 rounded-xl flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<span class="text-xs font-bold">4 Items Low</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white p-4 rounded-2xl">
+<img alt="Bogolan Cloth" class="w-full h-32 object-cover rounded-xl mb-4" data-alt="Close-up of traditional Malian Bogolan mud cloth with intricate geometric white patterns on dark brown fabric" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZUnusJ-N6VFgIOpAa838_WlhhidR0IdpeyjluCSEOtndTGDJjBnyHK8EghRLoIrR7a0dS0LHvII4BxufCKiMTqjyxMXpH6Q5smZtxnOfDAXgPNSpKLN5i4JFQLY3LltLdCvwQe8RZl5SvJPk9j8BJE46gp5lCyHNw7cFhHaT-DWtezmg-xqbk6q4jqeCun8UthSMGfnueJ0ek3yU6NZj9cXjDsRr1ZfB2gbE0X69mINxREmPk3U9iNT7eSNgQF4QlF_jOWxM-VMDJ"/>
+<p class="text-xs font-bold truncate">Premium Bogolan Fabric</p>
+<div class="flex justify-between items-center mt-2">
+<span class="text-[10px] text-outline uppercase font-bold">Stock: 24m</span>
+<span class="text-emerald-600 text-[10px] font-bold">Optimal</span>
+</div>
+</div>
+<div class="bg-white p-4 rounded-2xl">
+<img alt="Shea Butter" class="w-full h-32 object-cover rounded-xl mb-4" data-alt="Pure raw organic shea butter in a wooden bowl with golden sunlight accentuating the creamy texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4eqOFqWNNKqJ84XJh5K69LgQ_RSgvQK0_Hx-A0UST6bwzDmaCJXfZRpAo6u3aKF4EiqSHB34nJDqNfYsce5S7bHhZde_b2n8BvIRDxETGTCQkXM7nv6_2A-0B4xm76KW7uFsAFEnaBtdv1eIOaZMJRXibOn_BlmCI2t7CqUwwktI1oFVXckGY6HEmrcaOk9Knv3Qo7FU68DRsJAGaGtkBzvzPTTTPtATnpE-LGSPRSx_iRLjgwVzqcvJVKmZsVneqnx_1N1y-Ccsp"/>
+<p class="text-xs font-bold truncate">Organic Shea Butter (Raw)</p>
+<div class="flex justify-between items-center mt-2">
+<span class="text-[10px] text-outline uppercase font-bold">Stock: 12kg</span>
+<span class="text-tertiary text-[10px] font-bold">Restock Soon</span>
+</div>
+</div>
+<div class="bg-white p-4 rounded-2xl">
+<img alt="Indigo Dye" class="w-full h-32 object-cover rounded-xl mb-4" data-alt="Hand-dyed indigo blue fabric with deep rich hues and subtle artisanal texture details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZOuuksITjOiK_vUuaaUCaDfXwVGcKcGNb9pFIR8bCi808OEWuz8MQcufaDc9RIO5xH_uXsaMDTc6Q1haWxLSRAyw38NKj312SwehqyVAIyxYd9cTF8R362irt0YfARsjg1gVivyk5jLw5mfZy5sqY1cbc4ogPvX_k3cmZaA_E7WFE11XiDr9tsTbQ-MXTHqxBA8JvrpyXThFifa-ht0x3P3cTDmJ_Dfmq1NLWnS96LhPtvp7MQSJvEVhjcuCdLQvd1qSs29QlwZma"/>
+<p class="text-xs font-bold truncate">Natural Indigo Tunic</p>
+<div class="flex justify-between items-center mt-2">
+<span class="text-[10px] text-outline uppercase font-bold">Stock: 8 units</span>
+<span class="text-emerald-600 text-[10px] font-bold">Selling Fast</span>
+</div>
+</div>
+<div class="bg-white p-4 rounded-2xl">
+<img alt="Bronze Mask" class="w-full h-32 object-cover rounded-xl mb-4" data-alt="Artisanal bronze African mask with detailed carvings displayed in elegant gallery lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq115FS7JPBnISJ_Fs71vYaOzkQl4gpTsZwPj3fbxnwaCe60XpDTQO-DtyWoXKUX3c4aAVasydSAPPUU9_V_5fnCROdVtCV0VL_xWPm6kdGG5zIjfm-qJAU_4eoox4uHmbA7GGQa9GtIQPLsZwpK1eCPNDvDWxtIt4y-ahKMJP7XHCYBbjWdeNKNPE_QkIw8XvXEHHNYFm_uRObXUpz8ymcVWlWfORPPM21b0QeA233f8kjbZFTiDZ9iC8pqe5CSIYCf3Hwj3ny_Dv"/>
+<p class="text-xs font-bold truncate">Dogon Ceremonial Mask</p>
+<div class="flex justify-between items-center mt-2">
+<span class="text-[10px] text-outline uppercase font-bold">Stock: 2 units</span>
+<span class="text-tertiary text-[10px] font-bold">Critical Low</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-900 w-full rounded-t-3xl mt-12 flex flex-col md:flex-row justify-between items-center px-12 py-10 gap-6">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="text-lg font-bold text-emerald-800 font-headline">Sahel Luxe</span>
+<p class="font-['Inter'] text-xs font-medium uppercase tracking-widest text-slate-500">© 2024 Sahel Luxe Marketplace. Elevated Malian Artistry.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-['Inter'] text-xs font-medium uppercase tracking-widest text-slate-500 hover:text-emerald-600 transition-opacity" href="#">Orange Money</a>
+<a class="font-['Inter'] text-xs font-medium uppercase tracking-widest text-slate-500 hover:text-emerald-600 transition-opacity" href="#">Wave</a>
+<a class="font-['Inter'] text-xs font-medium uppercase tracking-widest text-slate-500 hover:text-emerald-600 transition-opacity" href="#">Moov</a>
+<a class="font-['Inter'] text-xs font-medium uppercase tracking-widest text-slate-500 hover:text-emerald-600 transition-opacity" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-xs font-medium uppercase tracking-widest text-slate-500 hover:text-emerald-600 transition-opacity" href="#">Privacy Policy</a>
+</div>
+</footer>
+</body></html>

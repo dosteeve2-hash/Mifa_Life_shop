@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mifa Life - Centre d'Aide Mali</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-container": "#e12531",
+              "primary-fixed-dim": "#65df76",
+              "on-surface": "#131d24",
+              "surface-container": "#e5eff9",
+              "on-secondary": "#ffffff",
+              "inverse-primary": "#65df76",
+              "surface": "#f6faff",
+              "primary-fixed": "#81fc90",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "surface-bright": "#f6faff",
+              "on-tertiary-fixed-variant": "#930015",
+              "on-tertiary-container": "#fffbff",
+              "on-primary-fixed": "#002107",
+              "outline-variant": "#bdcab9",
+              "on-surface-variant": "#3e4a3d",
+              "on-secondary-fixed-variant": "#564500",
+              "on-primary-fixed-variant": "#00531c",
+              "secondary-container": "#fed000",
+              "primary": "#006b26",
+              "secondary": "#725c00",
+              "on-secondary-fixed": "#231b00",
+              "inverse-surface": "#283239",
+              "tertiary-fixed": "#ffdad7",
+              "surface-container-highest": "#d9e4ee",
+              "on-primary": "#ffffff",
+              "error-container": "#ffdad6",
+              "primary-container": "#008732",
+              "error": "#ba1a1a",
+              "surface-container-low": "#eaf5ff",
+              "on-tertiary-fixed": "#410004",
+              "on-background": "#131d24",
+              "surface-dim": "#d1dbe5",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed": "#ffe07f",
+              "on-tertiary": "#ffffff",
+              "on-error": "#ffffff",
+              "on-error-container": "#93000a",
+              "outline": "#6e7b6b",
+              "background": "#f6faff",
+              "surface-variant": "#d9e4ee",
+              "surface-tint": "#006e27",
+              "secondary-fixed-dim": "#edc200",
+              "on-primary-container": "#f7fff2",
+              "inverse-on-surface": "#e8f2fc",
+              "surface-container-high": "#dfe9f3",
+              "tertiary": "#bb001e",
+              "on-secondary-container": "#6f5900"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #006b26 0%, #008732 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed-dim/30">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 glass-nav shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)]">
+<div class="flex items-center justify-between px-6 h-16 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="text-emerald-800 hover:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline font-bold tracking-tight text-xl text-emerald-900">Mifa Life</h1>
+</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-slate-500 hover:text-emerald-700 font-medium transition-colors" href="#">Home</a>
+<a class="text-emerald-700 font-bold" href="#">Support</a>
+<a class="text-slate-500 hover:text-emerald-700 font-medium transition-colors" href="#">Guides</a>
+<a class="text-slate-500 hover:text-emerald-700 font-medium transition-colors" href="#">Profile</a>
+</div>
+<button class="text-emerald-800 hover:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</header>
+<main class="pt-16 pb-24">
+<!-- Hero Section & Search -->
+<section class="hero-gradient px-6 py-16 md:py-24 text-center text-white relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<img alt="" class="w-full h-full object-cover mix-blend-overlay" data-alt="abstract organic patterns inspired by malian mudcloth designs in a subtle monochromatic green texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMBUytR2mfw9zWqc4jbByb1VZdqAgfH8gx3EVNQUfNUb9O9xHr3gdDhW4-xeppo4OAQ1LsM2p0TxhIsxLDrlRjYSOuiZrAuWM6eVY30yc9sSeCxKODRl-ZYpqJvqgu22865wJ-kDA5YcTPTFnMP1uMHYIyJdkmVQdBQBOgv-tbs1Cy2FUBp8v2-6efF4Wm27GzfNahiYCSDm70EEb17iBug0gkSfpMMc7V4jU-OOWt54hdTzp5mi4Uo98C8aplXyKK4kv-o4nzMDBb"/>
+</div>
+<div class="relative z-10 max-w-3xl mx-auto">
+<h2 class="font-headline text-3xl md:text-5xl font-extrabold mb-8 leading-tight">Centre d'Assistance Mifa Life</h2>
+<div class="relative group">
+<input class="w-full h-16 pl-14 pr-6 rounded-full border-none bg-white text-on-surface shadow-xl focus:ring-4 focus:ring-secondary-container/30 transition-all text-lg font-medium placeholder:text-slate-400" placeholder="Comment pouvons-nous vous aider aujourd'hui ?" type="text"/>
+<span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-primary text-3xl">search</span>
+</div>
+<div class="mt-6 flex flex-wrap justify-center gap-3">
+<span class="px-4 py-1.5 bg-white/20 backdrop-blur-md rounded-full text-sm font-medium">Orange Money</span>
+<span class="px-4 py-1.5 bg-white/20 backdrop-blur-md rounded-full text-sm font-medium">Livraison Bamako</span>
+<span class="px-4 py-1.5 bg-white/20 backdrop-blur-md rounded-full text-sm font-medium">Wave</span>
+</div>
+</div>
+</section>
+<!-- Emergency Cards (Bento Style) -->
+<section class="max-w-7xl mx-auto px-6 -mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-20">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)] flex flex-col items-center text-center group hover:-translate-y-1 transition-transform">
+<div class="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center text-primary mb-4 relative">
+<span class="material-symbols-outlined text-3xl">chat</span>
+<span class="absolute top-0 right-0 w-4 h-4 bg-primary rounded-full border-2 border-white animate-ping"></span>
+</div>
+<h3 class="font-headline font-bold text-lg mb-1">WhatsApp Assistance</h3>
+<p class="text-sm text-slate-500 mb-4">Réponse instantanée pour vos urgences</p>
+<button class="mt-auto w-full py-2 bg-primary text-white rounded-full font-bold text-sm hover:opacity-90 transition-opacity">Contacter</button>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)] flex flex-col items-center text-center group hover:-translate-y-1 transition-transform">
+<div class="w-14 h-14 bg-amber-100 rounded-full flex items-center justify-center text-secondary mb-4">
+<span class="material-symbols-outlined text-3xl">call</span>
+</div>
+<h3 class="font-headline font-bold text-lg mb-1">Appel Téléphonique</h3>
+<p class="text-sm text-slate-500 mb-4">Du Lundi au Samedi (8h - 20h)</p>
+<button class="mt-auto w-full py-2 bg-secondary text-on-secondary-container rounded-full font-bold text-sm hover:opacity-90 transition-opacity">Appeler</button>
+</div>
+<div class="md:col-span-2 bg-primary-container p-6 rounded-xl shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)] flex items-center gap-6 text-white overflow-hidden relative">
+<div class="relative z-10">
+<h3 class="font-headline font-bold text-xl mb-2">Devenir Vendeur</h3>
+<p class="text-primary-fixed text-sm mb-4">Rejoignez la plus grande marketplace du Mali et boostez votre commerce.</p>
+<button class="px-6 py-2 bg-white text-primary rounded-full font-bold text-sm hover:scale-95 transition-transform">En savoir plus</button>
+</div>
+<div class="absolute right-0 bottom-0 w-32 h-32 opacity-20 -mr-4 -mb-4">
+<span class="material-symbols-outlined text-[160px]">storefront</span>
+</div>
+</div>
+</section>
+<!-- Video Tutorial Section -->
+<section class="max-w-7xl mx-auto px-6 py-16">
+<div class="bg-surface-container-high rounded-xl overflow-hidden flex flex-col lg:flex-row items-center">
+<div class="lg:w-1/2 p-10">
+<h2 class="font-headline text-3xl font-bold mb-4">Comment utiliser Mifa Life ?</h2>
+<p class="text-slate-600 mb-8 leading-relaxed text-lg">Découvrez en 2 minutes comment naviguer, commander et payer vos articles préférés en toute sécurité sur notre plateforme.</p>
+<div class="flex items-center gap-4">
+<div class="flex -space-x-3">
+<img class="w-10 h-10 rounded-full border-2 border-white object-cover" data-alt="portrait of a smiling malian woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo-skhi6zlah0M-5hTXrZQcOZVL0w4hI4Kkom-ejZw7pYjZVlVtQbwePxiJoeobIh1zcdPjgplW0V6SC6M1XsOnqUmTQ6gOBzXXScXj1oqjckC0ocN0MrFeOU67x7igCErxjbpARwOa6z0Uevm5MTEkaDTG7drEHMbqrLuIsBRpStEc6qeF5L56wZl-qMIq8Rv0yrKbMg_9deoY07NCpFPouUETM7j7hYOCFPD7qGIAe68PxjAfpyxlcIQaAjBU05mY47DPpbOgw_c"/>
+<img class="w-10 h-10 rounded-full border-2 border-white object-cover" data-alt="portrait of a confident young man in Bamako" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3XOuBpm1TJPwuEIpDsgOVMTLub0jfHf-yr_DQeEWWYshDVIaEwHB8ciWH6ciwFdwHK9cNojBtTc4wa2a2T4TG5eM3jfQpJkivbJYcfx8h24LBwiImckq5ud2xmUmrdavM2ZuofAyv4D_PU4SOO9Df7m5x0yRihyyp2k7p64arkcz3_9njM5iziBE0HbwqTs9Ox1gofPqSORhXoMtYNYhzE6dW8d65bYACLZSy8MnQR7SsyI__7GHpNZcWiP2w5elkFiaSJ834SmEV"/>
+<img class="w-10 h-10 rounded-full border-2 border-white object-cover" data-alt="smiling female customer service representative" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHoUmow04CPy_BkwxU7fkeilhrJl27tyqS6ElP2yyEwrLzVr9hkmiAHW6Wi6u_U7zohmEZF6D3ERA36hbMuRpb4RizVqgBmyRWjx_i7jS1kECTKMH1ZPQF-bhmIHuY1tMIvlyMputQJHBU_gN2z9ePfytmJHUf6lLM2Imi11y0X4CBUxCABNtx7skt8WYGrz9FHuNat7bDv98dwV1awnrXWIpJYWU-tpnlI3gkcKS3Wx9wV27y3t0cTVyw8Cabl5wqZDWP43z3xTkL"/>
+</div>
+<p class="text-sm font-semibold text-primary">+10,000 clients satisfaits</p>
+</div>
+</div>
+<div class="lg:w-1/2 w-full p-4">
+<div class="aspect-video bg-black rounded-lg relative group overflow-hidden cursor-pointer shadow-2xl">
+<img alt="" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500" data-alt="professional still from a mobile app tutorial showing a smartphone interface on a wooden table with malian tea set" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8tMMKq2RcpjiNbD7hYO9N8XfK4zRsFvdg47SQ5FlJlLPb-mHMW1yaHMDeDOM2oBBez_jcBPGsViDsyGGekpwDeiDz4-kfYtw5JytkMvjdVIF560teOISjt0c9quQMbcF3YTh61ttbv8fd6rQrHhy4DZlcodB6pRAPZlUwYm6LPhZNIYBXPdnihEUNM2O-tET5K5KYbstv7QoTl-fbAIL8qopNE0JfdBBFAOvBzIR5NPmEXJZck6y8BLsKfdEdglfkqqKRADKbtEuc"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-20 h-20 bg-primary/90 text-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-5xl">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-4 left-4 bg-black/50 backdrop-blur-md px-3 py-1 rounded text-white text-xs">02:15</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Visual Stepper: Comment ça marche -->
+<section class="bg-white py-16">
+<div class="max-w-7xl mx-auto px-6 text-center">
+<h2 class="font-headline text-3xl font-bold mb-12">Comment ça marche</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+<!-- Connector line hidden on mobile -->
+<div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-slate-100 z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-24 h-24 bg-surface rounded-full flex items-center justify-center border-4 border-white shadow-lg mb-4 text-primary group hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-4xl">shopping_basket</span>
+</div>
+<h4 class="font-bold text-lg mb-2">1. Choisir</h4>
+<p class="text-sm text-slate-500 px-4">Explorez des milliers d'articles sélectionnés pour vous.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-24 h-24 bg-surface rounded-full flex items-center justify-center border-4 border-white shadow-lg mb-4 text-primary group hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-4xl">payments</span>
+</div>
+<h4 class="font-bold text-lg mb-2">2. Payer (OM/Wave)</h4>
+<p class="text-sm text-slate-500 px-4">Utilisez vos moyens de paiement mobiles préférés.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-24 h-24 bg-surface rounded-full flex items-center justify-center border-4 border-white shadow-lg mb-4 text-primary group hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-4xl">local_shipping</span>
+</div>
+<h4 class="font-bold text-lg mb-2">3. Recevoir</h4>
+<p class="text-sm text-slate-500 px-4">Livraison rapide à Bamako, Kati ou en Région.</p>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-24 h-24 bg-surface rounded-full flex items-center justify-center border-4 border-white shadow-lg mb-4 text-primary group hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-4xl">verified</span>
+</div>
+<h4 class="font-bold text-lg mb-2">4. Confirmer</h4>
+<p class="text-sm text-slate-500 px-4">Vérifiez vos articles et validez votre bonheur.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Sections (Accordions) -->
+<section class="max-w-4xl mx-auto px-6 py-20">
+<h2 class="font-headline text-3xl font-bold mb-10 text-center">Questions Fréquentes</h2>
+<div class="space-y-4">
+<!-- Paiements -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden">
+<button class="w-full flex items-center justify-between p-6 text-left group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<span class="font-bold text-lg">Paiements (Orange Money, Wave, Moov)</span>
+</div>
+<span class="material-symbols-outlined group-hover:translate-y-1 transition-transform">expand_more</span>
+</button>
+<div class="px-6 pb-6 pt-0 text-slate-600 border-t border-emerald-900/5">
+<p class="mb-4">Mifa Life accepte tous les principaux opérateurs de Mobile Money au Mali :</p>
+<ul class="space-y-2 list-disc list-inside ml-4 text-sm">
+<li>Orange Money : Paiement direct via code marchand.</li>
+<li>Wave : Scannez le QR code ou entrez votre numéro.</li>
+<li>Moov Money : Transaction sécurisée via passerelle Moov.</li>
+</ul>
+</div>
+</div>
+<!-- Livraison -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden">
+<button class="w-full flex items-center justify-between p-6 text-left group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">distance</span>
+</div>
+<span class="font-bold text-lg">Livraison (Bamako, Kati, Regions)</span>
+</div>
+<span class="material-symbols-outlined group-hover:translate-y-1 transition-transform">expand_more</span>
+</button>
+<div class="hidden px-6 pb-6 pt-0 text-slate-600 border-t border-emerald-900/5">
+<p>Détails de livraison...</p>
+</div>
+</div>
+<!-- Retours -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden">
+<button class="w-full flex items-center justify-between p-6 text-left group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">assignment_return</span>
+</div>
+<span class="font-bold text-lg">Retours &amp; Garanties</span>
+</div>
+<span class="material-symbols-outlined group-hover:translate-y-1 transition-transform">expand_more</span>
+</button>
+</div>
+<!-- Vendeur -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden">
+<button class="w-full flex items-center justify-between p-6 text-left group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">person_add</span>
+</div>
+<span class="font-bold text-lg">Devenir Vendeur</span>
+</div>
+<span class="material-symbols-outlined group-hover:translate-y-1 transition-transform">expand_more</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full glass-nav flex justify-around items-center px-4 py-3 pb-safe z-50 rounded-t-3xl shadow-[0_-8px_24px_-4px_rgba(19,29,36,0.04)]">
+<button class="flex flex-col items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-emerald-700 ring-2 ring-emerald-600 ring-offset-4 rounded-full p-1 bg-white">
+<span class="material-symbols-outlined">help_center</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="text-[10px] font-medium mt-1">Guides</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium mt-1">Profile</span>
+</button>
+</nav>
+</body></html>

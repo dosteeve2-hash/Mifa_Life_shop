@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mifa Life - Devenir Vendeur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed": "#ffdad9",
+              "on-error-container": "#93000a",
+              "error": "#ba1a1a",
+              "on-surface-variant": "#3e4a3d",
+              "on-background": "#191c1d",
+              "secondary-fixed": "#ffe16d",
+              "on-secondary-fixed-variant": "#544600",
+              "surface-variant": "#e1e3e4",
+              "surface-container": "#edeeef",
+              "outline": "#6e7b6b",
+              "on-tertiary-fixed": "#410008",
+              "inverse-primary": "#65df76",
+              "on-primary": "#ffffff",
+              "primary-fixed-dim": "#65df76",
+              "background": "#f8f9fa",
+              "secondary": "#705d00",
+              "surface-bright": "#f8f9fa",
+              "on-tertiary": "#ffffff",
+              "error-container": "#ffdad6",
+              "surface-dim": "#d9dadb",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#191c1d",
+              "on-error": "#ffffff",
+              "outline-variant": "#bdcab9",
+              "surface-tint": "#006e27",
+              "primary": "#006b26",
+              "on-primary-fixed-variant": "#00531c",
+              "inverse-surface": "#2e3132",
+              "tertiary": "#ba002a",
+              "primary-fixed": "#81fc90",
+              "on-secondary": "#ffffff",
+              "surface-container-highest": "#e1e3e4",
+              "on-secondary-fixed": "#221b00",
+              "on-tertiary-fixed-variant": "#92001f",
+              "on-primary-fixed": "#002107",
+              "surface-container-low": "#f3f4f5",
+              "primary-container": "#008732",
+              "secondary-fixed-dim": "#e9c400",
+              "tertiary-fixed-dim": "#ffb3b2",
+              "tertiary-container": "#e2213d",
+              "surface-container-high": "#e7e8e9",
+              "on-tertiary-container": "#fffbff",
+              "inverse-on-surface": "#f0f1f2",
+              "on-secondary-container": "#6e5c00",
+              "surface": "#f8f9fa",
+              "secondary-container": "#fcd400",
+              "on-primary-container": "#f7fff2"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#f8f9fa] dark:bg-slate-900 w-full top-0 z-50 fixed">
+<div class="flex items-center justify-between px-6 py-4 w-full bg-[#f3f4f5] dark:bg-slate-800/50">
+<button class="text-[#006b26] dark:text-[#009739] hover:bg-[#e7e8e9] dark:hover:bg-slate-800 transition-colors active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] text-lg font-bold tracking-tight text-[#006b26] dark:text-[#009739]">Devenir Vendeur</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</div>
+</header>
+<main class="pt-20 px-4 max-w-md mx-auto">
+<!-- Progress Stepper -->
+<div class="flex items-center justify-between px-4 mb-8">
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-white font-bold shadow-lg">1</div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-primary">Compte</span>
+</div>
+<div class="flex-1 h-[2px] bg-primary mx-2 mb-6"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-white font-bold shadow-lg">2</div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-primary">Boutique</span>
+</div>
+<div class="flex-1 h-[2px] bg-surface-variant mx-2 mb-6"></div>
+<div class="flex flex-col items-center gap-2 opacity-50">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-variant text-on-surface-variant font-bold">3</div>
+<span class="text-[10px] font-bold uppercase tracking-wider">Vérification</span>
+</div>
+</div>
+<!-- Section Intro Hero -->
+<section class="mb-8">
+<div class="relative h-48 w-full rounded-xl overflow-hidden mb-4 shadow-sm">
+<img alt="Marché Malien" class="w-full h-full object-cover" data-alt="Vibrant local marketplace in Bamako with colorful textiles and sunlight filtering through traditional structures, warm professional photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqJaUEC5ed0Ogcn2wUb2KsYfFK7SEJkfNHSUovUvmt-l7XnK6H3tYND9r_S6bICqac1Fv2tEAC4JywBlcPZF0n2_o5H6eGZVrLlt3d8-Kw9Rbw2z8ti4omWBy8GMNu-lX0dChoHcmph7rr4bxLapZyaDMzTEM8oC4dvDnf9nd57l_G17FoLNtdCoq7aGshEOy5o3hLx-6EsSAClyO04lPAQf1IV5arXfSVQvYMFLCLLIjpiEHWNU-jFMDZrSsteZwER6rtNWXIEoir"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
+<div class="absolute bottom-4 left-4 text-white">
+<p class="text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Étape 2 sur 3</p>
+<h2 class="text-2xl font-extrabold tracking-tight">Détails de votre Boutique</h2>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm px-1">Présentez votre entreprise aux clients de Mifa Life à travers Bamako et au-delà.</p>
+</section>
+<!-- Form: Shop Details -->
+<form class="space-y-6">
+<!-- Shop Name -->
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-wider text-on-surface-variant px-1">Nom de la Boutique</label>
+<div class="bg-surface-container-highest rounded-lg p-1 transition-all focus-within:bg-surface-container-lowest focus-within:ring-2 focus-within:ring-primary/20">
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface font-medium py-3 px-4" placeholder="Ex: Bamako Textiles Luxe" type="text"/>
+</div>
+</div>
+<!-- Category -->
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-wider text-on-surface-variant px-1">Catégorie</label>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex flex-col items-center gap-2 p-4 rounded-xl bg-surface-container-lowest border-2 border-primary/10 hover:border-primary transition-all group" type="button">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-icon="checkroom">checkroom</span>
+<span class="text-[11px] font-bold uppercase tracking-tight">Mode &amp; Bogolan</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-4 rounded-xl bg-surface-container-lowest border-2 border-transparent hover:border-primary transition-all group" type="button">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="restaurant">restaurant</span>
+<span class="text-[11px] font-bold uppercase tracking-tight">Gastronomie</span>
+</button>
+</div>
+</div>
+<!-- Location -->
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-wider text-on-surface-variant px-1">Localisation (Bamako)</label>
+<div class="bg-surface-container-highest rounded-lg p-1 transition-all focus-within:bg-surface-container-lowest focus-within:ring-2 focus-within:ring-primary/20 flex items-center pr-4">
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface font-medium py-3 px-4" placeholder="Quartier / Commune (ex: Kalaban Coura)" type="text"/>
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+</div>
+</div>
+<!-- Identity Verification Section -->
+<div class="pt-4">
+<h3 class="text-sm font-extrabold uppercase tracking-widest text-primary mb-4">Vérification d'Identité</h3>
+<div class="bg-surface-container-low rounded-xl p-6 border-2 border-dashed border-outline-variant hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="flex flex-col items-center text-center gap-3">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-primary shadow-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="add_a_photo">add_a_photo</span>
+</div>
+<div>
+<p class="font-bold text-sm">Télécharger la Carte NINA</p>
+<p class="text-xs text-on-surface-variant mt-1">Photo recto/verso ou licence commerciale</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Payment Setup Section -->
+<div class="pt-4 space-y-4">
+<h3 class="text-sm font-extrabold uppercase tracking-widest text-primary">Paiements Mobile Money</h3>
+<p class="text-xs text-on-surface-variant mb-4">Numéros pour vos reversements automatiques.</p>
+<div class="space-y-3">
+<!-- Orange Money -->
+<div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-[#FF7900] flex items-center justify-center text-white font-black text-xs">OM</div>
+<input class="flex-1 border-none focus:ring-0 text-sm font-bold placeholder:font-normal" placeholder="Numéro Orange Money" type="tel"/>
+</div>
+<!-- Wave -->
+<div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-[#1C92FF] flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="waves" style="font-variation-settings: 'FILL' 1;">waves</span>
+</div>
+<input class="flex-1 border-none focus:ring-0 text-sm font-bold placeholder:font-normal" placeholder="Numéro Wave" type="tel"/>
+</div>
+<!-- Moov -->
+<div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-[#005CA9] flex items-center justify-center text-white font-black text-xs">MOOV</div>
+<input class="flex-1 border-none focus:ring-0 text-sm font-bold placeholder:font-normal" placeholder="Numéro Moov Money" type="tel"/>
+</div>
+</div>
+</div>
+<!-- CTA Button -->
+<div class="pt-6 pb-12">
+<button class="w-full py-5 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-bold text-lg shadow-xl shadow-primary/20 active:scale-95 transition-all duration-300 flex items-center justify-center gap-3" type="submit">
+                    Continuer vers la Validation
+                    <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<p class="text-center text-[10px] text-on-surface-variant mt-4 font-medium uppercase tracking-widest">En continuant, vous acceptez les conditions de vente Mifa Life.</p>
+</div>
+</form>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-end px-4 pb-6 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-t border-[#f3f4f5] dark:border-slate-800 shadow-[0_-4px_40px_rgba(25,28,29,0.04)] z-50">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-[#006b26] dark:hover:text-[#009739] active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold uppercase tracking-wider">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-[#006b26] dark:hover:text-[#009739] active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold uppercase tracking-wider">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-[#006b26] dark:hover:text-[#009739] active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold uppercase tracking-wider">Payments</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-[#006b26] to-[#008732] text-white rounded-full p-3 mb-1 scale-110 -translate-y-2 transition-all active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold uppercase tracking-wider">Profile</span>
+</a>
+</nav>
+</body></html>

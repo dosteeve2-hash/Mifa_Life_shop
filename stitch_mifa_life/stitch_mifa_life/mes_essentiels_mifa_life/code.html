@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mes Essentiels - Mifa Life</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error-container": "#93000a",
+              "outline-variant": "#bdcab9",
+              "inverse-primary": "#65df76",
+              "error": "#ba1a1a",
+              "secondary-fixed": "#ffe07f",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#6f5900",
+              "surface-container-low": "#eaf5ff",
+              "on-primary-container": "#f7fff2",
+              "surface-bright": "#f6faff",
+              "primary-container": "#008732",
+              "on-secondary-fixed": "#231b00",
+              "tertiary-fixed": "#ffdad7",
+              "tertiary": "#bb001e",
+              "surface-variant": "#d9e4ee",
+              "on-tertiary-fixed": "#410004",
+              "on-secondary": "#ffffff",
+              "error-container": "#ffdad6",
+              "surface-tint": "#006e27",
+              "on-error": "#ffffff",
+              "primary-fixed": "#81fc90",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "secondary-fixed-dim": "#edc200",
+              "surface-container-highest": "#d9e4ee",
+              "surface": "#f6faff",
+              "surface-dim": "#d1dbe5",
+              "primary-fixed-dim": "#65df76",
+              "secondary-container": "#fed000",
+              "on-secondary-fixed-variant": "#564500",
+              "on-tertiary-container": "#fffbff",
+              "surface-container-lowest": "#ffffff",
+              "inverse-surface": "#283239",
+              "on-tertiary": "#ffffff",
+              "tertiary-container": "#e12531",
+              "on-surface": "#131d24",
+              "primary": "#006b26",
+              "inverse-on-surface": "#e8f2fc",
+              "outline": "#6e7b6b",
+              "on-tertiary-fixed-variant": "#930015",
+              "secondary": "#725c00",
+              "background": "#f6faff",
+              "on-background": "#131d24",
+              "surface-container": "#e5eff9",
+              "on-primary-fixed": "#002107",
+              "surface-container-high": "#dfe9f3",
+              "on-surface-variant": "#3e4a3d",
+              "on-primary-fixed-variant": "#00531c"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)]">
+<div class="flex items-center justify-between px-6 h-16 w-full">
+<button class="active:scale-95 transition-transform hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-[#006b26]">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-[#006b26]">Mes Essentiels</h1>
+<button class="active:scale-95 transition-transform hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-[#006b26]">tune</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-28 px-4 max-w-2xl mx-auto">
+<!-- Filters Section -->
+<section class="mb-6 overflow-x-auto no-scrollbar py-2">
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-5 py-2.5 bg-primary-container text-on-primary-container rounded-full shadow-sm whitespace-nowrap active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">history</span>
+<span class="font-label font-medium text-sm">Par date d'achat</span>
+</button>
+<button class="flex items-center gap-2 px-5 py-2.5 bg-surface-container-lowest text-on-surface-variant rounded-full shadow-sm border border-outline/10 whitespace-nowrap active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">reorder</span>
+<span class="font-label font-medium text-sm">Par fréquence</span>
+</button>
+</div>
+</section>
+<!-- Product List -->
+<div class="space-y-4">
+<!-- Product Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_8px_24px_-4px_rgba(19,29,36,0.04)] flex flex-col gap-4 overflow-hidden relative">
+<div class="flex gap-4">
+<div class="w-24 h-24 rounded-lg bg-surface-variant overflow-hidden flex-shrink-0">
+<img alt="Riz Gambiaka 50kg" class="w-full h-full object-cover" data-alt="Premium 50kg sack of white rice on a rustic wooden floor, warm natural window lighting, high-end commercial photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ0McNymid43rVWz45lWitnw8ZI81m9SFpQ-NJDJRY-Um_PjaY5XfwpD__Kchwmp3LsGQU7HywJdeqI6AikuzKoqneWfLrfVnw_vWt3I5srdu3hdoMgd9otQJrWKoQaGkOXdLwvdVpnaDvt1VMw9SxcDAxaylfbGW9zGG4q3IYwAncX-XBseRCXLl60i9jn1s_sZA8QvDc9rQrdR_VoNOh8lI4Zzj3sEZQ7RjJPEa4pzTQIB_53lrLwYns12z63uWHqlJ3t1r9Xsb6"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<h3 class="font-headline font-bold text-on-surface text-base leading-tight">Riz Gambiaka 50kg</h3>
+<p class="text-xs text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                                Dernier achat: 12 Mars
+                            </p>
+</div>
+<p class="font-headline font-extrabold text-[#006b26] text-lg">27 500 FCFA</p>
+</div>
+</div>
+<button class="w-full py-3 bg-gradient-to-br from-[#006b26] to-[#008732] text-white rounded-full flex items-center justify-center gap-2 font-bold active:scale-95 transition-transform shadow-md">
+<span class="material-symbols-outlined">shopping_cart</span>
+                    Commander à nouveau
+                </button>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_8px_24px_-4px_rgba(19,29,36,0.04)] flex flex-col gap-4 overflow-hidden">
+<div class="flex gap-4">
+<div class="w-24 h-24 rounded-lg bg-surface-variant overflow-hidden flex-shrink-0">
+<img alt="Huile Dinor 5L" class="w-full h-full object-cover" data-alt="A large clear 5-liter container of golden cooking oil sitting on a clean kitchen counter, soft depth of field background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjbncqi6JTnB8RL2lT4uckHsqd7_2qpW800LYA0fy_diNVrvo8EI4e4pKPM2hvkXbbE3REurdbjroCA13dciY6iU6gCF_LIG3q-9PPXoAnt_OSq13T4YHi7O-G-YVU_bt-GWWD7I2ikAULcM9OlVyeaYDF1CS964PuBOaE1KIg5JZAqjKvqdOJ_RXR4PVg6I0cO2vFz_sIaEOxj1GzJr-kQrlfBfT736fGV0ejKtnkbRcOFprW6LR1Mwn6-ewWJgqjLEBGJ8_PMcr-"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<h3 class="font-headline font-bold text-on-surface text-base leading-tight">Huile Dinor 5L</h3>
+<p class="text-xs text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                                Dernier achat: 05 Mars
+                            </p>
+</div>
+<p class="font-headline font-extrabold text-[#006b26] text-lg">7 250 FCFA</p>
+</div>
+</div>
+<button class="w-full py-3 bg-gradient-to-br from-[#006b26] to-[#008732] text-white rounded-full flex items-center justify-center gap-2 font-bold active:scale-95 transition-transform shadow-md">
+<span class="material-symbols-outlined">shopping_cart</span>
+                    Commander à nouveau
+                </button>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_8px_24px_-4px_rgba(19,29,36,0.04)] flex flex-col gap-4 overflow-hidden">
+<div class="flex gap-4">
+<div class="w-24 h-24 rounded-lg bg-surface-variant overflow-hidden flex-shrink-0">
+<img alt="Miel du Mandé" class="w-full h-full object-cover" data-alt="Glass jar of dark organic forest honey with a wooden honey dipper, soft golden lighting, artisan marketplace aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDy4TKHBusTQgYx4vR9gaJOLSBvKTRB1FMscA89sFh6RlHC6W4NStYNC8Ij9deLERouP0nuA3dKkQggEJwYsUnaJturrb-ncBHgXEWPrNcOawb68NDzXSYXpifWW1PNrq_HvcHLJqt9KwCUg4w-5k3iMIVy-uv_gVlkvmgjvWHjQDWACGazvf8XjsGRCEX6sYv7LWdVxQ3UVDfHXE7bH8VgZGUVpmOlkLX1EHh499LIe8Od7T0CAxylioQlB__ElyQOHkz5e0lR8kxG"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<h3 class="font-headline font-bold text-on-surface text-base leading-tight">Miel du Mandé</h3>
+<p class="text-xs text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                                Dernier achat: 28 Février
+                            </p>
+</div>
+<p class="font-headline font-extrabold text-[#006b26] text-lg">4 500 FCFA</p>
+</div>
+</div>
+<button class="w-full py-3 bg-gradient-to-br from-[#006b26] to-[#008732] text-white rounded-full flex items-center justify-center gap-2 font-bold active:scale-95 transition-transform shadow-md">
+<span class="material-symbols-outlined">shopping_cart</span>
+                    Commander à nouveau
+                </button>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_8px_24px_-4px_rgba(19,29,36,0.04)] flex flex-col gap-4 overflow-hidden">
+<div class="flex gap-4">
+<div class="w-24 h-24 rounded-lg bg-surface-variant overflow-hidden flex-shrink-0">
+<img alt="Lait Nido 2.5kg" class="w-full h-full object-cover" data-alt="Large yellow metal tin of powdered milk on a clean blue background, high contrast editorial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASMwMm9VhX4VIIcG7f67FvL66AFggXCPSnFEcg_Qbkxn7MuzIF-oX3_9qDW-jSVCs62E_19pnIOsxj3nSlwZyk342tMg6mojednAoGPFC0uUkmmTUinIV9-0InYyXbPvu9yPUA5dl4GNbQVrritZmv5ui13tXtqKt6pJgE2u_Jpt1q_0ENPW_W-dplB7M5Oa5ZZ36_RwMQY6aG0psYB0YfrXUjXF9LFvCWTcP-C8z8z2Zb-0YqBhYt5V6OpBmnkbafo9vxgCiGAyiB"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<h3 class="font-headline font-bold text-on-surface text-base leading-tight">Lait Nido 2.5kg</h3>
+<p class="text-xs text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                                Dernier achat: 15 Février
+                            </p>
+</div>
+<p class="font-headline font-extrabold text-[#006b26] text-lg">14 800 FCFA</p>
+</div>
+</div>
+<button class="w-full py-3 bg-gradient-to-br from-[#006b26] to-[#008732] text-white rounded-full flex items-center justify-center gap-2 font-bold active:scale-95 transition-transform shadow-md">
+<span class="material-symbols-outlined">shopping_cart</span>
+                    Commander à nouveau
+                </button>
+</div>
+</div>
+<!-- Suggestion Section -->
+<section class="mt-10">
+<h2 class="font-headline font-bold text-lg mb-4 px-2">Vous pourriez aussi aimer</h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-high rounded-xl p-3 flex flex-col items-center text-center gap-2">
+<div class="w-full aspect-square rounded-lg bg-white p-2">
+<img alt="Sucre SOSUCO" class="w-full h-full object-contain" data-alt="White granulated sugar in a branded Malian pack, isolated on soft grey background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgzA47RzRaBGAFQO0g5X3iLurMwFGxz6BAXeVsUumrdORoicslwqiZ3gz1JQzj3Z2o1yQXiBW-JnFhYUh32wDKCs6q2nYtdxZpXYB480q8UbBMhcOGd7hJ-rioLWr2NoPC4FH10aESHVQTo2QtqYot0nA-xIx1LZmdWJ9UyIhGD8-s3Z_jkaYautv9Zz3IbLtfUKCi4tLqL0DS4JH9J1fvDuRJxQ4sv2j3TEcN5LYQkf82wbt70lqoCfWR3O5PKkJShkseXQ4581jB"/>
+</div>
+<p class="font-label font-bold text-sm leading-tight h-8 overflow-hidden">Sucre SOSUCO 5kg</p>
+<p class="text-primary font-bold">3 250 FCFA</p>
+</div>
+<div class="bg-surface-container-high rounded-xl p-3 flex flex-col items-center text-center gap-2">
+<div class="w-full aspect-square rounded-lg bg-white p-2">
+<img alt="Farine de Blé" class="w-full h-full object-contain" data-alt="Eco-friendly paper bag of wheat flour on a white surface with scattered flour grains" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDP7NxLlU6FJRyNn4UwZ_KdgyZiVT3N1fkvGymAhYCZT42-2LEI4Vohx-0wuSJez3qz7Ac8ux34brq8jx_A0qvdOzUOi0uzOv7m59UIKJocF21uZ1H7lKVXYqkf75JQDfmJz_bFkr93r8yTZdwy9vKBVzXLdAu0Sk_xKE9_gKX0XrXI-b4db_QPUyOuFwEtyRo0O2yXBrMJ-V3y-fLPhv5ty66MLmL7MXvpZYXHTgsUJhwxVcN4PEWo9SaWXozv-JluytevF6nNXKvA"/>
+</div>
+<p class="font-label font-bold text-sm leading-tight h-8 overflow-hidden">Farine de Blé 10kg</p>
+<p class="text-primary font-bold">5 900 FCFA</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-[24px] bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-[0_-8px_24px_-4px_rgba(19,29,36,0.04)]">
+<div class="flex justify-around items-center px-4 pb-safe h-20">
+<a class="flex flex-col items-center justify-center text-slate-400 pt-2 hover:text-[#006b26] transition-colors active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Inter'] text-[10px] font-medium">Accueil</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#006b26] dark:text-[#008732] border-t-2 border-[#006b26] pt-2 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<span class="font-['Inter'] text-[10px] font-medium">Boutique</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 pt-2 hover:text-[#006b26] transition-colors active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-['Inter'] text-[10px] font-medium">Communauté</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 pt-2 hover:text-[#006b26] transition-colors active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Inter'] text-[10px] font-medium">Compte</span>
+</a>
+</div>
+</nav>
+</body></html>

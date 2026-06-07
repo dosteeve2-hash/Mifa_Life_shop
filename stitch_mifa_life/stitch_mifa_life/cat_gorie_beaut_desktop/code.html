@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "#f6faff",
+              "on-surface": "#131d24",
+              "inverse-surface": "#283239",
+              "tertiary": "#bb001e",
+              "on-primary-container": "#f7fff2",
+              "surface-container-high": "#dfe9f3",
+              "on-secondary-container": "#6f5900",
+              "on-background": "#131d24",
+              "on-tertiary-fixed-variant": "#930015",
+              "surface-container-low": "#eaf5ff",
+              "surface-container-highest": "#d9e4ee",
+              "on-tertiary-container": "#fffbff",
+              "primary-container": "#008732",
+              "on-secondary-fixed-variant": "#564500",
+              "secondary-fixed-dim": "#edc200",
+              "on-tertiary-fixed": "#410004",
+              "on-tertiary": "#ffffff",
+              "on-primary": "#ffffff",
+              "primary-fixed-dim": "#65df76",
+              "on-secondary-fixed": "#231b00",
+              "primary": "#006b26",
+              "surface": "#f6faff",
+              "secondary": "#725c00",
+              "outline-variant": "#bdcab9",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "tertiary-container": "#e12531",
+              "surface-container-lowest": "#ffffff",
+              "inverse-primary": "#65df76",
+              "on-surface-variant": "#3e4a3d",
+              "on-error-container": "#93000a",
+              "outline": "#6e7b6b",
+              "inverse-on-surface": "#e8f2fc",
+              "error": "#ba1a1a",
+              "surface-bright": "#f6faff",
+              "error-container": "#ffdad6",
+              "tertiary-fixed": "#ffdad7",
+              "surface-tint": "#006e27",
+              "on-error": "#ffffff",
+              "primary-fixed": "#81fc90",
+              "on-secondary": "#ffffff",
+              "surface-variant": "#d9e4ee",
+              "surface-dim": "#d1dbe5",
+              "on-primary-fixed": "#002107",
+              "surface-container": "#e5eff9",
+              "on-primary-fixed-variant": "#00531c",
+              "secondary-container": "#fed000",
+              "secondary-fixed": "#ffe07f"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #f6faff 0%, #ffffff 100%);
+        }
+        .premium-shadow {
+            box-shadow: 0 12px 32px -4px rgba(19, 29, 36, 0.06);
+        }
+        .active-ring {
+            box-shadow: 0 0 0 2px white, 0 0 0 4px #006b26;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body">
+<!-- Top Navigation Anchor -->
+<nav class="sticky top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md shadow-sm shadow-emerald-900/5">
+<div class="flex items-center justify-between px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-extrabold tracking-tighter text-emerald-900 dark:text-emerald-50 font-headline">Sahel Luxe</div>
+<div class="hidden md:flex items-center space-x-8 font-['Plus_Jakarta_Sans'] font-bold text-sm tracking-tight">
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-colors hover:scale-95 transition-transform duration-200" href="#">Collections</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-colors hover:scale-95 transition-transform duration-200" href="#">Artisans</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-colors hover:scale-95 transition-transform duration-200" href="#">New Arrivals</a>
+<a class="text-emerald-700 dark:text-emerald-400 border-b-2 border-emerald-700 pb-1 hover:scale-95 transition-transform duration-200" href="#">Exclusive</a>
+</div>
+<div class="flex items-center space-x-6 text-emerald-800 dark:text-emerald-400">
+<button class="hover:scale-95 transition-transform duration-200 active:scale-98">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+<button class="hover:scale-95 transition-transform duration-200 active:scale-98">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="max-w-screen-2xl mx-auto px-8">
+<!-- Hero Section: Editorial Focus -->
+<section class="relative mt-6 rounded-[2.5rem] overflow-hidden hero-gradient h-[500px] flex items-center">
+<div class="absolute inset-0 z-0">
+<img alt="Pure Shea Textures" class="w-full h-full object-cover opacity-90 mix-blend-multiply" data-alt="Close-up of pure raw shea butter texture with wooden scoop and botanical leaves in soft natural morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPp66rBWHYt_r54D13ACi1v1Y_KG7BE89mTEH4-_zyygE4O4xsmh9wmNxq5GSNQJ1uSRkkPkEQS8SVmuAf6OOVgKjd0LtSRKfR0njI-K58tw37W__Xp6R9tL4nw00_N2c4UL4r5t-Qak9YYr782r78GDaq1NwWtkKkV8bzK4OHIP3wD-ZLwo87qmJ1YtA_un-IpbqYOFHebW8douhzbV3noZTaZPYTDoXt8aeo2U11w2CZxHCHleYXGFqZHgcwA__lidDad4CivCiJ"/>
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent"></div>
+</div>
+<div class="relative z-10 pl-16 max-w-2xl">
+<span class="text-secondary font-headline font-bold uppercase tracking-[0.2em] text-xs mb-4 block">Mifa Life Apothecary</span>
+<h1 class="font-headline text-6xl font-extrabold text-on-background leading-[1.1] tracking-tight mb-6">
+                    Malian Gold: <br/><span class="text-primary">Sacred Beauty</span>
+</h1>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-8 max-w-md">
+                    Discover the ancestral secrets of the Sahel. Our Shea and Baobab essences are cold-pressed by artisan collectives to preserve cellular integrity.
+                </p>
+<div class="flex gap-4">
+<button class="bg-primary hover:bg-primary-container text-white px-8 py-4 rounded-full font-headline font-bold text-sm transition-all hover:scale-105 active:scale-95">
+                        Shop Collection
+                    </button>
+<button class="border border-outline/20 hover:bg-surface-container-high text-on-background px-8 py-4 rounded-full font-headline font-bold text-sm transition-all">
+                        The Artisan Story
+                    </button>
+</div>
+</div>
+</section>
+<!-- Category Filter Bar -->
+<section class="mt-16 flex flex-col md:flex-row gap-8">
+<!-- Sidebar Filters -->
+<aside class="w-full md:w-64 space-y-10">
+<div>
+<h3 class="font-headline font-bold text-sm tracking-widest uppercase text-on-surface-variant mb-6">Skin Concern</h3>
+<div class="space-y-4">
+<label class="flex items-center group cursor-pointer">
+<input class="rounded text-primary focus:ring-primary h-5 w-5 bg-surface-container-highest border-none" type="checkbox"/>
+<span class="ml-3 text-sm font-medium text-slate-600 group-hover:text-primary transition-colors">Deep Hydration</span>
+</label>
+<label class="flex items-center group cursor-pointer">
+<input class="rounded text-primary focus:ring-primary h-5 w-5 bg-surface-container-highest border-none" type="checkbox"/>
+<span class="ml-3 text-sm font-medium text-slate-600 group-hover:text-primary transition-colors">Barrier Repair</span>
+</label>
+<label class="flex items-center group cursor-pointer">
+<input checked="" class="rounded text-primary focus:ring-primary h-5 w-5 bg-surface-container-highest border-none" type="checkbox"/>
+<span class="ml-3 text-sm font-medium text-primary">Sun Restoration</span>
+</label>
+<label class="flex items-center group cursor-pointer">
+<input class="rounded text-primary focus:ring-primary h-5 w-5 bg-surface-container-highest border-none" type="checkbox"/>
+<span class="ml-3 text-sm font-medium text-slate-600 group-hover:text-primary transition-colors">Anti-Pollution</span>
+</label>
+</div>
+</div>
+<div>
+<h3 class="font-headline font-bold text-sm tracking-widest uppercase text-on-surface-variant mb-6">Primary Ingredient</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="text-sm font-bold text-on-surface">Wild Shea Butter</span>
+<span class="text-xs text-primary bg-primary/10 px-2 py-1 rounded-full">12</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors cursor-pointer group">
+<span class="text-sm font-medium text-slate-500 group-hover:text-on-surface">Baobab Seed Oil</span>
+<span class="text-xs text-slate-400">08</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors cursor-pointer group">
+<span class="text-sm font-medium text-slate-500 group-hover:text-on-surface">Desert Date Oil</span>
+<span class="text-xs text-slate-400">04</span>
+</div>
+</div>
+</div>
+<div class="p-6 bg-primary text-white rounded-3xl relative overflow-hidden group">
+<div class="relative z-10">
+<p class="text-[10px] uppercase tracking-widest font-bold opacity-80 mb-2">Artisan Support</p>
+<h4 class="font-headline font-bold text-lg leading-tight mb-4">Every purchase funds literacy programs in Bamako.</h4>
+<span class="text-sm underline font-bold cursor-pointer">Learn More</span>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+</div>
+</aside>
+<!-- Product Grid -->
+<div class="flex-1">
+<div class="flex justify-between items-end mb-10">
+<div>
+<h2 class="font-headline text-3xl font-extrabold text-on-background">Artisan Beauty</h2>
+<p class="text-slate-500 text-sm mt-1">Showing 24 refined formulations</p>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-xs font-bold uppercase tracking-widest text-slate-400">Sort By</span>
+<select class="bg-transparent border-none font-bold text-sm focus:ring-0 text-primary cursor-pointer">
+<option>Editorial Choice</option>
+<option>Newest First</option>
+<option>Price: High to Low</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
+<!-- Card 1 -->
+<div class="group">
+<div class="aspect-[4/5] rounded-3xl overflow-hidden bg-surface-variant relative mb-4">
+<img alt="Raw Shea Butter" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Minimalist glass jar of whipped white shea butter on a smooth beige surface with soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG1tKGVdDOs2K0PwPWtxYrMFBCX-lFuNeBOSjqZMIfHwX4Q_eysOutnqWso_LcQxTwRQwBGa3qHasVw4EoQ1JI7Eixnx454poQ2jutkHp-tQj9bIg1Ne87NdBDfg25JQOAL_W7lgztcV3B6AEWXOOO0_4Wbwh7RCVW4NGk-ZgwKRKnF4Aupx3UtVTTU1EeH2TavH2xPlusSlxZ63Wq6-8PROik25UObjqguL8COix1BM__tOyQMPc_Rmy6BenviArlaKZJAP-p9nN-"/>
+<div class="absolute top-4 right-4">
+<button class="w-10 h-10 rounded-full bg-white/90 backdrop-blur flex items-center justify-center text-primary premium-shadow">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+</div>
+<p class="text-[10px] uppercase font-bold tracking-[0.2em] text-secondary mb-1">Face &amp; Body</p>
+<h3 class="font-headline font-bold text-on-background text-lg group-hover:text-primary transition-colors">Whipped Raw Shea</h3>
+<p class="text-slate-500 text-xs mb-3">100% Unrefined / Ségou Source</p>
+<div class="flex items-center justify-between">
+<span class="font-bold text-on-background">$34.00</span>
+<button class="bg-on-background text-white px-4 py-2 rounded-full text-xs font-bold hover:bg-primary transition-colors">Add to Bag</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group">
+<div class="aspect-[4/5] rounded-3xl overflow-hidden bg-surface-variant relative mb-4">
+<img alt="Baobab Essence" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Luxury amber glass dropper bottle of golden baobab oil standing on a weathered stone pedestal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnDHHgH06ZEXNhZqXdfaEFtLb_DCoz_x5jcsUXry1j_9dUdsUGki8jQjfyDkeBl2QaDQfIdAf4pxDwas7mDwqRraOgrEBcuX-biv1l4-hQ-xEW2jKbwduSoY3UCZlewSPDqH2AWRg9CIGcU49LJVpxVTwrF0dkzDYEQMalD8MdYDaWJe1tFhgXhN-VzQ2kUkP9axBokRE7__n2i-b4O_Jd-iG9bYuEirx2SxdBUE7hLtyWuMibzrLfYFyk1d2yScYlOHaQ3ZJNOglh"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Featured</span>
+</div>
+<div class="absolute top-4 right-4">
+<button class="w-10 h-10 rounded-full bg-white/90 backdrop-blur flex items-center justify-center text-primary premium-shadow">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+</div>
+<p class="text-[10px] uppercase font-bold tracking-[0.2em] text-secondary mb-1">Serum</p>
+<h3 class="font-headline font-bold text-on-background text-lg group-hover:text-primary transition-colors">Ancient Baobab Elixir</h3>
+<p class="text-slate-500 text-xs mb-3">Cold-Pressed Vitality Oil</p>
+<div class="flex items-center justify-between">
+<span class="font-bold text-on-background">$48.00</span>
+<button class="bg-on-background text-white px-4 py-2 rounded-full text-xs font-bold hover:bg-primary transition-colors">Add to Bag</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group">
+<div class="aspect-[4/5] rounded-3xl overflow-hidden bg-surface-variant relative mb-4">
+<img alt="Artisan Soap" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Handcrafted soap bar with botanical inclusions resting on a piece of natural driftwood" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUHPgDL5ULfrQrMQXnnEjXbExjpx3NNfiLZD_xMH9U3jz7zvz2o9MjH5l2vTwWH9VkckQK6Ku9L-oiYbTN7LxOzTKgUCUXQ9_Whz9s_lkKUjYEkEjqX3pR9mCT5n79Xf4MKIEWbKCtBkUYu04HPVD3NGDJRinJ7na2r3bWERtz-SSCJVqu5d-XgP8CsZHU9y_SEwkiFRLRHTxBN396wH6XdqSyu73BhwSXng9ZGyeKy_Mg72jmKHvYRF1qM-nFKVV3T03iVGP0I8b2"/>
+<div class="absolute top-4 right-4">
+<button class="w-10 h-10 rounded-full bg-white/90 backdrop-blur flex items-center justify-center text-primary premium-shadow">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+</div>
+<p class="text-[10px] uppercase font-bold tracking-[0.2em] text-secondary mb-1">Cleansing</p>
+<h3 class="font-headline font-bold text-on-background text-lg group-hover:text-primary transition-colors">Black Soap Ritual</h3>
+<p class="text-slate-500 text-xs mb-3">Traditional Potash Formulation</p>
+<div class="flex items-center justify-between">
+<span class="font-bold text-on-background">$22.00</span>
+<button class="bg-on-background text-white px-4 py-2 rounded-full text-xs font-bold hover:bg-primary transition-colors">Add to Bag</button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group">
+<div class="aspect-[4/5] rounded-3xl overflow-hidden bg-surface-variant relative mb-4">
+<img alt="Nourishing Mask" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern aesthetic ceramic bowl containing organic skin mask powder with a small bamboo brush beside it" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuVrxxHtDX-_OGj6KNuyz8mpOrjjiohdRI9UWFRnPe2RqRIo6-7PnwnE7g9aogF5Xw7QxlWAy0mN-YRmI8bpYmjmoE3fhWzwQwNvwfU2PZdkWzv7jf2YkaDbrgITa-dfCY5lhsShcbXKQGs9m0O6EnXJACvF5qIOFpC9Zqo3abpK0uioedzXn_DC6fsbI-GfnRMFYdH0Z_eW_G2xS3OfnvlhaJUL7eYnC8aqPmSyk7nlBwQCEXPizONeAwCczg1LWFnzzkIe2VcOZ0"/>
+<div class="absolute top-4 right-4">
+<button class="w-10 h-10 rounded-full bg-white/90 backdrop-blur flex items-center justify-center text-primary premium-shadow">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+</div>
+<p class="text-[10px] uppercase font-bold tracking-[0.2em] text-secondary mb-1">Treatment</p>
+<h3 class="font-headline font-bold text-on-background text-lg group-hover:text-primary transition-colors">Desert Clay Detox</h3>
+<p class="text-slate-500 text-xs mb-3">Mineral-Rich Savannah Earth</p>
+<div class="flex items-center justify-between">
+<span class="font-bold text-on-background">$42.00</span>
+<button class="bg-on-background text-white px-4 py-2 rounded-full text-xs font-bold hover:bg-primary transition-colors">Add to Bag</button>
+</div>
+</div>
+<!-- Repeat Rows for Visual Grid -->
+<!-- Card 5 -->
+<div class="group">
+<div class="aspect-[4/5] rounded-3xl overflow-hidden bg-surface-variant relative mb-4">
+<img alt="Hibiscus Oil" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Golden oil drops splashing into a pool of clear liquid against a soft white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAL6RCrOsrLEaxvFAgpb5FlUbrzFvp_ZBRa0XCQh2p6k3gtpUoEZEUxHHXYdVNcbzsI00ldZj3e-8ULrPFDE8EW3MauhUw-alxjcPPZnRJHAy0yKfctrG4mVR0u9OfSCoQrg7l6GSb7rg7X7Vs0JNOjr2PNQ5Iui6Qf3VVm9-e3NEh00U2ZocUoXYavcY5OhPoDsQTdJRLVhB50Sv8FBABo4rAeohqiXASuCKGKbKgtoSUgaece2W7rNNp94fLm7KF_n8mvuVmWKV3"/>
+</div>
+<p class="text-[10px] uppercase font-bold tracking-[0.2em] text-secondary mb-1">Infusion</p>
+<h3 class="font-headline font-bold text-on-background text-lg group-hover:text-primary transition-colors">Hibiscus Glow Oil</h3>
+<p class="text-slate-500 text-xs mb-3">Vitamin C Rich Radiance</p>
+<div class="flex items-center justify-between">
+<span class="font-bold text-on-background">$38.00</span>
+<button class="bg-on-background text-white px-4 py-2 rounded-full text-xs font-bold hover:bg-primary transition-colors">Add to Bag</button>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group">
+<div class="aspect-[4/5] rounded-3xl overflow-hidden bg-surface-variant relative mb-4">
+<img alt="Shea Balm" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Handcrafted pottery jars containing natural beauty balms arranged on a sunlit terrace" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDctQ_RZoco4QNRmDQ1ELkTEZMvYYOEL8yR_MKhHD3DXGfJ3hUyfF5EV7aK7WPLO9_K3qXfgSvJgGin5YQQmj7Mf49cjQMW6iiptLKx7NfU2qFFAQ1d0zPfLZOYNhpZkr77Sg9GzxbOeEn0VOFwpRodETp8CpXTaUwgCPb3HZYnuO60ZAAZcyTlCF1883bDAR1MwR1gRAWodHjJ7FSaoHfrNNUqsqSbsS4K6q67F52nroEtwVIybJdsN126zP7icuLwbLoniMS6NLEI"/>
+</div>
+<p class="text-[10px] uppercase font-bold tracking-[0.2em] text-secondary mb-1">Body Care</p>
+<h3 class="font-headline font-bold text-on-background text-lg group-hover:text-primary transition-colors">Terra Balm Concentrate</h3>
+<p class="text-slate-500 text-xs mb-3">Intensive Repair Therapy</p>
+<div class="flex items-center justify-between">
+<span class="font-bold text-on-background">$52.00</span>
+<button class="bg-on-background text-white px-4 py-2 rounded-full text-xs font-bold hover:bg-primary transition-colors">Add to Bag</button>
+</div>
+</div>
+<!-- Card 7 -->
+<div class="group">
+<div class="aspect-[4/5] rounded-3xl overflow-hidden bg-surface-variant relative mb-4">
+<img alt="Night Cream" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Macro photography of pure white shea butter ripples looking like snowy dunes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoErONWjfKqcs9CbXUr-OLQUfwINAU1TFGk3mqurQTp6LlD-PWR3mC1fBPX1enCy98oRnOu29CL64B1_zJIjGJj4b1OZN32BtnKyLacOxxyr-YHY6eBfLdnjc7ERQ9uhdHKYXwSF7GBlN5XElxDOYJOrmF7r88YOn1IOGn8bgwcszh4vrM0JvjLS2QzzJidXaVQVbiYnKZ8F2grF1R5mvfZmXOE93xVPn9NT-ymh46rlSaQCMqEJVtmsIa8c531dMwgnG893uYJlFE"/>
+</div>
+<p class="text-[10px] uppercase font-bold tracking-[0.2em] text-secondary mb-1">Night</p>
+<h3 class="font-headline font-bold text-on-background text-lg group-hover:text-primary transition-colors">Moonlight Shea Mask</h3>
+<p class="text-slate-500 text-xs mb-3">Overnight Cellular Recovery</p>
+<div class="flex items-center justify-between">
+<span class="font-bold text-on-background">$45.00</span>
+<button class="bg-on-background text-white px-4 py-2 rounded-full text-xs font-bold hover:bg-primary transition-colors">Add to Bag</button>
+</div>
+</div>
+<!-- Card 8 -->
+<div class="group">
+<div class="aspect-[4/5] rounded-3xl overflow-hidden bg-surface-variant relative mb-4">
+<img alt="Savannah Oil" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Bottle of amber oil placed among dried desert flowers and organic textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAp6fbWFcUfAkevKhRQCAWVstshWW7wYjFs5pQ7yYeAR9ZOnzGSL_GCB4dYrDN8cxNVvEtxuq63mtiiZ3a3gdBVVhPrv6Ih1imRWcBTTHU_UaLW2Ek6k-CB6clK1CmvwEgg0dmKuzZLXQwputaxnqNrHueJqZ9Xt_321r7WLZyToIwDbPas7eGoImk9AEzaCGrsS71pYnsJo89M3-XFMm1DaQPrJlDTrrJAmIaOYIIwK5jQ1F4jaeVVEQ18GpdD6kKdMJiK_TJuXxG"/>
+</div>
+<p class="text-[10px] uppercase font-bold tracking-[0.2em] text-secondary mb-1">Signature</p>
+<h3 class="font-headline font-bold text-on-background text-lg group-hover:text-primary transition-colors">Sahel Mist Toner</h3>
+<p class="text-slate-500 text-xs mb-3">Botanical Refreshment</p>
+<div class="flex items-center justify-between">
+<span class="font-bold text-on-background">$29.00</span>
+<button class="bg-on-background text-white px-4 py-2 rounded-full text-xs font-bold hover:bg-primary transition-colors">Add to Bag</button>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-20 flex justify-center items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container text-slate-400">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white font-bold text-sm">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors font-bold text-sm">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors font-bold text-sm">3</button>
+<span class="text-slate-300">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors font-bold text-sm">8</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container text-on-surface">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Newsletter / Community -->
+<section class="mt-32 mb-16 rounded-[3rem] bg-surface-container-high p-16 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative">
+<div class="flex-1 z-10">
+<h2 class="font-headline text-4xl font-extrabold text-on-background mb-4">Join the Collective</h2>
+<p class="text-on-surface-variant text-lg mb-8 max-w-md">Get exclusive access to new seasonal harvests and artisanal stories from the heart of Mali.</p>
+<form class="flex w-full max-w-md bg-white p-2 rounded-full shadow-sm">
+<input class="flex-1 border-none focus:ring-0 px-6 text-sm text-on-surface" placeholder="Your email address" type="email"/>
+<button class="bg-primary text-white px-8 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform">Subscribe</button>
+</form>
+</div>
+<div class="flex-1 grid grid-cols-2 gap-4 z-10">
+<img alt="Texture 1" class="rounded-3xl h-40 w-full object-cover" data-alt="Close-up detail of a hand-woven Malian textile pattern in earthy tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5Kt_TEeHXinWtkx8Smr1AOt7qEQiZNfnOO8Pt2mJVqlORJm4ZWMhn2cV87nDJpyNxLdNtyy3oQVREtG-CDxRKl8ZVjtu6GmQz5o9fT-SXpJSdtWSQn5--VY3GjkvplMdX-IIBFw-FLKi8EMrP-HbrA2WooTckL7cm7YssNVb8-n-PTjmG3U4fhcPQZIZLLLWL8RYMyB51vy4EwqRVVIYC0clH3qvAF1VypiAUtfTjUx2qQxnqgaA1r24NYtkCrlVH1l_rZZ22R_Qr"/>
+<img alt="Texture 2" class="rounded-3xl h-40 w-full object-cover mt-8" data-alt="Abstract shot of ripples in desert sand at sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkU8wKBxOALDE9BJbVGRy1pQrS157JKZV0bviwN0T1QVva63j4pYkimT1CBW_0bQZipmWpeTrxzlCTaaCiZ806uDUiPia3RJMA6q8bKiY5Ilv16z5TgJY3pm_hSAQQeTSqOEZn-YWi-EsIZ5wk160HHzctxQHKZGFbP2eYix8QEdBfyHGo7t8Eon6xu8cBD2RL7DbX53EkChOTM_rFznf-i0FMaYTqWI50lghB9V6yo5Dylbr95LTmhegxdrjSKLlYHWiT-n69PX7G"/>
+</div>
+<div class="absolute -right-20 -top-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+</section>
+</main>
+<!-- Footer Anchor -->
+<footer class="w-full rounded-t-3xl mt-12 bg-slate-50 dark:bg-slate-900">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-10 gap-6">
+<div class="flex flex-col gap-2">
+<div class="text-lg font-bold text-emerald-800 font-headline uppercase tracking-widest">Sahel Luxe</div>
+<p class="font-['Inter'] text-xs font-medium uppercase tracking-widest text-slate-500">© 2024 Sahel Luxe Marketplace. Elevated Malian Artistry.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8 font-['Inter'] text-xs font-medium uppercase tracking-widest">
+<a class="text-slate-500 hover:text-emerald-600 hover:opacity-80 transition-opacity" href="#">Orange Money</a>
+<a class="text-slate-500 hover:text-emerald-600 hover:opacity-80 transition-opacity" href="#">Wave</a>
+<a class="text-slate-500 hover:text-emerald-600 hover:opacity-80 transition-opacity" href="#">Moov</a>
+<a class="text-slate-500 hover:text-emerald-600 hover:opacity-80 transition-opacity" href="#">Terms of Service</a>
+<a class="text-slate-500 hover:text-emerald-600 hover:opacity-80 transition-opacity" href="#">Privacy Policy</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-emerald-900 cursor-pointer hover:scale-110 transition-transform" data-icon="share">share</span>
+<span class="material-symbols-outlined text-emerald-900 cursor-pointer hover:scale-110 transition-transform" data-icon="public">public</span>
+</div>
+</div>
+</footer>
+</body></html>

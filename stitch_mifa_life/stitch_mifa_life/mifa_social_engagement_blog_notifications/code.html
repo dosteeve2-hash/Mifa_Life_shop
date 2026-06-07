@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface": "#f6faff",
+              "surface-dim": "#d1dbe5",
+              "primary-fixed-dim": "#65df76",
+              "secondary-container": "#fed000",
+              "on-secondary-fixed-variant": "#564500",
+              "on-tertiary-container": "#fffbff",
+              "surface-container-lowest": "#ffffff",
+              "inverse-surface": "#283239",
+              "tertiary-container": "#e12531",
+              "on-tertiary": "#ffffff",
+              "on-surface": "#131d24",
+              "primary": "#006b26",
+              "outline": "#6e7b6b",
+              "inverse-on-surface": "#e8f2fc",
+              "secondary": "#725c00",
+              "background": "#f6faff",
+              "on-tertiary-fixed-variant": "#930015",
+              "surface-container": "#e5eff9",
+              "on-primary-fixed": "#002107",
+              "on-background": "#131d24",
+              "surface-container-high": "#dfe9f3",
+              "on-surface-variant": "#3e4a3d",
+              "on-primary-fixed-variant": "#00531c",
+              "outline-variant": "#bdcab9",
+              "inverse-primary": "#65df76",
+              "on-error-container": "#93000a",
+              "error": "#ba1a1a",
+              "secondary-fixed": "#ffe07f",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#eaf5ff",
+              "on-primary-container": "#f7fff2",
+              "on-secondary-container": "#6f5900",
+              "surface-bright": "#f6faff",
+              "primary-container": "#008732",
+              "on-secondary-fixed": "#231b00",
+              "tertiary-fixed": "#ffdad7",
+              "tertiary": "#bb001e",
+              "on-secondary": "#ffffff",
+              "error-container": "#ffdad6",
+              "surface-variant": "#d9e4ee",
+              "on-tertiary-fixed": "#410004",
+              "on-error": "#ffffff",
+              "surface-tint": "#006e27",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "secondary-fixed-dim": "#edc200",
+              "primary-fixed": "#81fc90",
+              "surface-container-highest": "#d9e4ee"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-nav {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f6faff;
+      }
+      h1, h2, h3 {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-[0_12px_32px_-4px_rgba(19,29,36,0.06)] flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-800 dark:text-green-500 hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200 cursor-pointer">menu</span>
+<span class="text-2xl font-extrabold text-green-800 dark:text-green-500 italic font-['Plus_Jakarta_Sans'] tracking-tight">Mifa Life</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-green-800 dark:text-green-500 hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200 cursor-pointer">notifications</span>
+</div>
+</header>
+<main class="pt-24 pb-32 px-4 md:px-8 max-w-5xl mx-auto space-y-10">
+<!-- Toggle Navigation (Pulse vs Notifications) -->
+<div class="flex justify-center mb-8">
+<div class="bg-surface-container-high p-1.5 rounded-full flex gap-1 shadow-sm">
+<button class="bg-primary text-on-primary px-8 py-2.5 rounded-full text-sm font-semibold transition-all shadow-md">Mifa Pulse</button>
+<button class="text-on-surface-variant px-8 py-2.5 rounded-full text-sm font-medium hover:bg-surface-container transition-all">Alertes</button>
+</div>
+</div>
+<!-- Section: Mifa Pulse News Feed -->
+<section class="space-y-8">
+<div class="flex justify-between items-end">
+<h2 class="text-3xl font-extrabold tracking-tight text-on-surface">Mifa Pulse</h2>
+<span class="text-primary font-bold text-sm tracking-wide">VOIR TOUT</span>
+</div>
+<!-- Featured Article Hero Card -->
+<div class="relative group overflow-hidden rounded-3xl shadow-xl aspect-[16/10] md:aspect-[21/9]">
+<img alt="Rice Harvest" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Vibrant green rice paddies in Ségou, Mali, with local farmers in colorful traditional dress harvesting under a bright golden sun" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM2peeEtDRDyv_K5HdKZYhW69rj8u_auTgJQrNRL8x4-VBRo9xColcsQnihrOcCM4-_eU3liMBod9mNf2kt1OHJ3RVRscMMwjps8U7Zfl6vF-_BcSbz9XFO6m5urq2Yh_RGZ6uaFk2hvgFmV_JdQsbDYxoKtEm6T2W3cugCCVYOXYuHdYRIYII3uzSDpkzZX5pC8KxfyWcUMGNw5TuVf7O6Ops4xzeBRQn0zEhdi5evopnnuMNnzLDs20eT2bWdMepifdHAg2velgQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/40 to-transparent"></div>
+<div class="absolute bottom-0 p-6 md:p-10 w-full space-y-3">
+<span class="inline-block bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Agriculture</span>
+<h3 class="text-white text-2xl md:text-4xl font-bold leading-tight max-w-2xl">Nouvelle récolte de riz Gambiaka à Ségou</h3>
+<div class="flex items-center justify-between">
+<p class="text-white/80 text-sm md:text-base line-clamp-2 max-w-lg">Découvrez comment les innovations locales transforment la production de riz cette saison dans la région de Ségou.</p>
+<div class="flex gap-3">
+<button class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-[#25D366] transition-colors">
+<span class="material-symbols-outlined text-lg">share</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-[#1877F2] transition-colors">
+<span class="material-symbols-outlined text-lg">public</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- News Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1: Tech -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-4">
+<div class="relative h-48 rounded-xl overflow-hidden">
+<img alt="Tech Innovation" class="w-full h-full object-cover" data-alt="Close-up of a high-tech smartphone screen displaying a mobile banking app with West African currency symbols and clean UI design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDc0G_qdorVcc86CjozIMKovLzgpCnYTNokHa2XG9MnLT9UdXN_zJp0_MpbT1nWA4czC6Nfo_Moxzplj0UrWuUxiY6bwPyzMwuhIiHq20hR3tRP_fn3T3ZdKCGpaEGh_1nyUQWyM1c3rirLBiWL05I6SLfocMXQugBEFD9LNGAMpVqPoIZbGn6RgiQisuNtF15D5LJdJeZH8PnqQYck63wDkiiF1PFvZDNhKp9rZdI6XKXsciamM_pFwyO26JrjjyhgeACFrUrW5vVf"/>
+<span class="absolute top-3 left-3 bg-primary-container text-on-primary-container px-2 py-0.5 rounded-full text-[10px] font-bold uppercase">Tech</span>
+</div>
+<div class="space-y-2">
+<h4 class="text-lg font-bold text-on-surface line-clamp-2">L'essor du mobile banking à Bamako</h4>
+<p class="text-on-surface-variant text-sm line-clamp-2">Une analyse profonde sur l'accélération de l'inclusion financière digitale au Mali.</p>
+<div class="pt-2 flex justify-between items-center">
+<span class="text-[11px] text-outline font-medium">Il y a 2 heures</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-outline text-lg cursor-pointer hover:text-primary">share</span>
+<span class="material-symbols-outlined text-outline text-lg cursor-pointer hover:text-primary">bookmark</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2: Lifestyle -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-4">
+<div class="relative h-48 rounded-xl overflow-hidden">
+<img alt="Malian Fashion" class="w-full h-full object-cover" data-alt="Modern high-fashion portrait of a Malian designer wearing elegant indigo-dyed Bogolan textile garments in a minimalist architectural setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLpMPjnkEJs-4_L_Ee2Bmu02CMc2VvjyjaiHFw7LxUHWDrQBPNBej-dP__AdxwplV_4xa7ElBU4Oc13dME_1mmMpLuXp4F-fCeiqg5dTnu_5sFf42k2Vz-rnAqcdykvpJ7fYjg8aQnhWoBpe1hZWu4y4j6Y8f0RXJ8cIf4_uOoE2-QtToD9pIkfwMjMK-ZqDG1DyhFTUFemGckooLItO_qyXjnxB1AyZEYZUnRZIGpHKaQAdZMB2tNGB3dHwZdn6envf0LVk9zbcaj"/>
+<span class="absolute top-3 left-3 bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full text-[10px] font-bold uppercase">Lifestyle</span>
+</div>
+<div class="space-y-2">
+<h4 class="text-lg font-bold text-on-surface line-clamp-2">Le Bogolan : Entre Tradition et Haute Couture</h4>
+<p class="text-on-surface-variant text-sm line-clamp-2">Comment les créateurs maliens réinventent le textile traditionnel sur les podiums mondiaux.</p>
+<div class="pt-2 flex justify-between items-center">
+<span class="text-[11px] text-outline font-medium">Il y a 5 heures</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-outline text-lg cursor-pointer hover:text-primary">share</span>
+<span class="material-symbols-outlined text-outline text-lg cursor-pointer hover:text-primary">bookmark</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3: Agriculture -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-4">
+<div class="relative h-48 rounded-xl overflow-hidden">
+<img alt="Sustainable Farming" class="w-full h-full object-cover" data-alt="Wide shot of a sustainable community farm in Mali with solar-powered irrigation systems and lush organic vegetable plots under soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMPP5VdmNLrvomz0y-ebMrq1LFZPCKn58O-NEu2aGxoou8FjBlwyv9LTWDY2TY6ZBwjFt6JY6Sr17cwxe-7pq6d0hPYYzaCHtmN1N_TUYXsGrKRWw9z0g7I8--enllB_ZW3A-8X-7xRw04Y8H_Pkh7hvbmCGIF2hEx-6_zgMmXRJkDjLhBuU_-RXyAibIYFaQLFTOcQogY2ruegoRItt3z4yK6qlT0Iwq-DFMUR_WD8efmRfUanpcaWzAYjzb39DhrlsgEr4hUoEse"/>
+<span class="absolute top-3 left-3 bg-primary-container text-on-primary-container px-2 py-0.5 rounded-full text-[10px] font-bold uppercase">Agriculture</span>
+</div>
+<div class="space-y-2">
+<h4 class="text-lg font-bold text-on-surface line-clamp-2">Irrigation solaire : le futur des fermes familiales</h4>
+<p class="text-on-surface-variant text-sm line-clamp-2">Les pompes solaires changent la vie des petits agriculteurs pendant la saison sèche.</p>
+<div class="pt-2 flex justify-between items-center">
+<span class="text-[11px] text-outline font-medium">Il y a 1 jour</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-outline text-lg cursor-pointer hover:text-primary">share</span>
+<span class="material-symbols-outlined text-outline text-lg cursor-pointer hover:text-primary">bookmark</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Real-Time Notification Center -->
+<section class="space-y-6 pt-10">
+<div class="flex items-center gap-3">
+<h2 class="text-2xl font-extrabold text-on-surface">Centre de Notifications</h2>
+<span class="bg-tertiary text-white text-[10px] font-bold px-2 py-0.5 rounded-full">3 NOUVELLES</span>
+</div>
+<div class="space-y-3">
+<!-- Notification: Delivery (Green Priority) -->
+<div class="bg-surface-container-low p-4 rounded-2xl flex items-start gap-4 hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="mt-1 relative">
+<div class="w-12 h-12 bg-primary-container/20 rounded-full flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<span class="absolute top-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h5 class="font-bold text-on-surface group-hover:text-primary transition-colors">Alerte de livraison</h5>
+<span class="text-[10px] text-outline font-medium">À L'INSTANT</span>
+</div>
+<p class="text-sm text-on-surface-variant">Votre colis est arrivé à <span class="font-semibold text-on-surface">Kati</span>. Le livreur vous contactera sous peu.</p>
+</div>
+</div>
+<!-- Notification: Security (Red Priority) -->
+<div class="bg-surface-container-low p-4 rounded-2xl flex items-start gap-4 hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="mt-1 relative">
+<div class="w-12 h-12 bg-tertiary-container/20 rounded-full flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">security</span>
+</div>
+<span class="absolute top-0 right-0 w-3 h-3 bg-red-600 border-2 border-white rounded-full"></span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h5 class="font-bold text-on-surface group-hover:text-tertiary transition-colors">Sécurité de compte</h5>
+<span class="text-[10px] text-outline font-medium">10 MIN</span>
+</div>
+<p class="text-sm text-on-surface-variant">Nouvelle connexion détectée depuis un appareil inconnu à Mopti. S'agit-il de vous ?</p>
+</div>
+</div>
+<!-- Notification: Flash Sale (Yellow Accent) -->
+<div class="bg-secondary-container/10 p-4 rounded-2xl flex items-start gap-4 border-l-4 border-secondary hover:bg-secondary-container/20 transition-colors cursor-pointer group">
+<div class="mt-1 relative">
+<div class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h5 class="font-bold text-on-surface">Vente Flash Mifa</h5>
+<span class="text-[10px] text-outline font-medium">2 HEURES</span>
+</div>
+<p class="text-sm text-on-surface-variant">-20% sur tout le rayon Agriculture jusqu'à minuit ! Profitez-en maintenant.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter / Opt-in Section -->
+<section class="mt-16 bg-on-background rounded-3xl p-8 md:p-12 text-center space-y-6 overflow-hidden relative">
+<div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+<div class="absolute -top-24 -left-24 w-64 h-64 rounded-full bg-primary blur-3xl"></div>
+<div class="absolute -bottom-24 -right-24 w-64 h-64 rounded-full bg-secondary blur-3xl"></div>
+</div>
+<div class="relative z-10 space-y-4">
+<h2 class="text-white text-3xl font-bold tracking-tight">Restez connecté à l'essentiel</h2>
+<p class="text-surface-variant max-w-md mx-auto">Recevez les dernières nouvelles et offres exclusives directement via votre canal préféré.</p>
+<div class="flex flex-col md:flex-row gap-3 justify-center items-center mt-8">
+<div class="bg-white/10 p-1 rounded-full flex w-full md:w-96 ring-1 ring-white/20 focus-within:ring-primary transition-all">
+<input class="bg-transparent border-none focus:ring-0 text-white placeholder-surface-variant/60 flex-1 px-4 text-sm" placeholder="Email ou Numéro WhatsApp" type="text"/>
+<button class="bg-primary hover:bg-primary-container text-white px-6 py-2 rounded-full text-sm font-bold transition-all active:scale-95">Rejoindre</button>
+</div>
+</div>
+<div class="flex justify-center gap-6 mt-6">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="rounded-full text-primary focus:ring-primary bg-white/10 border-white/20" type="checkbox"/>
+<span class="text-[12px] text-white/70 group-hover:text-white transition-colors">WhatsApp</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded-full text-primary focus:ring-primary bg-white/10 border-white/20" type="checkbox"/>
+<span class="text-[12px] text-white/70 group-hover:text-white transition-colors">Email</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded-full text-primary focus:ring-primary bg-white/10 border-white/20" type="checkbox"/>
+<span class="text-[12px] text-white/70 group-hover:text-white transition-colors">SMS</span>
+</label>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-t-3xl shadow-[0_-8px_24px_-4px_rgba(19,29,36,0.04)] md:hidden">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-green-700 dark:hover:text-green-300 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide uppercase mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-green-700 dark:hover:text-green-300 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide uppercase mt-1">Shop</span>
+</div>
+<div class="flex flex-col items-center justify-center text-green-800 dark:text-green-400 ring-2 ring-green-800 dark:ring-green-400 ring-offset-4 rounded-full p-1 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide uppercase mt-1">Community</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2 hover:text-green-700 dark:hover:text-green-300 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide uppercase mt-1">Account</span>
+</div>
+</nav>
+</body></html>

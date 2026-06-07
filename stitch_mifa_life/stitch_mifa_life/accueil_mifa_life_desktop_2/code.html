@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mifa Life - L'élégance Malienne</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#ffffff",
+              "on-primary-container": "#f7fff2",
+              "surface-container-high": "#dfe9f3",
+              "secondary-fixed": "#ffe07f",
+              "outline-variant": "#bdcab9",
+              "on-surface": "#131d24",
+              "tertiary-container": "#e12531",
+              "on-tertiary-container": "#fffbff",
+              "surface-container-highest": "#d9e4ee",
+              "inverse-on-surface": "#e8f2fc",
+              "on-background": "#131d24",
+              "secondary-container": "#fed000",
+              "surface-container-low": "#eaf5ff",
+              "on-secondary-fixed": "#231b00",
+              "primary-fixed": "#81fc90",
+              "primary-fixed-dim": "#65df76",
+              "secondary": "#725c00",
+              "on-tertiary": "#ffffff",
+              "on-secondary": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "primary-container": "#008732",
+              "on-error": "#ffffff",
+              "on-tertiary-fixed-variant": "#930015",
+              "on-surface-variant": "#3e4a3d",
+              "tertiary-fixed": "#ffdad7",
+              "on-primary-fixed-variant": "#00531c",
+              "tertiary": "#bb001e",
+              "surface-bright": "#f6faff",
+              "on-primary-fixed": "#002107",
+              "surface-container": "#e5eff9",
+              "on-secondary-fixed-variant": "#564500",
+              "surface-dim": "#d1dbe5",
+              "surface": "#f6faff",
+              "surface-variant": "#d9e4ee",
+              "error-container": "#ffdad6",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "on-tertiary-fixed": "#410004",
+              "on-error-container": "#93000a",
+              "on-secondary-container": "#6f5900",
+              "outline": "#6e7b6b",
+              "surface-tint": "#006e27",
+              "background": "#f6faff",
+              "error": "#ba1a1a",
+              "primary": "#006b26",
+              "secondary-fixed-dim": "#edc200",
+              "inverse-primary": "#65df76",
+              "inverse-surface": "#283239"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #006b26 0%, #008732 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 glass-nav shadow-sm">
+<div class="flex items-center justify-between px-8 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-black tracking-tighter text-primary">Mifa Life</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-headline font-semibold text-sm tracking-tight text-primary border-b-2 border-primary pb-1" href="#">Alimentation</a>
+<a class="font-headline font-semibold text-sm tracking-tight text-slate-600 hover:text-primary transition-colors" href="#">Électronique</a>
+<a class="font-headline font-semibold text-sm tracking-tight text-slate-600 hover:text-primary transition-colors" href="#">Mode</a>
+<a class="font-headline font-semibold text-sm tracking-tight text-slate-600 hover:text-primary transition-colors" href="#">Maison</a>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative flex items-center bg-surface-container-highest rounded-full px-4 py-2 w-64">
+<span class="material-symbols-outlined text-outline text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full ml-2 text-on-surface" placeholder="Rechercher..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity flex items-center">
+<span class="material-symbols-outlined text-primary" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="hover:opacity-80 transition-opacity flex items-center">
+<span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-12 space-y-16">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-8">
+<div class="relative h-[560px] rounded-[2.5rem] overflow-hidden bg-surface-container-high flex items-center group">
+<img alt="Elegance Malienne" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80" data-alt="high-end editorial shot of vibrant Malian traditional fabrics with intricate patterns draped in a sunlit modern minimalist architectural space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSQwIC82O8hqFnpPRRq5Kbf4NEGfTU9kRMwEDK9RuDQd7lYcz8qhJW7yZxUSvOr72-u28-a4FgZU4duY-Td_wsbqEd0ghMZgsRFMFYE5PcJEy9afqQU6qEEsSAqFjqReY6EIsWmaPL-FAvWJsZ20lLY6cgUmu5_BmhGZS3o1Dhwws_nfDghAmggaoHwpjOKWI9Obl7QAm1Q3NlG8_MP1BobADqHErNyOVGYJiXGG8r3Z_i48ZxkgaTofxkjj958aOyD6TzzWKKGjnv"/>
+<div class="relative z-10 pl-20 w-1/2 space-y-6">
+<span class="bg-secondary-container text-on-secondary-container px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase">Édition Limitée</span>
+<h1 class="font-headline text-6xl font-extrabold text-on-background leading-tight">Authentic Malian Elegance</h1>
+<p class="text-lg text-on-surface-variant font-medium max-w-md">Découvrez une sélection curative de produits artisanaux et modernes, célébrant l'héritage vivant du Mali.</p>
+<button class="primary-gradient text-on-primary px-10 py-4 rounded-full font-bold text-lg hover:scale-95 transition-transform shadow-xl">Explorer la Collection</button>
+</div>
+</div>
+</section>
+<!-- Trust Bar: Bamako Fast Delivery -->
+<section class="max-w-7xl mx-auto px-8">
+<div class="bg-surface-container-low py-6 rounded-3xl flex items-center justify-around">
+<div class="flex items-center gap-4 group">
+<div class="bg-primary-container/10 p-3 rounded-2xl group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary" data-icon="local_shipping" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+</div>
+<div>
+<p class="font-bold text-on-background leading-none">Bamako Fast Delivery</p>
+<p class="text-xs text-on-surface-variant mt-1">Livraison en moins de 24h</p>
+</div>
+</div>
+<div class="w-px h-8 bg-outline-variant/30"></div>
+<div class="flex items-center gap-4 group">
+<div class="bg-primary-container/10 p-3 rounded-2xl group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div>
+<p class="font-bold text-on-background leading-none">Qualité Certifiée</p>
+<p class="text-xs text-on-surface-variant mt-1">Sélection rigoureuse</p>
+</div>
+</div>
+<div class="w-px h-8 bg-outline-variant/30"></div>
+<div class="flex items-center gap-4 group">
+<div class="bg-primary-container/10 p-3 rounded-2xl group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary" data-icon="payments" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+<div>
+<p class="font-bold text-on-background leading-none">Paiement Sécurisé</p>
+<p class="text-xs text-on-surface-variant mt-1">Orange Money, Wave, Moov</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Categories: Mali Pulse -->
+<section class="max-w-7xl mx-auto px-8 space-y-8">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline text-3xl font-bold text-on-background">Mali Pulse</h2>
+<p class="text-on-surface-variant">Le rythme de nos catégories préférées</p>
+</div>
+<a class="text-primary font-bold flex items-center gap-2 hover:underline" href="#">Voir tout <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<div class="flex items-center gap-12 overflow-x-auto pb-4 scrollbar-hide">
+<div class="flex flex-col items-center gap-4 min-w-[120px] group cursor-pointer">
+<div class="w-24 h-24 rounded-full ring-2 ring-primary ring-offset-4 overflow-hidden shadow-lg transition-transform group-hover:scale-105">
+<img alt="Alimentation" class="w-full h-full object-cover" data-alt="overhead shot of wooden bowls filled with exotic african grains and spices on a light stone surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmfovvCRgtDBy6IGEWT0LZEHMAKApB8WFuHez3R0P1iYNot3d7prrfGY-xnVkJB3esWp_5ruOlAgYAIH-1GhYlM4MRBzpN0LSCTc73egcLdkdPEPdnDtVSWoj8-x1z53H8UP8rUA8ItFIvYaMI9C9Lg7zpWL7qpQEvWTfJj-9j7Q0F70TQWO7BYtMjB2zsQdc9cQXv0ClQBJfdMKD2QGJhvl6cRqbgPKU_hIuchIqfAOySm-tB5SPOWvmilKg903fso9l3dY1wJjmi"/>
+</div>
+<span class="font-label text-sm font-bold text-primary">Alimentation</span>
+</div>
+<div class="flex flex-col items-center gap-4 min-w-[120px] group cursor-pointer">
+<div class="w-24 h-24 rounded-full overflow-hidden shadow-sm transition-transform group-hover:scale-105">
+<img alt="Électronique" class="w-full h-full object-cover" data-alt="clean minimal photo of a modern high-end smartphone and wireless earbuds on a light gray architectural background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0objWhnh-iH4hhSmZMSOoiAK_dWTlVc_2vunMgSUF-AzRBPxMNElOFel6mf4P8rBvDDCklkKcuClC_dwQBEPc6a8Qh4eEjZnUXM4TQp27MxzA8mvwU4gHZevRbqjMu6IiHJJnY8XXLf5Gj77g5aAVF6NeXvpYLAXPnJWbN_NvOqB1byRTWM0kIJnaCmL1WTf6jRuhN6Cura19aFcAPwnllQwKoCDHCqwob1GbmHc9ToT_wWwqQqEShVcCMrpbsyCICJzWNvkrXqUQ"/>
+</div>
+<span class="font-label text-sm font-medium text-on-surface-variant">Électronique</span>
+</div>
+<div class="flex flex-col items-center gap-4 min-w-[120px] group cursor-pointer">
+<div class="w-24 h-24 rounded-full overflow-hidden shadow-sm transition-transform group-hover:scale-105">
+<img alt="Mode" class="w-full h-full object-cover" data-alt="folded high quality textile with traditional african motifs in earth tones on a white studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEpY_B_hxt1EwngdoGONRh2TWPQedfp1UePLOP5-wk5PhHJqaAlcV-FGN7YiwOsQYHQnWfKkQ6X5UgkIJEMUO1rN8xvFF1mwXZgE3hFqQnAqJSYT5_tZaRhhI5u7Jfw962qQl66fq9VAVLO3VMSJNMzZX0_R7tp0xm_xNI3Qd8Hv7Gbw_iVoddhsQsk3twjScsPawo25ZEbtI1qg4ocDe0y-jP5y5k3KciaSCXVyutMzUfnae44QuUeic52L3hxFxKNjeiLWh61eQx"/>
+</div>
+<span class="font-label text-sm font-medium text-on-surface-variant">Mode</span>
+</div>
+<div class="flex flex-col items-center gap-4 min-w-[120px] group cursor-pointer">
+<div class="w-24 h-24 rounded-full overflow-hidden shadow-sm transition-transform group-hover:scale-105">
+<img alt="Maison" class="w-full h-full object-cover" data-alt="artisan hand-woven decorative basket next to a minimal ceramic vase in a bright modern living room corner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIthLgcSIn6DLbCZogMrKKKG7svd1nx1LsaaHQ17yR4T-U8mNYtSflAPgN9RLI3e4GZK180_DuUOEJjNtWX2nnBLY2KP59aHpKpm1zhCNYZyxOrIzBofKHI9eo-7rT11uhz78WjhvXw2bANaHA1aqLkzbg0bu0nn27v0hQy9DcNpqhboNHld0UUnzKNoauWOCwXn94zttI1HZPd6TT-xz_QQTyN5k4ioIok9e2EtVkXsFn-I_kpnnOwSslPvboc3Brhdu-m0XOCfEV"/>
+</div>
+<span class="font-label text-sm font-medium text-on-surface-variant">Maison</span>
+</div>
+<div class="flex flex-col items-center gap-4 min-w-[120px] group cursor-pointer">
+<div class="w-24 h-24 rounded-full overflow-hidden shadow-sm transition-transform group-hover:scale-105">
+<img alt="Beauté" class="w-full h-full object-cover" data-alt="luxurious amber glass bottles of natural shea butter and oils on a white marble surface with soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoVYeH029ORbR4SwCcCuFusk-3blrqoGqrEszAF1Y68kzNY-ateAfjkoWfdCRRc-Yd6JUGlVb1Vt5xSsgjbYUUF3U_gOJvA1QgMf70W2fistAsvxNkoGoTRirkkR6OeP5tAFnhl7boPba2PDIrHTNMvtjW9iuJxHEQK814P6bfgVa0kdBz-tSxH0YRoXNl8bV9sEx2W2BTwLRsAEL6kCIjpYPBFMEPvDkl2Qmdij5nqsCyH7D2x-qYdnUzt6bm-4q5I-uaG4MW-cWj"/>
+</div>
+<span class="font-label text-sm font-medium text-on-surface-variant">Beauté</span>
+</div>
+<div class="flex flex-col items-center gap-4 min-w-[120px] group cursor-pointer">
+<div class="w-24 h-24 rounded-full overflow-hidden shadow-sm transition-transform group-hover:scale-105">
+<img alt="Librairie" class="w-full h-full object-cover" data-alt="stack of aesthetic books with artistic covers on a clean light wood table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHnHdCukYnIUIh0JTs7d0d6PIUwe1dLjM_LFx3N5J5fHVRnDEjkiVcs9bHIWcoQTa51-z8CpYh_0j0fdQKYbAQ7ZRzkQCc2P8RZ4o4uP0OR9nWLl4tmCdqPt3wVWw-pfHUbJLfNzkZwOBPC2QzV0tU03K3advcnAut52MjX8cOJC8MrzNjYnNtRnUBksfwuAubY3lWrpkeJgE1oDmDndsiomLJO8lMoxn-w1Kl6PqGva1_CrF6i9BXVHycY6SXZMLRu2jYDlzsJeH0"/>
+</div>
+<span class="font-label text-sm font-medium text-on-surface-variant">Librairie</span>
+</div>
+</div>
+</section>
+<!-- Flash Sales Grid -->
+<section class="max-w-7xl mx-auto px-8 space-y-8">
+<div class="flex items-center gap-6">
+<h2 class="font-headline text-3xl font-bold text-on-background">Flash Sales</h2>
+<div class="flex items-center gap-2 bg-tertiary-container text-on-tertiary-container px-4 py-1.5 rounded-xl font-bold text-sm">
+<span class="material-symbols-outlined text-sm" data-icon="timer">timer</span>
+<span>08 : 45 : 12</span>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-8">
+<!-- Product Card 1 -->
+<div class="group cursor-pointer space-y-4">
+<div class="relative aspect-[3/4] rounded-2xl overflow-hidden bg-surface-container">
+<img alt="Smartphone Premium" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="front and back view of a sleek modern smartphone in emerald green metallic finish on a matching tonal background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjNPsdtNd70jFISaaN6Tln77l3MNgC0MzjLhtU8FGclqDXU-vFuM8nhUw_BKW717YDKpQpBTcU8U-GEVnF0NzDp13fO3oNrVXhyGLTpGYW3CYyuguAEBoXJmb21hn9Dlno_uAr5iLjvAH0kopwr89wSz0mAieDvcdmF908JZzpsCwhDS0m5JyTBqJ49XXasNtQ7LLeLkJVWo5qjKwe0QQs_VyKZ3RblxWNmexkfLguO2pzICnHwYsktYFgGHr-5A5L4zcDjC5lROV5"/>
+<div class="absolute top-4 left-4 bg-tertiary text-on-tertiary px-3 py-1 rounded-full text-xs font-bold">-25%</div>
+<button class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0">
+<span class="material-symbols-outlined text-primary" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+<div class="px-1">
+<p class="text-xs text-on-surface-variant font-medium uppercase tracking-wider">Électronique</p>
+<h3 class="font-bold text-on-background mt-1 line-clamp-1">Smartphone Galaxy Mifa Pro</h3>
+<div class="flex items-center gap-3 mt-2">
+<span class="text-xl font-extrabold text-primary">245.000 CFA</span>
+<span class="text-sm text-outline line-through">320.000 CFA</span>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group cursor-pointer space-y-4">
+<div class="relative aspect-[3/4] rounded-2xl overflow-hidden bg-surface-container">
+<img alt="Tissu Bogolan" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="close-up detail of authentic handmade Bogolan textile with traditional geometric patterns in deep brown and white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApU_kQz43vjetrkVIsNqCdL4s2KBRzrz0DmZM5DYs_fjBT-PoIJg-BhWc2cCF3DG_Msy3GnEjcKyxQNTb7Dff5fb8_1gbhwXcppNomrbPGAUf3cTEO3QUqWCxgrbKuKTRFMRqN2blEHXUL7F1UjfGU_oXkWkWYHo-iMB5jeWrCOOaFavRhtdW3P83N-wrTQK0W_56d5ojYwN_Rq9r2LbqZSsSL6lGr2tZFL0E_-HeaiaDSaGE9IjMP28yZMKVROZm0BSGAuAc828ji"/>
+<div class="absolute top-4 left-4 bg-tertiary text-on-tertiary px-3 py-1 rounded-full text-xs font-bold">-15%</div>
+<button class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0">
+<span class="material-symbols-outlined text-primary" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+<div class="px-1">
+<p class="text-xs text-on-surface-variant font-medium uppercase tracking-wider">Mode &amp; Tradition</p>
+<h3 class="font-bold text-on-background mt-1 line-clamp-1">Véritable Tissu Bogolan Artisanal</h3>
+<div class="flex items-center gap-3 mt-2">
+<span class="text-xl font-extrabold text-primary">12.500 CFA</span>
+<span class="text-sm text-outline line-through">15.000 CFA</span>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group cursor-pointer space-y-4">
+<div class="relative aspect-[3/4] rounded-2xl overflow-hidden bg-surface-container">
+<img alt="Beurre de Karité" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="aesthetic ceramic jar of pure organic shea butter surrounded by raw shea nuts on a natural wood surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlU9UQZdS0XL5jNArZmyAI3pck47eSmfdv-Yutt4-oxB9vdHY3JCgakED4VYtdWKWCaWdgXIPdrwpfIEBVWmYk3pXJ27j-eAPBehC-NUlKTM9t4PG4YGIIkX-PR3TiYM82xz6Amr5OfZfXsBrrBvOJLKZ53BwJ4sFYENfsbCDM0tVYYXr1VLs3kQQJpRXajnefQc283KukBxOhGTs4Z7tcHspNgXhLBFbr_a-pzx_IjVIthiZggMOgqMZzMrgdJA-j9AAzoZtCZ07r"/>
+<div class="absolute top-4 left-4 bg-tertiary text-on-tertiary px-3 py-1 rounded-full text-xs font-bold">-40%</div>
+<button class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0">
+<span class="material-symbols-outlined text-primary" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+<div class="px-1">
+<p class="text-xs text-on-surface-variant font-medium uppercase tracking-wider">Beauté Bio</p>
+<h3 class="font-bold text-on-background mt-1 line-clamp-1">Beurre de Karité Bio Premium 500g</h3>
+<div class="flex items-center gap-3 mt-2">
+<span class="text-xl font-extrabold text-primary">4.200 CFA</span>
+<span class="text-sm text-outline line-through">7.000 CFA</span>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group cursor-pointer space-y-4">
+<div class="relative aspect-[3/4] rounded-2xl overflow-hidden bg-surface-container">
+<img alt="Casque Audio" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="minimalist professional wireless headphones in sand color against a clean soft beige background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZjJ-U3_02Ns88zb-lCKS17mlXTMcvdEn1y8sx73YtE6zcY3c3tDanL_RCqIXov82wCo669Ea1qdsfD5o5FKpaTpcxq-w2EaZC5i-KKwe0l-rB3fVdZOzbotk1gcanV9vPFtc1uaJ_OvN00sw_ps_U1C1BKDHs5xVUmCIMxBNLUxHZIVe4LLtsBkZA2OdS-zQUR9DYznQlftKQjrdgenOI8RqjkdrlaPX5ROqL3F0yPPOaqKFrnPnlwtZv50EN6-fy_Uq_8sd-HGE-"/>
+<div class="absolute top-4 left-4 bg-tertiary text-on-tertiary px-3 py-1 rounded-full text-xs font-bold">-20%</div>
+<button class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0">
+<span class="material-symbols-outlined text-primary" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+</div>
+<div class="px-1">
+<p class="text-xs text-on-surface-variant font-medium uppercase tracking-wider">Électronique</p>
+<h3 class="font-bold text-on-background mt-1 line-clamp-1">Casque Sans Fil AudioPure</h3>
+<div class="flex items-center gap-3 mt-2">
+<span class="text-xl font-extrabold text-primary">45.000 CFA</span>
+<span class="text-sm text-outline line-through">56.000 CFA</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter / Editorial Section -->
+<section class="max-w-7xl mx-auto px-8">
+<div class="bg-surface-container-high rounded-[3rem] p-16 flex items-center gap-16 overflow-hidden relative">
+<div class="flex-1 space-y-8 relative z-10">
+<h2 class="font-headline text-5xl font-extrabold leading-tight text-on-background">Restez Connecté au <span class="text-primary italic">Mali Pulse</span></h2>
+<p class="text-lg text-on-surface-variant max-w-lg">Recevez nos dernières collections, des offres exclusives et les histoires de nos artisans directement dans votre boîte mail.</p>
+<form class="flex gap-4 max-w-md">
+<input class="flex-1 rounded-full px-6 py-4 bg-surface border-none focus:ring-2 focus:ring-primary shadow-sm text-on-surface" placeholder="votre@email.com" type="email"/>
+<button class="primary-gradient text-on-primary px-8 py-4 rounded-full font-bold shadow-lg">S'inscrire</button>
+</form>
+</div>
+<div class="flex-1 relative h-[400px]">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-80 h-80 bg-primary-container/20 rounded-full blur-3xl"></div>
+<img alt="Newsletter Image" class="relative z-10 w-full h-full object-contain rounded-3xl" data-alt="close-up of a high-end designer smartphone displaying a beautifully designed shopping app with colorful product images" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzWAsUUyTnWV2DU8e-t0xkE6D9ObVJndUdfbHU9VbiQX5zCjst_DOESXoWkwe8_4dsSLSxg3puzF0boYkxnJuWf9pYIC25JX7Ifkd-U2brZliu1GZ0mf1Jzz_8BfiXbciiN2aRuPu9I9Enk8pKeIhVNClOiH9XZk-tIELPJOOECrxICWRq0_ZyR9FNwI5p9LvWmN7gzoyHcyj6Baj4KiPswZ6k2Qbd5tJKpZpOFbwhCXDfbXEMuh5St0jpz9KYuc_5GUN49PPQzB4f"/>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 w-full border-t border-slate-200">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 px-12 py-12 max-w-7xl mx-auto">
+<div class="space-y-6">
+<div class="text-lg font-bold text-slate-900">Mifa Life</div>
+<p class="text-xs text-slate-500 leading-relaxed max-w-sm">La destination e-commerce numéro 1 au Mali, alliant tradition et modernité. Qualité garantie et livraison express à Bamako et dans les régions.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-emerald-800 cursor-pointer hover:opacity-70" data-icon="facebook">social_leaderboard</span>
+<span class="material-symbols-outlined text-emerald-800 cursor-pointer hover:opacity-70" data-icon="instagram">retweet</span>
+<span class="material-symbols-outlined text-emerald-800 cursor-pointer hover:opacity-70" data-icon="twitter">retweet</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="space-y-4">
+<h4 class="font-bold text-emerald-800 text-sm">Navigation</h4>
+<div class="flex flex-col gap-2">
+<a class="text-xs text-slate-500 hover:underline transition-all" href="#">À propos</a>
+<a class="text-xs text-slate-500 hover:underline transition-all" href="#">Livraison</a>
+<a class="text-xs text-slate-500 hover:underline transition-all" href="#">Conditions Générales</a>
+<a class="text-xs text-slate-500 hover:underline transition-all" href="#">Contact</a>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-emerald-800 text-sm">Support</h4>
+<div class="flex flex-col gap-2">
+<a class="text-xs text-slate-500 hover:underline transition-all" href="#">Aide</a>
+<a class="text-xs text-slate-500 hover:underline transition-all" href="#">Retours</a>
+<a class="text-xs text-slate-500 hover:underline transition-all" href="#">Suivi de commande</a>
+<a class="text-xs text-slate-500 hover:underline transition-all" href="#">FAQ</a>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-12 py-8 border-t border-slate-200/50">
+<p class="text-center font-['Inter'] text-xs text-slate-500">© 2024 Mifa Life. Paiements sécurisés via Orange Money, Wave, Moov.</p>
+</div>
+</footer>
+</body></html>

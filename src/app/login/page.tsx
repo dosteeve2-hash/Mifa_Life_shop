@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { createBrowserClient } from '@supabase/ssr';
 
 type Step = 'email' | 'otp' | 'success';
@@ -89,7 +90,12 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-[calc(100vh-64px)] items-center justify-center p-4 bg-[#F6F4F0]">
-      <div className="w-full max-w-md">
+      <motion.div
+        className="w-full max-w-md"
+        initial={{ opacity: 0, y: 32 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: 'easeOut' }}
+      >
 
         {/* Carte principale */}
         <div className="overflow-hidden rounded-2xl bg-white shadow-xl shadow-gray-200/80">
@@ -285,7 +291,7 @@ export default function LoginPage() {
             </Link>
           </p>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 }
