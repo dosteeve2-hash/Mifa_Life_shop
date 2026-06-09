@@ -18,21 +18,22 @@ function formatPrice(n: number) {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const supabase = await createServerSupabaseClient();
-  const { data } = await supabase
-    .from('mifa_products')
-    .select('name,description')
-    .eq('id', id)
-    .single();
-  if (data) {
-    return { title: data.name, description: data.description };
-  }
+  try {
+    const supabase = await createServerSupabaseClient();
+    const { data } = await supabase
+      .from('mifa_products')
+      .select('name,description')
+      .eq('id', id)
+      .single();
+    if (data) {
+      return { title: data.name, description: data.description };
+    }
+  } catch {}
   return { title: 'Produit' };
 }
 
 export default async function ProductPage({ params }: PageProps) {
   const { id } = await params;
-  const supabase = await createServerSupabaseClient();
 
   // Try mifa_products (uuid)
   let product: {
@@ -48,37 +49,65 @@ export default async function ProductPage({ params }: PageProps) {
     featured?: boolean;
     shipping_days?: number;
   } | null = null;
+  let related: Product[] = [];
 
-  const { data: mifaProduct } = await supabase
-    .from('mifa_products')
-    .select('id,name,description,price,original_price,category,images,stock,featured,shipping_days')
-    .eq('id', id)
-    .single();
+  try {
+    const supabase = await createServerSupabaseClient();
 
-  if (mifaProduct) {
-    product = mifaProduct as unknown as typeof product;
-  } else {
-    // Fallback: products table (int id)
-    const numId = parseInt(id, 10);
-    if (!isNaN(numId)) {
-      const { data: simpleProduct } = await supabase
-        .from('products')
-        .select('id,name,price_cfa,original_price_cfa,stock,category,image_url')
-        .eq('id', numId)
-        .single();
-      if (simpleProduct) {
-        const sp = simpleProduct as { id: number; name: string; price_cfa: number; original_price_cfa?: number; stock?: number; category?: string; image_url?: string };
-        product = {
-          id: sp.id,
-          name: sp.name,
-          price: sp.price_cfa,
-          original_price: sp.original_price_cfa,
-          category: sp.category,
-          image_url: sp.image_url,
-          stock: sp.stock,
-        };
+    const { data: mifaProduct } = await supabase
+      .from('mifa_products')
+      .select('id,name,description,price,original_price,category,images,stock,featured,shipping_days')
+      .eq('id', id)
+      .single();
+
+    if (mifaProduct) {
+      product = mifaProduct as unknown as typeof product;
+    } else {
+      const numId = parseInt(id, 10);
+      if (!isNaN(numId)) {
+        const { data: simpleProduct } = await supabase
+          .from('products')
+          .select('id,name,price_cfa,original_price_cfa,stock,category,image_url')
+          .eq('id', numId)
+          .single();
+        if (simpleProduct) {
+          const sp = simpleProduct as { id: number; name: string; price_cfa: number; original_price_cfa?: number; stock?: number; category?: string; image_url?: string };
+          product = {
+            id: sp.id,
+            name: sp.name,
+            price: sp.price_cfa,
+            original_price: sp.original_price_cfa,
+            category: sp.category,
+            image_url: sp.image_url,
+            stock: sp.stock,
+          };
+        }
       }
     }
+
+    if (product?.category) {
+      const { data: relData } = await supabase
+        .from('mifa_products')
+        .select('id,name,price,original_price,category,images,featured,shipping_days')
+        .eq('active', true)
+        .ilike('category', `%${product.category}%`)
+        .neq('id', String(product.id))
+        .limit(4);
+      if (relData) {
+        related = (relData as Array<{ id: string; name: string; price: number; original_price?: number; category?: string; images?: string[]; featured?: boolean; shipping_days?: number }>).map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          original_price: p.original_price,
+          category: p.category,
+          images: p.images,
+          featured: p.featured,
+          shipping_days: p.shipping_days,
+        }));
+      }
+    }
+  } catch {
+    // Supabase unavailable — fall through to notFound
   }
 
   if (!product) notFound();
@@ -88,30 +117,6 @@ export default async function ProductPage({ params }: PageProps) {
   const discount = original && original > price ? Math.round((1 - price / original) * 100) : null;
   const images = product.images && product.images.length > 0 ? product.images : product.image_url ? [product.image_url] : [];
   const mainImage = images[0] ?? null;
-
-  // Related products
-  let related: Product[] = [];
-  if (product.category) {
-    const { data: relData } = await supabase
-      .from('mifa_products')
-      .select('id,name,price,original_price,category,images,featured,shipping_days')
-      .eq('active', true)
-      .ilike('category', `%${product.category}%`)
-      .neq('id', String(product.id))
-      .limit(4);
-    if (relData) {
-      related = (relData as Array<{ id: string; name: string; price: number; original_price?: number; category?: string; images?: string[]; featured?: boolean; shipping_days?: number }>).map((p) => ({
-        id: p.id,
-        name: p.name,
-        price: p.price,
-        original_price: p.original_price,
-        category: p.category,
-        images: p.images,
-        featured: p.featured,
-        shipping_days: p.shipping_days,
-      }));
-    }
-  }
 
   const cartItem = {
     id: Number(product.id) || 0,
