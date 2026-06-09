@@ -243,26 +243,7 @@ export default function BlogPage() {
               href={`/blog/${article.slug}`}
               style={{ textDecoration: 'none', color: 'inherit' }}
             >
-              <article style={{
-                background: 'var(--white)',
-                borderRadius: 14,
-                overflow: 'hidden',
-                border: '1px solid var(--bg3)',
-                boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
-                transition: 'transform 0.22s ease, box-shadow 0.22s ease',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)';
-                (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 28px rgba(0,0,0,0.1)';
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-                (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 12px rgba(0,0,0,0.05)';
-              }}
-              >
+              <article className="blog-card">
                 {/* Image area */}
                 <div style={{
                   height: 160,

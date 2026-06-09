@@ -335,3 +335,7 @@ main{width:100%}
 
 /* Checkout spinner */
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* Blog card hover */
+.blog-card{background:var(--white);border-radius:14px;overflow:hidden;border:1px solid var(--bg3);box-shadow:0 2px 12px rgba(0,0,0,.05);transition:transform .22s ease,box-shadow .22s ease;height:100%;display:flex;flex-direction:column}
+.blog-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,0,0,.10)}
