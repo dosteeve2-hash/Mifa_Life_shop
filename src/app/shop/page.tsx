@@ -56,57 +56,61 @@ export default async function ShopPage({ searchParams }: PageProps) {
   const cat = params.cat ?? '';
   const sort = params.sort ?? '';
 
-  const supabase = await createServerSupabaseClient();
   let products: Product[] = [];
 
-  // Try mifa_products first
-  let query = supabase
-    .from('mifa_products')
-    .select('id,name,price,original_price,category,images,stock,featured,shipping_days')
-    .eq('active', true);
+  try {
+    const supabase = await createServerSupabaseClient();
 
-  if (q) query = query.ilike('name', `%${q}%`);
-  if (cat) query = query.ilike('category', `%${cat}%`);
-  if (sort === 'price_asc') query = query.order('price', { ascending: true });
-  else if (sort === 'price_desc') query = query.order('price', { ascending: false });
-  else query = query.order('featured', { ascending: false });
-
-  const { data: mifaData } = await query;
-
-  if (mifaData && mifaData.length > 0) {
-    products = (mifaData as MifaProduct[]).map((p) => ({
-      id: p.id,
-      name: p.name,
-      price: p.price,
-      original_price: p.original_price,
-      category: p.category,
-      images: p.images,
-      featured: p.featured,
-      shipping_days: p.shipping_days,
-      stock: p.stock,
-    }));
-  } else {
-    let q2 = supabase
-      .from('products')
-      .select('id,name,price_cfa,original_price_cfa,stock,category,image_url')
+    let query = supabase
+      .from('mifa_products')
+      .select('id,name,price,original_price,category,images,stock,featured,shipping_days')
       .eq('active', true);
-    if (q) q2 = q2.ilike('name', `%${q}%`);
-    if (cat) q2 = q2.ilike('category', `%${cat}%`);
-    if (sort === 'price_asc') q2 = q2.order('price_cfa', { ascending: true });
-    else if (sort === 'price_desc') q2 = q2.order('price_cfa', { ascending: false });
 
-    const { data: simpleData } = await q2;
-    if (simpleData) {
-      products = (simpleData as SimpleProduct[]).map((p) => ({
+    if (q) query = query.ilike('name', `%${q}%`);
+    if (cat) query = query.ilike('category', `%${cat}%`);
+    if (sort === 'price_asc') query = query.order('price', { ascending: true });
+    else if (sort === 'price_desc') query = query.order('price', { ascending: false });
+    else query = query.order('featured', { ascending: false });
+
+    const { data: mifaData } = await query;
+
+    if (mifaData && mifaData.length > 0) {
+      products = (mifaData as MifaProduct[]).map((p) => ({
         id: p.id,
         name: p.name,
-        price_cfa: p.price_cfa,
-        original_price_cfa: p.original_price_cfa,
+        price: p.price,
+        original_price: p.original_price,
         category: p.category,
-        image_url: p.image_url,
+        images: p.images,
+        featured: p.featured,
+        shipping_days: p.shipping_days,
         stock: p.stock,
       }));
+    } else {
+      let q2 = supabase
+        .from('products')
+        .select('id,name,price_cfa,original_price_cfa,stock,category,image_url')
+        .eq('active', true);
+      if (q) q2 = q2.ilike('name', `%${q}%`);
+      if (cat) q2 = q2.ilike('category', `%${cat}%`);
+      if (sort === 'price_asc') q2 = q2.order('price_cfa', { ascending: true });
+      else if (sort === 'price_desc') q2 = q2.order('price_cfa', { ascending: false });
+
+      const { data: simpleData } = await q2;
+      if (simpleData) {
+        products = (simpleData as SimpleProduct[]).map((p) => ({
+          id: p.id,
+          name: p.name,
+          price_cfa: p.price_cfa,
+          original_price_cfa: p.original_price_cfa,
+          category: p.category,
+          image_url: p.image_url,
+          stock: p.stock,
+        }));
+      }
     }
+  } catch {
+    // Supabase unavailable — render empty product grid
   }
 
   const activeFilters = [q && `"${q}"`, cat && `Catégorie: ${cat}`, sort && `Tri: ${sort}`].filter(Boolean);
@@ -147,9 +151,7 @@ export default async function ShopPage({ searchParams }: PageProps) {
         <div className="wrap" style={{ position: 'relative', zIndex: 1 }}>
           {/* Breadcrumb */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 14, fontSize: 12, color: 'rgba(255,255,255,0.38)' }}>
-            <Link href="/" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}
-              onMouseEnter={() => {}} /* hover handled inline below */
-            >
+            <Link href="/" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}>
               Accueil
             </Link>
             <span style={{ opacity: 0.5 }}>›</span>

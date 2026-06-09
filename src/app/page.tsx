@@ -43,62 +43,65 @@ interface MifaCategory {
 }
 
 export default async function HomePage() {
-  const supabase = await createServerSupabaseClient();
-
-  // Fetch featured products
   let products: Product[] = [];
-  const { data: mifaData } = await supabase
-    .from('mifa_products')
-    .select('id,name,description,price,original_price,category,images,stock,featured,shipping_days')
-    .eq('featured', true)
-    .eq('active', true)
-    .limit(8);
+  let categories: { name: string; slug: string; icon?: string | null }[] = [];
 
-  if (mifaData && mifaData.length > 0) {
-    products = (mifaData as MifaProduct[]).map((p) => ({
-      id: p.id,
-      name: p.name,
-      price: p.price,
-      original_price: p.original_price,
-      category: p.category,
-      images: p.images,
-      featured: p.featured,
-      shipping_days: p.shipping_days,
-      stock: p.stock,
-    }));
-  } else {
-    const { data: simpleData } = await supabase
-      .from('products')
-      .select('id,name,price_cfa,original_price_cfa,stock,category,image_url')
+  try {
+    const supabase = await createServerSupabaseClient();
+
+    const { data: mifaData } = await supabase
+      .from('mifa_products')
+      .select('id,name,description,price,original_price,category,images,stock,featured,shipping_days')
+      .eq('featured', true)
       .eq('active', true)
       .limit(8);
-    if (simpleData) {
-      products = (simpleData as SimpleProduct[]).map((p) => ({
+
+    if (mifaData && mifaData.length > 0) {
+      products = (mifaData as MifaProduct[]).map((p) => ({
         id: p.id,
         name: p.name,
-        price_cfa: p.price_cfa,
-        original_price_cfa: p.original_price_cfa,
+        price: p.price,
+        original_price: p.original_price,
         category: p.category,
-        image_url: p.image_url,
+        images: p.images,
+        featured: p.featured,
+        shipping_days: p.shipping_days,
         stock: p.stock,
       }));
+    } else {
+      const { data: simpleData } = await supabase
+        .from('products')
+        .select('id,name,price_cfa,original_price_cfa,stock,category,image_url')
+        .eq('active', true)
+        .limit(8);
+      if (simpleData) {
+        products = (simpleData as SimpleProduct[]).map((p) => ({
+          id: p.id,
+          name: p.name,
+          price_cfa: p.price_cfa,
+          original_price_cfa: p.original_price_cfa,
+          category: p.category,
+          image_url: p.image_url,
+          stock: p.stock,
+        }));
+      }
     }
-  }
 
-  // Fetch categories
-  let categories: { name: string; slug: string; icon?: string | null }[] = [];
-  const { data: catData } = await supabase
-    .from('mifa_categories')
-    .select('id,name,slug,icon')
-    .eq('active', true)
-    .order('sort_order', { ascending: true });
+    const { data: catData } = await supabase
+      .from('mifa_categories')
+      .select('id,name,slug,icon')
+      .eq('active', true)
+      .order('sort_order', { ascending: true });
 
-  if (catData) {
-    categories = (catData as MifaCategory[]).map((c) => ({
-      name: c.name,
-      slug: c.slug,
-      icon: c.icon,
-    }));
+    if (catData) {
+      categories = (catData as MifaCategory[]).map((c) => ({
+        name: c.name,
+        slug: c.slug,
+        icon: c.icon,
+      }));
+    }
+  } catch {
+    // Supabase unavailable — render page with empty products/categories
   }
 
   // Hero products (first 4 featured)
