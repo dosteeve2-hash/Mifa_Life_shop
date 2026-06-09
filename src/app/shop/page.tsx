@@ -147,9 +147,7 @@ export default async function ShopPage({ searchParams }: PageProps) {
         <div className="wrap" style={{ position: 'relative', zIndex: 1 }}>
           {/* Breadcrumb */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 14, fontSize: 12, color: 'rgba(255,255,255,0.38)' }}>
-            <Link href="/" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}
-              onMouseEnter={() => {}} /* hover handled inline below */
-            >
+            <Link href="/" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}>
               Accueil
             </Link>
             <span style={{ opacity: 0.5 }}>›</span>

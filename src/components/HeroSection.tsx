@@ -87,7 +87,13 @@ export default function HeroSection({ products }: HeroSectionProps) {
       </div>
 
       <section id="hero">
-        <div className="hero-bg" />
+        {/* Animated cinematic background */}
+        <div className="hero-anim-bg">
+          <div className="hero-orb hero-orb-1" />
+          <div className="hero-orb hero-orb-2" />
+          <div className="hero-orb hero-orb-3" />
+          <div className="hero-grid" />
+        </div>
         <div className="hero-overlay" />
 
         <div className="hero-in">

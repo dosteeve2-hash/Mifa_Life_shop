@@ -97,7 +97,7 @@ main{width:100%}
 
 /* ── HERO ── */
 #hero{position:relative;background:var(--sl3);overflow:hidden;min-height:clamp(420px,65vw,640px);display:flex;align-items:center}
-.hero-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1600&q=80&fit=crop&crop=center');background-size:cover;background-position:center;opacity:.18}
+/* .hero-bg replaced by .hero-anim-bg animated version */
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(17,27,34,.95) 0%,rgba(17,27,34,.7) 50%,rgba(17,27,34,.3) 100%)}
 .hero-in{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding:clamp(36px,6vw,72px) clamp(14px,3vw,28px);display:grid;grid-template-columns:1fr;gap:32px;align-items:center}
 @media(min-width:900px){.hero-in{grid-template-columns:1fr 380px}}
@@ -135,6 +135,17 @@ main{width:100%}
 .hc-skel-line{height:8px;background:rgba(255,255,255,.07);border-radius:4px}
 .hc-skel-line:last-child{width:55%}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+
+/* Hero animated background */
+.hero-anim-bg{position:absolute;inset:0;background:linear-gradient(135deg,#050e07 0%,#091510 35%,#0b1c12 65%,#050e07 100%);overflow:hidden}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.hero-orb-1{width:580px;height:580px;background:radial-gradient(circle,rgba(0,151,57,.22) 0%,transparent 70%);top:-180px;left:-180px;animation:orbFloat1 16s ease-in-out infinite}
+.hero-orb-2{width:440px;height:440px;background:radial-gradient(circle,rgba(252,209,22,.09) 0%,transparent 70%);bottom:-120px;right:8%;animation:orbFloat2 12s ease-in-out infinite}
+.hero-orb-3{width:320px;height:320px;background:radial-gradient(circle,rgba(0,151,57,.12) 0%,transparent 70%);top:35%;right:-90px;animation:orbFloat3 10s ease-in-out infinite}
+@keyframes orbFloat1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(50px,-45px) scale(1.09)}66%{transform:translate(-25px,35px) scale(.94)}}
+@keyframes orbFloat2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-35px,25px) scale(1.12)}66%{transform:translate(30px,-40px) scale(.91)}}
+@keyframes orbFloat3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-22px,-28px) scale(1.14)}}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,151,57,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,151,57,.035) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(ellipse 85% 85% at 50% 50%,#000 0%,transparent 100%);mask-image:radial-gradient(ellipse 85% 85% at 50% 50%,#000 0%,transparent 100%)}
 
 /* ── SECTION COMMUNE ── */
 .section{padding:clamp(36px,6vw,64px) 0}
