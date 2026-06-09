@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Heart, ShoppingBag, Check, Package } from 'lucide-react';
+import { Heart, ShoppingBag, Check, Package, Eye, Star } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 
 export interface Product {
@@ -43,6 +43,33 @@ function getImageUrl(p: Product): string | null {
   return p.image_url ?? null;
 }
 
+// Generate a stable pseudo-random rating from product id
+function getRating(id: number | string): number {
+  const seed = typeof id === 'number' ? id : id.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+  return 4 + (seed % 10) / 10; // 4.0 – 4.9
+}
+
+function StarRating({ rating }: { rating: number }) {
+  const full = Math.floor(rating);
+  const half = rating - full >= 0.5;
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star
+          key={i}
+          size={10}
+          fill={i < full ? '#FFD700' : i === full && half ? 'url(#half)' : 'none'}
+          color={i < full || (i === full && half) ? '#FFD700' : 'var(--bg3)'}
+          strokeWidth={1.5}
+        />
+      ))}
+      <span style={{ fontSize: 10, color: 'var(--t4)', marginLeft: 3, fontWeight: 600 }}>
+        {rating.toFixed(1)}
+      </span>
+    </div>
+  );
+}
+
 const containerVariants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.07 } },
@@ -56,11 +83,14 @@ function ProductCard({ product }: { product: Product }) {
   const { addToCart } = useCart();
   const [added, setAdded] = useState(false);
   const [wished, setWished] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   const price = getPrice(product);
   const original = getOriginalPrice(product);
   const imageUrl = getImageUrl(product);
   const discount = original && original > price ? Math.round((1 - price / original) * 100) : null;
+  const isNew = !discount && !product.featured;
+  const rating = getRating(product.id);
 
   useEffect(() => {
     try {
@@ -91,7 +121,12 @@ function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <motion.article variants={cardVariants} className="prod-card">
+    <motion.article
+      variants={cardVariants}
+      className="prod-card"
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+    >
       <Link href={`/shop/${product.id}`} style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', flex: 1 }}>
         {/* Image */}
         <div className="prod-img-wrap">
@@ -110,20 +145,70 @@ function ProductCard({ product }: { product: Product }) {
             </div>
           )}
 
+          {/* Quick-view overlay */}
+          <AnimatePresence>
+            {hovered && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.18 }}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'rgba(17,27,34,0.52)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: 2,
+                  backdropFilter: 'blur(2px)',
+                }}
+              >
+                <motion.div
+                  initial={{ scale: 0.85, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.85, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 7,
+                    padding: '9px 18px',
+                    background: 'rgba(255,255,255,0.95)',
+                    borderRadius: 22,
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: 'var(--t1)',
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
+                  }}
+                >
+                  <Eye size={14} color="var(--em)" />
+                  Voir le produit
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           {/* Wishlist button */}
-          <button
+          <motion.button
             className={`prod-wish ${wished ? 'on' : ''}`}
             onClick={toggleWish}
             aria-label={wished ? 'Retirer des souhaits' : 'Ajouter aux souhaits'}
+            whileTap={{ scale: 0.8 }}
+            animate={wished ? { scale: [1, 1.3, 1] } : {}}
+            transition={{ duration: 0.3 }}
+            style={{ zIndex: 3 }}
           >
             <Heart size={13} fill={wished ? 'var(--or)' : 'none'} color={wished ? 'var(--or)' : 'var(--t3)'} />
-          </button>
+          </motion.button>
 
           {/* Badge */}
           {discount && discount >= 5 ? (
             <div className="prod-badge pb-sale">-{discount}%</div>
           ) : product.featured ? (
             <div className="prod-badge pb-featured">VEDETTE</div>
+          ) : isNew ? (
+            <div className="prod-badge pb-new">NOUVEAU</div>
           ) : null}
         </div>
 
@@ -133,6 +218,11 @@ function ProductCard({ product }: { product: Product }) {
             <div className="prod-cat">{product.category}</div>
           )}
           <div className="prod-name">{product.name}</div>
+
+          {/* Star rating */}
+          <div style={{ marginBottom: 8 }}>
+            <StarRating rating={rating} />
+          </div>
 
           <div className="prod-price-row">
             <span className="prod-price">{formatPrice(price)}</span>
@@ -193,12 +283,13 @@ function ProductCard({ product }: { product: Product }) {
 function SkeletonCard() {
   return (
     <div className="prod-skel">
-      <div className="ps-img" />
+      <div className="ps-img" style={{ background: 'linear-gradient(90deg, var(--bg2) 25%, var(--bg3) 50%, var(--bg2) 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.4s ease-in-out infinite' }} />
       <div className="ps-body">
-        <div className="ps-line short" />
-        <div className="ps-line med" />
-        <div className="ps-line" />
-        <div className="ps-line short" />
+        <div className="ps-line short skeleton" />
+        <div className="ps-line med skeleton" />
+        <div className="ps-line skeleton" />
+        <div className="ps-line short skeleton" />
+        <div className="ps-line skeleton" style={{ height: 32, borderRadius: 8, marginTop: 4 }} />
       </div>
     </div>
   );
@@ -210,8 +301,11 @@ export default function FeaturedProducts({ products, loading = false }: Featured
       <div className="wrap">
         <div className="sec-hd">
           <div>
-            <div className="sec-eyebrow">Sélection</div>
+            <div className="sec-eyebrow">Sélection premium</div>
             <h2 className="sec-ti">Nos meilleures offres</h2>
+            <p style={{ fontSize: 13, color: 'var(--t3)', marginTop: 6, lineHeight: 1.55 }}>
+              Des produits soigneusement sélectionnés pour vous
+            </p>
           </div>
           <Link href="/shop" className="sec-link">
             Voir tout <span>→</span>
@@ -233,6 +327,9 @@ export default function FeaturedProducts({ products, loading = false }: Featured
                 <div className="empty-ico"><ShoppingBag size={28} strokeWidth={1} color="var(--t4)" /></div>
                 <div className="empty-ti">Aucun produit pour l&apos;instant</div>
                 <p className="empty-sub">Revenez bientôt, notre catalogue se remplit chaque jour.</p>
+                <Link href="/shop" className="empty-cta">
+                  <ShoppingBag size={14} /> Parcourir la boutique
+                </Link>
               </div>
             )
             : products.map((p) => <ProductCard key={p.id} product={p} />)}
