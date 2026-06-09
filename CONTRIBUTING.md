@@ -4,7 +4,7 @@ Merci de votre intérêt pour le projet ! Voici comment contribuer efficacement.
 
 ## Prérequis
 
-- Node.js 18+
+- Node.js 22+
 - Git
 - Compte Supabase (pour le développement local)
 

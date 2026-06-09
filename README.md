@@ -122,7 +122,7 @@ auth.users        -- Authentification native Supabase
 ## ⚙️ Installation & Démarrage
 
 ### Prérequis
-- Node.js 18+
+- Node.js 22+
 - npm / yarn / pnpm
 - Compte Supabase
 
