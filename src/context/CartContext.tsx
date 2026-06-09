@@ -59,12 +59,22 @@ type CartContextType = {
 
 // ─── Constantes ────────────────────────────────────────────────
 const STORAGE_KEY = 'mifa_cart';
-const supabase = createBrowserClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+
+let _supabase: ReturnType<typeof createBrowserClient> | null = null;
+function getSupabase() {
+  if (typeof window === 'undefined') return null;
+  if (!_supabase) {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    if (!url || !key) return null;
+    _supabase = createBrowserClient(url, key);
+  }
+  return _supabase;
+}
 
 async function fetchProductSnapshot(productId: number): Promise<Omit<CartItem, 'quantity'> | null> {
+  const supabase = getSupabase();
+  if (!supabase) return null;
   const { data, error } = await supabase
     .from('products')
     .select('id,name,price_cfa,image_url')
@@ -146,6 +156,8 @@ function saveToStorage(items: CartItem[]) {
 
 // ─── Sync Supabase ─────────────────────────────────────────────
 async function syncToSupabase(items: CartItem[], userId: string) {
+  const supabase = getSupabase();
+  if (!supabase) return;
   if (!items.length) {
     await supabase.from('cart_items').delete().eq('user_id', userId);
     return;
@@ -163,6 +175,8 @@ async function syncToSupabase(items: CartItem[], userId: string) {
 }
 
 async function loadFromSupabase(userId: string): Promise<CartItem[]> {
+  const supabase = getSupabase();
+  if (!supabase) return [];
   const { data, error } = await supabase
     .from('cart_items')
     .select(`
@@ -231,6 +245,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // Sync Supabase quand utilisateur connecté
   useEffect(() => {
+    const supabase = getSupabase();
+    if (!supabase) return;
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         if (event === 'SIGNED_IN' && session?.user) {
@@ -260,6 +276,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // Sync DB après chaque modification si connecté
   useEffect(() => {
+    const supabase = getSupabase();
+    if (!supabase) return;
     let cancelled = false;
     supabase.auth.getUser().then(({ data: { user } }) => {
       if (user && !cancelled) {

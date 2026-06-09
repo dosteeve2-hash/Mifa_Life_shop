@@ -8,10 +8,17 @@ import Logo from '@/components/Logo';
 
 type Step = 'email' | 'otp' | 'success';
 
-const supabase = createBrowserClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+let _supabase: ReturnType<typeof createBrowserClient> | null = null;
+function getSupabase() {
+  if (typeof window === 'undefined') return null;
+  if (!_supabase) {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    if (!url || !key) return null;
+    _supabase = createBrowserClient(url, key);
+  }
+  return _supabase;
+}
 
 export default function LoginPage() {
   const [step,    setStep]    = useState<Step>('email');
@@ -30,6 +37,8 @@ export default function LoginPage() {
     }
     setLoading(true);
     try {
+      const supabase = getSupabase();
+      if (!supabase) { setError('Configuration manquante.'); setLoading(false); return; }
       const { error: err } = await supabase.auth.signInWithOtp({
         email: email.trim().toLowerCase(),
         options: { emailRedirectTo: `${location.origin}/auth/callback` },
@@ -51,6 +60,8 @@ export default function LoginPage() {
     if (otp.length < 6) { setError('Le code doit contenir 6 chiffres.'); return; }
     setLoading(true);
     try {
+      const supabase = getSupabase();
+      if (!supabase) { setError('Configuration manquante.'); setLoading(false); return; }
       const { error: err } = await supabase.auth.verifyOtp({
         email: email.trim().toLowerCase(),
         token: otp.trim(),
@@ -74,6 +85,8 @@ export default function LoginPage() {
     setLoading(true);
     setError(null);
     try {
+      const supabase = getSupabase();
+      if (!supabase) { setLoading(false); return; }
       await supabase.auth.signInWithOtp({
         email: email.trim().toLowerCase(),
         options: { emailRedirectTo: `${location.origin}/auth/callback` },
