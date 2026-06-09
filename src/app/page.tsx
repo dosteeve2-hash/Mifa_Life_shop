@@ -2,6 +2,8 @@ import { createServerSupabaseClient } from '@/lib/supabase/server';
 import HeroSection from '@/components/HeroSection';
 import CategoriesSection from '@/components/CategoriesSection';
 import FeaturedProducts, { type Product } from '@/components/FeaturedProducts';
+import EngagementsSection from '@/components/EngagementsSection';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
@@ -111,7 +113,9 @@ export default async function HomePage() {
     <>
       <HeroSection products={heroProducts} />
       <CategoriesSection categories={categories} />
+      <EngagementsSection />
       <FeaturedProducts products={products} />
+      <TestimonialsSection />
 
       {/* How it works */}
       <section id="how" className="section">

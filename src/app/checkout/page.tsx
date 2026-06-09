@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
+import { placeOrderAction } from '@/actions/checkout';
 
 function formatPrice(n: number) {
   return new Intl.NumberFormat('fr-FR').format(n) + ' FCFA';
@@ -18,7 +19,6 @@ const STEPS = ['Livraison', 'Paiement', 'Confirmation'];
 export default function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCart();
   const [step, setStep] = useState(0);
-  const [orderNum] = useState(() => 'ML' + Math.random().toString(36).slice(2, 8).toUpperCase());
 
   // Step 1 form
   const [firstName, setFirstName] = useState('');
@@ -35,6 +35,7 @@ export default function CheckoutPage() {
   // Step 3
   const [confirming, setConfirming] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
+  const [confirmedOrderId, setConfirmedOrderId] = useState<string | null>(null);
 
   const validateStep1 = () => {
     const e: Record<string, string> = {};
@@ -49,9 +50,20 @@ export default function CheckoutPage() {
 
   const handleConfirm = async () => {
     setConfirming(true);
-    await new Promise((r) => setTimeout(r, 1400));
-    clearCart();
-    setConfirmed(true);
+    setErrors({});
+    const result = await placeOrderAction({
+      items: items.map((i) => ({ id: i.id, name: i.name, price_cfa: i.price_cfa, quantity: i.quantity })),
+      total: totalPrice,
+      paymentMethod: payMethod,
+      shipping: { firstName, lastName, phone, city, address, quarter },
+    });
+    if (result.ok) {
+      clearCart();
+      setConfirmedOrderId(result.orderId);
+      setConfirmed(true);
+    } else {
+      setErrors({ general: result.error ?? 'Erreur lors de la commande' });
+    }
     setConfirming(false);
   };
 
@@ -74,7 +86,7 @@ export default function CheckoutPage() {
             Merci {firstName} ! Votre commande a bien été enregistrée.
           </p>
           <p style={{ fontSize: 16, fontWeight: 700, color: 'var(--em)', marginBottom: 20 }}>
-            N° de commande : #{orderNum}
+            N° de commande : #{'ML' + (confirmedOrderId ?? '').slice(0, 6).toUpperCase()}
           </p>
           <p style={{ fontSize: 13, color: 'var(--t4)', marginBottom: 24 }}>
             Vous recevrez une confirmation par SMS. Notre équipe vous contactera dans les 24h.
@@ -252,6 +264,11 @@ export default function CheckoutPage() {
                   </div>
                 </div>
 
+                {errors.general && (
+                  <div style={{ background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: 9, padding: '10px 14px', fontSize: 13, color: '#DC2626', marginBottom: 14 }}>
+                    {errors.general}
+                  </div>
+                )}
                 <div style={{ display: 'flex', gap: 10 }}>
                   <button onClick={() => setStep(1)} style={{ flex: 1, padding: 13, border: '1.5px solid var(--bg3)', borderRadius: 10, fontSize: 13, fontWeight: 600, background: 'var(--white)', color: 'var(--t2)', cursor: 'pointer' }}>
                     ← Retour
