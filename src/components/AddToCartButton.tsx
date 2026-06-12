@@ -30,11 +30,12 @@ export default function AddToCartButton({ product, item }: { product?: Product; 
   return (
     <button
       onClick={handle}
-      className={`flex w-full items-center justify-center gap-1.5 rounded-xl py-2 text-sm font-bold text-white transition-all duration-200 ${
-        added
-          ? 'bg-emerald-600 scale-95'
-          : 'bg-[#009739] hover:bg-[#007a2e] active:scale-95'
-      }`}
+      className="flex w-full items-center justify-center gap-1.5 rounded-xl py-2 text-sm font-bold transition-all duration-200 active:scale-95"
+      style={{
+        background: added ? 'var(--green)' : 'var(--gold)',
+        color: 'var(--bg)',
+        transform: added ? 'scale(0.95)' : undefined,
+      }}
     >
       {added ? (
         <>
