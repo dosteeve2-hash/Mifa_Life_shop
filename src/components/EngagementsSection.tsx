@@ -5,36 +5,36 @@ import { ShieldCheck, Truck, Headphones, Smartphone } from 'lucide-react';
 
 const ENGAGEMENTS = [
   {
-    icon: <ShieldCheck size={26} />,
+    icon: <ShieldCheck size={24} />,
     title: 'Qualité africaine',
-    desc: 'Produits soigneusement sélectionnés auprès de fournisseurs de confiance au Mali et en Afrique de l\'Ouest.',
-    color: '#009A00',
-    bg: 'linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%)',
-    border: '#A5D6A7',
+    desc: 'Produits soigneusement sélectionnés auprès de fournisseurs de confiance.',
+    accent: 'var(--green)',
+    glow: 'rgba(34,217,138,0.10)',
+    border: 'rgba(34,217,138,0.20)',
   },
   {
-    icon: <Truck size={26} />,
+    icon: <Truck size={24} />,
     title: 'Livraison rapide',
-    desc: 'Bamako J+1 à J+2, reste du Mali en 2 à 5 jours. Suivi de commande en temps réel.',
-    color: '#1565C0',
-    bg: 'linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%)',
-    border: '#90CAF9',
+    desc: 'Bamako J+1 à J+2, reste du Mali 2 à 5 jours. Suivi en temps réel.',
+    accent: 'var(--cyan)',
+    glow: 'rgba(45,212,255,0.10)',
+    border: 'rgba(45,212,255,0.20)',
   },
   {
-    icon: <Headphones size={26} />,
+    icon: <Headphones size={24} />,
     title: 'Support client 7j/7',
-    desc: 'Notre équipe est disponible tous les jours pour vous accompagner avant et après votre achat.',
-    color: '#7B1FA2',
-    bg: 'linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%)',
-    border: '#CE93D8',
+    desc: 'Notre équipe disponible tous les jours pour vous accompagner.',
+    accent: '#e879f9',
+    glow: 'rgba(232,121,249,0.10)',
+    border: 'rgba(232,121,249,0.20)',
   },
   {
-    icon: <Smartphone size={26} />,
+    icon: <Smartphone size={24} />,
     title: 'Paiement mobile',
-    desc: 'Payez facilement via Orange Money, Wave ou à la livraison. Simple, rapide et sécurisé.',
-    color: '#E65100',
-    bg: 'linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%)',
-    border: '#FFCC80',
+    desc: 'Payez via Orange Money, Wave ou à la livraison. Simple et sécurisé.',
+    accent: 'var(--gold)',
+    glow: 'rgba(240,168,50,0.10)',
+    border: 'rgba(240,168,50,0.20)',
   },
 ];
 
@@ -44,22 +44,22 @@ const containerVariants = {
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] } },
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.48, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] } },
 };
 
 export default function EngagementsSection() {
   return (
     <section
       className="section"
-      style={{ background: 'var(--white)', borderTop: '1px solid var(--bg3)', borderBottom: '1px solid var(--bg3)' }}
+      style={{ background: 'var(--bg2)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}
     >
       <div className="wrap">
         <div className="sec-hd">
           <div>
             <div className="sec-eyebrow">Notre promesse</div>
-            <h2 className="sec-ti">Nos engagements</h2>
-            <p style={{ fontSize: 13, color: 'var(--t3)', marginTop: 6, lineHeight: 1.55 }}>
+            <h2 className="sec-ti">Nos engagements.</h2>
+            <p style={{ fontSize: 13, color: 'var(--t2)', marginTop: 6, lineHeight: 1.55, fontStyle: 'normal' }}>
               Ce qui nous distingue et vous garantit une expérience d&apos;achat exceptionnelle
             </p>
           </div>
@@ -68,8 +68,8 @@ export default function EngagementsSection() {
         <motion.div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(200px, 22vw, 260px), 1fr))',
-            gap: 'clamp(12px, 2vw, 20px)',
+            gridTemplateColumns: 'repeat(auto-fit,minmax(clamp(200px,22vw,260px),1fr))',
+            gap: 'clamp(12px,2vw,18px)',
           }}
           variants={containerVariants}
           initial="hidden"
@@ -80,56 +80,47 @@ export default function EngagementsSection() {
             <motion.div
               key={item.title}
               variants={cardVariants}
-              whileHover={{ y: -5, boxShadow: '0 12px 32px rgba(0,0,0,0.10)' }}
-              transition={{ duration: 0.22 }}
+              whileHover={{ y: -5 }}
+              transition={{ duration: 0.2 }}
               style={{
-                background: item.bg,
-                border: `1.5px solid ${item.border}`,
+                background: 'var(--bg3)',
+                border: '1.5px solid var(--border2)',
                 borderRadius: 'var(--rl)',
-                padding: 'clamp(18px, 3vw, 26px)',
+                padding: 'clamp(18px,3vw,26px)',
                 display: 'flex',
                 flexDirection: 'column' as const,
                 gap: 14,
-                boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
-                position: 'relative' as const,
-                overflow: 'hidden',
+                transition: 'border-color 0.22s ease, box-shadow 0.22s ease',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLDivElement).style.borderColor = item.border;
+                (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 0 1px ${item.glow.replace('0.10', '0.15')}, 0 8px 28px rgba(0,0,0,0.4)`;
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border2)';
+                (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
               }}
             >
-              {/* Decorative corner circle */}
               <div style={{
-                position: 'absolute',
-                top: -24,
-                right: -24,
-                width: 80,
-                height: 80,
-                borderRadius: '50%',
-                background: `${item.border}66`,
-                pointerEvents: 'none',
-              }} />
-
-              <div style={{
-                width: 52,
-                height: 52,
-                borderRadius: 14,
-                background: 'rgba(255,255,255,0.85)',
-                border: `1.5px solid ${item.border}`,
+                width: 48,
+                height: 48,
+                borderRadius: 12,
+                background: item.glow,
+                border: `1px solid ${item.border}`,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: item.color,
-                boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                position: 'relative' as const,
-                zIndex: 1,
+                color: item.accent,
                 flexShrink: 0,
               }}>
                 {item.icon}
               </div>
 
-              <div style={{ position: 'relative' as const, zIndex: 1 }}>
-                <div style={{ fontSize: 14, fontWeight: 700, color: item.color, marginBottom: 6 }}>
+              <div>
+                <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--t1)', marginBottom: 6, fontFamily: "'Outfit', sans-serif" }}>
                   {item.title}
                 </div>
-                <p style={{ fontSize: 12, color: 'rgba(0,0,0,0.55)', lineHeight: 1.65 }}>
+                <p style={{ fontSize: 12, color: 'var(--t2)', lineHeight: 1.65, fontStyle: 'normal' }}>
                   {item.desc}
                 </p>
               </div>

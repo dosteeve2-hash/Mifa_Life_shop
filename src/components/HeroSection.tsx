@@ -1,10 +1,10 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { Zap, ShieldCheck, RotateCcw, CreditCard, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 interface HeroProduct {
   id: number | string;
@@ -18,14 +18,31 @@ interface HeroSectionProps {
 }
 
 const QUICK_CATS = [
-  { label: 'Mode & Vêtements', slug: 'mode', icon: '👗' },
-  { label: 'Électronique', slug: 'electronique', icon: '💻' },
-  { label: 'Beauté', slug: 'beaute', icon: '💄' },
+  { label: 'Robes', slug: 'robes' },
+  { label: 'Costumes', slug: 'costumes' },
+  { label: 'Accessoires', slug: 'accessoires' },
+  { label: 'Nouveautés', slug: 'newest' },
+];
+
+const STATS = [
+  { value: '8 500+', label: 'produits' },
+  { value: '25 000+', label: 'clients' },
+  { value: '40+', label: 'pays livrés' },
 ];
 
 function formatPrice(n: number) {
   return new Intl.NumberFormat('fr-FR').format(n) + ' FCFA';
 }
+
+// Particles config — generated once
+const PARTICLES = Array.from({ length: 14 }, (_, i) => ({
+  id: i,
+  x: 55 + Math.sin(i * 2.4) * 38,
+  y: 10 + (i * 6.2) % 80,
+  size: 2 + (i % 3),
+  delay: i * 0.3,
+  duration: 3 + (i % 4),
+}));
 
 const containerVariants = {
   hidden: {},
@@ -36,20 +53,21 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' as const } },
 };
 
-const VALUE_ITEMS = [
-  { icon: <Zap size={11} />, label: 'Livraison 7-14j' },
-  { icon: <CreditCard size={11} />, label: 'Orange Money & Wave' },
-  { icon: <ShieldCheck size={11} />, label: 'Paiement sécurisé' },
-  { icon: <RotateCcw size={11} />, label: 'Retours faciles' },
-];
-
 export default function HeroSection({ products }: HeroSectionProps) {
   const [category, setCategory] = useState('');
   const [query, setQuery] = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
+  const [activeCard, setActiveCard] = useState(0);
   const router = useRouter();
 
   const heroProducts = products.slice(0, 4);
+
+  // Auto-cycle hero card highlight
+  useEffect(() => {
+    if (heroProducts.length < 2) return;
+    const t = setInterval(() => setActiveCard((c) => (c + 1) % heroProducts.length), 2800);
+    return () => clearInterval(t);
+  }, [heroProducts.length]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,235 +78,253 @@ export default function HeroSection({ products }: HeroSectionProps) {
   };
 
   return (
-    <>
-      {/* Value strip */}
-      <div style={{
-        background: 'var(--sl)',
-        padding: '7px 0',
-        overflow: 'hidden',
-      }}>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: 'clamp(10px,3vw,28px)',
-          maxWidth: 'var(--max)',
-          margin: '0 auto',
-          padding: '0 clamp(14px,3vw,28px)',
-        }}>
-          {VALUE_ITEMS.map((item, i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, color: 'rgba(255,255,255,0.72)', fontSize: 11, fontWeight: 600, whiteSpace: 'nowrap' }}>
-              <span style={{ color: 'var(--em)', display: 'flex' }}>{item.icon}</span>
-              {item.label}
-            </div>
-          ))}
-        </div>
+    <section id="hero">
+      {/* Subtle bg texture */}
+      <div className="hero-bg" />
+      <div className="hero-overlay" />
+
+      {/* Gold particles */}
+      <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}>
+        {PARTICLES.map((p) => (
+          <motion.div
+            key={p.id}
+            style={{
+              position: 'absolute',
+              left: `${p.x}%`,
+              top: `${p.y}%`,
+              width: p.size,
+              height: p.size,
+              borderRadius: '50%',
+              background: 'var(--gold)',
+              opacity: 0,
+            }}
+            animate={{ opacity: [0, 0.5, 0], y: [0, -18, 0] }}
+            transition={{ repeat: Infinity, duration: p.duration, delay: p.delay, ease: 'easeInOut' }}
+          />
+        ))}
       </div>
 
-      <section id="hero">
-        <div className="hero-bg" />
-        <div className="hero-overlay" />
+      <div className="hero-in">
+        {/* Left: text */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div variants={itemVariants} className="hero-eyebrow">
+            <span />
+            NEW COLLECTION 2025
+          </motion.div>
 
-        <div className="hero-in">
-          {/* Left: text */}
-          <motion.div
-            className="hero-txt"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
+          <motion.h1 variants={itemVariants} className="hero-h1">
+            MIFA Life{' '}
+            <em>Shop</em>
+          </motion.h1>
+
+          <motion.p variants={itemVariants} className="hero-sub">
+            Mode africaine. Qualité mondiale. Livraison partout.
+          </motion.p>
+
+          {/* Search bar */}
+          <motion.form
+            variants={itemVariants}
+            className="hero-search"
+            onSubmit={handleSearch}
+            style={searchFocused ? { transform: 'translateY(-2px)' } : {}}
           >
-            <motion.div variants={itemVariants} className="hero-eyebrow">
-              <span />
-              🌍 Mali Premium — Qualité garantie
-            </motion.div>
-
-            {/* Gradient title */}
-            <motion.h1 variants={itemVariants} className="hero-h1" style={{ background: 'linear-gradient(110deg, #ffffff 0%, #c8f5ef 45%, #009739 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              Tout ce dont vous avez besoin,{' '}
-              <em style={{ fontStyle: 'italic', WebkitTextFillColor: 'inherit' }}>livré chez vous</em> au Mali
-            </motion.h1>
-
-            <motion.p variants={itemVariants} className="hero-sub">
-              Des milliers de produits soigneusement sélectionnés — électronique, mode, maison
-              et plus. Paiement simple via Orange Money ou Wave.
-            </motion.p>
-
-            {/* Trust badge */}
-            <motion.div
-              variants={itemVariants}
-              style={{ marginBottom: 'clamp(14px,3vw,20px)' }}
+            <select
+              className="hs-cat"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
             >
-              <motion.div
-                animate={{ scale: [1, 1.04, 1] }}
-                transition={{ repeat: Infinity, duration: 3.2, ease: 'easeInOut' }}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 8,
-                  background: 'rgba(0,151,57,0.18)',
-                  border: '1px solid rgba(0,151,57,0.35)',
-                  borderRadius: 24,
-                  padding: '6px 14px',
-                  fontSize: 12,
-                  fontWeight: 700,
-                  color: '#6ee7b7',
-                }}
-              >
-                <span style={{ display: 'flex', gap: 2 }}>
-                  {'★★★★★'.split('').map((s, i) => <span key={i} style={{ color: '#FFD700', fontSize: 11 }}>{s}</span>)}
-                </span>
-                + de 500 clients satisfaits
-              </motion.div>
-            </motion.div>
+              <option value="">Toutes catégories</option>
+              <option value="electronique">Électronique</option>
+              <option value="mode">Mode</option>
+              <option value="maison">Maison</option>
+              <option value="sport">Sport</option>
+              <option value="beaute">Beauté</option>
+            </select>
+            <div style={{ position: 'relative', flex: 1, display: 'flex', alignItems: 'center' }}>
+              <Search size={14} style={{ position: 'absolute', left: 12, color: 'var(--t3)', pointerEvents: 'none', flexShrink: 0 }} />
+              <input
+                className="hs-inp"
+                type="text"
+                placeholder="Rechercher un produit..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onFocus={() => setSearchFocused(true)}
+                onBlur={() => setSearchFocused(false)}
+                style={{ paddingLeft: 34 }}
+              />
+            </div>
+            <button type="submit" className="hs-btn">
+              Chercher
+            </button>
+          </motion.form>
 
-            {/* Search bar */}
-            <motion.form
-              variants={itemVariants}
-              className="hero-search"
-              onSubmit={handleSearch}
-              style={{
-                transition: 'box-shadow 0.25s ease, transform 0.25s ease',
-                boxShadow: searchFocused ? '0 12px 40px rgba(0,151,57,0.28), 0 0 0 2px rgba(0,151,57,0.4)' : '0 8px 32px rgba(0,0,0,0.25)',
-                transform: searchFocused ? 'translateY(-2px)' : 'none',
-              }}
-            >
-              <select
-                className="hs-cat"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
+          {/* Quick-access pills */}
+          <motion.div variants={itemVariants} className="hero-chips">
+            {QUICK_CATS.map((cat) => (
+              <button
+                key={cat.slug}
+                className="hc"
+                onClick={() => router.push(`/shop?cat=${cat.slug}`)}
               >
-                <option value="">Toutes catégories</option>
-                <option value="electronique">Électronique</option>
-                <option value="mode">Mode</option>
-                <option value="maison">Maison</option>
-                <option value="sport">Sport</option>
-                <option value="beaute">Beauté</option>
-                <option value="enfants">Enfants</option>
-              </select>
-              <div style={{ position: 'relative', flex: 1, display: 'flex', alignItems: 'center' }}>
-                <Search size={14} style={{ position: 'absolute', left: 12, color: 'var(--t4)', pointerEvents: 'none', flexShrink: 0 }} />
-                <input
-                  className="hs-inp"
-                  type="text"
-                  placeholder="Rechercher un produit..."
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onFocus={() => setSearchFocused(true)}
-                  onBlur={() => setSearchFocused(false)}
-                  style={{ paddingLeft: 34 }}
-                />
-              </div>
-              <button type="submit" className="hs-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
-                </svg>
-                Chercher
+                {cat.label}
               </button>
-            </motion.form>
-
-            {/* Quick-access category pills */}
-            <motion.div
-              variants={itemVariants}
-              style={{ display: 'flex', flexWrap: 'wrap', gap: 7, marginBottom: 'clamp(10px,2vw,14px)' }}
-            >
-              {QUICK_CATS.map((cat) => (
-                <button
-                  key={cat.slug}
-                  onClick={() => router.push(`/shop?cat=${cat.slug}`)}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 6,
-                    padding: '6px 14px',
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    borderRadius: 20,
-                    fontSize: 11,
-                    fontWeight: 700,
-                    color: 'rgba(255,255,255,0.75)',
-                    background: 'rgba(255,255,255,0.07)',
-                    cursor: 'pointer',
-                    transition: 'all 0.22s ease',
-                    backdropFilter: 'blur(4px)',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(0,151,57,0.2)';
-                    e.currentTarget.style.borderColor = 'rgba(0,151,57,0.45)';
-                    e.currentTarget.style.color = '#6ee7b7';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.07)';
-                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
-                    e.currentTarget.style.color = 'rgba(255,255,255,0.75)';
-                  }}
-                >
-                  <span>{cat.icon}</span>
-                  {cat.label}
-                </button>
-              ))}
-            </motion.div>
+            ))}
           </motion.div>
+        </motion.div>
 
-          {/* Right: product mini-cards */}
+        {/* Right: product cards */}
+        <motion.div
+          className="hero-cards"
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.35, duration: 0.6, ease: 'easeOut' }}
+        >
+          {/* Floating badges */}
           <motion.div
-            className="hero-cards"
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.35, duration: 0.6, ease: 'easeOut' as const }}
+            style={{
+              position: 'absolute',
+              top: -16,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '6px 14px',
+              background: 'rgba(17,29,52,0.85)',
+              backdropFilter: 'blur(12px)',
+              border: '1px solid var(--border2)',
+              borderRadius: 22,
+              fontSize: 11,
+              fontWeight: 600,
+              color: 'var(--gold2)',
+              whiteSpace: 'nowrap',
+              zIndex: 5,
+            }}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9 }}
           >
-            {heroProducts.length > 0
-              ? heroProducts.map((p, i) => (
-                  <motion.div
-                    key={p.id}
-                    className="hc-card"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.45 + i * 0.08 }}
-                    onClick={() => router.push(`/shop/${p.id}`)}
-                  >
-                    <div style={{ position: 'relative', width: '100%', aspectRatio: '1', overflow: 'hidden', background: 'rgba(255,255,255,0.05)' }}>
-                      {p.image_url ? (
-                        <Image
-                          src={p.image_url}
-                          alt={p.name}
-                          fill
-                          sizes="(max-width: 900px) 0px, 180px"
-                          style={{ objectFit: 'cover' }}
-                        />
-                      ) : (
-                        <div className="hc-img-ph">
-                          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5">
-                            <rect x="3" y="3" width="18" height="18" rx="2" />
-                            <circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" />
-                          </svg>
-                        </div>
-                      )}
-                    </div>
-                    <div className="hc-info">
-                      <div className="hc-name">{p.name}</div>
-                      <div className="hc-price">{formatPrice(p.price)}</div>
-                    </div>
-                  </motion.div>
-                ))
-              : Array.from({ length: 4 }).map((_, i) => (
-                  <div key={i} className="hc-skel">
-                    <div className="hc-skel-img" />
-                    <div className="hc-skel-body">
-                      <div className="hc-skel-line" />
-                      <div className="hc-skel-line" />
-                    </div>
-                  </div>
-                ))}
+            ⭐ 4.9 — 2 400 avis
           </motion.div>
-        </div>
 
-        {/* Bottom Mali stripe */}
-        <div className="mali-stripe">
-          <span style={{ background: '#009A00' }} />
-          <span style={{ background: '#FFD700' }} />
-          <span style={{ background: '#CE1126' }} />
-        </div>
-      </section>
-    </>
+          {heroProducts.length > 0
+            ? heroProducts.map((p, i) => (
+                <motion.div
+                  key={p.id}
+                  className="hc-card"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    borderColor: activeCard === i ? 'rgba(240,168,50,0.5)' : 'var(--border2)',
+                    boxShadow: activeCard === i ? '0 0 20px rgba(240,168,50,0.12)' : 'none',
+                  }}
+                  transition={{ delay: 0.45 + i * 0.08 }}
+                  onClick={() => router.push(`/shop/${p.id}`)}
+                >
+                  <div style={{ position: 'relative', width: '100%', aspectRatio: '1', overflow: 'hidden', background: 'var(--bg3)' }}>
+                    {p.image_url ? (
+                      <Image
+                        src={p.image_url}
+                        alt={p.name}
+                        fill
+                        sizes="(max-width: 900px) 0px, 180px"
+                        style={{ objectFit: 'cover' }}
+                      />
+                    ) : (
+                      <div className="hc-img-ph">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(240,168,50,0.25)" strokeWidth="1.5">
+                          <rect x="3" y="3" width="18" height="18" rx="2" />
+                          <circle cx="8.5" cy="8.5" r="1.5" />
+                          <polyline points="21 15 16 10 5 21" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  <div className="hc-info">
+                    <div className="hc-name">{p.name}</div>
+                    <div className="hc-price">{formatPrice(p.price)}</div>
+                  </div>
+                </motion.div>
+              ))
+            : Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="hc-skel">
+                  <div className="hc-skel-img" />
+                  <div className="hc-skel-body">
+                    <div className="hc-skel-line" />
+                    <div className="hc-skel-line" />
+                  </div>
+                </div>
+              ))}
+
+          {/* Livraison badge */}
+          <motion.div
+            style={{
+              position: 'absolute',
+              bottom: -14,
+              right: 0,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              padding: '5px 12px',
+              background: 'rgba(34,217,138,0.10)',
+              backdropFilter: 'blur(8px)',
+              border: '1px solid rgba(34,217,138,0.25)',
+              borderRadius: 20,
+              fontSize: 11,
+              fontWeight: 600,
+              color: 'var(--green)',
+              zIndex: 5,
+            }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1 }}
+          >
+            <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--green)', display: 'inline-block' }} />
+            Livraison express disponible
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Stats bar */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.7, duration: 0.5 }}
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          borderTop: '1px solid var(--border)',
+          padding: '16px clamp(14px,3vw,28px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 'clamp(16px,4vw,48px)',
+          flexWrap: 'wrap',
+          background: 'rgba(12,21,40,0.6)',
+          backdropFilter: 'blur(8px)',
+        }}
+      >
+        {STATS.map((stat, i) => (
+          <div key={stat.label} style={{ display: 'flex', alignItems: 'center', gap: 'clamp(16px,4vw,48px)' }}>
+            <div style={{ textAlign: 'center' as const }}>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 'clamp(15px,2.5vw,18px)', fontWeight: 600, color: 'var(--gold)' }}>
+                {stat.value}
+              </div>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, fontWeight: 600, color: 'var(--t3)', textTransform: 'uppercase' as const, letterSpacing: '.07em' }}>
+                {stat.label}
+              </div>
+            </div>
+            {i < STATS.length - 1 && (
+              <div style={{ width: 1, height: 28, background: 'var(--border2)' }} />
+            )}
+          </div>
+        ))}
+      </motion.div>
+    </section>
   );
 }

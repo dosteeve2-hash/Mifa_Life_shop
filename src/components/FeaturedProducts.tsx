@@ -43,27 +43,25 @@ function getImageUrl(p: Product): string | null {
   return p.image_url ?? null;
 }
 
-// Generate a stable pseudo-random rating from product id
 function getRating(id: number | string): number {
   const seed = typeof id === 'number' ? id : id.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
-  return 4 + (seed % 10) / 10; // 4.0 – 4.9
+  return 4 + (seed % 10) / 10;
 }
 
 function StarRating({ rating }: { rating: number }) {
   const full = Math.floor(rating);
-  const half = rating - full >= 0.5;
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
       {Array.from({ length: 5 }).map((_, i) => (
         <Star
           key={i}
           size={10}
-          fill={i < full ? '#FFD700' : i === full && half ? 'url(#half)' : 'none'}
-          color={i < full || (i === full && half) ? '#FFD700' : 'var(--bg3)'}
+          fill={i < full ? '#f0a832' : 'none'}
+          color={i < full ? '#f0a832' : 'var(--border2)'}
           strokeWidth={1.5}
         />
       ))}
-      <span style={{ fontSize: 10, color: 'var(--t4)', marginLeft: 3, fontWeight: 600 }}>
+      <span style={{ fontSize: 10, fontFamily: "'JetBrains Mono', monospace", color: 'var(--t3)', marginLeft: 3, fontWeight: 600 }}>
         {rating.toFixed(1)}
       </span>
     </div>
@@ -75,8 +73,8 @@ const containerVariants = {
   visible: { transition: { staggerChildren: 0.07 } },
 };
 const cardVariants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' as const } },
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.42, ease: 'easeOut' as const } },
 };
 
 function ProductCard({ product }: { product: Product }) {
@@ -91,6 +89,7 @@ function ProductCard({ product }: { product: Product }) {
   const discount = original && original > price ? Math.round((1 - price / original) * 100) : null;
   const isNew = !discount && !product.featured;
   const rating = getRating(product.id);
+  const outOfStock = (product.stock ?? 1) === 0;
 
   useEffect(() => {
     try {
@@ -114,7 +113,7 @@ function ProductCard({ product }: { product: Product }) {
 
   const handleAdd = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (added) return;
+    if (added || outOfStock) return;
     await addToCart(product.id);
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
@@ -126,6 +125,7 @@ function ProductCard({ product }: { product: Product }) {
       className="prod-card"
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
+      style={outOfStock ? { opacity: 0.6 } : {}}
     >
       <Link href={`/shop/${product.id}`} style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', flex: 1 }}>
         {/* Image */}
@@ -140,23 +140,23 @@ function ProductCard({ product }: { product: Product }) {
               style={{ objectFit: 'cover' }}
             />
           ) : (
-            <div className="prod-img-ph" style={{ color: 'var(--t4)' }}>
-              <Package size={32} strokeWidth={1} />
+            <div className="prod-img-ph">
+              <Package size={28} strokeWidth={1} />
             </div>
           )}
 
-          {/* Quick-view overlay */}
+          {/* Hover overlay */}
           <AnimatePresence>
-            {hovered && (
+            {hovered && !outOfStock && (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.18 }}
+                transition={{ duration: 0.16 }}
                 style={{
                   position: 'absolute',
                   inset: 0,
-                  background: 'rgba(17,27,34,0.52)',
+                  background: 'rgba(7,14,31,0.65)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -168,28 +168,28 @@ function ProductCard({ product }: { product: Product }) {
                   initial={{ scale: 0.85, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.85, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: 0.18 }}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     gap: 7,
                     padding: '9px 18px',
-                    background: 'rgba(255,255,255,0.95)',
+                    background: 'var(--gold)',
                     borderRadius: 22,
                     fontSize: 12,
                     fontWeight: 700,
-                    color: 'var(--t1)',
-                    boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
+                    color: 'var(--bg)',
+                    boxShadow: '0 4px 16px rgba(240,168,50,0.35)',
                   }}
                 >
-                  <Eye size={14} color="var(--em)" />
+                  <Eye size={13} />
                   Voir le produit
                 </motion.div>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Wishlist button */}
+          {/* Wishlist */}
           <motion.button
             className={`prod-wish ${wished ? 'on' : ''}`}
             onClick={toggleWish}
@@ -199,11 +199,15 @@ function ProductCard({ product }: { product: Product }) {
             transition={{ duration: 0.3 }}
             style={{ zIndex: 3 }}
           >
-            <Heart size={13} fill={wished ? 'var(--or)' : 'none'} color={wished ? 'var(--or)' : 'var(--t3)'} />
+            <Heart size={12} fill={wished ? 'var(--gold)' : 'none'} color={wished ? 'var(--gold)' : 'var(--t2)'} />
           </motion.button>
 
           {/* Badge */}
-          {discount && discount >= 5 ? (
+          {outOfStock ? (
+            <div className="prod-badge" style={{ background: 'rgba(78,95,130,0.4)', color: 'var(--t3)', border: '1px solid var(--border2)' }}>
+              RUPTURE
+            </div>
+          ) : discount && discount >= 5 ? (
             <div className="prod-badge pb-sale">-{discount}%</div>
           ) : product.featured ? (
             <div className="prod-badge pb-featured">VEDETTE</div>
@@ -219,7 +223,6 @@ function ProductCard({ product }: { product: Product }) {
           )}
           <div className="prod-name">{product.name}</div>
 
-          {/* Star rating */}
           <div style={{ marginBottom: 8 }}>
             <StarRating rating={rating} />
           </div>
@@ -239,15 +242,15 @@ function ProductCard({ product }: { product: Product }) {
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" />
               </svg>
-              Livraison en {product.shipping_days}–{product.shipping_days + 2} jours
+              Livraison {product.shipping_days}–{product.shipping_days + 2}j
             </div>
           )}
 
-          {/* Add to cart */}
           <button
             className="prod-add"
             onClick={handleAdd}
-            style={added ? { background: '#065F46' } : {}}
+            disabled={outOfStock}
+            style={added ? { background: 'rgba(34,217,138,0.12)', borderColor: 'rgba(34,217,138,0.3)', color: 'var(--green)' } : {}}
             aria-label="Ajouter au panier"
           >
             <AnimatePresence mode="wait" initial={false}>
@@ -259,7 +262,7 @@ function ProductCard({ product }: { product: Product }) {
                   exit={{ scale: 0.5, opacity: 0 }}
                   style={{ display: 'flex', alignItems: 'center', gap: 6 }}
                 >
-                  <Check size={13} /> Ajouté !
+                  <Check size={12} /> Ajouté !
                 </motion.span>
               ) : (
                 <motion.span
@@ -269,7 +272,7 @@ function ProductCard({ product }: { product: Product }) {
                   exit={{ scale: 0.5, opacity: 0 }}
                   style={{ display: 'flex', alignItems: 'center', gap: 6 }}
                 >
-                  <ShoppingBag size={12} /> Ajouter au panier
+                  <ShoppingBag size={11} /> Ajouter
                 </motion.span>
               )}
             </AnimatePresence>
@@ -283,13 +286,13 @@ function ProductCard({ product }: { product: Product }) {
 function SkeletonCard() {
   return (
     <div className="prod-skel">
-      <div className="ps-img" style={{ background: 'linear-gradient(90deg, var(--bg2) 25%, var(--bg3) 50%, var(--bg2) 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.4s ease-in-out infinite' }} />
+      <div className="ps-img" />
       <div className="ps-body">
         <div className="ps-line short skeleton" />
         <div className="ps-line med skeleton" />
         <div className="ps-line skeleton" />
         <div className="ps-line short skeleton" />
-        <div className="ps-line skeleton" style={{ height: 32, borderRadius: 8, marginTop: 4 }} />
+        <div className="ps-line skeleton" style={{ height: 30, borderRadius: 8, marginTop: 4 }} />
       </div>
     </div>
   );
@@ -302,13 +305,13 @@ export default function FeaturedProducts({ products, loading = false }: Featured
         <div className="sec-hd">
           <div>
             <div className="sec-eyebrow">Sélection premium</div>
-            <h2 className="sec-ti">Nos meilleures offres</h2>
-            <p style={{ fontSize: 13, color: 'var(--t3)', marginTop: 6, lineHeight: 1.55 }}>
-              Des produits soigneusement sélectionnés pour vous
+            <h2 className="sec-ti">Nos meilleures offres.</h2>
+            <p style={{ fontSize: 13, color: 'var(--t2)', marginTop: 6, lineHeight: 1.55, fontStyle: 'normal' }}>
+              Produits soigneusement sélectionnés pour vous
             </p>
           </div>
           <Link href="/shop" className="sec-link">
-            Voir tout <span>→</span>
+            Voir tout →
           </Link>
         </div>
 
@@ -324,7 +327,9 @@ export default function FeaturedProducts({ products, loading = false }: Featured
             : products.length === 0
             ? (
               <div className="empty-state">
-                <div className="empty-ico"><ShoppingBag size={28} strokeWidth={1} color="var(--t4)" /></div>
+                <div className="empty-ico">
+                  <ShoppingBag size={28} strokeWidth={1} color="var(--t3)" />
+                </div>
                 <div className="empty-ti">Aucun produit pour l&apos;instant</div>
                 <p className="empty-sub">Revenez bientôt, notre catalogue se remplit chaque jour.</p>
                 <Link href="/shop" className="empty-cta">

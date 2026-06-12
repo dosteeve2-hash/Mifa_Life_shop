@@ -14,19 +14,18 @@ interface CategoriesSectionProps {
   categories: Category[];
 }
 
-// Per-category accent colors [bg, border, text gradient]
-const CAT_THEMES: Record<string, { bg: string; border: string; accent: string }> = {
-  electronique: { bg: 'linear-gradient(135deg,#E3F2FD 0%,#BBDEFB 100%)', border: '#90CAF9', accent: '#1565C0' },
-  mode:         { bg: 'linear-gradient(135deg,#FCE4EC 0%,#F8BBD0 100%)', border: '#F48FB1', accent: '#AD1457' },
-  maison:       { bg: 'linear-gradient(135deg,#E8F5E9 0%,#C8E6C9 100%)', border: '#A5D6A7', accent: '#2E7D32' },
-  sport:        { bg: 'linear-gradient(135deg,#FFF3E0 0%,#FFE0B2 100%)', border: '#FFCC80', accent: '#E65100' },
-  beaute:       { bg: 'linear-gradient(135deg,#F3E5F5 0%,#E1BEE7 100%)', border: '#CE93D8', accent: '#7B1FA2' },
-  enfants:      { bg: 'linear-gradient(135deg,#FFFDE7 0%,#FFF9C4 100%)', border: '#FFF176', accent: '#F57F17' },
-  auto:         { bg: 'linear-gradient(135deg,#ECEFF1 0%,#CFD8DC 100%)', border: '#B0BEC5', accent: '#37474F' },
-  alimentation: { bg: 'linear-gradient(135deg,#E0F2F1 0%,#B2DFDB 100%)', border: '#80CBC4', accent: '#00695C' },
+// Accent colors per category (used as glow/border tint)
+const CAT_ACCENTS: Record<string, { accent: string; glow: string }> = {
+  electronique: { accent: 'var(--cyan)',  glow: 'rgba(45,212,255,0.12)' },
+  mode:         { accent: 'var(--gold)',  glow: 'rgba(240,168,50,0.12)' },
+  maison:       { accent: 'var(--green)', glow: 'rgba(34,217,138,0.12)' },
+  sport:        { accent: '#f97316',      glow: 'rgba(249,115,22,0.12)' },
+  beaute:       { accent: '#e879f9',      glow: 'rgba(232,121,249,0.12)' },
+  enfants:      { accent: 'var(--gold2)', glow: 'rgba(247,192,96,0.12)' },
+  auto:         { accent: 'var(--text2)', glow: 'rgba(155,168,196,0.12)' },
+  alimentation: { accent: 'var(--green)', glow: 'rgba(34,217,138,0.12)' },
 };
-
-const DEFAULT_THEME = { bg: 'linear-gradient(135deg,#F6F4F0 0%,#EEE9E1 100%)', border: 'var(--bg3)', accent: 'var(--em)' };
+const DEFAULT_ACCENT = { accent: 'var(--gold)', glow: 'rgba(240,168,50,0.12)' };
 
 const DEFAULT_CATEGORIES = [
   { name: 'Électronique', slug: 'electronique', icon: '💻' },
@@ -41,14 +40,14 @@ const DEFAULT_CATEGORIES = [
 
 const containerVariants: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+  visible: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
 };
 
 const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 28, scale: 0.93 },
+  hidden: { opacity: 0, y: 24, scale: 0.94 },
   visible: {
     opacity: 1, y: 0, scale: 1,
-    transition: { duration: 0.48, ease: [0.25, 0.46, 0.45, 0.94] as [number,number,number,number] },
+    transition: { duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] },
   },
 };
 
@@ -66,14 +65,14 @@ export default function CategoriesSection({ categories }: CategoriesSectionProps
       <div className="wrap">
         <div className="sec-hd">
           <div>
-            <div className="sec-eyebrow">Parcourir</div>
-            <h2 className="sec-ti">Nos catégories</h2>
-            <p style={{ fontSize: 13, color: 'var(--t3)', marginTop: 4 }}>
-              Explorez nos {displayCats.length} univers soigneusement sélectionnés
+            <div className="sec-eyebrow">01 — Collections</div>
+            <h2 className="sec-ti">Explorez notre univers.</h2>
+            <p style={{ fontSize: 13, color: 'var(--t2)', marginTop: 6, fontFamily: "'Outfit', sans-serif", fontStyle: 'normal' }}>
+              {displayCats.length} univers soigneusement sélectionnés
             </p>
           </div>
           <Link href="/shop" className="sec-link">
-            Tout voir <span>→</span>
+            Tout voir →
           </Link>
         </div>
 
@@ -85,20 +84,17 @@ export default function CategoriesSection({ categories }: CategoriesSectionProps
           viewport={{ once: true, margin: '-60px' }}
         >
           {displayCats.map((cat) => {
-            const theme = CAT_THEMES[cat.slug] ?? DEFAULT_THEME;
+            const theme = CAT_ACCENTS[cat.slug] ?? DEFAULT_ACCENT;
             return (
               <motion.div key={cat.slug} variants={cardVariants}>
-                <Link
-                  href={`/shop?cat=${cat.slug}`}
-                  style={{ textDecoration: 'none' }}
-                >
+                <Link href={`/shop?cat=${cat.slug}`} style={{ textDecoration: 'none' }}>
                   <motion.div
-                    whileHover={{ y: -5, scale: 1.03 }}
+                    whileHover={{ y: -5, scale: 1.02 }}
                     whileTap={{ scale: 0.97 }}
-                    transition={{ duration: 0.22, ease: 'easeOut' }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
                     style={{
-                      background: theme.bg,
-                      border: `1.5px solid ${theme.border}`,
+                      background: 'var(--bg3)',
+                      border: '1.5px solid var(--border2)',
                       borderRadius: 'var(--rl)',
                       padding: 'clamp(16px,3vw,22px) 14px',
                       display: 'flex',
@@ -107,63 +103,45 @@ export default function CategoriesSection({ categories }: CategoriesSectionProps
                       gap: 10,
                       cursor: 'pointer',
                       textAlign: 'center' as const,
-                      boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
-                      position: 'relative' as const,
-                      overflow: 'hidden',
-                      transition: 'box-shadow 0.22s ease',
+                      transition: 'border-color 0.22s ease, box-shadow 0.22s ease',
                     }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLDivElement).style.boxShadow = '0 8px 28px rgba(0,0,0,0.12)';
+                      (e.currentTarget as HTMLDivElement).style.borderColor = theme.accent.startsWith('var') ? 'rgba(240,168,50,0.45)' : `${theme.accent}55`;
+                      (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 0 1px ${theme.glow.replace('0.12', '0.15')}, 0 8px 24px rgba(0,0,0,0.4)`;
                     }}
                     onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLDivElement).style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
+                      (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border2)';
+                      (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
                     }}
                   >
-                    {/* Subtle corner decoration */}
-                    <div style={{
-                      position: 'absolute',
-                      top: -18,
-                      right: -18,
-                      width: 64,
-                      height: 64,
-                      borderRadius: '50%',
-                      background: `${theme.border}55`,
-                      pointerEvents: 'none',
-                    }} />
-
                     <div style={{
                       width: 52,
                       height: 52,
                       borderRadius: 14,
-                      background: 'rgba(255,255,255,0.85)',
-                      border: `1.5px solid ${theme.border}`,
+                      background: theme.glow,
+                      border: `1px solid ${theme.glow.replace('0.12', '0.3')}`,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       fontSize: 24,
                       lineHeight: 1,
-                      boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                      position: 'relative' as const,
-                      zIndex: 1,
                     }}>
                       {cat.icon}
                     </div>
 
-                    <div style={{ position: 'relative' as const, zIndex: 1 }}>
-                      <div style={{ fontSize: 12, fontWeight: 700, color: theme.accent, marginBottom: 2 }}>
+                    <div>
+                      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--t1)', fontFamily: "'Outfit', sans-serif", marginBottom: 3 }}>
                         {cat.name}
                       </div>
                       <div style={{
-                        fontSize: 10,
+                        fontSize: 9,
                         fontWeight: 700,
-                        color: theme.accent,
-                        opacity: 0.6,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: 3,
+                        fontFamily: "'JetBrains Mono', monospace",
+                        color: 'var(--t3)',
+                        textTransform: 'uppercase' as const,
+                        letterSpacing: '.07em',
                       }}>
-                        Voir <span style={{ fontSize: 12 }}>→</span>
+                        Explorer →
                       </div>
                     </div>
                   </motion.div>

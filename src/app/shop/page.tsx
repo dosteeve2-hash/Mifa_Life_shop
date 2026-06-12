@@ -59,7 +59,6 @@ export default async function ShopPage({ searchParams }: PageProps) {
   const supabase = await createServerSupabaseClient();
   let products: Product[] = [];
 
-  // Try mifa_products first
   let query = supabase
     .from('mifa_products')
     .select('id,name,price,original_price,category,images,stock,featured,shipping_days')
@@ -117,47 +116,25 @@ export default async function ShopPage({ searchParams }: PageProps) {
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       {/* Page header */}
       <div style={{
-        background: 'var(--sl3)',
+        background: 'linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%)',
         padding: 'clamp(24px,4vw,48px) 0',
         position: 'relative',
         overflow: 'hidden',
+        borderBottom: '1px solid var(--border)',
       }}>
-        {/* Decorative circle */}
-        <div style={{
-          position: 'absolute',
-          top: -60,
-          right: -60,
-          width: 240,
-          height: 240,
-          borderRadius: '50%',
-          background: 'rgba(0,137,123,0.06)',
-          pointerEvents: 'none',
-        }} />
-        <div style={{
-          position: 'absolute',
-          bottom: -40,
-          left: -40,
-          width: 160,
-          height: 160,
-          borderRadius: '50%',
-          background: 'rgba(0,137,123,0.04)',
-          pointerEvents: 'none',
-        }} />
+        <div style={{ position: 'absolute', top: -60, right: -60, width: 240, height: 240, borderRadius: '50%', background: 'rgba(240,168,50,0.04)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: -40, left: -40, width: 160, height: 160, borderRadius: '50%', background: 'rgba(45,212,255,0.03)', pointerEvents: 'none' }} />
 
         <div className="wrap" style={{ position: 'relative', zIndex: 1 }}>
           {/* Breadcrumb */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 14, fontSize: 12, color: 'rgba(255,255,255,0.38)' }}>
-            <Link href="/" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}
-              onMouseEnter={() => {}} /* hover handled inline below */
-            >
-              Accueil
-            </Link>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 14, fontSize: 11, fontFamily: "'JetBrains Mono', monospace", color: 'var(--t3)', textTransform: 'uppercase', letterSpacing: '.05em' }}>
+            <Link href="/" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}>Accueil</Link>
             <span style={{ opacity: 0.5 }}>›</span>
-            <span style={{ color: 'rgba(255,255,255,0.65)' }}>Boutique</span>
+            <span style={{ color: 'var(--t2)' }}>Boutique</span>
             {cat && (
               <>
                 <span style={{ opacity: 0.5 }}>›</span>
-                <span style={{ color: 'var(--em)', fontWeight: 600 }}>{activeCatLabel}</span>
+                <span style={{ color: 'var(--gold)', fontWeight: 600 }}>{activeCatLabel}</span>
               </>
             )}
           </div>
@@ -165,46 +142,40 @@ export default async function ShopPage({ searchParams }: PageProps) {
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
             <div>
               <h1 style={{
-                fontFamily: '"Playfair Display", serif',
+                fontFamily: "'Playfair Display', serif",
                 fontSize: 'clamp(22px,4vw,34px)',
                 fontWeight: 700,
-                color: '#fff',
+                fontStyle: 'italic',
+                color: 'var(--t1)',
                 letterSpacing: '-0.025em',
                 lineHeight: 1.1,
                 marginBottom: 8,
               }}>
-                {q ? `Résultats pour « ${q} »` : cat ? `${activeCatLabel}` : 'Boutique'}
+                {q ? `Résultats pour « ${q} »` : cat ? `${activeCatLabel}` : 'Notre Catalogue'}
               </h1>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.42)', lineHeight: 1.55 }}>
+              <p style={{ fontSize: 12, fontFamily: "'JetBrains Mono', monospace", color: 'var(--t3)' }}>
                 {hasResults
                   ? `${products.length} produit${products.length !== 1 ? 's' : ''} disponible${products.length !== 1 ? 's' : ''}`
                   : 'Aucun résultat pour cette recherche'}
               </p>
             </div>
 
-            {/* Result count badge */}
             {hasResults && (
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: 8,
-                padding: '8px 16px',
-                background: 'rgba(0,137,123,0.18)',
-                border: '1px solid rgba(0,137,123,0.3)',
+                padding: '7px 14px',
+                background: 'rgba(240,168,50,0.08)',
+                border: '1px solid rgba(240,168,50,0.2)',
                 borderRadius: 22,
                 fontSize: 12,
                 fontWeight: 700,
-                color: '#6ee7b7',
+                fontFamily: "'JetBrains Mono', monospace",
+                color: 'var(--gold)',
                 flexShrink: 0,
               }}>
-                <span style={{
-                  width: 7,
-                  height: 7,
-                  borderRadius: '50%',
-                  background: '#6ee7b7',
-                  display: 'inline-block',
-                  animation: 'pulse 2s ease-in-out infinite',
-                }} />
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--gold)', display: 'inline-block' }} />
                 {products.length} produit{products.length !== 1 ? 's' : ''}
               </div>
             )}
@@ -213,9 +184,8 @@ export default async function ShopPage({ searchParams }: PageProps) {
       </div>
 
       <div className="wrap" style={{ paddingTop: 24, paddingBottom: 40 }}>
-        {/* Filters row */}
+        {/* Filters */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 20, alignItems: 'center' }}>
-          {/* Category chips */}
           <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', flex: 1 }}>
             {CATS.map((c) => {
               const isActive = cat === c.value;
@@ -227,17 +197,19 @@ export default async function ShopPage({ searchParams }: PageProps) {
                     display: 'flex',
                     alignItems: 'center',
                     gap: 5,
-                    padding: '7px 15px',
+                    padding: '7px 14px',
                     borderRadius: 22,
-                    fontSize: 12,
+                    fontSize: 11,
                     fontWeight: 700,
+                    fontFamily: "'JetBrains Mono', monospace",
                     border: '1.5px solid',
-                    borderColor: isActive ? 'var(--em)' : 'var(--bg3)',
-                    background: isActive ? 'var(--em)' : 'var(--white)',
-                    color: isActive ? '#fff' : 'var(--t2)',
+                    borderColor: isActive ? 'var(--gold)' : 'var(--border2)',
+                    background: isActive ? 'var(--gold)' : 'var(--bg3)',
+                    color: isActive ? 'var(--bg)' : 'var(--t2)',
                     textDecoration: 'none',
                     transition: 'all 0.2s ease',
-                    boxShadow: isActive ? '0 4px 14px rgba(0,137,123,0.25)' : '0 1px 4px rgba(0,0,0,0.04)',
+                    textTransform: 'uppercase' as const,
+                    letterSpacing: '.05em',
                   }}
                 >
                   <span style={{ fontSize: 13 }}>{c.icon}</span>
@@ -247,7 +219,6 @@ export default async function ShopPage({ searchParams }: PageProps) {
             })}
           </div>
 
-          {/* Sort pills */}
           <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', flexShrink: 0 }}>
             {SORTS.map((s) => {
               const isActive = sort === s.value;
@@ -258,15 +229,18 @@ export default async function ShopPage({ searchParams }: PageProps) {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 8,
-                    fontSize: 11,
+                    fontSize: 10,
                     fontWeight: 700,
+                    fontFamily: "'JetBrains Mono', monospace",
                     border: '1.5px solid',
-                    borderColor: isActive ? 'var(--em)' : 'var(--bg3)',
-                    background: isActive ? 'var(--em-l)' : 'var(--bg)',
-                    color: isActive ? 'var(--em)' : 'var(--t3)',
+                    borderColor: isActive ? 'var(--gold)' : 'var(--border2)',
+                    background: isActive ? 'rgba(240,168,50,0.10)' : 'var(--bg3)',
+                    color: isActive ? 'var(--gold)' : 'var(--t3)',
                     textDecoration: 'none',
                     flexShrink: 0,
                     transition: 'all 0.2s ease',
+                    textTransform: 'uppercase' as const,
+                    letterSpacing: '.05em',
                   }}
                 >
                   {s.label}
@@ -279,16 +253,17 @@ export default async function ShopPage({ searchParams }: PageProps) {
         {/* Active filters */}
         {activeFilters.length > 0 && (
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 16, alignItems: 'center' }}>
-            <span style={{ fontSize: 11, color: 'var(--t4)', fontWeight: 600 }}>Filtres actifs :</span>
+            <span style={{ fontSize: 10, fontFamily: "'JetBrains Mono', monospace", color: 'var(--t3)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.06em' }}>Filtres :</span>
             {activeFilters.map((f) => (
               <span key={f} style={{
                 padding: '3px 10px',
                 borderRadius: 20,
-                background: 'var(--em-l)',
-                color: 'var(--em)',
+                background: 'rgba(240,168,50,0.08)',
+                color: 'var(--gold)',
                 fontSize: 11,
                 fontWeight: 700,
-                border: '1px solid var(--em-g)',
+                fontFamily: "'JetBrains Mono', monospace",
+                border: '1px solid rgba(240,168,50,0.2)',
               }}>
                 {f}
               </span>
@@ -298,84 +273,38 @@ export default async function ShopPage({ searchParams }: PageProps) {
               fontSize: 11,
               color: 'var(--t3)',
               fontWeight: 700,
+              fontFamily: "'JetBrains Mono', monospace",
               textDecoration: 'none',
               borderRadius: 20,
-              border: '1px solid var(--bg3)',
-              background: 'var(--white)',
+              border: '1px solid var(--border2)',
+              background: 'var(--bg3)',
               transition: 'all 0.2s',
             }}>
-              ✕ Réinitialiser
+              ✕ Reset
             </Link>
           </div>
         )}
 
-        {/* Product grid — empty state handled inside FeaturedProducts */}
+        {/* Grid */}
         {!hasResults && (q || cat) ? (
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            textAlign: 'center',
-            padding: 'clamp(40px, 8vw, 80px) 20px',
-          }}>
-            <div style={{
-              width: 80,
-              height: 80,
-              borderRadius: '50%',
-              background: 'var(--bg2)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: 20,
-              fontSize: 32,
-            }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: 'clamp(40px,8vw,80px) 20px' }}>
+            <div style={{ width: 72, height: 72, borderRadius: '50%', background: 'var(--bg3)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20, border: '1px solid var(--border2)', fontSize: 28 }}>
               🔍
             </div>
-            <h2 style={{
-              fontFamily: '"Playfair Display", serif',
-              fontSize: 'clamp(18px, 3vw, 24px)',
-              fontWeight: 700,
-              color: 'var(--t1)',
-              marginBottom: 10,
-            }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(18px,3vw,24px)', fontWeight: 700, fontStyle: 'italic', color: 'var(--t1)', marginBottom: 10 }}>
               Aucun résultat trouvé
             </h2>
-            <p style={{ fontSize: 14, color: 'var(--t3)', lineHeight: 1.7, maxWidth: 420, marginBottom: 24 }}>
+            <p style={{ fontSize: 14, color: 'var(--t2)', lineHeight: 1.7, maxWidth: 420, marginBottom: 24 }}>
               {q
-                ? `Aucun produit ne correspond à « ${q} »${cat ? ` dans la catégorie ${activeCatLabel}` : ''}. Essayez un autre terme ou explorez nos catégories.`
-                : `Aucun produit disponible dans la catégorie ${activeCatLabel} pour le moment.`}
+                ? `Aucun produit ne correspond à « ${q} »${cat ? ` dans la catégorie ${activeCatLabel}` : ''}.`
+                : `Aucun produit dans la catégorie ${activeCatLabel} pour le moment.`}
             </p>
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center' }}>
-              <Link href="/shop" style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 7,
-                padding: '11px 22px',
-                background: 'var(--em)',
-                color: '#fff',
-                borderRadius: 10,
-                fontSize: 13,
-                fontWeight: 700,
-                textDecoration: 'none',
-                transition: 'background 0.2s',
-              }}>
-                🛍️ Voir tous les produits
+              <Link href="/shop" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '11px 22px', background: 'var(--gold)', color: 'var(--bg)', borderRadius: 10, fontSize: 13, fontWeight: 700, textDecoration: 'none', transition: 'background 0.2s' }}>
+                Voir tous les produits
               </Link>
-              <Link href="/" style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 7,
-                padding: '11px 22px',
-                background: 'var(--white)',
-                color: 'var(--t2)',
-                borderRadius: 10,
-                fontSize: 13,
-                fontWeight: 700,
-                textDecoration: 'none',
-                border: '1.5px solid var(--bg3)',
-                transition: 'all 0.2s',
-              }}>
-                ← Retour à l&apos;accueil
+              <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '11px 22px', background: 'var(--bg3)', color: 'var(--t2)', borderRadius: 10, fontSize: 13, fontWeight: 700, textDecoration: 'none', border: '1.5px solid var(--border2)', transition: 'all 0.2s' }}>
+                ← Accueil
               </Link>
             </div>
           </div>

@@ -4,14 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import {
-  ShoppingBag,
-  Heart,
-  User,
-  Search,
-  X,
-  ChevronRight,
-} from 'lucide-react';
+import { ShoppingBag, Heart, User, Search, X, ChevronRight } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import CartDrawer from './CartDrawer';
 import Logo from './Logo';
@@ -44,12 +37,17 @@ export default function Navbar() {
   const [searchFocused, setSearchFocused] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [badgePulse, setBadgePulse] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const prevTotalRef = useRef(totalItems);
 
   const { scrollY } = useScroll();
   const shadowOpacity = useTransform(scrollY, [0, 60], [0, 1]);
 
-  // Pulse cart badge when items added
+  useEffect(() => {
+    const unsub = scrollY.on('change', (v) => setScrolled(v > 20));
+    return unsub;
+  }, [scrollY]);
+
   useEffect(() => {
     if (totalItems > prevTotalRef.current) {
       setBadgePulse(true);
@@ -68,32 +66,35 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Mali stripe */}
-      <div className="mali-stripe" style={{ position: 'sticky', top: 0, zIndex: 601 }}>
-        <span style={{ background: '#009A00' }} />
-        <span style={{ background: '#FFD700' }} />
-        <span style={{ background: '#CE1126' }} />
-      </div>
+      {/* Gold accent line */}
+      <div style={{ height: 2, background: 'linear-gradient(90deg, var(--gold3) 0%, var(--gold) 40%, var(--gold2) 60%, var(--gold3) 100%)', position: 'sticky', top: 0, zIndex: 601 }} />
 
       <motion.div
-        style={{ boxShadow: useTransform(shadowOpacity, (v) => `0 2px 20px rgba(0,0,0,${v * 0.12})`) }}
+        style={{
+          boxShadow: useTransform(shadowOpacity, (v) =>
+            v > 0.5 ? `0 2px 40px rgba(0,0,0,${v * 0.6})` : 'none'
+          ),
+        }}
         className="sticky z-[600]"
         id="nav"
       >
-        {/* Main navbar */}
         <motion.header
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.4, ease: 'easeOut' as const }}
-          style={{ background: 'rgba(246,244,240,0.97)', backdropFilter: 'blur(18px)', borderBottom: '1px solid var(--bg3)' }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
         >
           <div className="nv">
-            {/* Logo */}
-            <Link href="/" aria-label="Mifa Life — Accueil" style={{ textDecoration: 'none', flexShrink: 0 }}>
-              <Logo variant="compact" size="sm" />
+            {/* Logo with subtle gold glow */}
+            <Link href="/" aria-label="Mifa Life — Accueil" style={{ flexShrink: 0 }}>
+              <motion.div
+                whileHover={{ filter: 'drop-shadow(0 0 8px rgba(240,168,50,0.4))' }}
+                transition={{ duration: 0.2 }}
+              >
+                <Logo variant="compact" size="sm" dark />
+              </motion.div>
             </Link>
 
-            {/* Desktop nav links */}
+            {/* Desktop nav */}
             <motion.nav
               className="nv-links"
               initial="hidden"
@@ -111,10 +112,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     className="nv-lnk"
-                    style={{
-                      color: pathname === link.href ? 'var(--em)' : undefined,
-                      background: pathname === link.href ? 'var(--em-l)' : undefined,
-                    }}
+                    style={pathname === link.href ? { color: 'var(--gold)', background: 'rgba(240,168,50,0.08)' } : {}}
                   >
                     {link.label}
                     {pathname === link.href && (
@@ -122,11 +120,11 @@ export default function Navbar() {
                         layoutId="nav-underline"
                         style={{
                           position: 'absolute',
-                          bottom: -2,
+                          bottom: -1,
                           left: 8,
                           right: 8,
                           height: 2,
-                          background: 'var(--em)',
+                          background: 'var(--gold)',
                           borderRadius: 1,
                         }}
                       />
@@ -136,11 +134,11 @@ export default function Navbar() {
               ))}
             </motion.nav>
 
-            {/* Search bar */}
+            {/* Search */}
             <motion.form
               className="nv-search"
               onSubmit={handleSearch}
-              animate={{ width: searchFocused ? '560px' : undefined }}
+              animate={{ width: searchFocused ? '520px' : undefined }}
               transition={{ duration: 0.3 }}
             >
               <input
@@ -163,11 +161,7 @@ export default function Navbar() {
                 <Heart size={18} />
               </Link>
 
-              <button
-                className="ic-btn"
-                aria-label="Mon panier"
-                onClick={() => setCartOpen(true)}
-              >
+              <button className="ic-btn" aria-label="Mon panier" onClick={() => setCartOpen(true)}>
                 <ShoppingBag size={18} />
                 <AnimatePresence>
                   {totalItems > 0 && (
@@ -175,7 +169,7 @@ export default function Navbar() {
                       key="badge"
                       className="ic-bdg"
                       initial={{ scale: 0 }}
-                      animate={{ scale: badgePulse ? 1.35 : 1 }}
+                      animate={{ scale: badgePulse ? 1.4 : 1 }}
                       exit={{ scale: 0 }}
                       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                     >
@@ -190,11 +184,9 @@ export default function Navbar() {
               </Link>
 
               <Link href="/login" className="auth-btn">
-                <User size={14} />
                 Connexion
               </Link>
 
-              {/* Hamburger */}
               <button
                 className={`burger ${drawerOpen ? 'open' : ''}`}
                 onClick={() => setDrawerOpen((o) => !o)}
@@ -241,7 +233,6 @@ export default function Navbar() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            style={{ position: 'fixed', top: 0, right: 0, bottom: 0, width: 'min(290px, 86vw)', background: 'var(--white)', zIndex: 499, overflowY: 'auto', boxShadow: 'var(--sh-l)' }}
           >
             <div className="mob-hd">
               <Link href="/" className="mob-logo" onClick={() => setDrawerOpen(false)}>
@@ -259,6 +250,7 @@ export default function Navbar() {
                 href={link.href}
                 className="mob-l"
                 onClick={() => setDrawerOpen(false)}
+                style={pathname === link.href ? { color: 'var(--gold)' } : {}}
               >
                 <ChevronRight size={14} />
                 {link.label}
@@ -288,7 +280,6 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* Cart Drawer */}
       <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
     </>
   );
