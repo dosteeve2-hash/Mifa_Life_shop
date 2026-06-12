@@ -1,5 +1,6 @@
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import HeroSection from '@/components/HeroSection';
+import BrandMotion from '@/components/BrandMotion';
 import CategoriesSection from '@/components/CategoriesSection';
 import FeaturedProducts, { type Product } from '@/components/FeaturedProducts';
 import EngagementsSection from '@/components/EngagementsSection';
@@ -111,6 +112,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <BrandMotion />
       <HeroSection products={heroProducts} />
       <CategoriesSection categories={categories} />
       <EngagementsSection />
