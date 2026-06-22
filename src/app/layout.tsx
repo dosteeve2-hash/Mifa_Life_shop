@@ -53,7 +53,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           rel="stylesheet"
         />
       </head>
-      <body style={{ backgroundColor: '#070e1f' }}>
+      <body style={{ backgroundColor: '#0a0f08' }}>
         <CartProvider>
           <Navbar />
           <main style={{ flex: 1 }}>{children}</main>

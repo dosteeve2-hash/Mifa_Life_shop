@@ -82,6 +82,8 @@ export default function HeroSection({ products }: HeroSectionProps) {
       {/* Subtle bg texture */}
       <div className="hero-bg" />
       <div className="hero-overlay" />
+      {/* Mali flag stripe — bande décorative verticale */}
+      <div className="hero-mali-stripe" />
 
       {/* Gold particles */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}>
@@ -194,7 +196,7 @@ export default function HeroSection({ products }: HeroSectionProps) {
               alignItems: 'center',
               gap: 8,
               padding: '6px 14px',
-              background: 'rgba(17,29,52,0.85)',
+              background: 'rgba(21,32,16,0.88)',
               backdropFilter: 'blur(12px)',
               border: '1px solid var(--border2)',
               borderRadius: 22,
@@ -305,7 +307,7 @@ export default function HeroSection({ products }: HeroSectionProps) {
           justifyContent: 'center',
           gap: 'clamp(16px,4vw,48px)',
           flexWrap: 'wrap',
-          background: 'rgba(12,21,40,0.6)',
+          background: 'rgba(15,26,13,0.6)',
           backdropFilter: 'blur(8px)',
         }}
       >
