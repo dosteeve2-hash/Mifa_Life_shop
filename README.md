@@ -12,6 +12,8 @@
 [![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-black?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.2-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
+**[🌐 Live Demo](https://mifa-life-shop-9k55.vercel.app)** · **[🐛 Report Bug](https://github.com/dosteeve2-hash/Mifa_Life_shop/issues)** · **[✨ Proposer une feature](https://github.com/dosteeve2-hash/Mifa_Life_shop/issues)**
+
 </div>
 
 ---
