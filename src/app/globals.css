@@ -388,3 +388,30 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; font-style: italic; }
 
 /* Gold glow utility */
 .glow-gold { box-shadow: 0 0 20px rgba(240,168,50,.15),0 0 40px rgba(240,168,50,.07); }
+
+/* ── PC — PRODUCT CARD COMPACT (composant src/components/ProductCard.tsx) ── */
+.pc { position: relative; background: var(--bg3); border: 1.5px solid var(--border2); border-radius: var(--rl); overflow: hidden; cursor: pointer; transition: all var(--tr); display: flex; flex-direction: column; }
+.pc:hover { border-color: rgba(240,168,50,.35); box-shadow: 0 0 0 1px rgba(240,168,50,.10),var(--sh-m); transform: translateY(-3px); }
+.pc-img { display: block; aspect-ratio: 1; position: relative; overflow: hidden; background: var(--bg2); }
+.pc-img-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; font-family: 'JetBrains Mono', monospace; color: var(--t3); letter-spacing: .04em; }
+.pc-bd { padding: 12px 14px 10px; flex: 1; display: flex; flex-direction: column; gap: 5px; }
+.pc-vnd { display: flex; align-items: center; gap: 5px; font-size: 10px; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--t3); text-transform: uppercase; letter-spacing: .06em; }
+.pc-vck { color: var(--mali-green); font-size: 8px; }
+.pc-nm { font-size: 13px; font-weight: 600; color: var(--t1); line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.pc-prices { display: flex; align-items: baseline; gap: 7px; margin-top: 2px; }
+.pc-p { font-size: 15px; font-weight: 700; font-family: 'JetBrains Mono', monospace; color: var(--gold); }
+
+/* Badges Nouveau / Populaire */
+.pc-badge { position: absolute; top: 8px; left: 8px; padding: 3px 9px; border-radius: 5px; font-size: 9px; font-weight: 700; letter-spacing: .05em; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; z-index: 2; pointer-events: none; }
+.pc-badge-new { background: rgba(200,16,46,.15); color: var(--mali-red); border: 1px solid rgba(200,16,46,.35); }
+.pc-badge-pop { background: var(--gold); color: var(--bg); }
+
+/* Hover overlay (Voir / Acheter) */
+.pc-hov { position: absolute; inset: 0; background: rgba(10,15,8,.72); display: flex; align-items: flex-end; justify-content: center; gap: 8px; padding: 0 12px 14px; opacity: 0; transition: opacity var(--tr); backdrop-filter: blur(3px); z-index: 3; pointer-events: none; }
+.pc:hover .pc-hov { opacity: 1; pointer-events: auto; }
+.pc-ha { display: inline-flex; align-items: center; justify-content: center; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: 700; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .05em; border: 1.5px solid var(--border2); color: var(--t1); background: rgba(10,15,8,.85); transition: all var(--tr); text-decoration: none; cursor: pointer; }
+.pc-ha:hover,.pc-ha.add { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+
+/* CTA mobile (toujours visible, pas d'hover requis) */
+.pc-atc-m { display: block; width: 100%; padding: 10px 14px; background: rgba(240,168,50,.08); border-top: 1px solid rgba(240,168,50,.15); color: var(--gold); font-size: 12px; font-weight: 700; font-family: inherit; text-align: center; transition: all var(--tr); cursor: pointer; }
+.pc-atc-m:hover { background: var(--gold); color: var(--bg); }
