@@ -5,6 +5,7 @@ import CategoriesSection from '@/components/CategoriesSection';
 import FeaturedProducts, { type Product } from '@/components/FeaturedProducts';
 import EngagementsSection from '@/components/EngagementsSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
+import NewsletterSection from '@/components/NewsletterSection';
 import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
@@ -118,6 +119,7 @@ export default async function HomePage() {
       <EngagementsSection />
       <FeaturedProducts products={products} />
       <TestimonialsSection />
+      <NewsletterSection />
 
       {/* How it works */}
       <section id="how" className="section">
