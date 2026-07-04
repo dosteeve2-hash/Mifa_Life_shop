@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { usePostHog } from 'posthog-js/react';
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 32 },
@@ -16,6 +17,7 @@ export default function NewsletterSection() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const posthog = usePostHog();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -24,6 +26,7 @@ export default function NewsletterSection() {
     // No real backend — simulate a brief delay then success
     setTimeout(() => {
       console.log('[MIFA Life Newsletter] New subscriber:', email.trim());
+      posthog?.capture('newsletter_signup', { email: email.trim() });
       setSubmitted(true);
       setLoading(false);
     }, 600);

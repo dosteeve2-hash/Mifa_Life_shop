@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import { Suspense } from 'react';
 import { CartProvider } from '@/context/CartContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { PostHogProvider } from '@/components/PostHogProvider';
+import { PostHogPageview } from '@/components/PostHogPageview';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -54,11 +57,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body style={{ backgroundColor: '#0a0f08' }}>
-        <CartProvider>
-          <Navbar />
-          <main style={{ flex: 1 }}>{children}</main>
-          <Footer />
-        </CartProvider>
+        <PostHogProvider>
+          <Suspense fallback={null}>
+            <PostHogPageview />
+          </Suspense>
+          <CartProvider>
+            <Navbar />
+            <main style={{ flex: 1 }}>{children}</main>
+            <Footer />
+          </CartProvider>
+        </PostHogProvider>
         <div id="modal-root" />
       </body>
     </html>
