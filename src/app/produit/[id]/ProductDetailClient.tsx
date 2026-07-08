@@ -4,6 +4,12 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import type { Product } from '@/lib/products';
+import { useCart } from '@/context/CartContext';
+
+// Convertit un slug string en id numérique déterministe
+function slugToId(slug: string): number {
+  return Math.abs(slug.split('').reduce((acc, c) => (acc * 31 + c.charCodeAt(0)) | 0, 0));
+}
 
 interface Props {
   product: Product;
@@ -12,12 +18,21 @@ interface Props {
 const formatPrice = (price: number) => price.toLocaleString('fr-FR') + ' FCFA';
 
 export default function ProductDetailClient({ product }: Props) {
+  const { addItem } = useCart();
   const [toastVisible, setToastVisible] = useState(false);
+  const [toastMessage, setToastMessage] = useState('Bientôt disponible ✨');
   const [selectedSize, setSelectedSize] = useState<string | null>(
     product.sizes ? product.sizes[0] : null
   );
 
-  const showToast = () => {
+  const handleAddToCart = () => {
+    addItem({
+      id: slugToId(product.id),
+      name: product.name + (selectedSize ? ` — ${selectedSize}` : ''),
+      price_cfa: product.price,
+      image_url: product.image ?? null,
+    });
+    setToastMessage(`${product.name} ajouté au panier ! 🛒`);
     setToastVisible(true);
     setTimeout(() => setToastVisible(false), 3000);
   };
@@ -47,7 +62,7 @@ export default function ProductDetailClient({ product }: Props) {
           whiteSpace: 'nowrap',
         }}
       >
-        Bientôt disponible ✨
+        {toastMessage}
       </div>
 
       <div className="wrap" style={{ paddingTop: 28, paddingBottom: 72 }}>
@@ -269,7 +284,7 @@ export default function ProductDetailClient({ product }: Props) {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
-              onClick={showToast}
+              onClick={handleAddToCart}
               style={{
                 width: '100%',
                 padding: 'clamp(14px, 2.5vw, 18px)',
