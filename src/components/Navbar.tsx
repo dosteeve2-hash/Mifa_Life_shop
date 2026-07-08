@@ -12,6 +12,7 @@ import Logo from './Logo';
 const NAV_LINKS = [
   { href: '/', label: 'Accueil' },
   { href: '/shop', label: 'Boutique' },
+  { href: '/collections', label: 'Collections' },
   { href: '/promo', label: 'Promos' },
   { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },

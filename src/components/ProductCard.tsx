@@ -5,15 +5,27 @@ import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import type { ShopProduct } from "@/lib/types/store";
 
+/**
+ * ProductCard — carte produit compacte avec badge optionnel.
+ *
+ * Usage :
+ *   <ProductCard product={p} badge="nouveau" />
+ *   <ProductCard product={p} badge="populaire" />
+ *   <ProductCard product={p} />            // sans badge
+ */
+
+type BadgeType = "nouveau" | "populaire" | null;
+
 type ProductCardProps = {
   product: ShopProduct;
+  /** Affiche un badge coloré sur la vignette produit */
+  badge?: BadgeType;
 };
 
 function formatPriceCfa(value: number | null) {
   if (value === null) {
     return "Prix indisponible";
   }
-
   return `${new Intl.NumberFormat("fr-FR").format(value)} FCFA`;
 }
 
@@ -33,12 +45,23 @@ function isSupabaseStorageUrl(url: string | null) {
   }
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+function Badge({ type }: { type: BadgeType }) {
+  if (!type) return null;
+
+  if (type === "nouveau") {
+    return <span className="pc-badge pc-badge-new">Nouveau</span>;
+  }
+
+  return <span className="pc-badge pc-badge-pop">Populaire ★</span>;
+}
+
+export function ProductCard({ product, badge = null }: ProductCardProps) {
   const { addToCart } = useCart();
   const canRenderImage = isSupabaseStorageUrl(product.image_url);
 
   return (
     <article className="pc">
+      {/* Image + badge */}
       <Link href={`/shop/${product.id}`} className="pc-img block">
         <div className="relative h-full w-full overflow-hidden bg-[var(--bg2)]">
           {canRenderImage && product.image_url ? (
@@ -52,9 +75,12 @@ export function ProductCard({ product }: ProductCardProps) {
           ) : (
             <div className="pc-img-ph h-full">Sans image</div>
           )}
+
+          <Badge type={badge} />
         </div>
       </Link>
 
+      {/* Corps de la carte */}
       <div className="pc-bd">
         <p className="pc-vnd">
           <span className="pc-vck">●</span>
@@ -69,6 +95,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </p>
       </div>
 
+      {/* Overlay hover — desktop */}
       <div className="pc-hov">
         <Link href={`/shop/${product.id}`} className="pc-ha">
           Voir
@@ -82,12 +109,13 @@ export function ProductCard({ product }: ProductCardProps) {
         </button>
       </div>
 
+      {/* CTA — mobile (toujours visible) */}
       <button
         type="button"
         className="pc-atc-m"
         onClick={() => addToCart(product.id, 1)}
       >
-        Acheter
+        + Ajouter au panier
       </button>
     </article>
   );
