@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { ShoppingBag, Heart, User, Search, X, ChevronRight } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 import CartDrawer from './CartDrawer';
 import Logo from './Logo';
 
@@ -31,6 +32,7 @@ const CATEGORIES = [
 export default function Navbar() {
   const pathname = usePathname();
   const { totalItems } = useCart();
+  const { totalItems: wishlistCount } = useWishlist();
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
@@ -157,8 +159,23 @@ export default function Navbar() {
 
             {/* Right icons */}
             <div className="nv-r">
-              <Link href="/wishlist" className="ic-btn" aria-label="Liste de souhaits">
+              <Link href="/wishlist" className="ic-btn" aria-label="Liste de souhaits" style={{ position: 'relative' }}>
                 <Heart size={18} />
+                <AnimatePresence>
+                  {wishlistCount > 0 && (
+                    <motion.span
+                      key="wishlist-badge"
+                      className="ic-bdg"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      exit={{ scale: 0 }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                      style={{ background: 'rgb(239,68,68)' }}
+                    >
+                      {wishlistCount > 99 ? '99+' : wishlistCount}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </Link>
 
               <button className="ic-btn" aria-label="Mon panier" onClick={() => setCartOpen(true)}>
