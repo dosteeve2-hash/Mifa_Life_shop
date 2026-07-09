@@ -12,6 +12,7 @@ import Logo from './Logo';
 const NAV_LINKS = [
   { href: '/', label: 'Accueil' },
   { href: '/shop', label: 'Boutique' },
+  { href: '/collections', label: 'Collections' },
   { href: '/promo', label: 'Promos' },
   { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
@@ -179,7 +180,7 @@ export default function Navbar() {
                 </AnimatePresence>
               </button>
 
-              <Link href="/account" className="ic-btn" aria-label="Mon compte">
+              <Link href="/compte" className="ic-btn" aria-label="Mon compte">
                 <User size={18} />
               </Link>
 
@@ -256,6 +257,18 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+
+            <div className="mob-sep" />
+            <div className="mob-sec-ti">Mon espace</div>
+            <Link
+              href="/compte"
+              className="mob-l"
+              onClick={() => setDrawerOpen(false)}
+              style={pathname === '/compte' ? { color: 'var(--gold)' } : {}}
+            >
+              <User size={14} />
+              Mon compte
+            </Link>
 
             <div className="mob-sep" />
             <div className="mob-sec-ti">Catégories</div>
