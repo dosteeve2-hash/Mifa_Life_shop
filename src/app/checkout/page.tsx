@@ -1,302 +1,253 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
+import { ShoppingBag, ArrowLeft } from 'lucide-react';
+import { createBrowserClient } from '@supabase/ssr';
 import { useCart } from '@/context/CartContext';
-import { placeOrderAction } from '@/actions/checkout';
 
-function formatPrice(n: number) {
-  return new Intl.NumberFormat('fr-FR').format(n) + ' FCFA';
+const fmt = (n: number) => new Intl.NumberFormat('fr-FR').format(n) + ' FCFA';
+const LIVRAISON_SEUIL = 50_000;
+const LIVRAISON_PRIX  = 2_500;
+const VILLES = ['Ouagadougou', 'Bobo-Dioulasso', 'Koudougou', 'Banfora', 'Autre'] as const;
+
+type ModePaiement = 'livraison' | 'mobile_money';
+interface FormData {
+  prenom: string; nom: string; email: string; telephone: string;
+  ville: string; adresse: string;
+  mode_paiement: ModePaiement; numero_mobile_money: string;
+}
+type FormErrors = Partial<Record<keyof FormData, string>>;
+
+function getSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) return null;
+  return createBrowserClient(url, key);
 }
 
-const CITIES = ['Bamako', 'Sikasso', 'Mopti', 'Gao', 'Tombouctou', 'Kayes', 'Kidal', 'Koulikoro', 'Ségou'];
-
-type PayMethod = 'orange' | 'wave' | 'cash';
-
-const STEPS = ['Livraison', 'Paiement', 'Confirmation'];
+const inputBase: React.CSSProperties = {
+  width: '100%', padding: '10px 14px', boxSizing: 'border-box',
+  background: 'var(--bg2)', border: '1px solid var(--border2)',
+  borderRadius: 8, color: 'var(--t1)', fontSize: 14,
+  fontFamily: "'Outfit', sans-serif", outline: 'none',
+};
+const labelCss: React.CSSProperties = {
+  display: 'block', fontSize: 11, fontWeight: 600, color: 'var(--t3)',
+  marginBottom: 5, fontFamily: "'JetBrains Mono', monospace",
+  textTransform: 'uppercase', letterSpacing: '.04em',
+};
+const errCss: React.CSSProperties = {
+  fontSize: 11, color: 'var(--red, #ef4444)', marginTop: 3,
+  fontFamily: "'JetBrains Mono', monospace",
+};
 
 export default function CheckoutPage() {
+  const router = useRouter();
   const { items, totalPrice, clearCart } = useCart();
-  const [step, setStep] = useState(0);
+  const livraison = totalPrice >= LIVRAISON_SEUIL ? 0 : LIVRAISON_PRIX;
+  const totalFinal = totalPrice + livraison;
 
-  // Step 1 form
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [city, setCity] = useState('');
-  const [address, setAddress] = useState('');
-  const [quarter, setQuarter] = useState('');
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [form, setForm] = useState<FormData>({
+    prenom: '', nom: '', email: '', telephone: '',
+    ville: '', adresse: '', mode_paiement: 'livraison', numero_mobile_money: '',
+  });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [submitting, setSubmitting] = useState(false);
 
-  // Step 2
-  const [payMethod, setPayMethod] = useState<PayMethod>('orange');
-
-  // Step 3
-  const [confirming, setConfirming] = useState(false);
-  const [confirmed, setConfirmed] = useState(false);
-  const [confirmedOrderId, setConfirmedOrderId] = useState<string | null>(null);
-
-  const validateStep1 = () => {
-    const e: Record<string, string> = {};
-    if (!firstName.trim()) e.firstName = 'Requis';
-    if (!lastName.trim()) e.lastName = 'Requis';
-    if (!phone.trim() || phone.length < 8) e.phone = 'Numéro invalide';
-    if (!city) e.city = 'Choisissez une ville';
-    if (!address.trim()) e.address = 'Requis';
-    setErrors(e);
-    return Object.keys(e).length === 0;
-  };
-
-  const handleConfirm = async () => {
-    setConfirming(true);
-    setErrors({});
-    const result = await placeOrderAction({
-      items: items.map((i) => ({ id: i.id, name: i.name, price_cfa: i.price_cfa, quantity: i.quantity })),
-      total: totalPrice,
-      paymentMethod: payMethod,
-      shipping: { firstName, lastName, phone, city, address, quarter },
-    });
-    if (result.ok) {
-      clearCart();
-      setConfirmedOrderId(result.orderId);
-      setConfirmed(true);
-    } else {
-      setErrors({ general: result.error ?? 'Erreur lors de la commande' });
-    }
-    setConfirming(false);
-  };
-
-  if (confirmed) {
-    return (
-      <div style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 40, gap: 20, textAlign: 'center' }}>
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-          style={{ width: 80, height: 80, borderRadius: '50%', background: 'var(--em-l)', border: '3px solid var(--em)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 36 }}
-        >
-          ✓
-        </motion.div>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-          <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: 28, fontWeight: 700, color: 'var(--sl)', marginBottom: 10 }}>
-            Commande confirmée !
-          </h1>
-          <p style={{ fontSize: 14, color: 'var(--t3)', marginBottom: 6 }}>
-            Merci {firstName} ! Votre commande a bien été enregistrée.
-          </p>
-          <p style={{ fontSize: 16, fontWeight: 700, color: 'var(--em)', marginBottom: 20 }}>
-            N° de commande : #{'ML' + (confirmedOrderId ?? '').slice(0, 6).toUpperCase()}
-          </p>
-          <p style={{ fontSize: 13, color: 'var(--t4)', marginBottom: 24 }}>
-            Vous recevrez une confirmation par SMS. Notre équipe vous contactera dans les 24h.
-          </p>
-          <Link
-            href="/shop"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 28px', background: 'var(--em)', color: '#fff', borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: 'none' }}
-          >
-            Continuer mes achats →
-          </Link>
-        </motion.div>
-      </div>
-    );
+  function set<K extends keyof FormData>(k: K, v: FormData[K]) {
+    setForm(p => ({ ...p, [k]: v }));
+    if (errors[k]) setErrors(p => ({ ...p, [k]: undefined }));
   }
 
-  const slideVariants = {
-    initial: (dir: number) => ({ x: dir > 0 ? 80 : -80, opacity: 0 }),
-    animate: { x: 0, opacity: 1 },
-    exit: (dir: number) => ({ x: dir > 0 ? -80 : 80, opacity: 0 }),
-  };
+  function validate(): boolean {
+    const e: FormErrors = {};
+    if (!form.prenom.trim()) e.prenom = 'Prénom requis';
+    if (!form.nom.trim())    e.nom = 'Nom requis';
+    if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) e.email = 'Email valide requis';
+    if (!form.telephone.trim()) e.telephone = 'Numéro requis';
+    if (!form.ville)         e.ville = 'Ville requise';
+    if (!form.adresse.trim()) e.adresse = 'Adresse requise';
+    if (form.mode_paiement === 'mobile_money' && !form.numero_mobile_money.trim())
+      e.numero_mobile_money = 'Numéro Mobile Money requis';
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  }
+
+  async function handleSubmit(ev: React.FormEvent) {
+    ev.preventDefault();
+    if (!validate() || submitting) return;
+    setSubmitting(true);
+    try {
+      const sb = getSupabase();
+      if (sb) {
+        await sb.from('commandes').insert({
+          prenom: form.prenom, nom: form.nom, email: form.email,
+          telephone: form.telephone, ville: form.ville, adresse: form.adresse,
+          mode_paiement: form.mode_paiement,
+          numero_mobile_money: form.numero_mobile_money || null,
+          items: JSON.stringify(items), total: totalFinal,
+          created_at: new Date().toISOString(),
+        });
+      }
+    } catch { /* silencieux si Supabase non configuré */ }
+    clearCart();
+    router.push('/commande-confirmee');
+  }
+
+  function inp(field: keyof FormData): React.CSSProperties {
+    return { ...inputBase, borderColor: errors[field] ? 'var(--red, #ef4444)' : 'var(--border2)' };
+  }
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
-      <div className="wrap" style={{ paddingTop: 32, paddingBottom: 60, maxWidth: 720 }}>
-        {/* Steps indicator */}
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: 36 }}>
-          {STEPS.map((s, i) => (
-            <div key={s} style={{ display: 'flex', alignItems: 'center', flex: i < STEPS.length - 1 ? 1 : 'initial' }}>
-              <div style={{
-                width: 32, height: 32, borderRadius: '50%',
-                background: i < step ? 'var(--em)' : i === step ? 'var(--em)' : 'var(--bg3)',
-                color: i <= step ? '#fff' : 'var(--t4)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: 13, fontWeight: 700, flexShrink: 0,
-                border: i === step ? '3px solid var(--em-d)' : 'none',
-              }}>
-                {i < step ? '✓' : i + 1}
-              </div>
-              <span style={{ marginLeft: 8, fontSize: 12, fontWeight: 600, color: i === step ? 'var(--em)' : 'var(--t4)' }}>
-                {s}
-              </span>
-              {i < STEPS.length - 1 && (
-                <div style={{ flex: 1, height: 2, background: i < step ? 'var(--em)' : 'var(--bg3)', margin: '0 12px', borderRadius: 1 }} />
-              )}
-            </div>
-          ))}
-        </div>
+      <div className="wrap" style={{ paddingTop: 28, paddingBottom: 72 }}>
 
-        <div style={{ background: 'var(--white)', borderRadius: 'var(--rl)', border: '1.5px solid var(--bg3)', padding: 'clamp(20px,4vw,36px)', overflow: 'hidden' }}>
-          <AnimatePresence mode="wait" custom={1}>
-            {step === 0 && (
-              <motion.div key="step0" custom={1} variants={slideVariants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.28 }}>
-                <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: 22, fontWeight: 700, color: 'var(--sl)', marginBottom: 24 }}>
-                  Adresse de livraison
-                </h2>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
-                  {[
-                    { label: 'Prénom', value: firstName, set: setFirstName, key: 'firstName', placeholder: 'Ibrahim' },
-                    { label: 'Nom', value: lastName, set: setLastName, key: 'lastName', placeholder: 'Coulibaly' },
-                  ].map((f) => (
-                    <div key={f.key}>
-                      <label style={{ display: 'block', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--t3)', marginBottom: 6 }}>{f.label}</label>
-                      <input
-                        type="text"
-                        value={f.value}
-                        onChange={(e) => f.set(e.target.value)}
-                        placeholder={f.placeholder}
-                        style={{ width: '100%', padding: '10px 14px', border: `1.5px solid ${errors[f.key] ? '#EF4444' : 'var(--bg3)'}`, borderRadius: 9, fontSize: 13, background: 'var(--bg)', color: 'var(--t1)', outline: 'none' }}
-                      />
-                      {errors[f.key] && <p style={{ fontSize: 11, color: '#EF4444', marginTop: 4 }}>{errors[f.key]}</p>}
-                    </div>
-                  ))}
-                </div>
-                <div style={{ marginTop: 14 }}>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--t3)', marginBottom: 6 }}>Téléphone (Orange Money / Wave)</label>
-                  <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+223 7x xxx xxx" style={{ width: '100%', padding: '10px 14px', border: `1.5px solid ${errors.phone ? '#EF4444' : 'var(--bg3)'}`, borderRadius: 9, fontSize: 13, background: 'var(--bg)', color: 'var(--t1)', outline: 'none' }} />
-                  {errors.phone && <p style={{ fontSize: 11, color: '#EF4444', marginTop: 4 }}>{errors.phone}</p>}
-                </div>
-                <div style={{ marginTop: 14 }}>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--t3)', marginBottom: 6 }}>Ville</label>
-                  <select value={city} onChange={(e) => setCity(e.target.value)} style={{ width: '100%', padding: '10px 14px', border: `1.5px solid ${errors.city ? '#EF4444' : 'var(--bg3)'}`, borderRadius: 9, fontSize: 13, background: 'var(--bg)', color: city ? 'var(--t1)' : 'var(--t4)', outline: 'none' }}>
-                    <option value="">Choisissez une ville</option>
-                    {CITIES.map((c) => <option key={c} value={c}>{c}</option>)}
-                  </select>
-                  {errors.city && <p style={{ fontSize: 11, color: '#EF4444', marginTop: 4 }}>{errors.city}</p>}
-                </div>
-                <div style={{ marginTop: 14 }}>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--t3)', marginBottom: 6 }}>Adresse</label>
-                  <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Rue, numéro..." style={{ width: '100%', padding: '10px 14px', border: `1.5px solid ${errors.address ? '#EF4444' : 'var(--bg3)'}`, borderRadius: 9, fontSize: 13, background: 'var(--bg)', color: 'var(--t1)', outline: 'none' }} />
-                  {errors.address && <p style={{ fontSize: 11, color: '#EF4444', marginTop: 4 }}>{errors.address}</p>}
-                </div>
-                <div style={{ marginTop: 14 }}>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--t3)', marginBottom: 6 }}>Quartier (optionnel)</label>
-                  <input type="text" value={quarter} onChange={(e) => setQuarter(e.target.value)} placeholder="Hamdallaye, Badalabougou..." style={{ width: '100%', padding: '10px 14px', border: '1.5px solid var(--bg3)', borderRadius: 9, fontSize: 13, background: 'var(--bg)', color: 'var(--t1)', outline: 'none' }} />
-                </div>
-                <button
-                  onClick={() => { if (validateStep1()) setStep(1); }}
-                  style={{ width: '100%', marginTop: 24, padding: '13px', background: 'var(--em)', color: '#fff', borderRadius: 10, fontSize: 14, fontWeight: 700, border: 'none', cursor: 'pointer' }}
-                >
-                  Continuer → Paiement
-                </button>
-              </motion.div>
-            )}
+        {/* Header */}
+        <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 28 }}>
+          <Link href="/panier" style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12,
+            fontFamily: "'JetBrains Mono', monospace", color: 'var(--t3)',
+            textDecoration: 'none', marginBottom: 14,
+          }}>
+            <ArrowLeft size={13} /> Retour au panier
+          </Link>
+          <h1 style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: 'clamp(22px, 4vw, 30px)', fontWeight: 900, fontStyle: 'italic',
+            color: 'var(--t1)', margin: 0,
+          }}>
+            Finaliser la commande
+          </h1>
+        </motion.div>
 
-            {step === 1 && (
-              <motion.div key="step1" custom={1} variants={slideVariants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.28 }}>
-                <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: 22, fontWeight: 700, color: 'var(--sl)', marginBottom: 24 }}>
-                  Mode de paiement
-                </h2>
-                {([
-                  { id: 'orange' as PayMethod, label: 'Orange Money', desc: 'Paiement mobile sécurisé', color: '#FF6B00', emoji: '📱' },
-                  { id: 'wave' as PayMethod, label: 'Wave', desc: 'Application de paiement Wave', color: '#0087C3', emoji: '🌊' },
-                  { id: 'cash' as PayMethod, label: 'Paiement à la livraison', desc: 'Payez en espèces à la réception', color: '#2C3A3F', emoji: '💵' },
-                ] as const).map((m) => (
-                  <button
-                    key={m.id}
-                    onClick={() => setPayMethod(m.id)}
-                    style={{
-                      width: '100%', padding: 16, borderRadius: 12, border: `2px solid ${payMethod === m.id ? m.color : 'var(--bg3)'}`,
-                      background: payMethod === m.id ? `${m.color}10` : 'var(--white)',
-                      display: 'flex', alignItems: 'center', gap: 14, marginBottom: 12, cursor: 'pointer', textAlign: 'left',
-                    }}
-                  >
-                    <div style={{ width: 44, height: 44, borderRadius: 10, background: `${m.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, flexShrink: 0 }}>
-                      {m.emoji}
-                    </div>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--t1)' }}>{m.label}</div>
-                      <div style={{ fontSize: 12, color: 'var(--t3)' }}>{m.desc}</div>
-                    </div>
-                    <div style={{ width: 18, height: 18, borderRadius: '50%', border: `2px solid ${payMethod === m.id ? m.color : 'var(--bg3)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      {payMethod === m.id && <div style={{ width: 8, height: 8, borderRadius: '50%', background: m.color }} />}
-                    </div>
-                  </button>
-                ))}
-                <div style={{ display: 'flex', gap: 10, marginTop: 8 }}>
-                  <button onClick={() => setStep(0)} style={{ flex: 1, padding: 13, border: '1.5px solid var(--bg3)', borderRadius: 10, fontSize: 13, fontWeight: 600, background: 'var(--white)', color: 'var(--t2)', cursor: 'pointer' }}>
-                    ← Retour
-                  </button>
-                  <button onClick={() => setStep(2)} style={{ flex: 2, padding: 13, background: 'var(--em)', color: '#fff', borderRadius: 10, fontSize: 14, fontWeight: 700, border: 'none', cursor: 'pointer' }}>
-                    Vérifier la commande →
-                  </button>
-                </div>
-              </motion.div>
-            )}
+        <form onSubmit={handleSubmit} noValidate>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
+            gap: 28, alignItems: 'start',
+          }}>
 
-            {step === 2 && (
-              <motion.div key="step2" custom={1} variants={slideVariants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.28 }}>
-                <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: 22, fontWeight: 700, color: 'var(--sl)', marginBottom: 20 }}>
-                  Confirmation
+            {/* ── COLONNE GAUCHE : Formulaire ── */}
+            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: .1 }}>
+              <div style={{ background: 'var(--bg2)', borderRadius: 16, padding: 24, border: '1px solid var(--border2)' }}>
+                <h2 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13, fontWeight: 700, color: 'var(--t3)', marginBottom: 20, textTransform: 'uppercase', letterSpacing: '.06em' }}>
+                  Informations de livraison
                 </h2>
-                {/* Summary */}
-                <div style={{ background: 'var(--bg)', borderRadius: 10, padding: 16, marginBottom: 20 }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--t4)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>Livraison</div>
-                  <p style={{ fontSize: 13, color: 'var(--t2)' }}>{firstName} {lastName} · {phone}</p>
-                  <p style={{ fontSize: 13, color: 'var(--t2)' }}>{address}{quarter ? `, ${quarter}` : ''} · {city}</p>
-                </div>
-                <div style={{ background: 'var(--bg)', borderRadius: 10, padding: 16, marginBottom: 20 }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--t4)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>Paiement</div>
-                  <p style={{ fontSize: 13, color: 'var(--t2)' }}>
-                    {payMethod === 'orange' ? '📱 Orange Money' : payMethod === 'wave' ? '🌊 Wave' : '💵 Paiement à la livraison'}
-                  </p>
-                </div>
-                <div style={{ background: 'var(--bg)', borderRadius: 10, padding: 16, marginBottom: 20 }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--t4)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>Articles ({items.length})</div>
-                  {items.map((item) => (
-                    <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--t2)', marginBottom: 6 }}>
-                      <span>{item.name} × {item.quantity}</span>
-                      <span style={{ fontWeight: 700 }}>{formatPrice(item.price_cfa * item.quantity)}</span>
-                    </div>
-                  ))}
-                  <div style={{ borderTop: '1px solid var(--bg3)', paddingTop: 10, marginTop: 10, display: 'flex', justifyContent: 'space-between', fontSize: 15, fontWeight: 700 }}>
-                    <span>Total</span>
-                    <span style={{ color: 'var(--em)' }}>{formatPrice(totalPrice)}</span>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 14 }}>
+                  <div>
+                    <label style={labelCss}>Prénom *</label>
+                    <input style={inp('prenom')} value={form.prenom} onChange={e => set('prenom', e.target.value)} placeholder="Kofi" />
+                    {errors.prenom && <p style={errCss}>{errors.prenom}</p>}
+                  </div>
+                  <div>
+                    <label style={labelCss}>Nom *</label>
+                    <input style={inp('nom')} value={form.nom} onChange={e => set('nom', e.target.value)} placeholder="Ouédraogo" />
+                    {errors.nom && <p style={errCss}>{errors.nom}</p>}
                   </div>
                 </div>
-
-                {errors.general && (
-                  <div style={{ background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: 9, padding: '10px 14px', fontSize: 13, color: '#DC2626', marginBottom: 14 }}>
-                    {errors.general}
+                <div style={{ marginBottom: 14 }}>
+                  <label style={labelCss}>Email *</label>
+                  <input type="email" style={inp('email')} value={form.email} onChange={e => set('email', e.target.value)} placeholder="kofi@example.com" />
+                  {errors.email && <p style={errCss}>{errors.email}</p>}
+                </div>
+                <div style={{ marginBottom: 14 }}>
+                  <label style={labelCss}>Téléphone *</label>
+                  <input style={inp('telephone')} value={form.telephone} onChange={e => set('telephone', e.target.value)} placeholder="+226 70 00 00 00" />
+                  {errors.telephone && <p style={errCss}>{errors.telephone}</p>}
+                </div>
+                <div style={{ marginBottom: 14 }}>
+                  <label style={labelCss}>Ville *</label>
+                  <select style={inp('ville')} value={form.ville} onChange={e => set('ville', e.target.value)}>
+                    <option value="">Sélectionner une ville</option>
+                    {VILLES.map(v => <option key={v} value={v}>{v}</option>)}
+                  </select>
+                  {errors.ville && <p style={errCss}>{errors.ville}</p>}
+                </div>
+                <div style={{ marginBottom: 20 }}>
+                  <label style={labelCss}>Adresse de livraison *</label>
+                  <textarea style={{ ...inp('adresse'), minHeight: 72, resize: 'vertical' }} value={form.adresse} onChange={e => set('adresse', e.target.value)} placeholder="Secteur 15, rue 12.34..." />
+                  {errors.adresse && <p style={errCss}>{errors.adresse}</p>}
+                </div>
+                <h3 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, fontWeight: 700, color: 'var(--t3)', marginBottom: 12, textTransform: 'uppercase', letterSpacing: '.06em' }}>
+                  Mode de paiement
+                </h3>
+                {(['livraison', 'mobile_money'] as ModePaiement[]).map(mode => (
+                  <label key={mode} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10, cursor: 'pointer', fontSize: 14, color: 'var(--t1)', fontFamily: "'Outfit', sans-serif" }}>
+                    <input type="radio" name="mode_paiement" value={mode} checked={form.mode_paiement === mode} onChange={() => set('mode_paiement', mode)} style={{ accentColor: 'var(--gold, #C9A84C)', width: 16, height: 16 }} />
+                    {mode === 'livraison' ? '💵 Paiement à la livraison' : '📱 Mobile Money (Moov / Orange)'}
+                  </label>
+                ))}
+                {form.mode_paiement === 'mobile_money' && (
+                  <div style={{ marginTop: 10 }}>
+                    <label style={labelCss}>Numéro Mobile Money *</label>
+                    <input style={inp('numero_mobile_money')} value={form.numero_mobile_money} onChange={e => set('numero_mobile_money', e.target.value)} placeholder="+226 60 00 00 00" />
+                    {errors.numero_mobile_money && <p style={errCss}>{errors.numero_mobile_money}</p>}
                   </div>
                 )}
-                <div style={{ display: 'flex', gap: 10 }}>
-                  <button onClick={() => setStep(1)} style={{ flex: 1, padding: 13, border: '1.5px solid var(--bg3)', borderRadius: 10, fontSize: 13, fontWeight: 600, background: 'var(--white)', color: 'var(--t2)', cursor: 'pointer' }}>
-                    ← Retour
-                  </button>
-                  <button
-                    onClick={handleConfirm}
-                    disabled={confirming}
-                    style={{ flex: 2, padding: 13, background: 'var(--em)', color: '#fff', borderRadius: 10, fontSize: 14, fontWeight: 700, border: 'none', cursor: confirming ? 'wait' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
-                  >
-                    {confirming ? (
-                      <>
-                        <span style={{ width: 16, height: 16, border: '2px solid rgba(255,255,255,0.3)', borderTop: '2px solid #fff', borderRadius: '50%', display: 'inline-block', animation: 'spin 0.7s linear infinite' }} />
-                        Confirmation...
-                      </>
-                    ) : '✓ Confirmer la commande'}
+              </div>
+            </motion.div>
+
+            {/* ── COLONNE DROITE : Résumé commande ── */}
+            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: .2 }}>
+              <div style={{ background: 'var(--bg2)', borderRadius: 16, padding: 24, border: '1px solid var(--border2)', position: 'sticky', top: 100 }}>
+                <h2 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13, fontWeight: 700, color: 'var(--t3)', marginBottom: 20, textTransform: 'uppercase', letterSpacing: '.06em', display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <ShoppingBag size={14} /> Résumé de la commande
+                </h2>
+                {items.length === 0 ? (
+                  <p style={{ color: 'var(--t3)', fontSize: 13, textAlign: 'center', padding: '20px 0' }}>Panier vide</p>
+                ) : (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 20 }}>
+                    {items.map(item => (
+                      <div key={item.id} style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+                        {item.image_url && (
+                          <Image src={item.image_url} alt={item.name} width={48} height={48} style={{ borderRadius: 8, objectFit: 'cover', border: '1px solid var(--border2)' }} />
+                        )}
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: 'var(--t1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.name}</p>
+                          <p style={{ margin: 0, fontSize: 11, color: 'var(--t3)', fontFamily: "'JetBrains Mono', monospace" }}>x{item.quantity} — {fmt(item.price_cfa)}</p>
+                        </div>
+                        <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--t1)', whiteSpace: 'nowrap' }}>{fmt(item.price_cfa * item.quantity)}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <div style={{ borderTop: '1px solid var(--border2)', paddingTop: 16 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--t2)', marginBottom: 8 }}>
+                    <span>Sous-total</span><span>{fmt(totalPrice)}</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: livraison === 0 ? 'var(--cyan, #06b6d4)' : 'var(--t2)', marginBottom: 12 }}>
+                    <span>Livraison</span><span>{livraison === 0 ? '🎁 Gratuite' : fmt(livraison)}</span>
+                  </div>
+                  {livraison > 0 && (
+                    <p style={{ fontSize: 11, color: 'var(--t3)', fontFamily: "'JetBrains Mono', monospace", marginBottom: 12 }}>
+                      Livraison offerte dès {fmt(LIVRAISON_SEUIL)}
+                    </p>
+                  )}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 16, fontWeight: 800, color: 'var(--t1)', marginBottom: 20 }}>
+                    <span>Total</span><span style={{ color: 'var(--gold, #C9A84C)' }}>{fmt(totalFinal)}</span>
+                  </div>
+                  <button type="submit" disabled={submitting || items.length === 0} style={{
+                    width: '100%', padding: '14px 20px', borderRadius: 12,
+                    background: submitting ? 'var(--border2)' : 'var(--gold, #C9A84C)',
+                    color: '#0a0a14', fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: 13, fontWeight: 700, border: 'none',
+                    cursor: submitting || items.length === 0 ? 'not-allowed' : 'pointer',
+                    letterSpacing: '.04em', transition: 'opacity .2s',
+                    opacity: items.length === 0 ? .5 : 1,
+                  }}>
+                    {submitting ? 'Traitement…' : 'Confirmer la commande →'}
                   </button>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+              </div>
+            </motion.div>
 
-        <p style={{ marginTop: 16, textAlign: 'center', fontSize: 12, color: 'var(--t4)' }}>
-          <Link href="/cart" style={{ color: 'inherit', textDecoration: 'none' }}>← Retour au panier</Link>
-        </p>
+          </div>
+        </form>
       </div>
-
-      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
   );
 }
