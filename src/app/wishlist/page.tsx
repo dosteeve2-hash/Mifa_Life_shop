@@ -1,319 +1,202 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Heart, ShoppingBag, Package, Trash2 } from 'lucide-react';
-import { createBrowserClient } from '@supabase/ssr';
-import { useCart } from '@/context/CartContext';
+/**
+ * MIFA LIFE — PAGE LISTE DE SOUHAITS
+ * src/app/wishlist/page.tsx
+ */
 
-function formatPrice(n: number) {
+import { useWishlist } from '@/context/WishlistContext';
+import { useCart } from '@/context/CartContext';
+import { useRouter } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Heart, Trash2, ShoppingBag, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
+import Image from 'next/image';
+
+function formatPrix(n: number): string {
   return new Intl.NumberFormat('fr-FR').format(n) + ' FCFA';
 }
 
-let _sb: ReturnType<typeof createBrowserClient> | null = null;
-function getSb() {
-  if (!_sb) {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? '';
-    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '';
-    if (url && key) _sb = createBrowserClient(url, key);
-  }
-  return _sb;
-}
-
-interface WishProduct {
-  id: string;
-  name: string;
-  price: number;
-  original_price?: number;
-  category?: string;
-  images?: string[];
-  stock?: number;
-  shipping_days?: number;
-}
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.8, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { delay: i * 0.07, type: 'spring' as const, stiffness: 260, damping: 20 },
+  }),
+  exit: { opacity: 0, scale: 0, transition: { duration: 0.2 } },
+};
 
 export default function WishlistPage() {
+  const { items, removeFromWishlist, totalItems } = useWishlist();
   const { addToCart } = useCart();
-  const [ids, setIds] = useState<(string | number)[]>([]);
-  const [products, setProducts] = useState<WishProduct[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [added, setAdded] = useState<Record<string, boolean>>({});
+  const router = useRouter();
 
-  useEffect(() => {
-    try {
-      const raw: (string | number)[] = JSON.parse(localStorage.getItem('mifa_wishes') ?? '[]');
-      setIds(raw);
-    } catch {
-      setIds([]);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (ids.length === 0) {
-      setLoading(false);
-      return;
-    }
-    const sb = getSb();
-    if (!sb) {
-      setLoading(false);
-      return;
-    }
-    sb.from('mifa_products')
-      .select('id,name,price,original_price,category,images,stock,shipping_days')
-      .in('id', ids.map(String))
-      .then(({ data }) => {
-        setProducts((data as WishProduct[]) ?? []);
-        setLoading(false);
-      });
-  }, [ids]);
-
-  const remove = (id: string | number) => {
-    try {
-      const wishes: (string | number)[] = JSON.parse(localStorage.getItem('mifa_wishes') ?? '[]');
-      const next = wishes.filter((w) => w !== id && w !== String(id));
-      localStorage.setItem('mifa_wishes', JSON.stringify(next));
-      setIds(next);
-      setProducts((prev) => prev.filter((p) => p.id !== String(id)));
-    } catch {}
-  };
-
-  const clearAll = () => {
-    localStorage.setItem('mifa_wishes', '[]');
-    setIds([]);
-    setProducts([]);
-  };
-
-  const handleAddToCart = async (id: string) => {
-    if (added[id]) return;
-    await addToCart(id);
-    setAdded((prev) => ({ ...prev, [id]: true }));
-    setTimeout(() => setAdded((prev) => ({ ...prev, [id]: false })), 1500);
+  const handleAddToCart = async (produit_id: string) => {
+    await addToCart(produit_id);
   };
 
   return (
-    <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
-      {/* Header */}
-      <div style={{
-        background: 'var(--sl3)',
-        padding: 'clamp(24px,4vw,48px) 0',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
-        <div style={{ position: 'absolute', top: -60, right: -60, width: 240, height: 240, borderRadius: '50%', background: 'rgba(0,137,123,0.06)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', bottom: -40, left: -40, width: 160, height: 160, borderRadius: '50%', background: 'rgba(0,137,123,0.04)', pointerEvents: 'none' }} />
-        <div className="wrap" style={{ position: 'relative', zIndex: 1 }}>
-          <nav style={{ display: 'flex', gap: 6, fontSize: 12, color: 'rgba(255,255,255,0.38)', marginBottom: 14 }}>
-            <Link href="/" style={{ color: 'inherit', textDecoration: 'none' }}>Accueil</Link>
-            <span style={{ opacity: 0.5 }}>›</span>
-            <span style={{ color: 'rgba(255,255,255,0.7)' }}>Liste de souhaits</span>
-          </nav>
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-            <div>
-              <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(22px,4vw,34px)', fontWeight: 700, color: '#fff', letterSpacing: '-0.025em', lineHeight: 1.1, marginBottom: 8 }}>
-                Ma liste de souhaits
-              </h1>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)' }}>
-                {loading
-                  ? 'Chargement…'
-                  : `${products.length} article${products.length !== 1 ? 's' : ''} sauvegardé${products.length !== 1 ? 's' : ''}`}
-              </p>
-            </div>
-            {products.length > 0 && (
-              <button
-                onClick={clearAll}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  padding: '9px 18px',
-                  background: 'rgba(255,255,255,0.08)',
-                  border: '1px solid rgba(255,255,255,0.18)',
-                  borderRadius: 10,
-                  fontSize: 12,
-                  fontWeight: 700,
-                  color: 'rgba(255,255,255,0.7)',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                }}
-              >
-                <Trash2 size={13} /> Tout supprimer
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
+    <div
+      className="min-h-screen"
+      style={{ background: 'var(--bg, #0a0f08)', paddingTop: '2rem', paddingBottom: '4rem' }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <div className="wrap" style={{ paddingTop: 32, paddingBottom: 60 }}>
-        {loading ? (
-          <div id="featured-grid">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="prod-skel">
-                <div className="ps-img" style={{ background: 'linear-gradient(90deg, var(--bg2) 25%, var(--bg3) 50%, var(--bg2) 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.4s ease-in-out infinite' }} />
-                <div className="ps-body">
-                  <div className="ps-line short skeleton" />
-                  <div className="ps-line med skeleton" />
-                  <div className="ps-line skeleton" />
-                  <div className="ps-line short skeleton" />
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : products.length === 0 ? (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: 'clamp(40px,8vw,80px) 20px' }}
+        {/* Header */}
+        <div className="flex items-center gap-4 mb-8">
+          <button
+            onClick={() => router.back()}
+            className="flex items-center gap-2 text-sm"
+            style={{ color: 'var(--gold, #C9A84C)', opacity: 0.8 }}
           >
+            <ArrowLeft size={16} />
+            Retour
+          </button>
+        </div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="text-3xl font-bold mb-2"
+          style={{ color: 'var(--gold, #C9A84C)', fontFamily: 'Playfair Display, serif' }}
+        >
+          Ma Liste de Souhaits
+        </motion.h1>
+        <p className="text-sm mb-10" style={{ color: 'rgba(255,255,255,0.5)' }}>
+          {totalItems} article{totalItems !== 1 ? 's' : ''}
+        </p>
+
+        {/* Empty state */}
+        <AnimatePresence mode="wait">
+          {items.length === 0 ? (
             <motion.div
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
-              style={{ width: 90, height: 90, borderRadius: '50%', background: 'var(--bg2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 22 }}
+              key="empty"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex flex-col items-center justify-center py-24 gap-6"
             >
-              <Heart size={36} strokeWidth={1} color="var(--t4)" />
-            </motion.div>
-            <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(18px,3vw,24px)', fontWeight: 700, color: 'var(--t1)', marginBottom: 10 }}>
-              Votre liste de souhaits est vide
-            </h2>
-            <p style={{ fontSize: 14, color: 'var(--t3)', lineHeight: 1.7, maxWidth: 380, marginBottom: 28 }}>
-              Cliquez sur l&apos;icône ♡ sur n&apos;importe quel produit pour le sauvegarder ici et le retrouver facilement.
-            </p>
-            <Link
-              href="/shop"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 26px', background: 'var(--em)', color: '#fff', borderRadius: 10, fontSize: 13, fontWeight: 700, textDecoration: 'none', transition: 'background 0.2s' }}
-            >
-              <ShoppingBag size={15} /> Découvrir la boutique
-            </Link>
-          </motion.div>
-        ) : (
-          <>
-            <motion.div
-              id="featured-grid"
-              initial="hidden"
-              animate="visible"
-              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }}
-            >
-              <AnimatePresence>
-                {products.map((p) => {
-                  const price = p.price;
-                  const original = p.original_price;
-                  const discount = original && original > price ? Math.round((1 - price / original) * 100) : null;
-                  const img = p.images?.[0] ?? null;
-                  const isAdded = added[p.id] ?? false;
-
-                  return (
-                    <motion.article
-                      key={p.id}
-                      variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' as const } } }}
-                      exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.25 } }}
-                      className="prod-card"
-                      layout
-                    >
-                      <Link href={`/shop/${p.id}`} style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                        <div className="prod-img-wrap">
-                          {img ? (
-                            <Image
-                              src={img}
-                              alt={p.name}
-                              fill
-                              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                              className="prod-img"
-                              style={{ objectFit: 'cover' }}
-                            />
-                          ) : (
-                            <div className="prod-img-ph">
-                              <Package size={32} strokeWidth={1} color="var(--t4)" />
-                            </div>
-                          )}
-                          {discount && discount >= 5 && (
-                            <div className="prod-badge pb-sale">-{discount}%</div>
-                          )}
-                        </div>
-
-                        <div className="prod-body">
-                          {p.category && <div className="prod-cat">{p.category}</div>}
-                          <div className="prod-name">{p.name}</div>
-                          <div className="prod-price-row">
-                            <span className="prod-price">{formatPrice(price)}</span>
-                            {original && original > price && (
-                              <>
-                                <span className="prod-orig">{formatPrice(original)}</span>
-                                {discount && <span className="prod-discount">-{discount}%</span>}
-                              </>
-                            )}
-                          </div>
-                          {p.shipping_days !== undefined && (
-                            <div className="prod-shipping">
-                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" />
-                              </svg>
-                              Livraison en {p.shipping_days}–{p.shipping_days + 2} jours
-                            </div>
-                          )}
-                          <button
-                            className="prod-add"
-                            onClick={(e) => { e.preventDefault(); handleAddToCart(p.id); }}
-                            style={isAdded ? { background: '#065F46' } : {}}
-                            aria-label="Ajouter au panier"
-                          >
-                            {isAdded ? '✓ Ajouté !' : '+ Ajouter au panier'}
-                          </button>
-                        </div>
-                      </Link>
-
-                      {/* Remove from wishlist */}
-                      <motion.button
-                        onClick={() => remove(p.id)}
-                        whileTap={{ scale: 0.85 }}
-                        style={{
-                          position: 'absolute',
-                          top: 10,
-                          right: 10,
-                          width: 32,
-                          height: 32,
-                          borderRadius: '50%',
-                          background: 'rgba(255,255,255,0.93)',
-                          border: 'none',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          cursor: 'pointer',
-                          zIndex: 4,
-                          boxShadow: '0 2px 8px rgba(0,0,0,0.14)',
-                        }}
-                        aria-label="Retirer de la liste"
-                      >
-                        <Heart size={13} fill="var(--or)" color="var(--or)" />
-                      </motion.button>
-                    </motion.article>
-                  );
-                })}
-              </AnimatePresence>
-            </motion.div>
-
-            <div style={{ marginTop: 40, textAlign: 'center' }}>
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+              >
+                <Heart
+                  size={80}
+                  style={{ color: 'var(--gold, #C9A84C)', opacity: 0.3 }}
+                />
+              </motion.div>
+              <p
+                className="text-xl font-semibold"
+                style={{ color: 'rgba(255,255,255,0.6)', fontFamily: 'Outfit, sans-serif' }}
+              >
+                Votre liste de souhaits est vide
+              </p>
+              <p className="text-sm" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                Ajoutez des produits depuis la boutique pour les retrouver ici.
+              </p>
               <Link
-                href="/shop"
+                href="/collections"
+                className="mt-2 px-6 py-3 rounded-full text-sm font-semibold transition-all"
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 8,
-                  padding: '11px 24px',
-                  background: 'var(--white)',
-                  color: 'var(--t2)',
-                  border: '1.5px solid var(--bg3)',
-                  borderRadius: 10,
-                  fontSize: 13,
-                  fontWeight: 700,
+                  background: 'var(--gold, #C9A84C)',
+                  color: '#0a0f08',
                   textDecoration: 'none',
                 }}
               >
-                <ShoppingBag size={14} /> Continuer mes achats
+                Parcourir les collections
               </Link>
-            </div>
-          </>
-        )}
+            </motion.div>
+          ) : (
+            /* Grid produits */
+            <motion.div
+              key="grid"
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+            >
+              <AnimatePresence>
+                {items.map((item, i) => (
+                  <motion.div
+                    key={item.produit_id}
+                    custom={i}
+                    variants={cardVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    layout
+                    className="relative rounded-2xl overflow-hidden flex flex-col"
+                    style={{
+                      background: 'rgba(255,255,255,0.04)',
+                      border: '1px solid rgba(201,168,76,0.15)',
+                    }}
+                  >
+                    {/* Image */}
+                    <div
+                      className="relative w-full"
+                      style={{ aspectRatio: '1/1', background: 'rgba(255,255,255,0.06)' }}
+                    >
+                      {item.image_url ? (
+                        <Image
+                          src={item.image_url}
+                          alt={item.nom}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <Heart size={40} style={{ color: 'rgba(201,168,76,0.2)' }} />
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Info */}
+                    <div className="flex flex-col gap-2 p-3 flex-1">
+                      <p
+                        className="text-sm font-medium line-clamp-2"
+                        style={{ color: 'rgba(255,255,255,0.85)', fontFamily: 'Outfit, sans-serif' }}
+                      >
+                        {item.nom}
+                      </p>
+                      <p
+                        className="text-sm font-bold"
+                        style={{ color: 'var(--gold, #C9A84C)' }}
+                      >
+                        {formatPrix(item.prix)}
+                      </p>
+
+                      {/* Actions */}
+                      <div className="flex gap-2 mt-auto pt-2">
+                        <button
+                          onClick={() => handleAddToCart(item.produit_id)}
+                          className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-semibold transition-all"
+                          style={{ background: 'var(--gold, #C9A84C)', color: '#0a0f08' }}
+                        >
+                          <ShoppingBag size={13} />
+                          Panier
+                        </button>
+                        <button
+                          onClick={() => removeFromWishlist(item.produit_id)}
+                          className="p-2 rounded-xl transition-all"
+                          style={{
+                            background: 'rgba(239,68,68,0.12)',
+                            color: 'rgb(239,68,68)',
+                            border: '1px solid rgba(239,68,68,0.2)',
+                          }}
+                          aria-label="Retirer des favoris"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

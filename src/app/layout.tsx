@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { CartProvider } from '@/context/CartContext';
+import { WishlistProvider } from '@/context/WishlistContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import './globals.css';
@@ -55,9 +56,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body style={{ backgroundColor: '#0a0f08' }}>
         <CartProvider>
-          <Navbar />
-          <main style={{ flex: 1 }}>{children}</main>
-          <Footer />
+          <WishlistProvider>
+            <Navbar />
+            <main style={{ flex: 1 }}>{children}</main>
+            <Footer />
+          </WishlistProvider>
         </CartProvider>
         <div id="modal-root" />
       </body>
