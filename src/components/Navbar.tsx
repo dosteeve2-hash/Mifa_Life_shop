@@ -179,7 +179,7 @@ export default function Navbar() {
                 </AnimatePresence>
               </button>
 
-              <Link href="/account" className="ic-btn" aria-label="Mon compte">
+              <Link href="/profil" className="ic-btn" aria-label="Mon profil">
                 <User size={18} />
               </Link>
 
@@ -270,6 +270,17 @@ export default function Navbar() {
                 {cat.label}
               </Link>
             ))}
+
+            <div className="mob-sep" />
+            <div className="mob-sec-ti">Mon compte</div>
+            <Link href="/wishlist" className="mob-l" onClick={() => setDrawerOpen(false)}>
+              <Heart size={14} />
+              Ma wishlist
+            </Link>
+            <Link href="/profil" className="mob-l" onClick={() => setDrawerOpen(false)}>
+              <User size={14} />
+              Mon profil
+            </Link>
 
             <div className="mob-auth">
               <Link href="/login" onClick={() => setDrawerOpen(false)}>
