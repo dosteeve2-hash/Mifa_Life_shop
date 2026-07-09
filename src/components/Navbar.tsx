@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { href: '/', label: 'Accueil' },
   { href: '/shop', label: 'Boutique' },
   { href: '/promo', label: 'Promos' },
+  { href: '/avis', label: 'Avis' },
   { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ];
