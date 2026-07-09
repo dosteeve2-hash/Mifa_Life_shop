@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ShoppingBag, Heart, User, Search, X, ChevronRight } from 'lucide-react';
+import { ShoppingBag, Heart, User, Search, X, ChevronRight, Package } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import CartDrawer from './CartDrawer';
 import Logo from './Logo';
@@ -183,6 +183,10 @@ export default function Navbar() {
                 <User size={18} />
               </Link>
 
+              <Link href="/commandes" className="ic-btn" aria-label="Mes commandes" title="Mes commandes">
+                <Package size={18} />
+              </Link>
+
               <Link href="/login" className="auth-btn">
                 Connexion
               </Link>
@@ -270,6 +274,27 @@ export default function Navbar() {
                 {cat.label}
               </Link>
             ))}
+
+            <div className="mob-sep" />
+            <div className="mob-sec-ti">Mon compte</div>
+            <Link
+              href="/commandes"
+              className="mob-l"
+              onClick={() => setDrawerOpen(false)}
+              style={pathname === '/commandes' ? { color: 'var(--gold)' } : {}}
+            >
+              <Package size={14} />
+              Mes commandes
+            </Link>
+            <Link
+              href="/account"
+              className="mob-l"
+              onClick={() => setDrawerOpen(false)}
+              style={pathname === '/account' ? { color: 'var(--gold)' } : {}}
+            >
+              <User size={14} />
+              Mon compte
+            </Link>
 
             <div className="mob-auth">
               <Link href="/login" onClick={() => setDrawerOpen(false)}>
