@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { CartProvider } from '@/context/CartContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import BottomNav from '@/components/BottomNav';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -53,11 +54,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           rel="stylesheet"
         />
       </head>
-      <body style={{ backgroundColor: '#0a0f08' }}>
+      <body style={{ backgroundColor: '#f2f6fb' }}>
         <CartProvider>
           <Navbar />
           <main style={{ flex: 1 }}>{children}</main>
           <Footer />
+          <BottomNav />
         </CartProvider>
         <div id="modal-root" />
       </body>
