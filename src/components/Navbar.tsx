@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ShoppingBag, Heart, User, Search, X, ChevronRight } from 'lucide-react';
+import { ShoppingBag, Heart, User, Search, X, ChevronRight, Settings, Laptop, Shirt, Home as HomeIcon, Dumbbell, Sparkles, Baby, Car, UtensilsCrossed } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import CartDrawer from './CartDrawer';
 import Logo from './Logo';
@@ -18,14 +18,14 @@ const NAV_LINKS = [
 ];
 
 const CATEGORIES = [
-  { label: 'Électronique', emoji: '💻', href: '/shop?cat=electronique' },
-  { label: 'Mode', emoji: '👗', href: '/shop?cat=mode' },
-  { label: 'Maison', emoji: '🏠', href: '/shop?cat=maison' },
-  { label: 'Sport', emoji: '⚽', href: '/shop?cat=sport' },
-  { label: 'Beauté', emoji: '💄', href: '/shop?cat=beaute' },
-  { label: 'Enfants', emoji: '🧸', href: '/shop?cat=enfants' },
-  { label: 'Auto', emoji: '🚗', href: '/shop?cat=auto' },
-  { label: 'Alimentation', emoji: '🛒', href: '/shop?cat=alimentation' },
+  { label: 'Électronique', Icon: Laptop, href: '/shop?cat=electronique' },
+  { label: 'Mode', Icon: Shirt, href: '/shop?cat=mode' },
+  { label: 'Maison', Icon: HomeIcon, href: '/shop?cat=maison' },
+  { label: 'Sport', Icon: Dumbbell, href: '/shop?cat=sport' },
+  { label: 'Beauté', Icon: Sparkles, href: '/shop?cat=beaute' },
+  { label: 'Enfants', Icon: Baby, href: '/shop?cat=enfants' },
+  { label: 'Auto', Icon: Car, href: '/shop?cat=auto' },
+  { label: 'Alimentation', Icon: UtensilsCrossed, href: '/shop?cat=alimentation' },
 ];
 
 export default function Navbar() {
@@ -209,7 +209,7 @@ export default function Navbar() {
                 href={cat.href}
                 className={`sn-a ${pathname.includes(cat.href.split('?')[1] ?? '__') ? 'on' : ''}`}
               >
-                <span>{cat.emoji}</span>
+                <cat.Icon size={13} />
                 {cat.label}
               </Link>
             ))}
@@ -266,7 +266,7 @@ export default function Navbar() {
                 className="mob-l"
                 onClick={() => setDrawerOpen(false)}
               >
-                <span>{cat.emoji}</span>
+                <cat.Icon size={14} />
                 {cat.label}
               </Link>
             ))}
@@ -280,6 +280,10 @@ export default function Navbar() {
             <Link href="/profil" className="mob-l" onClick={() => setDrawerOpen(false)}>
               <User size={14} />
               Mon profil
+            </Link>
+            <Link href="/compte/parametres" className="mob-l" onClick={() => setDrawerOpen(false)}>
+              <Settings size={14} />
+              Paramètres
             </Link>
 
             <div className="mob-auth">
