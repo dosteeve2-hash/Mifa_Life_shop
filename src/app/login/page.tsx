@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -117,13 +117,15 @@ export default function LoginPage() {
         <div
           className="overflow-hidden rounded-2xl"
           style={{
-            background: 'var(--bg3)',
-            border: '1.5px solid var(--border2)',
-            boxShadow: '0 14px 42px rgba(0,0,0,0.65)',
+            background: 'var(--glass2)',
+            backdropFilter: 'var(--glass-blur)',
+            WebkitBackdropFilter: 'var(--glass-blur)',
+            border: '1px solid var(--glass-brd)',
+            boxShadow: 'var(--sh-l)',
           }}
         >
-          {/* Bande dorée en haut */}
-          <div className="h-[3px]" style={{ background: 'var(--gold)' }} />
+          {/* Bande accent en haut */}
+          <div className="h-[3px]" style={{ background: 'linear-gradient(90deg, var(--gold), var(--cyan))' }} />
 
           <div className="p-8">
             {/* Logo */}
@@ -138,7 +140,7 @@ export default function LoginPage() {
               <>
                 <div className="mb-6 text-center">
                   <h1
-                    className="font-serif text-2xl font-bold italic"
+                    className="text-2xl font-extrabold tracking-tight"
                     style={{ color: 'var(--text)' }}
                   >
                     Connexion
@@ -172,7 +174,7 @@ export default function LoginPage() {
                         border: '1.5px solid var(--border2)',
                         color: 'var(--text)',
                       }}
-                      onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--gold)'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(240,168,50,0.12)'; }}
+                      onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--gold)'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(47,111,237,0.14)'; }}
                       onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--border2)'; e.currentTarget.style.boxShadow = 'none'; }}
                     />
                   </div>
@@ -180,7 +182,7 @@ export default function LoginPage() {
                   {error && (
                     <div
                       className="rounded-xl px-4 py-3 text-sm font-medium"
-                      style={{ background: 'rgba(239,68,68,0.10)', border: '1px solid rgba(239,68,68,0.3)', color: 'var(--red)' }}
+                      style={{ background: 'rgba(220,38,38,0.07)', border: '1px solid rgba(220,38,38,0.25)', color: 'var(--red)' }}
                     >
                       {error}
                     </div>
@@ -190,7 +192,7 @@ export default function LoginPage() {
                     type="submit"
                     disabled={loading}
                     className="flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-60"
-                    style={{ background: 'var(--gold)', color: 'var(--bg)' }}
+                    style={{ background: 'var(--gold)', color: '#ffffff', boxShadow: 'var(--sh-s)' }}
                     onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--gold2)'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--gold)'; }}
                   >
@@ -198,7 +200,7 @@ export default function LoginPage() {
                       <>
                         <span
                           className="h-4 w-4 animate-spin rounded-full border-2"
-                          style={{ borderColor: 'rgba(7,14,31,0.3)', borderTopColor: 'var(--bg)' }}
+                          style={{ borderColor: 'rgba(255,255,255,0.35)', borderTopColor: '#ffffff' }}
                         />
                         Envoi en cours…
                       </>
@@ -229,7 +231,7 @@ export default function LoginPage() {
                 <div className="mb-6 text-center">
                   <div
                     className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl"
-                    style={{ background: 'rgba(240,168,50,0.08)', border: '1px solid rgba(240,168,50,0.2)' }}
+                    style={{ background: 'rgba(47,111,237,0.08)', border: '1px solid rgba(47,111,237,0.2)' }}
                   >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                       stroke="var(--gold)" strokeWidth="1.8">
@@ -238,7 +240,7 @@ export default function LoginPage() {
                     </svg>
                   </div>
                   <h1
-                    className="font-serif text-2xl font-bold italic"
+                    className="text-2xl font-extrabold tracking-tight"
                     style={{ color: 'var(--text)' }}
                   >
                     Vérification
@@ -275,7 +277,7 @@ export default function LoginPage() {
                         border: '1.5px solid var(--border2)',
                         color: 'var(--text)',
                       }}
-                      onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--gold)'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(240,168,50,0.12)'; }}
+                      onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--gold)'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(47,111,237,0.14)'; }}
                       onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--border2)'; e.currentTarget.style.boxShadow = 'none'; }}
                     />
                     <p className="mt-1.5 text-center text-xs" style={{ color: 'var(--text3)' }}>
@@ -286,7 +288,7 @@ export default function LoginPage() {
                   {error && (
                     <div
                       className="rounded-xl px-4 py-3 text-sm font-medium"
-                      style={{ background: 'rgba(239,68,68,0.10)', border: '1px solid rgba(239,68,68,0.3)', color: 'var(--red)' }}
+                      style={{ background: 'rgba(220,38,38,0.07)', border: '1px solid rgba(220,38,38,0.25)', color: 'var(--red)' }}
                     >
                       {error}
                     </div>
@@ -296,7 +298,7 @@ export default function LoginPage() {
                     type="submit"
                     disabled={loading}
                     className="flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-60"
-                    style={{ background: 'var(--gold)', color: 'var(--bg)' }}
+                    style={{ background: 'var(--gold)', color: '#ffffff', boxShadow: 'var(--sh-s)' }}
                     onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--gold2)'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--gold)'; }}
                   >
@@ -304,7 +306,7 @@ export default function LoginPage() {
                       <>
                         <span
                           className="h-4 w-4 animate-spin rounded-full border-2"
-                          style={{ borderColor: 'rgba(7,14,31,0.3)', borderTopColor: 'var(--bg)' }}
+                          style={{ borderColor: 'rgba(255,255,255,0.35)', borderTopColor: '#ffffff' }}
                         />
                         Vérification…
                       </>
@@ -340,8 +342,8 @@ export default function LoginPage() {
                 <div
                   className="mb-4 flex h-16 w-16 items-center justify-center rounded-full"
                   style={{
-                    background: 'rgba(34,217,138,0.08)',
-                    boxShadow: '0 0 0 4px rgba(34,217,138,0.15)',
+                    background: 'rgba(22,163,74,0.08)',
+                    boxShadow: '0 0 0 4px rgba(22,163,74,0.15)',
                   }}
                 >
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
@@ -350,7 +352,7 @@ export default function LoginPage() {
                   </svg>
                 </div>
                 <h2
-                  className="font-serif text-2xl font-bold italic"
+                  className="text-2xl font-extrabold tracking-tight"
                   style={{ color: 'var(--text)' }}
                 >
                   Connecté !
