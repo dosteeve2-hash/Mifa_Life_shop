@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -19,6 +19,102 @@ function getSupabase() {
   }
   return _supabase;
 }
+
+/* ── Styles Glass Light (autonomes, pas de dépendance aux utilitaires) ── */
+const S = {
+  page: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 'calc(100vh - 64px)',
+    padding: '24px 16px',
+    background: 'var(--bg)',
+  } as React.CSSProperties,
+  card: {
+    overflow: 'hidden',
+    borderRadius: '18px',
+    background: 'var(--glass2)',
+    backdropFilter: 'var(--glass-blur)',
+    WebkitBackdropFilter: 'var(--glass-blur)',
+    border: '1px solid var(--glass-brd)',
+    boxShadow: 'var(--sh-l)',
+  } as React.CSSProperties,
+  band: {
+    height: '3px',
+    background: 'linear-gradient(90deg, var(--gold), var(--cyan))',
+  } as React.CSSProperties,
+  inner: { padding: '32px' } as React.CSSProperties,
+  title: {
+    fontSize: '26px',
+    fontWeight: 800,
+    letterSpacing: '-0.02em',
+    color: 'var(--text)',
+    margin: 0,
+  } as React.CSSProperties,
+  subtitle: {
+    marginTop: '6px',
+    fontSize: '14px',
+    color: 'var(--text2)',
+    lineHeight: 1.5,
+  } as React.CSSProperties,
+  label: {
+    display: 'block',
+    marginBottom: '7px',
+    fontSize: '11px',
+    fontWeight: 700,
+    textTransform: 'uppercase',
+    letterSpacing: '0.08em',
+    color: 'var(--text3)',
+    fontFamily: 'var(--font-mono)',
+  } as React.CSSProperties,
+  input: {
+    width: '100%',
+    padding: '12px 16px',
+    fontSize: '14px',
+    borderRadius: '12px',
+    background: 'var(--bg2)',
+    border: '1.5px solid var(--border2)',
+    color: 'var(--text)',
+    outline: 'none',
+    transition: 'border-color .2s, box-shadow .2s',
+    boxSizing: 'border-box',
+  } as React.CSSProperties,
+  error: {
+    padding: '12px 16px',
+    borderRadius: '12px',
+    fontSize: '13.5px',
+    fontWeight: 500,
+    background: 'rgba(220,38,38,0.07)',
+    border: '1px solid rgba(220,38,38,0.25)',
+    color: 'var(--red)',
+  } as React.CSSProperties,
+  button: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '8px',
+    width: '100%',
+    padding: '13px 16px',
+    fontSize: '14px',
+    fontWeight: 700,
+    borderRadius: '12px',
+    border: 'none',
+    cursor: 'pointer',
+    background: 'var(--gold)',
+    color: '#ffffff',
+    boxShadow: 'var(--sh-s)',
+    transition: 'background .2s, transform .1s',
+  } as React.CSSProperties,
+  spinner: {
+    width: '16px',
+    height: '16px',
+    borderRadius: '50%',
+    border: '2px solid rgba(255,255,255,0.35)',
+    borderTopColor: '#ffffff',
+    animation: 'spin 0.8s linear infinite',
+  } as React.CSSProperties,
+  form: { display: 'flex', flexDirection: 'column', gap: '16px' } as React.CSSProperties,
+};
 
 export default function LoginPage() {
   const [step,    setStep]    = useState<Step>('email');
@@ -102,34 +198,33 @@ export default function LoginPage() {
     const iv = setInterval(() => setCount((c) => { if (c <= 1) { clearInterval(iv); return 0; } return c - 1; }), 1000);
   }
 
+  const focusRing = {
+    onFocus: (e: React.FocusEvent<HTMLInputElement>) => {
+      e.currentTarget.style.borderColor = 'var(--gold)';
+      e.currentTarget.style.boxShadow = '0 0 0 3px rgba(47,111,237,0.14)';
+    },
+    onBlur: (e: React.FocusEvent<HTMLInputElement>) => {
+      e.currentTarget.style.borderColor = 'var(--border2)';
+      e.currentTarget.style.boxShadow = 'none';
+    },
+  };
+
   return (
-    <div
-      className="flex min-h-[calc(100vh-64px)] items-center justify-center p-4"
-      style={{ background: 'var(--bg)' }}
-    >
+    <div style={S.page}>
       <motion.div
-        className="w-full max-w-md"
+        style={{ width: '100%', maxWidth: '440px' }}
         initial={{ opacity: 0, y: 32 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: 'easeOut' as const }}
       >
         {/* Carte principale */}
-        <div
-          className="overflow-hidden rounded-2xl"
-          style={{
-            background: 'var(--glass2)',
-            backdropFilter: 'var(--glass-blur)',
-            WebkitBackdropFilter: 'var(--glass-blur)',
-            border: '1px solid var(--glass-brd)',
-            boxShadow: 'var(--sh-l)',
-          }}
-        >
+        <div style={S.card}>
           {/* Bande accent en haut */}
-          <div className="h-[3px]" style={{ background: 'linear-gradient(90deg, var(--gold), var(--cyan))' }} />
+          <div style={S.band} />
 
-          <div className="p-8">
+          <div style={S.inner}>
             {/* Logo */}
-            <div className="mb-6 flex justify-center">
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
               <Link href="/" aria-label="Retour à l'accueil">
                 <Logo variant="full" size="md" />
               </Link>
@@ -138,27 +233,16 @@ export default function LoginPage() {
             {/* ── ÉTAPE EMAIL ── */}
             {step === 'email' && (
               <>
-                <div className="mb-6 text-center">
-                  <h1
-                    className="text-2xl font-extrabold tracking-tight"
-                    style={{ color: 'var(--text)' }}
-                  >
-                    Connexion
-                  </h1>
-                  <p className="mt-1.5 text-sm" style={{ color: 'var(--text2)' }}>
+                <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+                  <h1 style={S.title}>Connexion</h1>
+                  <p style={S.subtitle}>
                     Entrez votre email — nous vous envoyons un code à 6 chiffres.
                   </p>
                 </div>
 
-                <form onSubmit={sendOtp} className="flex flex-col gap-4">
+                <form onSubmit={sendOtp} style={S.form}>
                   <div>
-                    <label
-                      htmlFor="email"
-                      className="mb-1.5 block text-xs font-bold uppercase tracking-wider font-mono"
-                      style={{ color: 'var(--text3)' }}
-                    >
-                      Adresse email
-                    </label>
+                    <label htmlFor="email" style={S.label}>Adresse email</label>
                     <input
                       id="email"
                       type="email"
@@ -168,40 +252,23 @@ export default function LoginPage() {
                       autoComplete="email"
                       autoFocus
                       disabled={loading}
-                      className="w-full rounded-xl px-4 py-3 text-sm transition-all disabled:opacity-60"
-                      style={{
-                        background: 'var(--bg2)',
-                        border: '1.5px solid var(--border2)',
-                        color: 'var(--text)',
-                      }}
-                      onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--gold)'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(47,111,237,0.14)'; }}
-                      onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--border2)'; e.currentTarget.style.boxShadow = 'none'; }}
+                      style={{ ...S.input, opacity: loading ? 0.6 : 1 }}
+                      {...focusRing}
                     />
                   </div>
 
-                  {error && (
-                    <div
-                      className="rounded-xl px-4 py-3 text-sm font-medium"
-                      style={{ background: 'rgba(220,38,38,0.07)', border: '1px solid rgba(220,38,38,0.25)', color: 'var(--red)' }}
-                    >
-                      {error}
-                    </div>
-                  )}
+                  {error && <div style={S.error}>{error}</div>}
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-60"
-                    style={{ background: 'var(--gold)', color: '#ffffff', boxShadow: 'var(--sh-s)' }}
+                    style={{ ...S.button, opacity: loading ? 0.65 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
                     onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--gold2)'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--gold)'; }}
                   >
                     {loading ? (
                       <>
-                        <span
-                          className="h-4 w-4 animate-spin rounded-full border-2"
-                          style={{ borderColor: 'rgba(255,255,255,0.35)', borderTopColor: '#ffffff' }}
-                        />
+                        <span style={S.spinner} />
                         Envoi en cours…
                       </>
                     ) : (
@@ -216,9 +283,9 @@ export default function LoginPage() {
                   </button>
                 </form>
 
-                <p className="mt-5 text-center text-xs" style={{ color: 'var(--text3)' }}>
+                <p style={{ marginTop: '20px', textAlign: 'center', fontSize: '12px', color: 'var(--text3)' }}>
                   Première visite ?{' '}
-                  <span className="font-semibold" style={{ color: 'var(--gold)' }}>
+                  <span style={{ fontWeight: 600, color: 'var(--gold)' }}>
                     Un compte est créé automatiquement.
                   </span>
                 </p>
@@ -228,10 +295,13 @@ export default function LoginPage() {
             {/* ── ÉTAPE OTP ── */}
             {step === 'otp' && (
               <>
-                <div className="mb-6 text-center">
+                <div style={{ textAlign: 'center', marginBottom: '24px' }}>
                   <div
-                    className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl"
-                    style={{ background: 'rgba(47,111,237,0.08)', border: '1px solid rgba(47,111,237,0.2)' }}
+                    style={{
+                      margin: '0 auto 12px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      width: '56px', height: '56px', borderRadius: '16px',
+                      background: 'rgba(47,111,237,0.08)', border: '1px solid rgba(47,111,237,0.2)',
+                    }}
                   >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                       stroke="var(--gold)" strokeWidth="1.8">
@@ -239,27 +309,16 @@ export default function LoginPage() {
                       <polyline points="22,6 12,13 2,6"/>
                     </svg>
                   </div>
-                  <h1
-                    className="text-2xl font-extrabold tracking-tight"
-                    style={{ color: 'var(--text)' }}
-                  >
-                    Vérification
-                  </h1>
-                  <p className="mt-1.5 text-sm" style={{ color: 'var(--text2)' }}>
+                  <h1 style={S.title}>Vérification</h1>
+                  <p style={S.subtitle}>
                     Code envoyé à{' '}
-                    <span className="font-semibold" style={{ color: 'var(--text)' }}>{email}</span>
+                    <span style={{ fontWeight: 600, color: 'var(--text)' }}>{email}</span>
                   </p>
                 </div>
 
-                <form onSubmit={verifyOtp} className="flex flex-col gap-4">
+                <form onSubmit={verifyOtp} style={S.form}>
                   <div>
-                    <label
-                      htmlFor="otp"
-                      className="mb-1.5 block text-xs font-bold uppercase tracking-wider font-mono"
-                      style={{ color: 'var(--text3)' }}
-                    >
-                      Code à 6 chiffres
-                    </label>
+                    <label htmlFor="otp" style={S.label}>Code à 6 chiffres</label>
                     <input
                       id="otp"
                       type="text"
@@ -271,62 +330,53 @@ export default function LoginPage() {
                       placeholder="123456"
                       autoFocus
                       disabled={loading}
-                      className="w-full rounded-xl px-4 py-3 text-center text-2xl font-bold tracking-[0.4em] transition-all disabled:opacity-60 font-mono"
                       style={{
-                        background: 'var(--bg2)',
-                        border: '1.5px solid var(--border2)',
-                        color: 'var(--text)',
+                        ...S.input,
+                        textAlign: 'center', fontSize: '24px', fontWeight: 700,
+                        letterSpacing: '0.4em', fontFamily: 'var(--font-mono)',
+                        opacity: loading ? 0.6 : 1,
                       }}
-                      onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--gold)'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(47,111,237,0.14)'; }}
-                      onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--border2)'; e.currentTarget.style.boxShadow = 'none'; }}
+                      {...focusRing}
                     />
-                    <p className="mt-1.5 text-center text-xs" style={{ color: 'var(--text3)' }}>
+                    <p style={{ marginTop: '7px', textAlign: 'center', fontSize: '12px', color: 'var(--text3)' }}>
                       Vérifiez vos spams si nécessaire
                     </p>
                   </div>
 
-                  {error && (
-                    <div
-                      className="rounded-xl px-4 py-3 text-sm font-medium"
-                      style={{ background: 'rgba(220,38,38,0.07)', border: '1px solid rgba(220,38,38,0.25)', color: 'var(--red)' }}
-                    >
-                      {error}
-                    </div>
-                  )}
+                  {error && <div style={S.error}>{error}</div>}
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-60"
-                    style={{ background: 'var(--gold)', color: '#ffffff', boxShadow: 'var(--sh-s)' }}
+                    style={{ ...S.button, opacity: loading ? 0.65 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
                     onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--gold2)'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--gold)'; }}
                   >
                     {loading ? (
                       <>
-                        <span
-                          className="h-4 w-4 animate-spin rounded-full border-2"
-                          style={{ borderColor: 'rgba(255,255,255,0.35)', borderTopColor: '#ffffff' }}
-                        />
+                        <span style={S.spinner} />
                         Vérification…
                       </>
                     ) : 'Valider le code'}
                   </button>
                 </form>
 
-                <div className="mt-5 flex flex-col items-center gap-2 text-center">
+                <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', textAlign: 'center' }}>
                   <button
                     onClick={resend}
                     disabled={countdown > 0 || loading}
-                    className="text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-40 hover:underline font-mono"
-                    style={{ color: 'var(--gold)' }}
+                    style={{
+                      background: 'none', border: 'none', fontSize: '13.5px', fontWeight: 600,
+                      fontFamily: 'var(--font-mono)', color: 'var(--gold)',
+                      cursor: countdown > 0 || loading ? 'not-allowed' : 'pointer',
+                      opacity: countdown > 0 || loading ? 0.4 : 1,
+                    }}
                   >
                     {countdown > 0 ? `Renvoyer dans ${countdown}s` : 'Renvoyer le code'}
                   </button>
                   <button
                     onClick={() => { setStep('email'); setError(null); setOtp(''); }}
-                    className="text-xs transition-colors"
-                    style={{ color: 'var(--text3)' }}
+                    style={{ background: 'none', border: 'none', fontSize: '12px', color: 'var(--text3)', cursor: 'pointer' }}
                     onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--text2)'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text3)'; }}
                   >
@@ -338,10 +388,11 @@ export default function LoginPage() {
 
             {/* ── SUCCÈS ── */}
             {step === 'success' && (
-              <div className="flex flex-col items-center py-4 text-center">
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '16px 0' }}>
                 <div
-                  className="mb-4 flex h-16 w-16 items-center justify-center rounded-full"
                   style={{
+                    marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    width: '64px', height: '64px', borderRadius: '50%',
                     background: 'rgba(22,163,74,0.08)',
                     boxShadow: '0 0 0 4px rgba(22,163,74,0.15)',
                   }}
@@ -351,13 +402,8 @@ export default function LoginPage() {
                     <polyline points="20 6 9 17 4 12"/>
                   </svg>
                 </div>
-                <h2
-                  className="text-2xl font-extrabold tracking-tight"
-                  style={{ color: 'var(--text)' }}
-                >
-                  Connecté !
-                </h2>
-                <p className="mt-2 text-sm" style={{ color: 'var(--text2)' }}>
+                <h2 style={S.title}>Connecté !</h2>
+                <p style={{ ...S.subtitle, marginTop: '8px' }}>
                   Redirection vers la boutique…
                 </p>
               </div>
@@ -367,11 +413,10 @@ export default function LoginPage() {
 
         {/* Lien retour */}
         {step !== 'success' && (
-          <p className="mt-4 text-center text-xs" style={{ color: 'var(--text3)' }}>
+          <p style={{ marginTop: '16px', textAlign: 'center', fontSize: '12px' }}>
             <Link
               href="/"
-              className="transition-colors hover:underline"
-              style={{ color: 'var(--text3)' }}
+              style={{ color: 'var(--text3)', textDecoration: 'none' }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text2)'; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text3)'; }}
             >
