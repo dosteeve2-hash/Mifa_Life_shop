@@ -142,9 +142,9 @@ export default function AdminPage() {
         {/* Quick actions */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 10, marginBottom: 36 }}>
           {[
-            { label: 'Ajouter un produit', href: '/add-product', emoji: '➕' },
+            { label: 'Nouveau produit', href: '/admin/produits/nouveau', emoji: '➕' },
             { label: 'Voir la boutique', href: '/shop', emoji: '🛍️' },
-            { label: 'Commandes', href: '/orders', emoji: '📦' },
+            { label: 'Commandes', href: '/admin/commandes', emoji: '📦' },
             { label: 'Vendeurs', href: '/seller-dashboard', emoji: '🏪' },
             { label: 'Contact client', href: '/contact', emoji: '💬' },
             { label: 'Stats avancées', href: '/admin/stats', emoji: '📊' },

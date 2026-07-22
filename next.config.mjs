@@ -1,5 +1,6 @@
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { withSentryConfig } from '@sentry/nextjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -24,4 +25,9 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
 };
-export default nextConfig;
+
+export default withSentryConfig(nextConfig, {
+  silent: true,
+  org: 'forge-afrika',
+  project: 'mifa-life-shop',
+});

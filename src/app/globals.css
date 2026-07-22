@@ -3,24 +3,36 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── MIFA LIFE — GLASS LIGHT ── */
-  --color-bg:          #f2f6fb;
-  --color-bg2:         #ffffff;
-  --color-bg3:         #ffffff;
-  --color-bg4:         #e9f0f9;
-  --color-text:        #0e1c33;
-  --color-text2:       #4a6285;
-  --color-text3:       #8fa3bf;
-  --color-gold:        #2f6fed;
-  --color-gold2:       #5b8cf5;
-  --color-gold3:       #1e56c8;
-  --color-mali-green:  #16a34a;
-  --color-mali-red:    #dc2626;
-  --color-cyan:        #0ea5e9;
-  --color-green:       #16a34a;
-  --color-red:         #dc2626;
-  --color-border:      #e4ebf5;
-  --color-border2:     #d4dfee;
+  /* ── MIFA LIFE — DESIGN UPGRADE v2 : Navy × Gold × Cyan ── */
+  --color-bg:          #0A1628;
+  --color-bg2:         #0c1a30;
+  --color-bg3:         #0f2040;
+  --color-bg4:         #152545;
+  --color-text:        #e8edf5;
+  --color-text2:       #93aacb;
+  --color-text3:       #4f6d8e;
+
+  /* Navy — fond principal */
+  --color-navy:        #0A1628;
+  --color-navy2:       #0c1a30;
+
+  /* Gold premium */
+  --color-gold:        #D4AF37;
+  --color-gold2:       #F5D67A;
+  --color-gold3:       #b8962e;
+
+  /* Cyan accent */
+  --color-cyan:        #00BCD4;
+  --color-cyan2:       #26C6DA;
+
+  /* Sémantique */
+  --color-mali-green:  #22c55e;
+  --color-mali-red:    #ef4444;
+  --color-green:       #22c55e;
+  --color-red:         #ef4444;
+  --color-border:      rgba(212,175,55,.12);
+  --color-border2:     rgba(212,175,55,.18);
+
   --font-sans: 'Outfit', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
@@ -406,3 +418,189 @@ h1,h2,h3 { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: 
 
 /* Accent doux (ex glow-gold) */
 .glow-gold { box-shadow: 0 0 20px rgba(47,111,237,.12),0 0 40px rgba(47,111,237,.06); }
+
+
+/* ── GlowButton utilities ── */
+.shadow-gold-glow { box-shadow: 0 0 24px rgba(212,175,55,.35), 0 8px 20px rgba(0,0,0,.3); }
+.hover-gold:hover { background: #b8962e !important; box-shadow: 0 8px 28px rgba(212,175,55,.45), 0 4px 12px rgba(0,0,0,.3) !important; }
+.hover-navy:hover { background: #0c1a30 !important; border-color: rgba(212,175,55,.5) !important; }
+.hover-outline:hover { background: rgba(212,175,55,.08) !important; border-color: rgba(212,175,55,.6) !important; }
+
+/* ═══════════════════════════════════════════════════════════════
+   MIFA LIFE — DESIGN UPGRADE v2  |  Navy × Gold × Cyan
+   Palette: #0A1628 (navy) / #D4AF37 (gold) / #00BCD4 (cyan)
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Core palette override */
+  --bg:          #0A1628;
+  --bg2:         #0c1a30;
+  --bg3:         #0f2040;
+  --bg4:         #152545;
+  --text:        #e8edf5;
+  --text2:       #93aacb;
+  --text3:       #4f6d8e;
+
+  /* Gold premium (ex --gold was #2f6fed) */
+  --gold:        #D4AF37;
+  --gold2:       #F5D67A;
+  --gold3:       #b8962e;
+
+  /* Cyan accent */
+  --cyan:        #00BCD4;
+  --cyan2:       #26C6DA;
+
+  /* Semantic */
+  --green:       #22c55e;
+  --red:         #ef4444;
+  --border:      rgba(212,175,55,.12);
+  --border2:     rgba(212,175,55,.18);
+
+  /* Text aliases */
+  --t1:  #e8edf5;
+  --t2:  #93aacb;
+  --t3:  #4f6d8e;
+  --t4:  #4f6d8e;
+
+  /* Legacy color aliases */
+  --em:   #D4AF37;
+  --em-d: #b8962e;
+  --em-l: rgba(212,175,55,.08);
+  --em-g: rgba(212,175,55,.20);
+  --or:   #D4AF37;
+  --or-l: rgba(212,175,55,.08);
+  --sl:   #0c1a30;
+  --sl2:  #0f2040;
+  --sl3:  #0A1628;
+  --mu:   #D4AF37;
+  --mu-l: rgba(212,175,55,.10);
+  --mg:   #22c55e;
+  --my:   #D4AF37;
+  --mr:   #ef4444;
+  --white: #e8edf5;
+
+  /* Glass system — dark navy glass */
+  --glass:      rgba(10,22,40,.62);
+  --glass2:     rgba(12,26,48,.88);
+  --glass-brd:  rgba(212,175,55,.15);
+  --glass-blur: saturate(1.4) blur(20px);
+
+  /* Shadows — deep navy */
+  --sh-s: 0 2px 10px rgba(0,0,0,.3);
+  --sh-m: 0 8px 28px rgba(0,0,0,.45);
+  --sh-l: 0 18px 50px rgba(0,0,0,.6);
+
+  /* Selection */
+  --selection-bg: rgba(212,175,55,.25);
+}
+
+/* Body dark override */
+body {
+  background: #0A1628 !important;
+  color: #e8edf5;
+}
+
+/* Scrollbar dark */
+::-webkit-scrollbar-track { background: #0A1628; }
+::-webkit-scrollbar-thumb { background: rgba(212,175,55,.25); }
+::selection { background: rgba(212,175,55,.3); color: #fff; }
+*:focus-visible { outline-color: #D4AF37; }
+
+/* ── Navbar dark glass ── */
+#nav { background: rgba(10,22,40,.92) !important; border-bottom-color: rgba(212,175,55,.12) !important; }
+.nv-lnk:hover { color: #D4AF37 !important; background: rgba(212,175,55,.06) !important; }
+.auth-btn { background: #D4AF37 !important; color: #0A1628 !important; }
+.auth-btn:hover { background: #b8962e !important; box-shadow: 0 4px 14px rgba(212,175,55,.3) !important; }
+.si:focus { border-color: #D4AF37 !important; box-shadow: 0 0 0 3px rgba(212,175,55,.12) !important; }
+.si-btn { background: #D4AF37 !important; color: #0A1628 !important; }
+.ic-btn:hover { color: #D4AF37 !important; }
+.ic-bdg { background: #D4AF37 !important; color: #0A1628 !important; }
+
+/* ── Section headers dark ── */
+.sec-eyebrow { color: #D4AF37 !important; }
+.sec-ti { color: #e8edf5 !important; }
+.sec-link { color: #D4AF37 !important; }
+
+/* ── Categories dark ── */
+.cat-card, .how-card, .trust-card {
+  background: rgba(255,255,255,.03) !important;
+  border-color: rgba(212,175,55,.10) !important;
+  color: #e8edf5 !important;
+}
+.cat-card:hover, .how-card:hover, .trust-card:hover {
+  border-color: rgba(212,175,55,.35) !important;
+  box-shadow: 0 0 0 1px rgba(212,175,55,.12), 0 8px 32px rgba(0,0,0,.5) !important;
+}
+.cat-ico { background: rgba(212,175,55,.10) !important; border-color: rgba(212,175,55,.25) !important; color: #D4AF37 !important; }
+.cat-name { color: #e8edf5 !important; }
+.trust-ico { background: rgba(212,175,55,.10) !important; border-color: rgba(212,175,55,.2) !important; color: #D4AF37 !important; }
+.trust-ti { color: #e8edf5 !important; }
+.trust-sub { color: #93aacb !important; }
+
+/* ── Product cards dark ── */
+.prod-card { background: rgba(255,255,255,.03) !important; border-color: rgba(212,175,55,.10) !important; }
+.prod-card:hover { border-color: rgba(212,175,55,.35) !important; box-shadow: 0 8px 32px rgba(0,0,0,.5) !important; }
+.prod-name { color: #e8edf5 !important; }
+.prod-price { color: #D4AF37 !important; }
+.prod-cat { color: rgba(212,175,55,.6) !important; }
+.prod-img-ph { color: rgba(212,175,55,.25) !important; }
+.prod-add { background: rgba(212,175,55,.08) !important; border-color: rgba(212,175,55,.22) !important; color: #D4AF37 !important; }
+.prod-add:hover { background: #D4AF37 !important; color: #0A1628 !important; box-shadow: 0 4px 16px rgba(212,175,55,.3) !important; }
+.prod-wish { background: rgba(10,22,40,.85) !important; border-color: rgba(212,175,55,.15) !important; }
+.pb-featured { background: #D4AF37 !important; color: #0A1628 !important; }
+
+/* ── Product skeletons dark ── */
+.prod-skel, .hc-skel, .cat-card-skel {
+  background: rgba(255,255,255,.03) !important;
+  border-color: rgba(212,175,55,.08) !important;
+}
+.ps-img, .hc-skel-img, .skel-ico, .ps-line, .hc-skel-line, .skel-line {
+  background: rgba(212,175,55,.07) !important;
+}
+.skeleton {
+  background: linear-gradient(90deg,rgba(212,175,55,.06) 25%,rgba(212,175,55,.12) 50%,rgba(212,175,55,.06) 75%) !important;
+}
+
+/* ── How it works ── */
+#how { background: #0c1a30 !important; border-color: rgba(212,175,55,.10) !important; }
+.how-num { background: #D4AF37 !important; color: #0A1628 !important; }
+.how-ti { color: #e8edf5 !important; }
+.how-sub { color: #93aacb !important; }
+
+/* ── Payment section ── */
+#pays { background: #0c1a30 !important; border-color: rgba(212,175,55,.10) !important; }
+
+/* ── Trust section ── */
+#trust { background: #0A1628 !important; border-color: rgba(212,175,55,.10) !important; }
+
+/* ── CTA Band ── */
+#cta-band {
+  background: linear-gradient(135deg, #0c1a30 0%, #0f2040 100%) !important;
+  border-top-color: rgba(212,175,55,.15) !important;
+}
+.cta-geo { background: rgba(212,175,55,.04) !important; }
+.cta-ti { color: #e8edf5 !important; }
+.cta-sub { color: #93aacb !important; }
+.cta-btn.white { background: #D4AF37 !important; color: #0A1628 !important; }
+.cta-btn.white:hover { background: #b8962e !important; box-shadow: 0 8px 22px rgba(212,175,55,.3) !important; }
+.cta-btn.outline { border-color: rgba(212,175,55,.3) !important; color: #e8edf5 !important; }
+
+/* ── Glow utility ── */
+.glow-gold { box-shadow: 0 0 20px rgba(212,175,55,.15), 0 0 40px rgba(212,175,55,.07) !important; }
+
+/* ── Cart drawer dark ── */
+#cart-ov { background: rgba(0,0,0,.6); }
+#cart-side { background: rgba(10,22,40,.97) !important; border-left-color: rgba(212,175,55,.12) !important; }
+.cs-hd { border-bottom-color: rgba(212,175,55,.10) !important; }
+.cs-ti { color: #e8edf5 !important; }
+.cs-item { background: rgba(255,255,255,.03) !important; border-color: rgba(212,175,55,.10) !important; }
+.cs-nm { color: #e8edf5 !important; }
+.cs-pr { color: #D4AF37 !important; }
+.cs-cta { background: #D4AF37 !important; color: #0A1628 !important; }
+.cs-cta:hover { background: #b8962e !important; }
+
+/* ── Footer dark ── */
+#footer { background: #060e1e !important; }
+
+/* ── Testimonials inside existing TestimonialsSection ── */
+.section { background: #0A1628 !important; }
