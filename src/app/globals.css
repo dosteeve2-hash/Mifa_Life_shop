@@ -3,24 +3,36 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── MIFA LIFE — GLASS LIGHT ── */
-  --color-bg:          #f2f6fb;
-  --color-bg2:         #ffffff;
-  --color-bg3:         #ffffff;
-  --color-bg4:         #e9f0f9;
-  --color-text:        #0e1c33;
-  --color-text2:       #4a6285;
-  --color-text3:       #8fa3bf;
-  --color-gold:        #2f6fed;
-  --color-gold2:       #5b8cf5;
-  --color-gold3:       #1e56c8;
-  --color-mali-green:  #16a34a;
-  --color-mali-red:    #dc2626;
-  --color-cyan:        #0ea5e9;
-  --color-green:       #16a34a;
-  --color-red:         #dc2626;
-  --color-border:      #e4ebf5;
-  --color-border2:     #d4dfee;
+  /* ── MIFA LIFE — DESIGN UPGRADE v2 : Navy × Gold × Cyan ── */
+  --color-bg:          #0A1628;
+  --color-bg2:         #0c1a30;
+  --color-bg3:         #0f2040;
+  --color-bg4:         #152545;
+  --color-text:        #e8edf5;
+  --color-text2:       #93aacb;
+  --color-text3:       #4f6d8e;
+
+  /* Navy — fond principal */
+  --color-navy:        #0A1628;
+  --color-navy2:       #0c1a30;
+
+  /* Gold premium */
+  --color-gold:        #D4AF37;
+  --color-gold2:       #F5D67A;
+  --color-gold3:       #b8962e;
+
+  /* Cyan accent */
+  --color-cyan:        #00BCD4;
+  --color-cyan2:       #26C6DA;
+
+  /* Sémantique */
+  --color-mali-green:  #22c55e;
+  --color-mali-red:    #ef4444;
+  --color-green:       #22c55e;
+  --color-red:         #ef4444;
+  --color-border:      rgba(212,175,55,.12);
+  --color-border2:     rgba(212,175,55,.18);
+
   --font-sans: 'Outfit', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
@@ -407,6 +419,12 @@ h1,h2,h3 { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: 
 /* Accent doux (ex glow-gold) */
 .glow-gold { box-shadow: 0 0 20px rgba(47,111,237,.12),0 0 40px rgba(47,111,237,.06); }
 
+
+/* ── GlowButton utilities ── */
+.shadow-gold-glow { box-shadow: 0 0 24px rgba(212,175,55,.35), 0 8px 20px rgba(0,0,0,.3); }
+.hover-gold:hover { background: #b8962e !important; box-shadow: 0 8px 28px rgba(212,175,55,.45), 0 4px 12px rgba(0,0,0,.3) !important; }
+.hover-navy:hover { background: #0c1a30 !important; border-color: rgba(212,175,55,.5) !important; }
+.hover-outline:hover { background: rgba(212,175,55,.08) !important; border-color: rgba(212,175,55,.6) !important; }
 
 /* ═══════════════════════════════════════════════════════════════
    MIFA LIFE — DESIGN UPGRADE v2  |  Navy × Gold × Cyan

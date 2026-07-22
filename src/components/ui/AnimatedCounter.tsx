@@ -33,38 +33,36 @@ export default function AnimatedCounter({
     if (!el) return;
 
     const obj = { val: from };
-
-    const tween = gsap.to(obj, {
-      val: to,
-      duration,
-      ease: 'power2.out',
-      paused: true,
-      onUpdate() {
-        el.textContent =
-          prefix +
-          obj.val.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') +
-          suffix;
-      },
-    });
-
-    const trigger = ScrollTrigger.create({
-      trigger: el,
-      start: 'top 88%',
-      once: true,
-      onEnter() {
-        if (!hasAnimated.current) {
-          hasAnimated.current = true;
-          tween.play();
-        }
-      },
-    });
-
     el.textContent = prefix + from.toFixed(decimals) + suffix;
 
-    return () => {
-      tween.kill();
-      trigger.kill();
-    };
+    const ctx = gsap.context(() => {
+      const tween = gsap.to(obj, {
+        val: to,
+        duration,
+        ease: 'power2.out',
+        paused: true,
+        onUpdate() {
+          el.textContent =
+            prefix +
+            obj.val.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') +
+            suffix;
+        },
+      });
+
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 88%',
+        once: true,
+        onEnter() {
+          if (!hasAnimated.current) {
+            hasAnimated.current = true;
+            tween.play();
+          }
+        },
+      });
+    });
+
+    return () => ctx.revert();
   }, [from, to, duration, decimals, prefix, suffix]);
 
   return (

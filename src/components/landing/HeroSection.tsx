@@ -21,6 +21,7 @@ const AVATARS = [
 ];
 
 export default function HeroSection() {
+  const containerRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subRef   = useRef<HTMLParagraphElement>(null);
   const ctaRef   = useRef<HTMLDivElement>(null);
@@ -44,21 +45,26 @@ export default function HeroSection() {
   }, []);
 
   useEffect(() => {
+    const container = containerRef.current;
     const img = imgRef.current;
-    if (!img) return;
+    if (!container || !img) return;
     const onMove = (e: MouseEvent) => {
-      const rx = (e.clientX / window.innerWidth  - 0.5) * 12;
-      const ry = (e.clientY / window.innerHeight - 0.5) * -8;
+      const rect = container.getBoundingClientRect();
+      const rx = ((e.clientX - rect.left) / rect.width  - 0.5) * 12;
+      const ry = ((e.clientY - rect.top)  / rect.height - 0.5) * -8;
       gsap.to(img, { rotateY: rx, rotateX: ry, duration: 0.6, ease: 'power2.out' });
     };
     const onLeave = () => gsap.to(img, { rotateY: 0, rotateX: 0, duration: 0.8, ease: 'elastic.out(1,0.5)' });
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseleave', onLeave);
-    return () => { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseleave', onLeave); };
+    container.addEventListener('mousemove', onMove);
+    container.addEventListener('mouseleave', onLeave);
+    return () => {
+      container.removeEventListener('mousemove', onMove);
+      container.removeEventListener('mouseleave', onLeave);
+    };
   }, []);
 
   return (
-    <section style={{ background:'linear-gradient(135deg,#0A1628 0%,#0d1f3c 50%,#0A1628 100%)', minHeight:'clamp(560px,90vh,820px)', position:'relative', overflow:'hidden', display:'flex', alignItems:'center' }}>
+    <section ref={containerRef} style={{ background:'linear-gradient(135deg,#0A1628 0%,#0d1f3c 50%,#0A1628 100%)', minHeight:'clamp(560px,90vh,820px)', position:'relative', overflow:'hidden', display:'flex', alignItems:'center' }}>
       {/* Ambient orbs */}
       <div style={{ position:'absolute', top:'-10%', left:'-5%', width:500, height:500, borderRadius:'50%', background:'radial-gradient(circle,rgba(212,175,55,.12) 0%,transparent 70%)', pointerEvents:'none' }} />
       <div style={{ position:'absolute', bottom:'-10%', right:'10%', width:400, height:400, borderRadius:'50%', background:'radial-gradient(circle,rgba(0,188,212,.10) 0%,transparent 70%)', pointerEvents:'none' }} />

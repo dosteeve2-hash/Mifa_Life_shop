@@ -238,7 +238,7 @@ export default function Navbar() {
               <Link href="/" className="mob-logo" onClick={() => setDrawerOpen(false)}>
                 <em>MIFA</em> LIFE
               </Link>
-              <button className="mob-cl" onClick={() => setDrawerOpen(false)}>
+              <button className="mob-cl" onClick={() => setDrawerOpen(false)} aria-label="Fermer le menu">
                 <X size={16} />
               </button>
             </div>

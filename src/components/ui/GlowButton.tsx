@@ -1,13 +1,13 @@
 'use client';
 
-import { useRef, type ReactNode, type ButtonHTMLAttributes } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, type ReactNode } from 'react';
+import { motion, type HTMLMotionProps } from 'framer-motion';
 import Link from 'next/link';
 
 type Variant = 'gold' | 'navy' | 'outline' | 'ghost';
 type Size    = 'sm' | 'md' | 'lg';
 
-interface GlowButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
+interface GlowButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
   children: ReactNode;
   variant?: Variant;
   size?: Size;
@@ -117,11 +117,11 @@ export default function GlowButton({
 
   return (
     <motion.button
+      {...rest}
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
       className={cls}
       onMouseEnter={handleMouseEnter}
-      {...(rest as Parameters<typeof motion.button>[0])}
     >
       {inner}
     </motion.button>
