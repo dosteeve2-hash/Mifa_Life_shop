@@ -24,25 +24,28 @@ src/
   hooks/         — hooks React custom
 ```
 
-## Charte graphique Mali Premium
+## Charte graphique FORGE Afrika — Navy × Gold × Cyan
 
-Fond bogolan-inspired, identité Mali (vert 🟩 or 🟨 rouge 🟥).
+Design upgrade v3 — palette unifiée sur tout l'écosystème FORGE Afrika.
 
 ```css
---bg:         #0a0f08   /* vert très sombre */
---bg2:        #0f1a0d   /* vert nuit */
---bg3:        #152010   /* cartes, modals */
---bg4:        #1c2b16   /* hover */
---text:       #f5ede0   /* ivoire */
---text2:      #b8a98c   /* beige-doré */
---gold:       #f0a832   /* CTAs, prix */
---mali-green: #14a050   /* vert drapeau Mali */
---mali-red:   #c8102e   /* rouge drapeau Mali */
---border:     #1a2e14
---border2:    #243d1c
+--bg:    #0A1628   /* Navy — fond principal */
+--bg2:   #0c1a30   /* Navy sombre — sections alternées */
+--bg3:   #0f2040   /* Navy profond — cartes, modals */
+--bg4:   #152545   /* Navy hover */
+--text:  #e8edf5   /* Blanc bleuté — texte principal */
+--text2: #93aacb   /* Bleu-gris — texte secondaire */
+--text3: #4f6d8e   /* Bleu-gris foncé — placeholders */
+--gold:  #D4AF37   /* Gold premium — CTAs, prix, accents */
+--gold2: #F5D67A   /* Gold clair */
+--gold3: #b8962e   /* Gold foncé — hover */
+--cyan:  #00BCD4   /* Cyan — accent secondaire */
+--cyan2: #26C6DA   /* Cyan clair */
+--green: #22c55e   /* Succès */
+--red:   #ef4444   /* Erreur */
 ```
 
-Typographie : **Playfair Display** (titres) · **Outfit** (body) · **JetBrains Mono** (prix, codes)
+Typographie : **Outfit** (body) · **JetBrains Mono** (prix, codes)
 
 ## Sécurité — 4 règles non négociables
 
