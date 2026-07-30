@@ -15,21 +15,59 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <div style={{ minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 40, gap: 20, textAlign: 'center' }}>
-        <ShoppingBag size={72} strokeWidth={1} color="var(--t4)" />
-        <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: 26, fontWeight: 700, color: 'var(--sl)' }}>
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: 'easeOut' }}
+        style={{ minHeight: '72vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px 24px', textAlign: 'center', background: 'var(--bg)' }}
+      >
+        {/* SVG illustration panier vide */}
+        <motion.div
+          animate={{ y: [0, -6, 0] }}
+          transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
+          style={{ marginBottom: 28 }}
+        >
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            {/* Shadow */}
+            <ellipse cx="60" cy="110" rx="36" ry="6" fill="var(--bg4)" />
+            {/* Cart body */}
+            <rect x="18" y="44" width="76" height="50" rx="10" fill="var(--em-l, rgba(47,111,237,.08))" stroke="var(--em, #2f6fed)" strokeWidth="2.5" />
+            {/* Cart handle */}
+            <path d="M10 28 L24 28 L36 72" stroke="var(--em, #2f6fed)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+            {/* Wheels */}
+            <circle cx="38" cy="100" r="7" fill="white" stroke="var(--em, #2f6fed)" strokeWidth="2.5" />
+            <circle cx="82" cy="100" r="7" fill="white" stroke="var(--em, #2f6fed)" strokeWidth="2.5" />
+            {/* Items inside (empty dashes) */}
+            <line x1="38" y1="62" x2="74" y2="62" stroke="var(--border2, #d4dfee)" strokeWidth="2" strokeLinecap="round" strokeDasharray="4 3" />
+            <line x1="38" y1="72" x2="64" y2="72" stroke="var(--border2, #d4dfee)" strokeWidth="2" strokeLinecap="round" strokeDasharray="4 3" />
+            {/* Star sparkle */}
+            <path d="M96 20 L98 26 L104 28 L98 30 L96 36 L94 30 L88 28 L94 26 Z" fill="var(--em, #2f6fed)" opacity="0.6" />
+            <path d="M16 50 L17.2 54 L21 55 L17.2 56 L16 60 L14.8 56 L11 55 L14.8 54 Z" fill="var(--em, #2f6fed)" opacity="0.4" />
+          </svg>
+        </motion.div>
+
+        <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(20px,4vw,26px)', fontWeight: 700, color: 'var(--text, #0e1c33)', marginBottom: 10, lineHeight: 1.2 }}>
           Votre panier est vide
         </h1>
-        <p style={{ fontSize: 14, color: 'var(--t3)', maxWidth: 380 }}>
-          Découvrez nos produits et ajoutez vos articles favoris ici.
+        <p style={{ fontSize: 14, color: 'var(--text2, #4a6285)', maxWidth: 360, lineHeight: 1.7, marginBottom: 28 }}>
+          Ajoutez des articles depuis notre boutique et retrouvez-les ici pour finaliser votre commande.
         </p>
-        <Link
-          href="/shop"
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 28px', background: 'var(--em)', color: '#fff', borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: 'none' }}
-        >
-          Voir la boutique →
-        </Link>
-      </div>
+
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <Link
+            href="/shop"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 28px', background: 'var(--em, #2f6fed)', color: '#fff', borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: 'none', transition: 'opacity 0.2s' }}
+          >
+            <ShoppingBag size={15} /> Commencer vos achats
+          </Link>
+          <Link
+            href="/categories"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 20px', border: '1.5px solid var(--border2, #d4dfee)', color: 'var(--text2, #4a6285)', borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: 'none', background: 'var(--bg3, #fff)', transition: 'all 0.2s' }}
+          >
+            Voir les catégories
+          </Link>
+        </div>
+      </motion.div>
     );
   }
 

@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BottomNav from '@/components/BottomNav';
 import LenisProvider from '@/components/providers/LenisProvider';
+import ScrollToTop from '@/components/ScrollToTop';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <main style={{ flex: 1 }}>{children}</main>
             <Footer />
             <BottomNav />
+            <ScrollToTop />
           </CartProvider>
         </LenisProvider>
         <div id="modal-root" />
