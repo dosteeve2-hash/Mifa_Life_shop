@@ -3,7 +3,9 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, MapPin, Package, MessageCircle, X, Send, ChevronRight, Search, BadgeCheck } from 'lucide-react';
+import { Star, MapPin, Package, MessageCircle, X, Send, ChevronRight, Search, BadgeCheck, ShoppingCart } from 'lucide-react';
+import { toast } from 'sonner';
+import { usePanier } from '@/context/PanierContext';
 
 /* ─── Types & Data ──────────────────────────────────────── */
 export interface Vendeur {
@@ -115,7 +117,15 @@ function StarRating({ note }: { note: number }) {
 }
 
 /* ─── Vendeur Card ──────────────────────────────────────── */
-function VendeurCard({ vendeur, onContact }: { vendeur: Vendeur; onContact: () => void }) {
+function VendeurCard({
+  vendeur,
+  onContact,
+  onAjouterAuPanier,
+}: {
+  vendeur: Vendeur;
+  onContact: () => void;
+  onAjouterAuPanier: () => void;
+}) {
   return (
     <motion.div
       variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }}
@@ -163,16 +173,43 @@ function VendeurCard({ vendeur, onContact }: { vendeur: Vendeur; onContact: () =
           <span style={{ fontSize: 12, color: 'var(--text2)' }}>{vendeur.produits} produits</span>
         </div>
 
-        <div style={{ marginTop: 'auto', display: 'flex', gap: 8 }}>
-          <Link href={`/vendeurs/${vendeur.id}`}
-            style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, padding: '9px 12px', borderRadius: 10, background: 'var(--gold)', color: 'var(--bg)', fontWeight: 700, fontSize: 12, textDecoration: 'none' }}>
-            Voir la boutique <ChevronRight size={12} />
-          </Link>
-          <button onClick={onContact}
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '9px 12px', borderRadius: 10, background: 'var(--bg3)', border: '1px solid var(--border2)', color: 'var(--text2)', cursor: 'pointer' }}
-            aria-label="Contacter">
-            <MessageCircle size={14} />
+        <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {/* Bouton Ajouter au panier */}
+          <button
+            onClick={onAjouterAuPanier}
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 6,
+              padding: '9px 12px',
+              borderRadius: 10,
+              background: 'linear-gradient(135deg, #00D4FF22, #00D4FF11)',
+              border: '1px solid rgba(0,212,255,0.35)',
+              color: '#00D4FF',
+              fontWeight: 700,
+              fontSize: 12,
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+            }}
+          >
+            <ShoppingCart size={13} />
+            Ajouter au panier
           </button>
+
+          {/* Boutons secondaires */}
+          <div style={{ display: 'flex', gap: 8 }}>
+            <Link href={`/vendeurs/${vendeur.id}`}
+              style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, padding: '9px 12px', borderRadius: 10, background: 'var(--gold)', color: 'var(--bg)', fontWeight: 700, fontSize: 12, textDecoration: 'none' }}>
+              Voir la boutique <ChevronRight size={12} />
+            </Link>
+            <button onClick={onContact}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '9px 12px', borderRadius: 10, background: 'var(--bg3)', border: '1px solid var(--border2)', color: 'var(--text2)', cursor: 'pointer' }}
+              aria-label="Contacter">
+              <MessageCircle size={14} />
+            </button>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -181,11 +218,26 @@ function VendeurCard({ vendeur, onContact }: { vendeur: Vendeur; onContact: () =
 
 /* ─── Page ──────────────────────────────────────────────── */
 export default function VendeursPage() {
+  const { ajouterArticle } = usePanier();
   const [recherche, setRecherche] = useState('');
   const [filterPays, setFilterPays] = useState('Tous');
   const [filterSpec, setFilterSpec] = useState('Toutes');
   const [filterNote, setFilterNote] = useState(0);
   const [contactVendeur, setContactVendeur] = useState<Vendeur | null>(null);
+
+  const handleAjouterAuPanier = (vendeur: Vendeur) => {
+    ajouterArticle({
+      id: `vendeur-${vendeur.id}`,
+      nom: `Article de ${vendeur.nom}`,
+      prix: 5000,
+      vendeur: vendeur.proprietaire,
+    });
+    toast.success(`Ajouté au panier — ${vendeur.nom}`, {
+      duration: 3000,
+      icon: '🛒',
+      description: `Voir votre panier pour finaliser la commande.`,
+    });
+  };
 
   const filtered = useMemo(() => VENDEURS.filter(v => {
     const q = recherche.toLowerCase();
@@ -275,7 +327,12 @@ export default function VendeursPage() {
           style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20 }}>
           <AnimatePresence>
             {filtered.map(v => (
-              <VendeurCard key={v.id} vendeur={v} onContact={() => setContactVendeur(v)} />
+              <VendeurCard
+                key={v.id}
+                vendeur={v}
+                onContact={() => setContactVendeur(v)}
+                onAjouterAuPanier={() => handleAjouterAuPanier(v)}
+              />
             ))}
           </AnimatePresence>
         </motion.div>

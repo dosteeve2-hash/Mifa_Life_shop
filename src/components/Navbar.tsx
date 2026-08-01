@@ -4,8 +4,9 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ShoppingBag, Heart, User, Search, X, ChevronRight, Settings, Laptop, Shirt, Home as HomeIcon, Dumbbell, Sparkles, Baby, Car, UtensilsCrossed, Store } from 'lucide-react';
+import { ShoppingBag, ShoppingCart, Heart, User, Search, X, ChevronRight, Settings, Laptop, Shirt, Home as HomeIcon, Dumbbell, Sparkles, Baby, Car, UtensilsCrossed, Store } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { usePanier } from '@/context/PanierContext';
 import CartDrawer from './CartDrawer';
 import Logo from './Logo';
 
@@ -32,15 +33,18 @@ const CATEGORIES = [
 export default function Navbar() {
   const pathname = usePathname();
   const { totalItems } = useCart();
+  const { nombreArticles } = usePanier();
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [badgePulse, setBadgePulse] = useState(false);
+  const [panierPulse, setPanierPulse] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [wishCount, setWishCount] = useState(0);
   const prevTotalRef = useRef(totalItems);
+  const prevPanierRef = useRef(nombreArticles);
 
   const { scrollY } = useScroll();
   const shadowOpacity = useTransform(scrollY, [0, 60], [0, 1]);
@@ -70,6 +74,15 @@ export default function Navbar() {
     }
     prevTotalRef.current = totalItems;
   }, [totalItems]);
+
+  useEffect(() => {
+    if (nombreArticles > prevPanierRef.current) {
+      setPanierPulse(true);
+      const t = setTimeout(() => setPanierPulse(false), 600);
+      return () => clearTimeout(t);
+    }
+    prevPanierRef.current = nombreArticles;
+  }, [nombreArticles]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -190,7 +203,28 @@ export default function Navbar() {
                 </AnimatePresence>
               </Link>
 
-              <button className="ic-btn" aria-label="Mon panier" onClick={() => setCartOpen(true)}>
+              {/* Panier vendeurs */}
+              <Link href="/panier" className="ic-btn" aria-label="Mon panier vendeurs" style={{ position: 'relative' }}>
+                <ShoppingCart size={18} />
+                <AnimatePresence>
+                  {nombreArticles > 0 && (
+                    <motion.span
+                      key="panier-badge"
+                      className="ic-bdg"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: panierPulse ? 1.4 : 1 }}
+                      exit={{ scale: 0 }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                      style={{ background: '#00D4FF', color: '#0A1628' }}
+                    >
+                      {nombreArticles > 99 ? '99+' : nombreArticles}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </Link>
+
+              {/* Boutique cart */}
+              <button className="ic-btn" aria-label="Mon panier boutique" onClick={() => setCartOpen(true)}>
                 <ShoppingBag size={18} />
                 <AnimatePresence>
                   {totalItems > 0 && (
@@ -302,6 +336,15 @@ export default function Navbar() {
 
             <div className="mob-sep" />
             <div className="mob-sec-ti">Mon compte</div>
+            <Link href="/panier" className="mob-l" onClick={() => setDrawerOpen(false)}>
+              <ShoppingCart size={14} />
+              Mon panier vendeurs{' '}
+              {nombreArticles > 0 && (
+                <span style={{ marginLeft: 4, fontSize: 10, fontWeight: 700, background: '#00D4FF', color: '#0A1628', borderRadius: 10, padding: '1px 6px' }}>
+                  {nombreArticles}
+                </span>
+              )}
+            </Link>
             <Link href="/wishlist" className="mob-l" onClick={() => setDrawerOpen(false)}>
               <Heart size={14} />
               Ma wishlist {wishCount > 0 && <span style={{ marginLeft: 4, fontSize: 10, fontWeight: 700, background: 'var(--gold)', color: 'var(--bg)', borderRadius: 10, padding: '1px 6px' }}>{wishCount}</span>}

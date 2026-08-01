@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { CartProvider } from '@/context/CartContext';
+import { PanierProvider } from '@/context/PanierContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BottomNav from '@/components/BottomNav';
 import LenisProvider from '@/components/providers/LenisProvider';
+import { Toaster } from 'sonner';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -51,12 +53,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <LenisProvider>
           <CartProvider>
-            <Navbar />
-            <main style={{ flex: 1 }}>{children}</main>
-            <Footer />
-            <BottomNav />
+            <PanierProvider>
+              <Navbar />
+              <main style={{ flex: 1 }}>{children}</main>
+              <Footer />
+              <BottomNav />
+            </PanierProvider>
           </CartProvider>
         </LenisProvider>
+        <Toaster position="top-right" richColors />
         <div id="modal-root" />
       </body>
     </html>
