@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ShoppingBag, ShoppingCart, Heart, User, Search, X, ChevronRight, Settings, Laptop, Shirt, Home as HomeIcon, Dumbbell, Sparkles, Baby, Car, UtensilsCrossed, Store } from 'lucide-react';
+import { ShoppingBag, ShoppingCart, Heart, User, Search, X, ChevronRight, Settings, Laptop, Shirt, Home as HomeIcon, Dumbbell, Sparkles, Baby, Car, UtensilsCrossed, Store, ClipboardList } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { usePanier } from '@/context/PanierContext';
 import CartDrawer from './CartDrawer';
@@ -242,6 +242,10 @@ export default function Navbar() {
                 </AnimatePresence>
               </button>
 
+              <Link href="/commandes" className="ic-btn" aria-label="Mes commandes">
+                <ClipboardList size={18} />
+              </Link>
+
               <Link href="/profil" className="ic-btn" aria-label="Mon profil">
                 <User size={18} />
               </Link>
@@ -348,6 +352,10 @@ export default function Navbar() {
             <Link href="/wishlist" className="mob-l" onClick={() => setDrawerOpen(false)}>
               <Heart size={14} />
               Ma wishlist {wishCount > 0 && <span style={{ marginLeft: 4, fontSize: 10, fontWeight: 700, background: 'var(--gold)', color: 'var(--bg)', borderRadius: 10, padding: '1px 6px' }}>{wishCount}</span>}
+            </Link>
+            <Link href="/commandes" className="mob-l" onClick={() => setDrawerOpen(false)}>
+              <ClipboardList size={14} />
+              Mes commandes
             </Link>
             <Link href="/profil" className="mob-l" onClick={() => setDrawerOpen(false)}>
               <User size={14} />
