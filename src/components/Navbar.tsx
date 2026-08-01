@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ShoppingBag, Heart, User, Search, X, ChevronRight, Settings, Laptop, Shirt, Home as HomeIcon, Dumbbell, Sparkles, Baby, Car, UtensilsCrossed } from 'lucide-react';
+import { ShoppingBag, Heart, User, Search, X, ChevronRight, Settings, Laptop, Shirt, Home as HomeIcon, Dumbbell, Sparkles, Baby, Car, UtensilsCrossed, Store } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import CartDrawer from './CartDrawer';
 import Logo from './Logo';
@@ -12,6 +12,7 @@ import Logo from './Logo';
 const NAV_LINKS = [
   { href: '/', label: 'Accueil' },
   { href: '/shop', label: 'Boutique' },
+  { href: '/vendeurs', label: 'Vendeurs' },
   { href: '/promo', label: 'Promos' },
   { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
@@ -38,6 +39,7 @@ export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState('');
   const [badgePulse, setBadgePulse] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [wishCount, setWishCount] = useState(0);
   const prevTotalRef = useRef(totalItems);
 
   const { scrollY } = useScroll();
@@ -47,6 +49,18 @@ export default function Navbar() {
     const unsub = scrollY.on('change', (v) => setScrolled(v > 20));
     return unsub;
   }, [scrollY]);
+
+  useEffect(() => {
+    const readWish = () => {
+      try {
+        const raw = JSON.parse(localStorage.getItem('mifa_wishes') ?? '[]');
+        setWishCount(Array.isArray(raw) ? raw.length : 0);
+      } catch { setWishCount(0); }
+    };
+    readWish();
+    window.addEventListener('storage', readWish);
+    return () => window.removeEventListener('storage', readWish);
+  }, []);
 
   useEffect(() => {
     if (totalItems > prevTotalRef.current) {
@@ -157,8 +171,23 @@ export default function Navbar() {
 
             {/* Right icons */}
             <div className="nv-r">
-              <Link href="/wishlist" className="ic-btn" aria-label="Liste de souhaits">
+              <Link href="/wishlist" className="ic-btn" aria-label="Liste de souhaits" style={{ position: 'relative' }}>
                 <Heart size={18} />
+                <AnimatePresence>
+                  {wishCount > 0 && (
+                    <motion.span
+                      key="wish-badge"
+                      className="ic-bdg"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      exit={{ scale: 0 }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                      style={{ background: 'var(--gold)', color: 'var(--bg)' }}
+                    >
+                      {wishCount > 99 ? '99+' : wishCount}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </Link>
 
               <button className="ic-btn" aria-label="Mon panier" onClick={() => setCartOpen(true)}>
@@ -275,7 +304,7 @@ export default function Navbar() {
             <div className="mob-sec-ti">Mon compte</div>
             <Link href="/wishlist" className="mob-l" onClick={() => setDrawerOpen(false)}>
               <Heart size={14} />
-              Ma wishlist
+              Ma wishlist {wishCount > 0 && <span style={{ marginLeft: 4, fontSize: 10, fontWeight: 700, background: 'var(--gold)', color: 'var(--bg)', borderRadius: 10, padding: '1px 6px' }}>{wishCount}</span>}
             </Link>
             <Link href="/profil" className="mob-l" onClick={() => setDrawerOpen(false)}>
               <User size={14} />

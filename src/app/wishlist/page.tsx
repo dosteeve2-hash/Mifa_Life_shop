@@ -1,12 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Heart, ShoppingBag, Package, Trash2 } from 'lucide-react';
+import { Heart, ShoppingBag, Package, Trash2, ArrowUpDown } from 'lucide-react';
 import { createBrowserClient } from '@supabase/ssr';
 import { useCart } from '@/context/CartContext';
+
+type SortKey = 'date' | 'prix-asc' | 'prix-desc';
 
 function formatPrice(n: number) {
   return new Intl.NumberFormat('fr-FR').format(n) + ' FCFA';
@@ -39,6 +41,8 @@ export default function WishlistPage() {
   const [products, setProducts] = useState<WishProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [added, setAdded] = useState<Record<string, boolean>>({});
+  const [sortKey, setSortKey] = useState<SortKey>('date');
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
 
   useEffect(() => {
     try {
@@ -82,7 +86,16 @@ export default function WishlistPage() {
     localStorage.setItem('mifa_wishes', '[]');
     setIds([]);
     setProducts([]);
+    setShowClearConfirm(false);
+    window.dispatchEvent(new Event('storage'));
   };
+
+  const sortedProducts = useMemo(() => {
+    const copy = [...products];
+    if (sortKey === 'prix-asc') return copy.sort((a, b) => a.price - b.price);
+    if (sortKey === 'prix-desc') return copy.sort((a, b) => b.price - a.price);
+    return copy; // 'date' = order in ids array
+  }, [products, sortKey]);
 
   const handleAddToCart = async (id: string) => {
     if (added[id]) return;
@@ -114,31 +127,40 @@ export default function WishlistPage() {
                 Ma liste de souhaits
               </h1>
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)' }}>
-                {loading
-                  ? 'Chargement…'
-                  : `${products.length} article${products.length !== 1 ? 's' : ''} sauvegardé${products.length !== 1 ? 's' : ''}`}
+                {loading ? 'Chargement…' : `${products.length} article${products.length !== 1 ? 's' : ''} sauvegardé${products.length !== 1 ? 's' : ''}`}
               </p>
             </div>
             {products.length > 0 && (
-              <button
-                onClick={clearAll}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  padding: '9px 18px',
-                  background: 'rgba(255,255,255,0.08)',
-                  border: '1px solid rgba(255,255,255,0.18)',
-                  borderRadius: 10,
-                  fontSize: 12,
-                  fontWeight: 700,
-                  color: 'rgba(255,255,255,0.7)',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                }}
-              >
-                <Trash2 size={13} /> Tout supprimer
-              </button>
+              <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
+                {/* Tri */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <ArrowUpDown size={13} style={{ color: 'rgba(255,255,255,0.5)' }} />
+                  <select value={sortKey} onChange={e => setSortKey(e.target.value as SortKey)}
+                    style={{ padding: '6px 12px', borderRadius: 8, fontSize: 12, fontWeight: 600, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', cursor: 'pointer', outline: 'none' }}>
+                    <option value="date">Ordre d&apos;ajout</option>
+                    <option value="prix-asc">Prix : croissant</option>
+                    <option value="prix-desc">Prix : décroissant</option>
+                  </select>
+                </div>
+                {/* Tout supprimer */}
+                {!showClearConfirm ? (
+                  <button onClick={() => setShowClearConfirm(true)}
+                    style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '9px 18px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: 10, fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.7)', cursor: 'pointer' }}>
+                    <Trash2 size={13} /> Tout supprimer
+                  </button>
+                ) : (
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    <button onClick={clearAll}
+                      style={{ padding: '7px 14px', borderRadius: 10, fontSize: 12, fontWeight: 700, background: '#ef4444', border: 'none', color: '#fff', cursor: 'pointer' }}>
+                      Confirmer
+                    </button>
+                    <button onClick={() => setShowClearConfirm(false)}
+                      style={{ padding: '7px 14px', borderRadius: 10, fontSize: 12, fontWeight: 700, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', cursor: 'pointer' }}>
+                      Annuler
+                    </button>
+                  </div>
+                )}
+              </div>
             )}
           </div>
         </div>
@@ -195,7 +217,7 @@ export default function WishlistPage() {
               variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }}
             >
               <AnimatePresence>
-                {products.map((p) => {
+                {sortedProducts.map((p) => {
                   const price = p.price;
                   const original = p.original_price;
                   const discount = original && original > price ? Math.round((1 - price / original) * 100) : null;
