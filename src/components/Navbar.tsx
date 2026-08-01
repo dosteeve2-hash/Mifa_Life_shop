@@ -90,7 +90,7 @@ export default function Navbar() {
                 whileHover={{ filter: 'drop-shadow(0 0 8px rgba(240,168,50,0.4))' }}
                 transition={{ duration: 0.2 }}
               >
-                <Logo variant="compact" size="sm" dark />
+                <Logo variant="compact" size="sm" />
               </motion.div>
             </Link>
 

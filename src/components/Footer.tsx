@@ -11,7 +11,7 @@ export default function Footer() {
           {/* Col 1 — Brand */}
           <div>
             <div className="ft-logo">
-              <Logo variant="compact" size="sm" dark />
+              <Logo variant="compact" size="sm" />
             </div>
             <p className="ft-desc">
               La marketplace premium du Mali. Des milliers de produits, un paiement simplifié,
