@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, MapPin, Package, MessageCircle, X, Send, ChevronRight, Search, BadgeCheck, ShoppingCart } from 'lucide-react';
 import { toast } from 'sonner';
-import { usePanier } from '@/context/PanierContext';
+import { useCart as usePanierCart } from '@/hooks/useCart';
 
 /* ─── Types & Data ──────────────────────────────────────── */
 export interface Vendeur {
@@ -218,7 +218,7 @@ function VendeurCard({
 
 /* ─── Page ──────────────────────────────────────────────── */
 export default function VendeursPage() {
-  const { ajouterArticle } = usePanier();
+  const { addItem } = usePanierCart();
   const [recherche, setRecherche] = useState('');
   const [filterPays, setFilterPays] = useState('Tous');
   const [filterSpec, setFilterSpec] = useState('Toutes');
@@ -226,11 +226,10 @@ export default function VendeursPage() {
   const [contactVendeur, setContactVendeur] = useState<Vendeur | null>(null);
 
   const handleAjouterAuPanier = (vendeur: Vendeur) => {
-    ajouterArticle({
+    addItem({
       id: `vendeur-${vendeur.id}`,
       nom: `Article de ${vendeur.nom}`,
       prix: 5000,
-      vendeur: vendeur.proprietaire,
     });
     toast.success(`Ajouté au panier — ${vendeur.nom}`, {
       duration: 3000,

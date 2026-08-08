@@ -1,21 +1,23 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { toast } from 'sonner';
 import {
   ShoppingCart,
   Plus,
   Minus,
   Trash2,
   ArrowLeft,
+  Package,
 } from 'lucide-react';
-import { usePanier } from '@/context/PanierContext';
+import { useCart } from '@/hooks/useCart';
 
-const LIVRAISON = 500; // FCFA fixe
+const LIVRAISON_FIXE = 2500;
+const LIVRAISON_GRATUITE_SEUIL = 50000;
 
 function formatPrix(n: number) {
-  return new Intl.NumberFormat('fr-FR').format(n) + ' FCFA';
+  return new Intl.NumberFormat('fr-FR').format(n) + ' FCFA';
 }
 
 /* ─── État vide ───────────────────────────────────────────── */
@@ -40,29 +42,27 @@ function PanierVide() {
           width: 120,
           height: 120,
           borderRadius: '50%',
-          background: 'linear-gradient(135deg, rgba(212,175,55,0.15), rgba(0,212,255,0.08))',
+          background: 'var(--em-l)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          border: '2px dashed rgba(212,175,55,0.3)',
+          border: '2px dashed var(--border2)',
         }}
       >
-        <ShoppingCart size={48} color="var(--gold)" strokeWidth={1.5} />
+        <ShoppingCart size={48} color="var(--em)" strokeWidth={1.5} />
       </div>
 
       <h1
         style={{
-          fontFamily: '"Playfair Display", serif',
           fontSize: 'clamp(22px,4vw,30px)',
           fontWeight: 700,
-          fontStyle: 'italic',
-          color: 'var(--text)',
+          color: 'var(--t1)',
         }}
       >
         Votre panier est vide
       </h1>
-      <p style={{ fontSize: 14, color: 'var(--text2)', maxWidth: 380, lineHeight: 1.7 }}>
-        Ajoutez des articles depuis nos vendeurs artisans africains et retrouvez-les ici.
+      <p style={{ fontSize: 14, color: 'var(--t3)', maxWidth: 380, lineHeight: 1.7 }}>
+        Ajoutez des articles depuis nos vendeurs artisans et retrouvez-les ici.
       </p>
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
         <Link
@@ -72,8 +72,8 @@ function PanierVide() {
             alignItems: 'center',
             gap: 8,
             padding: '12px 24px',
-            background: 'var(--gold)',
-            color: 'var(--bg)',
+            background: 'var(--em)',
+            color: '#fff',
             borderRadius: 12,
             fontWeight: 700,
             fontSize: 14,
@@ -90,7 +90,7 @@ function PanierVide() {
             gap: 8,
             padding: '12px 24px',
             background: 'var(--bg2)',
-            color: 'var(--text)',
+            color: 'var(--t1)',
             border: '1px solid var(--border)',
             borderRadius: 12,
             fontWeight: 600,
@@ -112,7 +112,6 @@ type ArticleRowProps = {
     nom: string;
     prix: number;
     quantite: number;
-    vendeur: string;
     image?: string;
   };
   onModifier: (quantite: number) => void;
@@ -131,14 +130,14 @@ function ArticleRow({ article, onModifier, onRetirer }: ArticleRowProps) {
         display: 'flex',
         gap: 16,
         padding: 16,
-        background: 'var(--bg2)',
+        background: 'var(--bg3)',
         borderRadius: 14,
         border: '1px solid var(--border)',
         marginBottom: 12,
         alignItems: 'center',
       }}
     >
-      {/* Image placeholder Navy */}
+      {/* Image */}
       <div
         style={{
           width: 80,
@@ -146,28 +145,26 @@ function ArticleRow({ article, onModifier, onRetirer }: ArticleRowProps) {
           borderRadius: 10,
           background: article.image
             ? `url(${article.image}) center/cover`
-            : 'linear-gradient(135deg, #0A1628, #152240)',
+            : 'var(--bg4)',
           flexShrink: 0,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          border: '1px solid rgba(212,175,55,0.15)',
+          border: '1px solid var(--border)',
+          overflow: 'hidden',
         }}
       >
         {!article.image && (
-          <ShoppingCart size={22} color="rgba(212,175,55,0.5)" strokeWidth={1.5} />
+          <Package size={22} color="var(--t3)" strokeWidth={1.5} />
         )}
       </div>
 
       {/* Info */}
       <div style={{ flex: 1, minWidth: 0 }}>
-        <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)', marginBottom: 4, lineHeight: 1.3 }}>
+        <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--t1)', marginBottom: 4, lineHeight: 1.3 }}>
           {article.nom}
         </p>
-        <p style={{ fontSize: 12, color: 'var(--text3)', marginBottom: 8 }}>
-          Vendeur : {article.vendeur}
-        </p>
-        <p style={{ fontSize: 12, color: 'var(--gold)' }}>
+        <p style={{ fontSize: 12, color: 'var(--em)', fontWeight: 600 }}>
           {formatPrix(article.prix)} / unité
         </p>
       </div>
@@ -178,24 +175,24 @@ function ArticleRow({ article, onModifier, onRetirer }: ArticleRowProps) {
           onClick={() => onModifier(article.quantite - 1)}
           style={{
             width: 30, height: 30, borderRadius: 8,
-            background: 'var(--bg3)', border: '1px solid var(--border)',
+            background: 'var(--bg4)', border: '1px solid var(--border)',
             cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: 'var(--text)',
+            color: 'var(--t1)',
           }}
           aria-label="Diminuer"
         >
           <Minus size={13} />
         </button>
-        <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', minWidth: 24, textAlign: 'center' }}>
+        <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--t1)', minWidth: 24, textAlign: 'center' }}>
           {article.quantite}
         </span>
         <button
           onClick={() => onModifier(article.quantite + 1)}
           style={{
             width: 30, height: 30, borderRadius: 8,
-            background: 'var(--bg3)', border: '1px solid var(--border)',
+            background: 'var(--bg4)', border: '1px solid var(--border)',
             cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: 'var(--text)',
+            color: 'var(--t1)',
           }}
           aria-label="Augmenter"
         >
@@ -205,16 +202,16 @@ function ArticleRow({ article, onModifier, onRetirer }: ArticleRowProps) {
 
       {/* Prix total + supprimer */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 10, flexShrink: 0, minWidth: 100 }}>
-        <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)' }}>
+        <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--t1)' }}>
           {formatPrix(article.prix * article.quantite)}
         </span>
         <button
           onClick={onRetirer}
           style={{
             width: 30, height: 30, borderRadius: 8,
-            background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)',
+            background: 'rgba(220,38,38,.08)', border: '1px solid rgba(220,38,38,.2)',
             cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: '#ef4444',
+            color: '#dc2626',
           }}
           aria-label="Supprimer"
         >
@@ -227,17 +224,17 @@ function ArticleRow({ article, onModifier, onRetirer }: ArticleRowProps) {
 
 /* ─── Page principale ─────────────────────────────────────── */
 export default function PanierPage() {
-  const { articles, modifierQuantite, retirerArticle, viderPanier, total, nombreArticles } = usePanier();
+  const router = useRouter();
+  const { items, updateQty, removeItem, clearCart, total, count } = useCart();
+
+  const fraisLivraison = total >= LIVRAISON_GRATUITE_SEUIL ? 0 : LIVRAISON_FIXE;
+  const totalFinal = total + fraisLivraison;
 
   const handleCommander = () => {
-    viderPanier();
-    toast.success('Commande passée ! Notre équipe vous contactera sous 24h', {
-      duration: 5000,
-      icon: '✅',
-    });
+    router.push('/checkout?source=panier');
   };
 
-  if (articles.length === 0) {
+  if (items.length === 0) {
     return (
       <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
         <PanierVide />
@@ -253,22 +250,14 @@ export default function PanierPage() {
         <div style={{ marginBottom: 28 }}>
           <Link
             href="/vendeurs"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--text3)', textDecoration: 'none', marginBottom: 14 }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--t3)', textDecoration: 'none', marginBottom: 14 }}
           >
             <ArrowLeft size={14} /> Retour aux vendeurs
           </Link>
-          <h1
-            style={{
-              fontFamily: '"Playfair Display", serif',
-              fontSize: 'clamp(22px,4vw,32px)',
-              fontWeight: 700,
-              fontStyle: 'italic',
-              color: 'var(--text)',
-            }}
-          >
+          <h1 style={{ fontSize: 'clamp(22px,4vw,32px)', fontWeight: 700, color: 'var(--t1)' }}>
             Mon Panier{' '}
-            <span style={{ color: 'var(--gold)' }}>
-              ({nombreArticles} article{nombreArticles !== 1 ? 's' : ''})
+            <span style={{ color: 'var(--em)' }}>
+              ({count} article{count !== 1 ? 's' : ''})
             </span>
           </h1>
         </div>
@@ -285,23 +274,39 @@ export default function PanierPage() {
           {/* Liste articles */}
           <div style={{ gridColumn: 'span 2' }}>
             <AnimatePresence initial={false}>
-              {articles.map((article) => (
+              {items.map((article) => (
                 <ArticleRow
                   key={article.id}
                   article={article}
-                  onModifier={(q) => modifierQuantite(article.id, q)}
-                  onRetirer={() => retirerArticle(article.id)}
+                  onModifier={(q) => updateQty(article.id, q)}
+                  onRetirer={() => removeItem(article.id)}
                 />
               ))}
             </AnimatePresence>
+
+            <button
+              onClick={clearCart}
+              style={{
+                marginTop: 8,
+                fontSize: 12,
+                color: 'var(--t3)',
+                textDecoration: 'underline',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 0,
+              }}
+            >
+              Vider le panier
+            </button>
           </div>
 
-          {/* Résumé */}
+          {/* Résumé commande */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             style={{
-              background: 'var(--bg2)',
+              background: 'var(--bg3)',
               borderRadius: 16,
               border: '1px solid var(--border)',
               padding: 24,
@@ -309,40 +314,42 @@ export default function PanierPage() {
               top: 100,
             }}
           >
-            <h2
-              style={{
-                fontFamily: '"Playfair Display", serif',
-                fontSize: 18,
-                fontWeight: 700,
-                fontStyle: 'italic',
-                color: 'var(--text)',
-                marginBottom: 20,
-              }}
-            >
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: 'var(--t1)', marginBottom: 20 }}>
               Résumé de commande
             </h2>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--text3)', marginBottom: 10 }}>
-              <span>Sous-total ({nombreArticles} art.)</span>
-              <span style={{ fontWeight: 700, color: 'var(--text)' }}>{formatPrix(total)}</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--t3)', marginBottom: 10 }}>
+              <span>Sous-total ({count} art.)</span>
+              <span style={{ fontWeight: 700, color: 'var(--t1)' }}>{formatPrix(total)}</span>
             </div>
             <div
               style={{
-                display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--text3)',
+                display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--t3)',
                 marginBottom: 16, paddingBottom: 16, borderBottom: '1px solid var(--border)',
               }}
             >
-              <span>Frais de livraison</span>
-              <span style={{ fontWeight: 600, color: 'var(--gold)' }}>{formatPrix(LIVRAISON)}</span>
+              <span>Livraison</span>
+              {fraisLivraison === 0 ? (
+                <span style={{ fontWeight: 600, color: 'var(--green)' }}>Gratuite 🎉</span>
+              ) : (
+                <span style={{ fontWeight: 600, color: 'var(--em)' }}>{formatPrix(fraisLivraison)}</span>
+              )}
             </div>
+
+            {fraisLivraison > 0 && (
+              <p style={{ fontSize: 11, color: 'var(--t3)', marginBottom: 12, lineHeight: 1.5 }}>
+                Livraison gratuite dès {formatPrix(LIVRAISON_GRATUITE_SEUIL)} d&apos;achats
+              </p>
+            )}
+
             <div
               style={{
                 display: 'flex', justifyContent: 'space-between', fontSize: 17, fontWeight: 800,
-                color: 'var(--text)', marginBottom: 24,
+                color: 'var(--t1)', marginBottom: 24,
               }}
             >
               <span>Total</span>
-              <span style={{ color: 'var(--gold)' }}>{formatPrix(total + LIVRAISON)}</span>
+              <span style={{ color: 'var(--em)' }}>{formatPrix(totalFinal)}</span>
             </div>
 
             <motion.button
@@ -352,22 +359,21 @@ export default function PanierPage() {
               style={{
                 width: '100%',
                 padding: '14px 20px',
-                background: 'linear-gradient(135deg, var(--gold), #b8922e)',
-                color: '#0A1628',
+                background: 'var(--em)',
+                color: '#fff',
                 borderRadius: 12,
                 border: 'none',
-                fontWeight: 800,
+                fontWeight: 700,
                 fontSize: 15,
                 cursor: 'pointer',
                 marginBottom: 10,
-                letterSpacing: 0.3,
               }}
             >
-              Passer commande →
+              Passer la commande →
             </motion.button>
 
-            <p style={{ fontSize: 11, color: 'var(--text3)', textAlign: 'center', lineHeight: 1.5 }}>
-              Notre équipe vous contactera sous 24h pour confirmer votre commande.
+            <p style={{ fontSize: 11, color: 'var(--t3)', textAlign: 'center', lineHeight: 1.5 }}>
+              Paiement sécurisé — Orange Money, Wave, Espèces
             </p>
           </motion.div>
         </div>
