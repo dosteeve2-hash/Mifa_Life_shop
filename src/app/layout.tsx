@@ -36,7 +36,11 @@ export const metadata: Metadata = {
     description: 'Mode africaine authentique, artisanat premium.',
   },
   robots: { index: true, follow: true },
-  icons: { icon: '/favicon.ico' },
+  icons: {
+    icon: '/android-chrome-192x192.png',
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
