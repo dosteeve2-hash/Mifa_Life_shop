@@ -145,7 +145,7 @@ export default function Footer() {
                     onMouseEnter={(e) => {
                       const el = e.currentTarget as HTMLAnchorElement;
                       el.style.color = 'var(--gold)';
-                      el.style.borderColor = 'rgba(240,168,50,0.35)';
+                      el.style.borderColor = 'rgba(212,175,55,0.35)';
                     }}
                     onMouseLeave={(e) => {
                       const el = e.currentTarget as HTMLAnchorElement;

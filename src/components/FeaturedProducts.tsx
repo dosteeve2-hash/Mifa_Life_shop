@@ -56,8 +56,8 @@ function StarRating({ rating }: { rating: number }) {
         <Star
           key={i}
           size={10}
-          fill={i < full ? '#f0a832' : 'none'}
-          color={i < full ? '#f0a832' : 'var(--border2)'}
+          fill={i < full ? '#D4AF37' : 'none'}
+          color={i < full ? '#D4AF37' : 'var(--border2)'}
           strokeWidth={1.5}
         />
       ))}
@@ -156,7 +156,7 @@ function ProductCard({ product }: { product: Product }) {
                 style={{
                   position: 'absolute',
                   inset: 0,
-                  background: 'rgba(7,14,31,0.65)',
+                  background: 'rgba(10,22,40,0.65)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -179,7 +179,7 @@ function ProductCard({ product }: { product: Product }) {
                     fontSize: 12,
                     fontWeight: 700,
                     color: 'var(--bg)',
-                    boxShadow: '0 4px 16px rgba(240,168,50,0.35)',
+                    boxShadow: '0 4px 16px rgba(212,175,55,0.35)',
                   }}
                 >
                   <Eye size={13} />

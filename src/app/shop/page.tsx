@@ -122,8 +122,8 @@ export default async function ShopPage({ searchParams }: PageProps) {
         overflow: 'hidden',
         borderBottom: '1px solid var(--border)',
       }}>
-        <div style={{ position: 'absolute', top: -60, right: -60, width: 240, height: 240, borderRadius: '50%', background: 'rgba(240,168,50,0.04)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', bottom: -40, left: -40, width: 160, height: 160, borderRadius: '50%', background: 'rgba(45,212,255,0.03)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: -60, right: -60, width: 240, height: 240, borderRadius: '50%', background: 'rgba(212,175,55,0.04)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: -40, left: -40, width: 160, height: 160, borderRadius: '50%', background: 'rgba(0,188,212,0.03)', pointerEvents: 'none' }} />
 
         <div className="wrap" style={{ position: 'relative', zIndex: 1 }}>
           {/* Breadcrumb */}
@@ -166,8 +166,8 @@ export default async function ShopPage({ searchParams }: PageProps) {
                 alignItems: 'center',
                 gap: 8,
                 padding: '7px 14px',
-                background: 'rgba(240,168,50,0.08)',
-                border: '1px solid rgba(240,168,50,0.2)',
+                background: 'rgba(212,175,55,0.08)',
+                border: '1px solid rgba(212,175,55,0.2)',
                 borderRadius: 22,
                 fontSize: 12,
                 fontWeight: 700,
@@ -234,7 +234,7 @@ export default async function ShopPage({ searchParams }: PageProps) {
                     fontFamily: "'JetBrains Mono', monospace",
                     border: '1.5px solid',
                     borderColor: isActive ? 'var(--gold)' : 'var(--border2)',
-                    background: isActive ? 'rgba(240,168,50,0.10)' : 'var(--bg3)',
+                    background: isActive ? 'rgba(212,175,55,0.10)' : 'var(--bg3)',
                     color: isActive ? 'var(--gold)' : 'var(--t3)',
                     textDecoration: 'none',
                     flexShrink: 0,
@@ -258,12 +258,12 @@ export default async function ShopPage({ searchParams }: PageProps) {
               <span key={f} style={{
                 padding: '3px 10px',
                 borderRadius: 20,
-                background: 'rgba(240,168,50,0.08)',
+                background: 'rgba(212,175,55,0.08)',
                 color: 'var(--gold)',
                 fontSize: 11,
                 fontWeight: 700,
                 fontFamily: "'JetBrains Mono', monospace",
-                border: '1px solid rgba(240,168,50,0.2)',
+                border: '1px solid rgba(212,175,55,0.2)',
               }}>
                 {f}
               </span>

@@ -222,8 +222,8 @@ export default function HeroSection({ products }: HeroSectionProps) {
                   animate={{
                     opacity: 1,
                     y: 0,
-                    borderColor: activeCard === i ? 'rgba(240,168,50,0.5)' : 'var(--border2)',
-                    boxShadow: activeCard === i ? '0 0 20px rgba(240,168,50,0.12)' : 'none',
+                    borderColor: activeCard === i ? 'rgba(212,175,55,0.5)' : 'var(--border2)',
+                    boxShadow: activeCard === i ? '0 0 20px rgba(212,175,55,0.12)' : 'none',
                   }}
                   transition={{ delay: 0.45 + i * 0.08 }}
                   onClick={() => router.push(`/shop/${p.id}`)}
@@ -239,7 +239,7 @@ export default function HeroSection({ products }: HeroSectionProps) {
                       />
                     ) : (
                       <div className="hc-img-ph">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(240,168,50,0.25)" strokeWidth="1.5">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(212,175,55,0.25)" strokeWidth="1.5">
                           <rect x="3" y="3" width="18" height="18" rx="2" />
                           <circle cx="8.5" cy="8.5" r="1.5" />
                           <polyline points="21 15 16 10 5 21" />

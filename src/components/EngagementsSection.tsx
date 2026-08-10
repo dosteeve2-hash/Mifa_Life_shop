@@ -17,8 +17,8 @@ const ENGAGEMENTS = [
     title: 'Livraison rapide',
     desc: 'Bamako J+1 à J+2, reste du Mali 2 à 5 jours. Suivi en temps réel.',
     accent: 'var(--cyan)',
-    glow: 'rgba(45,212,255,0.10)',
-    border: 'rgba(45,212,255,0.20)',
+    glow: 'rgba(0,188,212,0.10)',
+    border: 'rgba(0,188,212,0.20)',
   },
   {
     icon: <Headphones size={24} />,
@@ -33,8 +33,8 @@ const ENGAGEMENTS = [
     title: 'Paiement mobile',
     desc: 'Payez via Orange Money, Wave ou à la livraison. Simple et sécurisé.',
     accent: 'var(--gold)',
-    glow: 'rgba(240,168,50,0.10)',
-    border: 'rgba(240,168,50,0.20)',
+    glow: 'rgba(212,175,55,0.10)',
+    border: 'rgba(212,175,55,0.20)',
   },
 ];
 

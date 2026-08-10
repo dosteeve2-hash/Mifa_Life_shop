@@ -16,8 +16,8 @@ interface CategoriesSectionProps {
 
 // Accent colors per category (used as glow/border tint)
 const CAT_ACCENTS: Record<string, { accent: string; glow: string }> = {
-  electronique: { accent: 'var(--cyan)',  glow: 'rgba(45,212,255,0.12)' },
-  mode:         { accent: 'var(--gold)',  glow: 'rgba(240,168,50,0.12)' },
+  electronique: { accent: 'var(--cyan)',  glow: 'rgba(0,188,212,0.12)' },
+  mode:         { accent: 'var(--gold)',  glow: 'rgba(212,175,55,0.12)' },
   maison:       { accent: 'var(--green)', glow: 'rgba(34,217,138,0.12)' },
   sport:        { accent: '#f97316',      glow: 'rgba(249,115,22,0.12)' },
   beaute:       { accent: '#e879f9',      glow: 'rgba(232,121,249,0.12)' },
@@ -25,7 +25,7 @@ const CAT_ACCENTS: Record<string, { accent: string; glow: string }> = {
   auto:         { accent: 'var(--text2)', glow: 'rgba(155,168,196,0.12)' },
   alimentation: { accent: 'var(--green)', glow: 'rgba(34,217,138,0.12)' },
 };
-const DEFAULT_ACCENT = { accent: 'var(--gold)', glow: 'rgba(240,168,50,0.12)' };
+const DEFAULT_ACCENT = { accent: 'var(--gold)', glow: 'rgba(212,175,55,0.12)' };
 
 const DEFAULT_CATEGORIES = [
   { name: 'Électronique', slug: 'electronique', icon: '💻' },
@@ -106,7 +106,7 @@ export default function CategoriesSection({ categories }: CategoriesSectionProps
                       transition: 'border-color 0.22s ease, box-shadow 0.22s ease',
                     }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLDivElement).style.borderColor = theme.accent.startsWith('var') ? 'rgba(240,168,50,0.45)' : `${theme.accent}55`;
+                      (e.currentTarget as HTMLDivElement).style.borderColor = theme.accent.startsWith('var') ? 'rgba(212,175,55,0.45)' : `${theme.accent}55`;
                       (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 0 1px ${theme.glow.replace('0.12', '0.15')}, 0 8px 24px rgba(0,0,0,0.4)`;
                     }}
                     onMouseLeave={(e) => {

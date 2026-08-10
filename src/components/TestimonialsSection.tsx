@@ -43,8 +43,8 @@ function StarRow({ rating }: { rating: number }) {
         <Star
           key={i}
           size={13}
-          fill={i < rating ? '#f0a832' : 'none'}
-          color={i < rating ? '#f0a832' : 'var(--border2)'}
+          fill={i < rating ? '#D4AF37' : 'none'}
+          color={i < rating ? '#D4AF37' : 'var(--border2)'}
           strokeWidth={1.5}
         />
       ))}
@@ -133,7 +133,7 @@ export default function TestimonialsSection() {
                 transition: 'border-color 0.22s ease, box-shadow 0.22s ease',
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(240,168,50,0.3)';
+                (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(212,175,55,0.3)';
                 (e.currentTarget as HTMLDivElement).style.boxShadow = '0 14px 36px rgba(0,0,0,0.5)';
               }}
               onMouseLeave={(e) => {
@@ -163,8 +163,8 @@ export default function TestimonialsSection() {
                   width: 36,
                   height: 36,
                   borderRadius: '50%',
-                  background: `${t.accent === 'var(--cyan)' ? 'rgba(45,212,255,0.12)' : t.accent === 'var(--green)' ? 'rgba(34,217,138,0.12)' : 'rgba(232,121,249,0.12)'}`,
-                  border: `1.5px solid ${t.accent === 'var(--cyan)' ? 'rgba(45,212,255,0.3)' : t.accent === 'var(--green)' ? 'rgba(34,217,138,0.3)' : 'rgba(232,121,249,0.3)'}`,
+                  background: `${t.accent === 'var(--cyan)' ? 'rgba(0,188,212,0.12)' : t.accent === 'var(--green)' ? 'rgba(34,217,138,0.12)' : 'rgba(232,121,249,0.12)'}`,
+                  border: `1.5px solid ${t.accent === 'var(--cyan)' ? 'rgba(0,188,212,0.3)' : t.accent === 'var(--green)' ? 'rgba(34,217,138,0.3)' : 'rgba(232,121,249,0.3)'}`,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -188,8 +188,8 @@ export default function TestimonialsSection() {
                   alignItems: 'center',
                   gap: 4,
                   padding: '3px 8px',
-                  background: 'rgba(240,168,50,0.08)',
-                  border: '1px solid rgba(240,168,50,0.2)',
+                  background: 'rgba(212,175,55,0.08)',
+                  border: '1px solid rgba(212,175,55,0.2)',
                   borderRadius: 10,
                   fontSize: 9,
                   fontWeight: 700,
