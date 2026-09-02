@@ -1,5 +1,5 @@
 import { vi, describe, it, expect, beforeEach } from 'vitest'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor, within } from '@testing-library/react'
 import CheckoutPage from '@/app/checkout/page'
 import { toast } from 'sonner'
 
@@ -13,7 +13,7 @@ vi.mock('next/navigation', () => ({
 }))
 
 vi.mock('next/link', () => ({
-  default: ({ href, children, ...props }: any) => {
+  default: ({ href, children, ...props }: Record<string, unknown> & { children?: React.ReactNode }) => {
     const { prefetch, ...rest } = props
     return <a href={href} {...rest}>{children}</a>
   },
@@ -22,13 +22,13 @@ vi.mock('next/link', () => ({
 vi.mock('framer-motion', async () => {
   const { createElement } = await import('react')
   const strip = (tag: string) =>
-    function MotionEl({ children, ...props }: any) {
+    function MotionEl({ children, ...props }: Record<string, unknown> & { children?: React.ReactNode }) {
       const { whileHover, whileTap, initial, animate, exit, transition, variants, layout, custom, drag, ...rest } = props
-      return createElement(tag as any, rest, children)
+      return createElement(tag as React.ElementType, rest, children)
     }
   return {
     motion: { div: strip('div'), button: strip('button') },
-    AnimatePresence: ({ children }: any) => children ?? null,
+    AnimatePresence: ({ children }: { children?: React.ReactNode }) => children ?? null,
   }
 })
 
@@ -77,8 +77,8 @@ vi.mock('@/context/CartContext', () => ({
     itemCount: 0,
     syncing: false,
   }),
-  CartProvider: ({ children }: any) => children,
-  CartContextProvider: ({ children }: any) => children,
+  CartProvider: ({ children }: { children?: React.ReactNode }) => children,
+  CartContextProvider: ({ children }: { children?: React.ReactNode }) => children,
 }))
 
 // ── Helpers navigation ────────────────────────────────────────
@@ -110,9 +110,12 @@ describe('CheckoutPage — step 0 (Informations)', () => {
 
   it('affiche les 3 labels d\'étapes', () => {
     render(<CheckoutPage />)
-    expect(screen.getByText('Informations')).toBeInTheDocument()
-    expect(screen.getByText('Livraison')).toBeInTheDocument()
-    expect(screen.getByText('Paiement')).toBeInTheDocument()
+    // Ces libellés apparaissent aussi dans les boutons et le récapitulatif :
+    // on cible l'indicateur d'étapes, ce que ce test entend vérifier.
+    const etapes = within(screen.getByRole('navigation', { name: 'Progression de la commande' }))
+    expect(etapes.getByText('Informations')).toBeInTheDocument()
+    expect(etapes.getByText('Livraison')).toBeInTheDocument()
+    expect(etapes.getByText('Paiement')).toBeInTheDocument()
   })
 
   it('affiche le label "Informations"', () => {
@@ -122,7 +125,8 @@ describe('CheckoutPage — step 0 (Informations)', () => {
 
   it('affiche le label "Livraison"', () => {
     render(<CheckoutPage />)
-    expect(screen.getByText('Livraison')).toBeInTheDocument()
+    const etapes = within(screen.getByRole('navigation', { name: 'Progression de la commande' }))
+    expect(etapes.getByText('Livraison')).toBeInTheDocument()
   })
 
   it('affiche le label "Paiement"', () => {
