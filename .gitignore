@@ -41,3 +41,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env.local
+
+# Worktrees Claude Code (déjà commitées par erreur comme sous-module fantôme)
+.claude/worktrees/
