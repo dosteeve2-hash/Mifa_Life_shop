@@ -300,7 +300,7 @@ export default function ProfilClient({ userId, email, profil }: Props) {
           </motion.div>
 
           {/* Liens rapides */}
-          <motion.div variants={slideUp} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 20 }}>
+          <motion.div variants={slideUp} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 14, marginBottom: 20 }}>
             <Link
               href="/orders"
               style={{
@@ -347,6 +347,30 @@ export default function ProfilClient({ userId, email, profil }: Props) {
               <div>
                 <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--t1)' }}>Ma wishlist</div>
                 <div style={{ fontSize: 11, color: 'var(--t3)' }}>Favoris</div>
+              </div>
+            </Link>
+            <Link
+              href="/compte/parametres"
+              style={{
+                display: 'flex', alignItems: 'center', gap: 12,
+                padding: '16px 20px',
+                background: `linear-gradient(145deg, ${NAVY} 0%, #0f1e3a 100%)`,
+                border: `1px solid rgba(212,175,55,0.18)`,
+                borderRadius: 14,
+                textDecoration: 'none',
+                transition: 'border-color 0.2s, transform 0.15s',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${GOLD}60`; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(212,175,55,0.18)'; e.currentTarget.style.transform = 'none'; }}
+            >
+              <div style={{ width: 40, height: 40, borderRadius: 10, background: `${GOLD}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={GOLD} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+              </div>
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--t1)' }}>Paramètres</div>
+                <div style={{ fontSize: 11, color: 'var(--t3)' }}>Notifications, sécurité</div>
               </div>
             </Link>
           </motion.div>
