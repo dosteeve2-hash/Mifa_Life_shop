@@ -11,24 +11,33 @@ import { sendOtpEmail } from './send-otp';
  * Côté client, passer par `@/lib/auth/client`.
  */
 
-if (!process.env.DATABASE_URL) {
-  throw new Error(
-    'DATABASE_URL manquante — connexion Postgres directe requise par Better Auth. ' +
-      'Supabase la fournit dans Project Settings → Database → Connection string (URI).',
-  );
-}
+const DATABASE_URL = process.env.DATABASE_URL;
+const BETTER_AUTH_SECRET = process.env.BETTER_AUTH_SECRET;
 
-if (!process.env.BETTER_AUTH_SECRET) {
-  throw new Error('BETTER_AUTH_SECRET manquante — générez-la avec `openssl rand -base64 32`.');
-}
+/**
+ * `false` si la configuration d'authentification est incomplète.
+ *
+ * On ne lève pas à l'import : `next build` compile ce module sans variables
+ * d'environnement (c'est le cas en CI), et échouer ici casserait le build.
+ * C'est la route `/api/auth` qui refuse alors toute requête (503), et
+ * `getCurrentUser()` qui renvoie `null` — l'application se comporte comme si
+ * personne n'était connecté, plutôt que de servir une auth à moitié configurée.
+ */
+export const isAuthConfigured = Boolean(DATABASE_URL && BETTER_AUTH_SECRET);
+
+export const AUTH_CONFIG_ERROR =
+  'Authentification non configurée : renseignez DATABASE_URL (Supabase → Project Settings → ' +
+  'Database → Connection string URI) et BETTER_AUTH_SECRET (openssl rand -base64 32).';
 
 /** 15 minutes, en secondes — fenêtre du rate limiting (règle sécurité #4). */
 const WINDOW = 15 * 60;
 const MAX_ATTEMPTS = 5;
 
 export const auth = betterAuth({
-  database: new Pool({ connectionString: process.env.DATABASE_URL }),
-  secret: process.env.BETTER_AUTH_SECRET,
+  database: new Pool({ connectionString: DATABASE_URL }),
+  // Jamais utilisé pour signer quoi que ce soit : quand la config manque, la
+  // route d'auth répond 503 avant d'atteindre Better Auth.
+  secret: BETTER_AUTH_SECRET ?? 'unconfigured-build-placeholder',
   baseURL: process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000',
 
   emailAndPassword: {

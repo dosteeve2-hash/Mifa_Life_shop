@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { headers } from 'next/headers';
-import { auth } from './server';
+import { auth, isAuthConfigured, AUTH_CONFIG_ERROR } from './server';
 
 export interface AuthUser {
   id: string;
@@ -18,6 +18,10 @@ export interface AuthUser {
  * personnelles doit filtrer explicitement sur l'`id` qu'elle renvoie.
  */
 export async function getCurrentUser(): Promise<AuthUser | null> {
+  // Config absente (build, ou déploiement mal renseigné) : personne n'est
+  // connecté. Les pages redirigent alors vers /login au lieu de planter.
+  if (!isAuthConfigured) return null;
+
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user) return null;
 
@@ -34,6 +38,7 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
  * passer une écriture non autorisée.
  */
 export async function requireUser(): Promise<AuthUser> {
+  if (!isAuthConfigured) throw new Error(AUTH_CONFIG_ERROR);
   const user = await getCurrentUser();
   if (!user) throw new Error('non authentifié');
   return user;
