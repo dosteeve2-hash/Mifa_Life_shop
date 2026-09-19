@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { createBrowserClient } from '@supabase/ssr';
@@ -718,7 +719,7 @@ export default function ParametresClient({ user, prefs }: Props) {
 
           {/* Lien retour profil */}
           <motion.div variants={slideUp}>
-            <a
+            <Link
               href="/profil"
               style={{
                 display: 'flex',
@@ -741,7 +742,7 @@ export default function ParametresClient({ user, prefs }: Props) {
             >
               <span>Retour au profil</span>
               <ChevronRight size={14} style={{ color: GOLD }} />
-            </a>
+            </Link>
           </motion.div>
 
         </motion.div>
