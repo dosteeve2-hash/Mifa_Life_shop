@@ -604,3 +604,61 @@ body {
 
 /* ── Testimonials inside existing TestimonialsSection ── */
 .section { background: #0A1628 !important; }
+
+/* ═══════════════════════════════════════════════════════════════
+   FORGE UI — src/components/studio
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Le CSS historique de ce fichier vit hors de toute @layer : il l'emporte donc
+   sur les utilitaires Tailwind (le reset `* { margin:0; padding:0 }` neutralise
+   px-*, py-*, mx-auto ; `button { background:none }` neutralise bg-*).
+   `revert-layer` rend la main à la couche `utilities` — uniquement sous
+   `.forge-ui`, pour ne rien changer aux pages existantes. */
+.forge-ui *, .forge-ui *::before, .forge-ui *::after {
+  margin: revert-layer;
+  padding: revert-layer;
+}
+.forge-ui h1, .forge-ui h2, .forge-ui h3 {
+  font-weight: revert-layer;
+  letter-spacing: revert-layer;
+}
+.forge-ui p { line-height: revert-layer; }
+.forge-ui button, .forge-ui input, .forge-ui select {
+  background: revert-layer;
+  border: revert-layer;
+}
+
+/* GradientText — reflet Gold × Cyan qui traverse le texte */
+.forge-gradient-text {
+  background-image: linear-gradient(
+    100deg,
+    #D4AF37 0%, #F5D67A 22%, #ffffff 38%, #26C6DA 52%, #D4AF37 72%, #D4AF37 100%
+  );
+  background-size: 220% 100%;
+  animation-name: forge-text-sweep;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes forge-text-sweep {
+  from { background-position: 220% 50%; }
+  to   { background-position: -20% 50%; }
+}
+
+/* Marquee — la piste contient 2 copies séparées par gap-4 (1rem) :
+   un cycle = largeur d'une copie + 1 gap = 50% + 0.5rem */
+.forge-marquee-track {
+  animation-name: forge-marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes forge-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 0.5rem)); }
+}
+
+/* Respect de prefers-reduced-motion pour les animations purement CSS */
+@media (prefers-reduced-motion: reduce) {
+  .forge-marquee-track,
+  .forge-gradient-text { animation: none !important; }
+  .forge-gradient-text { background-position: 50% 50%; }
+}
