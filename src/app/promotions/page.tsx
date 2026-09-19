@@ -94,9 +94,6 @@ export default async function PromotionsPage() {
   try {
     const supabase = await createServerSupabaseClient();
 
-    // getUser() — jamais getSession()
-    await supabase.auth.getUser();
-
     const { data, error } = await supabase
       .from("promotions")
       .select("*")

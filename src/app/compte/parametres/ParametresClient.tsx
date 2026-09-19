@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { createBrowserClient } from '@supabase/ssr';
 import { Bell, Globe, Shield, Trash2, LogOut, Key, ChevronRight } from 'lucide-react';
 import type { UserPrefs } from './page';
+import { authClient } from '@/lib/auth/client';
 
 /* ── Supabase browser client (singleton) ── */
 let _sb: ReturnType<typeof createBrowserClient> | null = null;
@@ -309,7 +310,7 @@ export default function ParametresClient({ user, prefs }: Props) {
     try {
       const sb = getSB();
       if (!sb) throw new Error('Client Supabase indisponible');
-      await sb.auth.signOut();
+      await authClient.signOut();
       router.push('/');
     } catch {
       setSigningOut(false);

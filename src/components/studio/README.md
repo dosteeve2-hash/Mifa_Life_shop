@@ -57,11 +57,13 @@ animation ; les animations CSS sont neutralisées par le bloc
 
 ### Auth
 
-`auth/AuthCard.tsx` est une **maquette** : elle ne crée aucune session. Les appels
-Better Auth sont marqués en commentaire aux endroits exacts où les brancher
-(`authClient.signIn.email`, `authClient.signUp.email`, `authClient.emailOtp.verifyEmail`).
-La validation faite ici est celle du confort ; celle qui fait foi — et le rate limiting
-5 tentatives / 15 min — restent côté serveur.
+`auth/AuthCard.tsx` est une **maquette** : elle ne crée délibérément aucune session,
+une vitrine de composants n'ayant pas à ouvrir des comptes. Le parcours réel vit dans
+`src/app/login/page.tsx`, qui appelle Better Auth via `authClient.emailOtp.sendVerificationOtp`
+puis `authClient.signIn.emailOtp`.
+
+La validation faite dans la carte est celle du confort ; celle qui fait foi — et le
+rate limiting 5 tentatives / 15 min — restent côté serveur (`src/lib/auth/server.ts`).
 
 ### Données du dashboard
 

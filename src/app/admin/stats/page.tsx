@@ -10,6 +10,7 @@ import {
 import {
   ShoppingBag, TrendingUp, Users, Package, ArrowUp, ArrowDown, BarChart2,
 } from 'lucide-react';
+import { authClient } from '@/lib/auth/client';
 
 export const dynamic = 'force-dynamic';
 
@@ -93,8 +94,8 @@ export default function AdminStatsPage() {
   useEffect(() => {
     const sb = getSb();
     if (!sb) { setLoading(false); return; }
-    sb.auth.getUser().then(async ({ data }) => {
-      if (!data.user) { setLoading(false); return; }
+    authClient.getSession().then(async ({ data }) => {
+      if (!data?.user) { setLoading(false); return; }
       setAuthed(true);
       try {
         const [{ count: oCount }, { count: uCount }, { count: pCount }, { data: oData }] = await Promise.all([

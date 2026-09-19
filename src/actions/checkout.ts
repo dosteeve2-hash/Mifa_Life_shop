@@ -1,6 +1,7 @@
 "use server";
 
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { getCurrentUser } from '@/lib/auth/session';
 
 type OrderInput = {
   items: Array<{ id: number; name: string; price_cfa: number; quantity: number }>;
@@ -25,9 +26,7 @@ export async function placeOrderAction(input: OrderInput): Promise<PlaceOrderRes
     const supabase = await createServerSupabaseClient();
 
     // Récupérer l'utilisateur connecté (nullable)
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+  const user = await getCurrentUser();
 
     const deliveryAddress = JSON.stringify({
       firstName: input.shipping.firstName,

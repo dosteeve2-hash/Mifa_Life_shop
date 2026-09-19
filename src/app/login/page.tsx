@@ -3,22 +3,10 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { createBrowserClient } from '@supabase/ssr';
 import Logo from '@/components/Logo';
+import { authClient } from '@/lib/auth/client';
 
 type Step = 'email' | 'otp' | 'success';
-
-let _supabase: ReturnType<typeof createBrowserClient> | null = null;
-function getSupabase() {
-  if (typeof window === 'undefined') return null;
-  if (!_supabase) {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-    if (!url || !key) return null;
-    _supabase = createBrowserClient(url, key);
-  }
-  return _supabase;
-}
 
 /* ── Styles Glass Light (autonomes, pas de dépendance aux utilitaires) ── */
 const S = {
@@ -133,13 +121,11 @@ export default function LoginPage() {
     }
     setLoading(true);
     try {
-      const supabase = getSupabase();
-      if (!supabase) { setError('Configuration manquante.'); setLoading(false); return; }
-      const { error: err } = await supabase.auth.signInWithOtp({
+      const { error: err } = await authClient.emailOtp.sendVerificationOtp({
         email: email.trim().toLowerCase(),
-        options: { emailRedirectTo: `${location.origin}/auth/callback` },
+        type: 'sign-in',
       });
-      if (err) throw err;
+      if (err) throw new Error(err.message);
       setStep('otp');
       startCountdown(60);
     } catch (err: unknown) {
@@ -156,14 +142,11 @@ export default function LoginPage() {
     if (otp.length < 6) { setError('Le code doit contenir 6 chiffres.'); return; }
     setLoading(true);
     try {
-      const supabase = getSupabase();
-      if (!supabase) { setError('Configuration manquante.'); setLoading(false); return; }
-      const { error: err } = await supabase.auth.verifyOtp({
+      const { error: err } = await authClient.signIn.emailOtp({
         email: email.trim().toLowerCase(),
-        token: otp.trim(),
-        type: 'email',
+        otp: otp.trim(),
       });
-      if (err) throw err;
+      if (err) throw new Error(err.message);
       setStep('success');
       setTimeout(() => { location.href = '/shop'; }, 1200);
     } catch (err: unknown) {
@@ -181,11 +164,9 @@ export default function LoginPage() {
     setLoading(true);
     setError(null);
     try {
-      const supabase = getSupabase();
-      if (!supabase) { setLoading(false); return; }
-      await supabase.auth.signInWithOtp({
+      await authClient.emailOtp.sendVerificationOtp({
         email: email.trim().toLowerCase(),
-        options: { emailRedirectTo: `${location.origin}/auth/callback` },
+        type: 'sign-in',
       });
       startCountdown(60);
     } finally {
