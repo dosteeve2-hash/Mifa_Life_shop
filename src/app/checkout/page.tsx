@@ -192,8 +192,10 @@ function CheckoutInner() {
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <div className="wrap" style={{ paddingTop: 32, paddingBottom: 60 }}>
 
-        {/* Step indicator */}
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: 36 }}>
+        {/* Step indicator — nav nommée : sans elle, l'indicateur d'étapes n'est
+            annoncé par aucun lecteur d'écran, et rien ne le distingue des
+            autres occurrences des mêmes libellés dans la page. */}
+        <nav aria-label="Progression de la commande" style={{ display: 'flex', alignItems: 'center', marginBottom: 36 }}>
           {STEPS.map((s, i) => (
             <div key={s} style={{ display: 'flex', alignItems: 'center', flex: i < STEPS.length - 1 ? 1 : 'initial' }}>
               <div style={{
@@ -214,7 +216,7 @@ function CheckoutInner() {
               )}
             </div>
           ))}
-        </div>
+        </nav>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 28, alignItems: 'start' }}>
 

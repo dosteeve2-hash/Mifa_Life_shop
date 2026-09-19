@@ -14,7 +14,7 @@ vi.mock('next/navigation', () => ({
 }))
 
 vi.mock('next/link', () => ({
-  default: ({ href, children, ...props }: any) => {
+  default: ({ href, children, ...props }: Record<string, unknown> & { children?: React.ReactNode }) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { prefetch, ...rest } = props
     return <a href={href} {...rest}>{children}</a>
@@ -24,13 +24,13 @@ vi.mock('next/link', () => ({
 vi.mock('framer-motion', async () => {
   const { createElement } = await import('react')
   const strip = (tag: string) =>
-    function MotionEl({ children, ...props }: any) {
+    function MotionEl({ children, ...props }: Record<string, unknown> & { children?: React.ReactNode }) {
       const { whileHover, whileTap, initial, animate, exit, transition, variants, layout, custom, drag, ...rest } = props
-      return createElement(tag as any, rest, children)
+      return createElement(tag as React.ElementType, rest, children)
     }
   return {
     motion: { div: strip('div'), button: strip('button') },
-    AnimatePresence: ({ children }: any) => children ?? null,
+    AnimatePresence: ({ children }: { children?: React.ReactNode }) => children ?? null,
   }
 })
 
