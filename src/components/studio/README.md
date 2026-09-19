@@ -35,19 +35,17 @@ fichier autonome, sans import interne autre que `@/lib/motion/presets`.
 
 ## Points d'attention
 
-### `.forge-ui` sur la racine
+### Les couches CSS
 
-Le CSS historique de `globals.css` vit **hors de toute `@layer`**. En CSS, le non-layered
-l'emporte sur le layered : le reset `* { margin: 0; padding: 0 }` écrase donc `px-*`, `py-*`,
-`mx-auto`, et `button { background: none }` écrase `bg-*`. La classe `.forge-ui` posée sur la
-racine du studio rend la main à la couche `utilities` via `revert-layer`.
+`globals.css` place tout le CSS maison dans `@layer base`, et le bloc d'animations
+FORGE UI dans `@layer components`. C'est ce qui permet aux utilitaires Tailwind
+(`px-*`, `py-*`, `mx-auto`, `bg-*`) de s'appliquer : la couche `utilities` passe après.
 
-Dans un projet où `globals.css` est propre (tout en `@layer`), cette classe est inutile.
-
-> Ce contournement est local au studio. Le reste du site est affecté par le même
-> problème — les utilitaires Tailwind de spacing y sont inopérants — mais le corriger
-> demanderait de replacer le CSS historique dans `@layer base`, ce qui change le rendu
-> de toutes les pages existantes.
+En reprenant ces composants ailleurs, vérifiez ce point — du CSS écrit **hors de toute
+`@layer`** l'emporte sur *tous* les utilitaires Tailwind, et un simple reset
+`* { margin: 0; padding: 0 }` suffit à rendre `px-*` et `py-*` silencieusement inopérants.
+Seules les déclarations `!important` des couches basses continuent de gagner (pour
+`!important`, l'ordre des couches s'inverse).
 
 ### Mouvement réduit
 
