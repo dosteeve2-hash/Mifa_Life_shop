@@ -4,6 +4,7 @@ import { useState, useTransition } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { createBrowserClient } from '@supabase/ssr';
+import { authClient } from '@/lib/auth/client';
 
 type Props = {
   userId: string;
@@ -64,7 +65,7 @@ export default function AccountClient({ userId, email, fullName, phone, role }: 
 
   async function handleLogout() {
     const sb = getSupabase();
-    if (sb) await sb.auth.signOut();
+    await authClient.signOut();
     startTransition(() => {
       router.push('/login');
       router.refresh();

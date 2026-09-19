@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Bell, ShoppingBag, Truck, Tag, CheckCircle } from 'lucide-react';
 import { createBrowserClient } from '@supabase/ssr';
+import { authClient } from '@/lib/auth/client';
 
 let _sb: ReturnType<typeof createBrowserClient> | null = null;
 function getSb() {
@@ -51,8 +52,8 @@ export default function NotificationsPage() {
   useEffect(() => {
     const sb = getSb();
     if (!sb) { setLoading(false); return; }
-    sb.auth.getUser().then(({ data }) => {
-      if (!data.user) { setLoading(false); return; }
+    authClient.getSession().then(({ data }) => {
+      if (!data?.user) { setLoading(false); return; }
       setAuthed(true);
       sb.from('notifications')
         .select('*')
@@ -69,7 +70,8 @@ export default function NotificationsPage() {
   const markAllRead = async () => {
     const sb = getSb();
     if (!sb) return;
-    const { data: { user } } = await sb.auth.getUser();
+    const { data: sessionData } = await authClient.getSession();
+    const user = sessionData?.user;
     if (!user) return;
     await sb.from('notifications').update({ read: true }).eq('user_id', user.id).eq('read', false);
     setNotifs((prev) => prev.map((n) => ({ ...n, read: true })));

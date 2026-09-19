@@ -19,12 +19,12 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const MIN_PASSWORD = 8;
 
 /**
- * Écran d'authentification animé, prêt pour Better Auth.
+ * Écran d'authentification animé — maquette de vitrine.
  *
+ * Il ne crée aucune session : le parcours réel est dans src/app/login/page.tsx,
+ * qui appelle `authClient` (Better Auth) contre la route serveur `/api/auth`.
  * Les entrées sont nettoyées et validées ici pour l'ergonomie ; la validation
- * qui fait foi reste côté serveur. Aucune clé ni secret ne transite par ce
- * composant : les points de branchement marqués ci-dessous appellent
- * `authClient` (Better Auth), qui parle à la route serveur `/api/auth`.
+ * qui fait foi reste côté serveur. Aucune clé ni secret ne transite ici.
  */
 export default function AuthCard() {
   const [mode, setMode] = useState<Mode>('signin');
@@ -54,11 +54,10 @@ export default function AuthCard() {
       return fail(`Le mot de passe doit faire au moins ${MIN_PASSWORD} caractères.`);
 
     setPending(true);
-    // ── Point de branchement Better Auth ──────────────────────────────
-    // mode === 'signin'
-    //   ? await authClient.signIn.email({ email: cleanEmail, password })
-    //   : await authClient.signUp.email({ email: cleanEmail, password, name: cleanName });
-    // Le rate limiting (5 tentatives / 15 min) s'applique côté serveur.
+    // Maquette : on ne crée délibérément aucune session depuis la vitrine.
+    // Le vrai parcours Better Auth vit dans src/app/login/page.tsx
+    // (`authClient.emailOtp.sendVerificationOtp` puis `authClient.signIn.emailOtp`),
+    // avec rate limiting 5 tentatives / 15 min appliqué côté serveur.
     await new Promise((r) => setTimeout(r, 900));
     setPending(false);
     setStep('otp');
@@ -204,7 +203,7 @@ export default function AuthCard() {
                   <span className="font-mono text-gold">{sanitizeEmail(email)}</span>
                 </p>
               </div>
-              {/* Point de branchement : authClient.emailOtp.verifyEmail({ email, otp }) */}
+              {/* Équivalent réel : authClient.signIn.emailOtp({ email, otp }) */}
               <OtpInput onComplete={() => setStep('done')} />
               <button
                 type="button"

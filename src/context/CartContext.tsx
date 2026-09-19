@@ -20,6 +20,7 @@ import {
   type ReactNode,
 } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
+import { authClient } from '@/lib/auth/client';
 
 // ─── Types ────────────────────────────────────────────────────
 export type CartItem = {
@@ -279,7 +280,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const supabase = getSupabase();
     if (!supabase) return;
     let cancelled = false;
-    supabase.auth.getUser().then(({ data: { user } }) => {
+    authClient.getSession().then(({ data }) => {
+      const user = data?.user;
       if (user && !cancelled) {
         syncToSupabase(state.items, user.id);
       }

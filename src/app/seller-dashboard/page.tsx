@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { createBrowserClient } from '@supabase/ssr';
 import { Package, TrendingUp, ShoppingBag, Star, Plus, Eye, Edit } from 'lucide-react';
+import { authClient } from '@/lib/auth/client';
 
 let _sb: ReturnType<typeof createBrowserClient> | null = null;
 function getSb() {
@@ -35,8 +36,8 @@ export default function SellerDashboardPage() {
   useEffect(() => {
     const sb = getSb();
     if (!sb) { setLoading(false); return; }
-    sb.auth.getUser().then(async ({ data }) => {
-      if (!data.user) { setLoading(false); return; }
+    authClient.getSession().then(async ({ data }) => {
+      if (!data?.user) { setLoading(false); return; }
       setAuthed(true);
       setUser({ email: data.user.email });
       try {

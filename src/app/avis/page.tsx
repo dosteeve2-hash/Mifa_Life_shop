@@ -1,6 +1,7 @@
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import type { Metadata } from 'next';
 import AvisClient from './AvisClient';
+import { getCurrentUser } from '@/lib/auth/session';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,10 +23,7 @@ export type Avis = {
 export default async function AvisPage() {
   const supabase = await createServerSupabaseClient();
 
-  // getUser() — jamais getSession()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getCurrentUser();
 
   const { data: avisData, error } = await supabase
     .from('avis')
