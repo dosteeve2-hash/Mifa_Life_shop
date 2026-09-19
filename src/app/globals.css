@@ -37,6 +37,15 @@
   --font-mono: 'JetBrains Mono', monospace;
 }
 
+/* Tout le CSS maison vit dans la couche `base`, déclarée par `@import "tailwindcss"`
+   avant `components` et `utilities`. Sans cette couche, ces règles seraient
+   "non layered" et l'emporteraient sur TOUS les utilitaires Tailwind : le reset
+   `* { margin:0; padding:0 }` annulait px-*, py-*, mx-auto, et
+   `button { background:none }` annulait bg-*. Les déclarations `!important`
+   ci-dessous continuent de gagner (entre couches, l'ordre s'inverse pour
+   `!important` : la couche la plus basse l'emporte). */
+@layer base {
+
 /* ── PALETTE GLASS LIGHT — bleu doux, blanc, verre ── */
 :root {
   --bg:          #f2f6fb;   /* fond général bleu très pâle */
@@ -605,28 +614,13 @@ body {
 /* ── Testimonials inside existing TestimonialsSection ── */
 .section { background: #0A1628 !important; }
 
+} /* fin @layer base */
+
 /* ═══════════════════════════════════════════════════════════════
    FORGE UI — src/components/studio
    ═══════════════════════════════════════════════════════════════ */
 
-/* Le CSS historique de ce fichier vit hors de toute @layer : il l'emporte donc
-   sur les utilitaires Tailwind (le reset `* { margin:0; padding:0 }` neutralise
-   px-*, py-*, mx-auto ; `button { background:none }` neutralise bg-*).
-   `revert-layer` rend la main à la couche `utilities` — uniquement sous
-   `.forge-ui`, pour ne rien changer aux pages existantes. */
-.forge-ui *, .forge-ui *::before, .forge-ui *::after {
-  margin: revert-layer;
-  padding: revert-layer;
-}
-.forge-ui h1, .forge-ui h2, .forge-ui h3 {
-  font-weight: revert-layer;
-  letter-spacing: revert-layer;
-}
-.forge-ui p { line-height: revert-layer; }
-.forge-ui button, .forge-ui input, .forge-ui select {
-  background: revert-layer;
-  border: revert-layer;
-}
+@layer components {
 
 /* GradientText — reflet Gold × Cyan qui traverse le texte */
 .forge-gradient-text {
@@ -662,3 +656,5 @@ body {
   .forge-gradient-text { animation: none !important; }
   .forge-gradient-text { background-position: 50% 50%; }
 }
+
+} /* fin @layer components */

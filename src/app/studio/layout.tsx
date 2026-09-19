@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function StudioLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="forge-ui min-h-screen bg-[#0A1628]">
+    <div className="min-h-screen bg-[#0A1628]">
       <ScrollProgress />
       <StudioNav />
       {children}
