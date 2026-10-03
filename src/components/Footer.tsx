@@ -14,13 +14,12 @@ export default function Footer() {
               <Logo variant="compact" size="sm" />
             </div>
             <p className="ft-desc">
-              La marketplace premium du Mali. Des milliers de produits, un paiement simplifié,
-              une livraison fiable partout au Mali et en Afrique.
+              Marketplace malienne avec catalogue de produits et prix affichés en FCFA.
             </p>
             <div className="ft-pays">
-              <div className="ft-pay-chip" style={{ color: '#ff8c42', borderColor: 'rgba(255,140,66,0.25)' }}>Orange Money</div>
-              <div className="ft-pay-chip" style={{ color: '#38b6ff', borderColor: 'rgba(56,182,255,0.25)' }}>Wave</div>
-              <div className="ft-pay-chip">Cash</div>
+              <div className="ft-pay-chip" style={{ color: '#ff8c42', borderColor: 'rgba(255,140,66,0.25)' }}>Catalogue</div>
+              <div className="ft-pay-chip" style={{ color: '#38b6ff', borderColor: 'rgba(56,182,255,0.25)' }}>FCFA</div>
+              <div className="ft-pay-chip">MVP</div>
             </div>
 
             {/* Newsletter */}
