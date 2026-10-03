@@ -1,7 +1,6 @@
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import HeroSectionPremium from '@/components/landing/HeroSection';
 import FeaturesSection from '@/components/landing/FeaturesSection';
-import TestimonialsPremium from '@/components/landing/TestimonialsSection';
 import CategoriesSection from '@/components/CategoriesSection';
 import FeaturedProducts, { type Product } from '@/components/FeaturedProducts';
 import Link from 'next/link';
@@ -75,9 +74,6 @@ export default async function HomePage() {
         <FeaturedProducts products={products} />
       </div>
 
-      {/* ── Testimonials carousel ── */}
-      <TestimonialsPremium />
-
       {/* ── Comment ça marche ── */}
       <section id="how" className="section" style={{ background: '#0c1a30' }}>
         <div className="wrap">
@@ -90,9 +86,9 @@ export default async function HomePage() {
           <div className="how-grid">
             {[
               { n: '1', title: 'Choisissez vos produits', sub: 'Parcourez notre catalogue et ajoutez vos articles au panier en un clic.' },
-              { n: '2', title: 'Indiquez votre adresse', sub: 'Bamako, Sikasso, Mopti — nous livrons partout au Mali et en Afrique.' },
-              { n: '3', title: 'Payez en toute sécurité', sub: 'Orange Money, Wave ou paiement à la livraison selon votre préférence.' },
-              { n: '4', title: 'Recevez votre commande', sub: 'Livraison rapide et soignée directement à votre porte.' },
+              { n: '2', title: 'Indiquez votre adresse', sub: 'Renseignez les informations demandées pour votre commande.' },
+              { n: '3', title: 'Consultez les options disponibles', sub: 'Les modalités de commande sont présentées au cours du parcours.' },
+              { n: '4', title: 'MVP — pilote recherché', sub: 'La boutique est en phase de MVP et recherche un pilote.' },
             ].map((s) => (
               <div key={s.n} className="how-card">
                 <div className="how-num">{s.n}</div>
@@ -109,7 +105,7 @@ export default async function HomePage() {
         <div className="cta-geo a" /><div className="cta-geo b" />
         <div className="cta-in">
           <h2 className="cta-ti">Prêt à découvrir nos produits ?</h2>
-          <p className="cta-sub">Des centaines d&apos;articles soigneusement sélectionnés vous attendent. Paiement simple, livraison fiable.</p>
+          <p className="cta-sub">Parcourez le catalogue MIFA Life Shop. Les prix sont affichés en FCFA.</p>
           <div className="cta-btns">
             <Link href="/shop" className="cta-btn white">🛍️ Voir la boutique</Link>
             <Link href="/login" className="cta-btn outline">Créer un compte gratuit</Link>

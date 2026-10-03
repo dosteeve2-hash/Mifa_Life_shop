@@ -25,9 +25,9 @@ const QUICK_CATS = [
 ];
 
 const STATS = [
-  { value: '8 500+', label: 'produits' },
-  { value: '25 000+', label: 'clients' },
-  { value: '40+', label: 'pays livrés' },
+  { value: 'FCFA', label: 'prix affichés' },
+  { value: 'Catalogue', label: 'produits et catégories' },
+  { value: 'MVP', label: 'pilote recherché' },
 ];
 
 function formatPrice(n: number) {
@@ -115,7 +115,7 @@ export default function HeroSection({ products }: HeroSectionProps) {
         >
           <motion.div variants={itemVariants} className="hero-eyebrow">
             <span />
-            NEW COLLECTION 2025
+            MVP — PILOTE RECHERCHÉ
           </motion.div>
 
           <motion.h1 variants={itemVariants} className="hero-h1">
@@ -124,7 +124,7 @@ export default function HeroSection({ products }: HeroSectionProps) {
           </motion.h1>
 
           <motion.p variants={itemVariants} className="hero-sub">
-            Mode africaine. Qualité mondiale. Livraison partout.
+            Catalogue de produits et prix affichés en FCFA.
           </motion.p>
 
           {/* Search bar */}
@@ -210,7 +210,7 @@ export default function HeroSection({ products }: HeroSectionProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9 }}
           >
-            ⭐ 4.9 — 2 400 avis
+            MVP — pilote recherché
           </motion.div>
 
           {heroProducts.length > 0
@@ -287,7 +287,7 @@ export default function HeroSection({ products }: HeroSectionProps) {
             transition={{ delay: 1 }}
           >
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--green)', display: 'inline-block' }} />
-            Livraison express disponible
+            MVP — pilote recherché
           </motion.div>
         </motion.div>
       </div>
