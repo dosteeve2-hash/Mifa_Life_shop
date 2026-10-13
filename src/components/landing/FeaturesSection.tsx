@@ -3,26 +3,25 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import AnimatedCounter from '@/components/ui/AnimatedCounter';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import { Truck, Shield, RotateCcw, Headphones, Package, Globe } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const STATS = [
-  { to: 1000, suffix: '+', label: 'Vendeurs actifs',    color: '#D4AF37' },
-  { to: 25000, suffix: '+', label: 'Clients satisfaits', color: '#00BCD4' },
-  { to: 50,   suffix: '+', label: 'Pays livrés',        color: '#D4AF37' },
-  { to: 4.9,  suffix: '/5', label: 'Note moyenne',      color: '#00BCD4', decimals: 1 },
+  { value: 'Catalogue', label: 'Produits et catégories', color: '#D4AF37' },
+  { value: 'FCFA', label: 'Devise des prix', color: '#00BCD4' },
+  { value: 'Panier', label: 'Articles regroupés avant commande', color: '#D4AF37' },
+  { value: 'MVP', label: 'Pilote recherché', color: '#00BCD4' },
 ];
 
 const FEATURES = [
-  { icon: Truck,       title: 'Livraison express',   desc: 'Bamako J+1, reste du Mali 2–5 jours. Afrique & international sous 7 jours.', color: '#D4AF37' },
-  { icon: Shield,      title: 'Paiement sécurisé',   desc: 'Orange Money, Wave et cash à la livraison. Transactions 100% cryptées.',       color: '#00BCD4' },
-  { icon: RotateCcw,   title: 'Retours faciles',     desc: '14 jours pour retourner tout article. Remboursement intégral garanti.',         color: '#D4AF37' },
-  { icon: Headphones,  title: 'Support 7j/7',        desc: 'Notre équipe vous répond en français, bambara et anglais tous les jours.',      color: '#00BCD4' },
-  { icon: Package,     title: 'Emballage soigné',    desc: 'Chaque commande emballée avec soin. Produits protégés et présentés premium.', color: '#D4AF37' },
-  { icon: Globe,       title: 'Vendeurs certifiés',  desc: 'Chaque vendeur est vérifié. Qualité et authenticité garanties sur tous les produits.', color: '#00BCD4' },
+  { icon: Truck,       title: 'Catalogue produits', desc: 'Consultez les produits et catégories disponibles sur la boutique.', color: '#D4AF37' },
+  { icon: Shield,      title: 'Prix en FCFA', desc: 'Les prix des produits sont affichés en francs CFA.', color: '#00BCD4' },
+  { icon: RotateCcw,   title: 'Panier', desc: 'Regroupez des articles avant de passer commande.', color: '#D4AF37' },
+  { icon: Headphones,  title: 'Compte client', desc: 'Créez un compte pour accéder à votre espace client.', color: '#00BCD4' },
+  { icon: Package,     title: 'Recherche', desc: 'Recherchez des produits dans le catalogue.', color: '#D4AF37' },
+  { icon: Globe,       title: 'MVP — pilote recherché', desc: 'Le produit est en phase de MVP et recherche un pilote.', color: '#00BCD4' },
 ];
 
 export default function FeaturesSection() {
@@ -52,10 +51,10 @@ export default function FeaturesSection() {
         <ScrollReveal direction="up" duration={0.7}>
           <div style={{ textAlign: 'center', marginBottom: 'clamp(48px,8vw,80px)' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', borderRadius: 99, border: '1px solid rgba(212,175,55,.3)', background: 'rgba(212,175,55,.06)', fontSize: 11, fontWeight: 700, color: '#D4AF37', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 20 }}>
-              ✦ Chiffres qui parlent
+              ✦ Le produit
             </div>
             <h2 style={{ fontSize: 'clamp(28px,5vw,52px)', fontWeight: 900, color: '#fff', fontFamily: "'Playfair Display',serif", letterSpacing: '-0.02em', marginBottom: 8 }}>
-              MIFA Life en chiffres
+              MIFA Life en pratique
             </h2>
             <div ref={lineRef} style={{ width: 80, height: 3, background: 'linear-gradient(90deg,#D4AF37,#00BCD4)', borderRadius: 99, margin: '20px auto 0' }} />
           </div>
@@ -65,8 +64,8 @@ export default function FeaturesSection() {
           {STATS.map((s, i) => (
             <ScrollReveal key={s.label} direction="up" delay={i * 0.12}>
               <div style={{ textAlign: 'center', padding: 'clamp(24px,4vw,36px) 20px', borderRadius: 20, border: '1px solid rgba(255,255,255,.06)', background: 'rgba(255,255,255,.02)', backdropFilter: 'blur(8px)' }}>
-                <div style={{ fontSize: 'clamp(36px,5vw,56px)', fontWeight: 900, fontFamily: "'Playfair Display',serif", color: s.color, lineHeight: 1, marginBottom: 8 }}>
-                  <AnimatedCounter to={s.to} suffix={s.suffix} decimals={s.decimals ?? 0} duration={2.2} />
+                <div style={{ fontSize: 'clamp(30px,4vw,48px)', fontWeight: 900, fontFamily: "'Playfair Display',serif", color: s.color, lineHeight: 1, marginBottom: 8 }}>
+                  {s.value}
                 </div>
                 <div style={{ fontSize: 13, color: 'rgba(255,255,255,.5)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{s.label}</div>
               </div>

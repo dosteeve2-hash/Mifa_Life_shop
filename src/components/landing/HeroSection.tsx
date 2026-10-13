@@ -5,19 +5,14 @@ import { gsap } from 'gsap';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ShoppingBag, ArrowRight, Star, Truck } from 'lucide-react';
+import { ShoppingBag, ArrowRight } from 'lucide-react';
 
 const HERO_IMG = 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1200&q=85&auto=format&fit=crop';
 const BADGES = [
-  { icon: '🚀', text: 'Livraison rapide' },
-  { icon: '✨', text: 'Produits authentiques' },
-  { icon: '🛡️', text: 'Paiement sécurisé' },
-  { icon: '🌍', text: '50+ pays livrés' },
-];
-const AVATARS = [
-  'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=60&q=80',
-  'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=60&q=80',
-  'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=60&q=80',
+  { icon: '🛍️', text: 'Catalogue produits' },
+  { icon: '💰', text: 'Prix en FCFA' },
+  { icon: '🧺', text: 'Panier disponible' },
+  { icon: '🌱', text: 'MVP — pilote recherché' },
 ];
 
 export default function HeroSection() {
@@ -93,7 +88,7 @@ export default function HeroSection() {
             </h1>
 
             <p ref={subRef} style={{ fontSize:'clamp(14px,2vw,18px)', color:'rgba(255,255,255,.65)', lineHeight:1.75, maxWidth:480, marginBottom:40 }}>
-              Mode africaine authentique, artisanat premium, livraison rapide partout en Afrique. Paiement Orange Money & Wave.
+              Conçu pour les PME africaines. Découvrez le catalogue et les prix affichés en FCFA.
             </p>
 
             <div ref={ctaRef} style={{ display:'flex', flexWrap:'wrap', gap:16, alignItems:'center' }}>
@@ -109,21 +104,6 @@ export default function HeroSection() {
               </motion.div>
             </div>
 
-            <div style={{ marginTop:40, display:'flex', alignItems:'center', gap:16 }}>
-              <div style={{ display:'flex' }}>
-                {AVATARS.map((src, i) => (
-                  <div key={i} style={{ width:36, height:36, borderRadius:'50%', border:'2px solid #0A1628', overflow:'hidden', marginLeft:i>0?-10:0, position:'relative' }}>
-                    <Image src={src} alt="client" fill sizes="36px" style={{ objectFit:'cover' }} />
-                  </div>
-                ))}
-              </div>
-              <div>
-                <div style={{ display:'flex', gap:2, marginBottom:2 }}>
-                  {[1,2,3,4,5].map((s) => <Star key={s} size={11} fill="#D4AF37" color="#D4AF37" />)}
-                </div>
-                <p style={{ fontSize:12, color:'rgba(255,255,255,.55)', fontWeight:600 }}><span style={{ color:'#D4AF37' }}>25 000+</span> clients satisfaits</p>
-              </div>
-            </div>
           </div>
 
           {/* ── Right: image ── */}
@@ -133,13 +113,13 @@ export default function HeroSection() {
               <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top,rgba(10,22,40,.55) 0%,transparent 50%)' }} />
               <div style={{ position:'absolute', top:20, left:20, display:'flex', alignItems:'center', gap:7, padding:'7px 14px', borderRadius:99, background:'rgba(10,22,40,.85)', backdropFilter:'blur(12px)', border:'1px solid rgba(212,175,55,.25)' }}>
                 <motion.span animate={{ scale:[1,1.4,1] }} transition={{ repeat:Infinity, duration:1.5 }} style={{ width:7, height:7, borderRadius:'50%', background:'#22c55e', display:'inline-block' }} />
-                <span style={{ fontSize:11, fontWeight:700, color:'#fff', letterSpacing:'0.05em' }}>EN LIGNE · 1 200 actifs</span>
+                <span style={{ fontSize:11, fontWeight:700, color:'#fff', letterSpacing:'0.05em' }}>MVP — pilote recherché</span>
               </div>
               <div style={{ position:'absolute', bottom:20, left:20, right:20, display:'flex', alignItems:'center', gap:10, padding:'12px 16px', borderRadius:16, background:'rgba(10,22,40,.88)', backdropFilter:'blur(12px)', border:'1px solid rgba(212,175,55,.2)' }}>
-                <Truck size={20} color="#D4AF37" />
+                <ShoppingBag size={20} color="#D4AF37" />
                 <div>
-                  <div style={{ fontSize:12, fontWeight:700, color:'#fff' }}>Livraison express disponible</div>
-                  <div style={{ fontSize:10, color:'rgba(255,255,255,.5)' }}>Bamako J+1 · Afrique 3–7 jours</div>
+                  <div style={{ fontSize:12, fontWeight:700, color:'#fff' }}>Catalogue produits</div>
+                  <div style={{ fontSize:10, color:'rgba(255,255,255,.5)' }}>Prix affichés en FCFA</div>
                 </div>
               </div>
             </div>

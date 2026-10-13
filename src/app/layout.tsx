@@ -5,6 +5,7 @@ import { PanierProvider } from '@/context/PanierContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BottomNav from '@/components/BottomNav';
+import ExampleDataBanner from '@/components/ExampleDataBanner';
 import LenisProvider from '@/components/providers/LenisProvider';
 import { Toaster } from 'sonner';
 import './globals.css';
@@ -59,7 +60,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <CartProvider>
             <PanierProvider>
               <Navbar />
-              <main style={{ flex: 1 }}>{children}</main>
+              <main style={{ flex: 1 }}>
+                <ExampleDataBanner />
+                {children}
+              </main>
               <Footer />
               <BottomNav />
             </PanierProvider>
