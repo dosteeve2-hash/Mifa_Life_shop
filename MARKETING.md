@@ -73,16 +73,9 @@ Abonnez-vous aux alertes pour ne rien manquer des pièces les plus convoitées.
 
 ---
 
-## Ils Adorent MIFA Life
+## Pilotes recherchés
 
-> *"J'ai offert un ensemble bogolan à ma mère pour son anniversaire. Elle a pleuré de joie. Merci MIFA."*
-> — Fatou D., cliente diaspora, Paris
-
-> *"Je commande chaque mois. Qualité toujours au rendez-vous, livraison rapide."*
-> — Bintou K., cadre, Bamako
-
-> *"Enfin une boutique qui valorise nos créateurs comme ils le méritent."*
-> — Sékou C., créateur de mode, Ouagadougou
+Aucun témoignage pour l'instant : le produit est en phase pilote et nous cherchons nos premiers utilisateurs. Contactez-nous pour l'essayer et nous dire ce qui manque.
 
 ---
 

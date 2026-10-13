@@ -6,54 +6,6 @@ import { createBrowserSupabaseClient } from '@/lib/supabase/client';
 import type { Avis } from './page';
 
 // ─── Mock fallback ───────────────────────────────────────────────────────────
-const MOCK_AVIS: Avis[] = [
-  {
-    id: 'm1',
-    user_id: null,
-    produit_id: 'general',
-    nom_auteur: 'Aminata K.',
-    note: 5,
-    commentaire: 'Livraison ultra rapide et produits de qualité. Je recommande MIFA Life sans hésiter !',
-    created_at: new Date(Date.now() - 86400000).toISOString(),
-  },
-  {
-    id: 'm2',
-    user_id: null,
-    produit_id: 'general',
-    nom_auteur: 'Moussa D.',
-    note: 4,
-    commentaire: 'Très bon service client, réactif et professionnel. Les produits correspondent exactement aux descriptions.',
-    created_at: new Date(Date.now() - 2 * 86400000).toISOString(),
-  },
-  {
-    id: 'm3',
-    user_id: null,
-    produit_id: 'general',
-    nom_auteur: 'Fatou B.',
-    note: 5,
-    commentaire: 'Ma première commande sur MIFA Life et je suis conquise. Emballage soigné, produit impeccable.',
-    created_at: new Date(Date.now() - 3 * 86400000).toISOString(),
-  },
-  {
-    id: 'm4',
-    user_id: null,
-    produit_id: 'general',
-    nom_auteur: 'Ibrahima S.',
-    note: 4,
-    commentaire: 'Rapport qualité-prix excellent. J\'ai commandé plusieurs fois et je suis toujours satisfait.',
-    created_at: new Date(Date.now() - 5 * 86400000).toISOString(),
-  },
-  {
-    id: 'm5',
-    user_id: null,
-    produit_id: 'general',
-    nom_auteur: 'Kadiatou T.',
-    note: 5,
-    commentaire: 'Le meilleur site de e-commerce africain ! Sérieux, fiable et des prix imbattables.',
-    created_at: new Date(Date.now() - 7 * 86400000).toISOString(),
-  },
-];
-
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 function getInitials(name: string) {
   return name
@@ -466,9 +418,7 @@ export default function AvisClient({
   avis: Avis[];
   userId: string | null;
 }) {
-  const [avis, setAvis] = useState<Avis[]>(
-    initialAvis.length > 0 ? initialAvis : MOCK_AVIS
-  );
+  const [avis, setAvis] = useState<Avis[]>(initialAvis);
 
   const handleNewAvis = (nouvelAvis: Avis) => {
     setAvis((prev) => [nouvelAvis, ...prev]);
